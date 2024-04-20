@@ -27,7 +27,7 @@
 
     </header>
     <div class="d-flex justify-content-center">
-        <form class="bg-light rounded shadow p-3" method="POST" action="{{ route('tutor-create') }}">
+        <form class="bg-light rounded shadow p-3" method="POST" action="{{ route('tutor-create') }}" enctype="multipart/form-data">
             @csrf
 
             <div class="form-row d-flex flex-column flex-md-row">
@@ -108,12 +108,12 @@
             </div>
 
            <div class="form-row d-flex flex-column flex-md-row">
-               <!-- <div class="col-md-6 px-2 mb-2">
+               <div class="col-md-6 px-2 mb-2">
                    <label for="profilePicture" class="form-label">Profile Picture</label>
-                   <input type="file" class="form-control" id="profilePicture" required />
+                   <input type="file" class="form-control" id="profilePicture" required name="profileImage" />
 
 
-               </div> -->
+               </div>
                <div class="col-md-6 px-2 mb-2">
                    <label for="teaching" class="form-label">Available Time</label>
                    <select class="form-select" id="teaching" required name="availability">

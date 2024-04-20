@@ -43,7 +43,10 @@ class TutorController extends Controller
         $tutor->teaching = $request->input('teaching');
         $tutor->phone = $request->input('phone');
         $tutor->whatsapp = $request->input('whatsapp');
-        // Set other attributes as needed
+
+        // Upload profile image
+        $imagePath = $request->file('profileImage')->store('uploads', 'public');
+        $tutor->profileImage = $imagePath;
 
         // Save the Tutor instance to the database
         $tutor->save();

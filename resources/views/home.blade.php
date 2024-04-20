@@ -232,7 +232,7 @@
                                     <div class="row d-flex">
                                         <div class="col d-flex flex-column flex-md-row align-items-center rmb-3 m-lg-0">
                                             <div class="imgBox col-sm-4 d-grid mx-3">
-                                                <img class="img-1 rounded-circle" src="./images/profile_dp.png" alt="" />
+                                                <img class="img-1 rounded-circle" src="{{asset('storage/'.$item->profileImage)}}" alt="" />
                                                 <p class="d-flex align-items-center m-auto">
                                                     Verified
                                                     <span class="mx-1 varified bg-primary rounded-circle text-light"><i

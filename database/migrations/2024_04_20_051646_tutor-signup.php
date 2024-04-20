@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('experience');
             $table->string('curriculum');
             $table->string('availability');
+            $table->string('profileImage');
             $table->integer('phone');
             $table->integer('whatsapp');
             $table->integer('age');
