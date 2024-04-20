@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('teaching');
             $table->string('location');
             $table->string('experience');
+            $table->string('curriculum');
+            $table->string('availability');
             $table->integer('phone');
             $table->integer('whatsapp');
             $table->integer('age');

@@ -16,9 +16,10 @@ use App\Http\Controllers\TutorController;
 Route::get('/welcome', function () {
     return view('welcome');
 });
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+// Route::get('/', function () {
+//     return view('home');
+// })->name('home');
+Route::get('/', [TutorController::class, 'index'])->name('home');
 Route::get('/signup', function () {
     return view('signup');
 })->name('signup');

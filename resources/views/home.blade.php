@@ -215,16 +215,17 @@
                             </div>
 
                             <!-- Tutor profile -->
+                            @foreach($data as $item)
 
                             <div class="tutor_profile rounded overflow-hidden mb-3">
                                 <div class="d-flex justify-content-between">
                                     <button class="p-1 bg_theme_green text-light border border-0">
                                         Sponsored
-                                    </button>
-                                    <span class="p-1 text-secondary">
-                        <i class="fa fa-bookmark text-body-tertiary"></i>
-                        Watchlist
-                      </span>
+                                                    </button>
+                                                    <span class="p-1 text-secondary">
+                                        <i class="fa fa-bookmark text-body-tertiary"></i>
+                                        Watchlist
+                                    </span>
                                 </div>
 
                                 <div class="py-2 px-5">
@@ -240,10 +241,11 @@
                                             </div>
                                             <div class="personal_detail text-center text-md-start">
                                                 <!-- <div> -->
-                                                <h5>TutorName</h5>
-                                                <span>Female, 42 years
+                                               
+                                                <h5>{{ $item->name }}</h5>
+                                                <span>{{$item->gender}}, {{$item->age}} years
                               <span style="background-color: red" class="text-light font-s px-1">Pro</span></span>
-                                                <p class="m-0">15 years of teaching experience</p>
+                                                <p class="m-0">{{$item->experience}} years of teaching experience</p>
                                                 <!-- stars -->
                                                 <span
                                                     class="d-flex align-items-center text-warning d-flex justify-content-center justify-content-md-start">
@@ -252,7 +254,7 @@
                               <i class="fa fa-star"></i>
                               <i class="fa fa-star"></i>
                               <i class="fa fa-star"></i>
-                            </span>
+                                     </span>
                                                 <p class="text-danger m-0">( 10 reviews )</p>
                                                 <!-- </div> -->
                                             </div>
@@ -265,21 +267,21 @@
                                                         <td class="text-dark fw-bold">Qualification</td>
                                                         <td class="d-none d-md-block px-2">:</td>
                                                         <td class="font-s text-secondary">
-                                                            Master in Teaching
+                                                            {{$item->qualification}}
                                                         </td>
                                                     </tr>
                                                     <tr class="title-1 col col-md-3">
                                                         <td class="font-s text-dark fw-bold">Location</td>
                                                         <td class="d-none d-md-block px-2">:</td>
                                                         <td class="font-s text-secondary">
-                                                            Amin town,Askari plaza, 1st floor
+                                                            {{$item->location}}
                                                         </td>
                                                     </tr>
                                                     <tr class="title-1 col col-md-3">
                                                         <td class="font-s text-dark fw-bold">Mobile</td>
                                                         <td class="d-none d-md-block px-2">:</td>
                                                         <td class="font-s text-secondary">
-                                                            +92 318 xxxxxxxxx
+                                                           {{$item->phone}}
                                                             <button class="text-success bg-transparent fw-bold border-0">
                                                                 view contact
                                                             </button>
@@ -289,10 +291,19 @@
                                                         <td class="font-s fw-bold">WhatsApp</td>
                                                         <td class="d-none d-md-block px-2">:</td>
                                                         <td class="font-s text-secondary">
-                                                            +92 318 xxxxxxxxx
+                                                            {{$item->whatsapp}}
                                                             <button class="text-success bg-transparent fw-bold border-0">
                                                                 view contact
                                                             </button>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr class="title-1 col col-md-3">
+                                                        <td class="font-s fw-bold">Availability</td>
+                                                        <td class="d-none d-md-block px-2">:</td>
+                                                        <td class="font-s text-secondary">
+                                                            {{$item->availability}}
+                                                           
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -309,14 +320,9 @@
                                             </div>
 
                                             <div class="d-flex flex-column flex-md-row flex-wrap">
-                            <span
-                                class="bg-body-secondary rounded font-s m-1 d-inline-block p-1 bg_green_hover text-center">Business</span>
-                                                <span
-                                                    class="bg-body-secondary rounded font-s m-1 d-inline-block p-1 bg_green_hover text-center">English
-                              as second language</span>
-                                                <span
-                                                    class="bg-body-secondary rounded font-s m-1 d-inline-block p-1 bg_green_hover text-center">English
-                              language</span>
+                                                        <span
+                                                            class="bg-body-secondary rounded font-s m-1 d-inline-block p-1 bg_green_hover text-center">{{$item->teaching}}</span>
+                                                                            
                                                 <button class="m-1 text-danger border-0 bg-transparent">
                                                     +1 more
                                                 </button>
@@ -328,16 +334,15 @@
                                             </h5>
                                             <span class="d-none d-sm-block">:</span>
                                             <span
-                                                class="bg-body-secondary d-inline-block rounded font-s mx-1 p-1 bg_green_hover text-center">American
-                            Curriculum (AC)</span>
+                                                class="bg-body-secondary d-inline-block rounded font-s mx-1 p-1 bg_green_hover text-center">{{$item->curriculum}}</span>
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column flex-lg-row mt-5 py-1 bd_top_dashed">
                                         <div class="d-flex align-items-center flex-column flex-sm-row justify-content-between">
-                          <span class="d-flex align-items-center px-2 py-2">
-                            Expand
-                            <i class="fa fa-chevron-down mx-1" aria-hidden="true"></i>
-                          </span>
+                                            <span class="d-flex align-items-center px-2 py-2">
+                                                Expand
+                                                <i class="fa fa-chevron-down mx-1" aria-hidden="true"></i>
+                                            </span>
 
                                             <div class="d-flex">
                                                 <p
@@ -372,7 +377,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            @endforeach
                             <!-- tutor profile end -->
 
                             <!-- Here is form -->

@@ -12,6 +12,11 @@ class TutorController extends Controller
     public function index()
     {
         // Your index method logic here
+        // Retrieve data from the model
+        $data = Tutor::all(); // Replace YourModel with your actual model and adjust the retrieval logic as needed
+        // dd($data);
+        // Pass the data to the view
+        return view('home', ['data' => $data]);
     }
 
     public function store(Request $request)
@@ -33,6 +38,8 @@ class TutorController extends Controller
         $tutor->gender = $request->input('gender');
         $tutor->location = $request->input('location');
         $tutor->experience = $request->input('experience');
+        $tutor->curriculum = $request->input('curriculum');
+        $tutor->availability = $request->input('availability');
         $tutor->teaching = $request->input('teaching');
         $tutor->phone = $request->input('phone');
         $tutor->whatsapp = $request->input('whatsapp');

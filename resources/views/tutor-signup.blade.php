@@ -107,24 +107,24 @@
                 </div>
             </div>
 
-{{--            <div class="form-row d-flex flex-column flex-md-row">--}}
-{{--                <div class="col-md-6 px-2 mb-2">--}}
-{{--                    <label for="profilePicture" class="form-label">Profile Picture</label>--}}
-{{--                    <input type="file" class="form-control" id="profilePicture" required />--}}
+           <div class="form-row d-flex flex-column flex-md-row">
+               <!-- <div class="col-md-6 px-2 mb-2">
+                   <label for="profilePicture" class="form-label">Profile Picture</label>
+                   <input type="file" class="form-control" id="profilePicture" required />
 
 
-{{--                </div>--}}
-{{--                <div class="col-md-6 px-2 mb-2">--}}
-{{--                    <label for="teaching" class="form-label">Available Time</label>--}}
-{{--                    <select class="form-select" id="teaching" required>--}}
-{{--                        <option selected>Select Time</option>--}}
-{{--                        <option>9:00 to 10:00</option>--}}
-{{--                        <option>10:00 to 11:00</option>--}}
-{{--                    </select>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="col-12 px-2 py-2"><label for="curriculum" class="form-label">Curriculum</label>--}}
-{{--                <textarea class="form-control" id="curriculum" rows="2" required></textarea></div>--}}
+               </div> -->
+               <div class="col-md-6 px-2 mb-2">
+                   <label for="teaching" class="form-label">Available Time</label>
+                   <select class="form-select" id="teaching" required name="availability">
+                       <option selected>Select Time</option>
+                       <option value="9:00AM to 10:00AM">9:00AM to 10:00AM</option>
+                       <option value="10:00AM to 11:00AM">10:00AM to 11:00AM</option>
+                   </select>
+               </div>
+           </div>
+                    <div class="col-12 px-2 py-2"><label for="curriculum" class="form-label">Curriculum</label>
+                    <textarea class="form-control" id="curriculum" name="curriculum" rows="2" required></textarea></div>
 
             <div class="col d-flex justify-content-center py-3">
                 <button type="submit" class="btn bg_theme_green text-light fw-bold">Submit Form</button>
