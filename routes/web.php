@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\TutorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,3 +28,5 @@ Route::get('/login', function () {
 Route::get('/tutor-signup', function () {
     return view('tutor-signup');
 })->name('tutor');
+Route::post('/tutor/create', [TutorController::class, 'create'])->name('tutor-create');
+

@@ -1,0 +1,259 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+:root {
+    --green: 66 ,185 ,121;
+    --white: 255, 255, 255;
+    --text: 68, 68, 68;
+}
+.main_header{
+    text-align: center;
+    padding: 15px 0;
+    box-shadow: 0 0.1rem 0.1rem 0 rgba(64, 64, 64, 0.08);
+
+}
+.nav-link {
+    color:#42b979;
+ }
+ .nav-link:hover{
+     color:#42b979;
+     text-decoration: underline;
+     
+ }
+
+.inner{
+    padding: 40px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.inner h1{
+    text-align: center;
+    font-size: 34px;
+    color: #555;
+}
+.inner_wrapper{
+ display: flex;
+justify-content: center;
+flex-wrap: wrap;
+margin-top: 60px;
+width: 100%;
+
+}
+.signup_holder{
+    width: 25%;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 35px 20px;
+    margin: 0 25px;
+    text-align: center;
+}
+.signup_holder:hover{
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.08);
+    border: 1px solid rgb(var(--green));
+}
+.signup_holder .icon_holder{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: 20px 0;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.09);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.signup_holder .icon_holder img.active{
+    display: none;
+}
+.signup_holder:hover .icon_holder img.normal{
+    display: none;
+}
+.signup_holder:hover .icon_holder img.active{
+    display: block;
+}
+.signup_holder h4{
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: #555;
+    font-size: 18px;
+}
+.signup_holder p{
+    margin-bottom: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+.learn_more{
+    text-decoration: none;
+    font-weight: bold;
+    color: #555;
+    font-size: 14px;
+    margin: 20px 0;
+}
+.signup_typ{
+    text-decoration: none;
+    border: 1px solid rgb(var(--green));
+    color: rgb(var(--green));
+    border-radius: 2px;
+    font-weight: 400;
+    font-size: 16px;
+    width: 200px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+}
+.signup_holder:hover a.signup_typ{
+    background-color: rgb(var(--green));
+    color: #fff;
+}
+.signup_holder .para{
+    margin-bottom: 76px;
+}
+.login{
+    margin-top: 40px;
+}
+.login_typ{
+    color: var(--black);
+    text-decoration: none;
+    font-size: 16px;
+}
+.login_typ span{
+    color: rgb(var(--green));
+    font-weight: bold;
+    margin-left: 1px;
+}
+.login_typ:hover span {
+    color: var(--black);
+}
+.tutor_work{
+    background-color:rgb(242, 248, 242);
+    padding: 50px 0;
+
+}
+.tutor_work ul{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0;
+
+}
+
+.tutor_work ul li{
+    display: inline;
+    display: flex;
+    align-items: center;
+}
+.tutor_work ul img{
+    margin-right: 10px;
+}
+.tutor_work ul li a{
+    font-size: 18px;
+    color: #555;
+    font-weight: 600;
+}
+.tutor_work ul li a:hover{
+    text-decoration: none;
+}
+
+
+/* footer */
+footer{
+    width:100%;
+}
+footer ul{
+    margin: 0;
+    padding: 0 !important;
+}
+.social-circle li i {
+    margin: 0;
+    line-height: 50px;
+    text-align: center;
+}
+ul.social-network li {
+    display: inline-block;
+    margin: 0 5px;
+}
+.social-circle li a {
+    display: inline-block;
+    position: relative;
+    margin: 0 auto 0 auto;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    background-color: rgba(var(--green), 1);
+    color:#fff;
+}
+.footer-bottom{
+    background-color: rgba(var(--green), 1);
+    color:#fff;
+}
+@media(max-width:1150px){
+    .signup_holder h4{
+        font-size: 13px;
+    }
+    .signup_holder p{
+        font-size: 12px;
+    }
+    .learn_more{
+        font-size: 12px;
+    }
+    .signup_typ{
+        font-size: 11px;
+    }
+}
+@media(max-width:768px){
+    .inner_wrapper{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .signup_holder{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .signup_holder h4{
+        font-size: 18px;
+    }
+    .signup_holder p{
+        font-size: 14px;
+    }
+    .learn_more{
+        font-size: 14px;
+    }
+    .signup_typ{
+        font-size: 16px;
+    }
+    .tutor_work ul{
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: 15px;
+    }
+    .tutor_work ul li{
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        padding: 15px 0;
+        border-bottom: 1px solid lightgray;
+    }
+    .main_header img{
+        width: 35%;
+    }
+}
+/* footer */
+@media (max-width: 575px){
+    .footer-ul{
+      height: 0;
+      overflow: hidden;
+    }
+  }
+/* footer end */

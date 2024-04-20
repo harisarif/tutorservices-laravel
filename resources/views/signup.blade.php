@@ -780,9 +780,9 @@
         }
     </style>
     <!-- main css-->
-    <link href="css/style.css" rel="stylesheet"/>
+    <link href="{{asset('css/style.css')}}" rel="stylesheet"/>
     <!-- whatsapp button css -->
-    <link rel="stylesheet" href="css/whatsApp-buttons.css"/>
+    <link rel="stylesheet" href="{{asset('css/whatsApp-buttons.css')}}"/>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
           integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
@@ -802,7 +802,7 @@
     <header class="main_header d-flex  align-items-end">
         <a class="nav-link active px-3 py-0 fw-bold" aria-current="page" href="./hire_tutor.html"><i>&#8592; Hire
                 Tutor</i></a>
-        <a class="m-auto" href="{{ route('home') }}"><img style="height: 50px" src="images/logo.png" alt="EDEXCEL-logo"
+        <a class="m-auto" href="{{ route('home') }}"><img style="height: 50px" src="{{asset('images/logo.png')}}" alt="EDEXCEL-logo"
                                                           height="50px"></a>
 
     </header>
@@ -811,8 +811,8 @@
         <div class="inner_wrapper">
             <div class="signup_holder">
                 <div class="icon_holder">
-                    <img src="images/student_parent_normal.png" alt="" class="normal">
-                    <img src="images/student_parent_active.png" alt="" class="active">
+                    <img src="{{asset('images/student_parent_normal.png')}}" alt="" class="normal">
+                    <img src="{{asset('images/student_parent_active.png')}}" alt="" class="active">
                 </div>
                 <h4>Students & Parents</h4>
                 <p class="para">Discover amazing teachers, post tuition jobs, take enriching courses</p>

@@ -27,59 +27,60 @@
 
     </header>
     <div class="d-flex justify-content-center">
-        <form class="bg-light rounded shadow p-3">
+        <form class="bg-light rounded shadow p-3" method="POST" action="{{ route('tutor-create') }}">
+            @csrf
+
             <div class="form-row d-flex flex-column flex-md-row">
                 <div class="col-md-6 px-2 mb-2">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" required />
+                    <input type="text" class="form-control" id="name" name="name" required />
                 </div>
                 <div class="col-md-6 px-2 mb-2">
                     <label for="name" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" required />
+                    <input type="email" class="form-control" id="email" name="email" required />
 
                 </div>
             </div>
-            <div class="form-row d-flex flex-column flex-md-row">
-                <div class="col-md-6 px-2 mb-2">
-                    <label for="name" class="form-label">Set passward</label>
-                    <input type="password" class="form-control" id="passward" required />
-                </div>
-                <div class="col-md-6 px-2 mb-2">
-                    <label for="name" class="form-label">Confirm passward</label>
-                    <input type="password" class="form-control" id="passward" required />
+{{--            <div class="form-row d-flex flex-column flex-md-row">--}}
+{{--                <div class="col-md-6 px-2 mb-2">--}}
+{{--                    <label for="name" class="form-label">Set passward</label>--}}
+{{--                    <input type="password" class="form-control" id="passward" required />--}}
+{{--                </div>--}}
+{{--                <div class="col-md-6 px-2 mb-2">--}}
+{{--                    <label for="name" class="form-label">Confirm passward</label>--}}
+{{--                    <input type="password" class="form-control" id="passward" required />--}}
 
-                </div>
-            </div>
+{{--                </div>--}}
+{{--            </div>--}}
 
             <div class="form-row d-flex flex-column flex-md-row">
                 <div class="col-md-6 px-2 mb-2">
                     <label for="gender" class="form-label">Gender</label>
-                    <select class="form-select" id="gender" required>
+                    <select class="form-select" id="gender" name="gender" required>
                         <option selected>Select Gender</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
-                        <option value="other">Other</option>
                     </select>
                 </div>
                 <div class="col-md-6 px-2 mb-2">
                     <label for="age" class="form-label">Age</label>
-                    <input type="number" min="18" class="form-control" id="age" required />
+                    <input type="number"  class="form-control" id="age" name="age" required />
                 </div>
             </div>
 
             <div class="form-row d-flex flex-column flex-md-row">
                 <div class="col-md-6 px-2 mb-2">
                     <label for="qualification" class="form-label">Qualification</label>
-                    <input type="text" class="form-control" id="qualification" required />
+                    <input type="text" class="form-control" id="qualification" name="qualification" required />
                 </div>
                 <div class="col-md-6 px-2 mb-2">
-                    <label for="teaching" class="form-label">Teachs</label>
-                    <select class="form-select" id="teaching" required>
+                    <label for="teaching" class="form-label">Teaches</label>
+                    <select class="form-select" id="teaching" name="teaching" required>
                         <option selected>Select Teaching</option>
-                        <option>English</option>
-                        <option>Mathematics</option>
-                        <option>Physics</option>
-                        <option>Chemistry</option>
+                        <option value="english">English</option>
+                        <option value="maths">Mathematics</option>
+                        <option value="physics">Physics</option>
+                        <option value="chemistry">Chemistry</option>
                     </select>
                 </div>
             </div>
@@ -87,43 +88,43 @@
             <div class="form-row d-flex flex-column flex-md-row">
                 <div class="col-md-6 px-2 mb-2">
                     <label for="experience" class="form-label">Experience (in years)</label>
-                    <input type="number" min="0" class="form-control" id="experience" required />
+                    <input type="number" min="0" class="form-control" id="experience" name="experience" required />
                 </div>
                 <div class="col-md-6 px-2 mb-2">
                     <label for="location" class="form-label">Location</label>
-                    <input type="text" class="form-control" id="location" required />
+                    <input type="text" class="form-control" id="location" name="location" required />
                 </div>
             </div>
 
             <div class="form-row d-flex flex-column flex-md-row">
                 <div class="col-md-6 px-2 mb-2">
                     <label for="mobile" class="form-label">Mobile Number</label>
-                    <input type="number" class="form-control" id="mobile" required />
+                    <input type="number" class="form-control" id="mobile" name="phone" required />
                 </div>
                 <div class="col-md-6 px-2 mb-2">
                     <label for="whatsapp" class="form-label">WhatsApp Number</label>
-                    <input type="number" class="form-control" id="whatsapp" required />
+                    <input type="number" class="form-control" id="whatsapp" name="whatsapp" required />
                 </div>
             </div>
 
-            <div class="form-row d-flex flex-column flex-md-row">
-                <div class="col-md-6 px-2 mb-2">
-                    <label for="profilePicture" class="form-label">Profile Picture</label>
-                    <input type="file" class="form-control" id="profilePicture" required />
+{{--            <div class="form-row d-flex flex-column flex-md-row">--}}
+{{--                <div class="col-md-6 px-2 mb-2">--}}
+{{--                    <label for="profilePicture" class="form-label">Profile Picture</label>--}}
+{{--                    <input type="file" class="form-control" id="profilePicture" required />--}}
 
 
-                </div>
-                <div class="col-md-6 px-2 mb-2">
-                    <label for="teaching" class="form-label">Available Time</label>
-                    <select class="form-select" id="teaching" required>
-                        <option selected>Select Time</option>
-                        <option>9:00 to 10:00</option>
-                        <option>10:00 to 11:00</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-12 px-2 py-2"><label for="curriculum" class="form-label">Curriculum</label>
-                <textarea class="form-control" id="curriculum" rows="2" required></textarea></div>
+{{--                </div>--}}
+{{--                <div class="col-md-6 px-2 mb-2">--}}
+{{--                    <label for="teaching" class="form-label">Available Time</label>--}}
+{{--                    <select class="form-select" id="teaching" required>--}}
+{{--                        <option selected>Select Time</option>--}}
+{{--                        <option>9:00 to 10:00</option>--}}
+{{--                        <option>10:00 to 11:00</option>--}}
+{{--                    </select>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="col-12 px-2 py-2"><label for="curriculum" class="form-label">Curriculum</label>--}}
+{{--                <textarea class="form-control" id="curriculum" rows="2" required></textarea></div>--}}
 
             <div class="col d-flex justify-content-center py-3">
                 <button type="submit" class="btn bg_theme_green text-light fw-bold">Submit Form</button>
