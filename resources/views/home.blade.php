@@ -1,6 +1,12 @@
 @extends('layouts.app')
     @section('content')
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
 
+        <h1>Welcom git here...</h1>
         <div class="row mini_header m-0 p-0 container-fluid">
           <div class="col-sm-12  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0">
             <ul class="p-2 m-0 d-sm-inline d-block text-center">
@@ -241,7 +247,7 @@
                                             </div>
                                             <div class="personal_detail text-center text-md-start">
                                                 <!-- <div> -->
-                                               
+
                                                 <h5>{{ $item->name }}</h5>
                                                 <span>{{$item->gender}}, {{$item->age}} years
                               <span style="background-color: red" class="text-light font-s px-1">Pro</span></span>
@@ -303,7 +309,7 @@
                                                         <td class="d-none d-md-block px-2">:</td>
                                                         <td class="font-s text-secondary">
                                                             {{$item->availability}}
-                                                           
+
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -322,7 +328,7 @@
                                             <div class="d-flex flex-column flex-md-row flex-wrap">
                                                         <span
                                                             class="bg-body-secondary rounded font-s m-1 d-inline-block p-1 bg_green_hover text-center">{{$item->teaching}}</span>
-                                                                            
+
                                                 <button class="m-1 text-danger border-0 bg-transparent">
                                                     +1 more
                                                 </button>
@@ -754,3 +760,4 @@
 
 
     @endsection
+
