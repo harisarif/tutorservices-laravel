@@ -5,8 +5,7 @@
                 {{ session('success') }}
             </div>
         @endif
-
-        <h1>Welcom git here...</h1>
+ 
         <div class="row mini_header m-0 p-0 container-fluid">
           <div class="col-sm-12  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0">
             <ul class="p-2 m-0 d-sm-inline d-block text-center">
