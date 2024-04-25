@@ -49,7 +49,7 @@
         <div class="d-flex justify-content-end gap-2">
             <a href="#student" onclick="document.getElementById('allModal').style.display = 'none'"
                class="btn bg-body-secondary">Student</a>
-            <a href="./sign-up-for-tutor.html" class="btn btn-success bg_theme_green border-0">Tutor</a>
+            <a href="{{route('tutor')}}" class="btn btn-success bg_theme_green border-0">Tutor</a>
         </div>
     </div>
 </div>

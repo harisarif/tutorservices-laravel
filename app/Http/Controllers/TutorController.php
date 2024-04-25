@@ -28,7 +28,7 @@ class TutorController extends Controller
         // Validate form data
         $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048', // max:2048 is for maximum 2MB file size, adjust as needed
+            'profileImage' => 'required|image|mimes:jpeg,png,jpg|max:2048', // max:2048 is for maximum 2MB file size, adjust as needed
         ]);
         $tutor = new Tutor();
         $tutor->name = $request->input('name');
