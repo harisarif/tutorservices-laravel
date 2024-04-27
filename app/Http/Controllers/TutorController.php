@@ -5,19 +5,32 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Tutor; // Add the Tutor model namespace
-
+use App\Models\Country;
 class TutorController extends Controller
 {
     //
-    public function index()
-    {
-        // Your index method logic here
-        // Retrieve data from the model
-        $data = Tutor::all(); // Replace YourModel with your actual model and adjust the retrieval logic as needed
-        // dd($data);
-        // Pass the data to the view
-        return view('home', ['data' => $data]);
-    }
+    public function index(Request $request)
+{
+
+    $query = Tutor::query();
+
+    
+
+    $perPage = 10; // Define the number of tutors per page
+
+    // Paginate the results
+    $tutors = $query->paginate($perPage);
+
+    // Fetch the total count of tutors (for all countries)
+    $totalTutorsCount = Tutor::count();
+
+    return view('home', [
+        'tutors' => $tutors,
+        'totalTutorsCount' => $totalTutorsCount,
+        'perPage' => $perPage,
+    ]);
+}
+
 
     public function store(Request $request)
     {
@@ -53,5 +66,20 @@ class TutorController extends Controller
 
         // Optionally, you can redirect the user or return a response
         return redirect()->route('home')->with('success', 'Tutor created successfully.');
+    }
+    public function filterByCountry(Request $request)
+    {
+        $countryId = $request->input('country');
+
+        // Apply filtering logic here
+        $query = Tutor::query();
+
+        if ($countryId) {
+            $query->where('country_id', $countryId);
+        }
+
+        $tutors = $query->get();
+
+        return response()->json($tutors);
     }
 }

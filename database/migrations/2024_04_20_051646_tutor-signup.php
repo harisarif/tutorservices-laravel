@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('profileImage');
             $table->integer('phone');
             $table->integer('whatsapp');
+            $table->foreignId('country_id')->constrained()->onDelete('cascade');
             $table->integer('age');
             $table->timestamps();
         });
@@ -37,6 +38,9 @@ return new class extends Migration
     public function down(): void
     {
         //
-        Schema::dropIfExists('tutors');
+        Schema::table('tutors', function (Blueprint $table) {
+            $table->dropForeign(['country_id']);
+            $table->dropColumn('country_id');
+        });
     }
 };

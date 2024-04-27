@@ -1,3 +1,38 @@
+<style>
+    .pagination {
+    margin-top: 20px;
+}
+
+.pagination li {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.pagination li a,
+.pagination li span {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    color: #333;
+    text-decoration: none;
+}
+
+.pagination li.active span {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.pagination li.disabled span {
+    color: #ccc;
+    border-color: #ccc;
+}
+
+.pagination li a:hover {
+    background-color: #ddd;
+}
+
+</style>
 @extends('layouts.app')
     @section('content')
         @if(session('success'))
@@ -155,27 +190,16 @@
                         <div class="col-md-9">
                             <div class="d-flex justify-content-between mb-2 p-2 bg-body-secondary align-items-center">
                                 <div class="d-flex align-item-center">
-                                    <p class="m-0 pt-1">1 to 100 0f 34753 tutors</p>
-                                    <li class="nav-item dropdown m-1 d-block px-3">
-                                        <a class="text-dark text-decoration-none fw-bold dropdown-toggle p-0 m-0" href="#" role="button" data-bs-toggle="dropdown"
-                                           aria-expanded="false">
-                                            Country
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li>
-                                                <a class="dropdown-item" href="#">USA</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">UAE</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">UK</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">ASIA</a>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                    <p class="m-0 pt-1"> {{ $tutors->firstItem() }} to {{ $tutors->lastItem() }} 0f {{$totalTutorsCount}} tutors</p>
+                                    <div class="form-group">
+                                        {{-- <label for="country">Select Country:</label>
+                                        <select name="location" id="country" class="form-control">
+                                            <option value="">All Countries</option>
+                                            @foreach($countries as $country)
+                                                <option value="dubai">Dubai</option>
+                                            @endforeach
+                                        </select> --}}
+                                    </div>
                                     <li class="nav-item dropdown m-1 d-block px-3">
                                         <a class="text-dark text-decoration-none fw-bold dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                            aria-expanded="false">
@@ -207,7 +231,7 @@
                                         </ul>
                                     </li>
                                 </div>
-                                <div class="text-dark">
+                                {{-- <div class="text-dark">
                                     show
                                     <select>
                                         <option value="5">5</option>
@@ -216,12 +240,12 @@
                                         <option value="20">20</option>
                                     </select>
                                     per page
-                                </div>
+                                </div> --}}
                             </div>
 
                             <!-- Tutor profile -->
-                            @foreach($data as $item)
-
+                            @foreach($tutors as $item)
+                            
                             <div class="tutor_profile rounded overflow-hidden mb-3">
                                 <div class="d-flex justify-content-between">
                                     <button class="p-1 bg_theme_green text-light border border-0">
@@ -383,6 +407,8 @@
                                 </div>
                             </div>
                             @endforeach
+                            <!-- Display pagination links -->
+                            {{ $tutors->links('custom-pagination') }}
                             <!-- tutor profile end -->
 
                             <!-- Here is form -->
@@ -759,4 +785,4 @@
 
 
     @endsection
-
+    

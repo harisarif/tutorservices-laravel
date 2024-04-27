@@ -30,4 +30,5 @@ Route::get('/tutor-signup', function () {
     return view('tutor-signup');
 })->name('tutor');
 Route::post('/tutor/create', [TutorController::class, 'create'])->name('tutor-create');
+Route::get('/tutors', [TutorController::class, 'filterByCountry'])->name('tutors.filterByCountry');
 
