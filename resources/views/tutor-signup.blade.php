@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#42b979" />
-    <link rel="shortcut icon" href="favicon.png" type="image/png" />
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
     <title>Sign-up as Tutor</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -57,7 +57,6 @@
                 <div class="col-md-6 px-2 mb-2">
                     <label for="gender" class="form-label">Gender</label>
                     <select class="form-select" id="gender" name="gender" required>
-                        <option selected>Select Gender</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                     </select>
@@ -76,7 +75,6 @@
                 <div class="col-md-6 px-2 mb-2">
                     <label for="teaching" class="form-label">Teaches</label>
                     <select class="form-select" id="teaching" name="teaching" required>
-                        <option selected>Select Teaching</option>
                         <option value="english">English</option>
                         <option value="maths">Mathematics</option>
                         <option value="physics">Physics</option>
