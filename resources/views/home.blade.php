@@ -21,7 +21,7 @@
             <div class="icons d-flex p-2 m-0 justify-content-center">
               <a href="#" class="icoFacebook text-light  p-2" title="Facebook"><i
                   class="fa-brands fa-facebook-f"></i></a>
-              <a href="#" class="icoGoogle text-light p-2" title="instagram +"><i class="fa-brands fa-instagram"></i></a>
+              <a href="https://www.instagram.com/edexcel926/" class="icoGoogle text-light p-2" title="instagram +"><i class="fa-brands fa-instagram"></i></a>
               <a href="#" class="icoGoogle text-light p-2" title="Linked-in +"><i class="fa-brands fa-linkedin"></i></a>
             </div>
           </div>
