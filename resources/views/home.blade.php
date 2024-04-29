@@ -54,7 +54,7 @@
               </li>
             </ul>
             <div class="icons d-flex p-2 m-0 justify-content-center">
-              <a href="https://www.facebook.com/abdul.muqeet.7967" target="_blank" class="icoFacebook text-light  p-2" title="Facebook"><i
+              <a href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d" target="_blank" class="icoFacebook text-light  p-2" title="Facebook"><i
                   class="fa-brands fa-facebook-f"></i></a>
               <a href="https://www.instagram.com/edexcel926/" class="icoGoogle text-light p-2" title="instagram +"><i class="fa-brands fa-instagram"></i></a>
               <a href="#" class="icoGoogle text-light p-2" title="Linked-in +"><i class="fa-brands fa-linkedin"></i></a>
