@@ -10,34 +10,56 @@ class TutorController extends Controller
 {
     //
     public function index(Request $request)
-{
+        {
 
-    $query = Tutor::query();
+            $query = Tutor::query();
 
-    
+            
 
-    $perPage = 10; // Define the number of tutors per page
+            $perPage = 10; // Define the number of tutors per page
 
-    // Paginate the results
-    $tutors = $query->paginate($perPage);
+            // Paginate the results
+            $tutors = $query->paginate($perPage);
 
-    // Fetch the total count of tutors (for all countries)
-    $totalTutorsCount = Tutor::count();
+            // Fetch the total count of tutors (for all countries)
+            $totalTutorsCount = Tutor::count();
 
-    return view('home', [
-        'tutors' => $tutors,
-        'totalTutorsCount' => $totalTutorsCount,
-        'perPage' => $perPage,
-    ]);
-}
+            return view('home', [
+                'tutors' => $tutors,
+                'totalTutorsCount' => $totalTutorsCount,
+                'perPage' => $perPage,
+            ]);
+        }
 
+    public function fetchData(Request $request)
+        {
+            $query = Tutor::query();
 
+        // Filter tutors by selected country if a country is selected
+            if ($request->has('location')) {
+                $query->where('location', $request->location);
+            }
+
+            $tutors = $query->paginate(10);
+
+            // Fetch the total count of tutors (for all countries)
+            $totalTutorsCount = Tutor::count();
+
+            // Define the number of tutors per page
+            $perPage = 10;
+            // dd($tutors);
+            return view('home', [
+                'tutors' => $tutors,
+                'totalTutorsCount' => $totalTutorsCount,
+                'perPage' => $perPage,
+            ]);
+        }
     public function store(Request $request)
     {
         // Your store method logic here
     }
     public function create(Request $request){
-//        dd($request);
+        // dd($request);
         // Validate form data
         $request->validate([
             'name' => 'required|string|max:255',

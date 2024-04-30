@@ -33,6 +33,8 @@
 }
 
 </style>
+
+
 @extends('layouts.app')
     @section('content')
         @if(session('success'))
@@ -56,7 +58,7 @@
             <div class="icons d-flex p-2 m-0 justify-content-center">
               <a href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d" target="_blank" class="icoFacebook text-light  p-2" title="Facebook"><i
                   class="fa-brands fa-facebook-f"></i></a>
-              <a href="https://www.instagram.com/edexcel926/" class="icoGoogle text-light p-2" title="instagram +"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#" class="icoGoogle text-light p-2" title="instagram +"><i class="fa-brands fa-instagram"></i></a>
               <a href="#" class="icoGoogle text-light p-2" title="Linked-in +"><i class="fa-brands fa-linkedin"></i></a>
             </div>
           </div>
@@ -192,13 +194,19 @@
                                 <div class="d-flex align-item-center">
                                     <p class="m-0 pt-1"> {{ $tutors->firstItem() }} to {{ $tutors->lastItem() }} 0f {{$totalTutorsCount}} tutors</p>
                                     <div class="form-group">
-                                        {{-- <label for="country">Select Country:</label>
-                                        <select name="location" id="country" class="form-control">
+                                        <label for="country">Select Country:</label>
+                                        <form id="fetchDataForm" style="display: none;" method="post" action="{{ route('fetch-data') }}">
+                                            @csrf
+                                            <input type="hidden" name="location" id="selectedCountry">
+                                            <button type="submit" id="fetchDataButton" style="display: none;">Fetch Data</button>
+                                        </form>
+                                        
+                                        <select name="country" id="country" class="form-control">
                                             <option value="">All Countries</option>
-                                            @foreach($countries as $country)
-                                                <option value="dubai">Dubai</option>
-                                            @endforeach
-                                        </select> --}}
+                                            <option value="usa">USA</option>
+                                            <option value="uk">UK</option>
+                                            <option value="Dubai">Dubai</option>
+                                        </select>
                                     </div>
                                     <li class="nav-item dropdown m-1 d-block px-3">
                                         <a class="text-dark text-decoration-none fw-bold dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -244,6 +252,7 @@
                             </div>
 
                             <!-- Tutor profile -->
+                            @if ($tutors->count() > 0)
                             @foreach($tutors as $item)
                             
                             <div class="tutor_profile rounded overflow-hidden mb-3">
@@ -278,11 +287,11 @@
                                                 <!-- stars -->
                                                 <span
                                                     class="d-flex align-items-center text-warning d-flex justify-content-center justify-content-md-start">
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
                                      </span>
                                                 <p class="text-danger m-0">( 10 reviews )</p>
                                                 <!-- </div> -->
@@ -410,7 +419,10 @@
                             <!-- Display pagination links -->
                             {{ $tutors->links('custom-pagination') }}
                             <!-- tutor profile end -->
-
+                            @else
+                            <p>No tutors found.</p>
+                            @endif
+                            
                             <!-- Here is form -->
 
                             <div class="form col rounded p-4 align-item-center">
@@ -786,3 +798,44 @@
 
     @endsection
     
+    @section('js')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $.noConflict();
+        // Now you can use jQuery instead of $
+        jQuery(document).ready(function($) {
+            // Your jQuery code here
+            $('#country').change(function() {
+                var selectedCountry = $(this).val();
+                if (selectedCountry) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ route("fetch-data") }}',
+                        data: {
+                            location: selectedCountry,
+                            _token: '{{ csrf_token() }}' // Include CSRF token
+                        },
+                        dataType: 'json',
+                        success: function(response) {
+                            // Handle success response
+                            if (response && response.tutors) {
+                                // Update foreach loop content
+                                // Your code to update tutors goes here
+
+                                // Update pagination links
+                                $('#paginationContainer').html(response.pagination);
+                            } else {
+                                // Handle case where no tutors are found
+                                console.log('No tutors found for the selected country.');
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle error response
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+        
+@endsection
