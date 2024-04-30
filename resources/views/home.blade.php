@@ -463,7 +463,7 @@
                                         <option value="ZW">Zimbabwe</option>
                                     </select>
                                 </div>
-                                <li class="nav-item dropdown m-1 d-block px-3">
+                                <li class="nav-item dropdown m-1 d-none px-3">
                                     <a class="text-dark text-decoration-none fw-bold dropdown-toggle" href="#"
                                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         More
@@ -478,7 +478,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item dropdown m-1 d-block px-3">
+                                <li class="nav-item dropdown m-1 d-none px-3">
                                     <a class="text-dark text-decoration-none fw-bold dropdown-toggle" href="#"
                                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         City
