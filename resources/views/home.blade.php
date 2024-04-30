@@ -212,6 +212,12 @@
                                     
                                     <select name="country" id="country" class="select2">
                                         <option value="all">All Countries</option>
+                                        
+                                        <option value="AE">United Arab Emirates</option>
+                                        <option value="PK">Pakistan</option>
+                                        <option value="IN">India</option>
+                                        <option value="GB">United Kingdom</option>
+                                        <option value="US">United States</option>
                                         <option value="AF">Afghanistan</option>
                                         <option value="AX">Åland Islands</option>
                                         <option value="AL">Albania</option>
@@ -314,7 +320,6 @@
                                         <option value="HK">Hong Kong</option>
                                         <option value="HU">Hungary</option>
                                         <option value="IS">Iceland</option>
-                                        <option value="IN">India</option>
                                         <option value="ID">Indonesia</option>
                                         <option value="IR">Iran, Islamic Republic of</option>
                                         <option value="IQ">Iraq</option>
@@ -379,7 +384,6 @@
                                         <option value="MP">Northern Mariana Islands</option>
                                         <option value="NO">Norway</option>
                                         <option value="OM">Oman</option>
-                                        <option value="PK">Pakistan</option>
                                         <option value="PW">Palau</option>
                                         <option value="PS">Palestinian Territory, Occupied</option>
                                         <option value="PA">Panama</option>
@@ -445,9 +449,7 @@
                                         <option value="TV">Tuvalu</option>
                                         <option value="UG">Uganda</option>
                                         <option value="UA">Ukraine</option>
-                                        <option value="AE">United Arab Emirates</option>
-                                        <option value="GB">United Kingdom</option>
-                                        <option value="US">United States</option>
+                                        
                                         <option value="UM">United States Minor Outlying Islands</option>
                                         <option value="UY">Uruguay</option>
                                         <option value="UZ">Uzbekistan</option>
