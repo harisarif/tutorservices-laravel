@@ -208,7 +208,7 @@
                                             Data</button>
                                     </form>
 
-                                    <select name="country" id="country" class="form-control ms-2 p-1 bg_theme_green">
+                                    <select name="country" id="country" class="form-control ms-2 p-1">
                                         <option value="">All Countries</option>
                                         <option value="United States">USA</option>
                                         <option value="United Kingdom">UK</option>
@@ -840,6 +840,9 @@
         $.noConflict();
         // Now you can use jQuery instead of $
         jQuery(document).ready(function($) {
+                setTimeout(function() {
+            $(".alert").fadeOut("slow");
+        }, 5000);
             // Your jQuery code here
             $('#country').change(function() {
                 var selectedCountry = $(this).val();
