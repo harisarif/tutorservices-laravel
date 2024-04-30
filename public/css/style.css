@@ -614,3 +614,15 @@ ul.social-network li {
 
 
 /* Pagination  */
+
+
+
+/* responsive  */
+@media only screen and (max-width: 768px) {
+    .dropModal {
+        width: 90% !important;
+    }
+    .carouselExampleCaptions {
+        width: 80%;
+    }
+}
