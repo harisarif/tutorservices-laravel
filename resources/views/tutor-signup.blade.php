@@ -89,8 +89,13 @@
                     <input type="number" min="0" class="form-control" id="experience" name="experience" required />
                 </div>
                 <div class="col-md-6 px-2 mb-2">
-                    <label for="location" class="form-label">Location</label>
-                    <input type="text" class="form-control" id="location" name="location" required />
+                    <label for="location" class="form-label">Country</label>
+                    <select class="form-select" id="teaching" required name="location">
+                        <option value="United States">USA</option>
+                        <option value="United Kingdom">UK</option>
+                        <option value="Dubai">Dubai</option>
+                    </select>
+                    {{-- <input type="text" class="form-control" id="location" name="location" required /> --}}
                 </div>
             </div>
 
