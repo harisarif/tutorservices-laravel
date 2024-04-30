@@ -17,6 +17,9 @@
             background: url(./images/bg_image_1.png), #000000a0;
             background-blend-mode: screen;
         }
+        .select2-container {
+            width: 150px !important;
+        }
     </style>
 </head>
 
