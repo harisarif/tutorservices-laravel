@@ -209,7 +209,7 @@
                                     </form>
 
                                     <select name="country" id="country" class="form-control ms-2 p-1">
-                                        <option value="">All Countries</option>
+                                        <option value="all">All Countries</option>
                                         <option value="United States">USA</option>
                                         <option value="United Kingdom">UK</option>
                                         <option value="Dubai">Dubai</option>
@@ -845,17 +845,31 @@
         }, 5000);
             // Your jQuery code here
             $('#country').change(function() {
-                var selectedCountry = $(this).val();
-                if (selectedCountry) {
-                    $.ajax({
-                        type: 'POST',
-                        url: '{{ route('fetch-data') }}',
-                        data: {
-                            location: selectedCountry,
-                            _token: '{{ csrf_token() }}' // Include CSRF token
-                        },
-                        dataType: 'json',
-                        success: function(response) {
+    var selectedCountry = $(this).val();
+    var locationData = {};
+
+    // Check if "All Countries" is selected
+    if (selectedCountry !== "all") {
+        // If a specific country is selected, send its value
+        locationData = {
+            location: selectedCountry,
+            _token: '{{ csrf_token() }}' // Include CSRF token
+        };
+    } else {
+        // If "All Countries" is selected, send "all" as the location
+        locationData = {
+            location: "all",
+            _token: '{{ csrf_token() }}' // Include CSRF token
+        };
+    }
+
+    // Send AJAX request with the appropriate location data
+    $.ajax({
+        type: 'POST',
+        url: '{{ route('fetch-data') }}',
+        data: locationData,
+        dataType: 'json',
+        success: function(response) {
                             console.log('Success function triggered', response);
                             // Handle success response
                             if (response && response.tutors) {
@@ -1005,9 +1019,9 @@
                         error: function(xhr, status, error) {
                             // Handle error response
                         }
-                    });
-                }
-            });
+    });
+});
+
         });
         jQuery(document).ready(function() {
             // Reset filter button click event

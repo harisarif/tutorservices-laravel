@@ -31,40 +31,41 @@ class TutorController extends Controller
         }
 
         public function fetchData(Request $request)
-{
-    $query = Tutor::query();
-    
-    // Filter tutors by selected country if a country is selected
-    if ($request->has('location')) {
-        $query->where('location', $request->location);
-    }
-    
-    // Fetch the total count of tutors (for all countries)
-    $totalTutorsCount = $query->count();
-    
-    // Define the number of tutors per page
-    $perPage = 10;
-    
-    // Paginate the filtered tutors
-    $tutors = $query->paginate($perPage);
-    
-    // Manually serialize the paginated data
-    $serializedData = [
-        'tutors' => $tutors->items(), // Get the items from the paginator
-        'totalTutorsCount' => $totalTutorsCount,
-        'perPage' => $perPage,
-        'pagination' => [
-            'total' => $tutors->total(),
-            'count' => $tutors->count(),
-            'perPage' => $tutors->perPage(),
-            'currentPage' => $tutors->currentPage(),
-            'lastPage' => $tutors->lastPage(),
-        ],
-    ];
-    
-    // Return the serialized data as JSON response
-    return response()->json($serializedData);
-}
+        {
+            $query = Tutor::query();
+            
+            // Filter tutors by selected country if a specific country is selected
+            if ($request->has('location') && $request->location !== "all") {
+                $query->where('location', $request->location);
+            }
+            
+            // Fetch the total count of tutors (for all countries if "all" is selected)
+            $totalTutorsCount = $query->count();
+            
+            // Define the number of tutors per page
+            $perPage = 10;
+            
+            // Paginate the filtered tutors
+            $tutors = $query->paginate($perPage);
+            
+            // Manually serialize the paginated data
+            $serializedData = [
+                'tutors' => $tutors->items(), // Get the items from the paginator
+                'totalTutorsCount' => $totalTutorsCount,
+                'perPage' => $perPage,
+                'pagination' => [
+                    'total' => $tutors->total(),
+                    'count' => $tutors->count(),
+                    'perPage' => $tutors->perPage(),
+                    'currentPage' => $tutors->currentPage(),
+                    'lastPage' => $tutors->lastPage(),
+                ],
+            ];
+            
+            // Return the serialized data as JSON response
+            return response()->json($serializedData);
+        }
+        
 
     public function store(Request $request)
     {
