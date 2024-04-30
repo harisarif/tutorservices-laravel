@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Response;
 
 use Illuminate\Http\Request;
 
@@ -12,9 +13,7 @@ class TutorController extends Controller
     public function index(Request $request)
         {
 
-            $query = Tutor::query();
-
-            
+            $query = Tutor::query();           
 
             $perPage = 10; // Define the number of tutors per page
 
@@ -31,29 +30,42 @@ class TutorController extends Controller
             ]);
         }
 
-    public function fetchData(Request $request)
-        {
-            $query = Tutor::query();
+        public function fetchData(Request $request)
+{
+    $query = Tutor::query();
+    
+    // Filter tutors by selected country if a country is selected
+    if ($request->has('location')) {
+        $query->where('location', $request->location);
+    }
+    
+    // Fetch the total count of tutors (for all countries)
+    $totalTutorsCount = $query->count();
+    
+    // Define the number of tutors per page
+    $perPage = 10;
+    
+    // Paginate the filtered tutors
+    $tutors = $query->paginate($perPage);
+    
+    // Manually serialize the paginated data
+    $serializedData = [
+        'tutors' => $tutors->items(), // Get the items from the paginator
+        'totalTutorsCount' => $totalTutorsCount,
+        'perPage' => $perPage,
+        'pagination' => [
+            'total' => $tutors->total(),
+            'count' => $tutors->count(),
+            'perPage' => $tutors->perPage(),
+            'currentPage' => $tutors->currentPage(),
+            'lastPage' => $tutors->lastPage(),
+        ],
+    ];
+    
+    // Return the serialized data as JSON response
+    return response()->json($serializedData);
+}
 
-        // Filter tutors by selected country if a country is selected
-            if ($request->has('location')) {
-                $query->where('location', $request->location);
-            }
-
-            $tutors = $query->paginate(10);
-
-            // Fetch the total count of tutors (for all countries)
-            $totalTutorsCount = Tutor::count();
-
-            // Define the number of tutors per page
-            $perPage = 10;
-            // dd($tutors);
-            return view('home', [
-                'tutors' => $tutors,
-                'totalTutorsCount' => $totalTutorsCount,
-                'perPage' => $perPage,
-            ]);
-        }
     public function store(Request $request)
     {
         // Your store method logic here

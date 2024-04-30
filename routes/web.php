@@ -31,5 +31,5 @@ Route::get('/tutor-signup', function () {
 })->name('tutor');
 Route::post('/tutor/create', [TutorController::class, 'create'])->name('tutor-create');
 Route::get('/tutors', [TutorController::class, 'filterByCountry'])->name('tutors.filterByCountry');
-Route::post('/fetch-data', [TutorController::class, 'fetchData'])->name('fetch-data')->middleware('web');
+Route::post('/fetch-data', [TutorController::class, 'fetchData'])->name('fetch-data');
 

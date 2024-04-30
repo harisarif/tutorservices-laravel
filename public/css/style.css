@@ -150,7 +150,8 @@ main {
 }
 
 .bg_theme_green {
-    background-color: rgba(var(--green), 1);
+    background-color: rgba(var(--green), 1) !important;
+    color: #fff !important;
 }
 
 .theme_text_green {
