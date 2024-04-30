@@ -33,8 +33,8 @@
     }
 </style>
 
-
 @extends('layouts.app')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 @section('content')
     @if (session('success'))
         <div class="alert alert-success">
@@ -207,8 +207,8 @@
                                         <button type="submit" id="fetchDataButton" style="display: none;">Fetch
                                             Data</button>
                                     </form>
-
-                                    <select name="country" id="country" class="form-control ms-2 p-1">
+                                    
+                                    <select name="country" id="country" class="select2">
                                         <option value="all">All Countries</option>
                                         <option value="AF">Afghanistan</option>
                                         <option value="AX">Åland Islands</option>
@@ -717,7 +717,7 @@
                                         id="inputPassword4" />
                                 </div>
                                 <div class="col-md-6">
-                                    <select class="country px-2">
+                                    <select class="country px-2 ">
                                         <option value="pakistan">pakistan</option>
                                         <option value="pakistan">pakistan</option>
                                         <option value="pakistan">pakistan</option>
@@ -1078,14 +1078,19 @@
 
 
 @endsection
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @section('js')
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
-        $.noConflict();
-        // Now you can use jQuery instead of $
+        $(document).ready(function() {
+            $('.select2').select2()
+        });
+    </script>
+    <script>
+        
+        
         jQuery(document).ready(function($) {
+            
             setTimeout(function() {
                 $(".alert").fadeOut("slow");
             }, 5000);
