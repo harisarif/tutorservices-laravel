@@ -20,13 +20,13 @@ return new class extends Migration
             $table->string('gender');
             $table->string('teaching');
             $table->string('location');
+            $table->string('city');
             $table->string('experience');
             $table->string('curriculum');
             $table->string('availability');
             $table->string('profileImage');
             $table->integer('phone');
             $table->integer('whatsapp');
-            $table->foreignId('country_id')->constrained()->onDelete('cascade');
             $table->integer('age');
             $table->timestamps();
         });

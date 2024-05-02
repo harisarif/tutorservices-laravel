@@ -18,7 +18,7 @@
             background-blend-mode: screen;
         }
         .select2-container {
-            width: 150px !important;
+            width: 260px !important;
         }
     </style>
 </head>
@@ -97,6 +97,7 @@
                     </div>
                     <div class="col-md-6 px-2 mb-2">
                         <label for="location" class="form-label">Country</label>
+                    </br>
                         <select class="form-select select2" id="teaching" required name="location">
                             <option value="AE">United Arab Emirates</option>
                                         <option value="PK">Pakistan</option>
@@ -352,7 +353,12 @@
                         {{-- <input type="text" class="form-control" id="location" name="location" required /> --}}
                     </div>
                 </div>
-
+                <div class="form-row d-flex flex-column flex-md-row">
+                    <div class="col-md-12 px-2 mb-2">
+                        <label for="mobile" class="form-label">City</label>
+                        <input type="text" class="form-control" id="city" name="city" required />
+                    </div>
+                </div>
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
                         <label for="mobile" class="form-label">Mobile Number</label>
