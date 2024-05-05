@@ -92,9 +92,9 @@ class TutorController extends Controller
         $tutor->gender = $request->input('gender');
         $tutor->location = $request->input('location');
         $tutor->experience = $request->input('experience');
-        $tutor->curriculum = $request->input('curriculum');
+        $tutor->curriculum = serialize($request->input('curriculum'));
         $tutor->availability = $request->input('availability');
-        $tutor->teaching = $request->input('teaching');
+        $tutor->teaching = serialize($request->input('teaching'));
         $tutor->phone = $request->input('phone');
         $tutor->whatsapp = $request->input('whatsapp');
 

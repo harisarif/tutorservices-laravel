@@ -13,23 +13,24 @@ use App\Http\Controllers\TutorController;
 |
 */
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
-// Route::get('/', function () {
-//     return view('home');
-// })->name('home');
+Route::view('/welcome', 'welcome');
 Route::get('/', [TutorController::class, 'index'])->name('home');
-Route::get('/signup', function () {
-    return view('signup');
-})->name('signup');
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
+Route::get('/basicsignup', function () {
+    return view('basicsignup');
+})->name('basicsignup');
+
 Route::get('/tutor-signup', function () {
     return view('tutor-signup');
 })->name('tutor');
 Route::post('/tutor/create', [TutorController::class, 'create'])->name('tutor-create');
 Route::get('/tutors', [TutorController::class, 'filterByCountry'])->name('tutors.filterByCountry');
 Route::post('/fetch-data', [TutorController::class, 'fetchData'])->name('fetch-data');
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
+
+require __DIR__.'/auth.php';

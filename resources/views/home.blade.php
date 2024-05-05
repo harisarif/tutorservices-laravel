@@ -127,7 +127,7 @@
                                 <a class="nav-link text-decoration-none solid_btn" href="{{ route('login') }}">Login</a>
                             </li>
                             <li class="nav-item m-1 btn-an text-center rounded w-1">
-                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('signup') }}">Sign Up</a>
+                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}">Sign Up</a>
                             </li>
                         </ul>
                     </div>
@@ -633,9 +633,22 @@
                                                     </div>
 
                                                     <div class="d-flex flex-column flex-md-row flex-wrap">
-                                                        <span
-                                                            class="bg-body-secondary rounded font-s m-1 d-inline-block p-1 bg_green_hover text-center">{{ $item->teaching }}</span>
+                                                      
+                                                        @php
+                                                            // Assuming $item->teaching is a JSON string
+                                                            // Serialized string
+                                                            $serializedData = $item->teaching;
 
+                                                            // Convert the serialized string to an array
+                                                            $arrayData = unserialize($serializedData);
+                                                        @endphp
+                                                        @foreach ($arrayData as $teaching)
+                                                        <span
+                                                            class="bg-body-secondary rounded font-s m-1 d-inline-block p-1 bg_green_hover text-center">{{ $teaching }}</span>
+
+                                                    @endforeach
+                                                    
+                                                        
                                                         <button class="m-1 text-danger border-0 bg-transparent">
                                                             +1 more
                                                         </button>
@@ -646,9 +659,38 @@
                                                         Curriculum
                                                     </h5>
                                                     <span class="d-none d-sm-block">:</span>
-                                                    <span
-                                                        class="bg-body-secondary d-inline-block rounded font-s mx-1 p-1 bg_green_hover text-center">{{ $item->curriculum }}</span>
-                                                </div>
+                                                    @php
+                                                        // Assuming $item->curriculum is a serialized string
+                                                        // Serialized string
+                                                        $serializedCurriculum = $item->curriculum;
+
+                                                        // Convert the serialized string to an array
+                                                        $curriculumData = unserialize($serializedCurriculum);
+
+                                                        // Initialize an empty array to hold the modified curriculum data
+                                                        $modifiedCurriculumData = [];
+
+                                                        // Loop through each element in the curriculum data
+                                                        foreach ($curriculumData as $curriculum) {
+                                                            // Split the curriculum string by commas
+                                                            $splitCurriculum = explode(',', $curriculum);
+
+                                                            // Trim each element to remove any leading or trailing spaces
+                                                            $splitCurriculum = array_map('trim', $splitCurriculum);
+
+                                                            // Merge the split curriculum into the modified array
+                                                            $modifiedCurriculumData = array_merge($modifiedCurriculumData, $splitCurriculum);
+                                                        }
+
+                                                        // Output the modified curriculum data
+                                                        // print_r($modifiedCurriculumData);
+                                                    @endphp
+                                                         @foreach ($modifiedCurriculumData as $curriculums)
+                                                         <span
+                                                        class="bg-body-secondary d-inline-block rounded font-s mx-1 p-1 bg_green_hover text-center">{{$curriculums}}</span>
+                                                
+                                                         @endforeach
+                                                    </div>
                                             </div>
                                             <div class="d-flex flex-column flex-lg-row mt-5 py-1 bd_top_dashed">
                                                 <div

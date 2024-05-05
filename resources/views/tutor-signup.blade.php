@@ -80,7 +80,7 @@
                     </div>
                     <div class="col-md-6 px-2 mb-2">
                         <label for="teaching" class="form-label">Teaches</label>
-                        <select class="form-select" id="teaching" name="teaching" required>
+                        <select class="form-select teaching" id="teaching" name="teaching[]" required>
                             <option value="english">English</option>
                             <option value="maths">Mathematics</option>
                             <option value="physics">Physics</option>
@@ -98,7 +98,7 @@
                     <div class="col-md-6 px-2 mb-2">
                         <label for="location" class="form-label">Country</label>
                     </br>
-                        <select class="form-select select2" id="teaching" required name="location">
+                        <select class="form-select select2" id="location" required name="location">
                             <option value="AE">United Arab Emirates</option>
                                         <option value="PK">Pakistan</option>
                                         <option value="IN">India</option>
@@ -388,7 +388,7 @@
                     </div>
                 </div>
                 <div class="col-12 px-2 py-2"><label for="curriculum" class="form-label">Curriculum</label>
-                    <textarea class="form-control" id="curriculum" name="curriculum" rows="2" required></textarea>
+                    <textarea class="form-control" id="curriculum" name="curriculum[]" rows="2" required placeholder="Add comma after one"></textarea>
                 </div>
 
                 <div class="col d-flex justify-content-center py-3">
@@ -408,6 +408,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     $(document).ready(function() {
-        $('.select2').select2()
+        $('.select2').select2();
+        $('.teaching').select2({
+          multiple: true
+        });;
     });
 </script>
