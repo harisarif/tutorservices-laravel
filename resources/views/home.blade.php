@@ -51,7 +51,7 @@
     }
     .adjust-filters-wrap {
         display: flex;
-        margin-top: 50px;
+        margin-top: 50px !important;
     }
     }
     
