@@ -34,10 +34,27 @@
     .pagination li a:hover {
         background-color: #ddd;
     }
-
-    .select2-container {
+    @media only screen and (min-width: 768px) {
+        .select2-container {
         width: 150px !important;
     }
+    .adjust-filters-wrap {
+        display: flex;
+    }
+    }
+    @media only screen and (max-width: 767px) {
+        .select2-container {
+        width: 350px !important;
+    }
+    #carouselExampleCaptions {
+        display: none;
+    }
+    .adjust-filters-wrap {
+        display: flex;
+        margin-top: 50px;
+    }
+    }
+    
 </style>
 
 @extends('layouts.app')
@@ -201,14 +218,23 @@
                 </div>
 
                 <div class="row justify-content-center px-0">
-                    <p class="m-0 pt-1 tutors-range"> {{ $tutors->firstItem() }} to {{ $tutors->lastItem() }}
-                        0f <span class="total-tutors-count">{{ $totalTutorsCount }}</span> tutors</p>
+                    
+                    
                     <div class="col-md-9">
-                        <div class="d-flex justify-content-between mb-2 p-2 bg-body-secondary align-items-center">
-                            <div class="d-flex align-item-center">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <p class="m-0 pt-1 tutors-range"> {{ $tutors->firstItem() }} to {{ $tutors->lastItem() }}
+                                    0f <span class="total-tutors-count">{{ $totalTutorsCount }}</span> tutors</p>
+                            </div>
+                            <div class="mb-2">
+                                <button id="resetFilterBtn" class="btn btn-secondary bg_theme_green">Reset Filter</button>
+    
+                            </div>
+                        </div>
+                        <div class="bg-body-secondary">
                                
-                                <div class="form-group d-flex">
-                                    <div class="col-3">
+                                <div class="row p-2">
+                                    <div class="col-2">
 
                                         <select name="country" id="country" class="select2">
                                             <option value="all">All Countries</option>
@@ -465,61 +491,23 @@
                                             <option value="ZW">Zimbabwe</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-4 px-2 mb-2">
-                                        {{-- <label for="citysearch" class="form-label">City</label> --}}
-                                        <input placeholder="Search city" type="text" class="form-control"
-                                            id="citysearch" name="citysearch" required />
+                                    <div class="col-9 adjust-filters-wrap">
+                                        <div class="col-md-3 px-2 mb-2">
+                                            {{-- <label for="citysearch" class="form-label">City</label> --}}
+                                            <input placeholder="Search city" type="text" class="form-control"
+                                                id="citysearch" name="citysearch" required />
+                                        </div>
+                                        <div class="col-md-3 px-2 mb-2">
+                                            {{-- <label for="citysearch" class="form-label">City</label> --}}
+                                            <input placeholder="Search Subject" type="text" class="form-control"
+                                                id="subjectsearch" name="subjectsearch" required />
+                                        </div>
                                     </div>
-                                    <div class="col-md-4 px-2 mb-2">
-                                        {{-- <label for="citysearch" class="form-label">City</label> --}}
-                                        <input placeholder="Search Subject" type="text" class="form-control"
-                                            id="subjectsearch" name="subjectsearch" required />
-                                    </div>
+                                    
+                                    
                                 </div>
-                                <li class="nav-item dropdown m-1 d-none px-3">
-                                    <a class="text-dark text-decoration-none fw-bold dropdown-toggle" href="#"
-                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        More
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown m-1 d-none px-3">
-                                    <a class="text-dark text-decoration-none fw-bold dropdown-toggle" href="#"
-                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        City
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </li>
-                                    </ul>
-                                </li>
+                               
                             </div>
-                            <button id="resetFilterBtn" class="btn btn-secondary bg_theme_green">Reset Filter</button>
-
-                            {{-- <div class="text-dark">
-                                    show
-                                    <select>
-                                        <option value="5">5</option>
-                                        <option value="10">10</option>
-                                        <option value="15">15</option>
-                                        <option value="20">20</option>
-                                    </select>
-                                    per page
-                                </div> --}}
-                        </div>
 
                         <!-- Tutor profile -->
                         @if ($tutors->count() > 0)
