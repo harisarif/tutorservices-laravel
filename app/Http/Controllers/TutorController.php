@@ -32,43 +32,53 @@ class TutorController extends Controller
 
         public function fetchData(Request $request)
 {
-    $query = Tutor::query();
-    
-    // Filter tutors by selected country if a specific country is selected
-    if ($request->has('location') && $request->location !== "all") {
-        $query->where('location', $request->location);
-    }
-    
-    // Filter tutors by search query for city
-    if ($request->has('citysearch') && $request->citysearch !== "") {
-        $query->where('city', 'LIKE', '%' . $request->citysearch . '%');
-    }
-    
-    // Fetch the total count of tutors (for all countries if "all" is selected)
-    $totalTutorsCount = $query->count();
-    
-    // Define the number of tutors per page
-    $perPage = 10;
-    
-    // Paginate the filtered tutors
-    $tutors = $query->paginate($perPage);
-    
-    // Manually serialize the paginated data
-    $serializedData = [
-        'tutors' => $tutors->items(), // Get the items from the paginator
-        'totalTutorsCount' => $totalTutorsCount,
-        'perPage' => $perPage,
-        'pagination' => [
-            'total' => $tutors->total(),
-            'count' => $tutors->count(),
-            'perPage' => $tutors->perPage(),
-            'currentPage' => $tutors->currentPage(),
-            'lastPage' => $tutors->lastPage(),
-        ],
-    ];
-    
-    // Return the serialized data as JSON response
-    return response()->json($serializedData);
+   // Initialize the query builder
+$query = Tutor::query();
+
+// Define the number of tutors per page
+$perPage = 10;
+
+// Apply filters
+// Filter tutors by selected country if a specific country is selected
+if ($request->has('location') && $request->location !== "all") {
+    $query->where('location', $request->location);
+}
+
+// Filter tutors by search query for city
+if ($request->has('citysearch') && $request->citysearch !== "") {
+    $query->where('city', 'LIKE', '%' . $request->citysearch . '%');
+}
+
+// Filter tutors by search query for subject
+if ($request->has('subjectsearch') && $request->filled('subjectsearch')) {
+    $subject = $request->subjectsearch;
+
+    // Filter tutors who teach the specified subject
+    $query->where('teaching', 'LIKE', '%"'.$subject.'"%');
+}
+// Paginate the filtered tutors
+$tutors = $query->paginate($perPage);
+
+// Fetch the total count of tutors after applying filters
+$totalTutorsCount = $query->count();
+
+// Manually serialize the paginated data
+$serializedData = [
+    'tutors' => $tutors->items(), // Get the items from the paginator
+    'totalTutorsCount' => $totalTutorsCount,
+    'perPage' => $perPage,
+    'pagination' => [
+        'total' => $tutors->total(),
+        'count' => $tutors->count(),
+        'perPage' => $tutors->perPage(),
+        'currentPage' => $tutors->currentPage(),
+        'lastPage' => $tutors->lastPage(),
+    ],
+];
+
+// Return the serialized data as JSON response
+return response()->json($serializedData);
+
 }
 
 

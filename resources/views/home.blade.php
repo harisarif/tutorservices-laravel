@@ -1,4 +1,7 @@
 <style>
+    .select2-container .select2-selection--single {
+        height: 38px !important;
+    }
     .pagination {
         margin-top: 20px;
     }
@@ -31,9 +34,10 @@
     .pagination li a:hover {
         background-color: #ddd;
     }
+
     .select2-container {
-            width: 150px !important;
-        }
+        width: 150px !important;
+    }
 </style>
 
 @extends('layouts.app')
@@ -122,12 +126,13 @@
 
 
                             <!-- <li class="nav-item">
-                                        </li> -->
+                                            </li> -->
                             <li class="nav-item m-1 btn-an text-center rounded w-1">
                                 <a class="nav-link text-decoration-none solid_btn" href="{{ route('login') }}">Login</a>
                             </li>
                             <li class="nav-item m-1 btn-an text-center rounded w-1">
-                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}">Sign Up</a>
+                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}">Sign
+                                    Up</a>
                             </li>
                         </ul>
                     </div>
@@ -196,17 +201,18 @@
                 </div>
 
                 <div class="row justify-content-center px-0">
+                    <p class="m-0 pt-1 tutors-range"> {{ $tutors->firstItem() }} to {{ $tutors->lastItem() }}
+                        0f <span class="total-tutors-count">{{ $totalTutorsCount }}</span> tutors</p>
                     <div class="col-md-9">
                         <div class="d-flex justify-content-between mb-2 p-2 bg-body-secondary align-items-center">
                             <div class="d-flex align-item-center">
-                                <p class="m-0 pt-1 tutors-range"> {{ $tutors->firstItem() }} to {{ $tutors->lastItem() }}
-                                    0f <span class="total-tutors-count">{{ $totalTutorsCount }}</span> tutors</p>
+                               
                                 <div class="form-group d-flex">
-                                    <div>
-                                    
+                                    <div class="col-3">
+
                                         <select name="country" id="country" class="select2">
                                             <option value="all">All Countries</option>
-                                            
+
                                             <option value="AE">United Arab Emirates</option>
                                             <option value="PK">Pakistan</option>
                                             <option value="IN">India</option>
@@ -443,7 +449,7 @@
                                             <option value="TV">Tuvalu</option>
                                             <option value="UG">Uganda</option>
                                             <option value="UA">Ukraine</option>
-                                            
+
                                             <option value="UM">United States Minor Outlying Islands</option>
                                             <option value="UY">Uruguay</option>
                                             <option value="UZ">Uzbekistan</option>
@@ -459,9 +465,15 @@
                                             <option value="ZW">Zimbabwe</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-6 px-2 mb-2">
+                                    <div class="col-md-4 px-2 mb-2">
                                         {{-- <label for="citysearch" class="form-label">City</label> --}}
-                                        <input placeholder="Search city" type="text" class="form-control" id="citysearch" name="citysearch" required />
+                                        <input placeholder="Search city" type="text" class="form-control"
+                                            id="citysearch" name="citysearch" required />
+                                    </div>
+                                    <div class="col-md-4 px-2 mb-2">
+                                        {{-- <label for="citysearch" class="form-label">City</label> --}}
+                                        <input placeholder="Search Subject" type="text" class="form-control"
+                                            id="subjectsearch" name="subjectsearch" required />
                                     </div>
                                 </div>
                                 <li class="nav-item dropdown m-1 d-none px-3">
@@ -633,7 +645,7 @@
                                                     </div>
 
                                                     <div class="d-flex flex-column flex-md-row flex-wrap">
-                                                      
+
                                                         @php
                                                             // Assuming $item->teaching is a JSON string
                                                             // Serialized string
@@ -643,12 +655,11 @@
                                                             $arrayData = unserialize($serializedData);
                                                         @endphp
                                                         @foreach ($arrayData as $teaching)
-                                                        <span
-                                                            class="bg-body-secondary rounded font-s m-1 d-inline-block p-1 bg_green_hover text-center">{{ $teaching }}</span>
+                                                            <span
+                                                                class="bg-body-secondary rounded font-s m-1 d-inline-block p-1 bg_green_hover text-center">{{ $teaching }}</span>
+                                                        @endforeach
 
-                                                    @endforeach
-                                                    
-                                                        
+
                                                         <button class="m-1 text-danger border-0 bg-transparent">
                                                             +1 more
                                                         </button>
@@ -679,18 +690,21 @@
                                                             $splitCurriculum = array_map('trim', $splitCurriculum);
 
                                                             // Merge the split curriculum into the modified array
-                                                            $modifiedCurriculumData = array_merge($modifiedCurriculumData, $splitCurriculum);
+                                                            $modifiedCurriculumData = array_merge(
+                                                                $modifiedCurriculumData,
+                                                                $splitCurriculum,
+                                                            );
                                                         }
 
                                                         // Output the modified curriculum data
                                                         // print_r($modifiedCurriculumData);
+
                                                     @endphp
-                                                         @foreach ($modifiedCurriculumData as $curriculums)
-                                                         <span
-                                                        class="bg-body-secondary d-inline-block rounded font-s mx-1 p-1 bg_green_hover text-center">{{$curriculums}}</span>
-                                                
-                                                         @endforeach
-                                                    </div>
+                                                    @foreach ($modifiedCurriculumData as $curriculums)
+                                                        <span
+                                                            class="bg-body-secondary d-inline-block rounded font-s mx-1 p-1 bg_green_hover text-center">{{ $curriculums }}</span>
+                                                    @endforeach
+                                                </div>
                                             </div>
                                             <div class="d-flex flex-column flex-lg-row mt-5 py-1 bd_top_dashed">
                                                 <div
@@ -1137,10 +1151,8 @@
         });
     </script>
     <script>
-        
-        
         jQuery(document).ready(function($) {
-            
+
             setTimeout(function() {
                 $(".alert").fadeOut("slow");
             }, 5000);
@@ -1172,7 +1184,6 @@
                     dataType: 'json',
                     success: function(response) {
                         console.log('Success function triggered', response);
-                        // Handle success response
                         if (response && response.tutors) {
                             $('#tutorsContainer').empty();
 
@@ -1180,7 +1191,45 @@
                             if (response.tutors.length > 0) {
                                 // Iterate over tutors and update content
                                 response.tutors.forEach(function(item) {
+
+
                                     // Assuming item represents each tutor object
+                                    // Assuming item.teaching is a PHP serialized array
+                                    var serializedTeaching =
+                                    '<?php echo $item->teaching; ?>'; // Assuming you're echoing PHP data into JavaScript
+
+                                    // Parse the serialized PHP array into a JavaScript array
+                                    var teachingArray = [];
+
+                                    // Extract individual values from serializedTeaching
+                                    var matches = serializedTeaching.match(
+                                        /s:\d+:"(.*?)";/g);
+                                    if (matches) {
+                                        matches.forEach(function(match) {
+                                            teachingArray.push(match.match(
+                                                /s:\d+:"(.*?)";/)[1]);
+                                        });
+                                    }
+                                    const data = item.curriculum;
+
+                                    let newData = data;
+                                    newData = newData.split('"');
+
+                                    let sorttedArry = [];
+                                    newData.forEach(element => {
+
+                                        if (!element.includes(':') && !element
+                                            .includes(';')) {
+                                            sorttedArry.push(element);
+
+
+                                        }
+                                    });
+                                    sorttedArry = sorttedArry[0].split(',');
+
+                                    console.log(sorttedArry)
+
+
                                     var tutorHTML =
                                         '<div class="tutor_profile rounded overflow-hidden mb-3">';
                                     tutorHTML +=
@@ -1254,13 +1303,17 @@
                                         '<div class="col-12 d-flex m-1 align-items-center align-items-sm-center flex-column flex-sm-row">';
                                     tutorHTML +=
                                         '<div class="option d-flex align-items-start py-1"><h5 class="label-h m-0 m-1 font-s1 text-center text-md-left fw-bold">Teaches</h5><span class="d-none d-sm-block">:</span></div>';
-                                    tutorHTML +=
-                                        '<div class="d-flex flex-column flex-md-row flex-wrap">';
-                                    tutorHTML +=
-                                        '<span class="bg-body-secondary rounded font-s m-1 d-inline-block p-1 bg_green_hover text-center">' +
-                                        item.teaching + '</span>';
+                                    teachingArray.forEach(function(subject) {
+                                        // Add each subject to the tutorHTML
+                                        tutorHTML +=
+                                            '<span class="bg-body-secondary rounded font-s m-1 d-inline-block p-1 bg_green_hover text-center">' +
+                                            subject + '</span>';
+                                    });
+
+                                    // After adding all subjects, add the "+1 more" button and other HTML elements
                                     tutorHTML +=
                                         '<button class="m-1 text-danger border-0 bg-transparent">+1 more</button>';
+                                    tutorHTML += '</div>';
                                     tutorHTML += '</div>';
                                     tutorHTML += '</div>';
                                     tutorHTML +=
@@ -1269,9 +1322,16 @@
                                         '<h5 class="label-h m-0 m-1 font-s1 text-center text-md-left fw-bold">Curriculum</h5>';
                                     tutorHTML +=
                                         '<span class="d-none d-sm-block">:</span>';
-                                    tutorHTML +=
-                                        '<span class="bg-body-secondary d-inline-block rounded font-s mx-1 p-1 bg_green_hover text-center">' +
-                                        item.curriculum + '</span>';
+                                    // Unserialize the serialized data
+
+                                    // Add a span for each curriculum item to tutorHTML
+                                    sorttedArry.forEach(element => {
+                                        tutorHTML +=
+                                            '<span class="bg-body-secondary d-inline-block rounded font-s mx-1 p-1 bg_green_hover text-center">' +
+                                            element + '</span>';
+
+                                    })
+
                                     tutorHTML += '</div>';
                                     // Append tutor HTML to container
                                     $('#tutorsContainer').append(tutorHTML);
@@ -1347,7 +1407,45 @@
                             if (response.tutors.length > 0) {
                                 // Iterate over tutors and update content
                                 response.tutors.forEach(function(item) {
+
+
                                     // Assuming item represents each tutor object
+                                    // Assuming item.teaching is a PHP serialized array
+                                    var serializedTeaching =
+                                    '<?php echo $item->teaching; ?>'; // Assuming you're echoing PHP data into JavaScript
+
+                                    // Parse the serialized PHP array into a JavaScript array
+                                    var teachingArray = [];
+
+                                    // Extract individual values from serializedTeaching
+                                    var matches = serializedTeaching.match(
+                                        /s:\d+:"(.*?)";/g);
+                                    if (matches) {
+                                        matches.forEach(function(match) {
+                                            teachingArray.push(match.match(
+                                                /s:\d+:"(.*?)";/)[1]);
+                                        });
+                                    }
+                                    const data = item.curriculum;
+
+                                    let newData = data;
+                                    newData = newData.split('"');
+
+                                    let sorttedArry = [];
+                                    newData.forEach(element => {
+
+                                        if (!element.includes(':') && !element
+                                            .includes(';')) {
+                                            sorttedArry.push(element);
+
+
+                                        }
+                                    });
+                                    sorttedArry = sorttedArry[0].split(',');
+
+                                    console.log(sorttedArry)
+
+
                                     var tutorHTML =
                                         '<div class="tutor_profile rounded overflow-hidden mb-3">';
                                     tutorHTML +=
@@ -1421,13 +1519,17 @@
                                         '<div class="col-12 d-flex m-1 align-items-center align-items-sm-center flex-column flex-sm-row">';
                                     tutorHTML +=
                                         '<div class="option d-flex align-items-start py-1"><h5 class="label-h m-0 m-1 font-s1 text-center text-md-left fw-bold">Teaches</h5><span class="d-none d-sm-block">:</span></div>';
-                                    tutorHTML +=
-                                        '<div class="d-flex flex-column flex-md-row flex-wrap">';
-                                    tutorHTML +=
-                                        '<span class="bg-body-secondary rounded font-s m-1 d-inline-block p-1 bg_green_hover text-center">' +
-                                        item.teaching + '</span>';
+                                    teachingArray.forEach(function(subject) {
+                                        // Add each subject to the tutorHTML
+                                        tutorHTML +=
+                                            '<span class="bg-body-secondary rounded font-s m-1 d-inline-block p-1 bg_green_hover text-center">' +
+                                            subject + '</span>';
+                                    });
+
+                                    // After adding all subjects, add the "+1 more" button and other HTML elements
                                     tutorHTML +=
                                         '<button class="m-1 text-danger border-0 bg-transparent">+1 more</button>';
+                                    tutorHTML += '</div>';
                                     tutorHTML += '</div>';
                                     tutorHTML += '</div>';
                                     tutorHTML +=
@@ -1436,14 +1538,237 @@
                                         '<h5 class="label-h m-0 m-1 font-s1 text-center text-md-left fw-bold">Curriculum</h5>';
                                     tutorHTML +=
                                         '<span class="d-none d-sm-block">:</span>';
-                                    tutorHTML +=
-                                        '<span class="bg-body-secondary d-inline-block rounded font-s mx-1 p-1 bg_green_hover text-center">' +
-                                        item.curriculum + '</span>';
+                                    // Unserialize the serialized data
+
+                                    // Add a span for each curriculum item to tutorHTML
+                                    sorttedArry.forEach(element => {
+                                        tutorHTML +=
+                                            '<span class="bg-body-secondary d-inline-block rounded font-s mx-1 p-1 bg_green_hover text-center">' +
+                                            element + '</span>';
+
+                                    })
+
                                     tutorHTML += '</div>';
                                     // Append tutor HTML to container
                                     $('#tutorsContainer').append(tutorHTML);
                                     var totalTutorsCount = response.pagination
                                         .total;
+
+                                    // Update the perPage value with the count returned in the response
+                                    var perPage = response.pagination.perPage;
+                                    console.log(perPage)
+                                    // Calculate firstItem
+                                    var firstItem = (response.pagination
+                                        .currentPage - 1) * perPage + 1;
+
+                                    // Calculate lastItem
+                                    var lastItem = Math.min(response.pagination
+                                        .currentPage * perPage, totalTutorsCount
+                                    );
+
+                                    // Update the totalTutorsCount displayed in the UI
+                                    $('.total-tutors-count').text(totalTutorsCount);
+
+                                    // Update the range displayed in the UI
+                                    $('.tutors-range').text(firstItem + ' to ' +
+                                        lastItem + ' of ' + totalTutorsCount +
+                                        ' tutors');
+
+                                    // Hide pagination if totalTutorsCount is less than or equal to perPage
+                                    if (totalTutorsCount <= perPage) {
+                                        $('#paginationContainer').hide();
+                                    } else {
+                                        $('#paginationContainer').show();
+                                    }
+
+
+                                });
+                            } else {
+                                // Handle case where no tutors are found
+                                $('#tutorsContainer').html(
+                                    '<p>No tutors found for the selected city.</p>');
+                            }
+
+                            // Update pagination links
+                            $('#paginationContainer').html(response.pagination);
+                        } else {
+                            // Handle case where no tutors are found
+                            console.log('No tutors found for the selected city.');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error response
+                    }
+                });
+            });
+
+            $('#subjectsearch').keyup(function() {
+                var searchQuery = $(this).val(); // Get the value from the city search input field
+                var locationData = {
+                    subjectsearch: searchQuery,
+                    _token: '{{ csrf_token() }}' // Include CSRF token
+                };
+                console.log('searchQuery',searchQuery)
+                // Send AJAX request with the appropriate location data
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('fetch-data') }}',
+                    data: locationData,
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log('Success function triggered', response);
+                        if (response && response.tutors) {
+                            $('#tutorsContainer').empty();
+
+                            // Check if there are tutors
+                            if (response.tutors.length > 0) {
+                                // Iterate over tutors and update content
+                                response.tutors.forEach(function(item) {
+
+
+                                    // Assuming item represents each tutor object
+                                    // Assuming item.teaching is a PHP serialized array
+                                    var serializedTeaching =
+                                    '<?php echo $item->teaching; ?>'; // Assuming you're echoing PHP data into JavaScript
+
+                                    // Parse the serialized PHP array into a JavaScript array
+                                    var teachingArray = [];
+
+                                    // Extract individual values from serializedTeaching
+                                    var matches = serializedTeaching.match(
+                                        /s:\d+:"(.*?)";/g);
+                                    if (matches) {
+                                        matches.forEach(function(match) {
+                                            teachingArray.push(match.match(
+                                                /s:\d+:"(.*?)";/)[1]);
+                                        });
+                                    }
+                                    const data = item.curriculum;
+
+                                    let newData = data;
+                                    newData = newData.split('"');
+
+                                    let sorttedArry = [];
+                                    newData.forEach(element => {
+
+                                        if (!element.includes(':') && !element
+                                            .includes(';')) {
+                                            sorttedArry.push(element);
+
+
+                                        }
+                                    });
+                                    sorttedArry = sorttedArry[0].split(',');
+
+                                    console.log(sorttedArry)
+
+
+                                    var tutorHTML =
+                                        '<div class="tutor_profile rounded overflow-hidden mb-3">';
+                                    tutorHTML +=
+                                        '<div class="d-flex justify-content-between">';
+                                    tutorHTML +=
+                                        '<button class="p-1 bg_theme_green text-light border border-0">Sponsored</button>';
+                                    tutorHTML +=
+                                        '<span class="p-1 text-secondary"><i class="fa fa-bookmark text-body-tertiary"></i> Watchlist</span>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '<div class="py-2 px-5">';
+                                    tutorHTML += '<div class="row d-flex">';
+                                    tutorHTML +=
+                                        '<div class="col d-flex flex-column flex-md-row align-items-center rmb-3 m-lg-0">';
+                                    tutorHTML +=
+                                        '<div class="imgBox col-sm-4 d-grid mx-3">';
+                                    tutorHTML +=
+                                        '<img class="img-1 rounded-circle" src="storage/' +
+                                        item.profileImage + '" alt="" />';
+                                    tutorHTML +=
+                                        '<p class="d-flex align-items-center m-auto">Verified<span class="mx-1 varified bg-primary rounded-circle text-light"><i class="fa fa-check"></i></span></p>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML +=
+                                        '<div class="personal_detail text-center text-md-start">';
+                                    tutorHTML += '<h5>' + item.name + '</h5>';
+                                    tutorHTML += '<span>' + item.gender + ', ' +
+                                        item.age +
+                                        ' years <span style="background-color: red" class="text-light font-s px-1">Pro</span></span>';
+                                    tutorHTML += '<p class="m-0">' + item
+                                        .experience +
+                                        ' years of teaching experience</p>';
+                                    tutorHTML +=
+                                        '<span class="d-flex align-items-center text-warning d-flex justify-content-center justify-content-md-start">';
+                                    for (var i = 0; i < item.starRating; i++) {
+                                        tutorHTML += '<i class="fa fa-star"></i>';
+                                    }
+                                    tutorHTML += '</span>';
+                                    tutorHTML += '<p class="text-danger m-0">(' +
+                                        item.reviews + ' reviews)</p>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML +=
+                                        '<div class="qualification col-lg-6">';
+                                    tutorHTML += '<div class="row p-0">';
+                                    tutorHTML += '<table class="col-12">';
+                                    tutorHTML +=
+                                        '<tr class="title-1 col col-md-3"><td class="text-dark fw-bold">Qualification</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
+                                        item.qualification + '</td></tr>';
+                                    tutorHTML +=
+                                        '<tr class="title-1 col col-md-3"><td class="font-s text-dark fw-bold">Country</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
+                                        item.location + '</td></tr>';
+                                    tutorHTML +=
+                                        '<tr class="title-1 col col-md-3"><td class="font-s text-dark fw-bold">City</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
+                                        item.city + '</td></tr>';
+                                    tutorHTML +=
+                                        '<tr class="title-1 col col-md-3"><td class="font-s text-dark fw-bold">Mobile</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
+                                        item.phone +
+                                        '<button class="text-success bg-transparent fw-bold border-0">view contact</button></td></tr>';
+                                    tutorHTML +=
+                                        '<tr class="title-1 col col-md-3"><td class="font-s fw-bold">WhatsApp</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
+                                        item.whatsapp +
+                                        '<button class="text-success bg-transparent fw-bold border-0">view contact</button></td></tr>';
+                                    tutorHTML +=
+                                        '<tr class="title-1 col col-md-3"><td class="font-s fw-bold">Availability</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
+                                        item.availability + '</td></tr>';
+                                    tutorHTML += '</table>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '<div class="row mt-3">';
+                                    tutorHTML +=
+                                        '<div class="col-12 d-flex m-1 align-items-center align-items-sm-center flex-column flex-sm-row">';
+                                    tutorHTML +=
+                                        '<div class="option d-flex align-items-start py-1"><h5 class="label-h m-0 m-1 font-s1 text-center text-md-left fw-bold">Teaches</h5><span class="d-none d-sm-block">:</span></div>';
+                                    teachingArray.forEach(function(subject) {
+                                        // Add each subject to the tutorHTML
+                                        tutorHTML +=
+                                            '<span class="bg-body-secondary rounded font-s m-1 d-inline-block p-1 bg_green_hover text-center">' +
+                                            subject + '</span>';
+                                    });
+
+                                    // After adding all subjects, add the "+1 more" button and other HTML elements
+                                    tutorHTML +=
+                                        '<button class="m-1 text-danger border-0 bg-transparent">+1 more</button>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML +=
+                                        '<div class="col-12 d-flex m-1 align-items-center flex-column flex-sm-row">';
+                                    tutorHTML +=
+                                        '<h5 class="label-h m-0 m-1 font-s1 text-center text-md-left fw-bold">Curriculum</h5>';
+                                    tutorHTML +=
+                                        '<span class="d-none d-sm-block">:</span>';
+                                    // Unserialize the serialized data
+
+                                    // Add a span for each curriculum item to tutorHTML
+                                    sorttedArry.forEach(element => {
+                                        tutorHTML +=
+                                            '<span class="bg-body-secondary d-inline-block rounded font-s mx-1 p-1 bg_green_hover text-center">' +
+                                            element + '</span>';
+
+                                    })
+
+                                    tutorHTML += '</div>';
+                                    // Append tutor HTML to container
+                                    $('#tutorsContainer').append(tutorHTML);
+                                    var totalTutorsCount = response.pagination.total;
 
                                     // Update the perPage value with the count returned in the response
                                     var perPage = response.pagination.perPage;
