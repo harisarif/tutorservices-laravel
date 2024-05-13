@@ -1,6 +1,6 @@
 @extends('layouts.app')
 <style>
-   .hireTutor .modalBox {
+   .modalBox {
     display:none !important;
    }
 </style>
