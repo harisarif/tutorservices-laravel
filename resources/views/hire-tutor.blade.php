@@ -15,8 +15,8 @@
     </header>
     <main class="hireTutor">
         
-        <div class="row m-0">
-            <div class="main-page col-6 mx-auto my-3 p-0 text-center ">
+        <div class="row m-0 px-4">
+            <div class="main-page col-12 col-md-6 mx-auto my-3 p-0 text-center ">
                 <!-- page-1 header -->
                 <div class="col m-1 py-3 text-center flex-column rounded-top bg-body-secondary">
                     <h3>Post Learning Requirement - It's Free!</h3>
