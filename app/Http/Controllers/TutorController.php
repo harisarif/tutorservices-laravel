@@ -118,19 +118,8 @@ return response()->json($serializedData);
         // Optionally, you can redirect the user or return a response
         return redirect()->route('home')->with('success', 'Tutor created successfully.');
     }
-    public function filterByCountry(Request $request)
+    public function hiretutor(Request $request)
     {
-        $countryId = $request->input('country');
-
-        // Apply filtering logic here
-        $query = Tutor::query();
-
-        if ($countryId) {
-            $query->where('country_id', $countryId);
-        }
-
-        $tutors = $query->get();
-
-        return response()->json($tutors);
+        return redirect('/hire-tutor');
     }
 }

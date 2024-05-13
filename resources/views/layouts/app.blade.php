@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Edexcel') }}</title>
-        <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
-        <link href="css/style.css" rel="stylesheet" />
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Edexcel') }}</title>
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
+    <link href="css/style.css" rel="stylesheet" />
     <!-- whatsapp button css -->
     <link rel="stylesheet" href="css/whatsApp-buttons.css" />
 
@@ -20,43 +21,43 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
         integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <!-- Scripts -->
-        {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
-    </head>
-    <div class="loader" id="lazzyLoader">
-        <img src="./images/loader.gif" alt="lazzyloader">
-    </div>
-    <div class="modalBox" id="allModal">
-        <div class="boxModal-1 col-4 bg-light rounded p-2">
-            <h5 class="col-12 d-flex justify-content-between align-items-center px-2">
-                Edexcel Academy & Consultent.
-                <span class="fs-2 pointer"
-                    onclick="document.getElementById('allModal').style.display = 'none'">&times;</span>
-            </h5>
-    
-            <p class="px-2">Are you tutor or student?</p>
-    
-            <hr />
-            <div class="d-flex justify-content-end gap-2">
-                <a href="#student" onclick="document.getElementById('allModal').style.display = 'none'"
-                    class="btn bg-body-secondary">Student</a>
-                <a href="{{ route('tutor') }}" class="btn btn-success bg_theme_green border-0">Tutor</a>
-            </div>
+    <!-- Scripts -->
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+</head>
+<div class="loader" id="lazzyLoader">
+    <img src="./images/loader.gif" alt="lazzyloader">
+</div>
+<div class="modalBox" id="allModal">
+    <div class="boxModal-1 col-4 bg-light rounded p-2">
+        <h5 class="col-12 d-flex justify-content-between align-items-center px-2">
+            Edexcel Academy & Consultent.
+            <span class="fs-2 pointer"
+                onclick="document.getElementById('allModal').style.display = 'none'">&times;</span>
+        </h5>
+
+        <p class="px-2">Are you tutor or student?</p>
+
+        <hr />
+        <div class="d-flex justify-content-end gap-2">
+            <a href="#student" onclick="document.getElementById('allModal').style.display = 'none'"
+                class="btn bg-body-secondary">Student</a>
+            <a href="{{ route('tutor') }}" class="btn btn-success bg_theme_green border-0">Tutor</a>
         </div>
     </div>
-    
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            {{-- <livewire:layout.navigation /> --}}
+</div>
 
-            <!-- Page Heading -->
-            {{-- @if (isset($header))
+<body class="font-sans antialiased">
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        {{-- <livewire:layout.navigation /> --}}
+
+        <!-- Page Heading -->
+        {{-- @if (isset($header))
                 <header class="bg-white dark:bg-gray-800 shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
@@ -64,26 +65,27 @@
                 </header>
             @endif --}}
 
-            <!-- Page Content -->
-            <main>
-                {{-- {{ $slot }} --}}
-                @yield('content')
-                @include('layouts.footer')
-                @yield('js')
-            </main>
-        </div>
-    </body>
+        <!-- Page Content -->
+        <main>
+            {{-- {{ $slot }} --}}
+            @yield('content')
+            @include('layouts.footer')
+            @yield('js')
+        </main>
+    </div>
+</body>
+
 </html>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
     integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-</script>
 <script src="./js/app.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+{{-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+</script> --}}
+<script>
+    $(document).ready(function($) { $('.country').select2(); });
 </script>

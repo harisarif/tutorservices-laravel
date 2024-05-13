@@ -173,7 +173,7 @@
                     </button>
                     <button class="p-2 bg_theme_green btn-an rounded border-0 text-light">
                         <a class="text-light text-decoration-none active solid_btn" aria-current="page"
-                            href="./hire_tutor.html">Hire Tutor</a>
+                            href="{{ route('hire.tutor') }}">Hire Tutor</a>
 
                     </button>
                 </div>
@@ -185,7 +185,7 @@
 
             <section class="row justify-content-center">
                 <div class="col-12 row-gap-1 p-1">
-                    <a class="tutorLinks d-inline-block text-center text-decoration-none" href="./hire_tutor.html">Browse
+                    <a class="tutorLinks d-inline-block text-center text-decoration-none" href="{{ route('hire.tutor') }}">Browse
                         Tutor</a>
                     <a class="tutorLinks d-inline-block text-center text-decoration-none" href="#FAQ">FAQ</a>
                     <a class="tutorLinks d-inline-block text-center text-decoration-none" href="#">How it works</a>
@@ -236,7 +236,7 @@
                                 <div class="row p-2">
                                     <div class="col-2">
 
-                                        <select name="country" id="country" class="select2">
+                                        <select name="country" id="country" class="country">
                                             <option value="all">All Countries</option>
 
                                             <option value="AE">United Arab Emirates</option>
@@ -1132,20 +1132,23 @@
 
 
 @endsection
-@section('js')
-    <script>
-        $(document).ready(function() {
-            $('.select2').select2()
-        });
-    </script>
-    <script>
-        jQuery(document).ready(function($) {
 
+@section('js')
+    {{-- <script>
+        $(document).ready(function() {
+            
+        });
+    </script> --}}
+    <script>
+        
+
+        $(document).ready(function($) {
             setTimeout(function() {
                 $(".alert").fadeOut("slow");
             }, 5000);
             // Your jQuery code here
-            $('#country').change(function() {
+            $('#country').change(function(e) {
+                e.preventDefault();
                 var selectedCountry = $(this).val();
                 var locationData = {};
 
@@ -1805,10 +1808,6 @@
                     }
                 });
             });
-
-        });
-        jQuery(document).ready(function() {
-            // Reset filter button click event
             $('#resetFilterBtn').click(function() {
                 // Send an AJAX request to fetch data without applying the filter
                 // AJAX request to reset filters
@@ -1831,5 +1830,6 @@
 
             });
         });
+        
     </script>
 @endsection

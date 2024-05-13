@@ -800,7 +800,7 @@
 <body>
 <main>
     <header class="main_header d-flex  align-items-end">
-        <a class="nav-link active px-3 py-0 fw-bold" aria-current="page" href="./hire_tutor.html"><i>&#8592; Hire
+        <a class="nav-link active px-3 py-0 fw-bold" aria-current="page" href="{{ route('hire.tutor') }}"><i>&#8592; Hire
                 Tutor</i></a>
         <a class="m-auto" href="{{ route('home') }}"><img style="height: 50px" src="{{asset('images/logo.png')}}" alt="EDEXCEL-logo"
                                                           height="50px"></a>
@@ -816,7 +816,7 @@
                 </div>
                 <h4>Students & Parents</h4>
                 <p class="para">Discover amazing teachers, post tuition jobs, take enriching courses</p>
-                <a href="./hire_tutor.html" class="signup_typ">Find a Great Teacher</a>
+                <a href="{{ route('hire.tutor') }}" class="signup_typ">Find a Great Teacher</a>
             </div>
             <div class="signup_holder">
                 <div class="icon_holder">
