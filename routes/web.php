@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TutorController;
+use App\Http\Controllers\StudentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,9 +23,8 @@ Route::get('/basicsignup', function () {
 Route::get('/tutor-signup', function () {
     return view('tutor-signup');
 })->name('tutor');
-Route::get('/hire-tutor', function () {
-    return view('hire-tutor');
-})->name('hire.tutor');
+Route::get('/hire-tutor', [StudentController::class, 'index'])->name('hire.tutor');
+Route::post('/hire-tutor', [StudentController::class, 'create'])->name('create');
 Route::post('/tutor/create', [TutorController::class, 'create'])->name('tutor-create');
 Route::get('/tutors', [TutorController::class, 'filterByCountry'])->name('tutors.filterByCountry');
 Route::post('/fetch-data', [TutorController::class, 'fetchData'])->name('fetch-data');

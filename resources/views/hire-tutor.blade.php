@@ -32,7 +32,8 @@
                         <div class="percentage bg_theme_green"></div>
                     </div>
                 </div>
-                <form action="backend.php" class="pages">
+                <form action="" method="POST" class="pages">
+                    @csrf
                     <div style="min-height: 350px;">
 
 
@@ -53,7 +54,7 @@
                                         <label for="option-2">Tutor for Home</label>
                                     </li>
                                     <li class="d-flex align-items-center fs-5 py-2">
-                                        <input class="m-2 d-none chose-subject" type="radio" value="Tutor for home" name="subjects"
+                                        <input class="m-2 d-none chose-subject" type="radio" value="Both" name="subjects"
                                             id="option-3">
                                         <label for="option-3">Both</label>
                                     </li>
@@ -65,9 +66,9 @@
                         <div class="col-12 d-none" id="page-2">
                             <h3 class="text-center py-3"><b>Sign Up</b></h3>
                             <div class="col">
-                                <input required name="Name" type="text" placeholder="*Name"  class="inp-1">
-                                <input required name="Email" type="email" placeholder="*Email"  class="inp-1">
-                                <input required name="Mobile number" type="number" placeholder="*Mobile"  min="0" class="inp-1">
+                                <input required name="name" type="text" placeholder="*Name"  class="inp-1">
+                                <input required name="email" type="email" placeholder="*Email"  class="inp-1">
+                                <input required name="phone" type="number" placeholder="*Mobile"  min="0" class="inp-1">
                                 <div class="col-12 ">
                                     <!-- <select class="form-select py-2 mx-auto" style="width: 86%;" aria-label="Default select example" name="Time Availbility">
                                         <option selected>Time Availbilty</option>
@@ -75,8 +76,8 @@
                                         <option value="11 - 12">11 - 12</option>
                                         <option value="12 - 01">12 - 01</option>
                                     </select> -->
-                                    <input class="inp-1" title="Class start time" type="time" name="Class time" id="classStartTime">
-                                    <input class="inp-1" title="Class end time" disabled type="time" name="Class time" id="classEndTime">
+                                    <input class="inp-1" title="Class start time" type="time" name="class_start_time" id="classStartTime">
+                                    <input class="inp-1" title="Class end time" type="time" name="class_end_time" id="classEndTime">
                                 </div>
 
                             </div>
@@ -87,11 +88,11 @@
                             <h3>Select a Subject</h3>
                             <p>( Which subject tutor are you looking for? )</p>
                             <div class="col-12 mb-2">
-                                <input type="number" class="form-control" id="whatsapp" name="Whatsapp number" placeholder="Whatsapp number "
+                                <input type="number" class="form-control" id="whatsapp" name="whatsapp_number" placeholder="Whatsapp number "
                                     required />
                             </div>
                             <div class="form-group">
-                                <input type="search" value="apple" name="Subject" class="form-control" id="page1-search" placeholder="Search">
+                                <input type="search" value="apple" name="subject" class="form-control" id="page1-search" placeholder="Search">
                             </div>
                             <ul class="list-group" id="searchList">
                                 <li onclick="page1List(this)" class="list-group-item text-start">Apple</li>
@@ -109,9 +110,9 @@
                             <h4 class="text-center py-3">Enter password to creat an Account<i
                                     class="fs-6 text-secondary">
                                     (Required)</i></h4>
-                            <input required type="email" placeholder="*Email" class="inp-1">
-                            <input required type="Password" placeholder="*Password"  class="inp-1">
-                            <input required type="Password" placeholder="*Confirm Password"  class="inp-1">
+                            <input required type="email" name="c_email" placeholder="*Email" class="inp-1">
+                            <input required type="password" name="password" placeholder="*Password"  class="inp-1">
+                            <input required type="password" name="c_password" placeholder="*Confirm Password"  class="inp-1">
 
                         </div>
 
