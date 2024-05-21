@@ -64,6 +64,7 @@
             {{ session('success') }}
         </div>
     @endif
+    
 
     <div class="row mini_header m-0 p-0 container-fluid">
         <div class="col-sm-12  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0">

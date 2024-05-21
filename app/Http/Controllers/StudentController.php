@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 class StudentController extends Controller
 {
     public function index() {
@@ -12,6 +13,18 @@ class StudentController extends Controller
     }
 
     public function create(Request $request) {
+        $rules = [
+            'email' => 'required|string|email|max:255|unique:student,email',
+        ];
+    
+        $validator = Validator::make($request->all(), $rules);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                             ->withErrors($validator)
+                             ->withInput();
+        }
         $student = new Student();
         $student->subjects = $request->input('subjects');
         $student->name = $request->input('name');

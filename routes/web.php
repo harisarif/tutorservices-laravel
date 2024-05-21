@@ -24,7 +24,7 @@ Route::get('/tutor-signup', function () {
     return view('tutor-signup');
 })->name('tutor');
 Route::get('/hire-tutor', [StudentController::class, 'index'])->name('hire.tutor');
-Route::post('/hire-tutor', [StudentController::class, 'create'])->name('create');
+Route::post('/hire-tutor/create', [StudentController::class, 'create'])->name('student-create');
 Route::post('/tutor/create', [TutorController::class, 'create'])->name('tutor-create');
 Route::get('/tutors', [TutorController::class, 'filterByCountry'])->name('tutors.filterByCountry');
 Route::post('/fetch-data', [TutorController::class, 'fetchData'])->name('fetch-data');

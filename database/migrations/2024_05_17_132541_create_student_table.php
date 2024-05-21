@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->enum('subjects', ['online tutor', 'tutor for home', 'both']);
             $table->string('name');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->integer('phone');
             $table->time('class_start_time');
             $table->time('class_end_time');

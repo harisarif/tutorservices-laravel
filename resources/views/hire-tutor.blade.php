@@ -4,7 +4,17 @@
     display:none !important;
    }
 </style>
+@if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 @section('content')
+
 <body>
     <header class="main_header d-flex  align-items-end">
         {{-- <a class="nav-link active px-3 py-0 fw-bold" aria-current="page" href="./hire_tutor.html"><i>&#8592; Hire
@@ -32,7 +42,7 @@
                         <div class="percentage bg_theme_green"></div>
                     </div>
                 </div>
-                <form action="" method="POST" class="pages">
+                <form action="{{ route('student-create') }}" method="POST" class="pages">
                     @csrf
                     <div style="min-height: 350px;">
 
@@ -94,6 +104,7 @@
                             <div class="form-group">
                                 <input type="search" value="apple" name="subject" class="form-control" id="page1-search" placeholder="Search">
                             </div>
+                            <label>Subject</label>
                             <ul class="list-group" id="searchList">
                                 <li onclick="page1List(this)" class="list-group-item text-start">Apple</li>
                                 <li onclick="page1List(this)" class="list-group-item text-start">Banana</li>
@@ -138,4 +149,13 @@
     </main>
     <script src="./js/hire_tutor.js"></script>
 </body>
+@endsection
+@section('js')
+<script>
+     $(document).ready(function($) {
+            setTimeout(function() {
+                $(".alert").fadeOut("slow");
+            }, 5000);
+            })
+</script>
 @endsection
