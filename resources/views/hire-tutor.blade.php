@@ -101,16 +101,17 @@
                                 <input type="number" class="form-control" id="whatsapp" name="whatsapp_number" placeholder="Whatsapp number "
                                     required />
                             </div>
+                            <label class="form-label" style="display: flex;font-size:14px;font-weight:bold;">Subject</label>
                             <div class="form-group">
-                                <input type="search" value="apple" name="subject" class="form-control" id="page1-search" placeholder="Search">
+                                
+                                <input type="search" value="" name="subject" class="form-control" id="page1-search" placeholder="Search">
                             </div>
-                            <label>Subject</label>
                             <ul class="list-group" id="searchList">
-                                <li onclick="page1List(this)" class="list-group-item text-start">Apple</li>
-                                <li onclick="page1List(this)" class="list-group-item text-start">Banana</li>
-                                <li onclick="page1List(this)" class="list-group-item text-start">Orange</li>
-                                <li onclick="page1List(this)" class="list-group-item text-start">Grapes</li>
-                                <li onclick="page1List(this)" class="list-group-item text-start">Pineapple</li>
+                                <li onclick="page1List(this)" class="list-group-item text-start">English</li>
+                                <li onclick="page1List(this)" class="list-group-item text-start">Mathematics</li>
+                                <li onclick="page1List(this)" class="list-group-item text-start">Physics</li>
+                                <li onclick="page1List(this)" class="list-group-item text-start">Chemistry</li>
+                                <li onclick="page1List(this)" class="list-group-item text-start">Urdu</li>
                             </ul>
 
 
