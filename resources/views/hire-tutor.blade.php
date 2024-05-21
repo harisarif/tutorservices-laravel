@@ -104,7 +104,7 @@
                             <label class="form-label" style="display: flex;font-size:14px;font-weight:bold;">Subject</label>
                             <div class="form-group">
                                 
-                                <input type="search" value="" name="subject" class="form-control" id="page1-search" placeholder="Search">
+                                <input type="search" value="Subject" name="subject" class="form-control" id="page1-search" placeholder="Search">
                             </div>
                             <ul class="list-group" id="searchList">
                                 <li onclick="page1List(this)" class="list-group-item text-start">English</li>
