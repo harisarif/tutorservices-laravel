@@ -817,7 +817,7 @@
 
                     <!-- Filter -->
                     <div id="filter-col" class="d-none col col-lg-3 d-md-block my-0 p-0">
-                        <div class="filter-1 border">
+                        <div class="filter-1 border d-none">
                             <div class="col bg-body-secondary p-2 d-flex align-items-center justify-content-between">
                                 <span><i class="fas fa-filter"></i> Filter</span>
                                 <span onclick="hideNShow('filter-col')"
@@ -931,6 +931,8 @@
                             </div>
 
                         </div>
+                        <video src="images/student.mp4" class="object-fit-cover mt-2" autoplay muted loop
+                        width="100%"></video>
                         <video src="images/edexcel.mp4" class="object-fit-cover mt-2" autoplay muted loop
                             width="100%"></video>
 
