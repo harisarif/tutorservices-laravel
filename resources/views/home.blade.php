@@ -654,7 +654,7 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <div class="col-12 d-flex m-1 align-items-center flex-column flex-sm-row">
+                                                <div class="col-12 d-flex m-1 align-items-center flex-column flex-sm-row ps-5">
                                                     <h5 class="label-h m-0 m-1 font-s1 text-center text-md-left fw-bold">
                                                         Curriculum
                                                     </h5>
