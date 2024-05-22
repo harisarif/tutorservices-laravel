@@ -1128,7 +1128,7 @@
         </main>
     </div>
 
-    <button class="goToTop bg-dark fw-20px" onclick="window.scrollTo(0, 0)"><i
+    <button class="goToTop fw-20px" style="background-color:#42B979" onclick="window.scrollTo(0, 0)"><i
             class="fa-solid fa-chevron-up"></i></button>
 
     <!-- footer start... -->
