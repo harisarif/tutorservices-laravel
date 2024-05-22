@@ -772,7 +772,7 @@
                                         id="inputPassword4" />
                                 </div>
                                 <div class="col-md-6">
-                                    <select class="countrys px-2 ">
+                                    <select class="px-2 h-100 w-100" style="border: 1px solid lightgray">
                                         <option value="pakistan">pakistan</option>
                                         <option value="pakistan">pakistan</option>
                                         <option value="pakistan">pakistan</option>
