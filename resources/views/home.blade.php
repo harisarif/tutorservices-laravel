@@ -567,7 +567,7 @@
                                                     <div class="row p-0">
                                                         <table class="col-12">
                                                             <tr class="title-1 col col-md-3">
-                                                                <td class="text-dark fw-bold">Qualification</td>
+                                                                <td class="text-dark fw-bold font-s">Qualification</td>
                                                                 <td class="d-none d-md-block px-2">:</td>
                                                                 <td class="font-s text-secondary">
                                                                     {{ $item->qualification }}
@@ -1269,7 +1269,7 @@
                                     tutorHTML += '<div class="row p-0">';
                                     tutorHTML += '<table class="col-12">';
                                     tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="text-dark fw-bold">Qualification</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
+                                        '<tr class="title-1 col col-md-3"><td class="text-dark fw-bold font-s">Qualification</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
                                         item.qualification + '</td></tr>';
                                     tutorHTML +=
                                         '<tr class="title-1 col col-md-3"><td class="font-s text-dark fw-bold">Country</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
@@ -1485,7 +1485,7 @@
                                     tutorHTML += '<div class="row p-0">';
                                     tutorHTML += '<table class="col-12">';
                                     tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="text-dark fw-bold">Qualification</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
+                                        '<tr class="title-1 col col-md-3"><td class="text-dark fw-bold font-s">Qualification</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
                                         item.qualification + '</td></tr>';
                                     tutorHTML +=
                                         '<tr class="title-1 col col-md-3"><td class="font-s text-dark fw-bold">Country</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
@@ -1702,7 +1702,7 @@
                                     tutorHTML += '<div class="row p-0">';
                                     tutorHTML += '<table class="col-12">';
                                     tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="text-dark fw-bold">Qualification</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
+                                        '<tr class="title-1 col col-md-3"><td class="text-dark fw-bold font-s">Qualification</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
                                         item.qualification + '</td></tr>';
                                     tutorHTML +=
                                         '<tr class="title-1 col col-md-3"><td class="font-s text-dark fw-bold">Country</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
