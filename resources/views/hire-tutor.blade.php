@@ -122,7 +122,7 @@
                             <h4 class="text-center py-3">Enter password to creat an Account<i
                                     class="fs-6 text-secondary">
                                     (Required)</i></h4>
-                            <input required type="email" name="c_email" placeholder="*Email" class="inp-1">
+                            <input required type="email" name="c_email" placeholder="*Email" class="inp-1" readonly>
                             <input required type="password" name="password" placeholder="*Password"  class="inp-1">
                             <input required type="password" name="c_password" placeholder="*Confirm Password"  class="inp-1">
 
