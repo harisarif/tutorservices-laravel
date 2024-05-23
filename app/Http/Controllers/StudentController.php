@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -39,6 +40,12 @@ class StudentController extends Controller
         $student->c_password = $request->input('c_password');
 
         // Save the student instance to the database
+        $student->save();
+
+        $student = new User();
+        $student->name = $request->input('name');
+        $student->email = $request->input('email');
+        $student->password = $request->input('password');
         $student->save();
 
         // Optionally, you can redirect the user or return a response
