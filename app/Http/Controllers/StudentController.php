@@ -7,10 +7,12 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Collection;
 class StudentController extends Controller
 {
     public function index() {
-        return view('hire-tutor');
+        $countries = collect(config('countries.countries'))->prepend("Select your country", "");
+        return view('hire-tutor', compact('countries'));
     }
 
     public function create(Request $request) {
@@ -34,6 +36,8 @@ class StudentController extends Controller
         $student->class_start_time = $request->input('class_start_time');
         $student->class_end_time = $request->input('class_end_time');
         $student->whatsapp_number = $request->input('whatsapp_number');
+        $student->country = $request->input('country');
+        $student->city= $request->input('city');
         $student->subject = $request->input('subject');
         $student->c_email = $request->input('c_email');
         $student->password = $request->input('password');

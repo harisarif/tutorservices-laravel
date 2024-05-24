@@ -20,6 +20,8 @@ return new class extends Migration
             $table->time('class_start_time');
             $table->time('class_end_time');
             $table->integer('whatsapp_number');
+            $table->string('country');
+            $table->string('city');
             $table->string('subject');
             $table->string('c_email');
             $table->string('password');

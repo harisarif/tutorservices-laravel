@@ -38,13 +38,12 @@
 
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required />
+                        <label for="f_name" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="f_name" name="f_name" required />
                     </div>
                     <div class="col-md-6 px-2 mb-2">
-                        <label for="name" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required />
-
+                        <label for="l_name" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="l_name" name="l_name" required />
                     </div>
                 </div>
                 {{--            <div class="form-row d-flex flex-column flex-md-row"> --}}
@@ -61,23 +60,29 @@
 
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required />
+                    </div>
+                    <div class="col-md-6 px-2 mb-2">
                         <label for="gender" class="form-label">Gender</label>
                         <select class="form-select" id="gender" name="gender" required>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
                     </div>
+                </div>
+                <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
-                        <label for="age" class="form-label">Age</label>
-                        <input type="number" class="form-control" id="age" name="age" required />
+                        <label for="dob" class="form-label">DOB</label>
+                        <input type="date" class="form-control" id="dob" name="dob" required />
+                    </div>
+                    <div class="col-md-6 px-2 mb-2">
+                        <label for="recent-degree" class="form-label">Recent Degree</label>
+                        <input type="text" class="form-control" id="recent-degree" name="recent-degree" required />
                     </div>
                 </div>
 
                 <div class="form-row d-flex flex-column flex-md-row">
-                    <div class="col-md-6 px-2 mb-2">
-                        <label for="qualification" class="form-label">Qualification</label>
-                        <input type="text" class="form-control" id="qualification" name="qualification" required />
-                    </div>
                     <div class="col-md-6 px-2 mb-2">
                         <label for="teaching" class="form-label">Teaches</label>
                         <select class="form-select teaching" id="teaching" name="teaching[]" required>
@@ -87,18 +92,17 @@
                             <option value="chemistry">Chemistry</option>
                         </select>
                     </div>
-                </div>
-
-                <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
                         <label for="experience" class="form-label">Experience (in years)</label>
                         <input type="number" min="0" class="form-control" id="experience" name="experience"
                             required />
                     </div>
-                    <div class="col-md-6 px-2 mb-2">
-                        <label for="location" class="form-label">Country</label>
+                </div>
+                <div class="form-row d-flex flex-column flex-md-row">
+                    <div class="col-12 px-2 mb-2">
+                        <label for="location" class="form-label">Residence Country</label>
                     </br>
-                        <select class="form-select select2" id="location" required name="location">
+                        <select class="form-select" id="location" required name="location">
                             <option value="AE">United Arab Emirates</option>
                                         <option value="PK">Pakistan</option>
                                         <option value="IN">India</option>
@@ -387,7 +391,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-12 px-2 py-2"><label for="curriculum" class="form-label">Curriculum</label>
+                <div class="col-12 px-2 py-2"><label for="description" class="form-label">Description (Optional)</label>
                     <textarea class="form-control" id="curriculum" name="curriculum[]" rows="2" required placeholder="Add comma after one"></textarea>
                 </div>
 

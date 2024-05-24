@@ -101,6 +101,16 @@
                                 <input type="number" class="form-control" id="whatsapp" name="whatsapp_number" placeholder="Whatsapp number "
                                     required />
                             </div>
+                            <div class="col-12 mb-2">
+                                <select name="country" id="country" class="form-select" required>
+                                    @foreach($countries as $country)
+                                        <option value="{{ $country }}">{{ $country }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <input type="text" name="city" id="city" class="form-control" placeholder="Enter your city" required>
+                            </div>
                             <label class="form-label" style="display: flex;font-size:14px;font-weight:bold;">Subject</label>
                             <div class="form-group">
                                 
