@@ -45,7 +45,13 @@ class StudentController extends Controller
 
         // Save the student instance to the database
         $student->save();
+        $msg = "First line of text\nSecond line of text";
 
+        // use wordwrap() if lines are longer than 70 characters
+        $msg = wordwrap($msg,70);
+        
+        // send email
+        mail("harif3496@gmail.com","My subject",$msg);
         $student = new User();
         $student->name = $request->input('name');
         $student->email = $request->input('email');
