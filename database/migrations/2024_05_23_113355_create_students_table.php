@@ -16,10 +16,10 @@ return new class extends Migration
             $table->enum('subjects', ['online tutor', 'tutor for home', 'both']);
             $table->string('name');
             $table->string('email')->unique();
-            $table->integer('phone');
+            $table->biginteger('phone');
             $table->time('class_start_time');
             $table->time('class_end_time');
-            $table->integer('whatsapp_number');
+            $table->biginteger('whatsapp_number');
             $table->string('country');
             $table->string('city');
             $table->string('subject');
