@@ -90,9 +90,9 @@
                         class="fa-brands fa-instagram"></i></a>
                 <a href="#" class="icoGoogle text-light p-2" title="Linked-in +"><i
                         class="fa-brands fa-linkedin"></i></a>
-                <a href="#" class="btn notify position-relative"><i class="fa-regular fa-bell text-white"></i><span class="position-absolute top-10 start-60 translate-middle p-1 bg-danger border border-light rounded-circle">
+                {{-- <a href="#" class="btn notify position-relative"><i class="fa-regular fa-bell text-white"></i><span class="position-absolute top-10 start-60 translate-middle p-1 bg-danger border border-light rounded-circle">
                     <span class="visually-hidden">New alerts</span>
-                </span></a>
+                </span></a> --}}
             </div>
         </div>
         <div class="notification mb-2 w-25 p-2 bg-info-subtle position-absolute end-0 top-100 z-1">This is a demo</div>

@@ -26,8 +26,8 @@ return new class extends Migration
             $table->string('curriculum');
             $table->string('availability');
             $table->string('profileImage');
-            $table->integer('phone');
-            $table->integer('whatsapp');
+            $table->biginteger('phone');
+            $table->biginteger('whatsapp');
             $table->date('dob');
             $table->timestamps();
         });
