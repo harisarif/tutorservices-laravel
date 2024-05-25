@@ -47,14 +47,16 @@ class StudentController extends Controller
         $student->save();
         $to = $request->input('email');
         $subject = "Welcome to Edexcel – Your Learning Journey Starts Now!";
-        $message = "Dear <br/>".$student->name."<br/>Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.<br/>
+        $message = "Dear"
+        .$student->name.
+        "Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.
         Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at ceo@edexceledu.com +971566428066
         We’re here to help you succeed!
         Best regards
         The Edexcel Team " ;
         $headers = "From: ceo@edexceledu.com\r\n";
         $headers .= "Reply-To: ceo@edexceledu.com\r\n";
-        $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
         
         
         // Send email
