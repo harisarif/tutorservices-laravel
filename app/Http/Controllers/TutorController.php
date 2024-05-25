@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Response;
+use App\Models\Country;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Response;
 use App\Models\Tutor; // Add the Tutor model namespace
-use App\Models\Country;
+
 class TutorController extends Controller
 {
     //
@@ -90,14 +90,17 @@ return response()->json($serializedData);
         // dd($request);
         // Validate form data
         $request->validate([
-            'name' => 'required|string|max:255',
+            'f_name' => 'required|string|max:255',
+            'l_name' => 'required|string|max:255',
             'profileImage' => 'required|image|mimes:jpeg,png,jpg|max:2048', // max:2048 is for maximum 2MB file size, adjust as needed
         ]);
+        // dd($request);
         $tutor = new Tutor();
-        $tutor->name = $request->input('name');
+        $tutor->f_name = $request->input('f_name');
+        $tutor->l_name = $request->input('l_name');
         $tutor->city = $request->input('city');
         $tutor->email = $request->input('email');
-        $tutor->age = $request->input('age');
+        $tutor->dob = $request->input('dob');
         $tutor->qualification = $request->input('qualification');
         $tutor->gender = $request->input('gender');
         $tutor->location = $request->input('location');

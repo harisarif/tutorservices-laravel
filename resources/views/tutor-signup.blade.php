@@ -77,8 +77,8 @@
                         <input type="date" class="form-control" id="dob" name="dob" required />
                     </div>
                     <div class="col-md-6 px-2 mb-2">
-                        <label for="recent-degree" class="form-label">Recent Degree</label>
-                        <input type="text" class="form-control" id="recent-degree" name="recent-degree" required />
+                        <label for="qualification" class="form-label">Recent Degree</label>
+                        <input type="text" class="form-control" id="qualification" name="qualification" required />
                     </div>
                 </div>
 
@@ -391,7 +391,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-12 px-2 py-2"><label for="description" class="form-label">Description (Optional)</label>
+                <div class="col-12 px-2 py-2"><label for="curriculum" class="form-label">Description (Optional)</label>
                     <textarea class="form-control" id="curriculum" name="curriculum[]" rows="2" required placeholder="Add comma after one"></textarea>
                 </div>
 

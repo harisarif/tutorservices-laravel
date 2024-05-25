@@ -14,7 +14,8 @@ return new class extends Migration
         //
         Schema::create('tutors', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('f_name');
+            $table->string('l_name');
             $table->string('email');
             $table->string('qualification');
             $table->string('gender');
@@ -27,7 +28,7 @@ return new class extends Migration
             $table->string('profileImage');
             $table->integer('phone');
             $table->integer('whatsapp');
-            $table->integer('age');
+            $table->date('dob');
             $table->timestamps();
         });
     }
