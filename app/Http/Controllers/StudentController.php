@@ -7,6 +7,7 @@ use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use PHPMailer\PHPMailer\PHPMailer;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Collection;
 class StudentController extends Controller
@@ -39,19 +40,7 @@ class StudentController extends Controller
         // return $dompdf->stream('students.pdf'); // Change the filename if needed
         return view('student-list', compact('data'));
     }
-    public function sendEmail($to, $subject, $message)
-        {
-            $headers = "From: Edexcel\r\n";
-            $headers .= "Reply-To: ceo@edexceledu.com\r\n";
-            $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-
-            // Send email
-            if (mail($to, $subject, $message, $headers)) {
-                echo "Email sent successfully to $to.<br>";
-            } else {
-                echo "Email sending failed for $to.<br>";
-            }
-        }
+    
 
     public function create(Request $request) {
         $rules = [
@@ -83,25 +72,22 @@ class StudentController extends Controller
 
         // Save the student instance to the database
         $student->save();
-        $toStudent = $request->input('email');
-    $subjectStudent = "Welcome to Edexcel – Your Learning Journey Starts Now!";
-    $messageStudent = "Dear " . $student->name . "\r\n" .
-                      "Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.\r\n" .
-                      "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at ceo@edexceledu.com or +971566428066.\r\n" .
-                      "We’re here to help you succeed!\r\n\r\n" .
-                      "Best regards,\r\n" .
-                      "The Edexcel Team";
+        $student = Student::find($request->input('student_id'));
+        $studentEmail = $request->input('email');
+        $adminEmail = 'ceo@edexceledu.com';
 
-    // Send email to student
-    $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
+        $subject = "Welcome to Edexcel – Your Learning Journey Starts Now!";
+        $message = "Dear " . $student->name . "\r\n" .
+            "Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.\r\n" .
+            "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at ceo@edexceledu.com or +971566428066.\r\n" .
+            "We’re here to help you succeed!\r\n\r\n" .
+            "Best regards,\r\n" .
+            "The Edexcel Team";
 
-    // Email details for the admin
-    $toAdmin = 'info@edexceledu.com';
-    $subjectAdmin = "Edexcel Notification";
-    $messageAdmin = "A new student has been added with the name " . $student->name . "\r\n";
+        $adminMessage = "A new student has been added with the name " . $student->name . "\r\n";
 
-    // Send notification email to admin
-    $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
+        $this->sendEmail($studentEmail, $subject, $message);
+        $this->sendEmail($adminEmail, 'Edexcel Notification', $adminMessage);
         // $to = $request->input('email');'ceo@edexceledu.com';
         // $subject = "Welcome to Edexcel – Your Learning Journey Starts Now!";
         // $message = "Dear " . $student->name . "\r\n" .
@@ -143,5 +129,34 @@ class StudentController extends Controller
 
         // Optionally, you can redirect the user or return a response
         return redirect()->route('home')->with('success', 'Student created successfully.');
+    }
+    private function sendEmail($to, $subject, $body)
+    {
+        $mail = new PHPMailer(true);
+
+        try {
+            //Server settings
+            $mail->isSMTP();
+            $mail->Host = env('MAIL_HOST');
+            $mail->SMTPAuth = true;
+            $mail->Username = env('MAIL_USERNAME');
+            $mail->Password = env('MAIL_PASSWORD');
+            $mail->SMTPSecure = env('MAIL_ENCRYPTION');
+            $mail->Port = env('MAIL_PORT');
+
+            //Recipients
+            $mail->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+            $mail->addAddress($to);
+
+            // Content
+            $mail->isHTML(false); // Set email format to plain text
+            $mail->Subject = $subject;
+            $mail->Body = $body;
+
+            $mail->send();
+            echo "Email has been sent to $to";
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
     }
 }
