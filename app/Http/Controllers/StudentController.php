@@ -90,6 +90,20 @@ class StudentController extends Controller
         } else {
             echo "Email sending failed.";
         }
+        $toadmin = ' ceo@edexceledu.com';
+        $subjectadmin = "Edexcel Notification";
+        $messageadmin = "A new student added with name " . $student->name . "\r\n";
+        $headersadmin = "From: Edexcel\r\n";
+        $headersadmin .= "Reply-To: ceo@edexceledu.com\r\n";
+        $headersadmin .= "Content-Type: text/plain; charset=UTF-8\r\n";
+        
+        
+        // Send email
+        if (mail($toadmin, $subjectadmin, $messageadmin, $headersadmin)) {
+            echo "Email sent successfully.";
+        } else {
+            echo "Email sending failed.";
+        }
         $student = new User();
         $student->name = $request->input('name');
         $student->email = $request->input('email');

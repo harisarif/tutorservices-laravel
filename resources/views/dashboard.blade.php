@@ -1,21 +1,4 @@
-{{-- <nav>
-    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-        Logout
-    </a>
-</nav>
 
-<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-    @csrf
-    </form>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-        </div>
-    </div> --}}
 
 <!doctype html>
 <html lang="en">
@@ -25,14 +8,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Edexcel Dashboard</title>
     <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="edexcel dashboard">
     <meta name="msapplication-tap-highlight" content="no">
+    <title>{{ config('app.name', 'Edexcel Dashboard') }}</title>
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
     <link href="https://demo.dashboardpack.com/architectui-html-free/main.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
@@ -45,6 +30,19 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        div.dt-buttons {
+        float: right !important;
+        margin-left: 10px;
+    }
+        .vertical-nav-menu li a {
+            padding: 0 1.5rem 0 1px !important;
+        }
+        .widget-content .widget-content-left .widget-heading {
+            display: flex;
+            gap: 8px;
+        }
+    </style>
 
 </head>
 
@@ -52,7 +50,7 @@
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">
             <div class="app-header__logo">
-                <div class="logo-src"></div>
+                <img src="images/logo.png" height="50" width="200" alt="logo"/>
                 
             </div>
             
@@ -76,6 +74,26 @@
                                 <div class="widget-content-left  ml-3 header-user-info">
                                     <div class="widget-heading">
                                         Admin
+                                        <nav>
+                                            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                            </a>
+                                        </nav>
+                                        
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                            </form>
+                                            {{-- <div class="py-12">
+                                                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                                                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                                                        <div class="p-6 text-gray-900 dark:text-gray-100">
+                                                            {{ __("You're logged in!") }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> --}}
+                                        
+
                                     </div>
                                     {{-- <div class="widget-subheading">
                                         VP People Manager
@@ -97,7 +115,7 @@
         <div class="app-main">
             <div class="app-sidebar sidebar-shadow">
                 <div class="app-header__logo">
-                    <div class="logo-src"></div>
+                    
                     <div class="header__pane ml-auto">
                         <div>
                             <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
@@ -111,18 +129,20 @@
                 </div>
                
                 <div class="scrollbar-sidebar">
-                    <div class="app-sidebar__inner">
-                        <h3>Dashboards</h3>
+                    <div class="app-sidebar__inner mt-3">
+                        <h6>Dashboard</h6>
                         <ul class="vertical-nav-menu nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav- w-100 student-listing">
                                 <a id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" class="mm-active">
-                                    <i class="metismenu-icon pe-7s-rocket"></i>
+                                    <i class="fa fa-user mx-1" aria-hidden="true"></i>
+
                                    Students
                                 </a>
                                
                             </li>
                             <li class="nav-item w-100 teacher-listing"> <a id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
-                                <i class="metismenu-icon pe-7s-rocket"></i>
+                                <i class="fa fa-user mx-1" aria-hidden="true"></i>
+
                                Teachers
                             </a></li>
                         </ul>
@@ -135,7 +155,7 @@
                         <div class="page-title-wrapper">
                             <div class="page-title-heading">
                                 <div class="page-title-icon">
-                                    <i class="pe-7s-car icon-gradient bg-mean-fruit">
+                                    <i class="fa fa-user">
                                     </i>
                                 </div>
                                 <div class="student-data">
@@ -155,7 +175,7 @@
                                 
                                 <div class="d-inline-block dropdown">
                                     <a href="{{ route('students.pdf') }}" type="button" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false" class="btn-shadow dropdown-toggle btn btn-info">
+                                        aria-expanded="false" class="btn-shadow dropdown-toggle btn btn-info d-none">
                                         <span class="btn-icon-wrapper pr-2 opacity-7">
                                             <i class="fa fa-business-time fa-w-20"></i>
                                         </span>
@@ -236,6 +256,17 @@
     $('.teachers-table').DataTable({
         // Set number of rows per page
         dom: 'lBfrtip',
+        buttons: [
+                {
+                    extend: 'pdfHtml5', // Use PDF export button
+                    filename: 'teacher_list', // Specify PDF file name
+                    title: 'Teacher List', // Specify PDF title (optional)
+                    text: 'Export as PDF', // Button text (optional)
+                    customize: function (doc) {
+                        // Customize PDF document, if needed
+                    }
+                }
+            ]
             });
     $('#profile-tab').on('click', function() {
         $('#profile-tab').addClass('mm-active');

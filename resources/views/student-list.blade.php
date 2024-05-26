@@ -43,5 +43,17 @@
         $('.student-table').DataTable({
             // Set number of rows per page
             dom: 'lBfrtip',
+            buttons: [
+                {
+                    extend: 'pdfHtml5', // Use PDF export button
+                    filename: 'student_list', // Specify PDF file name
+                    title: 'Student List', // Specify PDF title (optional)
+                    text: 'Export as PDF', // Button text (optional)
+                    customize: function (doc) {
+                        // Customize PDF document, if needed
+                    }
+                }
+            ]
+            
                 });
     </script>
