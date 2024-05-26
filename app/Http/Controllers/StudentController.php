@@ -136,12 +136,12 @@ class StudentController extends Controller
         try {
             //Server settings
             $mail->isSMTP();
-            $mail->Host = env('MAIL_HOST');
+            $mail->Host = 'smtp.hostinger.com';
             $mail->SMTPAuth = true;
-            $mail->Username = env('MAIL_USERNAME');
-            $mail->Password = env('MAIL_PASSWORD');
-            $mail->SMTPSecure = env('MAIL_ENCRYPTION');
-            $mail->Port = env('MAIL_PORT');
+            $mail->Username = 'ceo@edexceledu.com';
+            $mail->Password = 'Babar123!@#';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port =587;
 
             //Recipients
             $mail->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
