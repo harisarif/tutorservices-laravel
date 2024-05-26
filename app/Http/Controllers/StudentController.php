@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,6 +15,31 @@ class StudentController extends Controller
         $countries = collect(config('countries.countries'))->prepend("Select your country", "");
         return view('hire-tutor', compact('countries'));
     }
+    public function showStudentsList() {
+        
+        $students = Student::all();
+        return view('student-list', compact('students'));
+    }
+    public function studentsPDF() {
+        $data = Student::all();
+        // $dompdf = new Dompdf();
+    
+        // // Load HTML content into Dompdf
+        // $html = view('student-list', ['data' => $data])->render(); // Pass $data as an associative array
+        // $dompdf->loadHtml($html);
+    
+        // // (Optional) Set paper size and orientation
+        // $options = new Options();
+        // $options->set('isHtml5ParserEnabled', true);
+        // $dompdf->setOptions($options);
+        // $dompdf->setPaper('A4', 'portrait');
+    
+        // // Render the PDF
+        // $dompdf->render();
+        // return $dompdf->stream('students.pdf'); // Change the filename if needed
+        return view('student-list', compact('data'));
+    }
+    
 
     public function create(Request $request) {
         $rules = [

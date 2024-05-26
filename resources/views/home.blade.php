@@ -178,9 +178,9 @@
                         in
                         extracurricular activities
                     </p>
-                    <button class="p-2 bg_theme_green btn-an rounded border-0 text-light">
+                    {{-- <button class="p-2 bg_theme_green btn-an rounded border-0 text-light">
                         Student
-                    </button>
+                    </button> --}}
                     <button class="p-2 bg_theme_green btn-an rounded border-0 text-light">
                         <a class="text-light text-decoration-none active solid_btn" aria-current="page"
                             href="{{ route('hire.tutor') }}">Hire Tutor</a>

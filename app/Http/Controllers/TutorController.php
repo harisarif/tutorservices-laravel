@@ -125,4 +125,10 @@ return response()->json($serializedData);
     {
         return redirect('/hire-tutor');
     }
+    
+    public function fetchTeachers(Request $request)
+    {
+        $students = Tutor::all();
+        return response()->json($students);
+    }
 }

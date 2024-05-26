@@ -27,6 +27,9 @@ Route::get('/hire-tutor', [StudentController::class, 'index'])->name('hire.tutor
 Route::post('/hire-tutor/create', [StudentController::class, 'create'])->name('student-create');
 Route::post('/tutor/create', [TutorController::class, 'create'])->name('tutor-create');
 Route::get('/tutors', [TutorController::class, 'filterByCountry'])->name('tutors.filterByCountry');
+Route::get('/students-list', [StudentController::class, 'showStudentsList'])->name('students.list');
+Route::get('/students-pdf', [StudentController::class, 'studentsPDF'])->name('students.pdf');
+Route::get('/teachers-list', [TutorController::class, 'fetchTeachers'])->name('teachers.list');
 Route::post('/fetch-data', [TutorController::class, 'fetchData'])->name('fetch-data');
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])

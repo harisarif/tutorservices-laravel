@@ -1,5 +1,4 @@
-<nav>
-    <!-- Other navigation items -->
+{{-- <nav>
     <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
         Logout
     </a>
@@ -16,4 +15,245 @@
                 </div>
             </div>
         </div>
+    </div> --}}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Edexcel Dashboard</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <meta name="description" content="edexcel dashboard">
+    <meta name="msapplication-tap-highlight" content="no">
+    <link href="https://demo.dashboardpack.com/architectui-html-free/main.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+        <div class="app-header header-shadow">
+            <div class="app-header__logo">
+                <div class="logo-src"></div>
+                
+            </div>
+            
+            <div class="app-header__content">
+                
+                <div class="app-header-right">
+                    <div class="header-btn-lg pr-0">
+                        <div class="widget-content p-0">
+                            <div class="widget-content-wrapper">
+                                <div class="widget-content-left">
+                                    <div class="btn-group">
+                                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                            class="p-0 btn">
+                                            <img width="42" class="rounded-circle" src="assets/images/avatars/1.jpg"
+                                                alt="">
+                                            {{-- <i class="fa fa-angle-down ml-2 opacity-8"></i> --}}
+                                        </a>
+                                        
+                                    </div>
+                                </div>
+                                <div class="widget-content-left  ml-3 header-user-info">
+                                    <div class="widget-heading">
+                                        Admin
+                                    </div>
+                                    {{-- <div class="widget-subheading">
+                                        VP People Manager
+                                    </div> --}}
+                                </div>
+                                {{-- <div class="widget-content-right header-user-info ml-3">
+                                    <button type="button"
+                                        class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
+                                        <i class="fa text-white fa-calendar pr-1 pl-1"></i>
+                                    </button>
+                                </div> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="app-main">
+            <div class="app-sidebar sidebar-shadow">
+                <div class="app-header__logo">
+                    <div class="logo-src"></div>
+                    <div class="header__pane ml-auto">
+                        <div>
+                            <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
+                                data-class="closed-sidebar">
+                                <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="scrollbar-sidebar">
+                    <div class="app-sidebar__inner">
+                        <h3>Dashboards</h3>
+                        <ul class="vertical-nav-menu nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav- w-100 student-listing">
+                                <a id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" class="mm-active">
+                                    <i class="metismenu-icon pe-7s-rocket"></i>
+                                   Students
+                                </a>
+                               
+                            </li>
+                            <li class="nav-item w-100 teacher-listing"> <a id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+                                <i class="metismenu-icon pe-7s-rocket"></i>
+                               Teachers
+                            </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="app-main__outer">
+                <div class="app-main__inner">
+                    <div class="app-page-title">
+                        <div class="page-title-wrapper">
+                            <div class="page-title-heading">
+                                <div class="page-title-icon">
+                                    <i class="pe-7s-car icon-gradient bg-mean-fruit">
+                                    </i>
+                                </div>
+                                <div class="student-data">
+                                    Student List
+                                    <div class="page-title-subheading">This is an example dashboard created using
+                                        build-in elements and components.
+                                    </div>
+                                </div>
+                                <div class="teacher-data d-none">
+                                    Teacher List
+                                    <div class="page-title-subheading">This is an example dashboard created using
+                                        build-in elements and components.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="page-title-actions">
+                                
+                                <div class="d-inline-block dropdown">
+                                    <a href="{{ route('students.pdf') }}" type="button" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false" class="btn-shadow dropdown-toggle btn btn-info">
+                                        <span class="btn-icon-wrapper pr-2 opacity-7">
+                                            <i class="fa fa-business-time fa-w-20"></i>
+                                        </span>
+                                        Export As PDF
+                                    </a>
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                
+                                @include('student-list')
+
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <table class="table table-bordered teacher-table d-none">
+                                @include('teacher-list')
+                            </table>
+                            </div>
+                        </div>
+                        <div id="content">
+                            <!-- Content will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="app-wrapper-footer d-none">
+                    <div class="app-footer">
+                        <div class="app-footer__inner">
+                            <div class="app-footer-left">
+                                <ul class="nav">
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link">
+                                            Footer Link 1
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link">
+                                            Footer Link 2
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="app-footer-right">
+                                <ul class="nav">
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link">
+                                            Footer Link 3
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link">
+                                            <div class="badge badge-success mr-1 ml-0">
+                                                <small>NEW</small>
+                                            </div>
+                                            Footer Link 4
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
     </div>
+   
+</body>
+
+</html>
+<script>
+   $(document).ready(function() {
+    $('.teachers-table').DataTable({
+        // Set number of rows per page
+        dom: 'lBfrtip',
+            });
+    $('#profile-tab').on('click', function() {
+        $('#profile-tab').addClass('mm-active');
+        $('#home-tab').removeClass('mm-active');
+        $('.teacher-data').removeClass('d-none');
+        $('.student-data').addClass('d-none');
+    });
+    $('#home-tab').on('click', function() {
+        
+        $('#profile-tab').removeClass('mm-active');
+        $('#home-tab').addClass('mm-active');
+        $('.student-data').removeClass('d-none');
+        $('.teacher-data').addClass('d-none');
+    });
+});
+
+</script>
+<script>
+    
+</script>
+    
