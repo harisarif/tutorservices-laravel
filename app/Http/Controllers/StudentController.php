@@ -130,34 +130,33 @@ class StudentController extends Controller
         return redirect()->route('home')->with('success', 'Student created successfully.');
     }
     private function sendEmail($to, $subject, $body)
-{
-    $mail = new PHPMailer(true);
+    {
+        $mail = new PHPMailer(true);
 
-    try {
-        //Server settings
-        $mail->SMTPDebug = 2; // Enable verbose debug output
-        $mail->isSMTP();
-        $mail->Host = env('MAIL_HOST');
-        $mail->SMTPAuth = true;
-        $mail->Username = env('MAIL_USERNAME');
-        $mail->Password = env('MAIL_PASSWORD');
-        $mail->SMTPSecure = env('MAIL_ENCRYPTION');
-        $mail->Port = env('MAIL_PORT');
+        try {
+            //Server settings
+            $mail->isSMTP();
+            $mail->Host = env('MAIL_HOST');
+            $mail->SMTPAuth = true;
+            $mail->Username = env('MAIL_USERNAME');
+            $mail->Password = env('MAIL_PASSWORD');
+            $mail->SMTPSecure = env('MAIL_ENCRYPTION');
+            $mail->Port = env('MAIL_PORT');
 
-        //Recipients
-        $mail->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
-        $mail->addAddress($to);
+            //Recipients
+            $mail->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+            $mail->addAddress($to);
 
-        // Content
-        $mail->isHTML(false); // Set email format to plain text
-        $mail->Subject = $subject;
-        $mail->Body = $body;
+            // Content
+            $mail->isHTML(false); // Set email format to plain text
+            $mail->Subject = $subject;
+            $mail->Body = $body;
 
-        $mail->send();
-        echo "Email has been sent to $to";
-    } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            $mail->send();
+            echo "Email has been sent to $to";
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
     }
-}
 
 }
