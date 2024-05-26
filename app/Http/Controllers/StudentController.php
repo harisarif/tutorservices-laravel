@@ -39,7 +39,19 @@ class StudentController extends Controller
         // return $dompdf->stream('students.pdf'); // Change the filename if needed
         return view('student-list', compact('data'));
     }
-    
+    public function sendEmail($to, $subject, $message)
+        {
+            $headers = "From: Edexcel\r\n";
+            $headers .= "Reply-To: ceo@edexceledu.com\r\n";
+            $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
+            // Send email
+            if (mail($to, $subject, $message, $headers)) {
+                echo "Email sent successfully to $to.<br>";
+            } else {
+                echo "Email sending failed for $to.<br>";
+            }
+        }
 
     public function create(Request $request) {
         $rules = [
@@ -71,39 +83,58 @@ class StudentController extends Controller
 
         // Save the student instance to the database
         $student->save();
-        $to = $request->input('email');
-        $subject = "Welcome to Edexcel – Your Learning Journey Starts Now!";
-        $message = "Dear " . $student->name . "\r\n" .
-        "Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.\r\n" .
-        "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at ceo@edexceledu.com or +971566428066.\r\n" .
-        "We’re here to help you succeed!\r\n\r\n" .
-        "Best regards,\r\n" .
-        "The Edexcel Team";
-        $headers = "From: Edexcel\r\n";
-        $headers .= "Reply-To: ceo@edexceledu.com\r\n";
-        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+        $toStudent = $request->input('email');
+    $subjectStudent = "Welcome to Edexcel – Your Learning Journey Starts Now!";
+    $messageStudent = "Dear " . $student->name . "\r\n" .
+                      "Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.\r\n" .
+                      "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at ceo@edexceledu.com or +971566428066.\r\n" .
+                      "We’re here to help you succeed!\r\n\r\n" .
+                      "Best regards,\r\n" .
+                      "The Edexcel Team";
+
+    // Send email to student
+    $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
+
+    // Email details for the admin
+    $toAdmin = 'ceo@edexceledu.com';
+    $subjectAdmin = "Edexcel Notification";
+    $messageAdmin = "A new student has been added with the name " . $student->name . "\r\n";
+
+    // Send notification email to admin
+    $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
+        // $to = $request->input('email');'ceo@edexceledu.com';
+        // $subject = "Welcome to Edexcel – Your Learning Journey Starts Now!";
+        // $message = "Dear " . $student->name . "\r\n" .
+        // "Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.\r\n" .
+        // "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at ceo@edexceledu.com or +971566428066.\r\n" .
+        // "We’re here to help you succeed!\r\n\r\n" .
+        // "Best regards,\r\n" .
+        // "The Edexcel Team";
+        // $headers = "From: Edexcel\r\n";
+        // $headers .= "Reply-To: ceo@edexceledu.com\r\n";
+        // $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
         
         
-        // Send email
-        if (mail($to, $subject, $message, $headers)) {
-            echo "Email sent successfully.";
-        } else {
-            echo "Email sending failed.";
-        }
-        $toadmin = ' ceo@edexceledu.com';
-        $subjectadmin = "Edexcel Notification";
-        $messageadmin = "A new student added with name " . $student->name . "\r\n";
-        $headersadmin = "From: Edexcel\r\n";
-        $headersadmin .= "Reply-To: ceo@edexceledu.com\r\n";
-        $headersadmin .= "Content-Type: text/plain; charset=UTF-8\r\n";
+        // // Send email
+        // if (mail($to, $subject, $message, $headers)) {
+        //     echo "Email sent successfully.";
+        // } else {
+        //     echo "Email sending failed.";
+        // }
+        // $toadmin = 'ceo@edexceledu.com';
+        // $subjectadmin = "Edexcel Notification";
+        // $messageadmin = "A new student added with name " . $student->name . "\r\n";
+        // $headersadmin = "From: Edexcel\r\n";
+        // $headersadmin .= "Reply-To: ceo@edexceledu.com\r\n";
+        // $headersadmin .= "Content-Type: text/plain; charset=UTF-8\r\n";
         
         
-        // Send email
-        if (mail($toadmin, $subjectadmin, $messageadmin, $headersadmin)) {
-            echo "Email sent successfully.";
-        } else {
-            echo "Email sending failed.";
-        }
+        // // Send email
+        // if (mail($toadmin, $subjectadmin, $messageadmin, $headersadmin)) {
+        //     echo "Email sent successfully.";
+        // } else {
+        //     echo "Email sending failed.";
+        // }
         $student = new User();
         $student->name = $request->input('name');
         $student->email = $request->input('email');
