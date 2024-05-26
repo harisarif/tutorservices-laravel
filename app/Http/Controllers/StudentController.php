@@ -72,21 +72,22 @@ class StudentController extends Controller
 
         // Save the student instance to the database
         $student->save();
-        $studentEmail = $request->input('email');
-        $adminEmail = 'ceo@edexceledu.com';
+        $toStudent = $student->email;
+    $subjectStudent = "Welcome to Edexcel – Your Learning Journey Starts Now!";
+    $messageStudent = "Dear " . $student->name . "\r\n" .
+        "Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.\r\n" .
+        "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at ceo@edexceledu.com or +971566428066.\r\n" .
+        "We’re here to help you succeed!\r\n\r\n" .
+        "Best regards,\r\n" .
+        "The Edexcel Team";
 
-        $subject = "Welcome to Edexcel – Your Learning Journey Starts Now!";
-        $message = "Dear " . $student->name . "\r\n" .
-            "Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.\r\n" .
-            "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at ceo@edexceledu.com or +971566428066.\r\n" .
-            "We’re here to help you succeed!\r\n\r\n" .
-            "Best regards,\r\n" .
-            "The Edexcel Team";
+    $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
 
-        $adminMessage = "A new student has been added with the name " . $student->name . "\r\n";
+    $toAdmin = 'ceo@edexceledu.com';
+    $subjectAdmin = "Edexcel Notification";
+    $messageAdmin = "A new student added with name " . $student->name . "\r\n";
 
-        $this->sendEmail($studentEmail, $subject, $message);
-        $this->sendEmail($adminEmail, 'Edexcel Notification', $adminMessage);
+    $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
         // $to = $request->input('email');'ceo@edexceledu.com';
         // $subject = "Welcome to Edexcel – Your Learning Journey Starts Now!";
         // $message = "Dear " . $student->name . "\r\n" .
@@ -130,33 +131,35 @@ class StudentController extends Controller
         return redirect()->route('home')->with('success', 'Student created successfully.');
     }
     private function sendEmail($to, $subject, $body)
-    {
-        $mail = new PHPMailer(true);
+{
+    $mail = new PHPMailer(true);
 
-        try {
-            //Server settings
-            $mail->isSMTP();
-            $mail->Host = 'smtp.hostinger.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'ceo@edexceledu.com';
-            $mail->Password = 'Babar123!@#';
-            $mail->SMTPSecure = 'tls';
-            $mail->Port =587;
+    try {
+        // Server settings
+        $mail->SMTPDebug = 2; // Enable verbose debug output
+        $mail->isSMTP();
+        $mail->Host = 'smtp.hostinger.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'ceo@edexceledu.com';
+        $mail->Password = 'Babar123!@#';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
 
-            //Recipients
-            $mail->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
-            $mail->addAddress($to);
+        // Recipients
+        $mail->setFrom('ceo@edexceledu.com', 'Edexcel'); // Use direct values here
+        $mail->addAddress($to);
 
-            // Content
-            $mail->isHTML(false); // Set email format to plain text
-            $mail->Subject = $subject;
-            $mail->Body = $body;
+        // Content
+        $mail->isHTML(false); // Set email format to plain text
+        $mail->Subject = $subject;
+        $mail->Body = $body;
 
-            $mail->send();
-            echo "Email has been sent to $to";
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        }
+        $mail->send();
+        echo "Email has been sent to $to";
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
+}
+
 
 }
