@@ -5,6 +5,8 @@ use App\Models\Country;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+
+use PHPMailer\PHPMailer\PHPMailer;
 use App\Models\Tutor; // Add the Tutor model namespace
 
 class TutorController extends Controller
@@ -117,7 +119,22 @@ return response()->json($serializedData);
 
         // Save the Tutor instance to the database
         $tutor->save();
+        $toStudent = $tutor->email;
+        $subjectStudent = "Welcome to Edexcel – Your Learning Journey Starts Now!";
+        $messageStudent = "Dear " . $tutor->full_name = $tutor->f_name . ' ' . $tutor->l_name . "\r\n" .
+        "Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.\r\n" .
+        "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at ceo@edexceledu.com or +971566428066.\r\n" .
+        "We’re here to help you succeed!\r\n\r\n" .
+        "Best regards,\r\n" .
+        "The Edexcel Team";
 
+        $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
+
+        $toAdmin = 'ceo@edexceledu.com';
+        $subjectAdmin = "Edexcel Notification";
+        $messageAdmin = "A new teacher added with name " . $tutor->full_name = $tutor->f_name . ' ' . $tutor->l_name . "\r\n";
+
+    $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
         // Optionally, you can redirect the user or return a response
         return redirect()->route('home')->with('success', 'Tutor created successfully.');
     }
@@ -131,4 +148,34 @@ return response()->json($serializedData);
         $students = Tutor::all();
         return response()->json($students);
     }
+    private function sendEmail($to, $subject, $body)
+        {
+            $mail = new PHPMailer(true);
+
+            try {
+                // Server settings
+                $mail->SMTPDebug = 2; // Enable verbose debug output
+                $mail->isSMTP();
+                $mail->Host = 'smtp.hostinger.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'ceo@edexceledu.com';
+                $mail->Password = 'Babar123!@#';
+                $mail->SMTPSecure = 'tls';
+                $mail->Port = 587;
+
+                // Recipients
+                $mail->setFrom('ceo@edexceledu.com', 'Edexcel'); // Use direct values here
+                $mail->addAddress($to);
+
+                // Content
+                $mail->isHTML(false); // Set email format to plain text
+                $mail->Subject = $subject;
+                $mail->Body = $body;
+
+                $mail->send();
+                echo "Email has been sent to $to";
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+        }
 }
