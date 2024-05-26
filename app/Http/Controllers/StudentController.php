@@ -72,7 +72,6 @@ class StudentController extends Controller
 
         // Save the student instance to the database
         $student->save();
-        $student = Student::find($request->input('student_id'));
         $studentEmail = $request->input('email');
         $adminEmail = 'ceo@edexceledu.com';
 
