@@ -96,7 +96,7 @@ class StudentController extends Controller
     $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
 
     // Email details for the admin
-    $toAdmin = 'ceo@edexceledu.com';
+    $toAdmin = 'info@edexceledu.com';
     $subjectAdmin = "Edexcel Notification";
     $messageAdmin = "A new student has been added with the name " . $student->name . "\r\n";
 
