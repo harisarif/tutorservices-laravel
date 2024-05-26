@@ -13,6 +13,7 @@
         background-color: #f2f2f2; /* Background color for header */
     }
 </style>
+
 @php
     $tutors = DB::table('tutors')->get();
 @endphp
