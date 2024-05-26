@@ -121,7 +121,7 @@ class StudentController extends Controller
                 $mail->Body = $body;
 
                 $mail->send();
-                echo "Email has been sent to $to";
+                // echo "Email has been sent to $to";
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
