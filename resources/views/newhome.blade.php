@@ -552,7 +552,7 @@
                                                     <div class="personal_detail text-center text-md-start">
                                                         <!-- <div> -->
 
-                                                        <h5>{{ $item->name }}</h5>
+                                                        <h5>{{ $item->f_name }} {{$item->l_name}}</h5>
                                                         <span>{{ $item->gender }}, {{ $item->age }} years
                                                             <span style="background-color: red"
                                                                 class="text-light font-s px-1">Pro</span></span>
@@ -1256,7 +1256,7 @@
                                     tutorHTML += '</div>';
                                     tutorHTML +=
                                         '<div class="personal_detail text-center text-md-start">';
-                                    tutorHTML += '<h5>' + item.name + '</h5>';
+                                    tutorHTML += '<h5>' + item.f_name +  item.l_name + '</h5>';
                                     tutorHTML += '<span>' + item.gender + ', ' +
                                         item.age +
                                         ' years <span style="background-color: red" class="text-light font-s px-1">Pro</span></span>';
@@ -1472,7 +1472,7 @@
                                     tutorHTML += '</div>';
                                     tutorHTML +=
                                         '<div class="personal_detail text-center text-md-start">';
-                                    tutorHTML += '<h5>' + item.name + '</h5>';
+                                    tutorHTML += '<h5>' + item.f_name +  item.l_name + '</h5>';
                                     tutorHTML += '<span>' + item.gender + ', ' +
                                         item.age +
                                         ' years <span style="background-color: red" class="text-light font-s px-1">Pro</span></span>';
@@ -1689,7 +1689,7 @@
                                     tutorHTML += '</div>';
                                     tutorHTML +=
                                         '<div class="personal_detail text-center text-md-start">';
-                                    tutorHTML += '<h5>' + item.name + '</h5>';
+                                    tutorHTML += '<h5>' + item.f_name +  item.l_name + '</h5>';
                                     tutorHTML += '<span>' + item.gender + ', ' +
                                         item.age +
                                         ' years <span style="background-color: red" class="text-light font-s px-1">Pro</span></span>';
