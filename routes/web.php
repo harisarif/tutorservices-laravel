@@ -62,9 +62,7 @@ Route::view('profile', 'profile')
         return redirect('/');
     })->name('logout');
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
