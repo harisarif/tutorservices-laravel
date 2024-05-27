@@ -1,5 +1,23 @@
 <?php
 
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TutorController;
 use App\Http\Controllers\StudentController;
@@ -15,7 +33,7 @@ use App\Http\Controllers\StudentController;
 */
 
 Route::view('/welcome', 'welcome');
-Route::get('/', [TutorController::class, 'index'])->name('home');
+Route::get('/', [TutorController::class, 'index'])->name('newhome');
 Route::get('/basicsignup', function () {
     return view('basicsignup');
 })->name('basicsignup');
@@ -44,4 +62,6 @@ Route::view('profile', 'profile')
         return redirect('/');
     })->name('logout');
 
-require __DIR__.'/auth.php';
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

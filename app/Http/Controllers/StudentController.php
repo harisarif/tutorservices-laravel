@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Student;
 use App\Models\User;
+use App\Models\Student;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use PHPMailer\PHPMailer\PHPMailer;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Collection;
+use PHPMailer\PHPMailer\PHPMailer;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
+
 class StudentController extends Controller
 {
     public function index() {
@@ -70,6 +72,13 @@ class StudentController extends Controller
 
         // Save the student instance to the database
         $student->save();
+
+        $student = new User();
+        $student->name = $request->input('name');
+        $student->email = $request->input('email');
+        $student->password = Hash::make($request->input('password'));
+        $student->save();
+
         $toStudent = $student->email;
         $subjectStudent = "Welcome to Edexcel – Your Learning Journey Starts Now!";
         $messageStudent = "Dear " . $student->name . "\r\n" .
@@ -85,16 +94,12 @@ class StudentController extends Controller
         $subjectAdmin = "Edexcel Notification";
         $messageAdmin = "A new student added with name " . $student->name . "\r\n";
 
-    $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
+        $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
         
-        $student = new User();
-        $student->name = $request->input('name');
-        $student->email = $request->input('email');
-        $student->password = $request->input('password');
-        $student->save();
+        
 
         // Optionally, you can redirect the user or return a response
-        return redirect()->route('home')->with('success', 'Student created successfully.');
+        return redirect()->route('newhome')->with('success', 'Student created successfully.');
     }
     private function sendEmail($to, $subject, $body)
         {

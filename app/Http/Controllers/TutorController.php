@@ -25,7 +25,7 @@ class TutorController extends Controller
             // Fetch the total count of tutors (for all countries)
             $totalTutorsCount = Tutor::count();
 
-            return view('home', [
+            return view('newhome', [
                 'tutors' => $tutors,
                 'totalTutorsCount' => $totalTutorsCount,
                 'perPage' => $perPage,
@@ -136,7 +136,7 @@ return response()->json($serializedData);
 
     $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
         // Optionally, you can redirect the user or return a response
-        return redirect()->route('home')->with('success', 'Tutor created successfully.');
+        return redirect()->route('newhome')->with('success', 'Tutor created successfully.');
     }
     public function hiretutor(Request $request)
     {
