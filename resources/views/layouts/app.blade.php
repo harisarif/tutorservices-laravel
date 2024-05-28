@@ -33,7 +33,6 @@
 <div class="loader" id="lazzyLoader">
     <img src="./images/loader.gif" alt="lazzyloader">
 </div>
-@if (Route::currentRouteName() === 'login')
 <div class="modalBox" id="allModal">
     <div class="boxModal-1 col-4 bg-light rounded p-2">
         <h5 class="col-12 d-flex justify-content-between align-items-center px-2">
@@ -52,7 +51,6 @@
         </div>
     </div>
 </div>
-@endif
 
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
