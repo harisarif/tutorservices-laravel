@@ -22,7 +22,15 @@
         }
     </style>
 </head>
-
+@if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 <body>
     <main class="container-fluid m-0 bg-body-secondary p-0">
         <header class="text-center bg-light m-0 p-2 d-flex align-items-end justify-content-center">

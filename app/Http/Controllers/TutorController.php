@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Country;
-
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
@@ -98,6 +98,14 @@ return response()->json($serializedData);
             'email' => 'required|string|email|max:255|unique:tutors,email'
         ]);
         // dd($request);
+        $validator = Validator::make($request->all(), $rules);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                             ->withErrors($validator)
+                             ->withInput();
+        }
         $tutor = new Tutor();
         $tutor->f_name = $request->input('f_name');
         $tutor->l_name = $request->input('l_name');
