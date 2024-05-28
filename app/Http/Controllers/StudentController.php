@@ -101,40 +101,36 @@ class StudentController extends Controller
         // Optionally, you can redirect the user or return a response
         return redirect()->route('newhome')->with('success', 'Student created successfully.');
     }
-    private function sendEmail($to, $subject, $body, $isHtml) {
-        $mail = new PHPMailer(true);
+    private function sendEmail($to, $subject, $body)
+        {
+            $mail = new PHPMailer(true);
 
-        try {
-            // Server settings
-            $mail->SMTPDebug = 0; // Disable verbose debug output
-            $mail->isSMTP();
-            $mail->Host = 'smtp.hostinger.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'ceo@edexceledu.com';
-            $mail->Password = 'Babar123!@#';
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
+            try {
+                // Server settings
+                // $mail->SMTPDebug = 2;
+                $mail->isSMTP();
+                $mail->Host = 'smtp.hostinger.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'ceo@edexceledu.com';
+                $mail->Password = 'Babar123!@#';
+                $mail->SMTPSecure = 'tls';
+                $mail->Port = 587;
 
-            // Recipients
-            $mail->setFrom('ceo@edexceledu.com', 'Edexcel');
-            $mail->addAddress($to);
+                // Recipients
+                $mail->setFrom('ceo@edexceledu.com', 'Edexcel'); // Use direct values here
+                $mail->addAddress($to);
 
-            // Content
-            $mail->isHTML($isHtml); // Set email format based on isHtml parameter
-            $mail->Subject = $subject;
-            $mail->Body = $body;
+                // Content
+                $mail->isHTML(false); // Set email format to plain text
+                $mail->Subject = $subject;
+                $mail->Body = $body;
 
-            if ($isHtml) {
-                // Embed image in the HTML email
-                $mail->addEmbeddedImage('https://edexceledu.com/images/logo.png', 'logo');
+                $mail->send();
+                // echo "Email has been sent to $to";
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
-
-            $mail->send();
-            echo "Email has been sent to $to";
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
-    }
 
 
 }

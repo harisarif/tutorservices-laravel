@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('f_name');
             $table->string('l_name');
-            $table->string('email');
+            $table->string('email')->unique();;
             $table->string('qualification');
             $table->string('gender');
             $table->string('teaching');
