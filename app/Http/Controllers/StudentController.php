@@ -64,7 +64,7 @@ class StudentController extends Controller
         $student->class_end_time = $request->input('class_end_time');
         $student->whatsapp_number = $request->input('whatsapp_number');
         $student->country = $request->input('country');
-        $student->city= $request->input('city');
+        $student->city = $request->input('city');
         $student->subject = $request->input('subject');
         $student->c_email = $request->input('c_email');
         $student->password = $request->input('password');
@@ -73,20 +73,20 @@ class StudentController extends Controller
         // Save the student instance to the database
         $student->save();
 
-        $student = new User();
-        $student->name = $request->input('name');
-        $student->email = $request->input('email');
-        $student->password = Hash::make($request->input('password'));
-        $student->save();
+        $user = new User();
+        $user->name = $student->name;
+        $user->email = $student->email;
+        $user->password = Hash::make($request->input('password'));
+        $user->save();
 
         $toStudent = $student->email;
         $subjectStudent = "Welcome to Edexcel – Your Learning Journey Starts Now!";
         $messageStudent = "Dear " . $student->name . "\r\n" .
-        "Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.\r\n" .
-        "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at ceo@edexceledu.com or +971566428066.\r\n" .
-        "We’re here to help you succeed!\r\n\r\n" .
-        "Best regards,\r\n" .
-        "The Edexcel Team";
+            "Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.\r\n" .
+            "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at ceo@edexceledu.com or +971566428066.\r\n" .
+            "We’re here to help you succeed!\r\n\r\n" .
+            "Best regards,\r\n" .
+            "The Edexcel Team";
 
         $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
 
@@ -94,23 +94,25 @@ class StudentController extends Controller
         $subjectAdmin = "Edexcel Notification";
         $messageAdmin = "Subject: New Student Enrollment Notification
 
-        Dear (Babar),
-        
+        Dear Babar,
+
         I hope this email finds you well.
-        
-        I am pleased to inform you that a new student, ($student->name), has successfully enrolled through our website. Below are the details of the new enrollment:
-        
-        - *Full Name:* $student->name
-        - *Email Address:*  $student->email 
-        - *Contact Number:* $student->phone
-        - *Program/Course Enrolled:* $student->subjects
-        
-        Please ensure that (Student's First Name) is added to our records and receives all necessary welcome materials and instructions. If any further information is needed, feel free to contact me.
-        
+
+        I am pleased to inform you that a new student, {$student->name}, has successfully enrolled through our website. Below are the details of the new enrollment:
+
+        - *Full Name:* {$student->name}
+        - *Email Address:* {$student->email}
+        - *Contact Number:* {$student->phone}
+        - *Program/Course Enrolled:* {$student->subjects}
+
+        Please ensure that {$student->name} is added to our records and receives all necessary welcome materials and instructions. If any further information is needed, feel free to contact me.
+
         Thank you for your prompt attention to this new enrollment.
-        
+
         Best regards,
         The Edexcel Team";
+
+
 
         $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
         
