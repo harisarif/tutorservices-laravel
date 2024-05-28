@@ -423,6 +423,10 @@
         $('.select2').select2();
         $('.teaching').select2({
           multiple: true
-        });;
+        });
+        setTimeout(function() {
+                $(".alert").fadeOut("slow");
+            }, 5000);
     });
+    
 </script>
