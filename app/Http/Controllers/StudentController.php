@@ -81,12 +81,25 @@ class StudentController extends Controller
 
         $toStudent = $student->email;
         $subjectStudent = "Welcome to Edexcel – Your Learning Journey Starts Now!";
-        $messageStudent = "Dear " . $student->name . "\r\n" .
-        "Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.\r\n" .
-        "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at ceo@edexceledu.com or +971566428066.\r\n" .
-        "We’re here to help you succeed!\r\n\r\n" .
-        "Best regards,\r\n" .
-        "The Edexcel Team";
+        $messageStudent = "Subject: New Student Enrollment Notification
+
+        Dear (Babar),
+        
+        I hope this email finds you well.
+        
+        I am pleased to inform you that a new student, ($student->name), has successfully enrolled through our website. Below are the details of the new enrollment:
+        
+        - *Full Name:* $student->name
+        - *Email Address:*  $student->email 
+        - *Contact Number:* $student->phone
+        - *Program/Course Enrolled:* $student->subjects
+        
+        Please ensure that (Student's First Name) is added to our records and receives all necessary welcome materials and instructions. If any further information is needed, feel free to contact me.
+        
+        Thank you for your prompt attention to this new enrollment.
+        
+        Best regards,
+        The Edexcel Team";
 
         $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
 
