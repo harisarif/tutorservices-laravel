@@ -21,18 +21,30 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Email</th>
-                <th>Created At</th>
-                <th>Updated At</th>
+                <th>Name</th>
+                <th>Degree</th>
+                <th>Gender</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Experience</th>
+                <th>Availability</th>
+                <th>Phone</th>
+                <th>DOB</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($tutors as $student)
             <tr>
                 <td>{{ $student->id }}</td>
-                <td>{{ $student->email }}</td>
-                <td>{{ $student->created_at }}</td>
-                <td>{{ $student->updated_at }}</td>
+                <td>{{ $student->f_name }} {{ $student->l_name }}</td>
+                <td>{{ $student->qualification }}</td>
+                <td>{{ $student->gender }}</td>
+                <td>{{ $student->location }}</td>
+                <td>{{ $student->city }}</td>
+                <td>{{ $student->experience }}</td>
+                <td>{{ $student->availability }}</td>
+                <td>{{ $student->phone }}</td>
+                <td>{{ $student->dob }}</td>
             </tr>
             @endforeach
         </tbody>

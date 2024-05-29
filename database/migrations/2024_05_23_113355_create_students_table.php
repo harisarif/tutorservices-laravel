@@ -17,8 +17,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->biginteger('phone');
-            $table->time('class_start_time');
-            $table->time('class_end_time');
+            // $table->time('class_start_time');
+            // $table->time('class_end_time');
+
+            $table->string('class_start_time'); // Store time as string
+            $table->string('class_end_time');   // Store time as string
+
             $table->biginteger('whatsapp_number');
             $table->string('country');
             $table->string('city');

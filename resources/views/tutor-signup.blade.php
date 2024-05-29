@@ -11,6 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css" crossorigin="anonymous" />
 
     <style>
         main {
@@ -21,6 +22,46 @@
             width: 260px !important;
         }
     </style>
+    <style>
+        .iti__selected-flag {
+            top: 6px;
+            height: 33px !important;
+            border-radius: 4px;
+            transition: .3s;
+        }
+        input#phone {
+            padding-left: 47px !important;
+              top: 6px;
+        }  
+        .intl-tel-input .flag-dropdown .selected-flag {
+          padding: 11px 16px 11px 6px;
+        }
+        .intl-tel-input {
+          z-index: 99;
+          width: 100%;
+        }
+        .iti-flag {
+          box-shadow: none;
+        }
+        .intl-tel-input .selected-flag:focus {
+          outline: none;
+        }
+        .iti--allow-dropdown .iti__flag-container:hover .iti__selected-flag {
+            background-color: rgba(0, 0, 0, 0.05);
+        }  
+        .iti--allow-dropdown input{
+            padding-right: 6px;
+            padding-left: 52px;
+            margin-left: 0;
+        }
+        .iti__country-list {
+            border-radius: 4px !important;
+            z-index: 999 !important;
+            box-shadow: 0 0 16px 0 rgb(0 0 0 / 8%) !important;
+            border: 1px solid #ececec !important;
+              width: 270px !important;
+        }
+        </style>
 </head>
 @if ($errors->any())
         <div class="alert alert-danger">
@@ -46,11 +87,11 @@
 
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
-                        <label for="f_name" class="form-label">First Name</label>
+                        <label for="f_name" class="form-label">First Name</label> <span class="text-danger fs-4">*</span>
                         <input type="text" class="form-control" id="f_name" name="f_name" required />
                     </div>
                     <div class="col-md-6 px-2 mb-2">
-                        <label for="l_name" class="form-label">Last Name</label>
+                        <label for="l_name" class="form-label">Last Name</label> <span class="text-danger fs-4">*</span>
                         <input type="text" class="form-control" id="l_name" name="l_name" required />
                     </div>
                 </div>
@@ -68,11 +109,11 @@
 
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
-                        <label for="email" class="form-label">Email</label>
+                        <label for="email" class="form-label">Email</label> <span class="text-danger fs-4">*</span>
                         <input type="email" class="form-control" id="email" name="email" required />
                     </div>
                     <div class="col-md-6 px-2 mb-2">
-                        <label for="gender" class="form-label">Gender</label>
+                        <label for="gender" class="form-label">Gender</label> <span class="text-danger fs-4">*</span>
                         <select class="form-select" id="gender" name="gender" required>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
@@ -81,18 +122,18 @@
                 </div>
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
-                        <label for="dob" class="form-label">DOB</label>
+                        <label for="dob" class="form-label">DOB</label> <span class="text-danger fs-4">*</span>
                         <input type="date" class="form-control" id="dob" name="dob" required />
                     </div>
                     <div class="col-md-6 px-2 mb-2">
-                        <label for="qualification" class="form-label">Recent Degree</label>
+                        <label for="qualification" class="form-label">Recent Degree</label> <span class="text-danger fs-4">*</span>
                         <input type="text" class="form-control" id="qualification" name="qualification" required />
                     </div>
                 </div>
 
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
-                        <label for="teaching" class="form-label">Teaches</label>
+                        <label for="teaching" class="form-label">Teaches</label> <span class="text-danger fs-4">*</span>
                         <select class="form-select teaching" id="teaching" name="teaching[]" required>
                             <option value="english">English</option>
                             <option value="maths">Mathematics</option>
@@ -101,14 +142,14 @@
                         </select>
                     </div>
                     <div class="col-md-6 px-2 mb-2">
-                        <label for="experience" class="form-label">Experience (in years)</label>
+                        <label for="experience" class="form-label">Experience (in years)</label> <span class="text-danger fs-4">*</span>
                         <input type="number" min="0" class="form-control" id="experience" name="experience"
                             required />
                     </div>
                 </div>
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-12 px-2 mb-2">
-                        <label for="location" class="form-label">Residence Country</label>
+                        <label for="location" class="form-label">Residence Country</label> <span class="text-danger fs-4">*</span>
                     </br>
                         <select class="form-select" id="location" required name="location">
                             <option value="AE">United Arab Emirates</option>
@@ -367,31 +408,35 @@
                 </div>
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-12 px-2 mb-2">
-                        <label for="mobile" class="form-label">City</label>
+                        <label for="mobile" class="form-label">City</label> <span class="text-danger fs-4">*</span>
                         <input type="text" class="form-control" id="city" name="city" required />
                     </div>
                 </div>
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
-                        <label for="mobile" class="form-label">Mobile Number</label>
-                        <input type="number" class="form-control" id="mobile" name="phone" required />
+                        <label for="mobile" class="form-label">Mobile Number</label> <span class="text-danger fs-4">*</span>
+                        {{-- <input type="number" class="form-control" id="phone" name="phone" required /> --}}
+                        <div class="input-group">
+                            {{-- <span class="input-group-text">+1</span> <!-- Replace +1 with the desired country code --> --}}
+                            <input type="tel" class="form-control" id="phone" name="phone" required />
+                        </div>
                     </div>
                     <div class="col-md-6 px-2 mb-2">
-                        <label for="whatsapp" class="form-label">WhatsApp Number</label>
+                        <label for="whatsapp" class="form-label">WhatsApp Number</label> <span class="text-danger fs-4">*</span>
                         <input type="number" class="form-control" id="whatsapp" name="whatsapp" required />
                     </div>
                 </div>
 
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
-                        <label for="profilePicture" class="form-label">Profile Picture</label>
+                        <label for="profilePicture" class="form-label">Profile Picture</label> <span class="text-danger fs-4">*</span>
                         <input type="file" class="form-control" id="profilePicture" required
                             name="profileImage" />
 
 
                     </div>
                     <div class="col-md-6 px-2 mb-2">
-                        <label for="teaching" class="form-label">Available Time</label>
+                        <label for="teaching" class="form-label">Available Time</label> <span class="text-danger fs-4">*</span>
                         <select class="form-select" id="teaching" required name="availability">
                             <option selected>Select Time</option>
                             <option value="9:00AM to 10:00AM">9:00AM to 10:00AM</option>
@@ -418,6 +463,7 @@
 </html>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js'></script>
 <script>
     $(document).ready(function() {
         $('.select2').select2();
@@ -429,4 +475,72 @@
             }, 5000);
     });
     
+</script>
+<script>
+    // International telephone format
+    // $("#phone").intlTelInput();
+    // get the country data from the plugin
+    var countryData = window.intlTelInputGlobals.getCountryData(),
+      input = document.querySelector("#phone"),
+      addressDropdown = document.querySelector("#country");
+    
+    // init plugin
+    var iti = window.intlTelInput(input, {
+      hiddenInput: "full_phone",
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js" // just for formatting/placeholders etc
+    });
+    
+    // populate the country dropdown
+    for (var i = 0; i < countryData.length; i++) {
+      var country = countryData[i];
+      var optionNode = document.createElement("option");
+      optionNode.value = country.iso2;
+      var textNode = document.createTextNode(country.name);
+      optionNode.appendChild(textNode);
+      addressDropdown.appendChild(optionNode);
+    }
+    // set it's initial value
+    addressDropdown.value = iti.getSelectedCountryData().iso2;
+    
+    // listen to the telephone input for changes
+    input.addEventListener('countrychange', function(e) {
+      addressDropdown.value = iti.getSelectedCountryData().iso2;
+    });
+    
+    // listen to the address dropdown for changes
+    addressDropdown.addEventListener('change', function() {
+      iti.setCountry(this.value);
+    });
+    </script>
+    <script>
+    //Append Value To Phone Field
+    $("#phone").prop('value', '+1 ');
+
+    // Listen to changes in the input field for updating the country code
+    input.addEventListener('countrychange', function(e) {
+        var countryCode = iti.getSelectedCountryData().dialCode;
+        // Update the country code prefix in the input field
+        updateCountryCodePrefix(countryCode);
+    });
+
+    // Prevent users from deleting the country code prefix
+    input.addEventListener('input', function(e) {
+        var countryCode = iti.getSelectedCountryData().dialCode;
+        var inputValue = input.value;
+
+        // Check if the input value starts with the country code prefix
+        if (!inputValue.startsWith("+" + countryCode)) {
+            // If not, update the input value with the country code prefix
+            updateCountryCodePrefix(countryCode);
+        }
+    });
+
+    // Function to update the input value with the country code prefix
+    function updateCountryCodePrefix(countryCode) {
+        // Check if the input value is empty or doesn't start with the country code prefix
+        if (!input.value || !input.value.startsWith("+" + countryCode)) {
+            // Update the input value with the country code prefix
+            input.value = "+" + countryCode;
+        }
+    }
 </script>

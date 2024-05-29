@@ -91,12 +91,12 @@ return response()->json($serializedData);
     public function create(Request $request){
         // dd($request);
         // Validate form data
-        $request->validate([
+        $rules = [
             'f_name' => 'required|string|max:255',
             'l_name' => 'required|string|max:255',
             'profileImage' => 'required|image|mimes:jpeg,png,jpg|max:2048', // max:2048 is for maximum 2MB file size, adjust as needed
             'email' => 'required|string|email|max:255|unique:tutors,email'
-        ]);
+        ];
         // dd($request);
         $validator = Validator::make($request->all(), $rules);
 

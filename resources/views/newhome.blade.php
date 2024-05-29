@@ -86,7 +86,7 @@
             <div class="icons d-flex p-2 m-0 justify-content-center align-items-center">
                 <a href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d" target="_blank"
                     class="icoFacebook text-light  p-2" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="#" class="icoGoogle text-light p-2" title="instagram +"><i
+                <a href="https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr" target="_blank" class="icoGoogle text-light p-2" title="instagram +"><i
                         class="fa-brands fa-instagram"></i></a>
                 <a href="#" class="icoGoogle text-light p-2" title="Linked-in +"><i
                         class="fa-brands fa-linkedin"></i></a>
@@ -220,10 +220,7 @@
 
                 <div class="col-12">
                     <hr />
-                    <a class="tutor_navigate text-decoration-none" href="#">Home</a> /
-                    <a class="tutor_navigate text-decoration-none" href="#">Tutor in Pak</a>
-                    /
-                    <a class="tutor_navigate text-decoration-none activeLink fw-bold" href="#">1370+</a>
+                    <h3>Tutor's List</h3>
                     <hr />
                 </div>
 
@@ -624,6 +621,15 @@
                                                                 <td class="d-none d-md-block px-2">:</td>
                                                                 <td class="font-s text-secondary">
                                                                     {{ $item->availability }}
+
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr class="title-1 col col-md-3">
+                                                                <td class="font-s fw-bold">Date of Birth</td>
+                                                                <td class="d-none d-md-block px-2">:</td>
+                                                                <td class="font-s text-secondary">
+                                                                    {{ $item->dob }}
 
                                                                 </td>
                                                             </tr>

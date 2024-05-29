@@ -24,8 +24,12 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Created At</th>
-                <th>Updated At</th>
+                <th>Phone</th>
+                <th>Class Start Time</th>
+                <th>Class End Time</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Subject</th>
             </tr>
         </thead>
         <tbody>
@@ -34,8 +38,12 @@
                 <td>{{ $student->id }}</td>
                 <td>{{ $student->name }}</td>
                 <td>{{ $student->email }}</td>
-                <td>{{ $student->created_at }}</td>
-                <td>{{ $student->updated_at }}</td>
+                <td>{{ $student->phone }}</td>
+                <td>{{ $student->class_start_time }}</td>
+                <td>{{ $student->class_end_time }}</td>
+                <td>{{ $student->country }}</td>
+                <td>{{ $student->city }}</td>
+                <td>{{ $student->subject }}</td>
             </tr>
             @endforeach
         </tbody>

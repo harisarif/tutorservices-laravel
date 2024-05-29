@@ -45,6 +45,8 @@ class StudentController extends Controller
     public function create(Request $request) {
         $rules = [
             'email' => 'required|string|email|max:255|unique:student,email',
+            'class_start_time' => 'required|date_format:H:i',
+            'class_end_time' => 'required|date_format:H:i',
         ];
     
         $validator = Validator::make($request->all(), $rules);
@@ -60,8 +62,17 @@ class StudentController extends Controller
         $student->name = $request->input('name');
         $student->email = $request->input('email');
         $student->phone = $request->input('phone');
-        $student->class_start_time = $request->input('class_start_time');
-        $student->class_end_time = $request->input('class_end_time');
+        // $student->class_start_time = $request->input('class_start_time');
+        // $student->class_end_time = $request->input('class_end_time');
+
+        // Convert the input time from 24-hour format to 12-hour format with AM/PM
+        $classStartTime = date("h:i A", strtotime($request->input('class_start_time')));
+        $classEndTime = date("h:i A", strtotime($request->input('class_end_time')));
+
+        // Store the times in 12-hour format with AM/PM
+        $student->class_start_time = $classStartTime;
+        $student->class_end_time = $classEndTime;
+        
         $student->whatsapp_number = $request->input('whatsapp_number');
         $student->country = $request->input('country');
         $student->city = $request->input('city');
