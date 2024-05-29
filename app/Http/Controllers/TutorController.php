@@ -163,7 +163,8 @@ return response()->json($serializedData);
 
             try {
                 // Server settings
-                $mail->SMTPDebug = 2; // Enable verbose debug output
+                // $mail->SMTPDebug = 2; 
+                // Enable verbose debug output
                 $mail->isSMTP();
                 $mail->Host = 'smtp.hostinger.com';
                 $mail->SMTPAuth = true;
