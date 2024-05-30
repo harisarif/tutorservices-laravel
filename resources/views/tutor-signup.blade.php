@@ -514,7 +514,7 @@
     </script>
     <script>
     //Append Value To Phone Field
-    $("#phone").prop('value', '+1 ');
+    $("#phone").prop('value', '+1');
 
     // Listen to changes in the input field for updating the country code
     input.addEventListener('countrychange', function(e) {

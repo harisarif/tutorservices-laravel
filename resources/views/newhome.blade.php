@@ -241,7 +241,7 @@
                         <div class="bg-body-secondary">
                                
                                 <div class="row p-2">
-                                    <div class="col-2">
+                                    <div class="col-2 me-3">
 
                                         <select name="country" id="country" class="country">
                                             <option value="all">All Countries</option>
@@ -551,8 +551,10 @@
 
                                                         <h5>{{ $item->f_name }} {{$item->l_name}}</h5>
                                                         <span>{{ $item->gender }}, {{ $item->age }} years
-                                                            <span style="background-color: red"
+                                                            @if ( $item->experience >= 1 )
+                                                                <span style="background-color: red"
                                                                 class="text-light font-s px-1">Pro</span></span>
+                                                            @endif
                                                         <p class="m-0">{{ $item->experience }} years of teaching
                                                             experience</p>
                                                         <!-- stars -->
