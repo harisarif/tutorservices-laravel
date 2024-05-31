@@ -1,28 +1,9 @@
-<style>
-    /* CSS for table styling */
-    table {
-        border-collapse: collapse; /* Collapse borders */
-        width: 100%; /* Full width */
-    }
-    th, td {
-        border: 1px solid #dddddd; /* Add borders to cells */
-        padding: 8px; /* Add padding */
-        text-align: left; /* Align text to the left */
-    }
-    th {
-        background-color: #f2f2f2; /* Background color for header */
-    }
-    
-    tbody td {
-        text-align: center !important;
-        white-space: nowrap !important;
-    }
-</style>
+
 @php
     $tutors = DB::table('tutors')->get();
 @endphp
     {{-- <h1>All Teachers</h1> --}}
-    <table class="teachers-table">
+    <table class="teachers-table table-responsive" style="width: 100%">
         <thead>
             <tr>
                 <th>ID</th>

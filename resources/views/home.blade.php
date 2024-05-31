@@ -34,6 +34,26 @@
             display: flex;
             gap: 8px;
         }
+        table {
+        border-collapse: collapse; /* Collapse borders */
+        width: 100%; /* Full width */
+    }
+    th, td {
+        border: 1px solid #dddddd; /* Add borders to cells */
+        padding: 8px; /* Add padding */
+        text-align: left; /* Align text to the left */
+    }
+    th {
+        background-color: #f2f2f2; /* Background color for header */
+    }
+    
+    tbody td {
+        text-align: center !important;
+        white-space: nowrap !important;
+    }
+    table.dataTable thead th, table.dataTable thead td {
+        text-align: center;
+    }
     </style>
 
 </head>
@@ -186,10 +206,8 @@
                                 @include('student-list')
 
                             </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <table class="table table-bordered teacher-table d-none">
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" style="width:1000px;">
                                 @include('teacher-list')
-                            </table>
                             </div>
                         </div>
                         <div id="content">

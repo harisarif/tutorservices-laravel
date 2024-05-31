@@ -187,9 +187,7 @@
 
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <table class="table table-bordered teacher-table d-none">
                                 @include('teacher-list')
-                            </table>
                             </div>
                         </div>
                         <div id="content">
@@ -242,9 +240,6 @@
    
 </body>
 
-@if (request()->is('livewire-required-route'))
-@livewireScripts
-@endif
 </html>
 
 

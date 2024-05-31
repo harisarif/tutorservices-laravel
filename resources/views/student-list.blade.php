@@ -1,18 +1,4 @@
-<style>
-    /* CSS for table styling */
-    table {
-        border-collapse: collapse; /* Collapse borders */
-        width: 100%; /* Full width */
-    }
-    th, td {
-        border: 1px solid #dddddd; /* Add borders to cells */
-        padding: 8px; /* Add padding */
-        text-align: left; /* Align text to the left */
-    }
-    th {
-        background-color: #f2f2f2; /* Background color for header */
-    }
-</style>
+
 
 @php
     $students = DB::table('student')->get();
