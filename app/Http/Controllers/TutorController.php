@@ -141,9 +141,26 @@ return response()->json($serializedData);
 
         $toAdmin = 'ceo@edexceledu.com';
         $subjectAdmin = "Edexcel Notification";
-        $messageAdmin = "A new teacher added with name " . $tutor->full_name = $tutor->f_name . ' ' . $tutor->l_name . "\r\n";
+        $messageAdmin = "Subject: New Teacher Enrollment Notification
 
-    $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
+        Dear Babar,
+
+        I hope this email finds you well.
+
+        I am pleased to inform you that a new teacher, {$tutor->f_name} {$tutor->l_name}, has successfully enrolled through our website. Below are the details of the new enrollment:
+
+        - *Full Name:* {$tutor->f_name} {$tutor->l_name}
+        - *Email Address:* {$tutor->email}
+        - *Contact Number:* {$tutor->phone}
+        - *Location:* {$tutor->location}
+
+        Please ensure that {$tutor->f_name} {$tutor->l_name} is added to our records and receives all necessary welcome materials and instructions. If any further information is needed, feel free to contact me.
+
+        Thank you for your prompt attention to this new enrollment.
+
+        Best regards,
+        The Edexcel Team";
+        $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
         // Optionally, you can redirect the user or return a response
         return redirect()->route('newhome')->with('success', 'Tutor created successfully.');
     }
