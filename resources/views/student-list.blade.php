@@ -25,11 +25,12 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
-                <th>Class Start Time</th>
-                <th>Class End Time</th>
+                <th>Start Time</th>
+                <th>End Time</th>
                 <th>Country</th>
                 <th>City</th>
                 <th>Subject</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -44,6 +45,14 @@
                 <td>{{ $student->country }}</td>
                 <td>{{ $student->city }}</td>
                 <td>{{ $student->subject }}</td>
+                <td>
+                    <a href="{{ route('edit-student', $student->id) }}" class="btn btn-sm btn-primary"><i class="fa-regular fa-pen-to-square"></i></a>
+                    <form action="{{ route('students.destroy', $student->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')"><i class="fa-solid fa-trash-can"></i></button>
+                    </form>
+                </td>
             </tr>
             @endforeach
         </tbody>

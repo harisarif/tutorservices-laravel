@@ -11,6 +11,7 @@
 <script>
    $(document).ready(function() {
     $('.student-table').DataTable({
+        // responsive: true
             // Set number of rows per page
             dom: 'lBfrtip',
             buttons: [
@@ -27,6 +28,7 @@
             
                 });
     $('.teachers-table').DataTable({
+        // responsive: true
         // Set number of rows per page
         dom: 'lBfrtip',
         buttons: [

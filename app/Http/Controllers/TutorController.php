@@ -188,4 +188,19 @@ return response()->json($serializedData);
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
         }
+
+    public function edit($id) {
+        $tutor = Tutor::findOrFail($id);
+        return view('edit-teacher');
+    }
+
+    public function update(Request $request, $id) {
+        
+    }
+
+    public function destroy($id) {
+        $tutor = Tutor::find($id);
+        $tutor->delete();
+        return back()->with('message', 'Student deleted successfully');
+    }
 }

@@ -43,11 +43,17 @@ Route::get('/tutor-signup', function () {
 })->name('tutor');
 Route::get('/hire-tutor', [StudentController::class, 'index'])->name('hire.tutor');
 Route::post('/hire-tutor/create', [StudentController::class, 'create'])->name('student-create');
+Route::get('/student-list/{id}/edit', [StudentController:: class, 'edit'])->name('edit-student');
+Route::put('/student-list/{id}', [StudentController:: class, 'update'])->name('students.update');
+Route::delete('/student-list/{id}', [StudentController:: class, 'destroy'])->name('students.destroy');
 Route::post('/tutor/create', [TutorController::class, 'create'])->name('tutor-create');
 Route::get('/tutors', [TutorController::class, 'filterByCountry'])->name('tutors.filterByCountry');
 Route::get('/students-list', [StudentController::class, 'showStudentsList'])->name('students.list');
 Route::get('/students-pdf', [StudentController::class, 'studentsPDF'])->name('students.pdf');
 Route::get('/teachers-list', [TutorController::class, 'fetchTeachers'])->name('teachers.list');
+Route::get('/teachers-list/{id}/edit', [TutorController::class, 'edit'])->name('edit-teacher');
+Route::put('/teachers-list/{id}', [TutorController::class, 'update'])->name('teachers.update');
+Route::delete('/teachers-list/{id}', [TutorController::class, 'destroy'])->name('teachers.destroy');
 Route::post('/fetch-data', [TutorController::class, 'fetchData'])->name('fetch-data');
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])

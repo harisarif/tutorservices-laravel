@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -47,6 +48,8 @@ class StudentController extends Controller
             'email' => 'required|string|email|max:255|unique:student,email',
             'class_start_time' => 'required|date_format:H:i',
             'class_end_time' => 'required|date_format:H:i',
+            'password' => 'required|min:8',
+            'c_password' => 'required|min:8|same:password',
         ];
     
         $validator = Validator::make($request->all(), $rules);
@@ -163,5 +166,67 @@ class StudentController extends Controller
             }
         }
 
+    public function edit($id) {
 
+        $countries = collect(config('countries.countries'))->prepend("Select your country", "");
+        $student = Student::findOrFail($id);
+
+        // Convert stored time format to HH:MM format
+        $student->class_start_time = Carbon::createFromFormat('h:i A', $student->class_start_time)->format('H:i');
+        $student->class_end_time = Carbon::createFromFormat('h:i A', $student->class_end_time)->format('H:i');
+
+        return view('edit-student', compact(['student', 'countries']));
+    }
+
+    public function update(Request $request, $id) {
+        $rules = [
+            'email' => 'required|string|email|max:255|unique:student,email',
+            'class_start_time' => 'required|date_format:H:i',
+            'class_end_time' => 'required|date_format:H:i',
+        ];
+    
+        $validator = Validator::make($request->all(), $rules);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                             ->withErrors($validator)
+                             ->withInput();
+        }
+    
+        $student = Student::findOrFail($id);
+        $student->subjects = $request->input('subjects');
+        $student->name = $request->input('name');
+        $student->email = $request->input('email');
+        $student->phone = $request->input('phone');
+        // $student->class_start_time = $request->input('class_start_time');
+        // $student->class_end_time = $request->input('class_end_time');
+
+        // Convert the input time from 24-hour format to 12-hour format with AM/PM
+        $classStartTime = date("h:i A", strtotime($request->input('class_start_time')));
+        $classEndTime = date("h:i A", strtotime($request->input('class_end_time')));
+
+        // Store the times in 12-hour format with AM/PM
+        $student->class_start_time = $classStartTime;
+        $student->class_end_time = $classEndTime;
+        
+        $student->whatsapp_number = $request->input('whatsapp_number');
+        $student->country = $request->input('country');
+        $student->city = $request->input('city');
+        $student->subject = $request->input('subject');
+        $student->c_email = $request->input('email');
+        $student->password = $request->input('password');
+        $student->c_password = $request->input('password');
+
+        // Save the student instance to the database
+        $student->save();
+
+        return back()->with('message', 'Student updated successfully');
+    }
+
+    public function destroy($id) {
+        $student = Student::find($id);
+        $student->delete();
+        return back()->with('message', 'Student deleted successfully');
+    }
 }

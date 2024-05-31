@@ -208,13 +208,7 @@
                             aria-hidden="true"></i>
                     </h3>
                     <p class="border p-2 description-tutor">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
-                        tempore itaque a nemo aliquid dicta, totam similique voluptatem
-                        fugiat atque sit? Rem praesentium corrupti nostrum obcaecati
-                        cupiditate soluta molestias. Amet voluptatem totam aperiam! Eos
-                        consequuntur quisquam quam, commodi recusandae asperiores id illo
-                        perspiciatis quasi accusamus voluptas quo iste rerum ducimus! Nam
-                        rem nostrum magnam fuga veniam! Minus sed delectus velit?
+                        Edexcel is a platform that connects students with qualified tutors across the globe. It leverages online tools and technologies to provide personalized, flexible, and accessible educational support. The platform offers a wide range of subjects, catering to different educational levels, from primary school to High school. Edexcel ensures high-quality instruction by vetting tutors for their expertise and teaching skills. This global reach allows students to access diverse teaching styles and perspectives, fostering a richer learning experience. Additionally, the platform often includes features like one-on-one sessions, group classes, and customized lesson plans to meet individual learning needs.
                     </p>
                 </div>
 
