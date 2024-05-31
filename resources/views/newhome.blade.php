@@ -88,7 +88,7 @@
                     class="icoFacebook text-light  p-2" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
                 <a href="https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr" target="_blank" class="icoGoogle text-light p-2" title="instagram +"><i
                         class="fa-brands fa-instagram"></i></a>
-                <a href="#" class="icoGoogle text-light p-2" title="Linked-in +"><i
+                <a href="https://www.linkedin.com/in/edexcel-edu-130983310/" class="icoGoogle text-light p-2" target="_blank" title="Linked-in +"><i
                         class="fa-brands fa-linkedin"></i></a>
                 {{-- <a href="#" class="btn notify position-relative"><i class="fa-regular fa-bell text-white"></i><span class="position-absolute top-10 start-60 translate-middle p-1 bg-danger border border-light rounded-circle">
                     <span class="visually-hidden">New alerts</span>

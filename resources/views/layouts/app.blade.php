@@ -41,7 +41,7 @@
                 onclick="document.getElementById('allModal').style.display = 'none'">&times;</span>
         </h5>
 
-        <p class="px-2">Welcome to edexcel. We are empowering success through top-class education
+        <p class="px-2">Welcome to edexcel. We are empowering success through top-class education.
             Drop your information to start your journey with edexcel  today!</p>
 
         <hr />
