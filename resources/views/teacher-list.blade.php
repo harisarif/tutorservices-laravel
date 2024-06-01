@@ -16,7 +16,7 @@
                     <th>Experience</th>
                     <th>Availability</th>
                     <th>Phone</th>
-                    <th>DOB</th>
+                    {{-- <th>DOB</th> --}}
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -32,7 +32,7 @@
                     <td>{{ $tutor->experience }} {{ $tutor->experience > 1 ? 'years' : 'year' }}</td>
                     <td>{{ $tutor->availability }}</td>
                     <td>{{ $tutor->phone }}</td>
-                    <td>{{ $tutor->dob }}</td>
+                    {{-- <td>{{ $tutor->dob }}</td> --}}
                     <td>
                         <a href="{{ route('edit-teacher', $tutor->id) }}" class="btn btn-sm btn-primary"><i class="fa-regular fa-pen-to-square"></i></a>
                         <form action="{{ route('teachers.destroy', $tutor->id) }}" method="POST" style="display:inline;">
