@@ -180,7 +180,7 @@ class StudentController extends Controller
 
     public function update(Request $request, $id) {
         $rules = [
-            'email' => 'required|string|email|max:255|unique:student,email',
+            'email' => 'required|string|email|max:255',
             'class_start_time' => 'required|date_format:H:i',
             'class_end_time' => 'required|date_format:H:i',
         ];
@@ -195,7 +195,6 @@ class StudentController extends Controller
         }
     
         $student = Student::findOrFail($id);
-        $student->subjects = $request->input('subjects');
         $student->name = $request->input('name');
         $student->email = $request->input('email');
         $student->phone = $request->input('phone');
@@ -221,7 +220,7 @@ class StudentController extends Controller
         // Save the student instance to the database
         $student->save();
 
-        return back()->with('message', 'Student updated successfully');
+        return redirect('home')->with('message', 'Student updated successfully');
     }
 
     public function destroy($id) {

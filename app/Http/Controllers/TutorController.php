@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use Carbon\Carbon;
 use App\Models\Country;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
-
 use PHPMailer\PHPMailer\PHPMailer;
+
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Tutor; // Add the Tutor model namespace
 
 class TutorController extends Controller
@@ -24,6 +25,15 @@ class TutorController extends Controller
 
             // Fetch the total count of tutors (for all countries)
             $totalTutorsCount = Tutor::count();
+
+            // Calculate age for each tutor
+            foreach ($tutors as $tutor) {
+                if ($tutor->dob) {
+                    $tutor->age = Carbon::parse($tutor->dob)->age;
+                } else {
+                    $tutor->age = null; // or any default value
+                }
+            }
 
             return view('newhome', [
                 'tutors' => $tutors,
@@ -61,11 +71,21 @@ if ($request->has('subjectsearch') && $request->filled('subjectsearch')) {
 // Paginate the filtered tutors
 $tutors = $query->paginate($perPage);
 
+// Calculate age for each tutor
+foreach ($tutors as $tutor) {
+    if ($tutor->dob) {
+        $tutor->age = Carbon::parse($tutor->dob)->age;
+    } else {
+        $tutor->age = null; // or any default value
+    }
+}
+
 // Fetch the total count of tutors after applying filters
 $totalTutorsCount = $query->count();
 
 // Manually serialize the paginated data
 $serializedData = [
+    'age' => $tutor->age,
     'tutors' => $tutors->items(), // Get the items from the paginator
     'totalTutorsCount' => $totalTutorsCount,
     'perPage' => $perPage,
@@ -208,16 +228,49 @@ return response()->json($serializedData);
 
     public function edit($id) {
         $tutor = Tutor::findOrFail($id);
-        return view('edit-teacher');
+        $countries = collect(config('countries_assoc.countries'));
+        return view('edit-teacher', compact(['tutor', 'countries']));
     }
 
     public function update(Request $request, $id) {
-        
+        // Validate form data
+        $rules = [
+            'f_name' => 'required|string|max:255',
+            'l_name' => 'required|string|max:255',
+            // 'profileImage' => 'required|image|mimes:jpeg,png,jpg|max:2048', // max:2048 is for maximum 2MB file size, adjust as needed
+            'email' => 'required|string|email|max:255'
+        ];
+        // dd($request);
+        $validator = Validator::make($request->all(), $rules);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                             ->withErrors($validator)
+                             ->withInput();
+        }
+        $tutor = Tutor::findOrFail($id);
+        $tutor->f_name = $request->input('f_name');
+        $tutor->l_name = $request->input('l_name');
+        $tutor->city = $request->input('city');
+        $tutor->email = $request->input('email');
+        $tutor->dob = $request->input('dob');
+        $tutor->qualification = $request->input('qualification');
+        $tutor->gender = $request->input('gender');
+        $tutor->location = $request->input('location');
+        $tutor->experience = $request->input('experience');
+        $tutor->availability = $request->input('availability');
+        $tutor->phone = $request->input('phone');
+        $tutor->whatsapp = $request->input('whatsapp');
+
+        $tutor->save();
+
+        return redirect('home')->with('message', 'Teacher updated successfully');
     }
 
     public function destroy($id) {
         $tutor = Tutor::find($id);
         $tutor->delete();
-        return back()->with('message', 'Student deleted successfully');
+        return back()->with('message', 'Teacher deleted successfully');
     }
 }

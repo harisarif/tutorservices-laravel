@@ -54,6 +54,11 @@
     table.dataTable thead th, table.dataTable thead td {
         text-align: center;
     }
+    .fixed-sidebar .app-main .app-main__outer {
+    z-index: 9!important;
+    padding-left: 280px!important;
+    width: calc(100% - 280px)!important;
+}
     </style>
 
 </head>
@@ -206,7 +211,7 @@
                                 @include('student-list')
 
                             </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" style="width:1000px;">
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" >
                                 @include('teacher-list')
                             </div>
                         </div>

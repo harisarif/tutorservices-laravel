@@ -549,7 +549,12 @@
                                                                 <span style="background-color: red"
                                                                 class="text-light font-s px-1">Pro</span></span>
                                                             @endif
-                                                        <p class="m-0">{{ $item->experience }} years of teaching
+                                                        <p class="m-0">{{ $item->experience }} 
+                                                            @if ( $item->experience > 1 )
+                                                            years
+                                                            @else
+                                                            year
+                                                        @endif of teaching
                                                             experience</p>
                                                         <!-- stars -->
                                                         <span
@@ -1299,6 +1304,9 @@
                                     tutorHTML +=
                                         '<tr class="title-1 col col-md-3"><td class="font-s fw-bold">Availability</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
                                         item.availability + '</td></tr>';
+                                    tutorHTML +=
+                                        '<tr class="title-1 col col-md-3"><td class="font-s fw-bold">Date of Birth</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
+                                        item.dob + '</td></tr>';
                                     tutorHTML += '</table>';
                                     tutorHTML += '</div>';
                                     tutorHTML += '</div>';
@@ -1515,6 +1523,9 @@
                                     tutorHTML +=
                                         '<tr class="title-1 col col-md-3"><td class="font-s fw-bold">Availability</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
                                         item.availability + '</td></tr>';
+                                    tutorHTML +=
+                                        '<tr class="title-1 col col-md-3"><td class="font-s fw-bold">Date of Birth</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
+                                        item.dob + '</td></tr>';
                                     tutorHTML += '</table>';
                                     tutorHTML += '</div>';
                                     tutorHTML += '</div>';
@@ -1732,6 +1743,9 @@
                                     tutorHTML +=
                                         '<tr class="title-1 col col-md-3"><td class="font-s fw-bold">Availability</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
                                         item.availability + '</td></tr>';
+                                    tutorHTML +=
+                                        '<tr class="title-1 col col-md-3"><td class="font-s fw-bold">Date of Birth</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
+                                        item.dob + '</td></tr>';
                                     tutorHTML += '</table>';
                                     tutorHTML += '</div>';
                                     tutorHTML += '</div>';

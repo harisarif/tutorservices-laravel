@@ -42,16 +42,6 @@
         </div>
 
         <div class="form-group">
-            <label for="subjects">Tutor Availability:</label><br>
-            {{-- <input type="subjects" class="form-control" id="subjects" name="subjects" value="{{ $student->subjects }}"> --}}
-            <select name="subjects" id="subjects" class="form-select">
-                <option value="tutor for online" {{ $student->subjects == 'tutor for online' ? 'selected' : '' }}>Tutor for Online</option>
-                <option value="tutor for home" {{ $student->subjects == 'tutor for home' ? 'selected' : '' }}>Tutor for Home</option>
-                <option value="both" {{ $student->subjects == 'both' ? 'selected' : '' }}>Both</option>
-            </select>
-        </div>
-
-        <div class="form-group">
             <label for="class_start_time">Class Start Time:</label><br>
             <input type="time" class="form-control" id="class_start_time" name="class_start_time" value="{{ $student->class_start_time }}">
         </div>
