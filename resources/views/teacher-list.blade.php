@@ -4,7 +4,7 @@
 @endphp
     {{-- <h1>All Teachers</h1> --}}
     <div class="">
-        <table class="table teachers-table table-responsive">
+        <table class="table teachers-table">
             <thead>
                 <tr>
                     <th>ID</th>

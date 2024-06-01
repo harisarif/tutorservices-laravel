@@ -4,7 +4,7 @@
     $students = DB::table('student')->get();
 @endphp
     {{-- <h1>All Students</h1> --}}
-    <table class="student-table table-responsive">
+    <table class="student-table">
         <thead>
             <tr>
                 <th>ID</th>
