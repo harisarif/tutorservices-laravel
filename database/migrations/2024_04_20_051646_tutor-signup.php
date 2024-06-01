@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('location');
             $table->string('city');
             $table->string('experience');
-            $table->string('curriculum');
+            $table->string('curriculum')->nullable();
             $table->string('availability');
             $table->string('profileImage');
             $table->string('phone', 20);

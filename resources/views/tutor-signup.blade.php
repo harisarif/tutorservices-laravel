@@ -445,7 +445,7 @@
                     </div>
                 </div>
                 <div class="col-12 px-2 py-2"><label for="curriculum" class="form-label">Description (Optional)</label>
-                    <textarea class="form-control" id="curriculum" name="curriculum[]" rows="2" required placeholder="Add comma after one"></textarea>
+                    <textarea class="form-control" id="curriculum" name="curriculum[]" rows="2" placeholder="Add comma after one"></textarea>
                 </div>
 
                 <div class="col d-flex justify-content-center py-3">
