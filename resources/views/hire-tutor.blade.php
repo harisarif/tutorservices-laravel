@@ -31,7 +31,7 @@
                 <div class="col m-1 py-3 text-center flex-column rounded-top bg-body-secondary">
                     <h3>Post Learning Requirement - It's Free!</h3>
                     <p>Post your learning requirement and let interested tutors contact you</p>
-                    <span><i> If you are a tutor </i><a href="#" class="theme_text_green text-decoration-none">
+                    <span><i> If you are a tutor </i><a href="{{ route('tutor') }}" class="theme_text_green text-decoration-none">
                             <b>Click here</b></a></span>
 
                 </div>
@@ -129,7 +129,7 @@
 
                         <!-- page-4 -->
                         <div class="col d-none" id="page-4">
-                            <h4 class="text-center py-3">Enter password to creat an Account<i
+                            <h4 class="text-center py-3">Enter password to create an Account<i
                                     class="fs-6 text-secondary">
                                     (Required)</i></h4>
                             <input required type="email" name="c_email" placeholder="*Email" class="inp-1" readonly>
