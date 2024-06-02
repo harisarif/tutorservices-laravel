@@ -12,7 +12,8 @@
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="edexcel dashboard">
     <meta name="msapplication-tap-highlight" content="no">
-    <title>{{ config('app.name', 'Edexcel Dashboard') }}</title>
+    {{-- <title>{{ config('app.name', 'Edexcel Dashboard') }}</title> --}}
+    <title>Edecel Academy & Educational Consultancy</title>
     <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
     <link href="https://demo.dashboardpack.com/architectui-html-free/main.css" rel="stylesheet">
     

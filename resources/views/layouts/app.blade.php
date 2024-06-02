@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Edecel Academy & Educational Consultancy') }}</title>
+    {{-- <title>{{ config('app.name', 'Edecel Academy & Educational Consultancy') }}</title> --}}
+    <title>Edecel Academy & Educational Consultancy</title>
     <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
     <link href="css/style.css" rel="stylesheet" />
     <!-- whatsapp button css -->
