@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css" crossorigin="anonymous" />
 
     <style>
+        #allModal {
+            display: none !important;
+        }
         main {
             background: url(./images/bg_image_1.png), #000000a0;
             background-blend-mode: screen;
@@ -68,7 +71,7 @@
     <main class="container-fluid m-0 bg-body-secondary p-0">
         <header class="text-center bg-light m-0 p-2 d-flex align-items-end justify-content-center">
             <!-- <a class="nav-link active  px-3" aria-current="page" href="./hire_tutor.html"><i> &#8592; Hire Tutor</i></a> -->
-            <a class="mx-auto" href="{{ route('home') }}"><img src="{{ asset('images/logo.png') }}" alt="EDEXCEL-logo"
+            <a class="mx-auto" href="{{ route('newhome') }}"><img src="{{ asset('images/logo.png') }}" alt="EDEXCEL-logo"
                     height="50px"></a>
 
         </header>
@@ -131,6 +134,11 @@
                             <option value="maths">Mathematics</option>
                             <option value="physics">Physics</option>
                             <option value="chemistry">Chemistry</option>
+                            <option value="islamiyat">Islamiyat</option>
+                            <option value="urdu">Urdu</option>
+                            <option value="biology">Biology</option>
+                            <option value="computer">Computer Science</option>
+                            <option value="pakstudies">Pak Studies</option>
                         </select>
                     </div>
                     <div class="col-md-6 px-2 mb-2">
@@ -537,4 +545,5 @@
         }
     }
 </script>
+
 @endsection

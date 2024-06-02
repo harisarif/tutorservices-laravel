@@ -1,8 +1,8 @@
 @extends('layouts.app')
 <style>
-   .modalBox {
-    display:none !important;
-   }
+   #allModal {
+            display: none !important;
+        }
 </style>
 @if ($errors->any())
         <div class="alert alert-danger">
@@ -19,7 +19,7 @@
     <header class="main_header d-flex  align-items-end">
         {{-- <a class="nav-link active px-3 py-0 fw-bold" aria-current="page" href="./hire_tutor.html"><i>&#8592; Hire
                 Tutor</i></a> --}}
-        <a class="m-auto" href="{{ route('home') }}"><img style="height: 50px" src="{{asset('images/logo.png')}}" alt="EDEXCEL-logo"
+        <a class="m-auto" href="{{ route('newhome') }}"><img style="height: 50px" src="{{asset('images/logo.png')}}" alt="EDEXCEL-logo"
                                                           height="50px"></a>
 
     </header>

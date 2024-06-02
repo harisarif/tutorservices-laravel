@@ -39,7 +39,7 @@
         <h5 class="col-12 d-flex justify-content-between align-items-center px-2">
             Edexcel Academy & Consultent.
             <span class="fs-2 pointer"
-                onclick="document.getElementById('allModal').style.display = 'none'">&times;</span>
+                onclick="document.getElementById('allModal').style.display = 'none'"> &times;</span>
         </h5>
 
         <p class="px-2">Welcome to edexcel. We are empowering success through top-class education.
@@ -47,9 +47,9 @@
 
         <hr />
         <div class="d-flex justify-content-end gap-2">
-            <a href="{{ route('hire.tutor') }}" onclick="document.getElementById('allModal').style.display = 'none'"
-                class="btn bg-body-secondary">Student</a>
-            <a href="{{ route('tutor') }}" class="btn btn-success bg_theme_green border-0">Tutor</a>
+            <a href="{{ route('hire.tutor') }}" 
+                class="btn bg-body-secondary hiring-btn">Student</a>
+            <a href="{{ route('tutor') }}"  class="btn btn-success bg_theme_green border-0 hiring-btn">Tutor</a>
         </div>
     </div>
 </div>
@@ -84,5 +84,12 @@
 <script src="./js/app.js"></script>
 
 <script>
+      $(document).ready(function() {
+            // Attach click event handler to elements with class 'hiring-btn'
+            $('.hiring-btn').on('click', function() {
+                // Add the 'highlight' class to the clicked element
+                $('#allModal').addClass('d-none');
+            });
+        });
     $(document).ready(function($) { $('.country').select2(); });
 </script>
