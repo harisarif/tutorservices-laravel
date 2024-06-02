@@ -56,7 +56,7 @@
     }
     .adjust-filters-wrap {
         display: flex;
-        margin-top: 50px !important;
+        margin-top: 10px !important;
     }
     }
     
@@ -235,7 +235,7 @@
                         <div class="bg-body-secondary">
                                
                                 <div class="row p-2">
-                                    <div class="col-2 me-3">
+                                    <div class="col-lg-2 me-3">
 
                                         <select name="country" id="country" class="country">
                                             <option value="all">All Countries</option>
@@ -492,7 +492,7 @@
                                             <option value="ZW">Zimbabwe</option>
                                         </select>
                                     </div>
-                                    <div class="col-9 adjust-filters-wrap">
+                                    <div class="col-lg-9 adjust-filters-wrap">
                                         <div class="col-md-3 px-2 mb-2">
                                             {{-- <label for="citysearch" class="form-label">City</label> --}}
                                             <input placeholder="Search city" type="text" class="form-control"
