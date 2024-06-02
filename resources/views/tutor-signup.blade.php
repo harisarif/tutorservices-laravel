@@ -446,7 +446,6 @@
 
             </form>
         </div>
-        @include('layouts.footer')
     </main>
 </body>
 @endsection
