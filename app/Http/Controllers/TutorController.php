@@ -227,6 +227,13 @@ return response()->json($serializedData);
             }
         }
 
+    public function signup() {
+        $countries = collect(config('countries_assoc.countries'))->prepend("Select your country", "");
+        $countries_number_length = collect(config('countries_number_length.countries'));
+        $countries_prefix = collect(config('countries_prefix.countries'));
+        return view('tutor-signup', compact(['countries', 'countries_number_length', 'countries_prefix']));
+    }
+
     public function edit($id) {
         $tutor = Tutor::findOrFail($id);
         $countries = collect(config('countries_assoc.countries'));

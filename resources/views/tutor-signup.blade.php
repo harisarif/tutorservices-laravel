@@ -3,7 +3,13 @@
 
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css" crossorigin="anonymous" />
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css" crossorigin="anonymous" /> --}}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Bootstrap Datepicker CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
     <style>
         #allModal {
@@ -22,10 +28,10 @@
             border-radius: 4px;
             transition: .3s;
         }
-        input#phone {
+        /* input#phone {
             padding-left: 47px !important;
               top: 6px;
-        }  
+        }   */
         .intl-tel-input .flag-dropdown .selected-flag {
           padding: 11px 16px 11px 6px;
         }
@@ -53,6 +59,9 @@
             box-shadow: 0 0 16px 0 rgb(0 0 0 / 8%) !important;
             border: 1px solid #ececec !important;
               width: 270px !important;
+        }
+        .input-group-append {
+            cursor: pointer;
         }
         </style>
 
@@ -117,8 +126,17 @@
                 </div>
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
-                        <label for="dob" class="form-label">DOB</label> <span class="text-danger fs-4">*</span>
-                        <input type="date" class="form-control" id="dob" name="dob" required />
+                        <div class="form-group">
+                            <label for="dob" class="form-label">DOB <span class="text-danger fs-4">*</span></label>
+                            <div class="input-group date" id="datepicker">
+                                <input type="text" class="form-control" id="date" name="dob" placeholder="Date of Birth" required />
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-light d-block">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-6 px-2 mb-2">
                         <label for="qualification" class="form-label">Recent Degree</label> <span class="text-danger fs-4">*</span>
@@ -128,7 +146,7 @@
 
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
-                        <label for="teaching" class="form-label">Teaches</label> <span class="text-danger fs-4">*</span>
+                        <label for="teaching" class="form-label">Teaches</label> <span class="text-danger fs-4">*</span><br>
                         <select class="form-select teaching" id="teaching" name="teaching[]" required>
                             <option value="english">English</option>
                             <option value="maths">Mathematics</option>
@@ -416,14 +434,20 @@
                     <div class="col-md-6 px-2 mb-2">
                         <label for="mobile" class="form-label">Mobile Number</label> <span class="text-danger fs-4">*</span>
                         {{-- <input type="number" class="form-control" id="phone" name="phone" required /> --}}
-                        <div class="input-group">
+                        <div class="input-group d-flex justify-content-between align-items-center">
+                            
                             {{-- <span class="input-group-text">+1</span> <!-- Replace +1 with the desired country code --> --}}
-                            <input type="tel" class="form-control" id="phone" name="phone" required />
+                            <select name="countrySelect" id="countrySelect" class="form-select w-50" required>
+                                @foreach ($countries as $key => $country)
+                                    <option value="{{ $key }}">{{ $country }}</option>
+                                @endforeach
+                            </select>
+                            <input type="text" class="form-control w-50" id="phone" name="phone" placeholder="e.g +92XXXXXXXXXX" required />
                         </div>
                     </div>
                     <div class="col-md-6 px-2 mb-2">
                         <label for="whatsapp" class="form-label">WhatsApp Number</label> <span class="text-danger fs-4">*</span>
-                        <input type="number" class="form-control" id="whatsapp" name="whatsapp" required />
+                        <input type="text" class="form-control" id="whatsapp" name="whatsapp" placeholder="e.g +92XXXXXXXXXX" required />
                     </div>
                 </div>
 
@@ -464,7 +488,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js'></script>
+{{-- <script src='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js'></script> --}}
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Bootstrap Datepicker JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script>
     $(document).ready(function() {
         $('.select2').select2();
@@ -474,10 +504,16 @@
         setTimeout(function() {
                 $(".alert").fadeOut("slow");
             }, 5000);
+        $('#datepicker').datepicker({
+            format: 'yyyy-dd-mm',
+            todayHighlight: true,
+            autoclose: true,
+            endDate: "0d"
+        });
     });
     
 </script>
-<script>
+{{-- <script>
     // International telephone format
     // $("#phone").intlTelInput();
     // get the country data from the plugin
@@ -544,6 +580,24 @@
             input.value = "+" + countryCode;
         }
     }
+</script> --}}
+
+<script>
+    const country = document.querySelector('#countrySelect');
+    const userNumber = document.querySelector('#phone');
+
+    let countryValue;
+
+    country.addEventListener('change', () => {
+        countryValue = country.value;
+        userNumber.value = @json($countries_prefix)[countryValue];
+    });
+
+    userNumber.addEventListener('input', () => {
+        if (userNumber.value.length > @json($countries_number_length)[countryValue]) {
+            userNumber.value = userNumber.value.slice(0, @json($countries_number_length)[countryValue]);
+        }
+    });
 </script>
 
 @endsection

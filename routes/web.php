@@ -68,7 +68,7 @@ Route::view('profile', 'profile')
         return redirect('/');
     })->name('logout');
 
-
+    Route::get('/tutor-signup', [TutorController::class, 'signup'])->name('tutor');
 
 Auth::routes();
 
