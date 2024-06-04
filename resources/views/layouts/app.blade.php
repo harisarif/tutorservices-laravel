@@ -30,6 +30,12 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Scripts -->
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+    <style>
+        .pagination li.active span {
+            background-color: #42B979 !important; 
+            border-color: #42B979 !important;
+        }
+    </style>
 </head>
 <div class="loader" id="lazzyLoader">
     <img src="./images/loader.gif" alt="lazzyloader">
