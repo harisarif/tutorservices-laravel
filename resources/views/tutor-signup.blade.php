@@ -12,6 +12,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
     <style>
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            background-color: #42B979 !important; 
+            color: #fff;
+            margin-top: 0px !important;
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+            color: #fff !important;
+        }
         #allModal {
             display: none !important;
         }
@@ -19,19 +27,18 @@
             background: url(./images/bg_image_1.png), #000000a0;
             background-blend-mode: screen;
         }
-        .select2-container {
-            width: 260px !important;
+        .select2-container--default .select2-selection--multiple {
+            padding: 5px;
         }
+        /* .select2-container {
+            width: 260px !important;
+        } */
         .iti__selected-flag {
             top: 6px;
             height: 33px !important;
             border-radius: 4px;
             transition: .3s;
         }
-        /* input#phone {
-            padding-left: 47px !important;
-              top: 6px;
-        }   */
         .intl-tel-input .flag-dropdown .selected-flag {
           padding: 11px 16px 11px 6px;
         }
@@ -166,9 +173,9 @@
                     </div>
                 </div>
                 <div class="form-row d-flex flex-column flex-md-row">
-                    <div class="col-12 px-2 mb-2">
+                    <div class="col-6 px-2 mb-2">
                         <label for="location" class="form-label">Residence Country</label> <span class="text-danger fs-4">*</span>
-                    </br>
+                        </br>
                         <select class="form-select" id="location" required name="location">
                             <option value="AE">United Arab Emirates</option>
                                         <option value="PK">Pakistan</option>
@@ -423,9 +430,7 @@
                         </select>
                         {{-- <input type="text" class="form-control" id="location" name="location" required /> --}}
                     </div>
-                </div>
-                <div class="form-row d-flex flex-column flex-md-row">
-                    <div class="col-md-12 px-2 mb-2">
+                    <div class="col-md-6 px-2 mb-2">
                         <label for="mobile" class="form-label">City</label> <span class="text-danger fs-4">*</span>
                         <input type="text" class="form-control" id="city" name="city" required />
                     </div>
