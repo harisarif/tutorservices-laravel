@@ -17,6 +17,9 @@ class StudentController extends Controller
         $countries = collect(config('countries.countries'))->prepend("Select your country", "");
         return view('hire-tutor', compact('countries'));
     }
+    public function qrcode() {
+        return view('qr-code');
+    }
     public function showStudentsList() {
         
         $students = Student::all();
