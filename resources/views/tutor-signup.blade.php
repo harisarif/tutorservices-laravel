@@ -440,8 +440,6 @@
                         <label for="mobile" class="form-label">Mobile Number</label> <span class="text-danger fs-4">*</span>
                         {{-- <input type="number" class="form-control" id="phone" name="phone" required /> --}}
                         <div class="input-group d-flex justify-content-between align-items-center">
-                            
-                            {{-- <span class="input-group-text">+1</span> <!-- Replace +1 with the desired country code --> --}}
                             <select name="countrySelect" id="countrySelect" class="form-select w-50" required>
                                 @foreach ($countries as $key => $country)
                                     <option value="{{ $key }}">{{ $country }}</option>
@@ -591,18 +589,57 @@
     const country = document.querySelector('#countrySelect');
     const userNumber = document.querySelector('#phone');
 
-    let countryValue;
+    // Pre-set the default country to the United States
+    const defaultCountry = 'US';
+    const countriesPrefix = @json($countries_prefix);
+    const countriesNumberLength = @json($countries_number_length);
+    let countryValue = defaultCountry;
 
-    country.addEventListener('change', () => {
-        countryValue = country.value;
-        userNumber.value = @json($countries_prefix)[countryValue];
-    });
+    // Set the default prefix and make it non-clearable
+    function setCountryPrefix() {
+        const prefix = countriesPrefix[countryValue];
+        userNumber.value = prefix;
+        userNumber.setAttribute('data-prefix', prefix); // Store the prefix in a data attribute
+    }
 
-    userNumber.addEventListener('input', () => {
-        if (userNumber.value.length > @json($countries_number_length)[countryValue]) {
-            userNumber.value = userNumber.value.slice(0, @json($countries_number_length)[countryValue]);
+    // Prevent users from clearing the prefix
+    userNumber.addEventListener('keydown', (event) => {
+        const prefix = userNumber.getAttribute('data-prefix');
+        const cursorPosition = userNumber.selectionStart;
+        
+        // Prevent deletion or backspace within the prefix
+        if (cursorPosition <= prefix.length && 
+            (event.key === 'Backspace' || event.key === 'Delete')) {
+            event.preventDefault();
+        }
+
+        // Prevent typing within the prefix
+        if (cursorPosition < prefix.length && !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
+            event.preventDefault();
         }
     });
+
+    // Adjust input length based on the selected country
+    userNumber.addEventListener('input', () => {
+        const prefix = userNumber.getAttribute('data-prefix');
+        const maxLength = countriesNumberLength[countryValue];
+        if (userNumber.value.length > maxLength) {
+            userNumber.value = userNumber.value.slice(0, maxLength);
+        }
+    });
+
+    // Change the prefix when the country selection changes
+    country.addEventListener('change', () => {
+        countryValue = country.value;
+        setCountryPrefix();
+    });
+
+    // Set default country and prefix on page load
+    window.addEventListener('load', () => {
+        country.value = defaultCountry;
+        setCountryPrefix();
+    });
 </script>
+
 
 @endsection
