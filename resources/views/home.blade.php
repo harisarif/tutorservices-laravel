@@ -2,7 +2,6 @@
 
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -59,6 +58,11 @@
     z-index: 9!important;
     padding-left: 280px!important;
     width: calc(100% - 280px)!important;
+}
+@media only screen and (max-width: 600px) {
+    #DataTables_Table_1_wrapper {
+        overflow: scroll;
+    }
 }
     </style>
 
