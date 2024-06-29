@@ -39,18 +39,63 @@
         border: none !important;
         border-color: none !important;
     }
-    @media only screen and (min-width: 768px) {
-        .select2-container {
+    @media (min-width: 768px) {
+        /* .select2-container {
         width: 150px !important;
-    }
+    } */
     .adjust-filters-wrap {
         display: flex;
     }
     }
-    @media only screen and (max-width: 767px) {
+ 
+    @media (min-width: 290px) and (max-width: 320px) {
+        .select2-container {
+       max-width: 255px !important;
+    }
+    .navbar-brand{
+        img{
+            max-height: 32px !important;
+        }
+    }
+    .navbar-toggler{
+        /* padding: 0 6px !important; */
+        .navbar-toggler-icon{
+                    width: 1rem;
+                            } 
+    }
+    .navbar{
+        .container-fluid{
+            padding: 0 !important;
+        }
+    }
+}
+    @media (min-width: 321px) and (max-width: 376px){
+        .select2-container {
+       max-width: 310px !important;
+    }
+    .navbar-brand{
+        img{
+            max-height: 40px !important;
+        }
+    }
+    .navbar-toggler{
+        padding: 0 6px !important;
+        .navbar-toggler-icon{
+                    width: 1rem;
+                            } 
+    }
+    }
+    @media (min-width: 377px) and (max-width: 426px){
+        .select2-container {
+       max-width: 360px !important;
+    }
+    }
+    @media (min-width: 427px)  (max-width: 769px) {
         .select2-container {
         width: 350px !important;
     }
+}
+@media (max-width: 767px){
     #carouselExampleCaptions {
         display: none;
     }
@@ -59,7 +104,26 @@
         margin-top: 10px !important;
     }
     }
+
+@media (max-width: 376px){
+    .navbar-brand{
+        img{
+            max-height: 40px !important;
+        }
+    }
+    .navbar-toggler{
+        padding: 0 6px !important;
+        .navbar-toggler-icon{
+                    width: 1rem;
+                            } 
+    }
     
+}
+.rounded{
+    & select{
+        padding: 8px  !important;
+    }
+}
 </style>
 
 @extends('layouts.app')
@@ -235,7 +299,7 @@
                         <div class="bg-body-secondary">
                                
                                 <div class="row p-2">
-                                    <div class="col-lg-2 me-3">
+                                    <div class="col-lg-2 ">
 
                                         <select name="country" id="country" class="country">
                                             <option value="all">All Countries</option>
@@ -492,13 +556,13 @@
                                             <option value="ZW">Zimbabwe</option>
                                         </select>
                                     </div>
-                                    <div class="col-lg-9 adjust-filters-wrap">
-                                        <div class="col-md-3 px-2 mb-2">
+                                    <div class="col-lg-9 adjust-filters-wrap ">
+                                        <div class="col-md-3 px-2 ">
                                             {{-- <label for="citysearch" class="form-label">City</label> --}}
                                             <input placeholder="Search city" type="text" class="form-control"
                                                 id="citysearch" name="citysearch" required />
                                         </div>
-                                        <div class="col-md-3 px-2 mb-2">
+                                        <div class="col-md-3 px-2 ">
                                             {{-- <label for="citysearch" class="form-label">City</label> --}}
                                             <input placeholder="Search Subject" type="text" class="form-control"
                                                 id="subjectsearch" name="subjectsearch" required />
@@ -514,7 +578,7 @@
                         @if ($tutors->count() > 0)
                             <div id="tutorsContainer">
                                 @foreach ($tutors as $item)
-                                    <div class="tutor_profile rounded overflow-hidden mb-3">
+                                    <div class="tutor_profile rounded overflow-hidden mb-3 mt-3">
                                         <div class="d-flex justify-content-between">
                                             <button class="p-1 bg_theme_green text-light border border-0">
                                                 Sponsored
