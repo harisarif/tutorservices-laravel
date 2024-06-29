@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,6 +38,35 @@
         }
 
         table {
+        border-collapse: collapse; /* Collapse borders */
+        width: 100%; /* Full width */
+    }
+    th, td {
+        border: 1px solid #dddddd; /* Add borders to cells */
+        padding: 8px; /* Add padding */
+        text-align: left; /* Align text to the left */
+    }
+    th {
+        background-color: #f2f2f2; /* Background color for header */
+    }
+    
+    tbody td {
+        text-align: center !important;
+        white-space: nowrap !important;
+    }
+    table.dataTable thead th, table.dataTable thead td {
+        text-align: center;
+    }
+    .fixed-sidebar .app-main .app-main__outer {
+    z-index: 9!important;
+    padding-left: 280px!important;
+    width: calc(100% - 280px)!important;
+}
+@media only screen and (max-width: 600px) {
+    #DataTables_Table_1_wrapper {
+        overflow: scroll;
+    }
+}
             border-collapse: collapse;
             /* Collapse borders */
             width: 100%;
