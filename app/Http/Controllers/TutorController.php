@@ -44,6 +44,7 @@ class TutorController extends Controller
 
         public function fetchData(Request $request)
 {
+    
    // Initialize the query builder
 $query = Tutor::query();
 
@@ -85,7 +86,6 @@ $totalTutorsCount = $query->count();
 
 // Manually serialize the paginated data
 $serializedData = [
-    'age' => $tutor->age,
     'tutors' => $tutors->items(), // Get the items from the paginator
     'totalTutorsCount' => $totalTutorsCount,
     'perPage' => $perPage,
@@ -97,7 +97,7 @@ $serializedData = [
         'lastPage' => $tutors->lastPage(),
     ],
 ];
-
+// dd($request);
 // Return the serialized data as JSON response
 return response()->json($serializedData);
 
