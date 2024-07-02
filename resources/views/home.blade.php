@@ -67,11 +67,11 @@
         overflow: scroll;
     }
 }
-            border-collapse: collapse;
-            /* Collapse borders */
+            /* border-collapse: collapse;
+            Collapse borders
             width: 100%;
-            /* Full width */
-        }
+            Full width
+        } */
 
         th,
         td {
@@ -284,7 +284,7 @@
                               <div class="label-div d-inline-block">
                 <label for="hamid" >
                 <i class="fa-solid fa-bars fa-lg"></i>
-                    <input type="checkbox" class="d-none" id="hamid">
+                    <input type="checkbox" class="d-none" id="hamid" >
                 </label>               
             </div>
             <!-- <div class="log-out-div d-inline-block">
@@ -518,6 +518,16 @@
         }
     }
 </script> -->
+<script>
+      document.addEventListener('click', function(event) {
+      var checkbox = document.getElementById('hamid');
+      var label = document.querySelector('label[for="hamid"]');
+
+      if (!label.contains(event.target)) {
+        checkbox.checked = false;
+      }
+    });
+</script>
 
 </html>
 

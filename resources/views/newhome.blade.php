@@ -39,6 +39,12 @@
         border: none !important;
         border-color: none !important;
     }
+    /* .form-control{
+        width: auto !important;
+    } */
+     .select2-container{
+        width: 100% !important;
+     }
     @media (min-width: 768px) {
         /* .select2-container {
         width: 150px !important;
@@ -68,6 +74,9 @@
             padding: 0 !important;
         }
     }
+    .adjust-filters-wrap{
+       padding-top: 10px !important;
+    }
 }
     @media (min-width: 321px) and (max-width: 376px){
         .select2-container {
@@ -84,15 +93,30 @@
                     width: 1rem;
                             } 
     }
+    .adjust-filters-wrap{
+       padding-top: 10px !important;
+    }
     }
     @media (min-width: 377px) and (max-width: 426px){
         .select2-container {
        max-width: 360px !important;
     }
+    .adjust-filters-wrap{
+       padding-top: 10px !important;
     }
-    @media (min-width: 427px)  (max-width: 769px) {
-        .select2-container {
+    }
+    @media (min-width: 427px) and  (max-width: 769px) {
+        /* .select2-container {
         width: 350px !important;
+    } */
+    .adjust-filters-wrap{
+       padding-top: 10px !important;
+    }
+}
+@media (min-width: 768px) {
+    .adjust-filters-wrap {
+        display: flex;
+        margin-top: 10px ;
     }
 }
 @media (max-width: 767px){
@@ -101,7 +125,12 @@
     }
     .adjust-filters-wrap {
         display: flex;
-        margin-top: 10px !important;
+       /* padding-top: 10px !important; */
+    }
+    .image-wrapper{
+        width: 80%;
+        height: 80%;
+        margin: 0 auto;
     }
     }
 
@@ -119,6 +148,13 @@
     }
     
 }
+/* @media (min-width: 769px) and (mix-width: 1025px){
+    .bg-body-secondary{
+        .select2-container{
+        width: 100% !important;
+    }
+    }
+} */
 .rounded{
     & select{
         padding: 8px  !important;
@@ -252,7 +288,10 @@
                     </button>
                 </div>
                 <div class="col-12 col-md-6 p-0">
-                    <img src="images/banner_img.png" class="full-img" alt="banner_img" />
+                    <div class="image-wrapper">
+                        <img src="images/banner_img.png" class="full-img" alt="banner_img" />
+
+                    </div>
                 </div>
             </section>
             <!--  -->
@@ -299,7 +338,7 @@
                         <div class="bg-body-secondary">
                                
                                 <div class="row p-2">
-                                    <div class="col-lg-2 ">
+                                    <div class="col-lg-6">
 
                                         <select name="country" id="country" class="country">
                                             <option value="all">All Countries</option>
@@ -556,13 +595,13 @@
                                             <option value="ZW">Zimbabwe</option>
                                         </select>
                                     </div>
-                                    <div class="col-lg-9 adjust-filters-wrap ">
-                                        <div class="col-md-3 px-2 ">
+                                    <div class="col-lg-6 adjust-filters-wrap ">
+                                        <div class="col-md-6 px-2 col-lg-6">
                                             {{-- <label for="citysearch" class="form-label">City</label> --}}
                                             <input placeholder="Search city" type="text" class="form-control"
                                                 id="citysearch" name="citysearch" required />
                                         </div>
-                                        <div class="col-md-3 px-2 ">
+                                        <div class="col-md-6 px-2 col-lg-6">
                                             {{-- <label for="citysearch" class="form-label">City</label> --}}
                                             <input placeholder="Search Subject" type="text" class="form-control"
                                                 id="subjectsearch" name="subjectsearch" required />
@@ -1011,9 +1050,10 @@
                             </div>
 
                         </div>
-                        <video src="images/student.mp4" class="object-fit-cover mt-2" autoplay muted loop
-                        width="100%"></video>
+                       
                         <video src="images/edexcel.mp4" class="object-fit-cover mt-2" autoplay muted loop
+                            width="100%"></video>
+                            <video src="images/student.mp4" class="object-fit-cover mt-2" autoplay muted loop
                             width="100%"></video>
 
                     </div>

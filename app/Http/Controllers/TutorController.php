@@ -282,3 +282,23 @@ return response()->json($serializedData);
         return back()->with('message', 'Teacher deleted successfully');
     }
 }
+
+
+// .form-row {
+//             .select2-container{
+//                 width: 100% !important;
+//             }
+//         }
+//         .input-group{
+//             #countrySelect{
+//                 width: 21% !important;
+//             }
+//             .select2-container{
+//                width: 40% !important;
+//             }
+//         }
+//         .selection{
+//             .select2-selection{
+//                 height: 38px !important;
+//             }
+//         }
