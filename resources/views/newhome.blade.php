@@ -45,6 +45,29 @@
      .select2-container{
         width: 100% !important;
      }
+     .carousel-control-prev {
+    left: -60px;
+}
+.carousel-control-next{
+    right: -60px;
+}
+.rounded{
+    & select{
+        padding: 8px  !important;
+    }
+}
+.header-ul{
+    & li {
+        display: inline-block;
+    }
+    .header-phone-number{
+        padding-bottom: 0 !important;
+    }
+}                    .select2-container{
+                    width: 90% !important;
+
+                }
+    
     @media (min-width: 768px) {
         /* .select2-container {
         width: 150px !important;
@@ -134,10 +157,10 @@
     }
     }
 
-@media (max-width: 376px){
+@media (max-width: 409px){
     .navbar-brand{
         img{
-            max-height: 40px !important;
+            max-height: 38px !important;
         }
     }
     .navbar-toggler{
@@ -146,20 +169,18 @@
                     width: 1rem;
                             } 
     }
+    .header-phone-number{
+        display: block;
+    }
     
 }
-/* @media (min-width: 769px) and (mix-width: 1025px){
-    .bg-body-secondary{
-        .select2-container{
-        width: 100% !important;
-    }
-    }
-} */
-.rounded{
-    & select{
-        padding: 8px  !important;
-    }
+
+@media (min-width: 780px) and (max-width: 1025px){
+    .carousel-control-prev {
+    left: 16px !important;
 }
+}
+
 </style>
 
 @extends('layouts.app')
@@ -173,12 +194,13 @@
 
     <div class="row mini_header m-0 p-0 container-fluid position-relative">
         <div class="col-sm-12  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0">
-            <ul class="p-2 m-0 d-sm-inline d-block text-center">
-                <li class="d-inline p-2">
+            <ul class="p-2 m-0 d-sm-inline d-block text-center header-ul">
+                <li class=" p-2">
                     <i class="fa fa-envelope-square text-light" aria-hidden="true"></i>
                     <a class="text-decoration-none text-light" href="mailto:info@eduexceledu.com">info@eduexceledu.com</a>
                 </li>
-                <li class="d-inline p-2">
+                <li class=" p-2 header-phone-number">
+                    
                     <i class="fa-solid fa-phone text-light" aria-hidden="true"></i>
                     <a class="text-decoration-none text-light" href="tel:+971566428066">+971 56 642 8066</a>
                 </li>
@@ -1233,12 +1255,12 @@
                             </div>
                         </div>
                     </div>
-                    <button class="carousel-control-prev " style="left: -60px;" type="button"
+                    <button class="carousel-control-prev " type="button"
                         data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" style="filter: invert(1);" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" style="right:-60px;" type="button"
+                    <button class="carousel-control-next" type="button"
                         data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
                         <span class="carousel-control-next-icon" style="filter: invert(1); " aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>

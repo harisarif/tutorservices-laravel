@@ -76,6 +76,9 @@
                 width: 100% !important;
             }
         }
+        /* .select2-container{
+            } */
+       
         .input-group{
             #countrySelect{
                 width: 21% !important;
