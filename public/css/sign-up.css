@@ -246,7 +246,8 @@ ul.social-network li {
         border-bottom: 1px solid lightgray;
     }
     .main_header img{
-        width: 35%;
+        width: 50%;
+        /* height: 50% !important; */
     }
 }
 /* footer */
@@ -255,5 +256,14 @@ ul.social-network li {
       height: 0;
       overflow: hidden;
     }
+    .hire-tutor-arrow{
+        margin: 0 auto ;
+        & img{
+            height: 30px !important;
+        }
+    }
+  }
+  .hire-tutor-arrow{
+    margin: 0 auto !important;
   }
 /* footer end */
