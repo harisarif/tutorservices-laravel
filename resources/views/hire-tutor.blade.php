@@ -86,8 +86,16 @@
                                         <option value="11 - 12">11 - 12</option>
                                         <option value="12 - 01">12 - 01</option>
                                     </select> -->
-                                    <input class="inp-1" title="Class start time" type="time" name="class_start_time" id="classStartTime">
-                                    <input class="inp-1" title="Class end time" type="time" name="class_end_time" id="classEndTime">
+                               
+<label for="classStartTime" class="d-block text-start " style=" width: 86%; margin: 0 auto; font-weight: 600;">Starting time</label>
+
+    <input class="inp-1" title="Class start time" type="time" name="class_start_time" id="classStartTime">
+
+<label for="classEndTime" class="d-block text-start " style=" width: 86%; margin: 0 auto; font-weight: 600;">Ending time</label>
+
+    <input class="inp-1" title="Class end time" type="time" name="class_end_time" id="classEndTime">
+
+
                                 </div>
 
                             </div>
@@ -111,7 +119,15 @@
                             <div class="col-12 mb-2">
                                 <input type="text" name="city" id="city" class="form-control" placeholder="Enter your city" required>
                             </div>
-                            <label class="form-label" style="display: flex;font-size:14px;font-weight:bold;">Subject</label>
+                            <div class="form-group" style="text-align:left; ">
+                      <label for="dropdown1" class="pt-1 pb-1" > <strong>Select your class</strong></label>
+                      <select class="form-control" id="dropdown1">
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                      </select>
+                    </div>
+                            <label class="form-label" style="display: flex;font-size:14px;font-weight:bold; padding:5px 0;">Subject</label>
                             <div class="form-group">
                                 
                                 <input type="search" value="English" name="subject" class="form-control" id="page1-search" placeholder="Search">
@@ -141,10 +157,12 @@
                     </div>
 
                     <div class="col-12 my-5 d-flex justify-content-center px-5">
+
                         <input onclick="backStep(this)" id="back-btn" type="button" value="Previous"
                             class="border-0 bg-body-secondary text-dark fs-6 py-1 px-4 rounded d-none">
                         <input onclick="NextStep(this)" id="next-btn" type="button" value="Next"
                             class="border-0 bg_theme_green text-light fs-6 py-1 px-4 rounded">
+                            
                     </div>
                 </form>
 

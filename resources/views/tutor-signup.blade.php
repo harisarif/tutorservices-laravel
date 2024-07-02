@@ -70,6 +70,54 @@
         .input-group-append {
             cursor: pointer;
         }
+       
+.form-row {
+            .select2-container{
+                width: 100% !important;
+            }
+        }
+        .input-group{
+            #countrySelect{
+                width: 21% !important;
+            }
+            .select2-container{
+               width: 100px !important;
+            }
+        }
+        .selection{
+            .select2-selection{
+                height: 38px !important;
+            }
+        }
+        @media(min-width: 322px) and (max-width: 766px){
+            .select2-container{
+            .select2-dropdown{
+                width: 330px !important;
+             
+            }
+        }
+        }
+        @media (max-width: 321px) {
+            .select2-container{
+            .select2-dropdown{
+                width: 283px !important;
+             
+            }
+        }
+        }
+        @media(min-width: 767px) and (max-width: 1441px){
+            .select2-container{
+            .select2-dropdown{
+                width: 269px !important;
+            }
+        }
+        @media(max-width:426px) {
+            .select2-container--open .select2-dropdown {
+    left: 0;
+    top: -44px !important;
+}
+        }
+        }
         </style>
 
 @if ($errors->any())
@@ -173,10 +221,10 @@
                     </div>
                 </div>
                 <div class="form-row d-flex flex-column flex-md-row">
-                    <div class="col-6 px-2 mb-2">
-                        <label for="location" class="form-label">Residence Country</label> <span class="text-danger fs-4">*</span>
+                    <div class="col-md-6 px-2 mb-2">
+                        <label for="location" class="form-label ">Residence Country</label> <span class="text-danger fs-4">*</span>
                         </br>
-                        <select class="form-select" id="location" required name="location">
+                        <select class="form-select countries " id="location" required name="location">
                             <option value="AE">United Arab Emirates</option>
                                         <option value="PK">Pakistan</option>
                                         <option value="IN">India</option>
@@ -438,9 +486,8 @@
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
                         <label for="mobile" class="form-label">Mobile Number</label> <span class="text-danger fs-4">*</span>
-                        {{-- <input type="number" class="form-control" id="phone" name="phone" required /> --}}
                         <div class="input-group d-flex justify-content-between align-items-center">
-                            <select name="countrySelect" id="countrySelect" class="form-select w-50" required>
+                            <select name="countrySelect" id="countrySelect" class="form-select country-select w-50" required>
                                 @foreach ($countries as $key => $country)
                                     <option value="{{ $key }}">{{ $country }}</option>
                                 @endforeach
@@ -501,6 +548,8 @@
 <script>
     $(document).ready(function() {
         $('.select2').select2();
+        $('.countries').select2();
+        // $('#countrySelect').select2();
         $('.teaching').select2({
           multiple: true
         });
@@ -514,7 +563,59 @@
             endDate: "0d"
         });
     });
-    
+    $(document).ready(function() {
+      // Initialize Select2
+      $('#countrySelect').select2();
+
+      const defaultCountry = 'US';
+      const countriesPrefix = @json($countries_prefix);
+      const countriesNumberLength = @json($countries_number_length);
+      let countryValue = defaultCountry;
+
+      const country = $('#countrySelect');
+      const userNumber = $('#phone');
+
+      function setCountryPrefix() {
+        const prefix = countriesPrefix[countryValue];
+        userNumber.val(prefix);
+        userNumber.attr('data-prefix', prefix); // Store the prefix in a data attribute
+      }
+
+      // Prevent users from clearing the prefix
+      userNumber.on('keydown', function(event) {
+        const prefix = userNumber.attr('data-prefix');
+        const cursorPosition = this.selectionStart;
+        
+        // Prevent deletion or backspace within the prefix
+        if (cursorPosition <= prefix.length && (event.key === 'Backspace' || event.key === 'Delete')) {
+          event.preventDefault();
+        }
+
+        // Prevent typing within the prefix
+        if (cursorPosition < prefix.length && !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
+          event.preventDefault();
+        }
+      });
+
+      // Adjust input length based on the selected country
+      userNumber.on('input', function() {
+        const prefix = userNumber.attr('data-prefix');
+        const maxLength = countriesNumberLength[countryValue];
+        if (userNumber.val().length > maxLength) {
+          userNumber.val(userNumber.val().slice(0, maxLength));
+        }
+      });
+
+      // Change the prefix when the country selection changes
+      country.on('change', function() {
+        countryValue = country.val();
+        setCountryPrefix();
+      });
+
+      // Set default country and prefix on page load
+      country.val(defaultCountry).trigger('change');
+      setCountryPrefix();
+    });
 </script>
 {{-- <script>
     // International telephone format
@@ -585,10 +686,11 @@
     }
 </script> --}}
 
-<script>
+<!-- <script>
     const country = document.querySelector('#countrySelect');
     const userNumber = document.querySelector('#phone');
 
+    
     // Pre-set the default country to the United States
     const defaultCountry = 'US';
     const countriesPrefix = @json($countries_prefix);
@@ -639,7 +741,7 @@
         country.value = defaultCountry;
         setCountryPrefix();
     });
-</script>
+</script> -->
 
 
 @endsection

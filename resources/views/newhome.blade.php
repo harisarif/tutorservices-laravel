@@ -39,27 +39,127 @@
         border: none !important;
         border-color: none !important;
     }
-    @media only screen and (min-width: 768px) {
-        .select2-container {
+    /* .form-control{
+        width: auto !important;
+    } */
+     .select2-container{
+        width: 100% !important;
+     }
+    @media (min-width: 768px) {
+        /* .select2-container {
         width: 150px !important;
-    }
+    } */
     .adjust-filters-wrap {
         display: flex;
     }
     }
-    @media only screen and (max-width: 767px) {
+ 
+    @media (min-width: 290px) and (max-width: 320px) {
         .select2-container {
-        width: 350px !important;
+       max-width: 255px !important;
     }
+    .navbar-brand{
+        img{
+            max-height: 32px !important;
+        }
+    }
+    .navbar-toggler{
+        /* padding: 0 6px !important; */
+        .navbar-toggler-icon{
+                    width: 1rem;
+                            } 
+    }
+    .navbar{
+        .container-fluid{
+            padding: 0 !important;
+        }
+    }
+    .adjust-filters-wrap{
+       padding-top: 10px !important;
+    }
+}
+    @media (min-width: 321px) and (max-width: 376px){
+        .select2-container {
+       max-width: 310px !important;
+    }
+    .navbar-brand{
+        img{
+            max-height: 40px !important;
+        }
+    }
+    .navbar-toggler{
+        padding: 0 6px !important;
+        .navbar-toggler-icon{
+                    width: 1rem;
+                            } 
+    }
+    .adjust-filters-wrap{
+       padding-top: 10px !important;
+    }
+    }
+    @media (min-width: 377px) and (max-width: 426px){
+        .select2-container {
+       max-width: 360px !important;
+    }
+    .adjust-filters-wrap{
+       padding-top: 10px !important;
+    }
+    }
+    @media (min-width: 427px) and  (max-width: 769px) {
+        /* .select2-container {
+        width: 350px !important;
+    } */
+    .adjust-filters-wrap{
+       padding-top: 10px !important;
+    }
+}
+@media (min-width: 768px) {
+    .adjust-filters-wrap {
+        display: flex;
+        margin-top: 10px ;
+    }
+}
+@media (max-width: 767px){
     #carouselExampleCaptions {
         display: none;
     }
     .adjust-filters-wrap {
         display: flex;
-        margin-top: 10px !important;
+       /* padding-top: 10px !important; */
     }
+    .image-wrapper{
+        width: 80%;
+        height: 80%;
+        margin: 0 auto;
+    }
+    }
+
+@media (max-width: 376px){
+    .navbar-brand{
+        img{
+            max-height: 40px !important;
+        }
+    }
+    .navbar-toggler{
+        padding: 0 6px !important;
+        .navbar-toggler-icon{
+                    width: 1rem;
+                            } 
     }
     
+}
+/* @media (min-width: 769px) and (mix-width: 1025px){
+    .bg-body-secondary{
+        .select2-container{
+        width: 100% !important;
+    }
+    }
+} */
+.rounded{
+    & select{
+        padding: 8px  !important;
+    }
+}
 </style>
 
 @extends('layouts.app')
@@ -188,7 +288,10 @@
                     </button>
                 </div>
                 <div class="col-12 col-md-6 p-0">
-                    <img src="images/banner_img.png" class="full-img" alt="banner_img" />
+                    <div class="image-wrapper">
+                        <img src="images/banner_img.png" class="full-img" alt="banner_img" />
+
+                    </div>
                 </div>
             </section>
             <!--  -->
@@ -235,7 +338,7 @@
                         <div class="bg-body-secondary">
                                
                                 <div class="row p-2">
-                                    <div class="col-lg-2 me-3">
+                                    <div class="col-lg-6">
 
                                         <select name="country" id="country" class="country">
                                             <option value="all">All Countries</option>
@@ -492,13 +595,13 @@
                                             <option value="ZW">Zimbabwe</option>
                                         </select>
                                     </div>
-                                    <div class="col-lg-9 adjust-filters-wrap">
-                                        <div class="col-md-3 px-2 mb-2">
+                                    <div class="col-lg-6 adjust-filters-wrap ">
+                                        <div class="col-md-6 px-2 col-lg-6">
                                             {{-- <label for="citysearch" class="form-label">City</label> --}}
                                             <input placeholder="Search city" type="text" class="form-control"
                                                 id="citysearch" name="citysearch" required />
                                         </div>
-                                        <div class="col-md-3 px-2 mb-2">
+                                        <div class="col-md-6 px-2 col-lg-6">
                                             {{-- <label for="citysearch" class="form-label">City</label> --}}
                                             <input placeholder="Search Subject" type="text" class="form-control"
                                                 id="subjectsearch" name="subjectsearch" required />
@@ -514,7 +617,7 @@
                         @if ($tutors->count() > 0)
                             <div id="tutorsContainer">
                                 @foreach ($tutors as $item)
-                                    <div class="tutor_profile rounded overflow-hidden mb-3">
+                                    <div class="tutor_profile rounded overflow-hidden mb-3 mt-3">
                                         <div class="d-flex justify-content-between">
                                             <button class="p-1 bg_theme_green text-light border border-0">
                                                 Sponsored
@@ -947,9 +1050,10 @@
                             </div>
 
                         </div>
-                        <video src="images/student.mp4" class="object-fit-cover mt-2" autoplay muted loop
-                        width="100%"></video>
+                       
                         <video src="images/edexcel.mp4" class="object-fit-cover mt-2" autoplay muted loop
+                            width="100%"></video>
+                            <video src="images/student.mp4" class="object-fit-cover mt-2" autoplay muted loop
                             width="100%"></video>
 
                     </div>
