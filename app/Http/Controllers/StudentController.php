@@ -10,12 +10,15 @@ use PHPMailer\PHPMailer\PHPMailer;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use App\Models\SchoolClass;
+use App\Models\Subject;
 
 class StudentController extends Controller
 {
     public function index() {
         $countries = collect(config('countries.countries'))->prepend("Select your country", "");
-        return view('hire-tutor', compact('countries'));
+        $schoolClasses = SchoolClass::all();
+        return view('hire-tutor', compact('countries','schoolClasses'));
     }
     public function qrcode() {
         return view('qr-code');
@@ -24,6 +27,16 @@ class StudentController extends Controller
         
         $students = Student::all();
         return view('student-list', compact('students'));
+    }
+    public function indexClass()
+    {
+        $schoolClasses = SchoolClass::all();
+        return view('hire-tutor', compact('schoolClasses'));
+    }
+    public function getSubjects($schoolClassId)
+    {
+        $subjects = SchoolClass::find($schoolClassId)->subjects;
+        return response()->json($subjects);
     }
     public function studentsPDF() {
         $data = Student::all();
