@@ -56,6 +56,8 @@ Route::get('/teachers-list/{id}/edit', [TutorController::class, 'edit'])->name('
 Route::put('/teachers-list/{id}', [TutorController::class, 'update'])->name('teachers.update');
 Route::delete('/teachers-list/{id}', [TutorController::class, 'destroy'])->name('teachers.destroy');
 Route::post('/fetch-data', [TutorController::class, 'fetchData'])->name('fetch-data');
+Route::get('/school-classes', [StudentController::class, 'indexClasses']);
+Route::get('/subjects/{schoolClassId}', [StudentController::class, 'getSubjects']);
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');

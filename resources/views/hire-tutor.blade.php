@@ -121,25 +121,30 @@
                             </div>
                             <div class="form-group" style="text-align:left; ">
                       <label for="dropdown1" class="pt-1 pb-1" > <strong>Select your class</strong></label>
-                      <select class="form-control" id="dropdown1">
-                        <option>Option 1</option>
-                        <option>Option 2</option>
-                        <option>Option 3</option>
+                      <select class="form-control" id="school_class" name="school_class">>
+                        @foreach($schoolClasses as $schoolClass)
+                        <option value="{{ $schoolClass->id }}">{{ $schoolClass->name }}</option>
+                        @endforeach
+        
                       </select>
                     </div>
                             <label class="form-label" style="display: flex;font-size:14px;font-weight:bold; padding:5px 0;">Subject</label>
-                            <div class="form-group">
+                            <div class="form-group d-none">
                                 
                                 <input type="search" value="English" name="subject" class="form-control" id="page1-search" placeholder="Search">
                             </div>
-                            <ul class="list-group" id="searchList">
+                            <ul class="list-group d-none" id="searchList">
                                 <li onclick="page1List(this)" class="list-group-item text-start">English</li>
                                 <li onclick="page1List(this)" class="list-group-item text-start">Mathematics</li>
                                 <li onclick="page1List(this)" class="list-group-item text-start">Physics</li>
                                 <li onclick="page1List(this)" class="list-group-item text-start">Chemistry</li>
                                 <li onclick="page1List(this)" class="list-group-item text-start">Urdu</li>
                             </ul>
-
+                            <div>
+                                <select id="subject" name="subject" class="select form-control">
+                                    <option value="">Select Subject</option>
+                                </select>
+                            </div>
 
                         </div>
 
@@ -186,5 +191,27 @@
                 $(".alert").fadeOut("slow");
             }, 5000);
             })
+            $(document).ready(function() {
+            $('#school_class').on('change', function() {
+                var schoolClassId = $(this).val();
+                if(schoolClassId) {
+                    $.ajax({
+                        url: '/subjects/' + schoolClassId,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('#subject').empty();
+                            $('#subject').append('<option value="">Select Subject</option>');
+                            $.each(data, function(key, value) {
+                                $('#subject').append('<option value="'+ value.id +'">'+ value.name +'</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('#subject').empty();
+                    $('#subject').append('<option value="">Select Subject</option>');
+                }
+            });
+        });
 </script>
 @endsection
