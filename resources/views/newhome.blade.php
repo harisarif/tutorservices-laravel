@@ -42,9 +42,9 @@
     /* .form-control{
         width: auto !important;
     } */
-     .select2-container{
+     /* .select2-container{
         width: 100% !important;
-     }
+     } */
      .carousel-control-prev {
     left: -60px;
 }
@@ -63,11 +63,14 @@
     .header-phone-number{
         padding-bottom: 0 !important;
     }
-}                  
-/* .select2-container{
-                    width: 70% !important;
+}             
+.country-row{
+    padding: 16px;
+}     
+.select2-container{
+                    width: 65% !important;
 
-                }  */
+                } 
     @media (min-width: 768px) {
         /* .select2-container {
         width: 150px !important;
@@ -78,9 +81,9 @@
     }
  
     @media (min-width: 290px) and (max-width: 320px) {
-        .select2-container {
+        /* .select2-container {
        max-width: 255px !important;
-    }
+    } */
     .navbar-brand{
         img{
             max-height: 32px !important;
@@ -101,10 +104,10 @@
        padding-top: 10px !important;
     }
 }
-    @media (min-width: 321px) and (max-width: 376px){
-        .select2-container {
+    @media (max-width: 376px){
+        /* .select2-container {
        max-width: 310px !important;
-    }
+    } */
     .navbar-brand{
         img{
             max-height: 40px !important;
@@ -121,9 +124,9 @@
     }
     }
     @media (min-width: 377px) and (max-width: 426px){
-        .select2-container {
+        /* .select2-container {
        max-width: 360px !important;
-    }
+    } */
     .adjust-filters-wrap{
        padding-top: 10px !important;
     }
@@ -141,8 +144,8 @@
 
 @media (min-width: 768px) {
     .adjust-filters-wrap {
-        display: flex;
-        margin-top: 10px ;
+        /* display: flex; */
+        /* margin-top: 10px ; */
     }
 }
 @media (max-width: 767px){
@@ -185,24 +188,68 @@
 }
 @media (max-width: 1440px) {
     .select2-container{
-                    width: 90% !important;
+                    width: 75% !important;
 
                 }
 }
-@media (min-width: 991px) {
+/* @media (min-width: 991px) {
     .navbar-nav{
         & li{
             display: inline-block !important;
 width: 100%;
         }
     }
-}
+} */
 @media (min-width:1441px) and (max-width: 2060px) {
     .select2-container{
                     width: 60% !important;
 
                 }
 }
+
+@media (max-width: 991px){
+   
+    .countries-div{
+        text-align: center;
+    }
+    #select2-country-container{
+        text-align: left;
+    }
+
+}
+@media (min-width:320px) and (max-width: 991px){
+    .adjust-filters-wrap {
+     
+     padding-top: 10px !important;
+     width: 94% !important;
+     margin: 0 auto;
+ }
+ .row{
+    width: 100%;
+ }
+ .country-drop-down{
+    text-align: center;
+}
+.country-row{
+    padding: 10px 10px 10px 30px !important;
+}
+}
+@media (min-width:425px) and (max-width: 768px){
+    .nav-item-row{
+        padding-left: 15px !important;
+    }
+
+}
+@media (max-width: 425px) {
+    .navbar-nav{
+   .col-6{
+            display: block !important;
+width: 100%;
+        }
+    }
+    
+}
+
 </style>
 
 @extends('layouts.app')
@@ -221,19 +268,25 @@ width: 100%;
                     <i class="fa fa-envelope-square text-light" aria-hidden="true"></i>
                     <a class="text-decoration-none text-light" href="mailto:info@eduexceledu.com">info@eduexceledu.com</a>
                 </li>
-                <li class=" p-2 header-phone-number">
+             
+            </ul>
+            <div>
+                <ul  class="icons d-flex p-2 m-0 justify-content-center align-items-center gap-3" style="list-style:none;">   
+                    <li class=" p-2 header-phone-number">
                     
                     <i class="fa-solid fa-phone text-light" aria-hidden="true"></i>
                     <a class="text-decoration-none text-light" href="tel:+971566428066">+971 56 642 8066</a>
                 </li>
-            </ul>
-            <div class="icons d-flex p-2 m-0 justify-content-center align-items-center">
-                <a href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d" target="_blank"
+                    <li>
+                    <a href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d" target="_blank"
                     class="icoFacebook text-light  p-2" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
                 <a href="https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr" target="_blank" class="icoGoogle text-light p-2" title="instagram +"><i
                         class="fa-brands fa-instagram"></i></a>
                 <a href="https://www.linkedin.com/in/edexcel-edu-130983310/" class="icoGoogle text-light p-2" target="_blank" title="Linked-in +"><i
                         class="fa-brands fa-linkedin"></i></a>
+                    </li>
+                </ul>
+               
                 {{-- <a href="#" class="btn notify position-relative"><i class="fa-regular fa-bell text-white"></i><span class="position-absolute top-10 start-60 translate-middle p-1 bg-danger border border-light rounded-circle">
                     <span class="visually-hidden">New alerts</span>
                 </span></a> --}}
@@ -295,11 +348,11 @@ width: 100%;
                     <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                         <ul class="navbar-nav align-items-md-center">
 
-<div class="row">
-    <div class="col-6">    <li class="nav-item m-1 btn-an text-center rounded w-1">
+<div class="row nav-item-row">
+    <div class="col-6 ">    <li class="nav-item m-1 btn-an text-center rounded w-1">
                                 <a class="nav-link text-decoration-none solid_btn" href="{{ route('login') }}">Login</a>
                             </li></div>
-    <div class="col-6">
+    <div class="col-6 ">
                             <li class="nav-item m-1 btn-an text-center rounded w-1">
                                 <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}">Sign
                                     Up</a>
@@ -384,8 +437,8 @@ width: 100%;
                         </div>
                         <div class="bg-body-secondary">
                                
-                                <div class="row p-2">
-                                    <div class="col-lg-6">
+                                <div class="row  country-row">
+                                    <div class="col-lg-6 country-drop-down" >
 
                                         <select name="country" id="country" class="country">
                                             <option value="all">All Countries</option>

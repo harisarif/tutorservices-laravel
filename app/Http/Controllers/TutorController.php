@@ -314,19 +314,3 @@ return response()->json($serializedData);
 // } */
 
 
-
-/* @media (max-width: 991px){
-    .adjust-filters-wrap {
-     
-        padding-top: 10px !important;
-        width: 94% !important;
-        margin: 0 auto;
-    }
-    .countries-div{
-        text-align: center;
-    }
-    #select2-country-container{
-        text-align: left;
-    }
-
-} */

@@ -192,9 +192,9 @@
             padding: 10px 14px;
             border-radius: 5px;
             overflow: auto; */
-            position: absolute;
-    bottom: 10px;
-            padding: 0 28px 20px !important;
+            /* position: absolute; */
+    /* bottom: 10px; */
+            padding: 2px 6px  !important;
             .main-div{
                 & h6{
                     color: #3195fe;
@@ -390,14 +390,17 @@
 
                                     Teachers
                                 </a></li>
-                        </ul>
-                    </div>
-                    <div class="mobile-log-out">
+                                <li>
+                                <div class="mobile-log-out">
                 <a href="{{ route('logout') }}" class="main-div d-flex gap-3 align-items-center"  style="gap:15px;">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     <h6 class="m-0">Logout</h6>
     </a >
-                      </div> 
+                      </div>
+                                </li>
+                        </ul>
+                    </div>
+                    
                 </div>
                 <!-- <div class="label-div">
                 <label for="hamid" >
