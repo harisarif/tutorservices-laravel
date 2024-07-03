@@ -302,3 +302,31 @@ return response()->json($serializedData);
 //                 height: 38px !important;
 //             }
 //         }
+
+
+
+
+// @media (min-width:1441px) and (max-width: 2060px) {
+//     .select2-container{
+//                     width: 70% !important;
+
+//                 }
+// } */
+
+
+
+/* @media (max-width: 991px){
+    .adjust-filters-wrap {
+     
+        padding-top: 10px !important;
+        width: 94% !important;
+        margin: 0 auto;
+    }
+    .countries-div{
+        text-align: center;
+    }
+    #select2-country-container{
+        text-align: left;
+    }
+
+} */

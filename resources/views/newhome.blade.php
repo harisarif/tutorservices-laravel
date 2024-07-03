@@ -63,11 +63,11 @@
     .header-phone-number{
         padding-bottom: 0 !important;
     }
-}                    .select2-container{
-                    width: 90% !important;
+}                  
+/* .select2-container{
+                    width: 70% !important;
 
-                }
-    
+                }  */
     @media (min-width: 768px) {
         /* .select2-container {
         width: 150px !important;
@@ -135,7 +135,10 @@
     .adjust-filters-wrap{
        padding-top: 10px !important;
     }
+ 
+   
 }
+
 @media (min-width: 768px) {
     .adjust-filters-wrap {
         display: flex;
@@ -180,7 +183,26 @@
     left: 16px !important;
 }
 }
+@media (max-width: 1440px) {
+    .select2-container{
+                    width: 90% !important;
 
+                }
+}
+@media (min-width: 991px) {
+    .navbar-nav{
+        & li{
+            display: inline-block !important;
+width: 100%;
+        }
+    }
+}
+@media (min-width:1441px) and (max-width: 2060px) {
+    .select2-container{
+                    width: 60% !important;
+
+                }
+}
 </style>
 
 @extends('layouts.app')
@@ -273,16 +295,19 @@
                     <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                         <ul class="navbar-nav align-items-md-center">
 
-
-                            <!-- <li class="nav-item">
-                                            </li> -->
-                            <li class="nav-item m-1 btn-an text-center rounded w-1">
+<div class="row">
+    <div class="col-6">    <li class="nav-item m-1 btn-an text-center rounded w-1">
                                 <a class="nav-link text-decoration-none solid_btn" href="{{ route('login') }}">Login</a>
-                            </li>
+                            </li></div>
+    <div class="col-6">
                             <li class="nav-item m-1 btn-an text-center rounded w-1">
                                 <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}">Sign
                                     Up</a>
-                            </li>
+                            </li></div>
+</div>
+                            <!-- <li class="nav-item">
+                                            </li> -->
+                        
                         </ul>
                     </div>
                 </div>
