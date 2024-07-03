@@ -799,7 +799,7 @@
 
 <body>
 <main>
-    <header class="main_header d-flex  align-items-end">
+    <header class="main_header d-flex  align-items-center">
         <a class="nav-link active px-3 py-0 fw-bold d-flex " style="flex-shrink: 0;" aria-current="page" href="{{ route('hire.tutor') }}"><i>&#8592; Hire
                 Tutor</i></a>
         <a class="hire-tutor-arrow" href="{{ route('newhome') }}"><img style="height: 50px" src="{{asset('images/logo.png')}}" alt="EDEXCEL-logo"

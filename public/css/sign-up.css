@@ -259,7 +259,8 @@ ul.social-network li {
     .hire-tutor-arrow{
         margin: 0 auto ;
         & img{
-            height: 30px !important;
+            height: 50px !important;
+            width: 85% !important;
         }
     }
   }
