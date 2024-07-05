@@ -156,11 +156,7 @@
         display: flex;
        /* padding-top: 10px !important; */
     }
-    .image-wrapper{
-        width: 80%;
-        height: 80%;
-        margin: 0 auto;
-    }
+  
     }
 
 @media (max-width: 409px){
@@ -215,13 +211,17 @@ width: 100%;
     #select2-country-container{
         text-align: left;
     }
-
+    .image-wrapper{
+        width: 80% !important;
+        height: 80% !important;
+        margin: 0 auto !important;
+    }
 }
 @media (min-width:320px) and (max-width: 991px){
     .adjust-filters-wrap {
      
      padding-top: 10px !important;
-     width: 94% !important;
+     /* width: 94% !important; */
      margin: 0 auto;
  }
  .row{

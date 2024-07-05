@@ -121,6 +121,18 @@
 }
         }
         }
+
+        .date-picker-input{
+            width: 100%;
+    padding: 6px 12px;
+    border-radius: 6px;
+    outline: none;
+    border: 1px solid #dee2e6;
+
+        }
+        .date-picker-label{
+            margin-bottom: 7px !important;
+        }
         </style>
 
 @if ($errors->any())
@@ -184,7 +196,7 @@
                 </div>
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="dob" class="form-label">DOB <span class="text-danger fs-4">*</span></label>
                             <div class="input-group date" id="datepicker">
                                 <input type="text" class="form-control" id="date" name="dob" placeholder="Date of Birth" required />
@@ -194,7 +206,18 @@
                                     </span>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
+
+
+                       <div class="form-group">
+        <label for="datePicker" class="date-picker-label" >DOB <span class="text-danger fs-4"> *</span></label>
+   
+        <input type="date" id="datePicker" class="date-picker-input" >
+      
+        
+</div>
+
+
                     </div>
                     <div class="col-md-6 px-2 mb-2">
                         <label for="qualification" class="form-label">Recent Degree</label> <span class="text-danger fs-4">*</span>
