@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- <title>{{ config('app.name', 'Edecel Academy & Educational Consultancy') }}</title> --}}
-    <title>Edecel Academy & Educational Consultancy</title>
+    <title>{{__('messages.academy_name')}}</title>
     <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
     <link href="css/style.css" rel="stylesheet" />
     <!-- whatsapp button css -->

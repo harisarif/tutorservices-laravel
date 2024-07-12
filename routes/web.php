@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TutorController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\LanguageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,6 +59,17 @@ Route::delete('/teachers-list/{id}', [TutorController::class, 'destroy'])->name(
 Route::post('/fetch-data', [TutorController::class, 'fetchData'])->name('fetch-data');
 Route::get('/school-classes', [StudentController::class, 'indexClasses']);
 Route::get('/subjects/{schoolClassId}', [StudentController::class, 'getSubjects']);
+// routes/web.php
+// routes/web.php
+Route::get('lang/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'ar'])) { // Only 'en' and 'ar' for English and Arabic
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+})->name('language.change');
+
+
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');

@@ -271,6 +271,12 @@ width: 100%;
              
             </ul>
             <div>
+            <!-- <h1>{{ __('messages.welcome') }}</h1> -->
+            <select id="language-select" onchange="changeLanguage()">
+                <option value="en" {{ session('locale') == 'en' ? 'selected' : '' }}>English</option>
+                <option value="ar" {{ session('locale') == 'ar' ? 'selected' : '' }}>Arabic</option>
+            </select>
+
                 <ul  class="icons d-flex p-2 m-0 justify-content-center align-items-center gap-3" style="list-style:none;">   
                     <li class=" p-2 header-phone-number">
                     
@@ -2072,4 +2078,11 @@ width: 100%;
         });
         
     </script>
+   <script>
+    function changeLanguage() {
+        var locale = document.getElementById('language-select').value;
+        var url = "{{ url('lang') }}/" + locale;
+        window.location.href = url;
+    }
+</script>
 @endsection

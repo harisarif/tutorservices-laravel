@@ -5,7 +5,8 @@ use Carbon\Carbon;
 use App\Models\Country;
 use Illuminate\Http\Request;
 use PHPMailer\PHPMailer\PHPMailer;
-
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Tutor; // Add the Tutor model namespace
@@ -41,7 +42,18 @@ class TutorController extends Controller
                 'perPage' => $perPage,
             ]);
         }
-
+        public function changeLanguage(Request $request)
+        {
+            // dd($request);
+            $language = $request->language;
+    
+            if (in_array($language, ['en', 'ar'])) {
+                Session::put('locale', $language); // Store the selected language in session
+                App::setLocale($language); // Set the application locale
+            }
+    
+            return redirect()->back();
+        }
         public function fetchData(Request $request)
 {
     
