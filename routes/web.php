@@ -31,7 +31,6 @@ use App\Http\Controllers\LanguageController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::view('/welcome', 'welcome');
 Route::get('/', [TutorController::class, 'index'])->name('newhome');
 Route::get('/basicsignup', function () {
