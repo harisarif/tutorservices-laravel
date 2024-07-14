@@ -3,6 +3,7 @@
     position: fixed;
     bottom: 4px;
     right: 30px;
+    z-index: 1;
   }
 
   #toggleWhatsAppChat {

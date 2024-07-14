@@ -1,4 +1,27 @@
 <style>
+    .fixed {
+        padding: 10px;
+        background-color: rgb(23, 218, 140);
+        position: fixed;
+        top: 40%;
+        right: 0;
+        border-top-left-radius: 7px;
+        border-bottom-left-radius: 7px;
+        }
+
+        .fixed a,
+        .fixed i {
+        display: block;
+        text-decoration: none;
+        padding: 4px 0px;
+        }
+
+        .fixed i {
+        font-size: 15px;
+        color: #ffffff;
+        margin-top: 0;
+        }
+
     .select2-container .select2-selection--single {
         height: 38px !important;
     }
@@ -249,6 +272,37 @@ width: 100%;
     }
     
 }
+/* Style the select dropdown */
+#language-select {
+    appearance: none; /* Remove default styling */
+    -webkit-appearance: none; /* For Safari */
+    -moz-appearance: none; /* For Firefox */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 12px;
+    color: #333;
+    width: 60px;
+    max-width: 200px; /* Adjust width as needed */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Style the options */
+#language-select option {
+    background-color: #fff;
+    color: #333;
+    padding: 10px;
+}
+
+/* Change the border and box-shadow on focus */
+#language-select:focus {
+    border-color: #42b979;
+    box-shadow: 0 0 5px rgba(66, 185, 121, 0.5);
+}
 
 </style>
 
@@ -271,27 +325,46 @@ width: 100%;
             </ul>
             <div>
             <!-- <h1>{{ __('messages.welcome') }}</h1> -->
-            <select id="language-select" onchange="changeLanguage()">
-                <option value="en" {{ session('locale') == 'en' ? 'selected' : '' }}>English</option>
-                <option value="ar" {{ session('locale') == 'ar' ? 'selected' : '' }}>Arabic</option>
-            </select>
+            
 
                 <ul  class="icons d-flex p-2 m-0 justify-content-center align-items-center gap-3" style="list-style:none;">   
+                    
+                <div>
+                    <label class="text-white" style="font-size:12px;">Swtich language from there</label>
+                    <select id="language-select" onchange="changeLanguage()">
+                        <option value="en" {{ session('locale') == 'en' ? 'selected' : '' }}>English</option>
+                        <option value="ar" {{ session('locale') == 'ar' ? 'selected' : '' }}>Arabic</option>
+                    </select>
+                    </div>
                     <li class=" p-2 header-phone-number">
                     
-                    <i class="fa-solid fa-phone text-light" aria-hidden="true"></i>
-                    <a class="text-decoration-none text-light" href="tel:+971566428066">+971 56 642 8066</a>
-                </li>
-                    <li>
-                    <a href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d" target="_blank"
-                    class="icoFacebook text-light  p-2" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr" target="_blank" class="icoGoogle text-light p-2" title="instagram +"><i
-                        class="fa-brands fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/in/edexcel-edu-130983310/" class="icoGoogle text-light p-2" target="_blank" title="Linked-in +"><i
-                        class="fa-brands fa-linkedin"></i></a>
+                        <i class="fa-solid fa-phone text-light" aria-hidden="true"></i>
+                        <a class="text-decoration-none text-light" href="tel:+971566428066">+971 56 642 8066</a>
                     </li>
+                    <!-- <li>
+                    <a href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d" target="_blank"
+                        class="icoFacebook text-light  p-2" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr" target="_blank" class="icoGoogle text-light p-2" title="instagram +"><i
+                        class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/edexcel-edu-130983310/" class="icoGoogle text-light p-2" target="_blank" title="Linked-in +"><i
+                        class="fa-brands fa-linkedin"></i></a>
+                    </li> -->
                 </ul>
-               
+                <div class="fixed" id="social">
+                        <a target="_blank"
+                            href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d"
+                        >
+                            <i class="fa-brands fa-facebook" aria-hidden="true"></i>
+                        </a>
+                        <a target="_blank"
+                            href="https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr"
+                        >
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a target="_blank" href="https://www.linkedin.com/in/edexcel-edu-130983310/">
+                            <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+                        </a>
+                </div>
                 {{-- <a href="#" class="btn notify position-relative"><i class="fa-regular fa-bell text-white"></i><span class="position-absolute top-10 start-60 translate-middle p-1 bg-danger border border-light rounded-circle">
                     <span class="visually-hidden">New alerts</span>
                 </span></a> --}}
@@ -342,7 +415,7 @@ width: 100%;
                 <div class="container-fluid">
 
 
-                    <a class="navbar-brand" href="{{ route('home') }}">
+                    <a class="navbar-brand" href="#">
                         <img src="images/logo.png" height="50px" alt="logo" style="height: 50px" />
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -353,16 +426,18 @@ width: 100%;
                     <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                         <ul class="navbar-nav align-items-md-center">
 
-<div class="row nav-item-row">
-    <div class="col-6 ">    <li class="nav-item m-1 btn-an text-center rounded w-1">
-                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('login') }}">Login</a>
-                            </li></div>
-    <div class="col-6 ">
+                    <div class="row nav-item-row">
+                        <div class="col-6 ">    
                             <li class="nav-item m-1 btn-an text-center rounded w-1">
-                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}">Sign
-                                    Up</a>
-                            </li></div>
-</div>
+                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('login') }}">{{__('messages.login')}}</a>
+                            </li>
+                        </div>
+                        <div class="col-6 ">
+                            <li class="nav-item m-1 btn-an text-center rounded w-1">
+                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}">{{__('messages.sign_up')}}</a>
+                            </li>
+                        </div>
+                    </div>
                             <!-- <li class="nav-item">
                                             </li> -->
                         
@@ -377,18 +452,14 @@ width: 100%;
                 <div class="col-12 col-md-6 intro_lines mx-0 my-5">
                     <h1><span>{{__('messages.academy_name')}}</span></h1>
                     <p>
-                        Edexcel Academy is more than just a school; it's a vibrant community where students, parents,
-                        teachers, and
-                        staff come together in a spirit of collaboration and mutual respect. We encourage active involvement
-                        in
-                        extracurricular activities
+                    {{__('messages.about_us')}}
                     </p>
                     {{-- <button class="p-2 bg_theme_green btn-an rounded border-0 text-light">
                         Student
                     </button> --}}
                     <button class="p-2 bg_theme_green btn-an rounded border-0 text-light">
                         <a class="text-light text-decoration-none active solid_btn" aria-current="page"
-                            href="{{ route('hire.tutor') }}">Hire Tutor</a>
+                            href="{{ route('hire.tutor') }}">{{__('messages.hire_tutor')}}</a>
 
                     </button>
                 </div>

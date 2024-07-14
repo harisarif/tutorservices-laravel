@@ -48,14 +48,13 @@
                 onclick="document.getElementById('allModal').style.display = 'none'"> &times;</span>
         </h5>
 
-        <p class="px-2">Welcome to edexcel. We are empowering success through top-class education.
-            Drop your information to start your journey with edexcel  today!</p>
+        <p class="px-2">{{__('messages.welcome_message')}}</p>
 
         <hr />
         <div class="d-flex justify-content-end gap-2">
             <a href="{{ route('hire.tutor') }}" 
-                class="btn bg-body-secondary hiring-btn">Student</a>
-            <a href="{{ route('tutor') }}"  class="btn btn-success bg_theme_green border-0 hiring-btn">Tutor</a>
+                class="btn bg-body-secondary hiring-btn">{{__('messages.student')}}</a>
+            <a href="{{ route('tutor') }}"  class="btn btn-success bg_theme_green border-0 hiring-btn">{{__('messages.tutor')}}</a>
         </div>
     </div>
 </div>
