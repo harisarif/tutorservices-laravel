@@ -71,11 +71,11 @@
             cursor: pointer;
         }
        
-.form-row {
-            .select2-container{
-                width: 100% !important;
-            }
-        }
+        .form-row {
+                    .select2-container{
+                        width: 100% !important;
+                    }
+                }
         /* .select2-container{
             } */
        
@@ -593,18 +593,13 @@
 @endsection
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-{{-- <script src='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js'></script> --}}
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Bootstrap JS -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- Bootstrap Datepicker JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script>
     $(document).ready(function() {
         $('.select2').select2();
@@ -677,131 +672,6 @@
       setCountryPrefix();
     });
 </script>
-{{-- <script>
-    // International telephone format
-    // $("#phone").intlTelInput();
-    // get the country data from the plugin
-    var countryData = window.intlTelInputGlobals.getCountryData(),
-      input = document.querySelector("#phone"),
-      addressDropdown = document.querySelector("#country");
-    
-    // init plugin
-    var iti = window.intlTelInput(input, {
-      hiddenInput: "full_phone",
-      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js" // just for formatting/placeholders etc
-    });
-    
-    // populate the country dropdown
-    for (var i = 0; i < countryData.length; i++) {
-      var country = countryData[i];
-      var optionNode = document.createElement("option");
-      optionNode.value = country.iso2;
-      var textNode = document.createTextNode(country.name);
-      optionNode.appendChild(textNode);
-      addressDropdown.appendChild(optionNode);
-    }
-    // set it's initial value
-    addressDropdown.value = iti.getSelectedCountryData().iso2;
-    
-    // listen to the telephone input for changes
-    input.addEventListener('countrychange', function(e) {
-      addressDropdown.value = iti.getSelectedCountryData().iso2;
-    });
-    
-    // listen to the address dropdown for changes
-    addressDropdown.addEventListener('change', function() {
-      iti.setCountry(this.value);
-    });
-    </script>
-    <script>
-    //Append Value To Phone Field
-    $("#phone").prop('value', '+1');
-
-    // Listen to changes in the input field for updating the country code
-    input.addEventListener('countrychange', function(e) {
-        var countryCode = iti.getSelectedCountryData().dialCode;
-        // Update the country code prefix in the input field
-        updateCountryCodePrefix(countryCode);
-    });
-
-    // Prevent users from deleting the country code prefix
-    input.addEventListener('input', function(e) {
-        var countryCode = iti.getSelectedCountryData().dialCode;
-        var inputValue = input.value;
-
-        // Check if the input value starts with the country code prefix
-        if (!inputValue.startsWith("+" + countryCode)) {
-            // If not, update the input value with the country code prefix
-            updateCountryCodePrefix(countryCode);
-        }
-    });
-
-    // Function to update the input value with the country code prefix
-    function updateCountryCodePrefix(countryCode) {
-        // Check if the input value is empty or doesn't start with the country code prefix
-        if (!input.value || !input.value.startsWith("+" + countryCode)) {
-            // Update the input value with the country code prefix
-            input.value = "+" + countryCode;
-        }
-    }
-</script> --}}
-
-<!-- <script>
-    const country = document.querySelector('#countrySelect');
-    const userNumber = document.querySelector('#phone');
-
-    
-    // Pre-set the default country to the United States
-    const defaultCountry = 'US';
-    const countriesPrefix = @json($countries_prefix);
-    const countriesNumberLength = @json($countries_number_length);
-    let countryValue = defaultCountry;
-
-    // Set the default prefix and make it non-clearable
-    function setCountryPrefix() {
-        const prefix = countriesPrefix[countryValue];
-        userNumber.value = prefix;
-        userNumber.setAttribute('data-prefix', prefix); // Store the prefix in a data attribute
-    }
-
-    // Prevent users from clearing the prefix
-    userNumber.addEventListener('keydown', (event) => {
-        const prefix = userNumber.getAttribute('data-prefix');
-        const cursorPosition = userNumber.selectionStart;
-        
-        // Prevent deletion or backspace within the prefix
-        if (cursorPosition <= prefix.length && 
-            (event.key === 'Backspace' || event.key === 'Delete')) {
-            event.preventDefault();
-        }
-
-        // Prevent typing within the prefix
-        if (cursorPosition < prefix.length && !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
-            event.preventDefault();
-        }
-    });
-
-    // Adjust input length based on the selected country
-    userNumber.addEventListener('input', () => {
-        const prefix = userNumber.getAttribute('data-prefix');
-        const maxLength = countriesNumberLength[countryValue];
-        if (userNumber.value.length > maxLength) {
-            userNumber.value = userNumber.value.slice(0, maxLength);
-        }
-    });
-
-    // Change the prefix when the country selection changes
-    country.addEventListener('change', () => {
-        countryValue = country.value;
-        setCountryPrefix();
-    });
-
-    // Set default country and prefix on page load
-    window.addEventListener('load', () => {
-        country.value = defaultCountry;
-        setCountryPrefix();
-    });
-</script> -->
 
 
 @endsection

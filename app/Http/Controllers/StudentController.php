@@ -16,9 +16,12 @@ use App\Models\Subject;
 class StudentController extends Controller
 {
     public function index() {
-        $countries = collect(config('countries.countries'))->prepend("Select your country", "");
+        // $countries = collect(config('countries.countries'))->prepend("Select your country", "");
         $schoolClasses = SchoolClass::all();
-        return view('hire-tutor', compact('countries','schoolClasses'));
+        $countries = collect(config('countries_assoc.countries'));
+        $countries_number_length = collect(config('countries_number_length.countries'));
+        $countries_prefix = collect(config('countries_prefix.countries'));
+        return view('hire-tutor', compact('countries','schoolClasses','countries_prefix','countries_number_length'));
     }
     public function qrcode() {
         return view('qr-code');
@@ -92,7 +95,7 @@ class StudentController extends Controller
         $student->class_start_time = $classStartTime;
         $student->class_end_time = $classEndTime;
         
-        $student->whatsapp_number = $request->input('whatsapp_number');
+        // $student->whatsapp_number = $request->input('whatsapp_number');
         $student->country = $request->input('country');
         $student->city = $request->input('city');
         $student->subject = $request->input('subject');

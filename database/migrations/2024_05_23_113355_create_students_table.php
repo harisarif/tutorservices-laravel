@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('class_start_time'); // Store time as string
             $table->string('class_end_time');   // Store time as string
 
-            $table->string('whatsapp_number', 20);
+            // $table->string('whatsapp_number', 20);
             $table->string('country');
             $table->string('city');
             $table->string('subject');

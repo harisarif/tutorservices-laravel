@@ -3,6 +3,9 @@
    #allModal {
             display: none !important;
         }
+    .select2-container--default .select2-selection--single {
+            height:35px !important;
+        }
 </style>
 @if ($errors->any())
         <div class="alert alert-danger">
@@ -111,22 +114,28 @@
                             <div class="col">
                                 <input required name="name" type="text" placeholder="*Name"  class="inp-1">
                                 <input required name="email" type="email" placeholder="*Email"  class="inp-1">
-                                <input required name="phone" type="number" placeholder="*Mobile"  min="0" class="inp-1">
+                                <!-- <div class="row"> -->
+                                    <div class="col-md-11 px-2 mb-2 ps-5">
+                                        <div class="input-group d-flex justify-content-between align-items-center">
+                                            <select name="countrySelect" id="countrySelect" class="form-select country-select w-50" required>
+                                                @foreach ($countries as $key => $country)
+                                                    <option value="{{ $key }}">{{ $country }}</option>
+                                                @endforeach
+                                            </select>
+                                            <input class="form-control w-50" required name="phone" id="phone" type="text" placeholder="e.g +92XXXXXXXXXX">
+                                        </div>
+                                    </div>
+                                <!-- </div> -->
                                 <div class="col-12 ">
-                                    <!-- <select class="form-select py-2 mx-auto" style="width: 86%;" aria-label="Default select example" name="Time Availbility">
-                                        <option selected>Time Availbilty</option>
-                                        <option value="10 - 11">10 - 11</option>
-                                        <option value="11 - 12">11 - 12</option>
-                                        <option value="12 - 01">12 - 01</option>
-                                    </select> -->
+                                    
                                
-<label for="classStartTime" class="d-block text-start " style=" width: 86%; margin: 0 auto; font-weight: 600;">Starting time</label>
+                                <label for="classStartTime" class="d-block text-start " style=" width: 86%; margin: 0 auto; font-weight: 600;">Starting time</label>
 
-    <input class="inp-1" title="Class start time" type="time" name="class_start_time" id="classStartTime">
+                                <input class="inp-1" title="Class start time" type="time" name="class_start_time" id="classStartTime">
 
-<label for="classEndTime" class="d-block text-start " style=" width: 86%; margin: 0 auto; font-weight: 600;">Ending time</label>
+                                <label for="classEndTime" class="d-block text-start " style=" width: 86%; margin: 0 auto; font-weight: 600;">Ending time</label>
 
-    <input class="inp-1" title="Class end time" type="time" name="class_end_time" id="classEndTime">
+                                <input class="inp-1" title="Class end time" type="time" name="class_end_time" id="classEndTime">
 
 
                                 </div>
@@ -138,10 +147,10 @@
                         <div class="col-12 px-5 py-4 d-none" id="page-3">
                             <h3>Select a Subject</h3>
                             <p>( Which subject tutor are you looking for? )</p>
-                            <div class="col-12 mb-2">
+                            <!-- <div class="col-12 mb-2">
                                 <input type="number" class="form-control" id="whatsapp" name="whatsapp_number" placeholder="Whatsapp number "
                                     required />
-                            </div>
+                            </div> -->
                             <div class="col-12 mb-2">
                                 <select name="country" id="country" class="form-select" required>
                                     @foreach($countries as $country)
@@ -153,14 +162,14 @@
                                 <input type="text" name="city" id="city" class="form-control" placeholder="Enter your city" required>
                             </div>
                             <div class="form-group" style="text-align:left; ">
-                      <label for="dropdown1" class="pt-1 pb-1" > <strong>Select your class</strong></label>
-                      <select class="form-control" id="school_class" name="school_class">>
-                        @foreach($schoolClasses as $schoolClass)
-                        <option value="{{ $schoolClass->id }}">{{ $schoolClass->name }}</option>
-                        @endforeach
-        
-                      </select>
-                    </div>
+                                <label for="dropdown1" class="pt-1 pb-1" > <strong>Select your class</strong></label>
+                                <select class="form-control" id="school_class" name="school_class">>
+                                    @foreach($schoolClasses as $schoolClass)
+                                    <option value="{{ $schoolClass->id }}">{{ $schoolClass->name }}</option>
+                                    @endforeach
+                    
+                                </select>
+                            </div>
                             <label class="form-label" style="display: flex;font-size:14px;font-weight:bold; padding:5px 0;">Subject</label>
                             <div class="form-group d-none">
                                 
@@ -246,5 +255,58 @@
                 }
             });
         });
+        $(document).ready(function() {
+      // Initialize Select2
+      $('#countrySelect').select2();
+
+      const defaultCountry = 'US';
+      const countriesPrefix = @json($countries_prefix);
+      const countriesNumberLength = @json($countries_number_length);
+      let countryValue = defaultCountry;
+
+      const country = $('#countrySelect');
+      const userNumber = $('#phone');
+
+      function setCountryPrefix() {
+        const prefix = countriesPrefix[countryValue];
+        userNumber.val(prefix);
+        userNumber.attr('data-prefix', prefix); // Store the prefix in a data attribute
+      }
+
+      // Prevent users from clearing the prefix
+      userNumber.on('keydown', function(event) {
+        const prefix = userNumber.attr('data-prefix');
+        const cursorPosition = this.selectionStart;
+        
+        // Prevent deletion or backspace within the prefix
+        if (cursorPosition <= prefix.length && (event.key === 'Backspace' || event.key === 'Delete')) {
+          event.preventDefault();
+        }
+
+        // Prevent typing within the prefix
+        if (cursorPosition < prefix.length && !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
+          event.preventDefault();
+        }
+      });
+
+      // Adjust input length based on the selected country
+      userNumber.on('input', function() {
+        const prefix = userNumber.attr('data-prefix');
+        const maxLength = countriesNumberLength[countryValue];
+        if (userNumber.val().length > maxLength) {
+          userNumber.val(userNumber.val().slice(0, maxLength));
+        }
+      });
+
+      // Change the prefix when the country selection changes
+      country.on('change', function() {
+        countryValue = country.val();
+        setCountryPrefix();
+      });
+
+      // Set default country and prefix on page load
+      country.val(defaultCountry).trigger('change');
+      setCountryPrefix();
+    });
 </script>
 @endsection
