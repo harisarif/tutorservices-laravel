@@ -375,7 +375,7 @@ width: 100%;
             <!-- banner start -->
             <section class="row banner-section">
                 <div class="col-12 col-md-6 intro_lines mx-0 my-5">
-                    <h1><span>Edexcel </span> Academy & Educational Consultancy.</h1>
+                    <h1><span>{{__('messages.academy_name')}}</span></h1>
                     <p>
                         Edexcel Academy is more than just a school; it's a vibrant community where students, parents,
                         teachers, and

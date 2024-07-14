@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
 
 <head>
     <meta charset="utf-8">
@@ -43,7 +43,7 @@
 <div class="modalBox" id="allModal">
     <div class="boxModal-1 col-4 bg-light rounded p-2">
         <h5 class="col-12 d-flex justify-content-between align-items-center px-2">
-            Edexcel Academy & Educational Consultancy.
+        {{__('messages.academy_name')}}
             <span class="fs-2 pointer"
                 onclick="document.getElementById('allModal').style.display = 'none'"> &times;</span>
         </h5>
