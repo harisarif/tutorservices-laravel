@@ -23,6 +23,9 @@ class StudentController extends Controller
         $countries_prefix = collect(config('countries_prefix.countries'));
         return view('hire-tutor', compact('countries','schoolClasses','countries_prefix','countries_number_length'));
     }
+    public function hiring() {
+        return view('hired-tutor');
+    }
     public function qrcode() {
         return view('qr-code');
     }
