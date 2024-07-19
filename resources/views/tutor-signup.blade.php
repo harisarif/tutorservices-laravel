@@ -246,7 +246,7 @@
                        <div class="form-group">
         <label for="datePicker" class="date-picker-label" >DOB <span class="text-danger fs-4"> *</span></label>
    
-        <input type="date" id="datePicker" class="date-picker-input" >
+        <input type="date" id="datePicker" class="date-picker-input" name="dob">
       
         
 </div>

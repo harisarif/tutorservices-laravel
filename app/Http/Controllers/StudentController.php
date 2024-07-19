@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use App\Models\SchoolClass;
 use App\Models\Subject;
-
+use Illuminate\Support\Facades\Auth;
 class StudentController extends Controller
 {
     public function index() {
@@ -113,6 +113,7 @@ class StudentController extends Controller
         $user->name = $student->name;
         $user->email = $student->email;
         $user->password = Hash::make($request->input('password'));
+        $user->role = 'user';
         $user->save();
 
         $toStudent = $student->email;
@@ -153,9 +154,13 @@ class StudentController extends Controller
         $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
         
         
+        Auth::login($user);
+
+        // Redirect to the "hire us" page
+        return redirect()->route('hiring-tutor')->with(compact('user'));
 
         // Optionally, you can redirect the user or return a response
-        return redirect()->route('newhome')->with('success', 'Student created successfully.');
+        // return redirect()->route('newhome')->with('success', 'Student created successfully.');
     }
     private function sendEmail($to, $subject, $body)
         {

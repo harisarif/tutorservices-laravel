@@ -10,5 +10,6 @@ return [
     'student' => 'Student',
     'tutor' => 'Tutor',
     'login' => 'Login',
+    'logout' => 'Logout',
     'sign_up' => 'Sign Up',
 ];

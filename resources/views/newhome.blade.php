@@ -20,9 +20,9 @@
                             </a>
              </li>
              <li>
-             <a href="{{ route('hiring-tutor') }}" class="hiring-button">
+             <!-- <a href="{{ route('hiring-tutor') }}" class="hiring-button">
                         New page
-                            </a>
+                            </a> -->
              </li>
             </ul>
             <div>

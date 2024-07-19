@@ -135,17 +135,11 @@
                     <div class="row nav-item-row">
                         <div class="col-6 ">    
                             <li class="nav-item m-1 btn-an text-center rounded w-1">
-                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('login') }}">{{__('messages.login')}}</a>
+                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('logout') }}">{{__('messages.logout')}}</a>
                             </li>
                         </div>
-                        <div class="col-6 ">
-                            <li class="nav-item m-1 btn-an text-center rounded w-1">
-                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}">{{__('messages.sign_up')}}</a>
-                            </li>
-                        </div>
+                        
                     </div>
-                            <!-- <li class="nav-item">
-                                            </li> -->
                         
                         </ul>
                     </div>
@@ -155,19 +149,14 @@
 
             <!-- banner start -->
             <section class="row banner-section">
+            
                 <div class="col-12 col-md-6 intro_lines mx-0 my-5">
-                    <h1><span>{{__('messages.academy_name')}}</span></h1>
+                @if(Auth::check())
+                    <h1>Welcome, {{ Auth::user()->name }}!</h1>
+                    @endif
                     <p>
                     {{__('messages.about_us')}}
                     </p>
-                    {{-- <button class="p-2 bg_theme_green btn-an rounded border-0 text-light">
-                        Student
-                    </button> --}}
-                    <button class="p-2 bg_theme_green btn-an rounded border-0 text-light">
-                        <a class="text-light text-decoration-none active solid_btn" aria-current="page"
-                            href="{{ route('hire.tutor') }}">{{__('messages.hire_tutor')}}</a>
-
-                    </button>
                 </div>
                 <div class="col-12 col-md-6 p-0">
                     <div class="image-wrapper">
@@ -177,119 +166,160 @@
                 </div>
             </section>
             <!--  -->
-            <section class="row justify-content-center">
-                <div class="col-12 row-gap-1 p-1">
-                    <a class="tutorLinks d-inline-block text-center text-decoration-none" href="{{ route('hire.tutor') }}">Browse
-                        Tutor</a>
-                    <a class="tutorLinks d-inline-block text-center text-decoration-none" href="#FAQ">FAQ</a>
-                    <a class="tutorLinks d-inline-block text-center text-decoration-none" href="#">How it works</a>
-                    <hr />
-                </div>
-                <div class="col-12">
-                    <h3 class="d-flex justify-content-between align-items-center">
-                        World Wide Tutor
-                        <i onclick="hideNShow('filter-col')" class="fa fa-filter text-secondary d-inline-block d-md-none"
-                            aria-hidden="true"></i>
-                    </h3>
-                    <p class="border p-2 description-tutor">
-                        Edexcel is a platform that connects students with qualified tutors across the globe. It leverages online tools and technologies to provide personalized, flexible, and accessible educational support. The platform offers a wide range of subjects, catering to different educational levels, from primary school to High school. Edexcel ensures high-quality instruction by vetting tutors for their expertise and teaching skills. This global reach allows students to access diverse teaching styles and perspectives, fostering a richer learning experience. Additionally, the platform often includes features like one-on-one sessions, group classes, and customized lesson plans to meet individual learning needs.
-                    </p>
-                </div>
-                </section>
-
-
-
-
+            
             <section>
-            <h3 class="text-center">Popular Subjects & Courses</h3>
-            <div class="color-main-div">
-                <div class="color-div"></div>
-            </div>
-            <h4 class="text-center">Featured Learning Paths</h4>
-       
-            <div class="row g-3">
-                
-                <div class="col-4">
-                    <div class=" teacher-main-parent">
-                    <div class="card h-100 teacher-card-wrapper border-0">
-                        <div class="card-div">
-                            <div class="hadding">
-                                <h3>AGE 5-7</h3>
-                                <h4>KS1</h4>
+                <div class="row g-3">
+                    
+                        <h3 class="text-center">Popular Subjects & Courses</h3>
+                        <div class="color-main-div">
+                            <div class="color-div"></div>
+                        </div>
+                            <h4 class="text-center">Featured Learning Paths</h4>
+                        <div class="col-4">
+                            <div class=" teacher-main-parent">
+                            <div class="card h-100 teacher-card-wrapper border-0">
+                                <div class="card-div">
+                                    <div class="hadding">
+                                        <h3>AGE 5-7</h3>
+                                        <h4>KS1</h4>
+                                    </div>
+                                    <div class="img-teacher">
+                                        
+                                        <div class="deatil">
+                                            <h3>All Subject</h3>
+                                            <p>English,Math,phonics,science.</p>
+                                        </div>
+                                        <div class="img-card">
+                                            <img src="{{ asset('images/study-removebg-preview.png') }}" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            
                             </div>
-                            <div class="img-teacher">
-                                
-                                <div class="deatil">
-                                    <h3>All Subject</h3>
-                                    <p>English,Math,phonics,science.</p>
-                                </div>
-                                <div class="img-card">
-                                    <img src="{{ asset('images/study-removebg-preview.png') }}" alt="">
-                                </div>
                             </div>
                         </div>
-                       
-                    </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class=" teacher-main-parent">
-                    <div class="card h-100 teacher-card-wrapper border-0">
-                        <div class="card-div">
-                            <div class="hadding">
-                                <h3>AGE 5-7</h3>
-                                <h4>KS1</h4>
+                        <div class="col-4">
+                            <div class=" teacher-main-parent">
+                            <div class="card h-100 teacher-card-wrapper border-0">
+                                <div class="card-div">
+                                    <div class="hadding">
+                                        <h3>AGE 5-7</h3>
+                                        <h4>KS1</h4>
+                                    </div>
+                                    <div class="img-teacher">
+                                        
+                                        <div class="deatil">
+                                            <h3>All Subject</h3>
+                                            <p>English,Math,phonics,science.</p>
+                                        </div>
+                                        <div class="img-card">
+                                            <img src="{{ asset('images/study-removebg-preview.png') }}" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            
                             </div>
-                            <div class="img-teacher">
-                                
-                                <div class="deatil">
-                                    <h3>All Subject</h3>
-                                    <p>English,Math,phonics,science.</p>
-                                </div>
-                                <div class="img-card">
-                                    <img src="{{ asset('images/study-removebg-preview.png') }}" alt="">
-                                </div>
-                            </div>
-                        </div>
-                       
-                    </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class=" teacher-main-parent">
-                    <div class="card h-100 teacher-card-wrapper border-0">
-                        <div class="card-div">
-                            <div class="hadding">
-                                <h3>AGE 5-7</h3>
-                                <h4>KS1</h4>
-                            </div>
-                            <div class="img-teacher">
-                                
-                                <div class="deatil">
-                                    <h3>All Subject</h3>
-                                    <p>English,Math,phonics,science.</p>
-                                </div>
-                                <div class="img-card">
-                                    <img src="{{ asset('images/study-removebg-preview.png') }}" alt="">
-                                </div>
                             </div>
                         </div>
-                       
+                        <div class="col-4">
+                            <div class=" teacher-main-parent">
+                            <div class="card h-100 teacher-card-wrapper border-0">
+                                <div class="card-div">
+                                    <div class="hadding">
+                                        <h3>AGE 5-7</h3>
+                                        <h4>KS1</h4>
+                                    </div>
+                                    <div class="img-teacher">
+                                        
+                                        <div class="deatil">
+                                            <h3>All Subject</h3>
+                                            <p>English,Math,phonics,science.</p>
+                                        </div>
+                                        <div class="img-card">
+                                            <img src="{{ asset('images/study-removebg-preview.png') }}" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class=" teacher-main-parent">
+                            <div class="card h-100 teacher-card-wrapper border-0">
+                                <div class="card-div">
+                                    <div class="hadding">
+                                        <h3>AGE 5-7</h3>
+                                        <h4>KS1</h4>
+                                    </div>
+                                    <div class="img-teacher">
+                                        
+                                        <div class="deatil">
+                                            <h3>All Subject</h3>
+                                            <p>English,Math,phonics,science.</p>
+                                        </div>
+                                        <div class="img-card">
+                                            <img src="{{ asset('images/study-removebg-preview.png') }}" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class=" teacher-main-parent">
+                            <div class="card h-100 teacher-card-wrapper border-0">
+                                <div class="card-div">
+                                    <div class="hadding">
+                                        <h3>AGE 5-7</h3>
+                                        <h4>KS1</h4>
+                                    </div>
+                                    <div class="img-teacher">
+                                        
+                                        <div class="deatil">
+                                            <h3>All Subject</h3>
+                                            <p>English,Math,phonics,science.</p>
+                                        </div>
+                                        <div class="img-card">
+                                            <img src="{{ asset('images/study-removebg-preview.png') }}" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class=" teacher-main-parent">
+                            <div class="card h-100 teacher-card-wrapper border-0">
+                                <div class="card-div">
+                                    <div class="hadding">
+                                        <h3>AGE 5-7</h3>
+                                        <h4>KS1</h4>
+                                    </div>
+                                    <div class="img-teacher">
+                                        
+                                        <div class="deatil">
+                                            <h3>All Subject</h3>
+                                            <p>English,Math,phonics,science.</p>
+                                        </div>
+                                        <div class="img-card">
+                                            <img src="{{ asset('images/study-removebg-preview.png') }}" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                            </div>
+                        </div>
                     </div>
-                    </div>
-                </div>
-                </div>
-        </section>
+            </section>
 
 
-    </div>
+         </div>
           
 
 
             
     @endsection
-
-
-    <script>
-  AOS.init();
-</script>
