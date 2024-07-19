@@ -1,104 +1,85 @@
-<style>
-    .color-div{
-        height: 6px !important;
-        width: 50px !important;
-       background-color: red;
-       /* text-align: center; */
-/* padding: 3px 0; */
-    }
-    .color-main-div{
-        display: flex;
-        justify-content: center;
-        padding: 4px 0;
-    }
-</style>
-<link rel="stylesheet" href="./css/new-home.css">
+
 @extends('layouts.app')
+<link rel="stylesheet" href="{{ asset('css/new-home.css') }}">
 @section('content')
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
     @endif
-
-
-
-
-
-
     <div class="row mini_header m-0 p-0 container-fluid position-relative">
-        <div class="col-sm-12  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0">
-            <ul class="p-2 m-0 d-sm-inline d-block text-center header-ul">
-                <li class=" p-2">
-                    <i class="fa fa-envelope-square text-light" aria-hidden="true"></i>
-                    <a class="text-decoration-none text-light" href="mailto:info@eduexceledu.com">info@eduexceledu.com</a>
-                </li>
-             <li>
-             <a href="{{ route('hiring') }}" class="hiring-button">
-                        Book A demo
-                            </a>
-                            <!-- <button class="p-2 bg_theme_green btn-an rounded border-0 text-light">
-                        <a class="text-light text-decoration-none active solid_btn" aria-current="page"
-                            href="{{ route('hire.tutor') }}">{{__('messages.hire_tutor')}}</a>
-
-                    </button> -->
-             </li>
-            </ul>
-
-            
-            <div>
-            <!-- <h1>{{ __('messages.welcome') }}</h1> -->
-            
-
-                <ul  class="icons d-flex p-2 m-0 justify-content-center align-items-center gap-3" style="list-style:none;">   
-                  
-                <div>
-                    <label class="text-white" style="font-size:12px;">Swtich language from there</label>
-                    <select id="language-select" onchange="changeLanguage()">
-                        <option value="en" {{ session('locale') == 'en' ? 'selected' : '' }}>English</option>
-                        <option value="ar" {{ session('locale') == 'ar' ? 'selected' : '' }}>Arabic</option>
-                    </select>
-                    </div>
-                    <li class=" p-2 header-phone-number">
-                    
-                        <i class="fa-solid fa-phone text-light" aria-hidden="true"></i>
-                        <a class="text-decoration-none text-light" href="tel:+971566428066">+971 56 642 8066</a>
+            <div class="col-sm-12  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0">
+                <ul class="p-2 m-0 d-sm-inline d-block text-center header-ul">
+                    <li class=" p-2">
+                        <i class="fa fa-envelope-square text-light" aria-hidden="true"></i>
+                        <a class="text-decoration-none text-light" href="mailto:info@eduexceledu.com">info@eduexceledu.com</a>
                     </li>
-                    <!-- <li>
-                    <a href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d" target="_blank"
-                        class="icoFacebook text-light  p-2" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr" target="_blank" class="icoGoogle text-light p-2" title="instagram +"><i
-                        class="fa-brands fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/in/edexcel-edu-130983310/" class="icoGoogle text-light p-2" target="_blank" title="Linked-in +"><i
-                        class="fa-brands fa-linkedin"></i></a>
-                    </li> -->
+                <li>
+                <a href="{{ route('hire.tutor') }}" class="hiring-button">
+                            Book A demo
+                                </a>
+                                <!-- <button class="p-2 bg_theme_green btn-an rounded border-0 text-light">
+                            <a class="text-light text-decoration-none active solid_btn" aria-current="page"
+                                href="{{ route('hire.tutor') }}">{{__('messages.hire_tutor')}}</a>
+
+                        </button> -->
+                </li>
                 </ul>
-                <div class="fixed" id="social">
-                        <a target="_blank"
-                            href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d"
-                        >
-                            <i class="fa-brands fa-facebook" aria-hidden="true"></i>
-                        </a>
-                        <a target="_blank"
-                            href="https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr"
-                        >
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-                        <a target="_blank" href="https://www.linkedin.com/in/edexcel-edu-130983310/">
-                            <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
-                        </a>
+
+                
+                <div>
+                <!-- <h1>{{ __('messages.welcome') }}</h1> -->
+                
+
+                    <ul  class="icons d-flex p-2 m-0 justify-content-center align-items-center gap-3" style="list-style:none;">   
+                    
+                    <div>
+                        <label class="text-white" style="font-size:12px;">Swtich language from there</label>
+                        <select id="language-select" onchange="changeLanguage()">
+                            <option value="en" {{ session('locale') == 'en' ? 'selected' : '' }}>English</option>
+                            <option value="ar" {{ session('locale') == 'ar' ? 'selected' : '' }}>Arabic</option>
+                        </select>
+                        </div>
+                        <li class=" p-2 header-phone-number">
+                        
+                            <i class="fa-solid fa-phone text-light" aria-hidden="true"></i>
+                            <a class="text-decoration-none text-light" href="tel:+971566428066">+971 56 642 8066</a>
+                        </li>
+                        <!-- <li>
+                        <a href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d" target="_blank"
+                            class="icoFacebook text-light  p-2" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr" target="_blank" class="icoGoogle text-light p-2" title="instagram +"><i
+                            class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/edexcel-edu-130983310/" class="icoGoogle text-light p-2" target="_blank" title="Linked-in +"><i
+                            class="fa-brands fa-linkedin"></i></a>
+                        </li> -->
+                    </ul>
+                    <div class="fixed" id="social">
+                            <a target="_blank"
+                                href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d"
+                            >
+                                <i class="fa-brands fa-facebook" aria-hidden="true"></i>
+                            </a>
+                            <a target="_blank"
+                                href="https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr"
+                            >
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                            <a target="_blank" href="https://www.linkedin.com/in/edexcel-edu-130983310/">
+                                <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+                            </a>
+                    </div>
+                    {{-- <a href="#" class="btn notify position-relative"><i class="fa-regular fa-bell text-white"></i><span class="position-absolute top-10 start-60 translate-middle p-1 bg-danger border border-light rounded-circle">
+                        <span class="visually-hidden">New alerts</span>
+                    </span></a> --}}
                 </div>
-                {{-- <a href="#" class="btn notify position-relative"><i class="fa-regular fa-bell text-white"></i><span class="position-absolute top-10 start-60 translate-middle p-1 bg-danger border border-light rounded-circle">
-                    <span class="visually-hidden">New alerts</span>
-                </span></a> --}}
             </div>
-        </div>
-        <!-- <div class="notification mb-2 w-25 p-2 bg-info-subtle position-absolute end-0 top-100 z-1">This is a demo</div> -->
+            <!-- <div class="notification mb-2 w-25 p-2 bg-info-subtle position-absolute end-0 top-100 z-1">This is a demo</div> -->
     </div>
 
 
-    <div class="wrapper container-fluid">
-        <main class="container">
+    <div class="wrapper container">
+       
             <!-- WhatsApp Button html start -->
             <div class="whatsApp_button_Warpper12">
                 <div class="whatsAppMsgBox12">
@@ -219,25 +200,96 @@
 
 
 
-<section class="popular-subjects">
-<h3 class="text-center">Popular Subjects & Courses</h3>
-<div class="color-main-div">
-    <div class="color-div"></div>
-</div>
-<h4 class="text-center">Featured Learning Paths</h4>
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-            </main>
+            <section>
+            <h3 class="text-center">Popular Subjects & Courses</h3>
+            <div class="color-main-div">
+                <div class="color-div"></div>
             </div>
+            <h4 class="text-center">Featured Learning Paths</h4>
+       
+            <div class="row g-3">
+                
+                <div class="col-4">
+                    <div class=" teacher-main-parent">
+                    <div class="card h-100 teacher-card-wrapper border-0">
+                        <div class="card-div">
+                            <div class="hadding">
+                                <h3>AGE 5-7</h3>
+                                <h4>KS1</h4>
+                            </div>
+                            <div class="img-teacher">
+                                
+                                <div class="deatil">
+                                    <h3>All Subject</h3>
+                                    <p>English,Math,phonics,science.</p>
+                                </div>
+                                <div class="img-card">
+                                    <img src="{{ asset('images/study-removebg-preview.png') }}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class=" teacher-main-parent">
+                    <div class="card h-100 teacher-card-wrapper border-0">
+                        <div class="card-div">
+                            <div class="hadding">
+                                <h3>AGE 5-7</h3>
+                                <h4>KS1</h4>
+                            </div>
+                            <div class="img-teacher">
+                                
+                                <div class="deatil">
+                                    <h3>All Subject</h3>
+                                    <p>English,Math,phonics,science.</p>
+                                </div>
+                                <div class="img-card">
+                                    <img src="{{ asset('images/study-removebg-preview.png') }}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class=" teacher-main-parent">
+                    <div class="card h-100 teacher-card-wrapper border-0">
+                        <div class="card-div">
+                            <div class="hadding">
+                                <h3>AGE 5-7</h3>
+                                <h4>KS1</h4>
+                            </div>
+                            <div class="img-teacher">
+                                
+                                <div class="deatil">
+                                    <h3>All Subject</h3>
+                                    <p>English,Math,phonics,science.</p>
+                                </div>
+                                <div class="img-card">
+                                    <img src="{{ asset('images/study-removebg-preview.png') }}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    </div>
+                </div>
+                </div>
+        </section>
+
+
+    </div>
+          
+
+
+            
     @endsection
+
+
+    <script>
+  AOS.init();
+</script>

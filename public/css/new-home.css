@@ -310,3 +310,97 @@ font-size: 12px;
 text-decoration: none;
 color: black !important;
 }
+
+.color-div{
+    height: 6px !important;
+    width: 50px !important;
+   background-color: red;
+   /* text-align: center; */
+/* padding: 3px 0; */
+}
+.color-main-div{
+    display: flex;
+    justify-content: center;
+    padding: 4px 0;
+}
+
+.hading h1{
+font-size: 35px;
+color: #454545;
+text-align: center;
+font-weight: 600;
+}
+.hading h3{
+color: #454545;
+text-align: center;
+font-weight: 600;
+font-size: 26px;
+margin-top: 20px;
+}
+.hadding{
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin: 5px 12px;
+}
+.hadding h3{
+color: #42b979;
+font-size: 35px;
+}
+.hadding h4{
+font-size: 35px;
+color: #454545;
+}
+.deatil{
+margin: 17px 10px;
+}
+.teacher-main-parent:hover{
+cursor: pointer;
+box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+transform: scale(1.1);
+z-index: 1;
+box-shadow: 0 2px 5px #ddd;
+}
+.teacher-main-parent{
+height: 210px;
+box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+border-radius: 10px;
+margin: 10px;
+transition: 0.5s;
+overflow: hidden;
+}
+/* .row{
+display: flex;
+justify-content: space-evenly;
+align-items: center;
+} */
+.teacher-card-wrapper{
+border: none;
+border-radius: 5px;
+}
+.deatil h3{
+font-size: 25px;
+color: #42b979;
+font-weight: 500;
+}
+.deatil p{
+font-size: 12px;
+color: #454545;
+}
+
+.img-teacher{
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.img-card{
+display: flex;
+justify-content: end;
+position: absolute;
+top: 49px;
+left: 0;
+right: -12px;
+}
+.img-card img{
+width: 45%;
+}

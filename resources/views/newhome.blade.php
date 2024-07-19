@@ -19,6 +19,11 @@
                         Book A demo
                             </a>
              </li>
+             <li>
+             <a href="{{ route('hiring-tutor') }}" class="hiring-button">
+                        New page
+                            </a>
+             </li>
             </ul>
             <div>
             <!-- <h1>{{ __('messages.welcome') }}</h1> -->
@@ -69,8 +74,7 @@
         </div>
         <div class="notification mb-2 w-25 p-2 bg-info-subtle position-absolute end-0 top-100 z-1">This is a demo</div>
     </div>
-    <div class="wrapper container-fluid">
-        <main class="container">
+    <div class="wrapper container">
             <!-- WhatsApp Button html start -->
             <div class="whatsApp_button_Warpper12">
                 <div class="whatsAppMsgBox12">
@@ -1118,14 +1122,12 @@
                     </button>
                 </div>
             </section>
-        </main>
     </div>
 
     <button class="goToTop fw-20px" style="background-color:#42B979" onclick="window.scrollTo(0, 0)"><i
             class="fa-solid fa-chevron-up"></i></button>
 
     <!-- footer start... -->
-
 
 @endsection
 
@@ -1135,6 +1137,8 @@
             
         });
     </script> --}}
+
+    
     <script>
         
 

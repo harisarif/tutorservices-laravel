@@ -60,7 +60,6 @@
 </div>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
         {{-- <livewire:layout.navigation /> --}}
 
         <!-- Page Heading -->
@@ -79,7 +78,6 @@
             @include('layouts.footer')
             @yield('js')
         </main>
-    </div>
 </body>
 
 </html>
