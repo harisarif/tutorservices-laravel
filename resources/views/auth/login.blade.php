@@ -1,14 +1,33 @@
 @extends('layouts.app')
 <style>
     footer {
-        display: none !important;
+        /* display: none !important; */
+        position: absolute;
+        bottom: 0;
+        left: 0;
     }
     .modalBox{
         display: none !important;
     }
+    .card-header{
+        background: #42b979 !important;
+    color: white !important;
+}
+.login-button{
+    background: #42b979 !important;
+    border: none !important;
+}
 </style>
 @section('content')
+<header class="main_header d-flex  py-2 align-items-end justify-content-center">
+        {{-- <a class="nav-link active px-3 py-0 fw-bold" aria-current="page" href="./hire_tutor.html"><i>&#8592; Hire
+                Tutor</i></a> --}}
+        <a class="arrow" href="{{ route('newhome') }}"><img style="height: 50px" src="{{asset('images/logo.png')}}" alt="EDEXCEL-logo"
+                                                          height="50px"></a>
+
+    </header>
 <div class="container mt-5" id="login">
+
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -60,7 +79,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary login-button">
                                     {{ __('Login') }}
                                 </button>
 
@@ -76,5 +95,6 @@
             </div>
         </div>
     </div>
+    
 </div>
 @endsection
