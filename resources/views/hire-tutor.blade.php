@@ -26,41 +26,8 @@
                                                           height="50px"></a>
 
     </header>
+    @include('whatsapp')
     <main class="hireTutor">
-    <div class="whatsApp_button_Warpper12">
-                <div class="whatsAppMsgBox12">
-                    <div class="WhatsApp_Msg_Box_header">
-                        <img src="./images/whatsapp_dp.png" alt="whatsapp_dp" />
-                        <div class="information">
-                            <h4>Edexcel</h4>
-                            <p>typing..</p>
-                        </div>
-                    </div>
-                    <div class="WhatsApp_Msg_Aria">
-                        <div class="WhatsApp_button_Msg">
-                            <p>
-                                Welcome to Edexcel Academy! <br />Empowering futures with
-                                Edexcel Academy & Consultancy.
-                            </p>
-                        </div>
-                        <div class="startChat_wrapper">
-                            <a href="https://wa.me/+971566428066?text=Hi%20there,%20I%20visited%20the%20website%20of%20Edexcel%20Academy%20&%20Consultancy%20and%20I'm%20interested%20in%20learning%20more%20about%20your%20services.%20Could%20you%20please%20provide%20me%20with%20some%20information%20or%20arrange%20a%20call%20to%20discuss%20further?%20Thanks!"
-                                target="_blank" class="start_chat">
-                                <i class="fab fa-whatsapp" aria-hidden="true"></i> Start
-                                Chat</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="Toggle_WhatsApp_Button_Wrapper">
-                    <div class="Toggle_WhatApp_Chat_Box">
-                        <input type="checkbox" id="toggleWhatsAppChat" />
-                        <label for="toggleWhatsAppChat">
-                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                        </label>
-                    </div>
-                </div>
-            </div>
         <div class="row m-0 px-4">
             <div class="main-page col-12 col-md-6 mx-auto my-3 p-0 text-center ">
                 <!-- page-1 header -->
@@ -116,32 +83,32 @@
                                 <input required name="email" type="email" placeholder="*Email"  class="inp-1">
                                 <!-- <div class="row"> -->
                                     <div class="col-md-11 px-2 mb-2 ps-5">
-                                        <div class="input-group d-flex justify-content-between align-items-center">
+                                        <div class="input-group d-flex justify-content-between align-items-center" style="width: 557px;px">
                                             <select name="countrySelect" id="countrySelect" class="form-select country-select w-50" required>
                                                 @foreach ($countries as $key => $country)
                                                     <option value="{{ $key }}">{{ $country }}</option>
                                                 @endforeach
                                             </select>
-                                            <input class="form-control w-50" required name="phone" id="phone" type="text" placeholder="e.g +92XXXXXXXXXX">
+                                            <input  class="form-control w-50" required name="phone" id="phone" type="text" placeholder="e.g +92XXXXXXXXXX" style="border: 1px solid #aaa; height: 35px; box-shadow: none;">
                                         </div>
                                     </div>
                                 <!-- </div> -->
-                                <div class="col-12 ">
-                                    
-                               
-                                <label for="classStartTime" class="d-block text-start " style=" width: 86%; margin: 0 auto; font-weight: 600;">Starting time</label>
+                    <div class="col-12 ">
+                               <div class="input-design">
+                            <div class="input-div">
 
+                               <label for="classStartTime" class="d-block text-start " style=" width: 86%; margin: 0 auto; font-weight: 600;">Starting time</label>
                                 <input class="inp-1" title="Class start time" type="time" name="class_start_time" id="classStartTime">
-
-                                <label for="classEndTime" class="d-block text-start " style=" width: 86%; margin: 0 auto; font-weight: 600;">Ending time</label>
-
-                                <input class="inp-1" title="Class end time" type="time" name="class_end_time" id="classEndTime">
-
-
-                                </div>
+                            </div>
+                        <div class="input-box">
+                            <label for="classEndTime" class="d-block text-start " style=" width: 86%; margin: 0 auto; font-weight: 600;">Ending time</label>
+                            <input class="inp-1" title="Class end time" type="time" name="class_end_time" id="classEndTime">
+                            </div>
+                          </div>
+                            </div>
 
                             </div>
-                        </div>
+                     </div>
 
                         <!-- page-3 -->
                         <div class="col-12 px-5 py-4 d-none" id="page-3">
@@ -215,12 +182,7 @@
 
 
             </div>
-
-
-
         </div>
-        </div>
-
         
     </main>
     <script src="./js/hire_tutor.js"></script>

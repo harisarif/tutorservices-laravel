@@ -146,79 +146,37 @@
     @endif
     @section('content')
 <body>
-<header class="text-center bg-light m-0 p-2 d-flex align-items-end justify-content-center">
+<header class="text-center bg-white m-0 p-2 d-flex align-items-end justify-content-center">
             <!-- <a class="nav-link active  px-3" aria-current="page" href="./hire_tutor.html"><i> &#8592; Hire Tutor</i></a> -->
             <a class="mx-auto" href="{{ route('newhome') }}"><img src="{{ asset('images/logo.png') }}" alt="EDEXCEL-logo"
                     height="50px"></a>
 
         </header>
+        
+    @include('whatsapp')
     <main class="container-fluid m-0 bg-body-secondary p-0">
        
-        <div class="whatsApp_button_Warpper12">
-                <div class="whatsAppMsgBox12">
-                    <div class="WhatsApp_Msg_Box_header">
-                        <img src="./images/whatsapp_dp.png" alt="whatsapp_dp" />
-                        <div class="information">
-                            <h4>Edexcel</h4>
-                            <p>typing..</p>
-                        </div>
-                    </div>
-                    <div class="WhatsApp_Msg_Aria">
-                        <div class="WhatsApp_button_Msg">
-                            <p>
-                                Welcome to Edexcel Academy! <br />Empowering futures with
-                                Edexcel Academy & Consultancy.
-                            </p>
-                        </div>
-                        <div class="startChat_wrapper">
-                            <a href="https://wa.me/+971566428066?text=Hi%20there,%20I%20visited%20the%20website%20of%20Edexcel%20Academy%20&%20Consultancy%20and%20I'm%20interested%20in%20learning%20more%20about%20your%20services.%20Could%20you%20please%20provide%20me%20with%20some%20information%20or%20arrange%20a%20call%20to%20discuss%20further?%20Thanks!"
-                                target="_blank" class="start_chat">
-                                <i class="fab fa-whatsapp" aria-hidden="true"></i> Start
-                                Chat</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="Toggle_WhatsApp_Button_Wrapper">
-                    <div class="Toggle_WhatApp_Chat_Box">
-                        <input type="checkbox" id="toggleWhatsAppChat" />
-                        <label for="toggleWhatsAppChat">
-                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                        </label>
-                    </div>
-                </div>
-            </div>
         <div class="d-flex justify-content-center">
             <form class="bg-light rounded shadow p-3" method="POST" action="{{ route('tutor-create') }}"
-                enctype="multipart/form-data">
+                enctype="multipart/form-data" style="margin:15px 0;">
                 @csrf
 
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
                         <label for="f_name" class="form-label">First Name</label> <span class="text-danger fs-4">*</span>
-                        <input type="text" class="form-control" id="f_name" name="f_name" required />
+                        <input type="text" class="form-control" id="f_name" name="f_name" required style="box-shadow: none;border: 1px solid #aaa;">
                     </div>
                     <div class="col-md-6 px-2 mb-2">
                         <label for="l_name" class="form-label">Last Name</label> <span class="text-danger fs-4">*</span>
-                        <input type="text" class="form-control" id="l_name" name="l_name" required />
+                        <input type="text" class="form-control" id="l_name" name="l_name" required  style="box-shadow: none;border: 1px solid #aaa;">
                     </div>
                 </div>
-                {{--            <div class="form-row d-flex flex-column flex-md-row"> --}}
-                {{--                <div class="col-md-6 px-2 mb-2"> --}}
-                {{--                    <label for="name" class="form-label">Set passward</label> --}}
-                {{--                    <input type="password" class="form-control" id="passward" required /> --}}
-                {{--                </div> --}}
-                {{--                <div class="col-md-6 px-2 mb-2"> --}}
-                {{--                    <label for="name" class="form-label">Confirm passward</label> --}}
-                {{--                    <input type="password" class="form-control" id="passward" required /> --}}
-
-                {{--                </div> --}}
-                {{--            </div> --}}
+               
 
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
                         <label for="email" class="form-label">Email</label> <span class="text-danger fs-4">*</span>
-                        <input type="email" class="form-control" id="email" name="email" required />
+                        <input type="email" class="form-control" id="email" name="email" required style="box-shadow: none;border: 1px solid #aaa;">
                     </div>
                     <div class="col-md-6 px-2 mb-2">
                         <label for="gender" class="form-label">Gender</label> <span class="text-danger fs-4">*</span>
@@ -230,32 +188,18 @@
                 </div>
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
-                        <!-- <div class="form-group">
-                            <label for="dob" class="form-label">DOB <span class="text-danger fs-4">*</span></label>
-                            <div class="input-group date" id="datepicker">
-                                <input type="text" class="form-control" id="date" name="dob" placeholder="Date of Birth" required />
-                                <div class="input-group-append">
-                                    <span class="input-group-text bg-light d-block">
-                                        <i class="fa fa-calendar"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div> -->
-
-
                        <div class="form-group">
-        <label for="datePicker" class="date-picker-label" >DOB <span class="text-danger fs-4"> *</span></label>
-   
-        <input type="date" id="datePicker" class="date-picker-input" name="dob">
+                            <label for="datePicker" class="date-picker-label" >DOB <span class="text-danger fs-4"> *</span></label>
+                                <input type="date" id="datePicker" class="date-picker-input" name="dob">
       
         
-</div>
+                        </div>
 
 
                     </div>
                     <div class="col-md-6 px-2 mb-2">
                         <label for="qualification" class="form-label">Recent Degree</label> <span class="text-danger fs-4">*</span>
-                        <input type="text" class="form-control" id="qualification" name="qualification" required />
+                        <input type="text" class="form-control" id="qualification" name="qualification" required style="box-shadow: none;border: 1px solid #aaa;">
                     </div>
                 </div>
 
@@ -277,7 +221,7 @@
                     <div class="col-md-6 px-2 mb-2">
                         <label for="experience" class="form-label">Experience (in years)</label> <span class="text-danger fs-4">*</span>
                         <input type="number" min="0" class="form-control" id="experience" name="experience"
-                            required />
+                            required style="box-shadow: none;border: 1px solid #aaa;">
                     </div>
                 </div>
                 <div class="form-row d-flex flex-column flex-md-row">
@@ -536,11 +480,11 @@
                                         <option value="ZM">Zambia</option>
                                         <option value="ZW">Zimbabwe</option>
                         </select>
-                        {{-- <input type="text" class="form-control" id="location" name="location" required /> --}}
+                        {{-- <input type="text" class="form-control" id="location" name="location" required style="box-shadow: none;border: 1px solid #aaa;"> --}}
                     </div>
                     <div class="col-md-6 px-2 mb-2">
                         <label for="mobile" class="form-label">City</label> <span class="text-danger fs-4">*</span>
-                        <input type="text" class="form-control" id="city" name="city" required />
+                        <input type="text" class="form-control" id="city" name="city" required style="box-shadow: none;border: 1px solid #aaa;">
                     </div>
                 </div>
                 <div class="form-row d-flex flex-column flex-md-row">
@@ -552,12 +496,12 @@
                                     <option value="{{ $key }}">{{ $country }}</option>
                                 @endforeach
                             </select>
-                            <input type="text" class="form-control w-50" id="phone" name="phone" placeholder="e.g +92XXXXXXXXXX" required />
+                            <input type="text" class="form-control w-50" id="phone" name="phone" placeholder="e.g +92XXXXXXXXXX" required style="box-shadow: none;border: 1px solid #aaa;">
                         </div>
                     </div>
                     <div class="col-md-6 px-2 mb-2">
                         <label for="whatsapp" class="form-label">WhatsApp Number</label> <span class="text-danger fs-4">*</span>
-                        <input type="text" class="form-control" id="whatsapp" name="whatsapp" placeholder="e.g +92XXXXXXXXXX" required />
+                        <input type="text" class="form-control" id="whatsapp" name="whatsapp" placeholder="e.g +92XXXXXXXXXX" required style="box-shadow: none;border: 1px solid #aaa;">
                     </div>
                 </div>
 
@@ -565,7 +509,7 @@
                     <div class="col-md-6 px-2 mb-2">
                         <label for="profilePicture" class="form-label">Profile Picture</label> <span class="text-danger fs-4">*</span>
                         <input type="file" class="form-control" id="profilePicture" required
-                            name="profileImage" />
+                            name="profileImage" style="box-shadow: none;">
 
 
                     </div>
@@ -579,7 +523,7 @@
                     </div>
                 </div>
                 <div class="col-12 px-2 py-2"><label for="curriculum" class="form-label">Description (Optional)</label>
-                    <textarea class="form-control" id="curriculum" name="curriculum[]" rows="2" placeholder="Add comma after one"></textarea>
+                    <textarea class="form-control" id="curriculum" name="curriculum[]" rows="2" placeholder="Add comma after one" style="box-shadow: none;border: 1px solid #aaa;"></textarea>
                 </div>
 
                 <div class="col d-flex justify-content-center py-3">
