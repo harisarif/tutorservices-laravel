@@ -90,6 +90,9 @@
 .detail-div{
     padding: 5px 0;
 }
+.modalBox{
+    display: none !important;
+}
 /* .btn-success{
     width: 150px;
     border-radius: 20px;

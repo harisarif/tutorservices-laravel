@@ -1,6 +1,11 @@
 
 @extends('layouts.app')
 <link rel="stylesheet" href="{{ asset('css/new-home.css') }}">
+<style>
+    .modalBox{
+        display: none !important;
+    }
+</style>
 @section('content')
     @if (session('success'))
         <div class="alert alert-success">
@@ -14,46 +19,30 @@
                         <i class="fa fa-envelope-square text-light" aria-hidden="true"></i>
                         <a class="text-decoration-none text-light" href="mailto:info@eduexceledu.com">info@eduexceledu.com</a>
                     </li>
-                <li>
-                <a href="{{ route('hire.tutor') }}" class="hiring-button">
-                            Book A demo
-                                </a>
-                                <!-- <button class="p-2 bg_theme_green btn-an rounded border-0 text-light">
-                            <a class="text-light text-decoration-none active solid_btn" aria-current="page"
-                                href="{{ route('hire.tutor') }}">{{__('messages.hire_tutor')}}</a>
 
-                        </button> -->
-                </li>
+                    <li>
+                          <a href="{{ route('hire.tutor') }}" class="hiring-button">Book A demo</a>               
+                    </li>
                 </ul>
 
-                
                 <div>
-                <!-- <h1>{{ __('messages.welcome') }}</h1> -->
-                
-
                     <ul  class="icons d-flex p-2 m-0 justify-content-center align-items-center gap-3" style="list-style:none;">   
-                    
-                    <div>
-                        <label class="text-white" style="font-size:12px;">Swtich language from there</label>
-                        <select id="language-select" onchange="changeLanguage()">
-                            <option value="en" {{ session('locale') == 'en' ? 'selected' : '' }}>English</option>
-                            <option value="ar" {{ session('locale') == 'ar' ? 'selected' : '' }}>Arabic</option>
-                        </select>
-                        </div>
+
+                            <div>
+                                <label class="text-white" style="font-size:12px;">Swtich language from there</label>
+                                <select id="language-select" onchange="changeLanguage()">
+                                    <option value="en" {{ session('locale') == 'en' ? 'selected' : '' }}>English</option>
+                                    <option value="ar" {{ session('locale') == 'ar' ? 'selected' : '' }}>Arabic</option>
+                                </select>
+                                </div>
                         <li class=" p-2 header-phone-number">
-                        
+
                             <i class="fa-solid fa-phone text-light" aria-hidden="true"></i>
                             <a class="text-decoration-none text-light" href="tel:+971566428066">+971 56 642 8066</a>
                         </li>
-                        <!-- <li>
-                        <a href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d" target="_blank"
-                            class="icoFacebook text-light  p-2" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr" target="_blank" class="icoGoogle text-light p-2" title="instagram +"><i
-                            class="fa-brands fa-instagram"></i></a>
-                        <a href="https://www.linkedin.com/in/edexcel-edu-130983310/" class="icoGoogle text-light p-2" target="_blank" title="Linked-in +"><i
-                            class="fa-brands fa-linkedin"></i></a>
-                        </li> -->
-                    </ul>
+                        
+                        </ul>
+                    </div>
                     <div class="fixed" id="social">
                             <a target="_blank"
                                 href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d"
@@ -74,13 +63,11 @@
                     </span></a> --}}
                 </div>
             </div>
-            <!-- <div class="notification mb-2 w-25 p-2 bg-info-subtle position-absolute end-0 top-100 z-1">This is a demo</div> -->
     </div>
 
 
     <div class="wrapper container">
-       
-            <!-- WhatsApp Button html start -->
+
             <div class="whatsApp_button_Warpper12">
                 <div class="whatsAppMsgBox12">
                     <div class="WhatsApp_Msg_Box_header">
@@ -145,9 +132,6 @@
                     </div>
                 </div>
             </nav>
-            <!-- header end -->
-
-            <!-- banner start -->
             <section class="row banner-section">
             
                 <div class="col-12 col-md-6 intro_lines mx-0 my-5">
@@ -165,8 +149,7 @@
                     </div>
                 </div>
             </section>
-            <!--  -->
-            
+
             <section>
                 <div class="row g-3">
                     
@@ -176,30 +159,31 @@
                         </div>
                             <h4 class="text-center">Featured Learning Paths</h4>
                         <div class="col-4">
-                            <div class=" teacher-main-parent">
-                            <div class="card h-100 teacher-card-wrapper border-0">
-                                <div class="card-div">
-                                    <div class="hadding">
-                                        <h3>AGE 5-7</h3>
-                                        <h4>KS1</h4>
-                                    </div>
-                                    <div class="img-teacher">
-                                        
-                                        <div class="deatil">
-                                            <h3>All Subject</h3>
-                                            <p>English,Math,phonics,science.</p>
+                           <a href="{{route('tutor.detail')}}" style="text-decoration: none;cursor: pointer;"> <div class=" teacher-main-parent">
+                                <div class="card h-100 teacher-card-wrapper border-0">
+                                    <div class="card-div">
+                                        <div class="hadding">
+                                            <h3>AGE 5-7</h3>
+                                            <h4>KS1</h4>
                                         </div>
-                                        <div class="img-card">
-                                            <img src="{{ asset('images/study-removebg-preview.png') }}" alt="">
+                                        <div class="img-teacher">
+                                            
+                                            <div class="deatil">
+                                                <h3>All Subject</h3>
+                                                <p>English,Math,phonics,science.</p>
+                                            </div>
+                                            <div class="img-card">
+                                                <img src="{{ asset('images/study-removebg-preview.png') }}" alt="">
+                                            </div>
                                         </div>
                                     </div>
+                                
                                 </div>
-                            
-                            </div>
+                            </a>
                             </div>
                         </div>
                         <div class="col-4">
-                            <a href="{{route('tutor.detail')}}">
+                            <a href="{{route('tutor.detail')}}" style="text-decoration: none;cursor: pointer;">
                                 <div class=" teacher-main-parent">
                                 <div class="card h-100 teacher-card-wrapper border-0">
                                     <div class="card-div">
@@ -224,6 +208,7 @@
                             </a>
                         </div>
                         <div class="col-4">
+                         <a href="{{route('tutor.detail')}}" style="text-decoration: none;cursor: pointer;">
                             <div class=" teacher-main-parent">
                             <div class="card h-100 teacher-card-wrapper border-0">
                                 <div class="card-div">
@@ -245,8 +230,10 @@
                             
                             </div>
                             </div>
+                         </a>    
                         </div>
                         <div class="col-4">
+                         <a href="{{route('tutor.detail')}}" style="text-decoration: none;cursor: pointer;">
                             <div class=" teacher-main-parent">
                             <div class="card h-100 teacher-card-wrapper border-0">
                                 <div class="card-div">
@@ -268,8 +255,10 @@
                             
                             </div>
                             </div>
+                         </a> 
                         </div>
                         <div class="col-4">
+                         <a href="{{route('tutor.detail')}}" style="text-decoration: none;cursor: pointer;">
                             <div class=" teacher-main-parent">
                             <div class="card h-100 teacher-card-wrapper border-0">
                                 <div class="card-div">
@@ -291,8 +280,10 @@
                             
                             </div>
                             </div>
+                          </a>
                         </div>
                         <div class="col-4">
+                         <a href="{{route('tutor.detail')}}" style="text-decoration: none;cursor: pointer;">
                             <div class=" teacher-main-parent">
                             <div class="card h-100 teacher-card-wrapper border-0">
                                 <div class="card-div">
@@ -314,6 +305,7 @@
                             
                             </div>
                             </div>
+                           </a>  
                         </div>
                     </div>
             </section>
