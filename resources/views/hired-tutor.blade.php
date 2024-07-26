@@ -199,27 +199,29 @@
                             </div>
                         </div>
                         <div class="col-4">
-                            <div class=" teacher-main-parent">
-                            <div class="card h-100 teacher-card-wrapper border-0">
-                                <div class="card-div">
-                                    <div class="hadding">
-                                        <h3>AGE 5-7</h3>
-                                        <h4>KS1</h4>
-                                    </div>
-                                    <div class="img-teacher">
-                                        
-                                        <div class="deatil">
-                                            <h3>All Subject</h3>
-                                            <p>English,Math,phonics,science.</p>
+                            <a href="{{route('tutor.detail')}}">
+                                <div class=" teacher-main-parent">
+                                <div class="card h-100 teacher-card-wrapper border-0">
+                                    <div class="card-div">
+                                        <div class="hadding">
+                                            <h3>AGE 5-7</h3>
+                                            <h4>KS1</h4>
                                         </div>
-                                        <div class="img-card">
-                                            <img src="{{ asset('images/study-removebg-preview.png') }}" alt="">
+                                        <div class="img-teacher">
+                                            
+                                            <div class="deatil">
+                                                <h3>All Subject</h3>
+                                                <p>English,Math,phonics,science.</p>
+                                            </div>
+                                            <div class="img-card">
+                                                <img src="{{ asset('images/study-removebg-preview.png') }}" alt="">
+                                            </div>
                                         </div>
                                     </div>
+                                
                                 </div>
-                            
-                            </div>
-                            </div>
+                                </div>
+                            </a>
                         </div>
                         <div class="col-4">
                             <div class=" teacher-main-parent">

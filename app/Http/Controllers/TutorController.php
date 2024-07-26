@@ -42,6 +42,9 @@ class TutorController extends Controller
                 'perPage' => $perPage,
             ]);
         }
+        public function tutorDetail (){
+            return view('teacher-detail');
+        }
         public function changeLanguage(Request $request)
         {
             // dd($request);

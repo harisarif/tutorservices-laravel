@@ -41,6 +41,7 @@ Route::get('/tutor-signup', function () {
     return view('tutor-signup');
 })->name('tutor');
 Route::get('/hire-tutor', [StudentController::class, 'index'])->name('hire.tutor');
+Route::get('/tutor-detail', [TutorController::class, 'tutorDetail'])->name('tutor.detail');
 
 Route::get('/qr-code', [StudentController::class, 'qrcode'])->name('qrcode');
 Route::post('/hire-tutor/create', [StudentController::class, 'create'])->name('student-create');

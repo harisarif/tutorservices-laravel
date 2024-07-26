@@ -937,7 +937,7 @@
                 </div>
 
                 <!-- FQA Section -->
-                <div class="p-0">
+                <!-- <div class="p-0">
                     <div class="col-12">
                         <h2 class="py-0 my-4 text-center text-capitalize fw-bold">
                             Find tutors near your locality
@@ -963,7 +963,7 @@
                                 <b class="text-danger">Jumerirah Luke Towers</b> </a>
                         </li>
                     </ul>
-                </div>
+                </div> -->
                 <!-- FAQ -->
                 <div class="p-0" id="FAQ">
                     <div class="col-12">

@@ -1,0 +1,131 @@
+.hadding h1{
+    color: #42b979;
+    font-size: 60px;
+}
+.hadding h2{
+    font-size: 4rem;
+    color: #454545;
+    padding: 0 6px;
+}
+.hadding h3{
+    color: #454545;
+    font-size: 22px;
+    
+}
+.hadding{
+    padding: 10px 30px;
+}
+.row{
+    --bs-gutter-x:none;
+
+}
+.banner{
+    display: flex;
+    justify-content: space-between;
+}
+.Banner{
+    background-color: #FAFAFA;
+    border-bottom-right-radius: 170px;
+}
+.line{
+    background: #42b979;
+    border: 6px solid #42b979;
+    width: 60px;
+    margin: 10px 3px;
+}
+.img{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.img-card{
+    background-color: #42b979;
+    width: 100px;
+    border-radius: 200px;
+    overflow: hidden;
+    position: absolute;
+    top: 40px;
+    right: 150px;
+}
+.img-card img{
+    width: 100%;
+}
+.img-div {
+    width: 140px;
+    background: #42b979;
+    border-radius: 200px;
+    overflow: hidden;
+}
+.img-div img{
+    width: 100%;
+    height: 320px;
+}
+.position{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.img-card-div{
+    width: 40%;
+    padding: 45px 0;
+}
+.img-card-div img {
+    width: 100%;
+    border-radius: 15px;
+}
+.line{
+    background: #42b979;
+    border: 6px solid #42b979;
+    width: 60px;
+}
+.detail-div span i{
+    font-size: 20px;
+    color: #42B979;
+    padding: 0 5px;
+}
+.detail-div span{
+    color: #454545;
+    font-size: 16px;
+}
+.detail-div{
+    padding: 5px 0;
+}
+/* .btn-success{
+    width: 150px;
+    border-radius: 20px;
+    padding: 6px;
+    margin: 15px 0;
+    transition: 1s;
+}
+.btn-success:hover{
+    transform: scale(1.1);
+} */
+.kids{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.line-div{
+    background: #42b979;
+    border: 6px solid #42b979;
+    width: 63px;
+    margin: 10px 0;
+}
+.education{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.hadding-div h2{
+    text-transform: capitalize;
+    font-size: 25px;
+}
+.detail-box span i{
+    color: #42b979;
+    padding: 0 7px;
+}
+.detail-box span{
+    color: #454545;
+    font-size: 17px;
+    line-height: 30px;
+}
