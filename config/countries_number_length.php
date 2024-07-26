@@ -223,7 +223,7 @@ return [
         'TV' => 11, // Tuvalu
         'UG' => 11, // Uganda
         'UA' => 12, // Ukraine
-        'AE' => 12, // United Arab Emirates
+        'AE' => 13, // United Arab Emirates
         'GB' => 12, // United Kingdom
         'US' => 12, // United States
         'UM' => 11, // United States Minor Outlying Islands
