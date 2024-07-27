@@ -1,0 +1,43 @@
+:root {
+    --primary-color: #42b979;
+}
+#allModal {
+    display: none !important;
+}
+.ad-banner{
+    background-color: #fafafa;
+    border-bottom-right-radius: 170px;
+}
+.line{
+    border: 5px solid var(--primary-color);
+    width: 60px;
+    margin: 10px 0;
+}
+.ad-heading h3{
+    font-size: 25px;
+}
+.ad-heading h1{
+    color: var(--primary-color);
+    font-size: 50px;
+    text-transform: capitalize;
+}
+.ad-heading h4{
+    text-transform: capitalize;
+    color: #252525;
+    line-height: 30px;
+}
+.ad-line{
+    border: 5px solid var(--primary-color);
+    width: 60px;
+    margin: 17px 0;
+}
+.ad-heading-div h3{
+    font-size: 23px;
+    color:var(--primary-color) ;
+}
+.ad-instruction strong{
+    line-height: 35px;
+}
+.ad-para p a{
+    color:var(--primary-color) !important; 
+}

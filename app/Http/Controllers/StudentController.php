@@ -26,6 +26,9 @@ class StudentController extends Controller
     public function hiring() {
         return view('hired-tutor');
     }
+    public function termsCondition() {
+        return view('terms-condition');
+    }
     public function qrcode() {
         return view('qr-code');
     }

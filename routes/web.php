@@ -41,6 +41,7 @@ Route::get('/tutor-signup', function () {
     return view('tutor-signup');
 })->name('tutor');
 Route::get('/hire-tutor', [StudentController::class, 'index'])->name('hire.tutor');
+Route::get('/terms', [StudentController::class, 'termsCondition'])->name('terms.condition');
 Route::get('/tutor-detail', [TutorController::class, 'tutorDetail'])->name('tutor.detail');
 
 Route::get('/qr-code', [StudentController::class, 'qrcode'])->name('qrcode');
@@ -88,4 +89,4 @@ Route::view('profile', 'profile')
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/hiring', [StudentController::class, 'hiring'])->name('hiring-tutor');
+Route::get('/hiring', [App\Http\Controllers\HomeController::class, 'hiring'])->name('hiring-tutor');

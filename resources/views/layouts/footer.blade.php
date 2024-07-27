@@ -12,7 +12,7 @@
             </li>
             <li class="d-inline text-light">|</li>
             <li class="d-inline">
-                <a class="text-decoration-none text-light" href="#">Terms & Conditions</a>
+                <a class="text-decoration-none text-light" href="{{route('terms.condition')}}">Terms & Conditions</a>
             </li>
             <li class="d-inline text-light">|</li>
             <li class="d-inline text-light">Managed by</li>
