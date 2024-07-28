@@ -133,7 +133,9 @@
                 </div>
                 <div class="col-12 col-md-6 p-0">
                     <div class="image-wrapper">
-                        <img src="images/banner_img.png" class="full-img" alt="banner_img" />
+                        <!-- <img src="images/banner_img.png" class="full-img" alt="banner_img" /> -->
+                        <!-- <video src="images/banner.mp4" class="object-fit-cover mt-2" autoplay muted loop
+                        width="100%" style="width:300px;height:400px;"></video> -->
 
                     </div>
                 </div>
@@ -141,7 +143,7 @@
             <!--  -->
 
             <section class="row justify-content-center">
-                <div class="col-12 row-gap-1 p-1">
+                <div class="col-12 row-gap-1 p-1 d-none">
                     <a class="tutorLinks d-inline-block text-center text-decoration-none" href="{{ route('hire.tutor') }}">Browse
                         Tutor</a>
                     <a class="tutorLinks d-inline-block text-center text-decoration-none" href="#FAQ">FAQ</a>
@@ -758,9 +760,9 @@
                                 <div class="chk-box col-12 py-2 d-flex">
                                     <input type="checkbox" class="mb-3 d-none mx-2 common_checkbox" id="agreeWithTerm" />
                                     <label class="checkBox_label pointer d-flex align-item-center"
-                                        for="agreeWithTerm"><span class="px-1 b-text">I agree to the MyPrivateTutor<b
+                                        for="agreeWithTerm"><a style="text-decoration:none" href="{{route('terms.condition')}}" class="px-1 b-text">I agree to the Edexcel Academy & Educational Consultancy<b
                                                 class="text-danger">Terms &
-                                                Conditions</b></span>
+                                                Conditions</b></a>
                                     </label>
                                 </div>
                             </form>
@@ -770,7 +772,7 @@
                                 </button>
                             </div>
                             <span class="d-flex py-3 text-center">
-                                <span>Do you offer Tuition?<b class="text-success">REGISTER HERE!</b></span>
+                                <!-- <span>Do you offer Tuition?<b class="text-success">REGISTER HERE!</b></span> -->
                             </span>
                         </div>
 

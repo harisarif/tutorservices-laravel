@@ -1,5 +1,12 @@
 @extends('layouts.app')
-
+<style>
+    #allModal {
+            display: none !important;
+        }
+    #lazzyLoader {
+            display: none;
+        }
+</style>
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
