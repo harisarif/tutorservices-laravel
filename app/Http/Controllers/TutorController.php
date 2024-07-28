@@ -129,8 +129,11 @@ return response()->json($serializedData);
         $rules = [
             'f_name' => 'required|string|max:255',
             'l_name' => 'required|string|max:255',
+            'qualification'=> 'required|string|max:255',
             'profileImage' => 'required|image|mimes:jpeg,png,jpg|max:2048', // max:2048 is for maximum 2MB file size, adjust as needed
             'email' => 'required|string|email|max:255|unique:tutors,email',
+            'experience'=> 'required|string|max:255',
+
             
         ];
         // dd($request);
@@ -156,7 +159,7 @@ return response()->json($serializedData);
         $tutor->availability = $request->input('availability');
         $tutor->teaching = serialize($request->input('teaching'));
         $tutor->phone = $request->input('phone');
-        $tutor->whatsapp = $request->input('whatsapp');
+        // $tutor->whatsapp = $request->input('whatsapp');
 
         // Upload profile image
         $imagePath = $request->file('profileImage')->store('uploads', 'public');

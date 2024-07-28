@@ -862,7 +862,7 @@
                 <a href="#" class="learn_more">Learn More</a>
                 <a href="{{route('tutor')}}" class="signup_typ">Sign Up</a>
             </div>
-            <div class="signup_holder">
+            <div class="signup_holder d-none">
                 <div class="icon_holder">
                     <img src="{{asset('images/center_normal.png')}}" alt="" class="normal">
                     <img src="{{asset('images/center_active.png')}}" alt="" class="active">

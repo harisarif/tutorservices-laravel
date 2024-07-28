@@ -162,11 +162,11 @@
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
                         <label for="f_name" class="form-label">First Name</label> <span class="text-danger fs-4">*</span>
-                        <input type="text" class="form-control" id="f_name" name="f_name" required style="box-shadow: none;border: 1px solid #aaa;">
+                        <input type="text" class="form-control" id="f_name" name="f_name"   style="box-shadow: none;border: 1px solid #aaa;">
                     </div>
                     <div class="col-md-6 px-2 mb-2">
                         <label for="l_name" class="form-label">Last Name</label> <span class="text-danger fs-4">*</span>
-                        <input type="text" class="form-control" id="l_name" name="l_name" required  style="box-shadow: none;border: 1px solid #aaa;">
+                        <input type="text" class="form-control" id="l_name" name="l_name"    style="box-shadow: none;border: 1px solid #aaa;">
                     </div>
                 </div>
                
@@ -174,11 +174,11 @@
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
                         <label for="email" class="form-label">Email</label> <span class="text-danger fs-4">*</span>
-                        <input type="email" class="form-control" id="email" name="email" required style="box-shadow: none;border: 1px solid #aaa;">
+                        <input type="email" class="form-control" id="email" name="email"   style="box-shadow: none;border: 1px solid #aaa;">
                     </div>
                     <div class="col-md-6 px-2 mb-2">
                         <label for="gender" class="form-label">Gender</label> <span class="text-danger fs-4">*</span>
-                        <select class="form-select" id="gender" name="gender" required>
+                        <select class="form-select" id="gender" name="gender"  >
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
@@ -196,15 +196,15 @@
 
                     </div>
                     <div class="col-md-6 px-2 mb-2">
-                        <label for="qualification" class="form-label">Recent Degree</label> <span class="text-danger fs-4">*</span>
-                        <input type="text" class="form-control" id="qualification" name="qualification" required style="box-shadow: none;border: 1px solid #aaa;">
+                        <label for="qualification" class="form-label">Highest Qualifications</label> <span class="text-danger fs-4">*</span>
+                        <input type="text" class="form-control" id="qualification" name="qualification"   style="box-shadow: none;border: 1px solid #aaa;">
                     </div>
                 </div>
 
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
-                        <label for="teaching" class="form-label">Teaches</label> <span class="text-danger fs-4">*</span><br>
-                        <select class="form-select teaching" id="teaching" name="teaching[]" required>
+                        <label for="teaching" class="form-label">Subject You Can Teach</label> <span class="text-danger fs-4">*</span><br>
+                        <select class="form-select teaching" id="teaching" name="teaching[]"  >
                             <option value="english">English</option>
                             <option value="maths">Mathematics</option>
                             <option value="physics">Physics</option>
@@ -217,16 +217,16 @@
                         </select>
                     </div>
                     <div class="col-md-6 px-2 mb-2">
-                        <label for="experience" class="form-label">Experience (in years)</label> <span class="text-danger fs-4">*</span>
+                        <label for="experience" class="form-label">Experience (in teaching)</label> <span class="text-danger fs-4">*</span>
                         <input type="number" min="0" class="form-control" id="experience" name="experience"
-                            required style="box-shadow: none;border: 1px solid #aaa;">
+                              style="box-shadow: none;border: 1px solid #aaa;">
                     </div>
                 </div>
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
-                        <label for="location" class="form-label ">Residence Country</label> <span class="text-danger fs-4">*</span>
+                        <label for="location" class="form-label ">Country Residence</label> <span class="text-danger fs-4">*</span>
                         </br>
-                        <select class="form-select countries " id="location" required name="location">
+                        <select class="form-select countries " id="location"   name="location">
                             <option value="AE">United Arab Emirates</option>
                                         <option value="PK">Pakistan</option>
                                         <option value="IN">India</option>
@@ -478,42 +478,42 @@
                                         <option value="ZM">Zambia</option>
                                         <option value="ZW">Zimbabwe</option>
                         </select>
-                        {{-- <input type="text" class="form-control" id="location" name="location" required style="box-shadow: none;border: 1px solid #aaa;"> --}}
+                        {{-- <input type="text" class="form-control" id="location" name="location"   style="box-shadow: none;border: 1px solid #aaa;"> --}}
                     </div>
                     <div class="col-md-6 px-2 mb-2">
                         <label for="mobile" class="form-label">City</label> <span class="text-danger fs-4">*</span>
-                        <input type="text" class="form-control" id="city" name="city" required style="box-shadow: none;border: 1px solid #aaa;">
+                        <input type="text" class="form-control" id="city" name="city"   style="box-shadow: none;border: 1px solid #aaa;">
                     </div>
                 </div>
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
                         <label for="mobile" class="form-label">Mobile Number</label> <span class="text-danger fs-4">*</span>
                         <div class="input-group d-flex justify-content-between align-items-center">
-                            <select name="countrySelect" id="countrySelect" class="form-select country-select w-50" required>
+                            <select name="countrySelect" id="countrySelect" class="form-select country-select w-50"  >
                                 @foreach ($countries as $key => $country)
                                     <option value="{{ $key }}">{{ $country }}</option>
                                 @endforeach
                             </select>
-                            <input type="text" class="form-control w-50" id="phone" name="phone" placeholder="e.g +92XXXXXXXXXX" required style="box-shadow: none;border: 1px solid #aaa;">
+                            <input type="text" class="form-control w-50" id="phone" name="phone" placeholder="e.g +92XXXXXXXXXX"   style="box-shadow: none;border: 1px solid #aaa;">
                         </div>
                     </div>
-                    <div class="col-md-6 px-2 mb-2">
+                    <div class="col-md-6 px-2 mb-2 d-none">
                         <label for="whatsapp" class="form-label">WhatsApp Number</label> <span class="text-danger fs-4">*</span>
-                        <input type="text" class="form-control" id="whatsapp" name="whatsapp" placeholder="e.g +92XXXXXXXXXX" required style="box-shadow: none;border: 1px solid #aaa;">
+                        <input type="text" class="form-control" id="whatsapp" name="whatsapp" placeholder="e.g +92XXXXXXXXXX"   style="box-shadow: none;border: 1px solid #aaa;">
                     </div>
                 </div>
 
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
                         <label for="profilePicture" class="form-label">Profile Picture</label> <span class="text-danger fs-4">*</span>
-                        <input type="file" class="form-control" id="profilePicture" required
+                        <input type="file" class="form-control" id="profilePicture"  
                             name="profileImage" style="box-shadow: none;">
 
 
                     </div>
                     <div class="col-md-6 px-2 mb-2">
                         <label for="teaching" class="form-label">Available Time</label> <span class="text-danger fs-4">*</span>
-                        <select class="form-select" id="teaching" required name="availability">
+                        <select class="form-select" id="teaching"   name="availability">
                             <option selected>Select Time</option>
                             <option value="9:00AM to 10:00AM">9:00AM to 10:00AM</option>
                             <option value="10:00AM to 11:00AM">10:00AM to 11:00AM</option>
