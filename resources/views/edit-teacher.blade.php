@@ -51,6 +51,7 @@
             <select name="gender" id="gender" class="form-select" required>
                 <option value="male" {{ $tutor->gender == 'male' ? 'selected' : '' }}>Male</option>
                 <option value="female" {{ $tutor->gender == 'female' ? 'selected' : '' }}>Female</option>
+                <option value="other" {{ $tutor->gender == 'other' ? 'selected' : '' }}>Other</option>
             </select>
         </div>
 

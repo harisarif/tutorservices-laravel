@@ -134,7 +134,12 @@
         </style>
 
 @if ($errors->any())
-        <div class="alert alert-danger">
+        <div class="alert alert-danger" style="position: fixed; width: 28%; right: 0;width: 35%;
+  padding: 0 16px;
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 16px;">
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -158,8 +163,11 @@
             <form class="bg-light rounded shadow p-3" method="POST" action="{{ route('tutor-create') }}"
                 enctype="multipart/form-data" style="margin:15px 0;">
                 @csrf
-
+                <div class="ad-heading">
+                        <h3 style="text-align: center;color: red; padding: 10px; font-size: 23px;"><b>Please fill all mandatory fields</b></h3>
+                    </div>
                 <div class="form-row d-flex flex-column flex-md-row">
+                    
                     <div class="col-md-6 px-2 mb-2">
                         <label for="f_name" class="form-label">First Name</label> <span class="text-danger fs-4">*</span>
                         <input type="text" class="form-control" id="f_name" name="f_name"   style="box-shadow: none;border: 1px solid #aaa;">
@@ -486,9 +494,9 @@
                     </div>
                 </div>
                 <div class="form-row d-flex flex-column flex-md-row">
-                    <div class="col-md-6 px-2 mb-2">
+                    <div class="col-md-6 px-2 mb-2" >
                         <label for="mobile" class="form-label">Mobile Number</label> <span class="text-danger fs-4">*</span>
-                        <div class="input-group d-flex justify-content-between align-items-center">
+                        <div class="input-group d-flex justify-content-between align-items-center" style="width: 545px;">
                             <select name="countrySelect" id="countrySelect" class="form-select country-select w-50"  >
                                 @foreach ($countries as $key => $country)
                                     <option value="{{ $key }}">{{ $country }}</option>

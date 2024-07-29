@@ -25,7 +25,7 @@
 
                 <div class="Toggle_WhatsApp_Button_Wrapper">
                     <div class="Toggle_WhatApp_Chat_Box">
-                        <span style="    position: absolute; top: 14px; right: 0; left: -98px; font-size: 15px;background: #fff; width: 94px; border-radius: 6px; padding: 1px; text-align: center">Need Help?</span>
+                        <span style="    position: absolute; top: 14px; right: 0; left: -98px; font-size: 15px;background: #fff; width: 94px; color:#000; border-radius: 6px; padding: 1px; text-align: center">Need Help?</span>
                         <input type="checkbox" id="toggleWhatsAppChat" />
                         <label for="toggleWhatsAppChat">
                             <i class="fab fa-whatsapp" aria-hidden="true"></i>

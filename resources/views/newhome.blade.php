@@ -151,12 +151,12 @@
                     <hr />
                 </div>
                 <div class="col-12">
-                    <h3 class="d-flex justify-content-between align-items-center">
+                    <h3 class="d-flex justify-content-between align-items-center" style="color: #42b979;      font-size: 30px;">
                         World Wide Tutor
                         <i onclick="hideNShow('filter-col')" class="fa fa-filter text-secondary d-inline-block d-md-none"
                             aria-hidden="true"></i>
                     </h3>
-                    <p class="border p-2 description-tutor">
+                    <p class="border p-2 description-tutor"style="    color: #42b979; background: #fff;font-size: 17px;">
                         Edexcel is a platform that connects students with qualified tutors across the globe. It leverages online tools and technologies to provide personalized, flexible, and accessible educational support. The platform offers a wide range of subjects, catering to different educational levels, from primary school to High school. Edexcel ensures high-quality instruction by vetting tutors for their expertise and teaching skills. This global reach allows students to access diverse teaching styles and perspectives, fostering a richer learning experience. Additionally, the platform often includes features like one-on-one sessions, group classes, and customized lesson plans to meet individual learning needs.
                     </p>
                 </div>
@@ -974,6 +974,58 @@
                                 <i class="fa fa-chevron-down" id="toggle-arrow1"></i>
                             </div>
                             <div id="para1">
+                                <p>
+                                    There are many ways students can improve their skills. But
+                                    experienced tutors in Dubai can help to:
+                                </p>
+                                <ul>
+                                    <li>Build confidence in the student.</li>
+                                    <li>Encourage questioning and make space for curiosity.</li>
+                                    <li>Emphasize conceptual understanding over procedure.</li>
+                                    <li>
+                                        Provide authentic problems that increase students’ drive
+                                        to engage with the subject.
+                                    </li>
+                                    <li>Share a positive attitude about the subject.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="list-group-item border rounded my-2 px-2">
+                            <div class="d-flex justify-content-between align-items-center"
+                                onclick="toggle('para2','toggle-arrow2')">
+                                <h6 class="fw-bold py-3">
+                                Want to know what we can offer?
+                                </h6>
+                                <i class="fa fa-chevron-down" id="toggle-arrow1"></i>
+                            </div>
+                            <div id="para2">
+                                <p>
+                                    There are many ways students can improve their skills. But
+                                    experienced tutors in Dubai can help to:
+                                </p>
+                                <ul>
+                                    <li>Build confidence in the student.</li>
+                                    <li>Encourage questioning and make space for curiosity.</li>
+                                    <li>Emphasize conceptual understanding over procedure.</li>
+                                    <li>
+                                        Provide authentic problems that increase students’ drive
+                                        to engage with the subject.
+                                    </li>
+                                    <li>Share a positive attitude about the subject.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="list-group-item border rounded my-2 px-2">
+                            <div class="d-flex justify-content-between align-items-center"
+                                onclick="toggle('para3','toggle-arrow3')">
+                                <h6 class="fw-bold py-3">
+                                If you have tried all means and yet looking for a tutor❓
+                                </h6>
+                                <i class="fa fa-chevron-down" id="toggle-arrow1"></i>
+                            </div>
+                            <div id="para3">
                                 <p>
                                     There are many ways students can improve their skills. But
                                     experienced tutors in Dubai can help to:
