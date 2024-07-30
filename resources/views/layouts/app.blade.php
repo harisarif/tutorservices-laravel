@@ -5,7 +5,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+<style>
+    .alert{
+    position: fixed !important;
+    right: 0px;
+    width: 26%;
+    padding: 0px 16px;
+    margin: 10px;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 16px;
+    }
+</style>
     {{-- <title>{{ config('app.name', 'Edecel Academy & Educational Consultancy') }}</title> --}}
     <title>{{__('messages.academy_name')}}</title>
     <link rel="shortcut icon" href="images/favicon.png" type="image/png" />

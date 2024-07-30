@@ -17,9 +17,10 @@
     background: #42b979 !important;
     border: none !important;
 }
+
 </style>
 @section('content')
-<header class="main_header d-flex  py-2 align-items-end justify-content-center">
+<header class="main_header d-flex bg-white py-2 align-items-end justify-content-center">
         {{-- <a class="nav-link active px-3 py-0 fw-bold" aria-current="page" href="./hire_tutor.html"><i>&#8592; Hire
                 Tutor</i></a> --}}
         <a class="arrow" href="{{ route('newhome') }}"><img style="height: 50px" src="{{asset('images/logo.png')}}" alt="EDEXCEL-logo"

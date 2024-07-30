@@ -6,13 +6,26 @@
         #lazzyLoader {
             display: none;
         }
+        footer {
+        /* display: none !important; */
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #42b979;
+    }
 </style>
 @section('content')
+<header class="main_header d-flex  py-2 align-items-end justify-content-center">  
+        <a class="arrow" href="{{ route('newhome') }}">
+          <img style="height: 50px" src="{{asset('images/logo.png')}}" alt="EDEXCEL-logo" height="50px">
+        </a>
+    </header>
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="margin: 8px;">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+                <div class="card-header" style=" background: #42b979; color: #fff; font-size: 18px;">{{ __('Reset Password') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -40,7 +53,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-success">
                                     {{ __('Send Password Reset Link') }}
                                 </button>
                             </div>

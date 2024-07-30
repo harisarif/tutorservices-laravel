@@ -1,5 +1,7 @@
 
 @extends('layouts.app')
+<!-- aos animation link -->
+
 
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -134,15 +136,17 @@
         </style>
 
 @if ($errors->any())
-        <div class="alert alert-danger" style="position: fixed; width: 28%; right: 0;width: 35%;
+        <div class="alert alert-danger" style="position: fixed; width: 28%; right: 0;width: 27%;
   padding: 0 16px;
+  margin: 10px;
   border-radius: 4px;
   border-style: solid;
   border-width: 1px;
   font-size: 16px;">
-            <ul>
+            <ul style="margin: 0; padding: 10px 0;">
                 @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                    <li style="display:flex; justify-content: space-between; align-items: center;">{{ $error }}  <i class="fa fa-times" aria-hidden="true"></i></li> 
+                    
                 @endforeach
             </ul>
         </div>
@@ -164,7 +168,7 @@
                 enctype="multipart/form-data" style="margin:15px 0;">
                 @csrf
                 <div class="ad-heading">
-                        <h3 style="text-align: center;color: red; padding: 10px; font-size: 23px;"><b>Please fill all mandatory fields</b></h3>
+                        <h3 style="text-align: center;color: red; padding: 10px; font-size: 20px;"><b><i>Please fill all mandatory fields</i></b></h3>
                     </div>
                 <div class="form-row d-flex flex-column flex-md-row">
                     
@@ -539,7 +543,11 @@
             </form>
         </div>
     </main>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
 </body>
+
 @endsection
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

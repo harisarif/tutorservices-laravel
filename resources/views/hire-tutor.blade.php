@@ -6,6 +6,10 @@
     .select2-container--default .select2-selection--single {
             height:35px !important;
         }
+        main{
+    background: url(./images/bg_image_1.png), #f1f1f1a0;
+    background-blend-mode: screen;
+}
 </style>
 @if ($errors->any())
         <div class="alert alert-danger">
@@ -19,18 +23,18 @@
 @section('content')
 
 <body>
-    <header class="main_header d-flex  py-2 align-items-end justify-content-center">
-        
+    <header class="main_header d-flex  py-2 align-items-end justify-content-center">  
         <a class="arrow" href="{{ route('newhome') }}">
-            <img style="height: 50px" src="{{asset('images/logo.png')}}" alt="EDEXCEL-logo" height="50px"></a>
+          <img style="height: 50px" src="{{asset('images/logo.png')}}" alt="EDEXCEL-logo" height="50px">
+        </a>
 
     </header>
     @include('whatsapp')
     <main class="hireTutor">
         <div class="row m-0 px-4">
-            <div class="main-page col-12 col-md-6 mx-auto my-3 p-0 text-center ">
+            <div class="main-page col-12 bg-white col-md-6 mx-auto my-3 p-0 text-center ">
                 <!-- page-1 header -->
-                <div class="col m-1 py-3 text-center flex-column rounded-top bg-body-secondary">
+                <div class="col m-1 py-3  text-center flex-column rounded-top bg-body-secondary">
                     <h3>Post Learning Requirement - It's Free!</h3>
                     <p>Post your learning requirement and let interested tutors contact you</p>
                     <span><i> If you are a tutor </i><a href="{{ route('tutor') }}" class="theme_text_green text-decoration-none">
@@ -113,10 +117,6 @@
                         <div class="col-12 px-5 py-4 d-none" id="page-3">
                             <h3>Select a Subject</h3>
                             <p>( Which subject tutor are you looking for? )</p>
-                            <!-- <div class="col-12 mb-2">
-                                <input type="number" class="form-control" id="whatsapp" name="whatsapp_number" placeholder="Whatsapp number "
-                                    required />
-                            </div> -->
                             <div class="col-12 mb-2">
                                 <select name="country" id="country" class="form-select" required>
                                     @foreach($countries as $country)
@@ -160,7 +160,7 @@
                         <div class="col d-none" id="page-4">
                             <h4 class="text-center py-3">Enter password to create an Account<i
                                     class="fs-6 text-secondary">
-                                    (Required)</i></h4>
+                                    <b style="color:red">(Required)</b></i></h4>
                             <input required type="email" name="c_email" placeholder="*Email" class="inp-1" readonly>
                             <input required type="password" name="password" placeholder="*Password"  class="inp-1">
                             <input required type="password" name="c_password" placeholder="*Confirm Password"  class="inp-1">
@@ -182,7 +182,6 @@
 
             </div>
         </div>
-        
     </main>
     <script src="./js/hire_tutor.js"></script>
 </body>

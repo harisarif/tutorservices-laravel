@@ -2,8 +2,11 @@
 @extends('layouts.app')
 @section('content')
     @if (session('success'))
-        <div class="alert alert-success">
+        <div class="alert alert-success" style="z-index: 6;
+    padding: 14px !important;">
+            
             {{ session('success') }}
+            <i class="fa fa-times" aria-hidden="true" style="margin-left: 35%;"></i>
         </div>
     @endif
     
@@ -732,23 +735,144 @@
                                     <input type="text" placeholder="Mobile*" class="form-control py-3"
                                         id="inputPassword4" />
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 pt-3">
                                     <input type="email" placeholder="Enter Email" class="form-control py-3"
                                         id="inputPassword4" />
                                 </div>
-                                <div class="col-md-6">
-                                    <select class="px-2 h-100 w-100" style="border: 1px solid lightgray">
+                                
+                                <div class="col-md-6 ">
+                                    <select class="px-2 h-100 w-100" style="border: 1px solid #ddd; border-radius: 4px;">
                                         <option value="pakistan">pakistan</option>
-                                        <option value="pakistan">pakistan</option>
-                                        <option value="pakistan">pakistan</option>
-                                        <option value="pakistan">pakistan</option>
-                                        <option value="pakistan">pakistan</option>
-                                        <option value="pakistan">pakistan</option>
-                                        <option value="pakistan">pakistan</option>
-                                        <option value="pakistan">pakistan</option>
-                                        <option value="pakistan">pakistan</option>
+                                        <option value="United Arab Emirates">United Arab Emirates</option>
+                                        <option value="India">India</option>
+                                        <option value="United Kingdom">United Kingdom</option>
+                                        <option value="Afghanistan">Afghanistan</option>
+                                        <option value="Åland Islands">Åland Islands</option>
+                                        <option value="Albania">Albania</option>
+                                        <option value="American Samoa">American Samoa</option>
+                                        <option value="Andorra">Andorra</option>
+                                        <option value="Armenia">Armenia</option>
+                                        <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                                        <option value="Australia">Australia</option>
+                                        <option value="Bahrain">Bahrain</option>
+                                        <option value="Bangladesh">Bangladesh</option>\
+                                        <option value="Bouvet Island">Bouvet Island</option>
+                                        <option value="Brazil">Brazil</option>
+                                        <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                                        <option value="Cambodia">Cambodia</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="Cayman Islands">Cayman Islands</option>
+                                        <option value="Central African Republic">Central African Republic</option>
+                                        <option value="China">China</option>
+                                        <option value="Colombia">Colombia</option>
+                                        <option value="Cuba">Cuba</option>
+                                        <option value="Denmark">Denmark</option>
+                                        <option value="Dominica">Dominica</option>
+                                        <option value="Ecuador">Ecuador</option>
+                                        <option value="Equatorial Guinea">Equatorial Guinea</option>
+                                        <option value="Faroe Islands">Faroe Islands</option>
+                                        <option value="Ecuador">France</option>
+                                        <option value="French Polynesia">French Polynesia</option>
+                                        <option value="French Southern Territories">French Southern Territories</option>
+                                        <option value="Iceland">Iceland</option>
+                                        <option value="Iran, Islamic Republic of">Iran, Islamic Republic of</option>
+                                        <option value="Iraq">Iraq</option>
+                                        <option value="Ireland">Ireland</option>
+                                        <option value="Italy">Italy</option>
+                                        <option value="Japan">Japan</option>
+                                        <option value="Jordan">Jordan</option>
+                                        <option value="Kazakhstan">Kazakhstan</option>
+                                        <option value="Kenya">Kenya</option>
+                                        <option value="Korea, Democratic People's Republic of">Korea, Democratic People's Republic of</option>
+                                        <option value="Kuwait">Kuwait</option>
+                                        <option value="Latvia">Latvia</option>
+                                        <option value="Libya">Libya</option>
+                                        <option value="Macedonia, the former Yugoslav Republic of">Macedonia, the former Yugoslav Republic of</option>
+                                        <option value="Malawi">Malawi</option>
+                                        <option value="Malaysia">Malaysia</option>
+                                        <option value="Mali">Mali</option>
+                                        <option value="Mayotte">Mayotte</option>
+                                        <option value="Mexico">Mexico</option>
+                                        <option value="Namibia">Namibia</option>
+                                        <option value="Nauru">Nauru</option>
+                                        <option value="Nepal">Nepal</option>
+                                        <option value="Netherlands">Netherlands</option>
+                                        <option value="New Caledonia">New Caledonia</option>
+                                        <option value="New Zealand">New Zealand</option>
+                                        <option value="Nicaragua">Nicaragua</option>
+                                        <option value="Nigeria">Nigeria</option>
+                                        <option value="Northern Mariana Islands">Northern Mariana Islands</option>
+                                        <option value="Palau">Palau</option>
+                                        <option value="Philippines">Philippines</option>
+                                        <option value="Poland">Poland</option>
+                                        <option value="Qatar">Qatar</option>
+                                        <option value="Réunion">Réunion</option>
+                                        <option value="Romania">Romania</option>
+                                        <option value="Russian Federation">Russian Federation</option>
+                                        <option value="Rwanda">Rwanda</option>
+                                        <option value="Saint Barthélemy">Saint Barthélemy</option>
+                                        <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                                        <option value="Rwanda">Saint Martin (French part)</option>
+                                        <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+                                        <option value="Samoa">Samoa</option>
+                                        <option value="Saudi Arabia">Saudi Arabia</option>
+                                        <option value="Serbia">Serbia</option>
+                                        <option value="South Africa">South Africa</option>
+                                        <option value="South Sudan">South Sudan</option>
+                                         <option value="Spain">Spain</option>
+                                        <option value="Sri Lanka">Sri Lanka</option>
+                                        <option value="RwandaSwaziland">Swaziland</option>
+                                        <option value="Sweden">Sweden</option>
+                                        <option value="Switzerland">Switzerland</option>
+                                        <option value="Syrian Arab Republic">Syrian Arab Republic</option>
+                                        <option value="Thailand">Thailand</option>
+                                        <option value="Timor-Leste">Timor-Leste</option>
+                                        <option value="Turkey">Turkey</option>
+                                        <option value="Turkmenistan">Turkmenistan</option>
+                                        <option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
+                                        <option value="Ukraine">Ukraine</option>
+                                        <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
+                                        <option value="Uzbekistan">Uzbekistan</option>
+                                        <option value="Vanuatu">Vanuatu</option>
+                                        <option value="Virgin Islands, British">Virgin Islands, British</option>
+                                        <option value="Virgin Islands, U.S.">Virgin Islands, U.S.</option>
+                                        <option value="Western Sahara">Western Sahara</option>
+                                        <option value="Yemen">Yemen</option>
+                                        <option value="Zambia">Zambia</option>
+                                        <option value="Zimbabwe">Zimbabwe</option>
                                     </select>
                                 </div>
+                                <div class="col-md-6 pt-3">
+                                    <input type="text" placeholder="Enter city" id="inputPassword4" class="form-control py-3">
+                                </div>
+                                <div class="col-md-6 pt-3">
+                                    <input type="text" placeholder="Select your class" id="inputPassword4" class="form-control py-3">
+                                </div>
+                             <div class="col-12 " id="page-1">
+                                   <h3 class="text-center " style="text-align: left !important; font-size:  18px; color:#42b979;">What are you looking for?</h3>
+                                  <div class="choice col-12 ">
+
+                                 <ul class="p-0 ">
+                                    <li class="d-flex align-items-center fs-5 py-2">
+                                        <input class="m-2 d-none chose-subject" type="radio" value="Online Tutor" name="subjects"
+                                            id="option-1">
+                                        <label for="option-1">Online Tutor </label>
+                                    </li>
+                                    <li class="d-flex align-items-center fs-5 py-2">
+                                        <input class="m-2 d-none chose-subject" type="radio" value="Tutor for home" name="subjects"
+                                            id="option-2">
+                                        <label for="option-2">Tutor for Home</label>
+                                    </li>
+                                    <li class="d-flex align-items-center fs-5 py-2">
+                                        <input class="m-2 d-none chose-subject" type="radio" value="Both" name="subjects"
+                                            id="option-3">
+                                        <label for="option-3">Both</label>
+                                    </li>
+                                 </ul>
+                            </div>
+
+                        </div>
+
                                 <div class="col-12">
                                     <span><b>Note :</b>Check Email Inbox/Spam Folder for OTP</span>
                                     <input type="text" class="form-control mt-4 py-3"
@@ -798,21 +922,21 @@
                                 </h5>
                                 <ul style="height: 200px" id="ul-toggle-1" class="border rounded filter_ul p-0">
                                     <li>English</li>
+                                    <li>Maths</li>
+                                    <li>Physic</li>
+                                    <li>Chemistry</li>
+                                    <li>social sutdy</li>
+                                    <li>Islammiat</li>
+                                    <li>Urdu</li>
+                                    <li>Computer</li>
+                                    <li>Biology</li>
+                                    <!-- <li></li>
                                     <li>English</li>
                                     <li>English</li>
                                     <li>English</li>
                                     <li>English</li>
                                     <li>English</li>
-                                    <li>English</li>
-                                    <li>English</li>
-                                    <li>English</li>
-                                    <li>English</li>
-                                    <li>English</li>
-                                    <li>English</li>
-                                    <li>English</li>
-                                    <li>English</li>
-                                    <li>English</li>
-                                    <li>English</li>
+                                    <li>English</li> -->
                                 </ul>
                             </div>
 
