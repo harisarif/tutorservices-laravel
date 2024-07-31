@@ -41,6 +41,7 @@ Route::get('/tutor-signup', function () {
     return view('tutor-signup');
 })->name('tutor');
 Route::get('/hire-tutor', [StudentController::class, 'index'])->name('hire.tutor');
+Route::get('/faq', [StudentController::class, 'FAQ'])->name('faq.index');
 Route::get('/terms', [StudentController::class, 'termsCondition'])->name('terms.condition');
 Route::get('/tutor-detail', [TutorController::class, 'tutorDetail'])->name('tutor.detail');
 

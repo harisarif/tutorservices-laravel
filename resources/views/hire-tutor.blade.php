@@ -23,7 +23,7 @@
 @section('content')
 
 <body>
-    <header class="main_header d-flex  py-2 align-items-end justify-content-center">  
+    <header class="main_header d-flex bg-white  py-2 align-items-end justify-content-center">  
         <a class="arrow" href="{{ route('newhome') }}">
           <img style="height: 50px" src="{{asset('images/logo.png')}}" alt="EDEXCEL-logo" height="50px">
         </a>
@@ -34,12 +34,12 @@
         <div class="row m-0 px-4">
             <div class="main-page col-12 bg-white col-md-6 mx-auto my-3 p-0 text-center ">
                 <!-- page-1 header -->
-                <div class="col m-1 py-3  text-center flex-column rounded-top bg-body-secondary">
+                <div class="col m-1 py-3 bg-success text-center flex-column rounded-top bg-body-secondary">
                     <h3>Post Learning Requirement - It's Free!</h3>
                     <p>Post your learning requirement and let interested tutors contact you</p>
                     <span><i> If you are a tutor </i><a href="{{ route('tutor') }}" class="theme_text_green text-decoration-none">
                             <b>Click here</b></a></span>
-
+                            <h3 style="font-size: 18px;color: red;"><i>Please fill all mandatory fields</i></h3>
                 </div>
                 <!-- loading -->
                 <div class="col-12 d-flex justify-content-center py-3 border-bottom">
@@ -149,9 +149,10 @@
                                 <li onclick="page1List(this)" class="list-group-item text-start">Urdu</li>
                             </ul>
                             <div>
-                                <select id="subject" name="subject" class="select form-control">
+                                <!-- <select id="subject" name="subject" class="select form-control">
                                     <option value="">Select Subject</option>
-                                </select>
+                                </select> -->
+                                <input type="text" name="subject"  placeholder="Subject" id="subject" class="form-control">
                             </div>
 
                         </div>

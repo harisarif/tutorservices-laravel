@@ -59,3 +59,4 @@ window.addEventListener('scroll', () => {
 window.addEventListener('load', ()=>{
     document.getElementById('lazzyLoader').style.display = 'none';
 })
+

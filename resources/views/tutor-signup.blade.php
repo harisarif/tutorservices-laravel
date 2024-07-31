@@ -136,7 +136,7 @@
         </style>
 
 @if ($errors->any())
-        <div class="alert alert-danger" style="position: fixed; width: 28%; right: 0;width: 27%;
+        <div class="alert alert-danger" id="close" style="position: fixed; width: 28%; right: 0;width: 27%;
   padding: 0 16px;
   margin: 10px;
   border-radius: 4px;
@@ -145,7 +145,7 @@
   font-size: 16px;">
             <ul style="margin: 0; padding: 10px 0;">
                 @foreach ($errors->all() as $error)
-                    <li style="display:flex; justify-content: space-between; align-items: center;">{{ $error }}  <i class="fa fa-times" aria-hidden="true"></i></li> 
+                    <li style="display:flex; justify-content: space-between; align-items: center;">{{ $error }}  <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true"></i></li> 
                     
                 @endforeach
             </ul>
@@ -629,6 +629,10 @@
       country.val(defaultCountry).trigger('change');
       setCountryPrefix();
     });
+    function cancel(){
+        var close = document.getElementById("close");
+        close.style.display = "none";
+    }
 </script>
 
 

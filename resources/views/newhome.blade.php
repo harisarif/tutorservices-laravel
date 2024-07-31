@@ -6,7 +6,7 @@
     padding: 14px !important;">
             
             {{ session('success') }}
-            <i class="fa fa-times" aria-hidden="true" style="margin-left: 35%;"></i>
+            <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
         </div>
     @endif
     
@@ -46,14 +46,6 @@
                         <i class="fa-solid fa-phone text-light" aria-hidden="true"></i>
                         <a class="text-decoration-none text-light" href="tel:+971566428066">+971 56 642 8066</a>
                     </li>
-                    <!-- <li>
-                    <a href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d" target="_blank"
-                        class="icoFacebook text-light  p-2" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr" target="_blank" class="icoGoogle text-light p-2" title="instagram +"><i
-                        class="fa-brands fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/in/edexcel-edu-130983310/" class="icoGoogle text-light p-2" target="_blank" title="Linked-in +"><i
-                        class="fa-brands fa-linkedin"></i></a>
-                    </li> -->
                 </ul>
                 <div class="fixed" id="social">
                         <a target="_blank"
@@ -727,21 +719,31 @@
                                     Tell us your learning needs and get immediate response from
                                     qualified tutors
                                 </p>
+
                                 <div class="col-md-6 pt-3">
+                                    <label for=""><strong>Enter your name <b style="color: red;
+                                    font-size: 20px;">*</b></strong></label>
                                     <input type="text" placeholder="Name*" class="form-control py-3"
-                                        id="inputEmail4" />
+                                        id="inputEmail4"/>
                                 </div>
+
                                 <div class="col-md-6 pt-3">
-                                    <input type="text" placeholder="Mobile*" class="form-control py-3"
-                                        id="inputPassword4" />
-                                </div>
-                                <div class="col-md-6 pt-3">
+                                    <label for=""><strong>Enter your email <b style="color: red;
+                                    font-size: 20px;">*</b></strong></label>
                                     <input type="email" placeholder="Enter Email" class="form-control py-3"
                                         id="inputPassword4" />
                                 </div>
-                                
+                                <div class="col-ma-6 pt-3" style="width:100%;">
+                                <label for=""><strong>Enter your number <b style="color: red;
+                                    font-size: 20px;">*</b></strong></label>
+                                    <input type="text" placeholder="Mobile*" class="form-control py-3"
+                                        id="inputPassword4" />
+                                </div>
+
                                 <div class="col-md-6 ">
-                                    <select class="px-2 h-100 w-100" style="border: 1px solid #ddd; border-radius: 4px;">
+                                 <label for=""><strong>Select your Country <b style="color: red;
+                                    font-size: 20px;">*</b></strong></label>
+                                    <select class="px-2 h-100 w-100" style="border: 1px solid #ddd; border-radius: 4px;height: 57px !important; margin-top: 17px; color:#857979;">
                                         <option value="pakistan">pakistan</option>
                                         <option value="United Arab Emirates">United Arab Emirates</option>
                                         <option value="India">India</option>
@@ -842,45 +844,71 @@
                                         <option value="Zimbabwe">Zimbabwe</option>
                                     </select>
                                 </div>
-                                <div class="col-md-6 pt-3">
-                                    <input type="text" placeholder="Enter city" id="inputPassword4" class="form-control py-3">
+
+                               <div class="col-md-6 pt-3">  
+                                 <label for=""><strong>Enter your City <b style="color: red;
+                                    font-size: 20px;">*</b></strong></label>
+                                    <input type="text" placeholder="City" id="inputPassword4" class="form-control py-3">
                                 </div>
-                                <div class="col-md-6 pt-3">
-                                    <input type="text" placeholder="Select your class" id="inputPassword4" class="form-control py-3">
+
+                                <div class="col-md-6 ">
+                                   <label for="dropdown1" class=" pb-1">
+                                    <strong>Select your class <b style="color: red;
+                                    font-size: 20px;">*</b></strong>
+                                   </label>
+                                  <select style="height: 55px;" class="form-control" name="school_class" id="school_class">
+                                    <option value="1">Class 1</option>
+                                    <option value="2">Class 2</option>
+                                    <option value="3">Class 3</option>
+                                    <option value="4">FSc Pre-Medical</option>
+                                    <option value="5">FSc Pre-Engineering</option>
+                                    <option value="6">ICS</option>
+                                    <option value="7">BSc</option>
+                                    <option value="8">BSCS</option>
+                                    <option value="9">F.A</option>
+                                    <option value="10">I.Com</option>
+                                  </select>
                                 </div>
-                             <div class="col-12 " id="page-1">
-                                   <h3 class="text-center " style="text-align: left !important; font-size:  18px; color:#42b979;">What are you looking for?</h3>
+
+                                <div class="col-md-6" style="padding-top:5px;">
+                                  <label for=""><strong>Enter your Subject <b style="color: red;
+                                    font-size: 20px;">*</b></strong></label>
+                                   <input type="text" placeholder="Subject" id="inputPassword4" class="form-control py-3" style="height: 53px;">
+                               </div>
+                        
+                               <div class="col-12 " id="page-1">
+                                   <h3 class="text-center " style="text-align: left !important; font-size:  15px; color:#42b979;">What are you looking for?</h3>
                                   <div class="choice col-12 ">
 
                                  <ul class="p-0 ">
                                     <li class="d-flex align-items-center fs-5 py-2">
                                         <input class="m-2 d-none chose-subject" type="radio" value="Online Tutor" name="subjects"
                                             id="option-1">
-                                        <label for="option-1">Online Tutor </label>
+                                        <label for="option-1" style="font-size:13px;">Online Tutor </label>
                                     </li>
                                     <li class="d-flex align-items-center fs-5 py-2">
                                         <input class="m-2 d-none chose-subject" type="radio" value="Tutor for home" name="subjects"
                                             id="option-2">
-                                        <label for="option-2">Tutor for Home</label>
+                                        <label for="option-2"  style="font-size:13px;">Tutor for Home</label>
                                     </li>
                                     <li class="d-flex align-items-center fs-5 py-2">
                                         <input class="m-2 d-none chose-subject" type="radio" value="Both" name="subjects"
                                             id="option-3">
-                                        <label for="option-3">Both</label>
+                                        <label for="option-3"  style="font-size:13px;">Both</label>
                                     </li>
                                  </ul>
                             </div>
 
                         </div>
 
-                                <div class="col-12">
+                                <!-- <div class="col-12">
                                     <span><b>Note :</b>Check Email Inbox/Spam Folder for OTP</span>
                                     <input type="text" class="form-control mt-4 py-3"
                                         placeholder="I need Tution at or near*" />
                                 </div>
                                 <div class="col-12">
                                     <textarea rows="5" class="col-12 p-1 border" placeholder="Elaborate tution requirments*"></textarea>
-                                </div>
+                                </div> -->
                                 <div class="chk-box col-12 py-2 d-flex">
                                     <input type="checkbox" class="mb-3 d-none mx-2 common_checkbox" id="agreeWithTerm" />
                                     <label class="checkBox_label pointer d-flex align-item-center"
@@ -1255,11 +1283,13 @@
                             </div>
                         </div>
                     </div>
+
                     <button class="carousel-control-prev " type="button"
                         data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" style="filter: invert(1);" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
+                    
                     <button class="carousel-control-next" type="button"
                         data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
                         <span class="carousel-control-next-icon" style="filter: invert(1); " aria-hidden="true"></span>
@@ -1523,6 +1553,7 @@
                         // Handle error response
                     }
                 });
+                
             });
             $('#citysearch').keyup(function() {
                 var searchQuery = $(this).val(); // Get the value from the city search input field
