@@ -43,103 +43,75 @@
                 </div>
                 <!-- loading -->
                 <div class="col-12 d-flex justify-content-center py-3 border-bottom">
-                    <b class="theme_text_green px-2 persentage-num">25%</b>
+                    <b class="theme_text_green px-2 persentage-num">33%</b>
                     <div class="loading bg-body-secondary my-2">
                         <div class="percentage bg_theme_green"></div>
                     </div>
                 </div>
                 <form action="{{ route('student-create') }}" method="POST" class="pages">
                     @csrf
-                    <div style="min-height: 350px;">
+                    <div style="min-height: 325px;">
 
 
                         <!-- page-1 -->
                         <div class="col " id="page-1">
-                            <h3 class="text-center pt-5">What are you looking for?</h3>
-                            <div class="choice col-12 px-3 py-5">
+                            <h3 class=" pt-3" style="padding:0 30px; text-align: left; font-size:16px;">What are you looking for?</h3>
+                            <div class="choice col-12 px-3 py-1" >
 
                                 <ul class="p-0 ">
-                                    <li class="d-flex align-items-center fs-5 py-2">
+                                    <li class="d-flex align-items-center fs-5 py-1">
                                         <input class="m-2 d-none chose-subject" type="radio" value="Online Tutor" name="subjects"
                                             id="option-1">
-                                        <label for="option-1">Online Tutor </label>
+                                        <label for="option-1" style="font-size:15px;">Online Tutor </label>
                                     </li>
-                                    <li class="d-flex align-items-center fs-5 py-2">
+                                    <li class="d-flex align-items-center fs-5 py-1">
                                         <input class="m-2 d-none chose-subject" type="radio" value="Tutor for home" name="subjects"
                                             id="option-2">
-                                        <label for="option-2">Tutor for Home</label>
+                                        <label for="option-2" style="font-size:15px;">Tutor for Home</label>
                                     </li>
-                                    <li class="d-flex align-items-center fs-5 py-2">
+                                    <li class="d-flex align-items-center fs-5 py-1">
                                         <input class="m-2 d-none chose-subject" type="radio" value="Both" name="subjects"
                                             id="option-3">
-                                        <label for="option-3">Both</label>
+                                        <label for="option-3" style="font-size:15px;">Both</label>
                                     </li>
                                 </ul>
                             </div>
-                        </div>
 
-                        <!-- page-2 -->
-                        <div class="col-12 d-none" id="page-2">
-                            <h3 class="text-center py-3"><b>Sign Up</b></h3>
-                            <div class="col">
-                                <input required name="name" type="text" placeholder="*Name"  class="inp-1">
-                                <input required name="email" type="email" placeholder="*Email"  class="inp-1">
-                                <!-- <div class="row"> -->
-                                    <div class="col-md-11 px-2 mb-2 ps-5">
-                                        <div class="input-group d-flex justify-content-between align-items-center" style="width: 557px;px">
-                                            <select name="countrySelect" id="countrySelect" class="form-select country-select w-50" required>
-                                                @foreach ($countries as $key => $country)
-                                                    <option value="{{ $key }}">{{ $country }}</option>
-                                                @endforeach
-                                            </select>
-                                            <input  class="form-control w-50" required name="phone" id="phone" type="text" placeholder="e.g +92XXXXXXXXXX" style="border: 1px solid #aaa; height: 35px; box-shadow: none;">
-                                        </div>
-                                    </div>
-                                <!-- </div> -->
-                    <div class="col-12 ">
-                               <div class="input-design">
-                            <div class="input-div">
-
-                               <label for="classStartTime" class="d-block text-start " style=" width: 86%; margin: 0 auto; font-weight: 600;">Starting time</label>
-                                <input class="inp-1" title="Class start time" type="time" name="class_start_time" id="classStartTime">
-                            </div>
-                        <div class="input-box">
-                            <label for="classEndTime" class="d-block text-start " style=" width: 86%; margin: 0 auto; font-weight: 600;">Ending time</label>
-                            <input class="inp-1" title="Class end time" type="time" name="class_end_time" id="classEndTime">
-                            </div>
-                          </div>
-                            </div>
-
-                            </div>
-                     </div>
-
-                        <!-- page-3 -->
-                        <div class="col-12 px-5 py-4 d-none" id="page-3">
-                            <h3>Select a Subject</h3>
-                            <p>( Which subject tutor are you looking for? )</p>
+                            <div class="col-12" id="page-1">
                             <div class="col-12 mb-2">
-                                <select name="country" id="country" class="form-select" required>
+                            <h4 style="font-size: 17px; text-align: left; padding-left: 30px;">Select your country</h4>
+                                <select name="country" id="country" class="form-select" required style="margin: 0 auto !important; width: 92%; height: 50px;">
                                     @foreach($countries as $country)
                                         <option value="{{ $country }}">{{ $country }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-12 mb-2">
-                                <input type="text" name="city" id="city" class="form-control" placeholder="Enter your city" required>
+                                
+                                <input type="text" name="city" id="city" class="form-control" placeholder="Enter your city" required style="margin: 16px auto !important; width: 92%; height: 50px;">
                             </div>
+                            </div>
+                        </div>
+
+                        <!-- page-2 -->
+                      
+                        <div class="col-12 px-5 py-4 d-none" id="page-2">
+                            <h3 style="font-size:18px; text-align: left;">Select a Subject</h3>
+                            <p style="font-size:15px; text-align: left;">Which subject tutor are you looking for?</p>
+                            
                             <div class="form-group" style="text-align:left; ">
-                                <label for="dropdown1" class="pt-1 pb-1" > <strong>Select your class</strong></label>
-                                <select class="form-control" id="school_class" name="school_class">>
+                                <label for="dropdown1" class="pt-1 pb-1"></label>
+                                <select class="form-control" id="school_class" name="school_class" style="height:50px;">>
                                     @foreach($schoolClasses as $schoolClass)
                                     <option value="{{ $schoolClass->id }}">{{ $schoolClass->name }}</option>
                                     @endforeach
                     
                                 </select>
                             </div>
-                            <label class="form-label" style="display: flex;font-size:14px;font-weight:bold; padding:5px 0;">Subject</label>
+                            <label class="form-label"></label>
                             <div class="form-group d-none">
                                 
-                                <input type="search" value="English" name="subject" class="form-control" id="page1-search" placeholder="Search">
+                                <input type="search" value="English" name="subject" class="form-control" id="page1-search" placeholder="Search" style="height:50px;">
                             </div>
                             <ul class="list-group d-none" id="searchList">
                                 <li onclick="page1List(this)" class="list-group-item text-start">English</li>
@@ -148,6 +120,7 @@
                                 <li onclick="page1List(this)" class="list-group-item text-start">Chemistry</li>
                                 <li onclick="page1List(this)" class="list-group-item text-start">Urdu</li>
                             </ul>
+                            
                             <div>
                                 <!-- <select id="subject" name="subject" class="select form-control">
                                     <option value="">Select Subject</option>
@@ -155,10 +128,51 @@
                                 <input type="text" name="subject"  placeholder="Subject" id="subject" class="form-control">
                             </div>
 
+                            <div class="col">
+                                <h3 style="font-size: 15px; text-align: left; margin-top: 5px;">Enter your Detail</h3>
+                                <input required name="name" type="text" placeholder="*Name"  class="inp-1" style="width:100%;">
+                                <input required name="email" type="email" placeholder="*Email"  class="inp-1" style="width:100%;">
+                                <!-- <div class="row"> -->
+                                    <div class="col-md-11 mt-2 mb-2" style="width: 100%;">
+                                        <div class="input-group d-flex justify-content-between align-items-center" style="width: 101%;">
+                                            <select name="countrySelect" id="countrySelect" class="form-select country-select w-50" required>
+                                                @foreach ($countries as $key => $country)
+                                                    <option value="{{ $key }}">{{ $country }}</option>
+                                                @endforeach
+                                            </select>
+                                            <input  class="form-control w-50" required name="phone" id="phone" type="text" placeholder="e.g +92XXXXXXXXXX" style="border: 1px solid #aaa; height: 35px; box-shadow: none;">
+                                        </div>
+                                    </div>
+
+                        </div>
+                        
+                        <div class="col-12 d-none">
+                           
+                         <div class="col-12 ">
+                               <div class="input-design">                               
+                            <div class="input-div">
+                               <label for="classStartTime" class="d-block text-start " style=" width: 86%; margin: 0 auto; font-weight: 600;">Starting time</label>
+                                <input class="inp-1" title="Class start time" type="time" name="class_start_time" id="classStartTime">
+                            </div>
+                        <div class="input-box">
+
+                            <label for="classEndTime" class="d-block text-start " style=" width: 86%; margin: 0 auto; font-weight: 600;">Ending time</label>
+                            <input class="inp-1" title="Class end time" type="time" name="class_end_time" id="classEndTime">
+                            </div> 
+
+                    
+                          </div>
+                            </div>
+
+                            </div>
+                    
+                    
                         </div>
 
-                        <!-- page-4 -->
-                        <div class="col d-none" id="page-4">
+
+                        <!-- page-3 -->
+                        
+                        <div class="col d-none" id="page-3">
                             <h4 class="text-center py-3">Enter password to create an Account<i
                                     class="fs-6 text-secondary">
                                     <b style="color:red">(Required)</b></i></h4>
@@ -170,7 +184,7 @@
 
                     </div>
 
-                    <div class="col-12 my-5 d-flex justify-content-center px-5">
+                    <div class="col-12 my-5 d-flex justify-content-center px-5 " style="margin-bottom: 1rem !important;">
 
                         <input onclick="backStep(this)" id="back-btn" type="button" value="Previous"
                             class="border-0 bg-body-secondary text-dark fs-6 py-1 px-4 rounded d-none">
@@ -178,6 +192,9 @@
                             class="border-0 bg_theme_green text-light fs-6 py-1 px-4 rounded">
                             
                     </div>
+                        
+                        <!-- page-4 -->
+                        
                 </form>
 
 
