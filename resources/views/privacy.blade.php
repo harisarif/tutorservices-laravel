@@ -5,7 +5,23 @@
      .modalBox{
         display: none;
     }
+    :root {
+    --primary-color: #42b979;
+}
+.ad-policy h1{
+    font-size: 45px;
+    color: var(--primary-color);
+}
+.ad-detail-child p{
+    margin: 20px 0;
+}
+.ad-detail-child p b{
+    font-size: 50px;
+}
+
 </style>
+<body>
+@include('whatsapp')
 <div  data-aos="fade-left" class="row mini_header m-0 p-0 container-fluid position-relative">
         <div data-aos="fade-left" class="col-sm-12  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0">
             <ul class="p-2 m-0 d-sm-inline d-block text-center header-ul">
@@ -57,127 +73,88 @@
                
             </div>
         </div>
-    </div>
-<section class="ad-banner">
-        <div class="container">
-            <div class="row">
-                <div class="ad-banner-child">
-                    <div class="ad-heading">
-                        
-                        <h1 style="text-align: center; font-size: 40px;">Privacy Policy</h1>
-                    </div>
-                </div>
+</div>
+<section class="container">
+        <div data-aos="fade-left" class="ad-detail-child">
+            <div data-aos="fade-left" class="ad-policy">
+                <h1>Privacy Policy</h1>
             </div>
+            <p>Edexcel Academy & Educational Consultancy, a company registered in England and Wales (No. +971566428066),
+                herein referred to as Spires. We have created this privacy statement ("Statement"™) in order to
+                demonstrate our firm commitment to the privacy of the details that you provide to us when using this
+                website.</p>
+
+            <p>This policy applies where we are acting as a data controller with respect to the personal data of our
+                website visitors and service users; in other words, where we determine the purposes and means of the
+                processing of that personal data.</p>
+
+            <p>We may change this Privacy Policy from time to time. We may provide you with additional notice (such as
+                adding a statement to the homepages of our websites or sending you an email notification). We encourage
+                you to review the Privacy Policy whenever you interact with us to stay informed about our information
+                practices and the ways you can help protect your privacy.</p>
+
+            <p>WHAT IS PERSONAL INFORMATION
+                Personal information means information about an identifiable individual or information that permits an
+                individual to be identified. It does not include business contact information, such as name, title,
+                business address and business telephone number when used for business communications.</p>
+
+            <p>OUR COMMITMENT
+                Spires takes responsibility for maintaining and protecting the personal information under our control.
+                We have appointed a Data Controller who can be contacted directly by the public . Our Data Protection
+                Officer is responsible for our day to day compliance. We review this policy and our personal data
+                protection practices regularly to ensure that we are in compliance with applicable legislation and
+                current best practices.</p>
+
+            <p>HOW WE COLLECT, USE AND DISCLOSE PERSONAL INFORMATION
+                We only collect and process personal information as required to meet the purposes that we have
+                identified. We do not indiscriminately collect or retain personal information and will delete all
+                provided information within 6 years of the termination of the usage of our services, save for
+                information required for tax and regulatory purposes for a longer period of limitation.</p>
+
+            <p>Spires typically collects personal information that is voluntarily provided by the individual in
+                question. At times, however, personal information is obtained from other sources, such as government
+                bodies or third parties such as employers, references and service providers, as permitted by law. Where
+                the purpose for the collection of personal information is unclear, you can ask the Spires representative
+                with whom you are dealing to provide an explanation of the purpose for the data collection. More
+                generally, we are happy to provide you with all personal information we hold upon request in writing to
+                suppor</p>
+
+            <p>Our reason for collecting personal information about tutors, students, parents, staff and consultants is
+                to establish and maintain our contractual or other business relationship with that individual.</p>
+
+            <p>The purpose for collecting personal information about tutors and students is primarily to facilitate the
+                provision of educational tutoring services online, including to allow students to quickly and easily
+                assess the professional and educational background of tutors, as well as allowing us to communicate
+                effectively with tutors, students and parents and to maintain mailing lists. We may also use your
+                personal information to:</p>
+                <p>As appropriate, Spires will ask for specific consent to collect, use and disclose personal information. Such a request, and your consent to such request, may be given in writing, orally or through the Spires platform. In some cases, consent can be implied through an individual relationship or conduct with us, depending on the sensitivity of the information.</p>
+                <p>We may also share aggregated or de-identified information, which cannot reasonably be used to identify you.</p>
+                <p>Generally, personal information supplied to us is confidential and we do not disclose the information to unconnected third parties except with actual or implied consent, or as permitted or required by law. We do not exchange or sell personal information.</p>
+                <p>Spires may use third party service providers from time to time to carry out certain functions for us such as printing, storage, shredding or document scanning. Where we use such outside service providers, we require those third parties to protect personal information in the same manner in which we protect it and to not use or disclose it for any purposes except as directed by Spires.</p>
+                
+                <p>We may process data about your use of our website and services ("usage data"). The usage data may include your IP address, geographical location, browser type and version, operating system, referral source, length of visit, page views and website navigation paths, as well as information about the timing, frequency and pattern of your use of our website or services. The source of the usage data is Google Analytics, Mix Panel, Smartlook and Facebook. This usage data may be processed for the purposes of analysing the use of our website and services. The legal basis for this processing is the legitimate interest of our platform and website, namely the monitoring and improvement of our website and services.</p>
+                <p>We may process information needed to set up and maintain an account with Spires, in order to provide you with our services ("account data"). This account data may include your name, phone number and email address. The source of the account data is the information you provide. The account data may be processed for the purposes of providing our services, ensuring the security of our website and services, maintaining back-ups of our databases and communicating with you. The legal basis for this processing is to allow the performance of a contract between you and us and/or taking steps, at your request, to enter into such a contract.</p>
+
+                <p>We may process information to be included in your personal client profile on our website ("profile data"). This profile data may include your name, address, telephone number, email address, profile pictures, gender, date of birth, educational details and employment details. Profile data may be processed for the purposes of enabling your use of our services. The legal basis for this processing is to allow the performance of a contract between you and us and/or taking steps, at your request, to enter into such a contract.</p>
+                <p>We may process your personal data that are provided in the course of the use of our services ("service data"). This service data may include information about your classes, academic performance and any factors relevant to this, your current, past or future academic institutions, your availability for tuition sessions, your preferred tuition location, and your experience or qualifications. We gather this information directly from you. Service data may be processed for the purpose of effectively providing our services. The legal basis for this processing to facilitate the performance of a contract between you and us and/or taking steps, at your request, to enter into such a contract.</p>
+                <p>We may process your personal data that are provided in the course of the use of our services ("service data"). This service data may include information about your classes, academic performance and any factors relevant to this, your current, past or future academic institutions, your availability for tuition sessions, your preferred tuition location, and your experience or qualifications. We gather this information directly from you. Service data may be processed for the purpose of effectively providing our services. The legal basis for this processing to facilitate the performance of a contract between you and us and/or taking steps, at your request, to enter into such a contract.</p>
+                <p>We may process information contained in any enquiry you submit to us regarding our services ("enquiry data"). Enquiry data may be processed for the purposes of offering or providing relevant services to you. The legal basis for this processing is the legitimate interest of our platform, namely to respond to enquiries concerning our services and to make our services available to potential clients.</p>
+                <p>We may process information relating to our customer relationships, including customer contact information ("customer relationship data"). The customer relationship data may include your name, your contact details, and information contained in communications between us and you. The source of the customer relationship data is you. The customer relationship data may be processed for the purposes of managing our relationships with customers, communicating with customers, keeping records of those communications and promoting our services to customers. The legal basis for this processing is the legitimate interest of our platform, namely the proper management of our customer relationships.</p>
+
+                <p>We may process information relating to transactions, including purchases of goods and services, that you enter into with us and/or through our website ("transaction data"). Transaction data may include your contact details, details of the payment method used, including details of specific payment cards, your billing address, and the details of the transaction itself. The transaction data may be processed for the purpose of supplying the purchased goods and services and keeping proper records of those transactions. The legal basis for this processing is the performance of a contract between you and us and/or taking steps, at your request, to enter into such a contract and our legitimate interests, namely the proper administration of our website and business.</p>
+
+                <p>We may process information that you provide to us for the purpose of subscribing to our email notifications ("notification data"). The notification data may be processed for the purposes of sending you the relevant notification. The legal basis for this processing is the legitimate interests of our platform, namely the need to inform clients of relevant developments in relation to their use of our services, for example any charges to be levied in respect of those services.</p>
+
+                <p>We may process information that you provide to us for the purpose of subscribing to our email newsletters and job, class, account, message and payment emails (“notification data”). This data may be processed for the purposes of sending you the relevant newsletters. The legal basis for this processing is consent.</p>
+
+                <p>We may process information contained in or relating to any communication that you send to us and/or other users ("correspondence data"). The correspondence data includes the communication content, video recordings, phone recordings and message transcipts and metadata associated with these communications. Our website will generate the metadata associated with communications made using the website. The correspondence data may be processed for the purposes of communicating with you, dispute resolution and record-keeping. The legal basis for this processing is our legitimate interests, namely the proper administration of our website and business and communications with users and protecting the integrity of our platform and brand.</p>
+                <p>We may process any of your personal data identified in this policy where necessary for the purposes of obtaining or maintaining insurance coverage, managing risks, reporting misconduct or obtaining professional advice. The legal basis for this processing is our legitimate interests, namely the proper protection of our business against risk.</p>
+                <p>In addition to the specific purposes for which we may process your personal data set out in this Section, we may also process any of your personal data where such processing is necessary for compliance with a legal obligation to which we are subject, or in order to protect your vital interests or the vital interests of another natural person. Please do not supply any other person's personal data to us, unless we prompt you to do so.</p>
+                <p>PROTECTING YOUR PERSONAL INFORMATION
+                    We strive to maintain personal information in an accurate, complete and up-to-date a form as necessary to fulfil the purposes for which it was collected. We protect personal information by security safeguards appropriate to the sensitivity of the personal information, regardless of format. Our security safeguards include premises security and restricted access to files containing personal information. Depending upon the information under our control, we also use technological safeguards such as security software and firewalls to prevent hacking or unauthorized computer access, internal passwords and security policies.</p>
+                <p>We may disclose your personal data to our insurers and/or professional advisers in so far as reasonably necessary for the purposes of obtaining or maintaining insurance coverage, managing risks, obtaining professional advice, or the establishment, exercise or defence of legal claims, whether in court proceedings or in an administrative or out-of-court procedure.</p>
+                <p>We may disclose enquiry data, profile data, service data or correspondence data to another or multiple clients of our paltform in so far as reasonably necessary to affect an introduction between tutor and student for the purposes of arranging tuition, and to facilitate and administer that relationship, and to assist in the performance of the contract between tutor and student. The legal basis for this is the legitimate interest of our platform, namely the provision of our services.</p>
         </div>
     </section>
-
-    <section class="container">
-        <div class="ad-trems">
-            <div class="ad-line"></div>
-            <div class="ad-heading-div">
-                <h3><b>Terms and Conditions for Edexcel Academy & Educational Consultancy
-                    </b></h3>
-                <span>Effective Date: 26.7.2024</span>
-            </div>
-            <div class="ad-instruction">
-                <div class="ad-para">
-                    <p>
-                        <strong>Introduction</strong>
-                    <p> Welcome to <b>Edexcel Academy & Educational Consultancy</b>, operated by Edexcel (“Company”,
-                        “we”, “our”, “us”). By accessing or using our application (“App” ‘Website’), you agree to be
-                        bound by these Terms and Conditions (“Terms”). Please read them carefully. If you do not agree
-                        with any part of these Terms, you must not use our App."</p>
-                    </p>
-                    </p>
-                    <p>
-                        <strong>1. Use of the App</strong>
-                    </p>
-                    <p>
-                        <strong>1.1 Eligibility:</strong>
-                        You must be at least 10 years old to use our App. By using our App, you represent and warrant
-                        that you meet this age requirement.
-                    </p>
-                    <p>
-                        <strong>1.2 Account Registration:</strong>
-                        To access certain features of the App, you may be required to create an account. You agree to
-                        provide accurate, current, and complete information during the registration process and to
-                        update such information to keep it accurate, current, and complete.
-                    </p>
-                    <p><strong>1.3 Account Security: </strong>You are responsible for maintaining the confidentiality of
-                        your account login information and for all activities that occur under your account. You agree
-                        to notify us immediately of any unauthorized use of your account.</p>
-                    <p><strong>2. Services Provided</strong></p>
-
-                    <p><strong>2.1 Tutoring Services:</strong> Our App provides access to various tutoring services,
-                        including but not limited to online classes, lesson tracking, and subject trackin</p>
-
-                    <p><strong>2.2 Content and Materials:</strong>
-                        All content and materials available on our App, including but not limited to text, graphics, images, and videos, are the property of Edexcel Academy & Educational Consultancy or its licensors and are protected by copyright and other intellectual property laws.
-                    </p>
-                    <p><strong><b>3. User Conduct</b></strong></p>   
-                    <p>
-                        <strong>3.1 Prohibited Activities:</strong>
-                        You agree not to:
-                        <br>
-                        – Use the App for any unlawful purpose.
-                        <br>
-                        – Post or transmit any content that is defamatory, obscene, offensive, or otherwise
-                        objectionable.
-                        <br>
-                        – Attempt to gain unauthorized access to our systems or networks.
-                        <br>
-                        – Interfere with the proper functioning of the App.
-                    </p>
-                    <p><strong>3.2 User Content:</strong>You are solely responsible for any content you post or transmit through the App. You grant us a non-exclusive, worldwide, royalty-free license to use, reproduce, modify, and display such content in connection with the operation of the App.</p>
-
-                    <p><strong><b>4. Payments and Refunds</b></strong></p>
-                    <p><strong>4.1 Fees:</strong>  Certain features of the App may be subject to fees. All fees are posted on the App and are subject to change at our discretion.</p>
-
-                    <p><strong>4.2 Payments:</strong>  All payments are processed through third-party payment processors. You agree to provide accurate payment information and to update such information as necessary.</p>
-                    
-                    <p><strong>4.3 Refunds:</strong>  Refunds for services provided are subject to our refund policy, which is available on our website. All refund requests must be made in accordance with this policy.</p>
-
-                    <p><strong><b>5. Termination</b></strong></p>
-
-                    <p><strong>5.1 Termination by You:</strong>
-                          You may terminate your account at any time by following the instructions on the App or by contacting us directly.
-                    </p>
-
-                    <p><strong>5.2 Termination by Us:</strong>
-                     We  reserve the right to terminate or suspend your account and access to the App, with or without notice, if you violate these Terms or engage in any conduct that we, in our sole discretion, consider to be inappropriate or harmful.
-                    </p>
-                    <p><strong><b>6. Disclaimers and Limitation of Liability</b></strong></p>
-
-                    <p><strong>6.1 Disclaimers:</strong>  The App and all content and services provided through the App are provided on an “as is” and “as available” basis. We make no warranties, express or implied, regarding the App or its content.</p>
-
-                    <p><strong>6.2 Limitation of Liability: </strong>  To the maximum extent permitted by law, Edexcel Academy & Educational Consultancy  shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses, resulting from (i) your use or inability to use the App; (ii) any unauthorized access to or use of our servers and/or any personal information stored therein; (iii) any interruption or cessation of transmission to or from the App; (iv) any bugs, viruses, trojan horses, or the like that may be transmitted to or through the App by any third party; (v) any errors or omissions in any content or for any loss or damage incurred as a result of the use of any content posted, emailed, transmitted, or otherwise made available through the App.</p>
-
-                    <p><strong><b>7. Indemnification</b></strong>
-                        <p>You agree to indemnify, defend, and hold harmless Edexcel Academy & Educational Consultancy  and its affiliates, directors, officers, employees, and agents from and against any and all claims, damages, obligations, losses, liabilities, costs, or debt, and expenses (including but not limited to attorney’s fees) arising from: (i) your use of and access to the App; (ii) your violation of any term of these Terms; (iii) your violation of any third-party right, including without limitation any copyright, property, or privacy right; or (iv) any claim that your content caused damage to a third party.</p>
-
-                        <p><strong><b>8. Governing Law</b></strong>
-                            <p>These Terms shall be governed and construed in accordance with the laws of [Your Country/State], without regard to its conflict of law provisions.</p>
-                        </p>
-                    </p>
-
-                    <p><strong><b>9. Changes to These Terms</b></strong>
-                        <p>We reserve the right to modify these Terms at any time. If we make changes, we will notify you by revising the effective date at the top of these Terms and, in some cases, we may provide additional notice (such as sending you an email notification or providing a notice within the App). Your continued use of the App following the posting of changes constitutes your acceptance of such changes.</p>
-                    </p>
-                    <p><strong><b>10. Contact Us</b></strong>
-                        <p>If you have any questions about these Terms, please contact us at:</p>
-                    </p>
-                    <p>Edexcel Academy & Educational Consultancy
-                        <br>
-                        <a class="text-decoration-none" href="mailto:info@eduexceledu.com">info@eduexceledu.com</a>
-                        <br>
-                        <a class="text-decoration-none text-light" href="tel:+971566428066">+971 56 642 8066</a>
-                        <br>
-                        Dubai , UAE
-                    </p>
-                    <p>Thank you for using Edexcel Academy & Educational Consultancy.</p>
-                    <p>This Terms and Conditions document should be customized with your company’s specific contact information and any additional details relevant to your operations</p>
-                </div>
-            </div>
-        </div>
-    </section>
+</body>
 @endsection
