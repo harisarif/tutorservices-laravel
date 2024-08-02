@@ -14,6 +14,13 @@
         width: 60px;
         margin: 10px 0;
      }
+     footer{
+        position: relative;
+     }
+     .footer-bottom{
+        position: absolute;
+        top: 130px;
+     }
     </style>
    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
