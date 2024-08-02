@@ -79,7 +79,7 @@
 
                             <div class="col-12" id="page-1">
                             <div class="col-12 mb-2">
-                            <h4 style="font-size: 17px; text-align: left; padding-left: 30px;">Select your country</h4>
+                            <h4 style="font-size: 16px; text-align: left; padding-left: 30px;">Select your country</h4>
                                 <select name="country" id="country" class="form-select" required style="margin: 0 auto !important; width: 92%; height: 50px;">
                                     @foreach($countries as $country)
                                         <option value="{{ $country }}">{{ $country }}</option>

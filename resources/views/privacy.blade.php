@@ -22,8 +22,10 @@
 </style>
 <body>
 @include('whatsapp')
+
 <div  data-aos="fade-left" class="row mini_header m-0 p-0 container-fluid position-relative">
         <div data-aos="fade-left" class="col-sm-12  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0">
+
             <ul class="p-2 m-0 d-sm-inline d-block text-center header-ul">
                 <li class=" p-2">
                     <i class="fa fa-envelope-square text-light" aria-hidden="true"></i>

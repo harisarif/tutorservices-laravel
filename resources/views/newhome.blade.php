@@ -128,7 +128,7 @@
                 </div>
                 <div class="col-12 col-md-6 p-0">
                     <div class="image-wrapper">
-                        <!-- <img src="images/banner-php.jpeg" class="full-img" alt="banner-php" /> -->
+                        <img src="images/banner-php.jpeg" class="full-img" alt="banner-php" />
                         <!-- <video src="images/banner.mp4" class="object-fit-cover mt-2" autoplay muted loop
                         width="100%" style="width:300px;height:400px;"></video> -->
 
@@ -741,7 +741,7 @@
                                 </div>
 
                                 <div class="col-md-6 ">
-                                 <label for=""><strong>Select your Country <b style="color: red;
+                                 <label for=""><strong>Select your country <b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
                                     <select class="px-2 h-100 w-100" style="border: 1px solid #ddd; border-radius: 4px;height: 57px !important; margin-top: 17px; color:#857979;">
                                         <option value="pakistan">pakistan</option>
@@ -846,7 +846,7 @@
                                 </div>
 
                                <div class="col-md-6 pt-3">  
-                                 <label for=""><strong>Enter your City <b style="color: red;
+                                 <label for=""><strong>Enter your city <b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
                                     <input type="text" placeholder="City" id="inputPassword4" class="form-control py-3">
                                 </div>
@@ -871,13 +871,13 @@
                                 </div>
 
                                 <div class="col-md-6" style="padding-top:5px;">
-                                  <label for=""><strong>Enter your Subject <b style="color: red;
+                                  <label for=""><strong>Select your grad <b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
                                    <input type="text" placeholder="Subject" id="inputPassword4" class="form-control py-3" style="height: 53px;">
                                </div>
                         
                                <div class="col-12 " id="page-1">
-                                   <h3 class="text-center " style="text-align: left !important; font-size:  15px; color:#42b979;">What are you looking for?</h3>
+                                   <h3 class="text-center " style="text-align: left !important; font-size:  15px;">What are you looking for?</h3>
                                   <div class="choice col-12 ">
 
                                  <ul class="p-0 ">

@@ -408,8 +408,8 @@ main {
 .choice ul li label::before {
     display: inline-block;
     content: '';
-    min-width: 0.9rem;
-    min-height: 0.9rem;
+    min-width: 0.7rem;
+    min-height: 0.7rem;
     /* background-color: rgb(var(--green)); */
     border: 2px solid #fff;
     outline: 1px solid #777;
