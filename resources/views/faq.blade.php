@@ -5,6 +5,15 @@
      .modalBox{
         display: none !important;
      }
+     .ad-heading-div{
+        background-color: #fafafa;
+        border-bottom-right-radius: 170px;
+     }
+     .ad-line-child{
+        border:5px solid #42b979;
+        width: 60px;
+        margin: 10px 0;
+     }
     </style>
    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -65,13 +74,21 @@
             </div>
         </div>
     </div>
-    <div data-aos="fade-left" class="wrapper container">
-            <div class="p-0" id="FAQ">
-                    <div class="col-12">
-                        <h2 class="py-0 my-4 text-center text-capitalize fw-bold">
+    <section class="ad-heading-div">
+                <div class="container">
+                    <div class="row">
+                       <div class="col-12">
+                        <div class="ad-line-child"></div>
+                        <h2 class="py-0 my-4 text-left text-capitalize fw-bold">
                             Frequently Asked Questions
                         </h2>
+                       </div>
                     </div>
+                </div>
+    </section>
+    <div data-aos="fade-left" class="wrapper container">
+            <div class="p-0" id="FAQ">
+                    
 
                     <div class="col-12 ms-1 ">
                         <div class="list-group-item border rounded my-2 px-2">

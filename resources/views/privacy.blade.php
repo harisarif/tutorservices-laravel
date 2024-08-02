@@ -8,9 +8,10 @@
     :root {
     --primary-color: #42b979;
 }
-.ad-policy h1{
+.ad-heading-child h1{
     font-size: 45px;
     color: var(--primary-color);
+    padding: 10px 0;
 }
 .ad-detail-child p{
     margin: 20px 0;
@@ -18,7 +19,15 @@
 .ad-detail-child p b{
     font-size: 50px;
 }
-
+.ad-line{
+    border: 5px solid var(--primary-color);
+    width: 60px;
+    margin: 10px 0;
+}
+.ad-heading{
+    border-bottom-right-radius: 170px;
+    background: #fafafa;
+}
 </style>
 <body>
 @include('whatsapp')
@@ -76,11 +85,18 @@
             </div>
         </div>
 </div>
+ <section class="ad-heading">
+    <div class="container">
+        <div class="row">
+            <div class="ad-heading-child">
+                <div class="ad-line"></div>
+            <h1>Privacy Policy</h1>
+            </div>
+        </div>
+    </div>
+ </section>
 <section class="container">
         <div data-aos="fade-left" class="ad-detail-child">
-            <div data-aos="fade-left" class="ad-policy">
-                <h1>Privacy Policy</h1>
-            </div>
             <p>Edexcel Academy & Educational Consultancy, a company registered in England and Wales (No. +971566428066),
                 herein referred to as Spires. We have created this privacy statement ("Statement"™) in order to
                 demonstrate our firm commitment to the privacy of the details that you provide to us when using this
@@ -159,4 +175,9 @@
         </div>
     </section>
 </body>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
 @endsection

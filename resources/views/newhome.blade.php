@@ -128,7 +128,7 @@
                 </div>
                 <div class="col-12 col-md-6 p-0">
                     <div class="image-wrapper">
-                        <img src="images/banner-php.jpeg" class="full-img" alt="banner-php" />
+                        <img src="images/Banner.png" class="full-img" alt="Banner.png" />
                         <!-- <video src="images/banner.mp4" class="object-fit-cover mt-2" autoplay muted loop
                         width="100%" style="width:300px;height:400px;"></video> -->
 
@@ -147,18 +147,18 @@
                 </div>
                 <div class="col-12">
                     <h3 class="d-flex justify-content-between align-items-center" style="color: #42b979;      font-size: 30px;">
-                        World Wide Tutor
+                    {{__('messages.World Wide Tutor')}}
                         <i onclick="hideNShow('filter-col')" class="fa fa-filter text-secondary d-inline-block d-md-none"
                             aria-hidden="true"></i>
                     </h3>
                     <p class="border p-2 description-tutor"style="    color: #42b979; background: #fff;font-size: 17px;">
-                        Edexcel is a platform that connects students with qualified tutors across the globe. It leverages online tools and technologies to provide personalized, flexible, and accessible educational support. The platform offers a wide range of subjects, catering to different educational levels, from primary school to High school. Edexcel ensures high-quality instruction by vetting tutors for their expertise and teaching skills. This global reach allows students to access diverse teaching styles and perspectives, fostering a richer learning experience. Additionally, the platform often includes features like one-on-one sessions, group classes, and customized lesson plans to meet individual learning needs.
+                    {{__('messages.Edexcel is a platform that connects students with qualified tutors across the globe. It leverages online tools and technologies to provide personalized, flexible, and accessible educational support. The platform offers a wide range of subjects, catering to different educational levels, from primary school to High school. Edexcel ensures high-quality instruction by vetting tutors for their expertise and teaching skills. This global reach allows students to access diverse teaching styles and perspectives, fostering a richer learning experience. Additionally, the platform often includes features like one-on-one sessions, group classes, and customized lesson plans to meet individual learning needs.')}} 
                     </p>
                 </div>
 
                 <div class="col-12">
                     <hr />
-                    <h3>Tutor's List</h3>
+                    <h3>{{__('messages.tutor_list')}}</h3>
                     <hr />
                 </div>
 
@@ -853,7 +853,7 @@
 
                                 <div class="col-md-6 ">
                                    <label for="dropdown1" class=" pb-1">
-                                    <strong>Select your class <b style="color: red;
+                                    <strong>Select your grad <b style="color: red;
                                     font-size: 20px;">*</b></strong>
                                    </label>
                                   <select style="height: 55px;" class="form-control" name="school_class" id="school_class">
@@ -871,7 +871,7 @@
                                 </div>
 
                                 <div class="col-md-6" style="padding-top:5px;">
-                                  <label for=""><strong>Select your grad <b style="color: red;
+                                  <label for=""><strong>Enter your subject<b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
                                    <input type="text" placeholder="Subject" id="inputPassword4" class="form-control py-3" style="height: 53px;">
                                </div>
