@@ -1,4 +1,4 @@
-@extends('layouts.app')
+extends('layouts.app')
 <style>
     footer {
         /* display: none !important; */
