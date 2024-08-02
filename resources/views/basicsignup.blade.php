@@ -93,6 +93,10 @@
                 <li class="d-inline">
                     <a class="text-decoration-none text-light" href="#">Tecktrack</a>
                 </li>
+                <li class="d-inline text-light">|</li>
+                <li class="d-inline">
+                    <a class="text-decoration-none text-light" href="#">FAQ</a>
+                </li>
             </ul>
         </div>
     </footer>

@@ -1,7 +1,7 @@
 
 //  hire tutor script
 let stepCounter = 1;
-let persentage = 25;
+let persentage = 100/3;
 const backBtn = document.getElementById('back-btn');
 const nextBtn = document.getElementById('next-btn');
 const classStartTime = document.getElementById('classStartTime');
@@ -19,26 +19,30 @@ const NextStep = (button) => {
     //set email to create account
     sEmail[1].value = sEmail[0].value;
 
-    if (stepCounter == 4) {
+    if (stepCounter == 3) {
         button.type = 'submit'
     }
     if (firstPageSearch.value != '' && firstPageSearch.value != ' ') {
         if (stepCounter == 1) {
             backBtn.classList.remove('d-none')
         }
-        if (stepCounter < 4) {
+        if (stepCounter < 3) {
+            // alert('dfds')
             step = document.getElementById('page-' + stepCounter);
             step.classList.add('d-none')
             secondStep = document.getElementById('page-' + (stepCounter + 1))
             secondStep.classList.remove('d-none')
             stepCounter++
-            stepPersentage.style.width = (persentage + 25) + '%';
-            persentage_num.innerHTML = (persentage + 25) + '%';
+            stepPersentage.style.width = (persentage + 100/3) + '%';
+            persentage_num.innerHTML = ((persentage + 100 / 3).toFixed(0)) + '%';
+
+            // alert(persentage_num.innerHTML)
             button.parentElement.classList.remove('justify-content-center');
             button.parentElement.classList.add('justify-content-between');
             // console.log(persentage);
-            persentage = persentage + 25;
-            if (stepCounter == 4) {
+            persentage = persentage + 100/3;
+            
+            if (stepCounter == 3) {
                 button.type = 'submit'
                 button.value = 'Submit'
                 // console.log(stepCounter);
@@ -61,11 +65,11 @@ const backStep = (button) => {
         backPage.classList.remove('d-none')
         stepCounter--
         // console.log(stepCounter);
-        persentage = persentage - 25;
+        persentage = persentage - 100/3;
 
         stepPersentage.style.width = persentage + '%'
         persentage_num.innerHTML = (persentage) + '%';
-        // persentage = persentage + 25;
+        // persentage = persentage + 100/3;
         nextBtn.type = "button"
         nextBtn.value = 'Next'
         

@@ -1,21 +1,19 @@
 <link rel="stylesheet" href="./css/new-home.css">
 @extends('layouts.app')
 @section('content')
-<style>
-footer{
-    position: fixed;
-    top: 92%;
-}
-.modalBox{
+    <style>    
+     .modalBox{
         display: none !important;
-    }
-</style>
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  AOS.init();
-</script>
-<div  data-aos="fade-left" class="row mini_header m-0 p-0 container-fluid position-relative">
+     }
+    </style>
+   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+      AOS.init();
+    </script>
+    <body>
+    @include('whatsapp')
+    <div  data-aos="fade-left" class="row mini_header m-0 p-0 container-fluid position-relative">
         <div data-aos="fade-left" class="col-sm-12  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0">
             <ul class="p-2 m-0 d-sm-inline d-block text-center header-ul">
                 <li class=" p-2">
@@ -48,9 +46,7 @@ footer{
                         <a class="text-decoration-none text-light" href="tel:+971566428066">+971 56 642 8066</a>
                     </li>
                 </ul>
-                <div data-aos="fade-left" class="fixed" id="social" style="position: fixed;
-    top: 200px;
-    right: 0;">
+                <div data-aos="fade-left" class="fixed" id="social" style="position: fixed; top: 200px; right: 0;">
                         <a target="_blank"
                             href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d"
                         >
@@ -182,4 +178,5 @@ footer{
                 </div>
             </div>
             
-@endsection
+    </body>
+            @endsection

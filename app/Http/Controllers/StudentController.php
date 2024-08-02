@@ -29,6 +29,9 @@ class StudentController extends Controller
     public function FAQ(){
         return view('faq');
     }
+    public function privacyPolicy(){
+        return view('privacy');
+    }
     public function termsCondition() {
         return view('terms-condition');
     }
@@ -74,8 +77,6 @@ class StudentController extends Controller
     public function create(Request $request) {
         $rules = [
             'email' => 'required|string|email|max:255|unique:student,email',
-            'class_start_time' => 'required|date_format:H:i',
-            'class_end_time' => 'required|date_format:H:i',
             'password' => 'required|min:8',
             'c_password' => 'required|min:8|same:password',
         ];
@@ -97,12 +98,12 @@ class StudentController extends Controller
         // $student->class_end_time = $request->input('class_end_time');
 
         // Convert the input time from 24-hour format to 12-hour format with AM/PM
-        $classStartTime = date("h:i A", strtotime($request->input('class_start_time')));
-        $classEndTime = date("h:i A", strtotime($request->input('class_end_time')));
+        // $classStartTime = date("h:i A", strtotime($request->input('class_start_time')));
+        // $classEndTime = date("h:i A", strtotime($request->input('class_end_time')));
 
         // Store the times in 12-hour format with AM/PM
-        $student->class_start_time = $classStartTime;
-        $student->class_end_time = $classEndTime;
+        // $student->class_start_time = $classStartTime;
+        // $student->class_end_time = $classEndTime;
         
         // $student->whatsapp_number = $request->input('whatsapp_number');
         $student->country = $request->input('country');
