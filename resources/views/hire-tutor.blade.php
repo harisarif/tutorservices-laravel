@@ -116,7 +116,7 @@
                             </div>
                             
                             <div class="form-group d-none">
-                                
+                           
                                 <input type="search" value="English" name="subject" class="form-control" id="page1-search" placeholder="Search" style="height:50px;">
                             </div>
                             <ul class="list-group d-none" id="searchList">
@@ -127,16 +127,22 @@
                                 <li onclick="page1List(this)" class="list-group-item text-start">Urdu</li>
                             </ul>
                             
-                            <div>
+                            <div style="text-align: left;">
                                 <!-- <select id="subject" name="subject" class="select form-control">
                                     <option value="">Select Subject</option>
                                 </select> -->
+                                <label for="" style="padding: 5px;"><strong>Enter your subject<b style="color: red;
+                                    font-size: 20px;">*</b></strong></label>
                                    <input type="text" placeholder="Subject" id="inputPassword4" class="form-control py-3" style="height: 53px;">
                             </div>
 
-                            <div class="col">
+                            <div class="col" style="text-align:left;">
                                 <h3 style="font-size: 15px; text-align: left; margin-top: 5px;">Enter your Detail</h3>
+                                <label for=""><strong>Enter your name <b style="color: red;
+                                    font-size: 20px;">*</b></strong></label>
                                 <input required name="name" type="text" placeholder="*Name"  class="inp-1" style="width:100%;">
+                                <label for=""><strong>Enter your email<b style="color: red;
+                                    font-size: 20px;">*</b></strong></label>
                                 <input required name="email" type="email" placeholder="*Email"  class="inp-1" style="width:100%;">
                                 <!-- <div class="row"> -->
                                     <div class="col-md-11 mt-2 mb-2" style="width: 100%;">
@@ -178,13 +184,15 @@
 
                         <!-- page-3 -->
                         
-                        <div class="col d-none" id="page-3">
+                        <div class="col d-none" id="page-3" style="text-align:left;">
                             <h4 class="text-center py-3">Enter password to create an Account<i
                                     class="fs-6 text-secondary">
                                     <b style="color:red">(Required)</b></i></h4>
-                            <input required type="email" name="c_email" placeholder="*Email" class="inp-1 d-none" readonly>
-                            <input required type="password" name="password" placeholder="*Password"  class="inp-1">
-                            <input required type="password" name="c_password" placeholder="*Confirm Password"  class="inp-1">
+                                    <label for="" style="padding: 0 25px;"><strong>Enter your password <b style="color: red;
+                                    font-size: 20px;">*</b></strong></label>
+                            <input required type="email" name="c_email" placeholder="*Email" class="inp-1 d-none" readonly >
+                            <input required type="password" name="password" placeholder="*Password"  class="inp-1"style="margin: 11px auto; display: flex; width: 91%;">
+                            <input required type="password" name="c_password" placeholder="*Confirm Password"  class="inp-1" style="margin: 11px auto; display: flex; width: 91%;">
 
                         </div>
 

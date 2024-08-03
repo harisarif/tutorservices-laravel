@@ -1,9 +1,11 @@
-@extends('layouts.app')
 <link rel="stylesheet" href="{{ asset('css/terms.css') }}">
+@extends('layouts.app')
 @section('content')
 
 <body>
+    
 @include('whatsapp')
+
         <header class="text-center bg-white m-0 p-2 d-flex align-items-end justify-content-center">
             <a class="mx-auto" href="{{ route('newhome') }}"><img src="{{ asset('images/logo.png') }}" alt="EDEXCEL-logo"height="50px"></a>
         </header>

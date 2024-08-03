@@ -17,7 +17,7 @@
     background: #42b979 !important;
     border: none !important;
 }
-
+@media(max-width: 425px)
 </style>
 @section('content')
 <header class="main_header d-flex bg-white py-2 align-items-end justify-content-center">
@@ -27,7 +27,7 @@
                                                           height="50px"></a>
 
     </header>
-<div class="container mt-5" id="login">
+<div class="container" id="login">
 
     <div class="row justify-content-center">
         <div class="col-md-8">

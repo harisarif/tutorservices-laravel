@@ -128,9 +128,9 @@
                 </div>
                 <div class="col-12 col-md-6 p-0">
                     <div class="image-wrapper">
-                        <img src="images/Banner.png" class="full-img" alt="Banner.png" />
-                        <!-- <video src="images/banner.mp4" class="object-fit-cover mt-2" autoplay muted loop
-                        width="100%" style="width:300px;height:400px;"></video> -->
+                        <!-- <img src="images/Banner.png" class="full-img" alt="Banner.png" /> -->
+                        <video src="images/banner-video.mp4" class="object-fit-cover mt-2" autoplay muted loop
+                        width="100%" style="width: 510px; height: 335px;"></video>
 
                     </div>
                 </div>

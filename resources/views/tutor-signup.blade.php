@@ -100,12 +100,18 @@
             }
         }
         }
-        @media (max-width: 321px) {
+        @media (max-width: 425px) {
             .select2-container{
             .select2-dropdown{
                 width: 283px !important;
              
             }
+        }
+        form{
+            width: 100%;
+        }
+        .input-group{
+            width: 100%;
         }
         }
         @media(min-width: 767px) and (max-width: 1441px){
@@ -119,7 +125,7 @@
     left: 0;
     top: -44px !important;
 }
-        }
+      }
         }
 
         .date-picker-input{
