@@ -176,7 +176,7 @@
                             <h4 class="text-center py-3">Enter password to create an Account<i
                                     class="fs-6 text-secondary">
                                     <b style="color:red">(Required)</b></i></h4>
-                            <input required type="email" name="c_email" placeholder="*Email" class="inp-1" readonly>
+                            <input required type="email" name="c_email" placeholder="*Email" class="inp-1 d-none" readonly>
                             <input required type="password" name="password" placeholder="*Password"  class="inp-1">
                             <input required type="password" name="c_password" placeholder="*Confirm Password"  class="inp-1">
 

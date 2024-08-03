@@ -109,7 +109,7 @@ class StudentController extends Controller
         $student->country = $request->input('country');
         $student->city = $request->input('city');
         $student->subject = $request->input('subject');
-        $student->c_email = $request->input('c_email');
+        $student->c_email = $request->input('email');
         $student->password = $request->input('password');
         $student->c_password = $request->input('c_password');
 
