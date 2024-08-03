@@ -32,8 +32,8 @@
 <body>
 @include('whatsapp')
 
-<header class="text-center bg-white m-0 p-2 d-flex align-items-end justify-content-center">
-            <a class="mx-auto" href="http://127.0.0.1:8000"><img src="/images/logo.png" alt="EDEXCEL-logo" height="50px"></a>
+        <header class="text-center bg-white m-0 p-2 d-flex align-items-end justify-content-center">
+            <a class="mx-auto" href="{{ route('newhome') }}"><img src="/images/logo.png" alt="EDEXCEL-logo" height="50px"></a>
         </header>
 
  <section class="ad-heading">
