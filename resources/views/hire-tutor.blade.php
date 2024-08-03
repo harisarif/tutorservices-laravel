@@ -80,8 +80,11 @@
                             <div class="col-12" id="page-1">
                             <div class="col-12 mb-2">
                             <h4 style="font-size: 16px; text-align: left; padding-left: 30px;">Select your country</h4>
+                            
                                 <select name="country" id="country" class="form-select" required style="margin: 0 auto !important; width: 92%; height: 50px;">
+                                    
                                     @foreach($countries as $country)
+                                    
                                         <option value="{{ $country }}">{{ $country }}</option>
                                     @endforeach
                                 </select>
@@ -100,7 +103,10 @@
                             <p style="font-size:15px; text-align: left;">Which subject tutor are you looking for?</p>
                             
                             <div class="form-group" style="text-align:left; ">
-                                <label for="dropdown1" class="pt-1 pb-1"></label>
+                            <label for="dropdown1" class=" pb-1">
+                                    <strong>Select your grade <b style="color: red;
+                                    font-size: 20px;">*</b></strong>
+                                   </label>
                                 <select class="form-control" id="school_class" name="school_class" style="height:50px;">>
                                     @foreach($schoolClasses as $schoolClass)
                                     <option value="{{ $schoolClass->id }}">{{ $schoolClass->name }}</option>
@@ -108,7 +114,7 @@
                     
                                 </select>
                             </div>
-                            <label class="form-label"></label>
+                            
                             <div class="form-group d-none">
                                 
                                 <input type="search" value="English" name="subject" class="form-control" id="page1-search" placeholder="Search" style="height:50px;">
@@ -125,7 +131,7 @@
                                 <!-- <select id="subject" name="subject" class="select form-control">
                                     <option value="">Select Subject</option>
                                 </select> -->
-                                <input type="text" name="subject"  placeholder="Subject" id="subject" class="form-control">
+                                   <input type="text" placeholder="Subject" id="inputPassword4" class="form-control py-3" style="height: 53px;">
                             </div>
 
                             <div class="col">

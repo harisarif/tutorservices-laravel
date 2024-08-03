@@ -723,15 +723,13 @@
                                 <div class="col-md-6 pt-3">
                                     <label for=""><strong>Enter your name <b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
-                                    <input type="text" placeholder="Name*" class="form-control py-3"
-                                        id="inputEmail4"/>
+                                    <input required="" name="name" type="text" placeholder="*Name" class="inp-1" style="width:100%;">
                                 </div>
 
                                 <div class="col-md-6 pt-3">
                                     <label for=""><strong>Enter your email <b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
-                                    <input type="email" placeholder="Enter Email" class="form-control py-3"
-                                        id="inputPassword4" />
+                                  <input required="" name="email" type="email" placeholder="*Email" class="inp-1" style="width:100%;">
                                 </div>
                                 <div class="col-ma-6 pt-3" style="width:100%;">
                                 <label for=""><strong>Enter your number <b style="color: red;
@@ -853,7 +851,7 @@
 
                                 <div class="col-md-6 ">
                                    <label for="dropdown1" class=" pb-1">
-                                    <strong>Select your grad <b style="color: red;
+                                    <strong>Select your grade <b style="color: red;
                                     font-size: 20px;">*</b></strong>
                                    </label>
                                   <select style="height: 55px;" class="form-control" name="school_class" id="school_class">
@@ -1051,7 +1049,7 @@
                        
                         <video src="images/edexcel.mp4" class="object-fit-cover mt-2" autoplay muted loop
                             width="100%"></video>
-                            <video src="images/student.mp4" class="object-fit-cover mt-2" autoplay muted loop
+                            <video src="images/video.mp4" class="object-fit-cover mt-2" autoplay muted loop
                             width="100%"></video>
 
                     </div>
