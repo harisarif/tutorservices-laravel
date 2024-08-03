@@ -127,7 +127,7 @@
                     </button>
                 </div>
                 <div class="col-12 col-md-6 p-0">
-                    <div class="image-wrapper">
+                    <div class="image-wrapper d-flex justify-content-end">
                         <!-- <img src="images/Banner.png" class="full-img" alt="Banner.png" /> -->
                         <video src="images/banner-video.mp4" class="object-fit-cover mt-2" autoplay muted loop
                         width="100%" style="width: 510px; height: 335px;"></video>
@@ -1047,8 +1047,8 @@
 
                         </div>
                        
-                        <video src="images/edexcel.mp4" class="object-fit-cover mt-2" autoplay muted loop
-                            width="100%"></video>
+                        <!-- <video src="images/edexcel.mp4" class="object-fit-cover mt-2" autoplay muted loop
+                            width="100%"></video> -->
                             <video src="images/video.mp4" class="object-fit-cover mt-2" autoplay muted loop
                             width="100%"></video>
 

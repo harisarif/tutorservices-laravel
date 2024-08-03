@@ -17,7 +17,11 @@
     background: #42b979 !important;
     border: none !important;
 }
-@media(max-width: 425px)
+@media(max-width: 425px){
+    footer{
+        top: 409px;
+    }
+}
 </style>
 @section('content')
 <header class="main_header d-flex bg-white py-2 align-items-end justify-content-center">
