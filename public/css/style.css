@@ -24,7 +24,10 @@ main {
     background-color: rgb(var(--green));
     color: rgb(var(--white));
 }
-
+.form-headings {
+    color: rgb(var(--green));
+    font-weight: bold;
+}
 .mini_header{
     display: flex;
     align-items: center;

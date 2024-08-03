@@ -714,36 +714,60 @@
                             <div class="border-bottom py-2">
                                 <h3 class="py-2">Let us guide you find an expert Tutor</h3>
                             </div>
-                            <form class="row g-3">
+                            <form class=" g-3">
                                 <p class="fs-5 text-secondary pt-2">
                                     Tell us your learning needs and get immediate response from
                                     qualified tutors
                                 </p>
+                                <div class="row " id="page-1">
+                                   <h3 class="text-center form-headings" style="text-align: left !important; font-size:  16px;">What are you looking for?<b style="color: red;
+                                    font-size: 20px;">*</b></h3>
+                                    <div class="choice col-12 ">
+
+                                        <ul class="p-0 mb-0">
+                                            <li class="d-flex align-items-center fs-5 py-2">
+                                                <input class="m-2 d-none chose-subject" type="radio" value="Online Tutor" name="subjects"
+                                                    id="option-1">
+                                                <label for="option-1" style="font-size:16px;">Online Tutor </label>
+                                            </li>
+                                            <li class="d-flex align-items-center fs-5 py-2">
+                                                <input class="m-2 d-none chose-subject" type="radio" value="Tutor for home" name="subjects"
+                                                    id="option-2">
+                                                <label for="option-2"  style="font-size:16px;">Tutor for Home</label>
+                                            </li>
+                                            <li class="d-flex align-items-center fs-5 py-2">
+                                                <input class="m-2 d-none chose-subject" type="radio" value="Both" name="subjects"
+                                                    id="option-3">
+                                                <label for="option-3"  style="font-size:16px;">Both</label>
+                                            </li>
+                                        </ul>
+                                </div>
 
                                 <div class="col-md-6 pt-3">
-                                    <label for=""><strong>Enter your name <b style="color: red;
+                                    <label for=""><strong class="form-headings">Enter your name <b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
                                     <input required="" name="name" type="text" placeholder="*Name" class="inp-1" style="width:100%;">
                                 </div>
 
                                 <div class="col-md-6 pt-3">
-                                    <label for=""><strong>Enter your email <b style="color: red;
+                                    <label for=""><strong class="form-headings">Enter your email <b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
                                   <input required="" name="email" type="email" placeholder="*Email" class="inp-1" style="width:100%;">
                                 </div>
                                 <div class="col-ma-6 pt-3" style="width:100%;">
-                                <label for=""><strong>Enter your number <b style="color: red;
+                                <label for=""><strong class="form-headings">Enter your number <b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
                                     <input type="text" placeholder="Mobile*" class="form-control py-3"
                                         id="inputPassword4" />
                                 </div>
 
                                 <div class="col-md-6 ">
-                                 <label for=""><strong>Select your country <b style="color: red;
+                                 <label for=""><strong class="form-headings">Select your country <b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
                                     <select class="px-2 h-100 w-100" style="border: 1px solid #ddd; border-radius: 4px;height: 57px !important; margin-top: 17px; color:#857979;">
-                                        <option value="pakistan">pakistan</option>
+                                        
                                         <option value="United Arab Emirates">United Arab Emirates</option>
+                                        <option value="pakistan">Pakistan</option>
                                         <option value="India">India</option>
                                         <option value="United Kingdom">United Kingdom</option>
                                         <option value="Afghanistan">Afghanistan</option>
@@ -844,14 +868,14 @@
                                 </div>
 
                                <div class="col-md-6 pt-3">  
-                                 <label for=""><strong>Enter your city <b style="color: red;
+                                 <label for=""><strong class="form-headings">Enter your city <b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
                                     <input type="text" placeholder="City" id="inputPassword4" class="form-control py-3">
                                 </div>
 
                                 <div class="col-md-6 ">
                                    <label for="dropdown1" class=" pb-1">
-                                    <strong>Select your grade <b style="color: red;
+                                    <strong class="form-headings">Select your grade <b style="color: red;
                                     font-size: 20px;">*</b></strong>
                                    </label>
                                   <select style="height: 55px;" class="form-control" name="school_class" id="school_class">
@@ -869,34 +893,12 @@
                                 </div>
 
                                 <div class="col-md-6" style="padding-top:5px;">
-                                  <label for=""><strong>Enter your subject<b style="color: red;
+                                  <label for=""><strong class="form-headings">Enter your subject<b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
                                    <input type="text" placeholder="Subject" id="inputPassword4" class="form-control py-3" style="height: 53px;">
                                </div>
                         
-                               <div class="col-12 " id="page-1">
-                                   <h3 class="text-center " style="text-align: left !important; font-size:  15px;">What are you looking for?</h3>
-                                  <div class="choice col-12 ">
-
-                                 <ul class="p-0 ">
-                                    <li class="d-flex align-items-center fs-5 py-2">
-                                        <input class="m-2 d-none chose-subject" type="radio" value="Online Tutor" name="subjects"
-                                            id="option-1">
-                                        <label for="option-1" style="font-size:13px;">Online Tutor </label>
-                                    </li>
-                                    <li class="d-flex align-items-center fs-5 py-2">
-                                        <input class="m-2 d-none chose-subject" type="radio" value="Tutor for home" name="subjects"
-                                            id="option-2">
-                                        <label for="option-2"  style="font-size:13px;">Tutor for Home</label>
-                                    </li>
-                                    <li class="d-flex align-items-center fs-5 py-2">
-                                        <input class="m-2 d-none chose-subject" type="radio" value="Both" name="subjects"
-                                            id="option-3">
-                                        <label for="option-3"  style="font-size:13px;">Both</label>
-                                    </li>
-                                 </ul>
-                            </div>
-
+                               
                         </div>
 
                                 <!-- <div class="col-12">
