@@ -55,7 +55,7 @@
 
                         <!-- page-1 -->
                         <div class="col " id="page-1">
-                            <h3 class=" pt-3" style="padding:0 30px; text-align: left; font-size:16px;">What are you looking for?</h3>
+                            <h3 class=" pt-3" style="padding:0 30px; text-align: left; font-size:16px;"><strong>What are you looking for?</strong></h3>
                             <div class="choice col-12 px-3 py-1" >
 
                                 <ul class="p-0 ">
