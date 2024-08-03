@@ -68,7 +68,7 @@ const backStep = (button) => {
         persentage = persentage - 100/3;
 
         stepPersentage.style.width = persentage + '%'
-        persentage_num.innerHTML = (persentage) + '%';
+        persentage_num.innerHTML = (persentage.toFixed(0)) + '%';
         // persentage = persentage + 100/3;
         nextBtn.type = "button"
         nextBtn.value = 'Next'
