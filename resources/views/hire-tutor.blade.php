@@ -78,21 +78,24 @@
                             </div>
 
                             <div class="col-12" id="page-1">
-                            <div class="col-12 mb-2">
-                            <h4 style="font-size: 16px; text-align: left; padding-left: 30px;">Select your country</h4>
-                            
-                                <select name="country" id="country" class="form-select" required style="margin: 0 auto !important; width: 92%; height: 50px;">
-                                    
-                                    @foreach($countries as $country)
-                                    
-                                        <option value="{{ $country }}">{{ $country }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-12 mb-2">
+                                <div class="col-12 mb-2 ms-4 text-left" style="text-align:left">
+                                    <h4 style="font-size: 16px; text-align: left;">Select your country</h4>
                                 
-                                <input type="text" name="city" id="city" class="form-control" placeholder="Enter your city" required style="margin: 16px auto !important; width: 92%; height: 50px;">
-                            </div>
+                                    <select name="country" id="country" class="form-select" required style="margin: 0 auto !important; width: 92%; height: 50px;">
+                                        <option value="">Select Country</option>
+                                        @foreach($countries as $code => $country)
+                                            <option value="{{ $code }}">{{ $country }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-12 mb-2 ms-4 text-left" style="text-align:left">
+                                    
+                                    <!-- <input type="text" name="city" id="city" class="form-control" placeholder="Enter your city" required style="margin: 16px auto !important; width: 92%; height: 50px;"> -->
+                                    <h4 style="font-size: 16px; text-align: left;">Select your city</h4>
+                                    <select name="city" id="city" class="form-select" required style="margin: 0 auto !important; width: 92%; height: 50px;">
+                                        <option value="">Select City</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
@@ -148,7 +151,7 @@
                                     <div class="col-md-11 mt-2 mb-2" style="width: 100%;">
                                         <div class="input-group d-flex justify-content-between align-items-center" style="width: 101%;">
                                             <select name="countrySelect" id="countrySelect" class="form-select country-select w-50" required>
-                                                @foreach ($countries as $key => $country)
+                                                @foreach ($countriesPhone as $key => $country)
                                                     <option value="{{ $key }}">{{ $country }}</option>
                                                 @endforeach
                                             </select>
@@ -220,6 +223,42 @@
 @endsection
 @section('js')
 <script>
+        $(document).ready(function() {
+            $('#country').select2();
+            $('#city').select2();
+            $('#country').on('change', function() {
+                
+            
+                var countryCode = $(this).val();
+                var $citySelect = $('#city');
+
+                if (countryCode) {
+                    $.ajax({
+                        url: '{{ route('cities') }}',
+                        type: 'GET',
+                        data: { country: countryCode },
+                        success: function(data) {
+                            console.log(data)
+                            $citySelect.empty();
+                            $citySelect.append('<option value="">Select City</option>');
+                            $.each(data, function(index, city) {
+                                $citySelect.append('<option value="' + city + '">' + city + '</option>');
+                            });
+                        },
+                        error: function() {
+                            $citySelect.empty();
+                            $citySelect.append('<option value="">No cities available</option>');
+                        }
+                    });
+                } else {
+                    $citySelect.empty();
+                    $citySelect.append('<option value="">Select City</option>');
+                }
+            });
+        });
+    </script>
+<script>
+
      $(document).ready(function($) {
             setTimeout(function() {
                 $(".alert").fadeOut("slow");

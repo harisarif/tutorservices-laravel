@@ -19,9 +19,17 @@ class StudentController extends Controller
         // $countries = collect(config('countries.countries'))->prepend("Select your country", "");
         $schoolClasses = SchoolClass::all();
         $countries = collect(config('countries_assoc.countries'));
+        $countriesPhone = collect(config('phonecountries.countries'));
         $countries_number_length = collect(config('countries_number_length.countries'));
         $countries_prefix = collect(config('countries_prefix.countries'));
-        return view('hire-tutor', compact('countries','schoolClasses','countries_prefix','countries_number_length'));
+        return view('hire-tutor', compact('countriesPhone','countries','schoolClasses','countries_prefix','countries_number_length'));
+    }
+    public function getCities(Request $request)
+    {
+        $countryCode = $request->query('country');
+        $cities = config('cities.cities')[$countryCode] ?? [];
+        return response()->json($cities);
+        // dd($countryCode, $cities);
     }
     public function hiring() {
         return view('hired-tutor');

@@ -246,7 +246,7 @@ return response()->json($serializedData);
         }
 
     public function signup() {
-        $countries = collect(config('countries_assoc.countries'));
+        $countries = collect(config('phonecountries.countries'));
         $countries_number_length = collect(config('countries_number_length.countries'));
         $countries_prefix = collect(config('countries_prefix.countries'));
         return view('tutor-signup', compact(['countries', 'countries_number_length', 'countries_prefix']));
@@ -254,7 +254,7 @@ return response()->json($serializedData);
 
     public function edit($id) {
         $tutor = Tutor::findOrFail($id);
-        $countries = collect(config('countries_assoc.countries'));
+        $countries = collect(config('phonecountries.countries'));
         return view('edit-teacher', compact(['tutor', 'countries']));
     }
 
