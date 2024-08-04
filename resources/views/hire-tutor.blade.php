@@ -3,9 +3,9 @@
    #allModal {
             display: none !important;
         }
-    .select2-container--default .select2-selection--single {
+    /* .select2-container--default .select2-selection--single {
             height:35px !important;
-        }
+        } */
         main{
     background: url(./images/bg_image_1.png), #f1f1f1a0;
     background-blend-mode: screen;
