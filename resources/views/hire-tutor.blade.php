@@ -79,7 +79,7 @@
 
                             <div class="col-12" id="page-1">
                                 <div class="col-12 mb-2 ms-4 text-left" style="text-align:left">
-                                    <h4 style="font-size: 16px; text-align: left; color:#42b979;">Select your country</h4>
+                                    <h4 style="font-size: 16px; text-align: left; color:#42b979;"><strong>Select your country</strong></h4>
                                 
                                     <select name="country" id="country" class="form-select" required style="margin: 0 auto !important; width: 92%; height: 50px;">
                                         <option value="">Select Country</option>
@@ -91,7 +91,7 @@
                                 <div class="col-12 mb-2 ms-4 text-left" style="text-align:left">
                                     
                                     <!-- <input type="text" name="city" id="city" class="form-control" placeholder="Enter your city" required style="margin: 16px auto !important; width: 92%; height: 50px;"> -->
-                                    <h4 style="font-size: 16px; text-align: left; color:#42b979;">Select your city</h4>
+                                    <h4 style="font-size: 16px; text-align: left; color:#42b979;"><strong>Select your city</strong></h4>
                                     <select name="city" id="city" class="form-select" required style="margin: 0 auto !important; width: 92%; height: 50px;">
                                         <option value="">Select City</option>
                                     </select>
@@ -103,7 +103,7 @@
                       
                         <div class="col-12 px-5 py-4 d-none" id="page-2">
                             <h3 style="font-size:18px; text-align: left; color:42b979;">Select a Subject</h3>
-                            <p style="font-size:15px; text-align: left;">Which subject tutor are you looking for?</p>
+                            <p style="font-size:15px; text-align: left; color:#aaa;">Which subject tutor are you looking for?</p>
                             
                             <div class="form-group" style="text-align:left; ">
                             <label for="dropdown1" class=" pb-1">
@@ -148,14 +148,18 @@
                                     font-size: 20px;">*</b></strong></label>
                                 <input required name="email" type="email" placeholder="*Email"  class="inp-1" style="width:100%;">
                                 <!-- <div class="row"> -->
+                                <label for="" style="color:#42b979;"><strong>Mobile Number<b style="color: red;
+                                    font-size: 20px;">*</b></strong></label>
                                     <div class="col-md-11 mt-2 mb-2" style="width: 100%;">
                                         <div class="input-group d-flex justify-content-between align-items-center" style="width: 101%;">
+                                        
                                             <select name="countrySelect" id="countrySelect" class="form-select country-select w-50" required>
                                                 @foreach ($countriesPhone as $key => $country)
                                                     <option value="{{ $key }}">{{ $country }}</option>
                                                 @endforeach
                                             </select>
-                                            <input  class="form-control w-50" required name="phone" id="phone" type="text" placeholder="e.g +92XXXXXXXXXX" style="border: 1px solid #aaa; height: 35px; box-shadow: none;">
+                                           
+                                            <input  class="form-control w-50" required name="phone" id="phone" type="text" placeholder="e.g +92XXXXXXXXXX" style="border: 1px solid #aaa; height: 28px; box-shadow: none;">
                                         </div>
                                     </div>
 
@@ -194,8 +198,8 @@
                                     <label for="" style="padding: 0 25px; color:#42b979;"><strong>Enter your password <b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
                             <input required type="email" name="c_email" placeholder="*Email" class="inp-1 d-none" readonly >
-                            <input required type="password" name="password" placeholder="*Password"  class="inp-1"style="margin: 11px auto; display: flex; width: 91%;">
-                            <input required type="password" name="c_password" placeholder="*Confirm Password"  class="inp-1" style="margin: 11px auto; display: flex; width: 91%;">
+                            <input required type="password" name="password" placeholder="*Password"  class="inp-1"style="margin: 11px auto; display: flex; width: 92%;">
+                            <input required type="password" name="c_password" placeholder="*Confirm Password"  class="inp-1" style="margin: 11px auto; display: flex; width: 92%;">
 
                         </div>
 

@@ -460,7 +460,7 @@
                                 @foreach ($tutors as $item)
                                     <div class="tutor_profile rounded overflow-hidden mb-3 mt-3">
                                         <div class="d-flex justify-content-between">
-                                            <button class="p-1 bg_theme_green text-light border border-0">
+                                            <button class="p-1 bg_theme_green text-light border border-0" style="display:none;">
                                                 Sponsored
                                             </button>
                                             <span class="p-1 text-secondary">
@@ -538,7 +538,7 @@
                                                                     {{ $item->city }}
                                                                 </td>
                                                             </tr>
-                                                            <tr class="title-1 col col-md-3">
+                                                            <tr class="title-1 col col-md-3" style="display:none;">
                                                                 <td class="font-s text-dark fw-bold">Mobile</td>
                                                                 <td class="d-none d-md-block px-2">:</td>
                                                                 <td class="font-s text-secondary">
@@ -549,7 +549,7 @@
                                                                     </button>
                                                                 </td>
                                                             </tr>
-                                                            <tr class="title-1 col col-md-3">
+                                                            <tr class="title-1 col col-md-3" style="display:none;">
                                                                 <td class="font-s fw-bold">WhatsApp</td>
                                                                 <td class="d-none d-md-block px-2">:</td>
                                                                 <td class="font-s text-secondary">

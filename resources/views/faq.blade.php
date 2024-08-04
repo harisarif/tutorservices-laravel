@@ -97,7 +97,7 @@
                     </div>
                 </div>
     </section>
-    <section class="ad-flex" style="display: flex; align-items: center; margin: 10px 50px;">
+    <section class="ad-flex" style="display: flex;  margin: 10px 50px;">
         <div data-aos="fade-left" class="wrapper container" style="margin: 0 40px;">
             <div class="p-0" id="FAQ">
                     
@@ -206,7 +206,7 @@
                     </div>
                 </div>
             </div>
-            <div id="filter-col" class="d-none col col-lg-3 d-md-block my-0 p-0" style="overflow: hidden;    width: 255px;">
+            <div id="filter-col" class="d-none col col-lg-3 d-md-block my-0 p-0" style="overflow: hidden;    width: 235px;">
                         <div class="filter-1 border d-none">
                             <div class="col bg-body-secondary p-2 d-flex align-items-center justify-content-between">
                                 <span><i class="fas fa-filter"></i> Filter</span>
