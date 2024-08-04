@@ -85,7 +85,7 @@
     <header class="text-center bg-white m-0 p-2 d-flex align-items-end justify-content-center">
             <a class="mx-auto" href="{{ route('newhome') }}"><img src="/images/logo.png" alt="EDEXCEL-logo" height="50px"></a>
         </header>
-    <section class="ad-heading-div">
+        <section class="ad-heading-div">
                 <div class="container">
                     <div class="row">
                        <div class="col-12">
@@ -97,7 +97,8 @@
                     </div>
                 </div>
     </section>
-    <div data-aos="fade-left" class="wrapper container">
+    <section class="ad-flex" style="display: flex; align-items: center; margin: 10px 50px;">
+        <div data-aos="fade-left" class="wrapper container" style="margin: 0 40px;">
             <div class="p-0" id="FAQ">
                     
 
@@ -205,5 +206,120 @@
                     </div>
                 </div>
             </div>
+            <div id="filter-col" class="d-none col col-lg-3 d-md-block my-0 p-0" style="overflow: hidden;    width: 255px;">
+                        <div class="filter-1 border d-none">
+                            <div class="col bg-body-secondary p-2 d-flex align-items-center justify-content-between">
+                                <span><i class="fas fa-filter"></i> Filter</span>
+                                <span onclick="hideNShow('filter-col')" class="fs-1 text-secondary d-md-none">×</span>
+                            </div>
+
+                            <div class="p-0 m-0 mx-2 px-2">
+                                <h5 class="m-0 mt-2 pointer d-flex align-items-center justify-content-between font-s fw-bold" onclick="toggleList(this,'ul-toggle-1')">
+                                    Subject
+                                    <i class="fa fa-chevron-down text-secondary" style="transform: rotate(180deg)" aria-hidden="true"></i>
+                                </h5>
+                                <ul style="height: 200px" id="ul-toggle-1" class="border rounded filter_ul p-0">
+                                    <li>English</li>
+                                    <li>Maths</li>
+                                    <li>Physic</li>
+                                    <li>Chemistry</li>
+                                    <li>social sutdy</li>
+                                    <li>Islammiat</li>
+                                    <li>Urdu</li>
+                                    <li>Computer</li>
+                                    <li>Biology</li>
+                                    <!-- <li></li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li> -->
+                                </ul>
+                            </div>
+
+                            <div class="p-0 m-0 mx-2 px-2">
+                                <h5 class="m-0 mt-2 pointer d-flex align-items-center justify-content-between font-s fw-bold" onclick="toggleList(this,'ul-toggle-2')">
+                                    Curriculum
+                                    <i class="fa fa-chevron-down text-secondary" style="transform: rotate(180deg)" aria-hidden="true"></i>
+                                </h5>
+                                <ul style="height: 200px" id="ul-toggle-2" class="border rounded filter_ul p-0">
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                </ul>
+                            </div>
+
+                            <div class="p-0 m-0 mx-2 px-2">
+                                <h5 class="m-0 mt-2 pointer d-flex align-items-center justify-content-between font-s fw-bold" onclick="toggleList(this,'ul-toggle-3')">
+                                    Area
+                                    <i class="fa fa-chevron-down text-secondary" aria-hidden="true"></i>
+                                </h5>
+                                <ul id="ul-toggle-3" class="rounded filter_ul p-0">
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                </ul>
+                            </div>
+
+                            <div class="p-0 m-0 mx-2 px-2">
+                                <h5 class="m-0 mt-2 pointer d-flex align-items-center justify-content-between font-s fw-bold" onclick="toggleList(this,'ul-toggle-4')">
+                                    Cagtegories
+                                    <i class="fa fa-chevron-down text-secondary" aria-hidden="true"></i>
+                                </h5>
+                                <ul id="ul-toggle-4" class="rounded filter_ul p-0">
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                       
+                        <!-- <video src="images/edexcel.mp4" class="object-fit-cover mt-2" autoplay muted loop
+                            width="100%"></video> -->
+                            <video src="images/video.mp4" class="object-fit-cover mt-2" autoplay="" muted="" loop="" width="100%"></video>
+
+                    </div>
+    </section>
     </body>
  @endsection
