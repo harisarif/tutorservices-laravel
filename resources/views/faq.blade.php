@@ -47,8 +47,6 @@
     <section class="ad-flex" style="display: flex;  margin: 10px 50px;">
         <div data-aos="fade-left" class="wrapper container" style="margin: 0 40px;">
             <div class="p-0" id="FAQ">
-                    
-
                     <div class="col-12 ms-1 ">
                         <div class="list-group-item border rounded my-2 px-2">
                             <div class="d-flex justify-content-between align-items-center"
@@ -260,6 +258,7 @@
                                 </ul>
                             </div>
 
+                            
                         </div>
                        
                         <!-- <video src="images/edexcel.mp4" class="object-fit-cover mt-2" autoplay muted loop

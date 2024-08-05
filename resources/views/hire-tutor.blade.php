@@ -55,7 +55,7 @@
 
                         <!-- page-1 -->
                         <div class="col " id="page-1">
-                            <h3 class=" pt-3" style="padding:0 30px; text-align: left; font-size:16px;color:#42b979;"><strong>What are you looking for?</strong></h3>
+                            <h3 class=" pt-3" style="padding:0 30px; text-align: center; font-size:16px;color:#42b979;"><strong>What are you looking for?</strong></h3>
                             <div class="choice col-12 px-3 py-1" >
 
                                 <ul class="p-0 ">
@@ -102,8 +102,8 @@
                         <!-- page-2 -->
                       
                         <div class="col-12 px-5 py-4 d-none" id="page-2">
-                            <h3 style="font-size:18px; text-align: left; color:42b979;">Select a Subject</h3>
-                            <p style="font-size:15px; text-align: left; color:#aaa;">Which subject tutor are you looking for?</p>
+                            <h3 style="font-size:18px; text-align: center; color:42b979;"><strong>Select a Subject</strong></h3>
+                            <p style="font-size:15px; text-align: center; color:#aaa;">Which subject tutor are you looking for?</p>
                             
                             <div class="form-group" style="text-align:left; ">
                             <label for="dropdown1" class=" pb-1">
@@ -134,17 +134,17 @@
                                 <!-- <select id="subject" name="subject" class="select form-control">
                                     <option value="">Select Subject</option>
                                 </select> -->
-                                <label for="" style="padding: 5px; color:42b979;"><strong>Enter your Subject<b style="color: red;
+                                <label for="" style="padding: 5px; color:42b979;"><strong> Subject<b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
                                    <input type="text" placeholder="Subject" id="inputPassword4" class="form-control py-3" style="height: 53px;">
                             </div>
 
                             <div class="col" style="text-align:left;">
-                                <h3 style="font-size: 15px; text-align: left; margin-top: 5px;">Enter your Detail</h3>
-                                <label for="" style="color:#42b979;"><strong>Enter your Name <b style="color: red;
+                                <h3 style="font-size: 18px; text-align: center; margin-top: 5px; color: #42b979;"><b>Enter your Detail</b></h3>
+                                <label for="" style="color:#42b979;"><strong> Name <b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
                                 <input required name="name" type="text" placeholder="*Name"  class="inp-1" style="width:100%;">
-                                <label for="" style="color:#42b979;"><strong>Enter your email<b style="color: red;
+                                <label for="" style="color:#42b979;"><strong> email<b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
                                 <input required name="email" type="email" placeholder="*Email"  class="inp-1" style="width:100%;">
                                 <!-- <div class="row"> -->
@@ -195,7 +195,7 @@
                             <h4 class="text-center py-3">Enter password to create an Account<i
                                     class="fs-6 text-secondary">
                                     <b style="color:red">(Required)</b></i></h4>
-                                    <label for="" style="padding: 0 25px; color:#42b979;"><strong>Enter your password <b style="color: red;
+                                    <label for="" style="padding: 0 25px; color:#42b979;"><strong> password <b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
                             <input required type="email" name="c_email" placeholder="*Email" class="inp-1 d-none" readonly >
                             <input required type="password" name="password" placeholder="*Password"  class="inp-1"style="margin: 11px auto; display: flex; width: 92%;">
