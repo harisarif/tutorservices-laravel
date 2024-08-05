@@ -1050,10 +1050,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="form col rounded p-4 align-item-center">
-                            <div class="border-bottom py-2">
-                                <h3 class="py-2" style="color:42b979;"><strong>Discover the Perfect Tutor for Your Needs</strong></h3>
+                <div class="border-bottom py-2">
+                                <h3 class="py-2" style="color:42b979; text-align: center; margin: 10px;"><strong>Discover the Perfect Tutor for Your Needs</strong></h3>
                             </div>
+                <div class="form col rounded p-4 align-item-center">
+                            
                             <form class=" g-3">
                                 <p class="fs-5 text-secondary pt-2">
                                     Tell us your learning needs and get immediate response from
@@ -1249,10 +1250,14 @@
                                                 Conditions</b></a>
                                     </label>
                                 </div>
+                                <div class="col d-flex  py-3">
+                    <button type="submit" class="btn bg_theme_green text-light fw-bold">Submit Form</button>
+                </div>
                             </form>
                            
                         </div>
-                <div class="p-0" id="FAQ">
+            </section>
+            <div class="p-0" id="FAQ">
                     <div class="col-12">
                         <h2 class="py-0 my-4 text-center text-capitalize fw-bold">
                             Frequently Asked Questions
@@ -1462,7 +1467,6 @@
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
-            </section>
     </div>
 
     <button class="goToTop fw-20px" style="background-color:#42B979" onclick="window.scrollTo(0, 0)"><i
