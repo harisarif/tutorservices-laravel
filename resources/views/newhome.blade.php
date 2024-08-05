@@ -1259,7 +1259,7 @@
             </section>
             <div class="p-0" id="FAQ">
                     <div class="col-12">
-                        <h2 class="py-0 my-4 text-center text-capitalize fw-bold">
+                        <h2 class="py-0 my-4 text-center text-capitalize fw-bold" style="color:#42b979;">
                             Frequently Asked Questions
                         </h2>
                     </div>
