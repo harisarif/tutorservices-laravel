@@ -1369,7 +1369,7 @@
                 </div>
 
                 <div id="carouselExampleCaptions" class="carousel slide text-center mb-3" data-bs-ride="carousel">
-                    <h2 class="py-0 my-4 text-center text-capitalize fw-bold">
+                    <h2 class="py-0 my-4 text-center text-capitalize fw-bold" style="color:#42b979;">
                         Reviews
                     </h2>
                     <div class="carousel-indicators mx-5">
