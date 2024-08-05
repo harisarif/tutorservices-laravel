@@ -28,62 +28,10 @@
     border-bottom-right-radius: 170px;
     background: #fafafa;
 }
+
 </style>
 <body>
 @include('whatsapp')
-    <div class="row mini_header m-0 p-0 container-fluid position-relative">
-        <div class="col-sm-12  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0">
-            <ul class="p-2 m-0 d-sm-inline d-block text-center header-ul">
-                <li class=" p-2">
-                    <i class="fa fa-envelope-square text-light" aria-hidden="true"></i>
-                    <a class="text-decoration-none text-light" href="mailto:info@eduexceledu.com">info@eduexceledu.com</a>
-                </li>
-             <li>
-             <a href="http://127.0.0.1:8000/hire-tutor" class="hiring-button">
-                        Book A demo
-                            </a>
-             </li>
-             <li>
-             <!-- <a href="http://127.0.0.1:8000/hiring" class="hiring-button">
-                        New page
-                            </a> -->
-             </li>
-            </ul>
-            <div>
-            <!-- <h1>Welcome to our application!</h1> -->
-            
-
-                <ul class="icons d-flex p-2 m-0 justify-content-center align-items-center gap-3" style="list-style:none;">   
-                  
-                <div>
-                    <label class="text-white" style="font-size:12px;">Swtich language from there</label>
-                    <select id="language-select" onchange="changeLanguage()">
-                        <option value="en">English</option>
-                        <option value="ar">Arabic</option>
-                    </select>
-                    </div>
-                    <li class=" p-2 header-phone-number">
-                    
-                        <i class="fa-solid fa-phone text-light" aria-hidden="true"></i>
-                        <a class="text-decoration-none text-light" href="tel:+971566428066">+971 56 642 8066</a>
-                    </li>
-                </ul>
-                <div class="fixed" id="social">
-                        <a target="_blank" href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d">
-                            <i class="fa-brands fa-facebook" aria-hidden="true"></i>
-                        </a>
-                        <a target="_blank" href="https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&amp;utm_source=qr">
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-                        <a target="_blank" href="https://www.linkedin.com/in/edexcel-edu-130983310/">
-                            <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
-                        </a>
-                </div>
-                
-            </div>
-        </div>
-        <div class="notification mb-2 w-25 p-2 bg-info-subtle position-absolute end-0 top-100 z-1" style="display: none;">This is a demo</div>
-    </div>
         <header class="text-center bg-white m-0 p-2 d-flex align-items-end justify-content-center">
             <a class="mx-auto" href="{{ route('newhome') }}"><img src="/images/logo.png" alt="EDEXCEL-logo" height="50px"></a>
         </header>
@@ -98,9 +46,10 @@
         </div>
     </div>
  </section>
-<section class="container">
+    <section class="ad-slexx-sec" style=" display: flex; margin: 10px 30px;">
+    <section class="container">
         <div data-aos="fade-left" class="ad-detail-child">
-            <p>Edexcel Academy & Educational Consultancy, a company registered in England and Wales (No. +971566428066),
+            <p>Edexcel Academy & Educational Consultancy, a company registered in Pakistan and Wales (No. +971566428066),
                 herein referred to as Spires. We have created this privacy statement ("Statement"™) in order to
                 demonstrate our firm commitment to the privacy of the details that you provide to us when using this
                 website.</p>
@@ -176,6 +125,121 @@
                 <p>We may disclose your personal data to our insurers and/or professional advisers in so far as reasonably necessary for the purposes of obtaining or maintaining insurance coverage, managing risks, obtaining professional advice, or the establishment, exercise or defence of legal claims, whether in court proceedings or in an administrative or out-of-court procedure.</p>
                 <p>We may disclose enquiry data, profile data, service data or correspondence data to another or multiple clients of our paltform in so far as reasonably necessary to affect an introduction between tutor and student for the purposes of arranging tuition, and to facilitate and administer that relationship, and to assist in the performance of the contract between tutor and student. The legal basis for this is the legitimate interest of our platform, namely the provision of our services.</p>
         </div>
+    </section>
+    <div id="filter-col" class="d-none col col-lg-3 d-md-block my-0 p-0" style="overflow: hidden;">
+                        <div class="filter-1 border d-none">
+                            <div class="col bg-body-secondary p-2 d-flex align-items-center justify-content-between">
+                                <span><i class="fas fa-filter"></i> Filter</span>
+                                <span onclick="hideNShow('filter-col')" class="fs-1 text-secondary d-md-none">×</span>
+                            </div>
+
+                            <div class="p-0 m-0 mx-2 px-2">
+                                <h5 class="m-0 mt-2 pointer d-flex align-items-center justify-content-between font-s fw-bold" onclick="toggleList(this,'ul-toggle-1')">
+                                    Subject
+                                    <i class="fa fa-chevron-down text-secondary" style="transform: rotate(180deg)" aria-hidden="true"></i>
+                                </h5>
+                                <ul style="height: 200px" id="ul-toggle-1" class="border rounded filter_ul p-0">
+                                    <li>English</li>
+                                    <li>Maths</li>
+                                    <li>Physic</li>
+                                    <li>Chemistry</li>
+                                    <li>social sutdy</li>
+                                    <li>Islammiat</li>
+                                    <li>Urdu</li>
+                                    <li>Computer</li>
+                                    <li>Biology</li>
+                                    <!-- <li></li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li> -->
+                                </ul>
+                            </div>
+
+                            <div class="p-0 m-0 mx-2 px-2">
+                                <h5 class="m-0 mt-2 pointer d-flex align-items-center justify-content-between font-s fw-bold" onclick="toggleList(this,'ul-toggle-2')">
+                                    Curriculum
+                                    <i class="fa fa-chevron-down text-secondary" style="transform: rotate(180deg)" aria-hidden="true"></i>
+                                </h5>
+                                <ul style="height: 200px" id="ul-toggle-2" class="border rounded filter_ul p-0">
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                </ul>
+                            </div>
+
+                            <div class="p-0 m-0 mx-2 px-2">
+                                <h5 class="m-0 mt-2 pointer d-flex align-items-center justify-content-between font-s fw-bold" onclick="toggleList(this,'ul-toggle-3')">
+                                    Area
+                                    <i class="fa fa-chevron-down text-secondary" aria-hidden="true"></i>
+                                </h5>
+                                <ul id="ul-toggle-3" class="rounded filter_ul p-0">
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                </ul>
+                            </div>
+
+                            <div class="p-0 m-0 mx-2 px-2">
+                                <h5 class="m-0 mt-2 pointer d-flex align-items-center justify-content-between font-s fw-bold" onclick="toggleList(this,'ul-toggle-4')">
+                                    Cagtegories
+                                    <i class="fa fa-chevron-down text-secondary" aria-hidden="true"></i>
+                                </h5>
+                                <ul id="ul-toggle-4" class="rounded filter_ul p-0">
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                    <li>English</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                       
+                        <!-- <video src="images/edexcel.mp4" class="object-fit-cover mt-2" autoplay muted loop
+                            width="100%"></video> -->
+                            <video src="images/video.mp4" class="object-fit-cover mt-2" autoplay="" muted="" loop="" width="100%"></video>
+
+                    </div>
     </section>
 </body>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
