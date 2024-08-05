@@ -902,12 +902,16 @@
                                     </svg>
                                     </div>
                                     <div class="solu_title">
-                                    <h3>Demo 1</h3>
+                                    <h3><strong>Popular tutoring job subjects</strong></h3>
                                     </div>
                                     <div class="solu_description">
-                                    <p>
-                                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                                    </p>
+                                   <ol>
+                                    <li>Teach Tests onlline</li>
+                                    <li>Teach Economics onlline</li>
+                                    <li>Teach computer science onlline</li>
+                                    <li>Teach Math onlline</li>
+                                    <li>Teach writing onlline</li>
+                                   </ol>
                                     <button type="button" class="read_more_btn">View All</button>
                                     </div>
                                 </div>
@@ -962,13 +966,17 @@
                                     </svg>
                                     </div>
                                     <div class="solu_title">
-                                    <h3>Demo 2</h3>
+                                    <h3><strong>More tutoring jobs</strong></h3>
                                     </div>
                                     <div class="solu_description">
-                                    <p>
-                                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                                    </p>
-                                    <button type="button" class="read_more_btn">Read More</button>
+                                    <ol>
+                                        <li>Teach Arts onlline</li>
+                                        <li>Teach acting onlline</li>
+                                        <li>Teach Music onlline</li>
+                                        <li>Teach Painting onlline</li>
+                                        <li>Teach computer onlline</li>
+                                    </ol>
+                                    <button type="button" class="read_more_btn">View All</button>
                                     </div>
                                 </div>
                             </a>
@@ -1021,13 +1029,17 @@
                                     </svg>
                                     </div>
                                     <div class="solu_title">
-                                    <h3>Demo 3</h3>
+                                    <h3><strong>Onlline Classes</strong></h3>
                                     </div>
                                     <div class="solu_description">
-                                    <p>
-                                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                                    </p>
-                                    <button type="button" class="read_more_btn">Read More</button>
+                                    <ol>
+                                        <li>Business English courses</li>
+                                        <li>Business Arabic courses</li>
+                                        <li>Teach Turkish courses</li>
+                                        <li>Teach Chienes courses</li>
+                                        <li>Teach Japan courses</li>
+                                    </ol>
+                                    <button type="button" class="read_more_btn">View All</button>
                                     </div>
                                 </div>
                             </a>
@@ -1040,7 +1052,7 @@
                 </div>
                 <div class="form col rounded p-4 align-item-center">
                             <div class="border-bottom py-2">
-                                <h3 class="py-2">Let us guide you find an expert Tutor</h3>
+                                <h3 class="py-2" style="color:42b979;"><strong>Discover the Perfect Tutor for Your Needs</strong></h3>
                             </div>
                             <form class=" g-3">
                                 <p class="fs-5 text-secondary pt-2">
