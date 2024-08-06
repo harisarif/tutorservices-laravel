@@ -131,8 +131,7 @@
                                 <div class="card h-100 teacher-card-wrapper border-0">
                                     <div class="card-div">
                                         <div class="hadding">
-                                            <h3>AGE 5-7</h3>
-                                            <h4>KS1</h4>
+                                            <h3>Little Learners</h3>
                                         </div>
                                         <div class="img-teacher">
                                             
@@ -156,8 +155,7 @@
                                 <div class="card h-100 teacher-card-wrapper border-0">
                                     <div class="card-div">
                                         <div class="hadding">
-                                            <h3>AGE 5-7</h3>
-                                            <h4>KS1</h4>
+                                            <h3>Junior Journey</h3>
                                         </div>
                                         <div class="img-teacher">
                                             
@@ -181,8 +179,7 @@
                             <div class="card h-100 teacher-card-wrapper border-0">
                                 <div class="card-div">
                                     <div class="hadding">
-                                        <h3>AGE 5-7</h3>
-                                        <h4>KS1</h4>
+                                        <h3>Senior</h3>
                                     </div>
                                     <div class="img-teacher">
                                         
@@ -206,8 +203,7 @@
                             <div class="card h-100 teacher-card-wrapper border-0">
                                 <div class="card-div">
                                     <div class="hadding">
-                                        <h3>AGE 5-7</h3>
-                                        <h4>KS1</h4>
+                                        <h3>Curious Kids</h3>
                                     </div>
                                     <div class="img-teacher">
                                         

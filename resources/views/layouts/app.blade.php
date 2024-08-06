@@ -41,6 +41,14 @@
             background-color: #42B979 !important; 
             border-color: #42B979 !important;
         }
+        .foucs{
+            color:#42b979;
+            transition: 0.5s;
+        }
+        .foucs:hover{
+            cursor: pointer;
+            transform: scale(1.3);
+        }
     </style>
 </head>
 <div class="loader" id="lazzyLoader">
@@ -50,7 +58,7 @@
     <div class="boxModal-1 col-4 bg-light rounded p-2">
         <h5 class="col-12 d-flex justify-content-between align-items-center px-2">
         {{__('messages.academy_name')}}
-            <span class="fs-2 pointer"
+            <span class="fs-2 pointer foucs"
                 onclick="document.getElementById('allModal').style.display = 'none'"> &times;</span>
         </h5>
 

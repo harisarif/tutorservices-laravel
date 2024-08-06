@@ -227,8 +227,8 @@
                         
                         <div class="col-12 d-none px-4" id="page-3" style="text-align:left;">
                             
-                        <div class="col-12 px-2 py-2 d-none"><label for="curriculum" class="form-label" style="color:#42b979;"><strong>Description (Optional)</strong></label>
-                    <textarea class="form-control" id="curriculum" name="curriculum[]" rows="2" placeholder="Add comma after one" style="box-shadow: none;border: 1px solid #aaa;"></textarea>
+                        <div class="col-12 px-2 py-2"><label for="curriculum" class="form-label" style="color:#42b979;"><strong>Description (Optional)</strong></label>
+                    <textarea class="form-control" id="curriculum" name="reviews" rows="2" placeholder="Add comma after one" style="box-shadow: none;border: 1px solid #aaa;"></textarea>
                 </div>  
                         </div>
 

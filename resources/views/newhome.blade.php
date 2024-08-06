@@ -907,10 +907,10 @@
                                     <div class="solu_description">
                                    <ol>
                                     <li>Teach Tests onlline</li>
-                                    <li>Teach Economics onlline</li>
+                                    <li>Teach Pysics onlline</li>
                                     <li>Teach computer science onlline</li>
                                     <li>Teach Math onlline</li>
-                                    <li>Teach writing onlline</li>
+                                    <li>Teach Chemistry onlline</li>
                                    </ol>
                                     <button type="button" class="read_more_btn">View All</button>
                                     </div>
@@ -966,15 +966,15 @@
                                     </svg>
                                     </div>
                                     <div class="solu_title">
-                                    <h3><strong>More tutoring jobs</strong></h3>
+                                    <h3><strong>Exploring Educational Careers</strong></h3>
                                     </div>
                                     <div class="solu_description">
                                     <ol>
-                                        <li>Teach Arts onlline</li>
-                                        <li>Teach acting onlline</li>
-                                        <li>Teach Music onlline</li>
-                                        <li>Teach Painting onlline</li>
-                                        <li>Teach computer onlline</li>
+                                        <li>Teach HTML onlline</li>
+                                        <li>Teach CSS onlline</li>
+                                        <li>Teach Java onlline</li>
+                                        <li>Teach Web development  onlline</li>
+                                        <li>Teach Laravel onlline</li>
                                     </ol>
                                     <button type="button" class="read_more_btn">View All</button>
                                     </div>
@@ -1029,7 +1029,7 @@
                                     </svg>
                                     </div>
                                     <div class="solu_title">
-                                    <h3><strong>Onlline Classes</strong></h3>
+                                    <h3><strong>Online Study Programs</strong></h3>
                                     </div>
                                     <div class="solu_description">
                                     <ol>
