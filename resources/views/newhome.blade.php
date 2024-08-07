@@ -456,6 +456,36 @@
 
                         <!-- Tutor profile -->
                         @if ($tutors->count() > 0)
+
+                                <div class="ad-form">
+                                    <div class="ad-img-card">
+                                        <div style="display: flex; justify-content: center;">
+                                            <img src="http://127.0.0.1:8000/storage/uploads/AaAl8fDUSpLxaxJMZ4yW24dGKDj63VMiNQbeLqSX.jpg" alt="..." class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">
+                                        </div>
+                                    <div class="ad-icons">
+                                        <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
+                                        <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
+                                        <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
+                                        <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
+                                        <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
+                                    </div>
+                                
+                                    </div>
+                                    <div class="ad-detail">
+                                    <div style="margin: 5px 3px;">Tutor <u>Admin</u> [Tut2340]</div>
+
+                                        <span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Qualification :</strong> MA.English master </span>
+                                        
+                                        <span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong> English</span>
+
+                                        <span><i class="fa-solid fa-globe"></i><strong>Country :</strong> Pakistan</span>
+                                        <span><i class="fa-solid fa-location-dot"></i></i><strong style="margin-left: 14px;">City :</strong> Faisalabad</span>
+
+                                        <span><i class="fa-regular fa-clock"></i><strong>Time Available :</strong> 6:00 Am to 7:00 Am</span>
+
+                                        <span><i class="fa-solid fa-location-dot"></i></i><strong style="margin-left: 14px;">Available For :</strong> Onlline </span>
+                                    </div>
+                                </div>
                             <div id="tutorsContainer">
                                 @foreach ($tutors as $item)
                                     <div class="tutor_profile rounded overflow-hidden mb-3 mt-3">
@@ -902,15 +932,15 @@
                                     </svg>
                                     </div>
                                     <div class="solu_title">
-                                    <h3><strong>Popular tutoring job subjects</strong></h3>
+                                    <h3><strong>Sciences</strong></h3>
                                     </div>
                                     <div class="solu_description">
                                    <ol>
-                                    <li>Teach Tests onlline</li>
-                                    <li>Teach Pysics onlline</li>
-                                    <li>Teach computer science onlline</li>
-                                    <li>Teach Math onlline</li>
-                                    <li>Teach Chemistry onlline</li>
+                                    <li>Math</li>
+                                    <li>Physic</li>
+                                    <li>Computer science</li>
+                                    <li>Biology</li>
+                                    <li>Chemistry</li>
                                    </ol>
                                     <button type="button" class="read_more_btn">View All</button>
                                     </div>
@@ -966,15 +996,15 @@
                                     </svg>
                                     </div>
                                     <div class="solu_title">
-                                    <h3><strong>Exploring Educational Careers</strong></h3>
+                                    <h3><strong>Languages</strong></h3>
                                     </div>
                                     <div class="solu_description">
                                     <ol>
-                                        <li>Teach HTML onlline</li>
-                                        <li>Teach CSS onlline</li>
-                                        <li>Teach Java onlline</li>
-                                        <li>Teach Web development  onlline</li>
-                                        <li>Teach Laravel onlline</li>
+                                      <li>Arabic</li>
+                                      <li>English</li>
+                                      <li>urdu</li>
+                                      <li>Hindi</li>
+                                      <li>chienes</li>  
                                     </ol>
                                     <button type="button" class="read_more_btn">View All</button>
                                     </div>
@@ -1029,15 +1059,15 @@
                                     </svg>
                                     </div>
                                     <div class="solu_title">
-                                    <h3><strong>Online Study Programs</strong></h3>
+                                    <h3><strong>Technology</strong></h3>
                                     </div>
                                     <div class="solu_description">
                                     <ol>
-                                        <li>Business English courses</li>
-                                        <li>Business Arabic courses</li>
-                                        <li>Teach Turkish courses</li>
-                                        <li>Teach Chienes courses</li>
-                                        <li>Teach Japan courses</li>
+                                     <li>Teach HTML onlline</li>
+                                      <li>Teach CSS onlline</li>
+                                      <li>Teach Java onlline</li>
+                                      <li>Teach Web development  onlline</li>
+                                      <li>Teach Laravel onlline</li>
                                     </ol>
                                     <button type="button" class="read_more_btn">View All</button>
                                     </div>

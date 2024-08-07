@@ -13,14 +13,23 @@ class SchoolClassSeeder extends Seeder
     public function run()
     {
         $classes = [
-            ['name' => 'Class 1'],
-            ['name' => 'Class 2'],
-            ['name' => 'Class 3'],
-            ['name' => 'FSc Pre-Medical'],
-            ['name' => 'FSc Pre-Engineering'],
-            ['name' => 'ICS'],
-            ['name' => 'BSc'],
-            ['name' => 'BSCS'],
+            ['name' => 'Please Select'],
+            ['name' => 'Diploma/Certifications'],
+            ['name' => 'A Level'],
+            ['name' => 'Montessori'],
+            ['name' => 'ACCA'],
+            ['name' => 'IGCSE'],
+            ['name' => 'Class 1 to 5'],
+            ['name' => 'Class 6 to 8'],
+            ['name' => 'Matric'],
+            ['name' => 'Intermediate'],
+            ['name' => 'O Level'],
+            ['name' => 'Bachelors'],
+            ['name' => 'Masters'],
+            ['name' => 'Entery Test Prep'],
+            ['name' => 'IETLS/TOEFL'],
+            ['name' => 'Language Training'],
+            ['name' => 'Quran'],
         ];
 
         foreach ($classes as $class) {

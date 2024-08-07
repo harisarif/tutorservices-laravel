@@ -141,9 +141,9 @@
                         <!-- page-2 -->
                       
                         <div class="col-12 px-4 py-4 d-none" id="page-2">
-                            <h3 style="font-size:18px; text-align: center; color:42b979;"><strong>Select a Subject</strong></h3>
-                            <p style="font-size:15px; text-align: center; color:#aaa;">Which subject tutor are you looking for?</p>
-                            
+                            <!-- <h3 style="font-size:18px; text-align: center; color:42b979;"><strong>Select a Subject</strong></h3>
+                            <p style="font-size:15px; text-align: center; color:#aaa;">Which subject tutor are you looking for?</p> -->
+                            <h4 style="font-size: 18px; color:#42b979;" ><b>Select Your Residence</b></h4>
                             <div class="col-12" id="page-1">
                                 <div class="col-12 mb-2  text-left" style="text-align:left">
                                     <h4 style="font-size: 16px; text-align: left; color:#42b979;"><strong>Select your country</strong></h4>
@@ -167,7 +167,7 @@
                             
 
                             <div class="col" style="text-align:left;">
-                                <h3 style="font-size: 18px; text-align: center; margin-top: 15px;    margin-bottom: -9px; color: #42b979;"><b>Enter your Detail</b></h3>
+                                <h3 style="font-size: 18px; text-align: center; margin-top: 15px;    margin-bottom: -9px; color: #42b979;"><b>Please Enter your Details</b></h3>
                                 <label for="" style="color:#42b979;"><strong> Name <b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
                                 <input required name="name" type="text" placeholder="*Name"  class="inp-1" style="width:100%;">
@@ -228,7 +228,7 @@
                         <div class="col-12 d-none px-4" id="page-3" style="text-align:left;">
                             
                         <div class="col-12 px-2 py-2"><label for="curriculum" class="form-label" style="color:#42b979;"><strong>Description (Optional)</strong></label>
-                    <textarea class="form-control" id="curriculum" name="reviews" rows="2" placeholder="Add comma after one" style="box-shadow: none;border: 1px solid #aaa;"></textarea>
+                    <textarea class="form-control" id="curriculum" name="reviews" rows="2" placeholder="Description" style="box-shadow: none;border: 1px solid #aaa;"></textarea>
                 </div>  
                         </div>
 
