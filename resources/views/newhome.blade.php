@@ -456,6 +456,36 @@
 
                         <!-- Tutor profile -->
                         @if ($tutors->count() > 0)
+
+                                <div class="ad-form">
+                                    <div class="ad-img-card">
+                                        <div style="display: flex; justify-content: center;">
+                                            <img src="http://127.0.0.1:8000/storage/uploads/AaAl8fDUSpLxaxJMZ4yW24dGKDj63VMiNQbeLqSX.jpg" alt="..." class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">
+                                        </div>
+                                    <div class="ad-icons">
+                                        <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
+                                        <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
+                                        <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
+                                        <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
+                                        <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
+                                    </div>
+                                
+                                    </div>
+                                    <div class="ad-detail">
+                                    <div style="margin: 5px 3px;">Tutor <u>Admin</u> [Tut2340]</div>
+
+                                        <span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Qualification :</strong> MA.English master </span>
+                                        
+                                        <span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong> English</span>
+
+                                        <span><i class="fa-solid fa-globe"></i><strong>Country :</strong> Pakistan</span>
+                                        <span><i class="fa-solid fa-location-dot"></i></i><strong style="margin-left: 14px;">City :</strong> Faisalabad</span>
+
+                                        <span><i class="fa-regular fa-clock"></i><strong>Time Available :</strong> 6:00 Am to 7:00 Am</span>
+
+                                        <span><i class="fa-solid fa-location-dot"></i></i><strong style="margin-left: 14px;">Available For :</strong> Onlline </span>
+                                    </div>
+                                </div>
                             <div id="tutorsContainer">
                                 @foreach ($tutors as $item)
                                     <div class="tutor_profile rounded overflow-hidden mb-3 mt-3">
@@ -902,15 +932,15 @@
                                     </svg>
                                     </div>
                                     <div class="solu_title">
-                                    <h3><strong>Popular tutoring job subjects</strong></h3>
+                                    <h3><strong>Sciences</strong></h3>
                                     </div>
                                     <div class="solu_description">
                                    <ol>
-                                    <li>Teach Tests onlline</li>
-                                    <li>Teach Economics onlline</li>
-                                    <li>Teach computer science onlline</li>
-                                    <li>Teach Math onlline</li>
-                                    <li>Teach writing onlline</li>
+                                    <li>Math</li>
+                                    <li>Physic</li>
+                                    <li>Computer science</li>
+                                    <li>Biology</li>
+                                    <li>Chemistry</li>
                                    </ol>
                                     <button type="button" class="read_more_btn">View All</button>
                                     </div>
@@ -966,15 +996,15 @@
                                     </svg>
                                     </div>
                                     <div class="solu_title">
-                                    <h3><strong>More tutoring jobs</strong></h3>
+                                    <h3><strong>Languages</strong></h3>
                                     </div>
                                     <div class="solu_description">
                                     <ol>
-                                        <li>Teach Arts onlline</li>
-                                        <li>Teach acting onlline</li>
-                                        <li>Teach Music onlline</li>
-                                        <li>Teach Painting onlline</li>
-                                        <li>Teach computer onlline</li>
+                                      <li>Arabic</li>
+                                      <li>English</li>
+                                      <li>urdu</li>
+                                      <li>Hindi</li>
+                                      <li>chienes</li>  
                                     </ol>
                                     <button type="button" class="read_more_btn">View All</button>
                                     </div>
@@ -1029,15 +1059,15 @@
                                     </svg>
                                     </div>
                                     <div class="solu_title">
-                                    <h3><strong>Onlline Classes</strong></h3>
+                                    <h3><strong>Technology</strong></h3>
                                     </div>
                                     <div class="solu_description">
                                     <ol>
-                                        <li>Business English courses</li>
-                                        <li>Business Arabic courses</li>
-                                        <li>Teach Turkish courses</li>
-                                        <li>Teach Chienes courses</li>
-                                        <li>Teach Japan courses</li>
+                                     <li>Teach HTML onlline</li>
+                                      <li>Teach CSS onlline</li>
+                                      <li>Teach Java onlline</li>
+                                      <li>Teach Web development  onlline</li>
+                                      <li>Teach Laravel onlline</li>
                                     </ol>
                                     <button type="button" class="read_more_btn">View All</button>
                                     </div>
@@ -1050,10 +1080,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="form col rounded p-4 align-item-center">
-                            <div class="border-bottom py-2">
-                                <h3 class="py-2" style="color:42b979;"><strong>Discover the Perfect Tutor for Your Needs</strong></h3>
+                <div class="border-bottom py-2">
+                                <h3 class="py-2" style="color:42b979; text-align: center; margin: 10px;"><strong>Discover the Perfect Tutor for Your Needs</strong></h3>
                             </div>
+                <div class="form col rounded p-4 align-item-center">
+                            
                             <form class=" g-3">
                                 <p class="fs-5 text-secondary pt-2">
                                     Tell us your learning needs and get immediate response from
@@ -1249,12 +1280,16 @@
                                                 Conditions</b></a>
                                     </label>
                                 </div>
+                                <div class="col d-flex  py-3">
+                    <button type="submit" class="btn bg_theme_green text-light fw-bold">Submit Form</button>
+                </div>
                             </form>
                            
                         </div>
-                <div class="p-0" id="FAQ">
+            </section>
+            <div class="p-0" id="FAQ">
                     <div class="col-12">
-                        <h2 class="py-0 my-4 text-center text-capitalize fw-bold">
+                        <h2 class="py-0 my-4 text-center text-capitalize fw-bold" style="color:#42b979;">
                             Frequently Asked Questions
                         </h2>
                     </div>
@@ -1364,7 +1399,7 @@
                 </div>
 
                 <div id="carouselExampleCaptions" class="carousel slide text-center mb-3" data-bs-ride="carousel">
-                    <h2 class="py-0 my-4 text-center text-capitalize fw-bold">
+                    <h2 class="py-0 my-4 text-center text-capitalize fw-bold" style="color:#42b979;">
                         Reviews
                     </h2>
                     <div class="carousel-indicators mx-5">
@@ -1462,7 +1497,6 @@
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
-            </section>
     </div>
 
     <button class="goToTop fw-20px" style="background-color:#42B979" onclick="window.scrollTo(0, 0)"><i

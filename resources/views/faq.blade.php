@@ -37,7 +37,7 @@
                     <div class="row">
                        <div class="col-12">
                         <div class="ad-line-child"></div>
-                        <h2 class="py-0 my-4 text-left text-capitalize fw-bold">
+                        <h2 class="py-0 my-4 text-left text-capitalize fw-bold" style="color:#42b979;">
                             Frequently Asked Questions
                         </h2>
                        </div>

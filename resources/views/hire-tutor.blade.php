@@ -3,6 +3,31 @@
    #allModal {
             display: none !important;
         }
+        #page-2 {
+            height:300px;
+            overflow-y:scroll;
+        }
+        /* Target the entire scrollbar */
+            ::-webkit-scrollbar {
+            width: 4px; /* Adjust the width */
+            }
+
+            /* Target the scrollbar track */
+            ::-webkit-scrollbar-track {
+            background: #f1f1f1; /* Color of the track */
+            }
+
+            /* Target the scrollbar thumb */
+            ::-webkit-scrollbar-thumb {
+            background: #42b979; /* Color of the thumb */
+            border-radius: 6px; /* Rounded corners */
+            }
+
+            /* Target the scrollbar thumb on hover */
+            ::-webkit-scrollbar-thumb:hover {
+            background: #42b979; /* Color when hovering */
+            }
+
     /* .select2-container--default .select2-selection--single {
             height:35px !important;
         } */
@@ -55,7 +80,7 @@
 
                         <!-- page-1 -->
                         <div class="col " id="page-1">
-                            <h3 class=" pt-3" style="padding:0 30px; text-align: center; font-size:16px;color:#42b979;"><strong>What are you looking for?</strong></h3>
+                            <h3 class=" pt-3" style="padding:0 30px; text-align: left; font-size:16px;color:#42b979;"><strong>What are you looking for?</strong></h3>
                             <div class="choice col-12 px-3 py-1" >
 
                                 <ul class="p-0 ">
@@ -77,35 +102,8 @@
                                 </ul>
                             </div>
 
-                            <div class="col-12" id="page-1">
-                                <div class="col-12 mb-2 ms-4 text-left" style="text-align:left">
-                                    <h4 style="font-size: 16px; text-align: left; color:#42b979;"><strong>Select your country</strong></h4>
-                                
-                                    <select name="country" id="country" class="form-select" required style="margin: 0 auto !important; width: 92%; height: 50px;">
-                                        <option value="">Select Country</option>
-                                        @foreach($countries as $code => $country)
-                                            <option value="{{ $code }}">{{ $country }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-12 mb-2 ms-4 text-left" style="text-align:left">
-                                    
-                                    <!-- <input type="text" name="city" id="city" class="form-control" placeholder="Enter your city" required style="margin: 16px auto !important; width: 92%; height: 50px;"> -->
-                                    <h4 style="font-size: 16px; text-align: left; color:#42b979;"><strong>Select your city</strong></h4>
-                                    <select name="city" id="city" class="form-select" required style="margin: 0 auto !important; width: 92%; height: 50px;">
-                                        <option value="">Select City</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- page-2 -->
-                      
-                        <div class="col-12 px-5 py-4 d-none" id="page-2">
-                            <h3 style="font-size:18px; text-align: center; color:42b979;"><strong>Select a Subject</strong></h3>
-                            <p style="font-size:15px; text-align: center; color:#aaa;">Which subject tutor are you looking for?</p>
                             
-                            <div class="form-group" style="text-align:left; ">
+                            <div class="form-group" style="text-align:left; width:90%; margin: 0 auto;" >
                             <label for="dropdown1" class=" pb-1">
                                     <strong style="color:#42b979;">Select your Grade <b style="color: red;
                                     font-size: 20px;">*</b></strong>
@@ -118,7 +116,7 @@
                                 </select>
                             </div>
                             
-                            <div class="form-group d-none">
+                            <div class="form-group d-none" >
                            
                                 <input type="search" value="English" name="subject" class="form-control" id="page1-search" placeholder="Search" style="height:50px;">
                             </div>
@@ -130,7 +128,7 @@
                                 <li onclick="page1List(this)" class="list-group-item text-start">Urdu</li>
                             </ul>
                             
-                            <div style="text-align: left;">
+                            <div style="text-align: left; width:90%; margin: 0 auto;">
                                 <!-- <select id="subject" name="subject" class="select form-control">
                                     <option value="">Select Subject</option>
                                 </select> -->
@@ -138,13 +136,42 @@
                                     font-size: 20px;">*</b></strong></label>
                                    <input type="text" placeholder="Subject" id="inputPassword4" class="form-control py-3" style="height: 53px;">
                             </div>
+                        </div>
+
+                        <!-- page-2 -->
+                      
+                        <div class="col-12 px-4 py-4 d-none" id="page-2">
+                            <!-- <h3 style="font-size:18px; text-align: center; color:42b979;"><strong>Select a Subject</strong></h3>
+                            <p style="font-size:15px; text-align: center; color:#aaa;">Which subject tutor are you looking for?</p> -->
+                            <h4 style="font-size: 18px; color:#42b979;" ><b>Select Your Residence</b></h4>
+                            <div class="col-12" id="page-1">
+                                <div class="col-12 mb-2  text-left" style="text-align:left">
+                                    <h4 style="font-size: 16px; text-align: left; color:#42b979;"><strong>Select your country</strong></h4>
+                                
+                                    <select name="country" id="country" class="form-select" required style="margin: 0 auto !important; width: 100%; height: 50px;">
+                                        <option value="">Select Country</option>
+                                        @foreach($countries as $code => $country)
+                                            <option value="{{ $code }}">{{ $country }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-12 mb-2 text-left" style="text-align:left">
+                                    
+                                    <!-- <input type="text" name="city" id="city" class="form-control" placeholder="Enter your city" required style="margin: 16px auto !important; width: 92%; height: 50px;"> -->
+                                    <h4 style="font-size: 16px; text-align: left; color:#42b979;"><strong>Select your city</strong></h4>
+                                    <select name="city" id="city" class="form-select" required style="margin: 0 auto !important; width: 100%; height: 50px;">
+                                        <option value="">Select City</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
 
                             <div class="col" style="text-align:left;">
-                                <h3 style="font-size: 18px; text-align: center; margin-top: 5px; color: #42b979;"><b>Enter your Detail</b></h3>
+                                <h3 style="font-size: 18px; text-align: center; margin-top: 15px;    margin-bottom: -9px; color: #42b979;"><b>Please Enter your Details</b></h3>
                                 <label for="" style="color:#42b979;"><strong> Name <b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
                                 <input required name="name" type="text" placeholder="*Name"  class="inp-1" style="width:100%;">
-                                <label for="" style="color:#42b979;"><strong> email<b style="color: red;
+                                <label for="" style="color:#42b979;"><strong> Email<b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
                                 <input required name="email" type="email" placeholder="*Email"  class="inp-1" style="width:100%;">
                                 <!-- <div class="row"> -->
@@ -163,7 +190,14 @@
                                         </div>
                                     </div>
 
-                        </div>
+                                    <label for="" style=" color:#42b979;"><strong> Password <b style="color: red;
+                                    font-size: 20px;">*</b></strong></label>
+
+                                    <input required type="email" name="c_email" placeholder="*Email" class="inp-1 d-none" readonly >
+
+                                    <input required type="password" name="password" placeholder="*Password"  class="inp-1"style=" display: flex; width: 100%;">
+                                    <input required type="password" name="c_password" placeholder="*Confirm Password"  class="inp-1" style=" display: flex; width: 100%;">
+                                </div>
                         
                         <div class="col-12 d-none">
                            
@@ -191,16 +225,11 @@
 
                         <!-- page-3 -->
                         
-                        <div class="col d-none" id="page-3" style="text-align:left;">
-                            <h4 class="text-center py-3">Enter password to create an Account<i
-                                    class="fs-6 text-secondary">
-                                    <b style="color:red">(Required)</b></i></h4>
-                                    <label for="" style="padding: 0 25px; color:#42b979;"><strong> password <b style="color: red;
-                                    font-size: 20px;">*</b></strong></label>
-                            <input required type="email" name="c_email" placeholder="*Email" class="inp-1 d-none" readonly >
-                            <input required type="password" name="password" placeholder="*Password"  class="inp-1"style="margin: 11px auto; display: flex; width: 92%;">
-                            <input required type="password" name="c_password" placeholder="*Confirm Password"  class="inp-1" style="margin: 11px auto; display: flex; width: 92%;">
-
+                        <div class="col-12 d-none px-4" id="page-3" style="text-align:left;">
+                            
+                        <div class="col-12 px-2 py-2"><label for="curriculum" class="form-label" style="color:#42b979;"><strong>Description (Optional)</strong></label>
+                    <textarea class="form-control" id="curriculum" name="reviews" rows="2" placeholder="Description" style="box-shadow: none;border: 1px solid #aaa;"></textarea>
+                </div>  
                         </div>
 
                     </div>

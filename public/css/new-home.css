@@ -394,7 +394,7 @@ width: 100%;
 
 .hadding h3 {
     color: #42b979;
-    font-size: 35px;
+    font-size: 30px;
 }
 
 .hadding h4 {
@@ -653,4 +653,45 @@ align-items: center;
   .pagination{
     justify-content: center;
   }
+  .ad-form{
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    margin: 10px 0;
+}
+.ad-detail{
+    padding: 5px 0;
+}
+.ad-img-card{
+    width: 25%;
+    padding: 10px;
+    text-align: center;
+}
+.ad-icons span{
+    color: #ffc000;
+    font-size: 14px;
+}
+.ad-button{
+    padding: 10px 0;
+}
+.ad-button button{
+    width: 100%;
+    background: #42b979;
+    color: #fff;
+    border: none;
+    padding: 7px;
+    border-radius: 5px;
+}
+.ad-detail span{
+    display: block;
+}
+.ad-detail span strong{
+    margin: 0 10px;
+    color: #42b979;
+}
+.ad-detail span i{
+    font-size: 14px;
+    padding: 0 5px;
+    color: #42b979;
+}
 /* end  */
