@@ -31,6 +31,9 @@
         
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.css') }}">
+    @if(Route::is('newhome'))
+    <link rel="stylesheet" href="{{ asset('css/new-home.css') }}">
+    @endif
     <script src="{{ asset('js/jquery.js') }}"></script>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

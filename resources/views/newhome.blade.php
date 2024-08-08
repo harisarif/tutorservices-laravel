@@ -1,5 +1,6 @@
-<link rel="stylesheet" href="./css/new-home.css">
+
 @extends('layouts.app')
+
 @section('content')
     @if (session('success'))
         <div class="alert alert-success" style="z-index: 6;
@@ -1400,105 +1401,100 @@
                     </div>
                 </div>
 
-                <div id="carouselExampleCaptions" class="carousel slide text-center mb-3" data-bs-ride="carousel">
-                    <h2 class="py-0 my-4 text-center text-capitalize fw-bold" style="color:#42b979;">
-                        Reviews
-                    </h2>
-                    <div class="carousel-indicators mx-5">
-                        <button type="button" data-bs-target="#carouselExampleCaptions" style="filter: invert(1);"
-                            data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" style="filter: invert(1);"
-                            data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" style="filter: invert(1);"
-                            data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-                    <div class="carousel-inner px-0 mx-2 d-flex ">
-                        <div class="carousel-item  active">
-                            <div class="main-card d-flex justify-content-center">
-                                <div class="card-item bg-body-secondary py-3 ms-0  shadow rounded">
-                                    <img src="images/profile_dp.png" class="my-3 rounded-circle " width="100px"
-                                        height="100px" alt="... " />
-                                    <div>
-                                        <h3>Frank Burke</h3>
-                                        <span class="text-warning">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span>
-                                        <p>All Areas</p>
-                                    </div>
-
-                                    <h5>First slide label</h5>
-                                    <p>
-                                        Some representative placeholder content for the first slide.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="main-card d-flex justify-content-center">
-                                <div class="card-item bg-body-secondary py-3 mx-2 rounded">
-                                    <img src="images/profile_dp.png" class="my-3 rounded-circle " width="100px"
-                                        height="100px" alt="... " />
-                                    <div>
-                                        <h3>Frank Burke</h3>
-                                        <span class="text-warning">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span>
-                                        <p>All Areas</p>
-                                    </div>
-
-                                    <h5>First slide label</h5>
-                                    <p>
-                                        Some representative placeholder content for the first slide.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="main-card d-flex justify-content-center ">
-                                <div class="card-item bg-body-secondary py-3 mx-2  shadow rounded">
-                                    <img src="images/profile_dp.png" class="my-3 rounded-circle " width="100px"
-                                        height="100px" alt="... " />
-                                    <div>
-                                        <h3>Frank Burke</h3>
-                                        <span class="text-warning">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span>
-                                        <p>All Areas</p>
-                                    </div>
-
-                                    <h5>First slide label</h5>
-                                    <p>
-                                        Some representative placeholder content for the first slide.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button class="carousel-control-prev " type="button"
-                        data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" style="filter: invert(1);" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
+                <div class="testimonial-slider">
+        <div id="carouselExampleControls" class="carousel carousel-dark">
+          <div class="container-fluid">
+            <div class="row">
+                <div>
+                    <h2 class="happy-clients my-2" style="color: #42b979; text-align: center;"><b>Happy Clients</b></h2>
+               </div>
+              <div class="col-md-4">
+                <div class="testimonial-title">
                     
-                    <button class="carousel-control-next" type="button"
-                        data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" style="filter: invert(1); " aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+                  <i class="bi bi-quote display-1"></i>
+                  <h2 class="fw-bold display-6">Edexcel Customers</h2>
+                  <p>Our customers are at the heart of everything we do. We're thrilled to have a growing community of satisfied clients who have experienced our services.</p>
                 </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" style="background: #42b979;">
+                  <span class="" aria-hidden="true" >
+                  <i class="fa-solid fa-arrow-left"></i>
+                  </span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" style="background: #42b979;">
+                  <span class="" aria-hidden="true">
+                  <i class="fa-solid fa-arrow-right"></i>
+                  </span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+              <div class="col-md-8">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <div class="card">
+                      <div class="img-wrapper"><img src="https://codingyaar.com/wp-content/uploads/headshot-1-scaled.jpg" class="d-block w-100" alt="..."> </div>
+                      <div class="card-body">
+                        <h5 class="card-title">Card title 1</h5>
+                        <i class="bi bi-star-fill text-warning pe-1"></i>
+                        <i class="bi bi-star-fill text-warning pe-1"></i>
+                        <i class="bi bi-star-fill text-warning pe-1"></i>
+                        <i class="bi bi-star-fill text-warning pe-1"></i>
+                        <i class="bi bi-star-fill text-warning pe-1"></i>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="card">
+                      <div class="img-wrapper"><img src="https://codingyaar.com/wp-content/uploads/headshot-2-scaled.jpg" class="d-block w-100" alt="..."> </div>
+                      <div class="card-body">
+                        <h5 class="card-title">Card title 2</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="card">
+                      <div class="img-wrapper"><img src="https://codingyaar.com/wp-content/uploads/headshot-3-scaled.jpg" class="d-block w-100" alt="..."> </div>
+                      <div class="card-body">
+                        <h5 class="card-title">Card title 3</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="card">
+                      <div class="img-wrapper"><img src="https://codingyaar.com/wp-content/uploads/headshot-4-scaled.jpg" class="d-block w-100" alt="..."> </div>
+                      <div class="card-body">
+                        <h5 class="card-title">Card title 4</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="card">
+                      <div class="img-wrapper"><img src="https://codingyaar.com/wp-content/uploads/headshot-5-scaled.jpg" class="d-block w-100" alt="..."> </div>
+                      <div class="card-body">
+                        <h5 class="card-title">Card title 5</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="card">
+                      <div class="img-wrapper"><img src="https://codingyaar.com/wp-content/uploads/headshot-6-scaled.jpg" class="d-block w-100" alt="..."> </div>
+                      <div class="card-body">
+                        <h5 class="card-title">Card title 6</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <button class="goToTop fw-20px" style="background-color:#42B979" onclick="window.scrollTo(0, 0)"><i
@@ -1509,11 +1505,41 @@
 @endsection
 
 @section('js')
-    {{-- <script>
-        $(document).ready(function() {
-            
-        });
-    </script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <!-- Your custom script -->
+    <script>
+        var multipleCardCarousel = document.querySelector("#carouselExampleControls");
+
+        if (window.matchMedia("(min-width: 576px)").matches) {
+          var carousel = new bootstrap.Carousel(multipleCardCarousel, {
+            interval: false
+          });
+          var carouselWidth = document.querySelector(".carousel-inner").scrollWidth;
+          var cardWidth = document.querySelector(".carousel-item").offsetWidth;
+          var scrollPosition = 0;
+          document.querySelector("#carouselExampleControls .carousel-control-next").addEventListener("click", function () {
+            if (scrollPosition < carouselWidth - cardWidth * 3) {
+              scrollPosition += cardWidth;
+              document.querySelector("#carouselExampleControls .carousel-inner").scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
+              });
+            }
+          });
+          document.querySelector("#carouselExampleControls .carousel-control-prev").addEventListener("click", function () {
+            if (scrollPosition > 0) {
+              scrollPosition -= cardWidth;
+              document.querySelector("#carouselExampleControls .carousel-inner").scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
+              });
+            }
+          });
+        } else {
+          multipleCardCarousel.classList.add("slide");
+        }
+    </script>
 
     
     <script>
