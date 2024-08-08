@@ -485,10 +485,10 @@
                                         <span><i class="fa-solid fa-globe"></i><strong>Country :</strong> {{ $item->location }}</span>
                                         <span><i class="fa-solid fa-location-dot"></i></i><strong style="margin-left: 14px;">City :</strong> {{ $item->city }}</span>
 
-                                        <span><i class="fa-regular fa-clock"></i><strong>Time Available :</strong>{{ $item->availability }}</span>
-                                        <span><i class="fa-regular fa-clock"></i><strong>Gender :</strong>{{ $item->gender }}</span>
+                                        <span><i class="fa-regular fa-clock"></i><strong >Time Available :</strong>{{ $item->availability }}</span>
+                                        <span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong>{{ $item->gender }}</span>
 
-                                        <span><i class="fa-solid fa-location-dot"></i></i><strong style="margin-left: 14px;">Available For :</strong> Onlline </span>
+                                        <span style="background: #42b979; padding: 10px 0;border-radius: 5px; color: #fff; width: 80%;"><i class="fa-solid fa-location-dot" style="color:#fff;"></i></i><strong style="margin-left: 14px;  color: #fff;">Available For :</strong> Onlline </span>
                                     </div>
                                 </div>
                                     <div class="d-none tutor_profile rounded overflow-hidden mb-3 mt-3">

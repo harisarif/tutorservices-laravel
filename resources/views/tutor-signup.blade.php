@@ -239,6 +239,23 @@
                         <input type="number" min="0" class="form-control" id="experience" name="experience"
                               style="box-shadow: none;border: 1px solid #aaa;">
                     </div>
+                    <div class="choice col-12 px-3 py-1">
+                    <h3 class=" pt-3" style=" text-align: left; font-size:16px;color:#42b979;"><strong>Services</strong></h3>
+                                <ul class="p-0 ">
+                                    <li class="d-flex align-items-center fs-5 py-1">
+                                        <input class="m-2 d-none chose-subject" type="radio" value="Online Tutor" name="subjects" id="option-1">
+                                        <label for="option-1" style="font-size:15px;">Online</label>
+                                    </li>
+                                    <li class="d-flex align-items-center fs-5 py-1">
+                                        <input class="m-2 d-none chose-subject" type="radio" value="Tutor for home" name="subjects" id="option-2">
+                                        <label for="option-2" style="font-size:15px;">Physical</label>
+                                    </li>
+                                    <li class="d-flex align-items-center fs-5 py-1">
+                                        <input class="m-2 d-none chose-subject" type="radio" value="Both" name="subjects" id="option-3">
+                                        <label for="option-3" style="font-size:15px;">Both</label>
+                                    </li>
+                                </ul>
+                            </div>
                 </div>
                 <div class="form-row d-flex flex-column flex-md-row">
                     <div class="col-md-6 px-2 mb-2">
