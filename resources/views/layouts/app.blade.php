@@ -42,8 +42,16 @@
             border-color: #42B979 !important;
         }
         .foucs{
-            color:#42b979;
-            transition: 0.5s;
+        color: #ffff;
+        width: 30px;
+        transition: 0.5s;
+        display: flex;
+        justify-content: center;
+        height: 30px;
+        border-radius: 24px;
+         align-items: center;
+         background-color: #42b979;
+         margin-bottom:25px ;
         }
         .foucs:hover{
             cursor: pointer;
