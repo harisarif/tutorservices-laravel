@@ -178,7 +178,7 @@ return response()->json($serializedData);
 
         $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
 
-        $toAdmin = 'ceo@edexceledu.com';
+        $toAdmin = 'info@edexceledu.com';
         $subjectAdmin = "Edexcel Notification";
         $messageAdmin = "Subject: New Teacher Enrollment Notification
 
@@ -224,13 +224,13 @@ return response()->json($serializedData);
                 $mail->isSMTP();
                 $mail->Host = 'smtp.hostinger.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'ceo@edexceledu.com';
+                $mail->Username = 'info@edexceledu.com';
                 $mail->Password = 'Babar123!@#';
                 $mail->SMTPSecure = 'tls';
                 $mail->Port = 587;
 
                 // Recipients
-                $mail->setFrom('ceo@edexceledu.com', 'Edexcel'); // Use direct values here
+                $mail->setFrom('info@edexceledu.com', 'Edexcel'); // Use direct values here
                 $mail->addAddress($to);
 
                 // Content
@@ -301,35 +301,5 @@ return response()->json($serializedData);
         return back()->with('message', 'Teacher deleted successfully');
     }
 }
-
-
-// .form-row {
-//             .select2-container{
-//                 width: 100% !important;
-//             }
-//         }
-//         .input-group{
-//             #countrySelect{
-//                 width: 21% !important;
-//             }
-//             .select2-container{
-//                width: 40% !important;
-//             }
-//         }
-//         .selection{
-//             .select2-selection{
-//                 height: 38px !important;
-//             }
-//         }
-
-
-
-
-// @media (min-width:1441px) and (max-width: 2060px) {
-//     .select2-container{
-//                     width: 70% !important;
-
-//                 }
-// } */
 
 
