@@ -457,10 +457,13 @@
                         <!-- Tutor profile -->
                         @if ($tutors->count() > 0)
 
+                                
+                            <div id="tutorsContainer">
+                                @foreach ($tutors as $item)
                                 <div class="ad-form">
                                     <div class="ad-img-card">
                                         <div style="display: flex; justify-content: center;">
-                                            <img src="http://127.0.0.1:8000/storage/uploads/AaAl8fDUSpLxaxJMZ4yW24dGKDj63VMiNQbeLqSX.jpg" alt="..." class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">
+                                            <img src="{{ asset('storage/' . $item->profileImage) }}" alt="..." class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">
                                         </div>
                                     <div class="ad-icons">
                                         <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
@@ -472,23 +475,22 @@
                                 
                                     </div>
                                     <div class="ad-detail">
-                                    <div style="margin: 5px 3px;">Tutor <u>Admin</u> [Tut2340]</div>
+                                    <div style="margin: 5px 3px;">Tutor <u>{{ $item->f_name }} {{$item->l_name}}</u> [Tut2340]</div>
 
-                                        <span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Qualification :</strong> MA.English master </span>
+                                        <span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Qualification :</strong> {{ $item->qualification }} </span>
                                         
                                         <span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong> English</span>
 
-                                        <span><i class="fa-solid fa-globe"></i><strong>Country :</strong> Pakistan</span>
-                                        <span><i class="fa-solid fa-location-dot"></i></i><strong style="margin-left: 14px;">City :</strong> Faisalabad</span>
+                                        <span><i class="fa-solid fa-globe"></i><strong>Country :</strong> {{ $item->location }}</span>
+                                        <span><i class="fa-solid fa-location-dot"></i></i><strong style="margin-left: 14px;">City :</strong> {{ $item->city }}</span>
 
-                                        <span><i class="fa-regular fa-clock"></i><strong>Time Available :</strong> 6:00 Am to 7:00 Am</span>
+                                        <span><i class="fa-regular fa-clock"></i><strong>Time Available :</strong>{{ $item->availability }}</span>
+                                        <span><i class="fa-regular fa-clock"></i><strong>Gender :</strong>{{ $item->gender }}</span>
 
                                         <span><i class="fa-solid fa-location-dot"></i></i><strong style="margin-left: 14px;">Available For :</strong> Onlline </span>
                                     </div>
                                 </div>
-                            <div id="tutorsContainer">
-                                @foreach ($tutors as $item)
-                                    <div class="tutor_profile rounded overflow-hidden mb-3 mt-3">
+                                    <div class="d-none tutor_profile rounded overflow-hidden mb-3 mt-3">
                                         <div class="d-flex justify-content-between">
                                             <button class="p-1 bg_theme_green text-light border border-0" style="display:none;">
                                                 Sponsored
