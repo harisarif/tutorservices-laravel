@@ -1083,7 +1083,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="border-bottom py-2">
+                <!-- <div class="border-bottom py-2">
                                 <h3 class="py-2" style="color:42b979; text-align: center; margin: 10px;"><strong>Discover the Perfect Tutor for Your Needs</strong></h3>
                             </div>
                 <div class="form col rounded p-4 align-item-center">
@@ -1285,7 +1285,7 @@
                                 </div>
                                 <div class="col d-flex  py-3">
                     <button type="submit" class="btn bg_theme_green text-light fw-bold">Submit Form</button>
-                </div>
+                </div> -->
                             </form>
                            
                         </div>
