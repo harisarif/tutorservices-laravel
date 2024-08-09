@@ -1083,12 +1083,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="border-bottom py-2">
+                <div class="border-bottom py-2 d-none">
                                 <h3 class="py-2" style="color:42b979; text-align: center; margin: 10px;"><strong>Discover the Perfect Tutor for Your Needs</strong></h3>
                             </div>
-                <div class="form col rounded p-4 align-item-center">
+                <div class="form col rounded p-4 align-item-center d-none">
                             
-                            <form class=" g-3 d-none">
+                            <form class=" g-3">
                                 <p class="fs-5 text-secondary pt-2">
                                     Tell us your learning needs and get immediate response from
                                     qualified tutors
@@ -1271,7 +1271,7 @@
                                     font-size: 20px;">*</b></strong></label>
                                    <input type="text" placeholder="Subject" id="inputPassword4" class="form-control py-3" style="height: 53px;">
                                </div>
-                                <div class="chk-box col-12 py-2 d-flex">
+                        <div class="chk-box col-12 py-2 d-flex">
                                     <input type="checkbox" class="mb-3 d-none mx-2 common_checkbox" id="agreeWithTerm" />
                                     <label class="checkBox_label pointer d-flex align-item-center"
                                         for="agreeWithTerm"><a style="text-decoration:none" href="{{route('terms.condition')}}" class="px-1 b-text">I agree to the Edexcel Academy & Educational Consultancy<b
