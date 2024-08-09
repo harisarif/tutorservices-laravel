@@ -1086,9 +1086,9 @@
                 <div class="border-bottom py-2">
                                 <h3 class="py-2" style="color:42b979; text-align: center; margin: 10px;"><strong>Discover the Perfect Tutor for Your Needs</strong></h3>
                             </div>
-                <div class="form col rounded p-4 align-item-center d-none">
+                <div class="form col rounded p-4 align-item-center">
                             
-                            <form class=" g-3">
+                            <form class=" g-3 d-none">
                                 <p class="fs-5 text-secondary pt-2">
                                     Tell us your learning needs and get immediate response from
                                     qualified tutors
@@ -1281,7 +1281,7 @@
                                 </div>
                                 <div class="col d-flex  py-3">
                                     <button type="submit" class="btn bg_theme_green text-light fw-bold">Submit Form</button>
-               
+                </div>
                             </form>
                            
                         </div>
