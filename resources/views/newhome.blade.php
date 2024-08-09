@@ -1086,7 +1086,7 @@
                 <div class="border-bottom py-2">
                                 <h3 class="py-2" style="color:42b979; text-align: center; margin: 10px;"><strong>Discover the Perfect Tutor for Your Needs</strong></h3>
                             </div>
-                <div class="d-none form col rounded p-4 align-item-center">
+                <div class="form col rounded p-4 align-item-center d-none">
                             
                             <form class=" g-3">
                                 <p class="fs-5 text-secondary pt-2">
@@ -1271,10 +1271,6 @@
                                     font-size: 20px;">*</b></strong></label>
                                    <input type="text" placeholder="Subject" id="inputPassword4" class="form-control py-3" style="height: 53px;">
                                </div>
-                        
-                               
-                        
-
                                 <div class="chk-box col-12 py-2 d-flex">
                                     <input type="checkbox" class="mb-3 d-none mx-2 common_checkbox" id="agreeWithTerm" />
                                     <label class="checkBox_label pointer d-flex align-item-center"
@@ -1284,8 +1280,8 @@
                                     </label>
                                 </div>
                                 <div class="col d-flex  py-3">
-                    <button type="submit" class="btn bg_theme_green text-light fw-bold">Submit Form</button>
-                </div>
+                                    <button type="submit" class="btn bg_theme_green text-light fw-bold">Submit Form</button>
+               
                             </form>
                            
                         </div>
