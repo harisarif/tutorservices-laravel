@@ -1,5 +1,45 @@
 
 @extends('layouts.app')
+<style>
+    .custom-select-wrapper {
+        position: relative;
+        display: inline-block;
+    }
+
+    .custom-select {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+
+    .custom-select i {
+        font-size: 20px; /* Adjust icon size as needed */
+    }
+
+    .custom-options {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: white;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+    }
+
+    .custom-options.open {
+        display: block;
+    }
+
+    .custom-option {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .custom-option:hover {
+        background: #f0f0f0;
+    }
+</style>
 
 @section('content')
     @if (session('success'))
@@ -16,12 +56,12 @@
             <ul class="  d-sm-inline d-block text-center header-ul mb-0" style="padding: 5px;">
                 <li class="">
                     <i class="fa fa-envelope-square" aria-hidden="true style"></i>
-                    <a class="text-decoration-none " href="mailto:info@eduexceledu.com" style="color:#fff;">info@eduexceledu.com</a>
+                    <a class="text-decoration-none text-dark" href="mailto:info@eduexceledu.com">info@eduexceledu.com</a>
                 </li>
                 <li class=" p-2 header-phone-number">
                     
                     <i class="fa-solid fa-phone" aria-hidden="true"></i>
-                    <a class="text-decoration-none" href="tel:+971566428066" style="color:#fff;">+971 56 642 8066</a>
+                    <a class="text-decoration-none text-dark" href="tel:+971566428066">+971 56 642 8066</a>
                 </li>
              <li>
              <!-- <a href="{{ route('hiring-tutor') }}" class="hiring-button">
@@ -35,14 +75,15 @@
 
                 <ul  class="icons d-flex  m-0 justify-content-center align-items-center gap-3" style="list-style:none; ">   
                   
-                <div>
-                    <!-- <label class="" style="font-size:12px;">Swtich language from there</label> -->
-                    <span class="ai-icons"><i class="fa-solid fa-globe" aria-hidden="true"></i></span>
-                    <select id="language-select" onchange="changeLanguage()">
-                        <option value="en" {{ session('locale') == 'en' ? 'selected' : '' }}>English</option>
-                        <option value="ar" {{ session('locale') == 'ar' ? 'selected' : '' }}>Arabic</option>
-                    </select>
+                <div class="custom-select-wrapper">
+                    <div class="custom-select">
+                        <i class="fa-solid fa-globe" aria-hidden="true" onclick="toggleDropdown()"></i>
+                        <div class="custom-options" id="language-select">
+                            <div class="custom-option" data-value="en" onclick="changeLanguage('en')">English</div>
+                            <div class="custom-option" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
+                        </div>
                     </div>
+                </div>
                      <a target="_blank"
                             href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d"
                         style=" color: #000; font-size: 20px;" >
@@ -1503,10 +1544,27 @@
 @endsection
 
 @section('js')
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
     <!-- Your custom script -->
     <script>
+         function toggleDropdown() {
+        document.querySelector('.custom-options').classList.toggle('open');
+    }
+
+    function changeLanguage(value) {
+        document.querySelector('.custom-options').classList.remove('open');
+        // Implement your language change logic here, for example:
+        // window.location.href = '/change-language/' + value;
+    }
+
+    // Close the dropdown if clicked outside
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.custom-select')) {
+            document.querySelector('.custom-options').classList.remove('open');
+        }
+    });
         var multipleCardCarousel = document.querySelector("#carouselExampleControls");
 
         if (window.matchMedia("(min-width: 576px)").matches) {
@@ -2252,10 +2310,9 @@
         
     </script>
    <script>
-    function changeLanguage() {
-        var locale = document.getElementById('language-select').value;
-        var url = "{{ url('lang') }}/" + locale;
-        window.location.href = url;
-    }
+    function changeLanguage(locale) {
+    var url = "{{ url('lang') }}/" + locale;
+    window.location.href = url;
+}
 </script>
 @endsection
