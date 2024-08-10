@@ -11,57 +11,59 @@
         </div>
     @endif
     
-    <div class="row mini_header m-0 p-0 container-fluid position-relative">
-        <div class="col-sm-12  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0">
-            <ul class="p-2 m-0 d-sm-inline d-block text-center header-ul">
-                <li class=" p-2">
-                    <i class="fa fa-envelope-square text-light" aria-hidden="true"></i>
-                    <a class="text-decoration-none text-light" href="mailto:info@eduexceledu.com">info@eduexceledu.com</a>
+    <div class="row mini_header m-0 p-0 container-fluid position-relative" style="background: #ddd;">
+        <div class="col-sm-12  d-flex justify-content-between   align-items-center flex-sm-row flex-column p-0" style="padding: 0 10px !important;">
+            <ul class="  d-sm-inline d-block text-center header-ul mb-0" style="padding: 5px;">
+                <li class="">
+                    <i class="fa fa-envelope-square" aria-hidden="true style"></i>
+                    <a class="text-decoration-none " href="mailto:info@eduexceledu.com" style="color:#fff;">info@eduexceledu.com</a>
                 </li>
-             <li>
-             <a href="{{ route('hire.tutor') }}" class="hiring-button">
-                        Book A demo
-                            </a>
-             </li>
+                <li class=" p-2 header-phone-number">
+                    
+                    <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                    <a class="text-decoration-none" href="tel:+971566428066" style="color:#fff;">+971 56 642 8066</a>
+                </li>
              <li>
              <!-- <a href="{{ route('hiring-tutor') }}" class="hiring-button">
                         New page
                             </a> -->
              </li>
             </ul>
-            <div>
+            <div >
             <!-- <h1>{{ __('messages.welcome') }}</h1> -->
             
 
-                <ul  class="icons d-flex p-2 m-0 justify-content-center align-items-center gap-3" style="list-style:none;">   
+                <ul  class="icons d-flex  m-0 justify-content-center align-items-center gap-3" style="list-style:none; ">   
                   
                 <div>
-                    <label class="text-white" style="font-size:12px;">Swtich language from there</label>
+                    <!-- <label class="" style="font-size:12px;">Swtich language from there</label> -->
+                    <span class="ai-icons"><i class="fa-solid fa-globe" aria-hidden="true"></i></span>
                     <select id="language-select" onchange="changeLanguage()">
                         <option value="en" {{ session('locale') == 'en' ? 'selected' : '' }}>English</option>
                         <option value="ar" {{ session('locale') == 'ar' ? 'selected' : '' }}>Arabic</option>
                     </select>
                     </div>
-                    <li class=" p-2 header-phone-number">
-                    
-                        <i class="fa-solid fa-phone text-light" aria-hidden="true"></i>
-                        <a class="text-decoration-none text-light" href="tel:+971566428066">+971 56 642 8066</a>
-                    </li>
-                </ul>
-                <div class="fixed" id="social">
-                        <a target="_blank"
+                     <a target="_blank"
                             href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d"
-                        >
+                        style=" color: #000; font-size: 20px;" >
                             <i class="fa-brands fa-facebook" aria-hidden="true"></i>
                         </a>
                         <a target="_blank"
                             href="https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr"
-                        >
+                            style=" color: #000; font-size: 20px;">
                             <i class="fa-brands fa-instagram"></i>
                         </a>
-                        <a target="_blank" href="https://www.linkedin.com/in/edexcel-edu-130983310/">
+                        <a target="_blank" href="https://www.linkedin.com/in/edexcel-edu-130983310/"  style=" color: #000; font-size: 20px;">
                             <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+                        </a>        
+                   
+                </ul>
+                <div class="fixed" id="social">
+                    
+                        <a href="{{ route('hire.tutor') }}" class="hiring-button">
+                            Book A Demo
                         </a>
+                        <div class="red-dot"></div>
                 </div>
                 {{-- <a href="#" class="btn notify position-relative"><i class="fa-regular fa-bell text-white"></i><span class="position-absolute top-10 start-60 translate-middle p-1 bg-danger border border-light rounded-circle">
                     <span class="visually-hidden">New alerts</span>

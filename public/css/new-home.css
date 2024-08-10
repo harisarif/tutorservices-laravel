@@ -3,10 +3,13 @@
     background-color: rgb(23, 218, 140);
     position: fixed;
     top: 40%;
-    right: 0;
+    right: -59px;
     border-top-left-radius: 7px;
     border-bottom-left-radius: 7px;
     z-index: 9;
+    -webkit-transform: rotate(90deg);
+    width: 11%;
+    text-align: center;
 }
 
 .fixed a,
@@ -15,6 +18,7 @@
     text-decoration: none;
     padding: 4px 0px;
     transition: 0.5s !important;
+    font: 13px;
 } 
 .fixed a,
 .fixed i :hover{
@@ -93,6 +97,8 @@
 }
 
 .header-ul {
+    margin-top: -9px;
+    padding-left: 1rem;
     & li {
         display: inline-block;
     }
@@ -327,8 +333,6 @@ width: 100%;
     color: #333;
     width: 60px;
     max-width: 200px;
-    /* Adjust width as needed */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     outline: none;
     cursor: pointer;
     transition: border-color 0.3s, box-shadow 0.3s;
@@ -348,12 +352,11 @@ width: 100%;
 }
 
 .hiring-button {
-    background-color: white;
+    color: white;
     padding: 5px;
     border-radius: 3px;
     font-size: 12px;
     text-decoration: none;
-    color: black !important;
 }
 
 .color-div {
@@ -738,4 +741,68 @@ align-items: center;
       left: 5em;
     }
   }
-  
+  /* General styling for the red dot */
+.red-dot {
+    width: 15px;
+    height: 15px;
+    background-color: #ff0000; /* Red color */
+    border-radius: 50%; /* Makes it a circle */
+    position: absolute;
+    top: 15px;
+    right: 129px;
+}
+
+/* Blinking animation */
+.red-dot {
+    -webkit-animation: blink 1s ease infinite;
+    -moz-animation: blink 1s ease infinite;
+    -ms-animation: blink 1s ease infinite;
+    -o-animation: blink 1s ease infinite;
+    animation: blink 1s ease infinite;
+}
+
+/* Keyframes for the blink animation */
+@keyframes blink {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes blink {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes blink {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@-ms-keyframes blink {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes blink {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}

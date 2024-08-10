@@ -31,7 +31,7 @@ main {
 .mini_header{
     display: flex;
     align-items: center;
-    background-color: rgb(var(--green));
+    /* background-color: rgb(var(--green)); */
     margin: 0;
 
 }
