@@ -3,12 +3,12 @@
     background-color: rgb(23, 218, 140);
     position: fixed;
     top: 40%;
-    right: -59px;
+    right: -46px;
     border-top-left-radius: 7px;
     border-bottom-left-radius: 7px;
     z-index: 9;
     -webkit-transform: rotate(90deg);
-    width: 11%;
+    width: 9%;
     text-align: center;
 }
 
@@ -749,7 +749,7 @@ align-items: center;
     border-radius: 50%; /* Makes it a circle */
     position: absolute;
     top: 15px;
-    right: 129px;
+    right: 111px;
 }
 
 /* Blinking animation */

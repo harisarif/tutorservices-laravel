@@ -36,7 +36,6 @@
                 <ul  class="icons d-flex  m-0 justify-content-center align-items-center gap-3" style="list-style:none; ">   
                   
                 <div>
-                    <!-- <label class="" style="font-size:12px;">Swtich language from there</label> -->
                     <span class="ai-icons"><i class="fa-solid fa-globe" aria-hidden="true"></i></span>
                     <select id="language-select" onchange="changeLanguage()">
                         <option value="en" {{ session('locale') == 'en' ? 'selected' : '' }}>English</option>
