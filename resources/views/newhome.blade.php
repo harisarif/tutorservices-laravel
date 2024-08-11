@@ -1,5 +1,91 @@
 @extends('layouts.app')
+<style>
+    .email-container {
+        position: relative;
+        display: inline-block;
+        cursor:pointer;
+    }
 
+    .email {
+        display: none;
+        position: absolute;
+        left: -114px;
+        top: 25px; /* Adjust as needed to position below the icon */
+        white-space: nowrap;
+        background-color: white; /* Optional: add a background color */
+        padding: 5px; /* Optional: add some padding */
+        border-radius: 3px; /* Optional: add rounded corners */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: add a shadow */
+        z-index: 100;
+    }
+
+    .email-container:hover .email {
+        display: inline-block;
+    }
+    .phone-container {
+        position: relative;
+        display: inline-block;
+        cursor:pointer;
+    }
+    .phone-container i {
+        font-size:15px;
+    }
+    .phone-number-header {
+        display: none;
+        position: absolute;
+        left: -88px;
+        top: 100%; /* Adjust as needed to position below the icon */
+        white-space: nowrap;
+        background-color: white; /* Optional: add a background color */
+        padding: 5px; /* Optional: add some padding */
+        border-radius: 3px; /* Optional: add rounded corners */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: add a shadow */
+        z-index: 100;
+    }
+
+    .phone-container:hover .phone-number-header {
+        display: inline-block;
+    }
+    .custom-select-wrapper {
+        position: relative;
+        display: inline-block;
+    }
+
+    .custom-select {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+
+    .custom-select i {
+        font-size: 15px; /* Adjust icon size as needed */
+        /* margin-left:5px; */
+    }
+
+    .custom-options {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: -30px;
+        background: white;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+    }
+
+    .custom-options.open {
+        display: block;
+    }
+
+    .custom-option {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .custom-option:hover {
+        background: #f0f0f0;
+    }
+    </style>
 @section('content')
     @if (session('success'))
         <div class="alert alert-success" style="z-index: 6;
@@ -11,7 +97,7 @@
     @endif
     
     <div class="row mini_header m-0 p-0 container-fluid position-relative">
-        <div class="col-sm-12  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0">
+        <div class="col-sm-12 px-3  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0">
             <ul class="p-2 m-0 d-sm-inline d-block text-center header-ul">
                 <li class=" p-2">
                 <a class="navbar-brand" href="#">
@@ -27,40 +113,48 @@
              </li>
             </ul>
             <a href="{{ route('hire.tutor') }}" class="hiring-button">
-                        Book A demo
+                        Book A Demo
                 </a>
             <div>
             <!-- <h1>{{ __('messages.welcome') }}</h1> -->
             
 
-                <ul  class="icons d-flex p-2 m-0  align-items-center gap-3" style="list-style:none;     ">   
+                <ul  class="icons d-flex p-2 m-0  align-items-center gap-3" style="list-style:none;">   
                 <div class="d-flex  align-items: center;" style="justify-content: center;">
                         <div class="col-6 ">    
-                            <li class="nav-item m-1 btn-an text-center rounded w-1">
-                                <a class="nav-link text-decoration-none solid_btn" href="http://127.0.0.1:8000/login">Login</a>
+                            <li class="nav-item m-1 btn-an text-center rounded w-1 py-1">
+                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('login') }}">{{__('messages.login')}}</a>
                             </li>
                         </div>
                         <div class="col-6 ">
-                            <li class="nav-item m-1 btn-an text-center rounded w-1">
-                                <a class="nav-link text-decoration-none solid_btn" href="http://127.0.0.1:8000/basicsignup">Sign Up</a>
+                            <li class="nav-item m-1 btn-an text-center rounded w-1 py-1">
+                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}">{{__('messages.sign_up')}}</a>
                             </li>
                         </div>
                     </div>
-                <div>
-               
-                <i class="fa fa-envelope-square " aria-hidden="true" style="color: #42b979;"></i>
-                <a class="text-decoration-none " href="mailto:info@eduexceledu.com" style="color: #42b979;">info@eduexceledu.com</a>
-                <i class="fa-solid fa-globe" aria-hidden="true" onclick="toggleDropdown()" style="color: #42b979;"></i>
-                    <select id="language-select" onchange="changeLanguage()">
-                        <option value="en" {{ session('locale') == 'en' ? 'selected' : '' }}>English</option>
-                        <option value="ar" {{ session('locale') == 'ar' ? 'selected' : '' }}>Arabic</option>
-                    </select>
+                <div class="d-flex align-items-center">
+                    <div class="email-container">
+                        <i class="fa fa-envelope-square" aria-hidden="true" style="color: #42b979;"></i>
+                        <a class="email text-decoration-none" href="mailto:info@eduexceledu.com" style="color: #42b979;">info@eduexceledu.com</a>
                     </div>
-                    <li class=" p-2 header-phone-number">
+               
+                    <div class=" p-2 header-phone-number phone-container">
                     
                         <i class="fa-solid fa-phone " aria-hidden="true" style="color: #42b979;"></i>
-                        <a class="text-decoration-none " href="tel:+971566428066" style="color: #42b979;">+971 56 642 8066</a>
-                    </li>
+                        <a class="phone-number-header text-decoration-none " href="tel:+971566428066" style="color: #42b979;">+971 56 642 8066</a>
+                    </div>
+                    <div class="custom-select-wrapper">
+                    <div class="custom-select">
+                        <i class="fa-solid fa-globe" style="color:#42b979 !important" aria-hidden="true" onclick="toggleDropdown()"></i>
+                        <div class="custom-options" id="language-select">
+                            <div class="custom-option" data-value="en" onclick="changeLanguage('en')">English</div>
+                            <div class="custom-option" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                    
+                
                 </ul>
                 <div class="fixed" id="social">
                         <a target="_blank"
@@ -2248,8 +2342,23 @@
         
     </script>
    <script>
-    function changeLanguage() {
-        var locale = document.getElementById('language-select').value;
+    function toggleDropdown() {
+        document.querySelector('.custom-options').classList.toggle('open');
+    }
+
+    function changeLanguage(value) {
+        document.querySelector('.custom-options').classList.remove('open');
+        // Implement your language change logic here, for example:
+        // window.location.href = '/change-language/' + value;
+    }
+
+    // Close the dropdown if clicked outside
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.custom-select')) {
+            document.querySelector('.custom-options').classList.remove('open');
+        }
+    });
+    function changeLanguage(locale) {
         var url = "{{ url('lang') }}/" + locale;
         window.location.href = url;
     }
