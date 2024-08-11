@@ -3,12 +3,10 @@
     background-color: rgb(23, 218, 140);
     position: fixed;
     top: 40%;
-    right: -46px;
+    right: 0;
     border-top-left-radius: 7px;
     border-bottom-left-radius: 7px;
     z-index: 9;
-    -webkit-transform: rotate(90deg);
-    width: 9%;
     text-align: center;
 }
 
@@ -352,19 +350,18 @@ width: 100%;
 }
 
 .hiring-button {
-    color: white;
     padding: 5px;
     border-radius: 3px;
-    font-size: 12px;
+    font-size: 15px;
     text-decoration: none;
+    color: #42b979;
+    font-weight: 600;
 }
 
 .color-div {
     height: 6px !important;
     width: 50px !important;
     background-color: red;
-    /* text-align: center; */
-    /* padding: 3px 0; */
 }
 
 .color-main-div {
