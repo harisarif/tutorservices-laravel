@@ -113,7 +113,7 @@
              </li>
             </ul>
             <a href="{{ route('hire.tutor') }}" class="hiring-button">
-                        Book A Demo
+                        Book A Demo For Your Child
                 </a>
             <div>
             <!-- <h1>{{ __('messages.welcome') }}</h1> -->
