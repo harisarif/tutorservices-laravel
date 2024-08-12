@@ -135,7 +135,7 @@
                         </div>
                         <div class="col-6 ">
                             <li class="nav-item m-1 btn-an text-center rounded w-1 py-1">
-                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}">{{__('messages.sign_up')}}</a>
+                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}">Register</a>
                             </li>
                         </div>
                     </div>
