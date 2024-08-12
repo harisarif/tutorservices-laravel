@@ -129,12 +129,12 @@
                 <ul  class="icons d-flex p-2 m-0  align-items-center gap-3" style="list-style:none;">   
                 <div class="d-flex  align-items: center;" style="justify-content: center;">
                         <div class="col-6 ">    
-                            <li class="nav-item m-1 btn-an text-center rounded w-1 py-1">
+                            <li class="nav-item m-1 btn-an text-center bg-success rounded w-1 py-1">
                                 <a class="nav-link text-decoration-none solid_btn" href="{{ route('login') }}">{{__('messages.login')}}</a>
                             </li>
                         </div>
                         <div class="col-6 ">
-                            <li class="nav-item m-1 btn-an text-center rounded w-1 py-1">
+                            <li class="nav-item m-1 btn-an text-center  bg-success rounded w-1 py-1">
                                 <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}">Register</a>
                             </li>
                         </div>
@@ -197,7 +197,7 @@
                 {{-- <button class="p-2  btn-an rounded border-0 text-light">
                         Student
                     </button> --}}
-                    <button class="p-2  btn-an rounded border-0 text-success" style="margin: 5px 47%; white-space: nowrap; background: #fff;">
+                    <button class="p-2  btn-an rounded border-0 text-success" style="margin: 5px 46%; white-space: nowrap; background: #fff;">
                         <a class="text-success text-decoration-none active solid_btn" aria-current="page"
                             href="{{ route('hire.tutor') }}">Request A Tutor </a>
 
@@ -255,7 +255,7 @@
                                     <span>Teachers</span>
                                     </div>
                                     <div class="align-self-center">
-                                    <i class="fa-solid fa-user" style="color:#42b979; font-size:25px;"></i>
+                                    <i class="fa-solid fa-user text-success" style="color:#42b979; font-size:25px;"></i>
                                     </div>
                                 </div>
                                 </div>
@@ -273,7 +273,7 @@
                                     <span>Students</span>
                                     </div>
                                     <div class="align-self-center">
-                                    <i class="fa-solid fa-school"  style="color:#42b979; font-size:25px;"></i>
+                                    <i class="fa-solid fa-school text-success"  style="color:#42b979; font-size:25px;"></i>
                                     </div>
                                 </div>
                                 </div>
@@ -291,7 +291,7 @@
                                     <span>subjects</span>
                                     </div>
                                     <div class="align-self-center">
-                                    <i class="fa-solid fa-book-open" style="color:#42b979; font-size:25px;"></i>
+                                    <i class="fa-solid fa-book-open text-success" style="color:#42b979; font-size:25px;"></i>
                                     </div>
                                 </div>
                                 </div>
