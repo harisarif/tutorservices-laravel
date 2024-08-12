@@ -199,7 +199,7 @@
                     </button> --}}
                     <button class="p-2  btn-an rounded border-0 text-success" style="margin: 5px 47%; white-space: nowrap; background: #fff;">
                         <a class="text-success text-decoration-none active solid_btn" aria-current="page"
-                            href="{{ route('hire.tutor') }}">{{__('messages.hire_tutor')}}</a>
+                            href="{{ route('hire.tutor') }}">Request A Tutor </a>
 
                     </button>
     </section>
