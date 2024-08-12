@@ -185,7 +185,7 @@
                     Your browser does not support the video tag.
                 </video> -->
                 <div class="banner-content">
-                    <h1>The Content will be requried</h1>
+                    <h1 class="mt-5">The Content will be requried</h1>
                 </div>
                 {{-- <button class="p-2  btn-an rounded border-0 text-light">
                         Student
