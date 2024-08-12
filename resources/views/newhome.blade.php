@@ -85,6 +85,13 @@
     .custom-option:hover {
         background: #f0f0f0;
     }
+    .card{
+        transition: 0.5s;
+    }
+    .card:hover{
+        transform: scale(1.1);
+        cursor: pointer;
+    }
     </style>
 @section('content')
     @if (session('success'))
@@ -234,21 +241,64 @@
                     <a class="tutorLinks d-inline-block text-center text-decoration-none" href="#">How it works</a>
                     <hr />
                 </div>
-                <div class="col-12">
-                    <h3 class="d-flex justify-content-between align-items-center" style="color: #42b979;      font-size: 30px;">
-                    {{__('messages.World Wide Tutor')}}
-                        <i onclick="hideNShow('filter-col')" class="fa fa-filter text-secondary d-inline-block d-md-none"
-                            aria-hidden="true"></i>
-                    </h3>
-                    <p class="border p-2 description-tutor"style="    color: #42b979; background: #fff;font-size: 17px;">
-                    {{__('messages.Edexcel is a platform that connects students with qualified tutors across the globe. It leverages online tools and technologies to provide personalized, flexible, and accessible educational support. The platform offers a wide range of subjects, catering to different educational levels, from primary school to High school. Edexcel ensures high-quality instruction by vetting tutors for their expertise and teaching skills. This global reach allows students to access diverse teaching styles and perspectives, fostering a richer learning experience. Additionally, the platform often includes features like one-on-one sessions, group classes, and customized lesson plans to meet individual learning needs.')}} 
-                    </p>
+                <div class="ad-headin-div mt-2">
+                    <h2 style="text-align: center; color: #42b979; font-weight: 600;">Data Insights</h2>
                 </div>
-
-                <div class="col-12">
-                    <hr />
-                    <h3>{{__('messages.tutor_list')}}</h3>
-                    <hr />
+                <div class="row mb-3">
+                        <div class="col-xl-4 col-sm-6 col-12 my-3">
+                            <div class="card" style="border: 1px solid #42b979;">
+                            <div class="card-content">
+                                <div class="card-body">
+                                <div class="media d-flex" style=" justify-content: space-between;">
+                                    <div class="media-body text-left">
+                                    <h3 class="danger">500+</h3>
+                                    <span>Teachers</span>
+                                    </div>
+                                    <div class="align-self-center">
+                                    <i class="fa-solid fa-user" style="color:#42b979; font-size:25px;"></i>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-sm-6 col-12 my-3">
+                            <div class="card" style="border: 1px solid #42b979;">
+                            <div class="card-content">
+                                <div class="card-body">
+                                <div class="media d-flex" style=" justify-content: space-between;">
+                                    <div class="media-body text-left">
+                                    
+                                    <h3 class="success">1000+</h3>
+                                    <span>Students</span>
+                                    </div>
+                                    <div class="align-self-center">
+                                    <i class="fa-solid fa-school"  style="color:#42b979; font-size:25px;"></i>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    
+                        <div class="col-xl-4 col-sm-6 col-12 my-3">
+                            <div class="card" style="border: 1px solid #42b979;">
+                            <div class="card-content">
+                                <div class="card-body">
+                                <div class="media d-flex" style=" justify-content: space-between;">
+                                    <div class="media-body text-left">
+                                    <h3 class="warning">1500+</h3>
+                                    <span>subjects</span>
+                                    </div>
+                                    <div class="align-self-center">
+                                    <i class="fa-solid fa-book-open" style="color:#42b979; font-size:25px;"></i>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+     
                 </div>
 
                 <div class="row justify-content-center px-0">
