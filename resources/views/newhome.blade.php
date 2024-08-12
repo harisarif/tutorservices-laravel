@@ -178,24 +178,24 @@
         </div>
         <div class="notification mb-2 w-25 p-2 bg-info-subtle position-absolute end-0 top-100 z-1">This is a demo</div>
     </div>
-    <section class="
-    banner-section" style="">
-                <div class="col-12 col-md-6 intro_lines mx-0 my-5">
-                    <h1 style="display: grid; place-items: end; color: #42b979; margin: 0px 50%;
-                     white-space: nowrap;"><span>{{__('The Content will be requried')}}</span></h1>
-                    <!-- <p>
-                    {{__('messages.about_us')}}
-                    </p> -->
-                    {{-- <button class="p-2 bg_theme_green btn-an rounded border-0 text-light">
+    <section class="banner-section" style="background: #42b979;">
+                
+                <!-- <video autoplay muted loop playsinline>
+                    <source src="{{ asset('images/banner-video.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video> -->
+                <div class="banner-content">
+                    <h1>The Content will be requried</h1>
+                </div>
+                {{-- <button class="p-2  btn-an rounded border-0 text-light">
                         Student
                     </button> --}}
-                    <button class="p-2 bg_theme_green btn-an rounded border-0 text-light" style="margin: 27px 78%; white-space: nowrap;">
-                        <a class="text-light text-decoration-none active solid_btn" aria-current="page"
+                    <button class="p-2  btn-an rounded border-0 text-success" style="margin: 5px 47%; white-space: nowrap; background: #fff;">
+                        <a class="text-success text-decoration-none active solid_btn" aria-current="page"
                             href="{{ route('hire.tutor') }}">{{__('messages.hire_tutor')}}</a>
 
                     </button>
-                </div>
-            </section>
+    </section>
     <div class="wrapper container">
             <!-- WhatsApp Button html start -->
             @include('whatsapp')
