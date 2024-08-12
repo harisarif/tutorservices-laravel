@@ -178,7 +178,8 @@
         </div>
         <div class="notification mb-2 w-25 p-2 bg-info-subtle position-absolute end-0 top-100 z-1">This is a demo</div>
     </div>
-    <section class="banner-section" style="">
+    <section class="
+    banner-section" style="">
                 <div class="col-12 col-md-6 intro_lines mx-0 my-5">
                     <h1 style="display: grid; place-items: end; color: #42b979; margin: 0px 50%;
                      white-space: nowrap;"><span>{{__('The Content will be requried')}}</span></h1>
