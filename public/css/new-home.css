@@ -827,3 +827,6 @@ align-items: center;
         opacity: 1;
     }
 }
+.form-control{
+    height: 50px;
+}
