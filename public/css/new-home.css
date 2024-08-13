@@ -830,3 +830,10 @@ align-items: center;
 .form-control{
     height: 50px;
 }
+.ai-heading-div h2{
+    color: #42b979;
+    font-weight: 600;
+}
+.card-title{
+    color: #42b979;
+}

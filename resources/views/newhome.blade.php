@@ -303,14 +303,14 @@
 
                 <form>
                     <div class="ai-heading-div">
-                        <h3 class="text-center text-success fw-bold" >Inquiry Overview</h3>
+                        <h2 class="text-center  fw-bold" >Inquiry Overview</h2>
                     </div>
                     <div class="row">
                         <div class="col-6 " >
                         <div class=" mt-3 mb-5 " >
                  <div class="ai-card px-3 py-4" style="border: 1px solid #ddd; border-radius: 5px;">
                  <div class="card-body">
-                    <h6 class="card-title mb-3 text-center fw-bold fs-4 text-success">Students</h6> 
+                    <h6 class="card-title mb-3 text-center fw-bold fs-4 ">Students</h6> 
                     <h3 class="fw-bold text-center" style="font-size: 18px;color: red;"><i>"Please Complete All Required Fields"</i></h3>
                 <div class="row">
                   <div class="col-sm-12">
@@ -343,6 +343,7 @@
                  <div class=" d-flex flex-column text-center px-5  mb-3">  </div> <button class="btn btn-success btn-block confirm-button">Confirm</button>
         </div>
     </div>
+    
 </div>
                         </div>
                     </div>
