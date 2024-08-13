@@ -305,13 +305,53 @@
                     <div class="ai-heading-div">
                         <h2 class="text-center  fw-bold" >Inquiry Overview</h2>
                     </div>
-                    <div class="row">
-                        <div class="col-6 " >
-                        <div class=" mt-3 mb-5 " >
+                 <div class="row">
+                    <div class="col-6 " >
+                     <div class=" mt-3 mb-5 " >
+                        <div class="ai-card px-3 py-4" style="border: 1px solid #ddd; border-radius: 5px;">
+                         <div class="card-body">
+                                 <h6 class="card-title mb-3 text-center fw-bold fs-4 ">Students</h6> 
+                                  <h3 class="fw-bold text-center" style="font-size: 18px;color: red;"><i>"Please Complete All Required Fields"</i></h3>
+                              <div class="row">
+                                  <div class="col-sm-12">
+                            <div class="form-group p-2 px-0">
+                            <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your Name</strong></label>
+                            <input class="form-control" type="text" placeholder="Name">
+                            </div>      
+                            </div>
+                             </div>
+           
+                             <div class="row">
+                            <div class="col-sm-12">
+                            <div class="form-group p-2 px-0">
+                            <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your   Email</strong></label>
+                            <div class="input-group"> <input class="form-control" type="text" placeholder="Email ID"> </div>
+                            </div>
+                            </div>
+                              </div>
+                            <div class="row">
+                            <div class="col-sm-12">
+                             <div class="form-group p-2 px-0">
+                             <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your Number</strong></label>
+                            <div class="input-group"> <input class="form-control" type="text" placeholder="Mobile"> </div>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="col-12  py-2"><label for="curriculum" class="form-label" style="color:#42b979;"><strong>Description (Optional)</strong></label>
+                            <textarea class="form-control" id="curriculum" name="reviews" rows="2" placeholder="Description" style="box-shadow: none;border: 1px solid #ddd;"></textarea>
+                            </div>
+                            <div class=" d-flex flex-column text-center px-5  mb-3">  </div> <button class="btn btn-success btn-block confirm-button">Confirm</button>
+                           </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-6 ">
+                        <div class=" mt-3 mb-5 ">
                  <div class="ai-card px-3 py-4" style="border: 1px solid #ddd; border-radius: 5px;">
                  <div class="card-body">
-                    <h6 class="card-title mb-3 text-center fw-bold fs-4 ">Students</h6> 
-                    <h3 class="fw-bold text-center" style="font-size: 18px;color: red;"><i>"Please Complete All Required Fields"</i></h3>
+                    <h6 class="card-title mb-3 text-center fw-bold fs-4 ">Teachers</h6> 
+                    <h3 class="fw-bold text-center" style="font-size: 18px;color: red;"><i>"All Mandatory Fields Must Be Filled"</i></h3>
                 <div class="row">
                   <div class="col-sm-12">
                     <div class="form-group p-2 px-0">
@@ -346,7 +386,7 @@
     
 </div>
                         </div>
-                    </div>
+                 </div>
                 </form>
                 <div class="row justify-content-center px-0">
                     
