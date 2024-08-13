@@ -837,3 +837,7 @@ align-items: center;
 .card-title{
     color: #42b979;
 }
+.ad-heading-div h2{
+    color: #42b979;
+    font-weight: 600;
+}
