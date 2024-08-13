@@ -389,11 +389,141 @@
                  </div>
                 </form>
 
-                <section class="ad-testimonial">
+    <section class="ad-testimonial">
                     <div class="ad-heading-div">
                         <h2 class="text-center">Testimonials</h2>
                     </div>
-                </section>
+                    <div class="container-lg">
+    	<div class="row">               
+	    	<div class="col-sm-12">			
+		    	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			    	<h2></h2>
+				<!-- Wrapper for carousel items -->
+			    	<div class="carousel-inner">
+					    <div class="carousel-item active" >
+					    	<div class="row justify-content-center">
+                            <div class="col-sm-5 carousel-wrapper p-0 me-2">
+                                <div class="">
+                                    <div class="testimonial w-100">
+                                        <p>Vestibulum quis quam ut magna consequat faucibu. Eget mi suscipit tincidunt. Utmtc tempus dictum. Pellentesque virra. Quis quam ut magna consequat faucibus quam.</p>
+                                    </div>
+                                    <div class="media  d-flex">
+                                        <img src="{{asset('images/profile_dp.png')}}" class="mr-3" alt="">
+                                        <div class="media-body">
+                                            <div class="overview">
+                                                <div class="name"><b>Students Reviews</b></div>
+                                                <div class="details">Web Developer / SoftBee</div>
+                                                <div class="star-rating">
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>										
+                                        </div>
+                                    </div>
+                                </div>
+							</div>
+                            <div class="col-sm-5 carousel-wrapper p-0 me-2">
+                                <div class="">
+                                    <div class="testimonial w-100">
+                                        <p>Vestibulum quis quam ut magna consequat faucibu. Eget mi suscipit tincidunt. Utmtc tempus dictum. Pellentesque virra. Quis quam ut magna consequat faucibus quam.</p>
+                                    </div>
+                                    <div class="media  d-flex">
+                                        <img src="{{asset('images/profile_dp.png')}}" class="mr-3" alt="">
+                                        <div class="media-body">
+                                            <div class="overview">
+                                                <div class="name"><b>Students Reviews</b></div>
+                                                <div class="details">Web Developer / SoftBee</div>
+                                                <div class="star-rating">
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>										
+                                        </div>
+                                    </div>
+                                </div>
+							</div>
+						</div>
+                        
+                        
+                       	
+					</div>
+                    <div class="carousel-item" >
+					    	<div class="row justify-content-center">
+                            <div class="col-sm-5 carousel-wrapper p-0 me-2">
+                                <div class="">
+                                    <div class="testimonial w-100">
+                                        <p>Vestibulum quis quam ut magna consequat faucibu. Eget mi suscipit tincidunt. Utmtc tempus dictum. Pellentesque virra. Quis quam ut magna consequat faucibus quam.</p>
+                                    </div>
+                                    <div class="media  d-flex">
+                                        <img src="{{asset('images/profile_dp.png')}}" class="mr-3" alt="">
+                                        <div class="media-body">
+                                            <div class="overview">
+                                                <div class="name"><b>Students Reviews</b></div>
+                                                <div class="details">Web Developer / SoftBee</div>
+                                                <div class="star-rating">
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>										
+                                        </div>
+                                    </div>
+                                </div>
+							</div>
+                            <div class="col-sm-5 carousel-wrapper p-0 me-2">
+                                <div class="">
+                                    <div class="testimonial w-100">
+                                        <p>Vestibulum quis quam ut magna consequat faucibu. Eget mi suscipit tincidunt. Utmtc tempus dictum. Pellentesque virra. Quis quam ut magna consequat faucibus quam.</p>
+                                    </div>
+                                    <div class="media  d-flex">
+                                        <img src="{{asset('images/profile_dp.png')}}" class="mr-3" alt="">
+                                        <div class="media-body">
+                                            <div class="overview">
+                                                <div class="name"><b>Students Reviews</b></div>
+                                                <div class="details">Web Developer / SoftBee</div>
+                                                <div class="star-rating">
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>										
+                                        </div>
+                                    </div>
+                                </div>
+							</div>
+						</div>
+				</div>
+				<!-- Carousel controls -->
+				
+			    </div>
+                <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+					<i class="fa fa-chevron-left"></i>
+				</a>
+				<a class="carousel-control-next" href="#myCarousel" data-slide="next">
+					<i class="fa fa-chevron-right"></i>
+				</a>
+		      </div>
+	        </div>
+       </div>
+    </section>
                 <div class="row justify-content-center px-0 d-none">
                     
                     
@@ -1319,6 +1449,7 @@
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <!-- Your custom script -->
     <script>
         var multipleCardCarousel = document.querySelector("#carouselExampleControls");
