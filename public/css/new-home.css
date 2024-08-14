@@ -923,3 +923,9 @@ align-items: center;
 .rousel-item .active{
     border-left: 1px solid #42b979;
 }
+footer{
+    background-color: #42b979;
+}
+.row{
+    --bs-gutter-x: -0.5rem;
+}

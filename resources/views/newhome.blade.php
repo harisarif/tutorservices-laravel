@@ -164,10 +164,7 @@
                 
                 </ul>
                 <div class="fixed" id="social">
-                        <a target="_blank"
-                            href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d"
-                        >
-                            <i class="fa-brands fa-facebook" aria-hidden="true"></i>
+                        
                         </a>
                         <a target="_blank"
                             href="https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr"
@@ -1443,7 +1440,36 @@
             class="fa-solid fa-chevron-up"></i></button>
 
     <!-- footer start... -->
-
+     <footer>
+        <div class="row">
+            <div class="col-4">
+                <ul>
+                    <li class="text-white fs-5">Other Links</li>
+                    <li>
+                         <a class="text-decoration-none text-light border-bottom" href="{{route('faq.index')}}">FAQ</a>
+                    </li>
+                    <li >
+                     <a class="text-decoration-none text-light border-bottom" href="{{route('policy.index')}}">Privacy Policy</a>
+                    </li>
+                    <li>
+                         <a class="text-decoration-none text-light border-bottom" href="{{route('terms.condition')}}">Terms & Conditions</a>
+                    </li>
+                </ul>
+               
+            </div>
+            <div class="col-4">
+                 <ul>
+                 <li class="text-white fs-5 d-block">Social icons</li>
+                    <li class="d-block">
+                        <a target="_blank"
+                            href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d"class="text-decoration-none">
+                            <i class="fa-brands fa-facebook text-light" aria-hidden="true"></i>
+                            <span class="text-light">Facebook</span>
+                    </li>
+                 </ul>
+            </div>
+        </div>
+     </footer>
 @endsection
 
 @section('js')
