@@ -926,6 +926,3 @@ align-items: center;
 footer{
     background-color: #42b979;
 }
-.row{
-    --bs-gutter-x: -0.5rem;
-}
