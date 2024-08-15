@@ -926,3 +926,13 @@ align-items: center;
 footer{
     background-color: #42b979;
 }
+.ad-footer{
+    transition: 0.5s; 
+    width: 57%;
+    
+}
+.ad-footer:hover{
+    transform: scale(1.3);
+    margin-left: 25px;
+    cursor: pointer;
+}
