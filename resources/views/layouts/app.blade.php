@@ -100,9 +100,10 @@
         <main>
             {{-- {{ $slot }} --}}
             @yield('content')
-            @include('layouts.footer')
+            
             @yield('js')
         </main>
+        @include('layouts.footer')
 </body>
 
 </html>

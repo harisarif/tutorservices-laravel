@@ -107,7 +107,7 @@
         <div class="col-sm-12 px-3  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0">
             <ul class="p-2 m-0 d-sm-inline d-block text-center header-ul">
                 <li class=" p-2">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="{{ route('newhome') }}">
                         <img src="images/logo.png" height="50px" alt="logo" style="height: 50px">
                     </a>
                     
@@ -239,8 +239,10 @@
                                     <h3 class="danger">500+</h3>
                                     <span>Teachers</span>
                                     </div>
-                                    <div class="align-self-center">
-                                    <i class="fa-solid fa-user text-success" style="color:#42b979; font-size:25px;"></i>
+                                    <div class="align-self-center animated-icons">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40"   height="64" fill="#42b979">
+                                     <path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-2.67 0-8 1.337-8 4v3h16v-3c0-2.663-5.33-4-8-4zm-8 6v-1c0-1.721 3.468-3 8-3s8 1.279 8 3v1H4z"/>
+                                    </svg>
                                     </div>
                                 </div>
                                 </div>
@@ -257,8 +259,12 @@
                                     <h3 class="success">1000+</h3>
                                     <span>Students</span>
                                     </div>
-                                    <div class="align-self-center">
-                                    <i class="fa-solid fa-school text-success"  style="color:#42b979; font-size:25px;"></i>
+                                    <div class="align-self-center animated-icons">
+                                     <svg width="40" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="32" cy="20" r="12" fill="#42b979"/>
+                                         <path d="M32 36C22 36 14 44 14 54H50C50 44 42 36 32 36Z" fill="#42b979"/>
+                                        <path d="M32 4L14 14L32 24L50 14L32 4Z" fill="#42b979"/>
+                                      </svg>
                                     </div>
                                 </div>
                                 </div>
@@ -273,10 +279,10 @@
                                 <div class="media d-flex" style=" justify-content: space-between;">
                                     <div class="media-body text-left">
                                     <h3 class="warning">1500+</h3>
-                                    <span>subjects</span>
+                                    <span>Subjects</span>
                                     </div>
-                                    <div class="align-self-center">
-                                    <i class="fa-solid fa-book-open text-success" style="color:#42b979; font-size:25px;"></i>
+                                    <div class="align-self-center animated-icons">
+                                    <i class="fa-solid fa-book-open " style="color:#42b979; font-size:25px;"></i>
                                     </div>
                                 </div>
                                 </div>
@@ -285,13 +291,15 @@
                         </div>
      
                 </div>
+            </section>
 
-                <form>
+         
                     <div class="ai-heading-div">
                         <h2 class="text-center  fw-bold" >Inquiry Overview</h2>
                     </div>
                  <div class="row">
-                    <div class="col-6 " >
+                    <div class="col-5 " >
+                    <form>
                      <div class=" mt-3 mb-5 " >
                         <div class="ai-card px-3 py-4" style="border: 1px solid #ddd; border-radius: 5px;">
                          <div class="card-body">
@@ -330,67 +338,40 @@
                         </div>
                       </div>
                     </div>
+                    </form>
 
-                    <div class="col-6 ">
-                        <div class=" mt-3 mb-5 ">
-                 <div class="ai-card px-3 py-4" style="border: 1px solid #ddd; border-radius: 5px;">
-                 <div class="card-body">
-                    <h6 class="card-title mb-3 text-center fw-bold fs-4 ">Teachers</h6> 
-                    <h3 class="fw-bold text-center" style="font-size: 18px;color: red;"><i>"All Mandatory Fields Must Be Filled"</i></h3>
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="form-group p-2 px-0">
-                    <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your Name</strong></label>
-                        <input class="form-control" type="text" placeholder="Name">
-                    </div>      
-                </div>
-            </div>
-           
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="form-group p-2 px-0">
-                    <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your Email</strong></label>
-                        <div class="input-group"> <input class="form-control" type="text" placeholder="Email ID"> </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="form-group p-2 px-0">
-                    <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your Number</strong></label>
-                        <div class="input-group"> <input class="form-control" type="text" placeholder="Mobile"> </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12  py-2"><label for="curriculum" class="form-label" style="color:#42b979;"><strong>Description (Optional)</strong></label>
-                    <textarea class="form-control" id="curriculum" name="reviews" rows="2" placeholder="Description" style="box-shadow: none;border: 1px solid #ddd;"></textarea>
-                </div>
-                 <div class=" d-flex flex-column text-center px-5  mb-3">  </div> <button class="btn btn-success btn-block confirm-button">Confirm</button>
-        </div>
-    </div>
-    
-</div>
+                    <div class="col-7 img-reqire">
+                        <div class="ai-image-div">
+                            <h1 class="text-center text-white">This Imaage will be Required</h1>
                         </div>
-                 </div>
-                </form>
+                    </div>
 
-    <section class="ad-testimonial">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="ab-images-div">
+
+                            </div>
+                        </div>
+                    </div>
+            
+
+            <section class="ad-testimonial">
                     <div class="ad-heading-div">
                         <h2 class="text-center">Testimonials</h2>
                     </div>
-                    <div class="container-lg">
-    	<div class="row">               
-	    	<div class="col-sm-12">			
-		    	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <div class="container-lg">
+    	         <div class="row">               
+	    	      <div class="col-sm-12">			
+		    	    <div id="myCarousel" class="carousel slide" data-ride="carousel">
 			    	<h2></h2>
-				<!-- Wrapper for carousel items -->
+				    <!-- Wrapper for carousel items -->
 			    	<div class="carousel-inner">
 					    <div class="carousel-item active" >
 					    	<div class="row justify-content-center">
                             <div class="col-sm-5 carousel-wrapper p-0 me-2">
                                 <div class="">
                                     <div class="testimonial w-100">
-                                        <p>Vestibulum quis quam ut magna consequat faucibu. Eget mi suscipit tincidunt. Utmtc tempus dictum. Pellentesque virra. Quis quam ut magna consequat faucibus quam.</p>
+                                        <p class="fs-6">"Captivating storytelling paired with well-researched facts. This content is both informative and enjoyable."</p>
                                     </div>
                                     <div class="media  d-flex">
                                         <img src="{{asset('images/profile_dp.png')}}" class="mr-3" alt="">
@@ -415,7 +396,7 @@
                             <div class="col-sm-5 carousel-wrapper p-0 me-2">
                                 <div class="">
                                     <div class="testimonial w-100">
-                                        <p>Vestibulum quis quam ut magna consequat faucibu. Eget mi suscipit tincidunt. Utmtc tempus dictum. Pellentesque virra. Quis quam ut magna consequat faucibus quam.</p>
+                                        <p class="fs-6">"A well-structured piece that delivers valuable information in a clear, concise manner. Highly recommended."</p>
                                     </div>
                                     <div class="media  d-flex">
                                         <img src="{{asset('images/profile_dp.png')}}" class="mr-3" alt="">
@@ -447,7 +428,7 @@
                             <div class="col-sm-5 carousel-wrapper p-0 me-2">
                                 <div class="">
                                     <div class="testimonial w-100">
-                                        <p>Vestibulum quis quam ut magna consequat faucibu. Eget mi suscipit tincidunt. Utmtc tempus dictum. Pellentesque virra. Quis quam ut magna consequat faucibus quam.</p>
+                                        <p class="fs-6">"Brilliantly written with a perfect balance of detail and clarity. This content exceeded my expectations."</p>
                                     </div>
                                     <div class="media  d-flex">
                                         <img src="{{asset('images/profile_dp.png')}}" class="mr-3" alt="">
@@ -472,7 +453,7 @@
                             <div class="col-sm-5 carousel-wrapper p-0 me-2">
                                 <div class="">
                                     <div class="testimonial w-100">
-                                        <p>Vestibulum quis quam ut magna consequat faucibu. Eget mi suscipit tincidunt. Utmtc tempus dictum. Pellentesque virra. Quis quam ut magna consequat faucibus quam.</p>
+                                        <p class="fs-6">"Thoroughly engaging with fresh perspectives. The writing style is both approachable and authoritative."</p>
                                     </div>
                                     <div class="media  d-flex">
                                         <img src="{{asset('images/profile_dp.png')}}" class="mr-3" alt="">
@@ -499,16 +480,16 @@
 				<!-- Carousel controls -->
 				
 			    </div>
-                <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-					<i class="fa fa-chevron-left"></i>
-				</a>
-				<a class="carousel-control-next" href="#myCarousel" data-slide="next">
-					<i class="fa fa-chevron-right"></i>
-				</a>
+                    <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+					    <i class="fa fa-chevron-left"></i>
+				    </a>
+				    <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+					    <i class="fa fa-chevron-right"></i>
+				    </a>
 		      </div>
-	        </div>
-       </div>
-    </section>
+	            </div>
+                </div>
+             </section>
                 <div class="row justify-content-center px-0 d-none">
                     
                     
@@ -1427,75 +1408,7 @@
     <button class="goToTop fw-20px" style="background-color:#42B979" onclick="window.scrollTo(0, 0)"><i
             class="fa-solid fa-chevron-up"></i></button>
 
-    <!-- footer start... -->
-     <footer>
-       <div class="container" style="width: 1100px;">
-          <div class="row py-5">
-            <div class="col-4">
-                <ul>
-                    <li class="text-white fs-5 d-block fw-bold">Other Pages</li>
-                    <li class="ad-footer d-block py-1 ease-in-out duration-300">
-                        
-                         <a class="text-decoration-none text-light ease-in-out duration-300 ... "href="{{route('faq.index')}}">FAQ</a>
-                    </li>
-                    <li class="ad-footer d-block py-1">
-                     <a class="text-decoration-none text-light " href="{{route('policy.index')}}">Privacy Policy</a>
-                    </li>
-                    <li class="ad-footer d-block py-1 ">
-                         <a class="text-decoration-none text-light" href="{{route('terms.condition')}}">Terms & Conditions</a>
-                    </li>
-                </ul>
-               
-            </div>
-            <div class="col-4">
-                 <ul>
-                    <li class="text-white fs-5 d-block fw-bold">Edexcel Socials</li>
-                    <li class="ad-footer d-block py-1">
-                        <a target="_blank"
-                            href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d"class="text-decoration-none">
-                            <i class="fa-brands fa-facebook text-light" aria-hidden="true"></i>
-                            <span class="text-light ">Facebook</span>
-                        </a>  
-                    </li>
-                        <li class="ad-footer d-block py-1">
-                                <a target="_blank"
-                                 href="https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr" class="text-decoration-none">
-                                     <i class="fa-brands fa-instagram text-light"></i>
-                                     <span class="text-light">Instagram</span>
-                                </a>
-                        </li>
-
-                        <li class="ad-footer d-block py-1">
-                             <a target="_blank" href="https://www.linkedin.com/in/edexcel-edu-130983310/" class="text-decoration-none">
-                                 <i class="fa-brands fa-linkedin text-light" aria-hidden="true"></i>
-
-                              <span class="text-light ">LinkedIn</span>
-                             </a>
-                        </li>
-                 </ul>
-            </div>
-
-            <div class="col-4">
-                <ul>
-                    <li class="text-white fs-5 d-block fw-bold">Contact Us</li>
-                    <li class="ad-footer d-block py-1">
-                     <i class="fa-solid fa-location-dot text-white"></i>
-                     <span class="text-white">Dubai</span>
-                    </li>
-                    <li class="ad-footer d-block py-1">
-                        <i class="fa fa-envelope-square text-white" aria-hidden="true" ></i>
-                         <a class=" text-decoration-none text-white" href="mailto:info@eduexceledu.com" >info@eduexceledu.com</a>
-                    </li>
-                    <li class="ad-footer d-block py-1">
-                     <i class="fa-solid fa-phone text-white" aria-hidden="true" ></i>
-                     <a class=" text-decoration-none text-white" href="tel:+971566428066" >+971 56 642 8066</a>
-                    </li>
-                   
-                </ul>
-            </div>
-         </div>
-       </div>
-     </footer>
+  
 @endsection
 
 @section('js')
