@@ -968,3 +968,51 @@ footer{
   .ai-image-div img{
     width: 100%;
   }
+  .im-heading h2{
+    text-align: center;
+    color: #42b979;
+    font-weight: 700;
+    
+  }
+  .im-heading-div h1{
+    font-size: 3.5rem !important;
+  }
+  .im-div{
+    border: 1px solid #ddd;
+    overflow: hidden;
+    padding-left: 0;
+    height: 617px;
+  }
+  .im-img{
+    width: 767px;
+  }
+  .im-img img{
+    width: 100%;
+    height: 615px;
+  }
+  .ad-div-child{
+    background-color: #42b979;
+  }
+  .im-detail ul{
+    margin-top: 5rem;
+    transition: 0.5s;
+  }
+  .im-detail ul li:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    margin-left: 25px;
+ }
+ .im-button button{
+    width: 38%;
+    border-radius: 11px;
+    color: #42b979;
+    font-weight: 600;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+ .im-button button:hover{
+    background-color: #fff;
+    color: #42b979;
+ }

@@ -299,7 +299,7 @@
                     </div>
                  <div class="row">
                     <div class="col-5 " >
-                    <form>
+                <form>
                      <div class=" mt-3 mb-5 " >
                         <div class="ai-card px-3 py-4" style="border: 1px solid #ddd; border-radius: 5px;">
                          <div class="card-body">
@@ -338,8 +338,7 @@
                         </div>
                       </div>
                     </div>
-                    </form>
-
+                    
                     <div class="col-7 img-reqire">
                         <div class="ai-image-div">
                             <!-- <h1 class="text-center text-white">This Imaage will be Required</h1> -->
@@ -347,15 +346,44 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row ">
                         <div class="col-7">
                             <div class="ab-images-div">
-
                             </div>
                         </div>
                     </div>
-            
+                </form>
 
+                <section class="ad-Tutor my-4">
+                    <div class="im-heading py-3">
+                        <h2>Become A Tutor</h2>
+                    </div>
+                    <div class="row border">
+                        <div class="col-7 im-div">
+                            <div class="im-img">
+                                <img src="images/im-teacher.jpg" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-5 ad-div-child">
+                            <div class="im-heading-div text-white mt-4">
+                                <h1 class="text-white fw-bold">Guide and Inspire Learners</h1>
+                                <p class="mx-2">Earn while you teach—share your expertise with students on Preply. Sign up to start tutoring online.</p>
+
+                                <div class="im-detail">
+                                    <ul>
+                                        <li class="fs-5">Expand Your Student Base</li>
+                                        <li class="fs-5">Boost Your Business</li>
+                                        <li class="fs-5">Guaranteed Payment Security</li>
+                                    </ul>
+                                </div>
+                                <div class="im-button">
+                                <button type="button" class="btn btn-light mt-5">Register a Tutor <i class="fa-solid fa-arrow-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             <section class="ad-testimonial">
                     <div class="ad-heading-div">
                         <h2 class="text-center">Testimonials</h2>
