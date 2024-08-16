@@ -958,9 +958,13 @@ footer{
     border: 1px solid #ddd;
     border-radius: 5px;
     margin-top: 17px;
-    background: #42b979;
+    padding-left: 0;
     height: 570px;
+    overflow: hidden;
   }
   .ai-image-div{
-    margin-top: 30%;
+    width: 855px;
+  }
+  .ai-image-div img{
+    width: 100%;
   }

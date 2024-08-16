@@ -342,7 +342,8 @@
 
                     <div class="col-7 img-reqire">
                         <div class="ai-image-div">
-                            <h1 class="text-center text-white">This Imaage will be Required</h1>
+                            <!-- <h1 class="text-center text-white">This Imaage will be Required</h1> -->
+                             <img src="images/Ad-Banner.jpeg" alt="">
                         </div>
                     </div>
 
