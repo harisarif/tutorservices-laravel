@@ -170,20 +170,20 @@
         </div>
         <div class="notification mb-2 w-25 p-2 bg-info-subtle position-absolute end-0 top-100 z-1">This is a demo</div>
     </div>
-    <section class="banner-section" style="background: #42b979;">
+    <section class="banner-section" style="background-image: url(images/Potrate.webp); background-size: cover;">
                 
                 <!-- <video autoplay muted loop playsinline>
                     <source src="{{ asset('images/banner-video.mp4') }}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video> -->
                 <div class="banner-content">
-                    <h1 class="mt-5">The Content will be requried</h1>
+                    <h1 class=" text-white" style="margin-top:10rem;">The Content will be requried</h1>
                 </div>
                 {{-- <button class="p-2  btn-an rounded border-0 text-light">
                         Student
                     </button> --}}
-                    <button class="p-2  btn-an rounded border-0 text-success" style="margin: 5px 46%; white-space: nowrap; background: #fff;">
-                        <a class="text-success text-decoration-none active solid_btn" aria-current="page"
+                    <button class="p-2  btn-an rounded border-0 text-success" style="margin: 5px 46%; white-space: nowrap; background: #42b979;">
+                        <a class=" text-decoration-none active solid_btn" aria-current="page"
                             href="{{ route('hire.tutor') }}">Request A Tutor </a>
 
                     </button>
