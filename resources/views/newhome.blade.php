@@ -378,7 +378,7 @@
                                     </ul>
                                 </div>
                                 <div class="im-button">
-                                <a href="{{route('tutor')}}" class="btn btn-light mt-5">Register a Tutor <i class="fa-solid fa-arrow-right"></i></button>
+                                <a href="{{route('tutor')}}" class="btn btn-light mt-5">Register a Tutor <i class="fa-solid fa-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
