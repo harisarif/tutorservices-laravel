@@ -346,7 +346,7 @@
                         </div>
                     </div>
 
-                    <div class="row ">
+                    <div class="row">
                         <div class="col-7">
                             <div class="ab-images-div">
                             </div>
@@ -354,18 +354,18 @@
                     </div>
                 </form>
 
-                <section class="ad-Tutor my-4">
+                <section class="ad-Tutor my-4" >
                     <div class="im-heading py-3">
                         <h2>Become A Tutor</h2>
                     </div>
-                    <div class="row border">
-                        <div class="col-7 im-div">
+                    <div class="row border" >
+                        <div class="col-6 im-div">
                             <div class="im-img">
                                 <img src="images/im-teacher.jpg" alt="">
                             </div>
                         </div>
 
-                        <div class="col-5 ad-div-child">
+                        <div class="col-6 ad-div-child">
                             <div class="im-heading-div text-white mt-4">
                                 <h1 class="text-white fw-bold">Guide and Inspire Learners</h1>
                                 <p class="mx-2">Earn while you teach—share your expertise with students on Preply. Sign up to start tutoring online.</p>
