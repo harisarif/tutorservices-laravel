@@ -229,7 +229,7 @@
 
 @media (max-width: 1440px) {
     .select2-container {
-        width: 75% !important;
+        width: 100% !important;
 
     }
 }
