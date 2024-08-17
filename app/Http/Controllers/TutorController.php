@@ -19,7 +19,7 @@ class TutorController extends Controller
 
             $query = Tutor::query();           
 
-            $perPage = 10; // Define the number of tutors per page
+            $perPage = 5; // Define the number of tutors per page
 
             // Paginate the results
             $tutors = $query->paginate($perPage);
@@ -35,11 +35,13 @@ class TutorController extends Controller
                     $tutor->age = null; // or any default value
                 }
             }
+            $countries = collect(config('countries_assoc.countries'));
 
             return view('newhome', [
                 'tutors' => $tutors,
                 'totalTutorsCount' => $totalTutorsCount,
                 'perPage' => $perPage,
+                'countries' => $countries,
             ]);
         }
         public function tutorDetail (){
