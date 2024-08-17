@@ -34,6 +34,7 @@
 
 .select2-container .select2-selection--single {
     height: 50px !important;
+    border: 1px solid #42b979;
 }
 
 .pagination {
@@ -243,7 +244,7 @@ width: 100%;
 } */
 @media (min-width:1441px) and (max-width: 2060px) {
     .select2-container {
-        width: 60% !important;
+        width: 100% !important;
 
     }
 }
@@ -667,7 +668,7 @@ align-items: center;
     justify-content: center;
   }
   .ad-form{
-    border: 1px solid #ddd;
+    border: 1px solid #42b979;
     border-radius: 5px;
     display: flex;
     margin: 10px 0;
@@ -1017,5 +1018,16 @@ footer{
     color: #42b979;
  }
  .ae-heading h2{
+    color: #42b979;
+ }
+ .ae-detail h4{
+    border: 1px solid #42b979;
+    border-radius: 5px;
+    color: #43b979;
+    width: 75%;
+    padding: 5px;
+    margin: 0 auto;
+ } 
+ .ad-div span b{
     color: #42b979;
  }

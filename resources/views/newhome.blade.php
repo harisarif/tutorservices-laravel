@@ -1,5 +1,8 @@
 @extends('layouts.app')
 <style>
+    #country span.select2.select2-container.select2-container--default {
+        width: 100% !important;
+}
     .email-container {
         position: relative;
         display: inline-block;
@@ -308,13 +311,14 @@
                                 <button id="resetFilterBtn" class="btn btn-secondary bg_theme_green">Reset Filter</button>
     
                             </div>
+                            
                         </div>
-                        <div class="bg-body-secondary">
+                        <div>
                                
                                 <div class="row  country-row">
-                                    <div class="col-lg-6 country-drop-down" >
+                                    <div class="col-lg-3 country-drop-down" >
 
-                                        <select name="country" id="country" class="country">
+                                        <select name="country" id="country" class="country" >
                                             <option value="all">All Countries</option>
 
                                             @foreach($countries as $countryCode => $countryName)
@@ -322,16 +326,16 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-lg-6 adjust-filters-wrap ">
-                                        <div class="col-md-6 px-2 col-lg-6">
+                                    <div class="col-lg-9 adjust-filters-wrap ">
+                                        <div class="col-md-6 px-2 col-lg-4">
                                             {{-- <label for="citysearch" class="form-label">City</label> --}}
                                             <input placeholder="Search city" type="text" class="form-control"
-                                                id="citysearch" name="citysearch" required />
+                                                id="citysearch" name="citysearch" required/ style="border:1px solid #42b979;">
                                         </div>
-                                        <div class="col-md-6 px-2 col-lg-6">
+                                        <div class="col-md-6 px-2 col-lg-4">
                                             {{-- <label for="citysearch" class="form-label">City</label> --}}
-                                            <input placeholder="Search Subject" type="text" class="form-control"
-                                                id="subjectsearch" name="subjectsearch" required />
+                                            <input placeholder="Search Subject" type="text" class="form-control" style="border:1px solid #42b979;"
+                                                id="subjectsearch" name="subjectsearch" required/>
                                         </div>
                                     </div>
                                     
@@ -351,29 +355,43 @@
                                         <div style="display: flex; justify-content: center;">
                                             <img src="{{ asset('storage/' . $item->profileImage) }}" alt="..." class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">
                                         </div>
-                                    <div class="ad-icons">
-                                        <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
-                                        <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
-                                        <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
-                                        <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
-                                        <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
+                                        <div class="ad-icons">
+                                          <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
+                                          <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
+                                          <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
+                                          <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
+                                          <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
+                                         </div>
+                                         <div class="ae-detail">
+                                            <h4 class="fs-6 mt-3">Book A Demo</h4>
+                                         </div>
                                     </div>
-                                
-                                    </div>
-                                    <div class="ad-detail">
-                                    <div style="margin: 5px 3px;">Tutor <u>{{ $item->f_name }} {{$item->l_name}}</u> [Tut2340]</div>
+                                    <div class="ad-detail my-3  w-100">
+                                        <div class="ae-div row">
+                                            <div class="col-9">
+                                                <div class="ae-detail-div">
+                                                    <span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Name :</strong>{{ $item->f_name }} {{$item->l_name}} </span>
+                                                    <!-- <span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Qualification :</strong> {{ $item->qualification }} </span> -->
+                                                    
+                                                    <span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong> English</span>
 
-                                        <span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Qualification :</strong> {{ $item->qualification }} </span>
-                                        
-                                        <span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong> English</span>
+                                                    <span><i class="fa-solid fa-globe"></i><strong>Country :</strong> {{ $item->location }}</span>
+                                                    <!-- <span><i class="fa-solid fa-location-dot"></i></i><strong style="margin-left: 14px;">City :</strong> {{ $item->city }}</span> -->
+                                                </div>
+                                                <div class="ae-detail-child">
+                                                        <span><i class="fa-regular fa-clock"></i><strong >Time Available :</strong>{{ $item->availability }}</span>
+                                                        
+                                                        <span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong>{{ $item->gender }}</span>
 
-                                        <span><i class="fa-solid fa-globe"></i><strong>Country :</strong> {{ $item->location }}</span>
-                                        <span><i class="fa-solid fa-location-dot"></i></i><strong style="margin-left: 14px;">City :</strong> {{ $item->city }}</span>
-
-                                        <span><i class="fa-regular fa-clock"></i><strong >Time Available :</strong>{{ $item->availability }}</span>
-                                        <span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong>{{ $item->gender }}</span>
-
-                                        <span style="background: #42b979; padding: 10px 0;border-radius: 5px; color: #fff; width: 80%;"><i class="fa-solid fa-location-dot" style="color:#fff;"></i></i><strong style="margin-left: 14px;  color: #fff;">Available For :</strong> Onlline </span>
+                                                        <!-- <span class="d-flex"><i class="fa-solid fa-location-dot"></i></i><strong style="margin-left: 14px;">Available For :</strong> <p style="background: #42b979; border-radius: 35px;color: #fff;
+                                                        width:30%; text-align: center;">Onlline</p> </span> -->
+                                                </div>
+                                         </div>
+                                         <div class="ad-div col-3">
+                                                <span class="fs-5"><b>AED $20</b></span>
+                                            </div>
+                                        </div>
+                                            
                                     </div>
                                 </div>
                                     <div class="d-none tutor_profile rounded overflow-hidden mb-3 mt-3">
