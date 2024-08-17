@@ -302,18 +302,18 @@
                     
                     
                     <div class="col-md-9">
-                        <div class="d-flex justify-content-between">
-                            <div>
+                        <div class="d-flex justify-content-between ad-border-div">
+                            <div class="mx-2">
                                 <p class="m-0 pt-1 tutors-range"> {{ $tutors->firstItem() }} to {{ $tutors->lastItem() }}
                                     0f <span class="total-tutors-count">{{ $totalTutorsCount }}</span> tutors</p>
                             </div>
-                            <div class="mb-2">
-                                <button id="resetFilterBtn" class="btn btn-secondary bg_theme_green">Reset Filter</button>
+                            <div class="my-2 mx-2">
+                                <button id="resetFilterBtn" class="ad-btn">Reset Filter</button>
     
                             </div>
                             
                         </div>
-                        <div>
+                        <div class="ad-border" >
                                
                                 <div class="row  country-row">
                                     <div class="col-lg-3 country-drop-down" >

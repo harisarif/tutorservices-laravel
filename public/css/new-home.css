@@ -1031,3 +1031,24 @@ footer{
  .ad-div span b{
     color: #42b979;
  }
+ .ad-border-div{
+    background:#f4f4f6; 
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 1px solid #42b979;
+    align-items: center;
+ }
+ .tutors-range{
+    color: #42b979;
+ }
+ .ad-border{
+    background:#f4f4f6;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+ }
+ .ad-btn{
+    border: 1px solid #42b979;
+    padding: 3px;
+    color: #42b979;
+    border-radius: 5px;
+ }
