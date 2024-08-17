@@ -1180,24 +1180,24 @@
                                                 /s:\d+:"(.*?)";/)[1]);
                                         });
                                     }
-                                    const data = item.curriculum;
+                                    // const data = item.curriculum;
 
-                                    let newData = data;
-                                    newData = newData.split('"');
+                                    // let newData = data;
+                                    // newData = newData.split('"');
 
-                                    let sorttedArry = [];
-                                    newData.forEach(element => {
+                                    // let sorttedArry = [];
+                                    // newData.forEach(element => {
 
-                                        if (!element.includes(':') && !element
-                                            .includes(';')) {
-                                            sorttedArry.push(element);
+                                    //     if (!element.includes(':') && !element
+                                    //         .includes(';')) {
+                                    //         sorttedArry.push(element);
 
 
-                                        }
-                                    });
-                                    sorttedArry = sorttedArry[0].split(',');
+                                    //     }
+                                    // });
+                                    // sorttedArry = sorttedArry[0].split(',');
 
-                                    console.log(sorttedArry)
+                                    // console.log(sorttedArry)
 
 
                                     var tutorHTML =
@@ -1298,12 +1298,12 @@
                                     // Unserialize the serialized data
 
                                     // Add a span for each curriculum item to tutorHTML
-                                    sorttedArry.forEach(element => {
-                                        tutorHTML +=
-                                            '<span class="bg-body-secondary d-inline-block rounded font-s mx-1 p-1 bg_green_hover text-center">' +
-                                            element + '</span>';
+                                    // sorttedArry.forEach(element => {
+                                    //     tutorHTML +=
+                                    //         '<span class="bg-body-secondary d-inline-block rounded font-s mx-1 p-1 bg_green_hover text-center">' +
+                                    //         element + '</span>';
 
-                                    })
+                                    // })
 
                                     tutorHTML += '</div>';
                                     // Append tutor HTML to container
@@ -1400,24 +1400,24 @@
                                                 /s:\d+:"(.*?)";/)[1]);
                                         });
                                     }
-                                    const data = item.curriculum;
+                                    // const data = item.curriculum;
 
-                                    let newData = data;
-                                    newData = newData.split('"');
+                                    // let newData = data;
+                                    // newData = newData.split('"');
 
-                                    let sorttedArry = [];
-                                    newData.forEach(element => {
+                                    // let sorttedArry = [];
+                                    // newData.forEach(element => {
 
-                                        if (!element.includes(':') && !element
-                                            .includes(';')) {
-                                            sorttedArry.push(element);
+                                    //     if (!element.includes(':') && !element
+                                    //         .includes(';')) {
+                                    //         sorttedArry.push(element);
 
 
-                                        }
-                                    });
-                                    sorttedArry = sorttedArry[0].split(',');
+                                    //     }
+                                    // });
+                                    // sorttedArry = sorttedArry[0].split(',');
 
-                                    console.log(sorttedArry)
+                                    // console.log(sorttedArry)
 
 
                                     var tutorHTML =
@@ -1518,12 +1518,12 @@
                                     // Unserialize the serialized data
 
                                     // Add a span for each curriculum item to tutorHTML
-                                    sorttedArry.forEach(element => {
-                                        tutorHTML +=
-                                            '<span class="bg-body-secondary d-inline-block rounded font-s mx-1 p-1 bg_green_hover text-center">' +
-                                            element + '</span>';
+                                    // sorttedArry.forEach(element => {
+                                    //     tutorHTML +=
+                                    //         '<span class="bg-body-secondary d-inline-block rounded font-s mx-1 p-1 bg_green_hover text-center">' +
+                                    //         element + '</span>';
 
-                                    })
+                                    // })
 
                                     tutorHTML += '</div>';
                                     // Append tutor HTML to container
@@ -1620,24 +1620,24 @@
                                                 /s:\d+:"(.*?)";/)[1]);
                                         });
                                     }
-                                    const data = item.curriculum;
+                                    // const data = item.curriculum;
 
-                                    let newData = data;
-                                    newData = newData.split('"');
+                                    // let newData = data;
+                                    // newData = newData.split('"');
 
-                                    let sorttedArry = [];
-                                    newData.forEach(element => {
+                                    // let sorttedArry = [];
+                                    // newData.forEach(element => {
 
-                                        if (!element.includes(':') && !element
-                                            .includes(';')) {
-                                            sorttedArry.push(element);
+                                    //     if (!element.includes(':') && !element
+                                    //         .includes(';')) {
+                                    //         sorttedArry.push(element);
 
 
-                                        }
-                                    });
-                                    sorttedArry = sorttedArry[0].split(',');
+                                    //     }
+                                    // });
+                                    // sorttedArry = sorttedArry[0].split(',');
 
-                                    console.log(sorttedArry)
+                                    // console.log(sorttedArry)
 
 
                                     var tutorHTML =
@@ -1738,12 +1738,12 @@
                                     // Unserialize the serialized data
 
                                     // Add a span for each curriculum item to tutorHTML
-                                    sorttedArry.forEach(element => {
-                                        tutorHTML +=
-                                            '<span class="bg-body-secondary d-inline-block rounded font-s mx-1 p-1 bg_green_hover text-center">' +
-                                            element + '</span>';
+                                    // sorttedArry.forEach(element => {
+                                    //     tutorHTML +=
+                                    //         '<span class="bg-body-secondary d-inline-block rounded font-s mx-1 p-1 bg_green_hover text-center">' +
+                                    //         element + '</span>';
 
-                                    })
+                                    // })
 
                                     tutorHTML += '</div>';
                                     // Append tutor HTML to container
