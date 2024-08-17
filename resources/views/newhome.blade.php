@@ -291,9 +291,17 @@
                         </div>
      
                 </div>
+                <section class="AD-teacher">
+                    <div class="ae-heading my-4">
+                        <h2 class="text-center fw-bold ">Find A Tutor</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                           
+                        </div>
+                    </div>
+                </section>
             </section>
-
-         
                     <div class="ai-heading-div">
                         <h2 class="text-center  fw-bold" >Inquiry Overview</h2>
                     </div>
