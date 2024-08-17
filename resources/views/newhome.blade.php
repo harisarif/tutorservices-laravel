@@ -377,8 +377,8 @@
                                         <li class="fs-5">Guaranteed Payment Security</li>
                                     </ul>
                                 </div>
-                                <div class="im-button">
-                                <button type="button" class="btn btn-light mt-5">Register a Tutor <i class="fa-solid fa-arrow-right"></i></button>
+                                <div class="im-button d-flex justify-content-center">
+                                <a href="{{route('tutor')}}" class="btn btn-light mt-5">Register a Tutor <i class="fa-solid fa-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
