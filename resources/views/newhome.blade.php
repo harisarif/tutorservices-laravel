@@ -1,5 +1,8 @@
 @extends('layouts.app')
 <style>
+    body{
+        overflow-x: hidden !important;
+    }
     #country span.select2.select2-container.select2-container--default {
         width: 100% !important;
 }
