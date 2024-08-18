@@ -1136,15 +1136,16 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <!-- Your custom script -->
     <script>
-        var multipleCardCarousel = document.querySelector("#carouselExampleControls");
         $(document).on('select2:open', function(e) {
             let scrollPos = $(window).scrollTop();
     
-         // Restore the scroll position after a short delay to allow Select2 to open
-         setTimeout(function() {
-                $(window).scrollTop(scrollPos);
-             }, 0);
-          });
+    // Restore the scroll position after a short delay to allow Select2 to open
+    setTimeout(function() {
+        $(window).scrollTop(scrollPos);
+    }, 0);
+        });
+        var multipleCardCarousel = document.querySelector("#carouselExampleControls");
+        
         if (window.matchMedia("(min-width: 576px)").matches) {
           var carousel = new bootstrap.Carousel(multipleCardCarousel, {
             interval: false
