@@ -141,8 +141,6 @@
                         <!-- page-2 -->
                       
                         <div class="col-12 px-4 py-4 d-none" id="page-2">
-                            <!-- <h3 style="font-size:18px; text-align: center; color:42b979;"><strong>Select a Subject</strong></h3>
-                            <p style="font-size:15px; text-align: center; color:#aaa;">Which subject tutor are you looking for?</p> -->
                             <h4 style="font-size: 18px; color:#42b979;" ><b>Select Your Residence</b></h4>
                             <div class="col-12" id="page-1">
                                 <div class="col-12 mb-2  text-left" style="text-align:left">

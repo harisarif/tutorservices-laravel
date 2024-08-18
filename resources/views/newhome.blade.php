@@ -95,6 +95,30 @@
         transform: scale(1.1);
         cursor: pointer;
     }
+    #page-2 {
+            height:300px;
+            overflow-y:scroll;
+        }
+        /* Target the entire scrollbar */
+            ::-webkit-scrollbar {
+            width: 4px; /* Adjust the width */
+            }
+
+            /* Target the scrollbar track */
+            ::-webkit-scrollbar-track {
+            background: #f1f1f1; /* Color of the track */
+            }
+
+            /* Target the scrollbar thumb */
+            ::-webkit-scrollbar-thumb {
+            background: #42b979; /* Color of the thumb */
+            border-radius: 6px; /* Rounded corners */
+            }
+
+            /* Target the scrollbar thumb on hover */
+            ::-webkit-scrollbar-thumb:hover {
+            background: #42b979; /* Color when hovering */
+            }
     </style>
 @section('content')
     @if (session('success'))
@@ -388,7 +412,11 @@
                                                 </div>
                                          </div>
                                          <div class="ad-div col-3">
-                                                <span class="fs-5"><b>AED $20</b></span>
+                                                <span class="fs-5"><b>AED <svg xmlns="http://www.w3.org/2000/svg" width="35" height="40" viewBox="0 0 100 100">
+                                                 <circle cx="50" cy="50" r="48" fill="#42b979" />
+                                                 <text x="50%" y="55%" font-size="45" fill="white" font-family="Arial" text-anchor="middle" dominant-baseline="middle">د.إ</text>
+                                                    </svg>20</b>
+                                                </span>
                                             </div>
                                         </div>
                                             
@@ -1198,35 +1226,11 @@
                                                 /s:\d+:"(.*?)";/)[1]);
                                         });
                                     }
-                                    // const data = item.curriculum;
-
-                                    // let newData = data;
-                                    // newData = newData.split('"');
-
-                                    // let sorttedArry = [];
-                                    // newData.forEach(element => {
-
-                                    //     if (!element.includes(':') && !element
-                                    //         .includes(';')) {
-                                    //         sorttedArry.push(element);
-
-
-                                    //     }
-                                    // });
-                                    // sorttedArry = sorttedArry[0].split(',');
-
-                                    // console.log(sorttedArry)
 
 
                                     var tutorHTML =
                                         '<div class="tutor_profile rounded overflow-hidden mb-3">';
-                                    tutorHTML +=
-                                        '<div class="d-flex justify-content-between">';
-                                    tutorHTML +=
-                                        '<button class="p-1 bg_theme_green text-light border border-0">Sponsored</button>';
-                                    tutorHTML +=
-                                        '<span class="p-1 text-secondary"><i class="fa fa-bookmark text-body-tertiary"></i> Watchlist</span>';
-                                    tutorHTML += '</div>';
+                                    
                                     tutorHTML += '<div class="py-2 px-5">';
                                     tutorHTML += '<div class="row d-flex">';
                                     tutorHTML +=
