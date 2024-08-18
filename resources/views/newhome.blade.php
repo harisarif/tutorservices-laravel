@@ -404,7 +404,7 @@
                                                     <!-- <span><i class="fa-solid fa-location-dot"></i></i><strong style="margin-left: 14px;">City :</strong> {{ $item->city }}</span> -->
                                                 </div>
                                                 <div class="ae-detail-child">
-                                                        <span><i class="fa-regular fa-clock"></i><strong >Time Available :</strong>{{ $item->availability }}</span>
+                                                        <!-- <span><i class="fa-regular fa-clock"></i><strong >Time Available :</strong>{{ $item->availability }}</span> -->
                                                         
                                                         <span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong>{{ $item->gender }}</span>
 
@@ -413,14 +413,11 @@
                                                 </div>
                                          </div>
                                          <div class="ad-div col-3">
-                                                <span class="fs-5" ><b>AED <svg xmlns="http://www.w3.org/2000/svg" width="35" height="40" viewBox="0 0 100 100">
-                                                 <circle cx="50" cy="50" r="48" fill="#42b979" />
-                                                 <text x="50%" y="55%" font-size="45" fill="white" font-family="Arial" text-anchor="middle" dominant-baseline="middle">د.إ</text>
-                                                    </svg>20</b>
+                                                <span class="fs-5" ><b>AED 20</b>
                                                 </span>
 
                                                 <div class="ae-detail">
-                                                     <h4 class="fs-6 mt-1">Free Trial Seccion</h4>
+                                                     <h4 class="fs-6 mt-1">Free Trial Section</h4>
                                                 </div>
                                             </div>
                                         </div>
@@ -1140,9 +1137,9 @@
             let scrollPos = $(window).scrollTop();
     
     // Restore the scroll position after a short delay to allow Select2 to open
-    setTimeout(function() {
-        $(window).scrollTop(scrollPos);
-    }, 0);
+            setTimeout(function() {
+                $(window).scrollTop(scrollPos);
+            }, 0);
         });
         var multipleCardCarousel = document.querySelector("#carouselExampleControls");
         
