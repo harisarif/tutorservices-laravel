@@ -668,7 +668,7 @@ align-items: center;
     justify-content: center;
   }
   .ad-form{
-    border: 1px solid #42b979;
+    border: 1px solid rgb(25 135 84);
     border-radius: 5px;
     display: flex;
     margin: 10px 0;
@@ -1052,4 +1052,9 @@ footer{
     padding: 3px;
     color: #42b979;
     border-radius: 5px;
+ }
+
+ .ad-icons p{
+    margin-top: 5px;
+    color: #42b979;
  }

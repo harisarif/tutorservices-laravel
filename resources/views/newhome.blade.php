@@ -383,11 +383,7 @@
                                             <img src="{{ asset('storage/' . $item->profileImage) }}" alt="..." class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">
                                         </div>
                                         <div class="ad-icons">
-                                          <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
-                                          <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
-                                          <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
-                                          <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
-                                          <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
+                                          <p class="mb-0 mx-1 fs-5">4.5<sub>/5</sub></p>
                                          </div>
                                          
                                     </div>
@@ -407,13 +403,10 @@
                                                         <!-- <span><i class="fa-regular fa-clock"></i><strong >Time Available :</strong>{{ $item->availability }}</span> -->
                                                         
                                                         <span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong>{{ $item->gender }}</span>
-
-                                                        <!-- <span class="d-flex"><i class="fa-solid fa-location-dot"></i></i><strong style="margin-left: 14px;">Available For :</strong> <p style="background: #42b979; border-radius: 35px;color: #fff;
-                                                        width:30%; text-align: center;">Onlline</p> </span> -->
                                                 </div>
                                          </div>
                                          <div class="ad-div col-3">
-                                                <span class="fs-5" ><b>AED 20</b>
+                                                <span class="fs-6" ><b>20 AED for 1 hour</b>
                                                 </span>
 
                                                 <div class="ae-detail">
@@ -704,8 +697,8 @@
                               <div class="row">
                                   <div class="col-sm-12">
                             <div class="form-group p-2 px-0">
-                            <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your Name</strong></label>
-                            <input class="form-control" type="text" placeholder="Name">
+                                <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your Name <b style="color: red;font-size: 20px;">*</b></strong></label>
+                                  <input class="form-control" type="text" placeholder="Name">
                             </div>      
                             </div>
                              </div>
@@ -713,20 +706,20 @@
                              <div class="row">
                             <div class="col-sm-12">
                             <div class="form-group p-2 px-0">
-                            <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your   Email</strong></label>
-                            <div class="input-group"> <input class="form-control" type="text" placeholder="Email ID"> </div>
+                            <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your   Email <b style="color: red; font-size: 20px;">*</b></strong></label>
+                            <div class="input-group"> <input class="form-control" type="text" placeholder="Email ID"></div>
                             </div>
                             </div>
                               </div>
                             <div class="row">
                             <div class="col-sm-12">
                              <div class="form-group p-2 px-0">
-                             <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your Number</strong></label>
+                             <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your Number <b style="color: red; font-size: 20px;">*</b></strong></label>
                             <div class="input-group"> <input class="form-control" type="text" placeholder="Mobile"> </div>
                             </div>
                             </div>
                             </div>
-                            <div class="col-12  py-2"><label for="curriculum" class="form-label" style="color:#42b979;"><strong>Description (Optional)</strong></label>
+                            <div class="col-12  py-2"><label for="curriculum" class="form-label" style="color:#42b979;"><strong>Description (Optional) <b style="color: red; font-size: 20px;">*</b></strong></label>
                             <textarea class="form-control" id="curriculum" name="reviews" rows="2" placeholder="Description" style="box-shadow: none;border: 1px solid #ddd;"></textarea>
                             </div>
                             <div class=" d-flex flex-column text-center px-5  mb-3">  </div> <button class="btn btn-success btn-block confirm-button">Confirm</button>
@@ -774,7 +767,7 @@
                                     </ul>
                                 </div>
                                 <div class="im-button d-flex justify-content-center">
-                                <a href="{{route('tutor')}}" class="btn btn-light mt-5">Register a Tutor <i class="fa-solid fa-arrow-right"></i></a>
+                                <a href="{{route('tutor')}}" class="btn btn-light mt-5" style="color : #42b979;">Register yourself as a professional teacher with us <i class="fa-solid fa-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
