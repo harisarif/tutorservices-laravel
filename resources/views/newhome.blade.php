@@ -1137,11 +1137,19 @@
     <!-- Your custom script -->
     <script>
         var multipleCardCarousel = document.querySelector("#carouselExampleControls");
-
+        $(document).on('select2:open', function(e) {
+            let scrollPos = $(window).scrollTop();
+    
+         // Restore the scroll position after a short delay to allow Select2 to open
+         setTimeout(function() {
+                $(window).scrollTop(scrollPos);
+             }, 0);
+          });
         if (window.matchMedia("(min-width: 576px)").matches) {
           var carousel = new bootstrap.Carousel(multipleCardCarousel, {
             interval: false
           });
+
           var carouselWidth = document.querySelector(".carousel-inner").scrollWidth;
           var cardWidth = document.querySelector(".carousel-item").offsetWidth;
           var scrollPosition = 0;
