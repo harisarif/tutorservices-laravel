@@ -698,6 +698,7 @@ align-items: center;
 }
 .ad-detail span{
     display: block;
+    margin-left: 10px;
 }
 .ad-detail span strong{
     margin: 0 10px;
@@ -1025,8 +1026,8 @@ footer{
     border-radius: 5px;
     color: #43b979;
     width: 75%;
-    padding: 5px;
-    margin: 0 auto;
+    padding: 8px 0;
+    white-space: nowrap;
  } 
  .ad-div span b{
     color: #42b979;

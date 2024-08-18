@@ -318,7 +318,7 @@
                         </div>
      
                 </div>
-                <section class="AD-teacher">
+                <section class="AD-teacher" style="overflow-x:hidden;">
                     <div class="ae-heading my-4">
                         <h2 class="text-center fw-bold ">Find A Tutor</h2>
                     </div>
@@ -386,9 +386,7 @@
                                           <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
                                           <span><i class="fa-regular fa-star" aria-hidden="true"></i></span>
                                          </div>
-                                         <div class="ae-detail">
-                                            <h4 class="fs-6 mt-3">Book A Demo</h4>
-                                         </div>
+                                         
                                     </div>
                                     <div class="ad-detail my-3  w-100">
                                         <div class="ae-div row">
@@ -412,11 +410,15 @@
                                                 </div>
                                          </div>
                                          <div class="ad-div col-3">
-                                                <span class="fs-5"><b>AED <svg xmlns="http://www.w3.org/2000/svg" width="35" height="40" viewBox="0 0 100 100">
+                                                <span class="fs-5" ><b>AED <svg xmlns="http://www.w3.org/2000/svg" width="35" height="40" viewBox="0 0 100 100">
                                                  <circle cx="50" cy="50" r="48" fill="#42b979" />
                                                  <text x="50%" y="55%" font-size="45" fill="white" font-family="Arial" text-anchor="middle" dominant-baseline="middle">د.إ</text>
                                                     </svg>20</b>
                                                 </span>
+
+                                                <div class="ae-detail">
+                                                     <h4 class="fs-6 mt-1">Free Trial Seccion</h4>
+                                                </div>
                                             </div>
                                         </div>
                                             
@@ -697,8 +699,8 @@
                      <div class=" mt-3 mb-5 " >
                         <div class="ai-card px-3 py-4" style="border: 1px solid #ddd; border-radius: 5px;">
                          <div class="card-body">
-                                 <h6 class="card-title mb-3 text-center fw-bold fs-4 ">Students</h6> 
-                                  <h3 class="fw-bold text-center" style="font-size: 18px;color: red;"><i>"Please Complete All Required Fields"</i></h3>
+                                 <h6 class="card-title mb-3 text-center fw-bold fs-6 ">Submit your inquiry to request a callback for further assistance</h6> 
+                                  <h3 class="fw-bold text-center" style="font-size: 15px;color: red;"><i>"Please Complete All Required Fields"</i></h3>
                               <div class="row">
                                   <div class="col-sm-12">
                             <div class="form-group p-2 px-0">
