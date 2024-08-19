@@ -9,7 +9,9 @@
     z-index: 9;
     text-align: center;
 }
-
+.mini_header{
+    background-color: #42b979;
+}
 .fixed a,
 .fixed i {
     display: block;
@@ -366,9 +368,9 @@ width: 100%;
     border-radius: 3px;
     font-size: 15px;
     text-decoration: none;
-    color: #42b979;
+    color: #fff;
     font-weight: 600;
-    border: 1px solid #42b979;
+    border: 1px solid #fff;
     cursor: pointer;
 }
 

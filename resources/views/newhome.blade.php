@@ -138,7 +138,7 @@
             <ul class="p-2 m-0 d-sm-inline d-block text-center header-ul">
                 <li class=" p-2">
                 <a class="navbar-brand" href="{{ route('newhome') }}">
-                        <img src="images/logo.png" height="50px" alt="logo" style="height: 50px">
+                        <img src="images/white-logo.jpeg" height="50px" alt="logo" style="height: 50px">
                     </a>
                     
                 </li>
@@ -159,30 +159,30 @@
                 <ul  class="icons d-flex p-2 m-0  align-items-center gap-3" style="list-style:none;">   
                 <div class="d-flex  align-items: center;" style="justify-content: center;">
                         <div class="col-6 ">    
-                            <li class="nav-item m-1 btn-an text-center bg-success rounded w-1 py-1">
-                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('login') }}">{{__('messages.login')}}</a>
+                            <li class="nav-item m-1 btn-an text-center bg-white rounded w-1 py-1">
+                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('login') }}" style="color:#42b979;">{{__('messages.login')}}</a>
                             </li>
                         </div>
                         <div class="col-6 ">
-                            <li class="nav-item m-1 btn-an text-center  bg-success rounded w-1 py-1">
-                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}">Register</a>
+                            <li class="nav-item m-1 btn-an text-center  bg-white rounded w-1 py-1">
+                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}" style="color:#42b979;">Register</a>
                             </li>
                         </div>
                     </div>
                 <div class="d-flex align-items-center">
                     <div class="email-container">
-                        <i class="fa fa-envelope-square" aria-hidden="true" style="color: #42b979;"></i>
+                        <i class="fa fa-envelope-square" aria-hidden="true" style="color: #fff;"></i>
                         <a class="email text-decoration-none" href="mailto:info@eduexceledu.com" style="color: #42b979;">info@eduexceledu.com</a>
                     </div>
                
                     <div class=" p-2 header-phone-number phone-container">
                     
-                        <i class="fa-solid fa-phone " aria-hidden="true" style="color: #42b979;"></i>
+                        <i class="fa-solid fa-phone " aria-hidden="true" style="color: #fff;"></i>
                         <a class="phone-number-header text-decoration-none " href="tel:+971566428066" style="color: #42b979;">+971 56 642 8066</a>
                     </div>
                     <div class="custom-select-wrapper">
                     <div class="custom-select">
-                        <i class="fa-solid fa-globe" style="color:#42b979 !important" aria-hidden="true" onclick="toggleDropdown()"></i>
+                        <i class="fa-solid fa-globe" style="color:#fff !important" aria-hidden="true" onclick="toggleDropdown()"></i>
                         <div class="custom-options" id="language-select">
                             <div class="custom-option" data-value="en" onclick="changeLanguage('en')">English</div>
                             <div class="custom-option" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
@@ -405,7 +405,7 @@
                                                 <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                                                 </svg>
                                                 <strong style="margin-left: 15px;">Intro :</strong>{{ $item->introduction }}
-                                                <p class="px-2">Conten will be reqiured</p>                                                
+                                                <p  class="px-2">Conten will be reqiured</p>                                                
                                              </span>
                                             </div>
                                          <div class="ad-div col-3">
