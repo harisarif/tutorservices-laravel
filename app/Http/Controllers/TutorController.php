@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Mail;
 use App\Models\Tutor; // Add the Tutor model namespace
 
 class TutorController extends Controller
@@ -61,216 +60,167 @@ class TutorController extends Controller
             return redirect()->back();
         }
         public function fetchData(Request $request)
-{
-    
-   // Initialize the query builder
-$query = Tutor::query();
-
-// Define the number of tutors per page
-$perPage = 10;
-
-// Apply filters
-// Filter tutors by selected country if a specific country is selected
-if ($request->has('location') && $request->location !== "all") {
-    $query->where('location', $request->location);
-}
-
-// Filter tutors by search query for city
-if ($request->has('citysearch') && $request->citysearch !== "") {
-    $query->where('city', 'LIKE', '%' . $request->citysearch . '%');
-}
-
-// Filter tutors by search query for subject
-if ($request->has('subjectsearch') && $request->filled('subjectsearch')) {
-    $subject = $request->subjectsearch;
-
-    // Filter tutors who teach the specified subject
-    $query->where('teaching', 'LIKE', '%"'.$subject.'"%');
-}
-// Paginate the filtered tutors
-$tutors = $query->paginate($perPage);
-
-// Calculate age for each tutor
-foreach ($tutors as $tutor) {
-    if ($tutor->dob) {
-        $tutor->age = Carbon::parse($tutor->dob)->age;
-    } else {
-        $tutor->age = null; // or any default value
-    }
-}
-
-// Fetch the total count of tutors after applying filters
-$totalTutorsCount = $query->count();
-
-// Manually serialize the paginated data
-$serializedData = [
-    'tutors' => $tutors->items(), // Get the items from the paginator
-    'totalTutorsCount' => $totalTutorsCount,
-    'perPage' => $perPage,
-    'pagination' => [
-        'total' => $tutors->total(),
-        'count' => $tutors->count(),
-        'perPage' => $tutors->perPage(),
-        'currentPage' => $tutors->currentPage(),
-        'lastPage' => $tutors->lastPage(),
-    ],
-];
-// dd($request);
-// Return the serialized data as JSON response
-return response()->json($serializedData);
-
-}
+        {
+            // Initialize the query builder
+            $query = Tutor::query();
+        
+            // Define the number of tutors per page
+            $perPage = 5;
+        
+            // Apply filters
+            // Filter tutors by selected country if a specific country is selected
+            if ($request->has('location') && $request->location !== "all") {
+                $query->where('location', $request->location);
+            }
+        
+            // Filter tutors by search query for city
+            if ($request->has('citysearch') && $request->citysearch !== "") {
+                $query->where('city', 'LIKE', '%' . $request->citysearch . '%');
+            }
+        
+            // Filter tutors by search query for subject
+            if ($request->has('subjectsearch') && $request->filled('subjectsearch')) {
+                $subject = $request->subjectsearch;
+        
+                // Filter tutors who teach the specified subject
+                $query->where('teaching', 'LIKE', '%"'.$subject.'"%');
+            }
+        
+            // Paginate the filtered tutors
+            $tutors = $query->paginate($perPage);
+        
+            // Check if there are no tutors
+            if ($tutors->isEmpty()) {
+                return response()->json([
+                    'message' => 'No tutors found.',
+                    'totalTutorsCount' => 0,
+                    'perPage' => $perPage,
+                    'pagination' => [
+                        'total' => 0,
+                        'count' => 0,
+                        'perPage' => $perPage,
+                        'currentPage' => 1,
+                        'lastPage' => 1,
+                    ],
+                ]);
+            }
+        
+            // Calculate age for each tutor
+            foreach ($tutors as $tutor) {
+                if ($tutor->dob) {
+                    $tutor->age = Carbon::parse($tutor->dob)->age;
+                } else {
+                    $tutor->age = null; // or any default value
+                }
+            }
+        
+            // Fetch the total count of tutors after applying filters
+            $totalTutorsCount = $query->count();
+        
+            // Manually serialize the paginated data
+            $serializedData = [
+                'tutors' => $tutors->items(), // Get the items from the paginator
+                'totalTutorsCount' => $totalTutorsCount,
+                'perPage' => $perPage,
+                'pagination' => [
+                    'total' => $tutors->total(),
+                    'count' => $tutors->count(),
+                    'perPage' => $tutors->perPage(),
+                    'currentPage' => $tutors->currentPage(),
+                    'lastPage' => $tutors->lastPage(),
+                ],
+            ];
+        
+            // Return the serialized data as JSON response
+            return response()->json($serializedData);
+        }
+        
 
 
     public function store(Request $request)
     {
         // Your store method logic here
     }
-    public function create(Request $request)
-{
-    // Validate form data
-    $rules = [
-        'f_name' => 'required|string|max:255',
-        'l_name' => 'required|string|max:255',
-        'qualification' => 'required|string|max:255',
-        'profileImage' => 'required|image|mimes:jpeg,png,jpg|max:2048', // max:2048 is for maximum 2MB file size, adjust as needed
-        'email' => 'required|string|email|max:255|unique:tutors,email',
-        'experience' => 'required|string|max:255',
-    ];
+    public function create(Request $request){
+        // dd($request);
+        // Validate form data
+        $rules = [
+            'f_name' => 'required|string|max:255',
+            'l_name' => 'required|string|max:255',
+            'qualification'=> 'required|string|max:255',
+            'profileImage' => 'required|image|mimes:jpeg,png,jpg|max:2048', // max:2048 is for maximum 2MB file size, adjust as needed
+            'email' => 'required|string|email|max:255|unique:tutors,email',
+            'experience'=> 'required|string|max:255',
 
-    $validator = Validator::make($request->all(), $rules);
+            
+        ];
+        // dd($request);
+        $validator = Validator::make($request->all(), $rules);
 
-    // Check if validation fails
-    if ($validator->fails()) {
-        return redirect()->back()
-                         ->withErrors($validator)
-                         ->withInput();
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                             ->withErrors($validator)
+                             ->withInput();
+        }
+        $tutor = new Tutor();
+        $tutor->f_name = $request->input('f_name');
+        $tutor->l_name = $request->input('l_name');
+        $tutor->city = $request->input('city');
+        $tutor->email = $request->input('email');
+        $tutor->dob = $request->input('dob');
+        $tutor->qualification = $request->input('qualification');
+        $tutor->gender = $request->input('gender');
+        $tutor->location = $request->input('location');
+        $tutor->experience = $request->input('experience');
+        $tutor->curriculum = serialize($request->input('curriculum'));
+        $tutor->availability = $request->input('availability');
+        $tutor->teaching = serialize($request->input('teaching'));
+        $tutor->phone = $request->input('phone');
+        // $tutor->whatsapp = $request->input('whatsapp');
+
+        // Upload profile image
+        $imagePath = $request->file('profileImage')->store('uploads', 'public');
+        $tutor->profileImage = $imagePath;
+
+        // Save the Tutor instance to the database
+        $tutor->save();
+        $toStudent = $tutor->email;
+        $subjectStudent = "Welcome to Edexcel Your Learning Journey Starts Now!";
+        $messageStudent = "Dear " . $tutor->full_name = $tutor->f_name . ' ' . $tutor->l_name . "\r\n" .
+        "Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.\r\n" .
+        "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at infoo@edexceledu.com or +971566428066.\r\n" .
+        "We’re here to help you succeed!\r\n\r\n" .
+        "Best regards,\r\n" .
+        "The Edexcel Team";
+
+        $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
+
+        $toAdmin = 'info@edexceledu.com';
+        $subjectAdmin = "Edexcel Notification";
+        $messageAdmin = "Subject: New Teacher Enrollment Notification
+
+        Dear Babar,
+
+        I hope this email finds you well.
+
+        I am pleased to inform you that a new teacher, {$tutor->f_name} {$tutor->l_name}, has successfully enrolled through our website. Below are the details of the new enrollment:
+
+        - *Full Name:* {$tutor->f_name} {$tutor->l_name}
+        - *Email Address:* {$tutor->email}
+        - *Contact Number:* {$tutor->phone}
+        - *Location:* {$tutor->location}
+
+        Please ensure that {$tutor->f_name} {$tutor->l_name} is added to our records and receives all necessary welcome materials and instructions. If any further information is needed, feel free to contact me.
+
+        Thank you for your prompt attention to this new enrollment.
+
+        Best regards,
+        The Edexcel Team";
+        $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
+        // Optionally, you can redirect the user or return a response
+        return redirect()->route('newhome')->with('success', 'Tutor created successfully.');
     }
-
-    $tutor = new Tutor();
-    $tutor->f_name = $request->input('f_name');
-    $tutor->l_name = $request->input('l_name');
-    $tutor->city = $request->input('city');
-    $tutor->email = $request->input('email');
-    $tutor->dob = $request->input('dob');
-    $tutor->qualification = $request->input('qualification');
-    $tutor->gender = $request->input('gender');
-    $tutor->location = $request->input('location');
-    $tutor->experience = $request->input('experience');
-    $tutor->curriculum = serialize($request->input('curriculum'));
-    $tutor->availability = $request->input('availability');
-    $tutor->teaching = serialize($request->input('teaching'));
-    $tutor->phone = $request->input('phone');
-
-    // Upload profile image
-    $imagePath = $request->file('profileImage')->store('uploads', 'public');
-    $tutor->profileImage = $imagePath;
-
-    // Save the Tutor instance to the database
-    $tutor->save();
-
-    // Prepare and send email to the student
-    $toStudent = $tutor->email;
-    $subjectStudent = "Welcome to Edexcel! Your Learning Journey Starts Now!";
-    $messageStudent = "
-    <html>
-    <head>
-        <style>
-            body {
-                margin: 0;
-                padding: 0;
-                font-family: Arial, sans-serif;
-            }
-            .email-container {
-                background-image: url('https://edexceledu.com/images/logo.png');
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: cover;
-                padding: 20px;
-                color: #333;
-                height: 100%;
-            }
-            .content {
-                background-color: rgba(255, 255, 255, 0.8); /* Optional for readability */
-                padding: 20px;
-                border-radius: 10px;
-                max-width: 600px;
-                margin: 0 auto;
-            }
-        </style>
-    </head>
-    <body>
-        <div class='email-container'>
-            <div class='content'>
-                <p>Dear {$tutor->f_name} {$tutor->l_name},</p>
-
-                <p>Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.</p>
-
-                <p>Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at <a href='mailto:info@edexceledu.com'>info@edexceledu.com</a> or +971566428066.</p>
-
-                <p>We’re here to help you succeed!</p>
-
-                <p>Best regards,<br>
-                The Edexcel Team</p>
-            </div>
-        </div>
-    </body>
-    </html>
-    ";
-
-    Mail::send([], [], function ($message) use ($toStudent, $subjectStudent, $messageStudent) {
-        $message->to($toStudent)
-                ->subject($subjectStudent)
-                ->setBody($messageStudent, 'text/html'); // Set the email body with HTML content
-    });
-
-    // Prepare and send email to the admin
-    $toAdmin = 'info@edexceledu.com';
-    $subjectAdmin = "Edexcel Notification";
-    $messageAdmin = "
-    <html>
-    <head>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                color: #333;
-                padding: 20px;
-            }
-        </style>
-    </head>
-    <body>
-        <p>Dear Babar,</p>
-
-        <p>I hope this email finds you well.</p>
-
-        <p>I am pleased to inform you that a new teacher, {$tutor->f_name} {$tutor->l_name}, has successfully enrolled through our website. Below are the details of the new enrollment:</p>
-
-        <ul>
-            <li><strong>Full Name:</strong> {$tutor->f_name} {$tutor->l_name}</li>
-            <li><strong>Email Address:</strong> {$tutor->email}</li>
-            <li><strong>Contact Number:</strong> {$tutor->phone}</li>
-            <li><strong>Location:</strong> {$tutor->location}</li>
-        </ul>
-
-        <p>Please ensure that {$tutor->f_name} {$tutor->l_name} is added to our records and receives all necessary welcome materials and instructions. If any further information is needed, feel free to contact me.</p>
-
-        <p>Thank you for your prompt attention to this new enrollment.</p>
-
-        <p>Best regards,<br>
-        The Edexcel Team</p>
-    </body>
-    </html>
-    ";
-
-    Mail::send([], [], function ($message) use ($toAdmin, $subjectAdmin, $messageAdmin) {
-        $message->to($toAdmin)
-                ->subject($subjectAdmin)
-                ->setBody($messageAdmin, 'text/html'); // Set the email body with HTML content
-    });
-
-    // Optionally, you can redirect the user or return a response
-    return redirect()->route('newhome')->with('success', 'Tutor created successfully.');
-}
     public function hiretutor(Request $request)
     {
         return redirect('/hire-tutor');
