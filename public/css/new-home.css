@@ -1036,6 +1036,8 @@ footer{
  } 
  .ad-div span b{
     color: #42b979;
+    font-size: 14px;
+    margin: 0 -7px;
     white-space: nowrap;
  }
  .ad-border-div{
