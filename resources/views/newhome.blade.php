@@ -138,7 +138,7 @@
             <ul class="p-2 m-0 d-sm-inline d-block text-center header-ul">
                 <li class=" p-2">
                 <a class="navbar-brand" href="{{ route('newhome') }}">
-                        <img src="images/logo.png" height="50px" alt="logo" style="height: 50px">
+                        <img src="images/white-logo.jpeg" height="50px" alt="logo" style="height: 50px">
                     </a>
                     
                 </li>
@@ -159,30 +159,30 @@
                 <ul  class="icons d-flex p-2 m-0  align-items-center gap-3" style="list-style:none;">   
                 <div class="d-flex  align-items: center;" style="justify-content: center;">
                         <div class="col-6 ">    
-                            <li class="nav-item m-1 btn-an text-center bg-success rounded w-1 py-1">
-                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('login') }}">{{__('messages.login')}}</a>
+                            <li class="nav-item m-1 btn-an text-center bg-white rounded w-1 py-1">
+                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('login') }}" style="color:#42b979;">{{__('messages.login')}}</a>
                             </li>
                         </div>
                         <div class="col-6 ">
-                            <li class="nav-item m-1 btn-an text-center  bg-success rounded w-1 py-1">
-                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}">Register</a>
+                            <li class="nav-item m-1 btn-an text-center  bg-white rounded w-1 py-1">
+                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}" style="color:#42b979;">Register</a>
                             </li>
                         </div>
                     </div>
                 <div class="d-flex align-items-center">
                     <div class="email-container">
-                        <i class="fa fa-envelope-square" aria-hidden="true" style="color: #42b979;"></i>
+                        <i class="fa fa-envelope-square" aria-hidden="true" style="color: #fff;"></i>
                         <a class="email text-decoration-none" href="mailto:info@eduexceledu.com" style="color: #42b979;">info@eduexceledu.com</a>
                     </div>
                
                     <div class=" p-2 header-phone-number phone-container">
                     
-                        <i class="fa-solid fa-phone " aria-hidden="true" style="color: #42b979;"></i>
+                        <i class="fa-solid fa-phone " aria-hidden="true" style="color: #fff;"></i>
                         <a class="phone-number-header text-decoration-none " href="tel:+971566428066" style="color: #42b979;">+971 56 642 8066</a>
                     </div>
                     <div class="custom-select-wrapper">
                     <div class="custom-select">
-                        <i class="fa-solid fa-globe" style="color:#42b979 !important" aria-hidden="true" onclick="toggleDropdown()"></i>
+                        <i class="fa-solid fa-globe" style="color:#fff !important" aria-hidden="true" onclick="toggleDropdown()"></i>
                         <div class="custom-options" id="language-select">
                             <div class="custom-option" data-value="en" onclick="changeLanguage('en')">English</div>
                             <div class="custom-option" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
@@ -383,7 +383,7 @@
                                             <img src="{{ asset('storage/' . $item->profileImage) }}" alt="..." class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">
                                         </div>
                                         <div class="ad-icons">
-                                          <p class="mb-0 mx-1 fs-5">4.5<sub>/5</sub></p>
+                                          <p class="mb-0 mx-1 fs-5">4.5 <i class="fa-solid fa-star"></i></p>
                                          </div>
                                          
                                     </div>
@@ -397,16 +397,17 @@
                                                     <span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong> English</span>
 
                                                     <span><i class="fa-solid fa-globe"></i><strong>Country :</strong> {{ $item->location }}</span>
-                                                    <!-- <span><i class="fa-solid fa-location-dot"></i></i><strong style="margin-left: 14px;">City :</strong> {{ $item->city }}</span> -->
                                                 </div>
-                                                <div class="ae-detail-child">
-                                                        <!-- <span><i class="fa-regular fa-clock"></i><strong >Time Available :</strong>{{ $item->availability }}</span> -->
-                                                        
+                                                <div class="ae-detail-child">  
                                                         <span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong>{{ $item->gender }}</span>
                                                 </div>
-                                         </div>
+                                                <span class="d-flex align-item-center"><i class="fa-solid fa-user mt-1"></i>
+                                                <strong style="margin-left: 15px;">Intro :</strong>{{ $item->introduction }}
+                                                <p  class="px-2">Conten will be reqiured</p>                                                
+                                             </span>
+                                            </div>
                                          <div class="ad-div col-3">
-                                                <span class="fs-6" ><b>20 AED for 1 hour</b>
+                                                <span ><b>20 AED for 50 mintues</b>
                                                 </span>
 
                                                 <div class="ae-detail">
@@ -766,8 +767,8 @@
                                         <li class="fs-5">Guaranteed Payment Security</li>
                                     </ul>
                                 </div>
-                                <div class="im-button d-flex justify-content-center">
-                                <a href="{{route('tutor')}}" class="btn btn-light mt-5" style="color : #42b979;">Register yourself as a professional teacher with us <i class="fa-solid fa-arrow-right"></i></a>
+                                <div class="im-button d-flex mx-3">
+                                <a href="{{route('tutor')}}" class="btn btn-light bg-white mt-5 fs-6" style="color : #42b979;">Register yourself as a professional teacher <i class="fa-solid fa-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -1232,106 +1233,55 @@
                                     }
 
 
-                                    var tutorHTML =
-                                        '<div class="tutor_profile rounded overflow-hidden mb-3">';
-                                    
-                                    tutorHTML += '<div class="py-2 px-5">';
-                                    tutorHTML += '<div class="row d-flex">';
-                                    tutorHTML +=
-                                        '<div class="col d-flex flex-column flex-md-row align-items-center rmb-3 m-lg-0">';
-                                    tutorHTML +=
-                                        '<div class="imgBox col-sm-4 d-grid mx-3">';
-                                    tutorHTML +=
-                                        '<img class="img-1 rounded-circle" src="storage/' +
-                                        item.profileImage + '" alt="" />';
-                                    tutorHTML +=
-                                        '<p class="d-flex align-items-center m-auto">Verified<span class="mx-1 varified bg-primary rounded-circle text-light"><i class="fa fa-check"></i></span></p>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML +=
-                                        '<div class="personal_detail text-center text-md-start">';
-                                    tutorHTML += '<h5>' + item.f_name +  item.l_name + '</h5>';
-                                    tutorHTML += '<span>' + item.gender + ', ' +
-                                        item.age +
-                                        ' years <span style="background-color: red" class="text-light font-s px-1">Pro</span></span>';
-                                    tutorHTML += '<p class="m-0">' + item
-                                        .experience +
-                                        ' years of teaching experience</p>';
-                                    tutorHTML +=
-                                        '<span class="d-flex align-items-center text-warning d-flex justify-content-center justify-content-md-start">';
-                                    for (var i = 0; i < item.starRating; i++) {
-                                        tutorHTML += '<i class="fa fa-star"></i>';
-                                    }
-                                    tutorHTML += '</span>';
-                                    tutorHTML += '<p class="text-danger m-0">(' +
-                                        item.reviews + ' reviews)</p>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML +=
-                                        '<div class="qualification col-lg-6">';
-                                    tutorHTML += '<div class="row p-0">';
-                                    tutorHTML += '<table class="col-12">';
-                                    tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="text-dark fw-bold font-s">Qualification</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
-                                        item.qualification + '</td></tr>';
-                                    tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="font-s text-dark fw-bold">Country</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
-                                        item.location + '</td></tr>';
-                                    tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="font-s text-dark fw-bold">City</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
-                                        item.city + '</td></tr>';
-                                    tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="font-s text-dark fw-bold">Mobile</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
-                                        item.phone +
-                                        '<button class="text-success bg-transparent fw-bold border-0">view contact</button></td></tr>';
-                                    tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="font-s fw-bold">WhatsApp</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
-                                        item.whatsapp +
-                                        '<button class="text-success bg-transparent fw-bold border-0">view contact</button></td></tr>';
-                                    tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="font-s fw-bold">Availability</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
-                                        item.availability + '</td></tr>';
-                                    tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="font-s fw-bold">Date of Birth</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
-                                        item.dob + '</td></tr>';
-                                    tutorHTML += '</table>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML += '<div class="row mt-3">';
-                                    tutorHTML +=
-                                        '<div class="col-12 d-flex m-1 align-items-center align-items-sm-center flex-column flex-sm-row">';
-                                    tutorHTML +=
-                                        '<div class="option d-flex align-items-start py-1"><h5 class="label-h m-0 m-1 font-s1 text-center text-md-left fw-bold">Teaches</h5><span class="d-none d-sm-block">:</span></div>';
-                                    teachingArray.forEach(function(subject) {
+                                    var tutorHTML ='<div class="ad-form">';
+                                        tutorHTML +='<div class="ad-img-card">';
+                                        tutorHTML +='<div style="display: flex; justify-content: center;">';
+                                        tutorHTML +='<img src="storage/' +
+                                        item.profileImage + '" alt=""  class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">';
+                                        tutorHTML +='</div>'
+                                        tutorHTML +='<div class="ad-icons">';
+                                        tutorHTML +='<p class="mb-0 mx-1 fs-5">4.5 <i class="fa-solid fa-star"></i></p>';
+                                        tutorHTML +='</div>'
+                                        tutorHTML +='</div>'
+                                        tutorHTML +='<div class="ad-detail my-3  w-100">';
+                                        tutorHTML +='<div class="ae-div row">'
+
+                                        tutorHTML +='<div class="col-9">';
+
+                                        tutorHTML +='<div class="ae-detail-div">';
+                                        tutorHTML +='<span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Name :</strong>'+ item.f_name +  item.l_name +' </span>';
+                                        tutorHTML +='<div class="ae-detail-child">';
+                                        tutorHTML +='<span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong>';
+                                        teachingArray.forEach(function(subject) {
                                         // Add each subject to the tutorHTML
                                         tutorHTML +=
-                                            '<span class="bg-body-secondary rounded font-s m-1 d-inline-block p-1 bg_green_hover text-center">' +
+                                            '<span class=" rounded font-s  d-inline-block p-1 bg_green_hover text-center" style="text-transform: capitalize;">' +
                                             subject + '</span>';
                                     });
+                                    tutorHTML +='</span>';
+                                        tutorHTML +='<span><i class="fa-solid fa-globe"></i><strong>Country :</strong> '+item.location + '</span>';
+                                        tutorHTML += '</div>';
 
-                                    // After adding all subjects, add the "+1 more" button and other HTML elements
-                                    tutorHTML +=
-                                        '<button class="m-1 text-danger border-0 bg-transparent">+1 more</button>';
+                                        tutorHTML +='<div class="ae-detail-child">';
+                                        tutorHTML +='<span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong>' + item.gender + '</span>';
+                                        tutorHTML +='<span class="d-flex align-item-center"> ';
+                                        tutorHTML +='<i class="fa-solid fa-user mt-1"></i>';
+                                        tutorHTML +='<strong style="margin-left: 15px;">Intro :</strong>';
+                                        tutorHTML +='<p class="px-2">Conten will be reqiured</p>';
+                                        tutorHTML += '</div>';
+                                        tutorHTML += '</div>';
+                                        tutorHTML += '</div>';
+                                        tutorHTML +='<div class="ad-div col-3">';
+                                        tutorHTML +='<span>';
+                                        tutorHTML +='<b>20 AED for 50 mintues</b>';
+                                        tutorHTML +=' </span>';
+                                        tutorHTML +='<div class="ae-detail">';
+                                        tutorHTML +='<h4 class="fs-6 mt-1">Free Trial Section</h4>';
+                                        tutorHTML +='</div>';
+                                        tutorHTML += '</div>';
+                                        tutorHTML += '</div>';
                                     tutorHTML += '</div>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML +=
-                                        '<div class="col-12 d-flex m-1 align-items-center flex-column flex-sm-row ps-5">';
-                                    tutorHTML +=
-                                        '<h5 class="label-h m-0 m-1 font-s1 text-center text-md-left fw-bold">Curriculum</h5>';
-                                    tutorHTML +=
-                                        '<span class="d-none d-sm-block">:</span>';
-                                    // Unserialize the serialized data
-
-                                    // Add a span for each curriculum item to tutorHTML
-                                    // sorttedArry.forEach(element => {
-                                    //     tutorHTML +=
-                                    //         '<span class="bg-body-secondary d-inline-block rounded font-s mx-1 p-1 bg_green_hover text-center">' +
-                                    //         element + '</span>';
-
-                                    // })
-
-                                    tutorHTML += '</div>';
+                                    
                                     // Append tutor HTML to container
                                     $('#tutorsContainer').append(tutorHTML);
                                     var totalTutorsCount = response.pagination
@@ -1446,111 +1396,53 @@
                                     // console.log(sorttedArry)
 
 
-                                    var tutorHTML =
-                                        '<div class="tutor_profile rounded overflow-hidden mb-3">';
-                                    tutorHTML +=
-                                        '<div class="d-flex justify-content-between">';
-                                    tutorHTML +=
-                                        '<button class="p-1 bg_theme_green text-light border border-0">Sponsored</button>';
-                                    tutorHTML +=
-                                        '<span class="p-1 text-secondary"><i class="fa fa-bookmark text-body-tertiary"></i> Watchlist</span>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML += '<div class="py-2 px-5">';
-                                    tutorHTML += '<div class="row d-flex">';
-                                    tutorHTML +=
-                                        '<div class="col d-flex flex-column flex-md-row align-items-center rmb-3 m-lg-0">';
-                                    tutorHTML +=
-                                        '<div class="imgBox col-sm-4 d-grid mx-3">';
-                                    tutorHTML +=
-                                        '<img class="img-1 rounded-circle" src="storage/' +
-                                        item.profileImage + '" alt="" />';
-                                    tutorHTML +=
-                                        '<p class="d-flex align-items-center m-auto">Verified<span class="mx-1 varified bg-primary rounded-circle text-light"><i class="fa fa-check"></i></span></p>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML +=
-                                        '<div class="personal_detail text-center text-md-start">';
-                                    tutorHTML += '<h5>' + item.f_name +  item.l_name + '</h5>';
-                                    tutorHTML += '<span>' + item.gender + ', ' +
-                                        item.age +
-                                        ' years <span style="background-color: red" class="text-light font-s px-1">Pro</span></span>';
-                                    tutorHTML += '<p class="m-0">' + item
-                                        .experience +
-                                        ' years of teaching experience</p>';
-                                    tutorHTML +=
-                                        '<span class="d-flex align-items-center text-warning d-flex justify-content-center justify-content-md-start">';
-                                    for (var i = 0; i < item.starRating; i++) {
-                                        tutorHTML += '<i class="fa fa-star"></i>';
-                                    }
-                                    tutorHTML += '</span>';
-                                    tutorHTML += '<p class="text-danger m-0">(' +
-                                        item.reviews + ' reviews)</p>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML +=
-                                        '<div class="qualification col-lg-6">';
-                                    tutorHTML += '<div class="row p-0">';
-                                    tutorHTML += '<table class="col-12">';
-                                    tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="text-dark fw-bold font-s">Qualification</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
-                                        item.qualification + '</td></tr>';
-                                    tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="font-s text-dark fw-bold">Country</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
-                                        item.location + '</td></tr>';
-                                    tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="font-s text-dark fw-bold">City</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
-                                        item.city + '</td></tr>';
-                                    tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="font-s text-dark fw-bold">Mobile</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
-                                        item.phone +
-                                        '<button class="text-success bg-transparent fw-bold border-0">view contact</button></td></tr>';
-                                    tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="font-s fw-bold">WhatsApp</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
-                                        item.whatsapp +
-                                        '<button class="text-success bg-transparent fw-bold border-0">view contact</button></td></tr>';
-                                    tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="font-s fw-bold">Availability</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
-                                        item.availability + '</td></tr>';
-                                    tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="font-s fw-bold">Date of Birth</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
-                                        item.dob + '</td></tr>';
-                                    tutorHTML += '</table>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML += '<div class="row mt-3">';
-                                    tutorHTML +=
-                                        '<div class="col-12 d-flex m-1 align-items-center align-items-sm-center flex-column flex-sm-row">';
-                                    tutorHTML +=
-                                        '<div class="option d-flex align-items-start py-1"><h5 class="label-h m-0 m-1 font-s1 text-center text-md-left fw-bold">Teaches</h5><span class="d-none d-sm-block">:</span></div>';
-                                    teachingArray.forEach(function(subject) {
+                                    var tutorHTML ='<div class="ad-form">';
+                                        tutorHTML +='<div class="ad-img-card">';
+                                        tutorHTML +='<div style="display: flex; justify-content: center;">';
+                                        tutorHTML +='<img src="storage/' +
+                                        item.profileImage + '" alt=""  class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">';
+                                        tutorHTML +='</div>'
+                                        tutorHTML +='<div class="ad-icons">';
+                                        tutorHTML +='<p class="mb-0 mx-1 fs-5">4.5 <i class="fa-solid fa-star"></i></p>';
+                                        tutorHTML +='</div>'
+                                        tutorHTML +='</div>'
+                                        tutorHTML +='<div class="ad-detail my-3  w-100">';
+                                        tutorHTML +='<div class="ae-div row">'
+
+                                        tutorHTML +='<div class="col-9">';
+
+                                        tutorHTML +='<div class="ae-detail-div">';
+                                        tutorHTML +='<span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Name :</strong>'+ item.f_name +  item.l_name +' </span>';
+                                        tutorHTML +='<div class="ae-detail-child">';
+                                        tutorHTML +='<span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong>';
+                                        teachingArray.forEach(function(subject) {
                                         // Add each subject to the tutorHTML
                                         tutorHTML +=
-                                            '<span class="bg-body-secondary rounded font-s m-1 d-inline-block p-1 bg_green_hover text-center">' +
+                                            '<span class=" rounded font-s  d-inline-block p-1 bg_green_hover text-center" style="text-transform: capitalize;">' +
                                             subject + '</span>';
                                     });
+                                    tutorHTML +='</span>';
+                                        tutorHTML +='<span><i class="fa-solid fa-globe"></i><strong>Country :</strong> '+item.location + '</span>';
+                                        tutorHTML += '</div>';
 
-                                    // After adding all subjects, add the "+1 more" button and other HTML elements
-                                    tutorHTML +=
-                                        '<button class="m-1 text-danger border-0 bg-transparent">+1 more</button>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML +=
-                                        '<div class="col-12 d-flex m-1 align-items-center flex-column flex-sm-row ps-5">';
-                                    tutorHTML +=
-                                        '<h5 class="label-h m-0 m-1 font-s1 text-center text-md-left fw-bold">Curriculum</h5>';
-                                    tutorHTML +=
-                                        '<span class="d-none d-sm-block">:</span>';
-                                    // Unserialize the serialized data
-
-                                    // Add a span for each curriculum item to tutorHTML
-                                    // sorttedArry.forEach(element => {
-                                    //     tutorHTML +=
-                                    //         '<span class="bg-body-secondary d-inline-block rounded font-s mx-1 p-1 bg_green_hover text-center">' +
-                                    //         element + '</span>';
-
-                                    // })
-
+                                        tutorHTML +='<div class="ae-detail-child">';
+                                        tutorHTML +='<span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong>' + item.gender + '</span>';
+                                        tutorHTML +='<span class="d-flex align-item-center"> ';
+                                        tutorHTML +='<i class="fa-solid fa-user mt-1"></i>';
+                                        tutorHTML +='<strong style="margin-left: 15px;">Intro :</strong>';
+                                        tutorHTML +='<p class="px-2">Conten will be reqiured</p>';
+                                        tutorHTML += '</div>';
+                                        tutorHTML += '</div>';
+                                        tutorHTML += '</div>';
+                                        tutorHTML +='<div class="ad-div col-3">';
+                                        tutorHTML +='<span>';
+                                        tutorHTML +='<b>20 AED for 50 mintues</b>';
+                                        tutorHTML +=' </span>';
+                                        tutorHTML +='<div class="ae-detail">';
+                                        tutorHTML +='<h4 class="fs-6 mt-1">Free Trial Section</h4>';
+                                        tutorHTML +='</div>';
+                                        tutorHTML += '</div>';
+                                        tutorHTML += '</div>';
                                     tutorHTML += '</div>';
                                     // Append tutor HTML to container
                                     $('#tutorsContainer').append(tutorHTML);
@@ -1666,111 +1558,53 @@
                                     // console.log(sorttedArry)
 
 
-                                    var tutorHTML =
-                                        '<div class="tutor_profile rounded overflow-hidden mb-3">';
-                                    tutorHTML +=
-                                        '<div class="d-flex justify-content-between">';
-                                    tutorHTML +=
-                                        '<button class="p-1 bg_theme_green text-light border border-0">Sponsored</button>';
-                                    tutorHTML +=
-                                        '<span class="p-1 text-secondary"><i class="fa fa-bookmark text-body-tertiary"></i> Watchlist</span>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML += '<div class="py-2 px-5">';
-                                    tutorHTML += '<div class="row d-flex">';
-                                    tutorHTML +=
-                                        '<div class="col d-flex flex-column flex-md-row align-items-center rmb-3 m-lg-0">';
-                                    tutorHTML +=
-                                        '<div class="imgBox col-sm-4 d-grid mx-3">';
-                                    tutorHTML +=
-                                        '<img class="img-1 rounded-circle" src="storage/' +
-                                        item.profileImage + '" alt="" />';
-                                    tutorHTML +=
-                                        '<p class="d-flex align-items-center m-auto">Verified<span class="mx-1 varified bg-primary rounded-circle text-light"><i class="fa fa-check"></i></span></p>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML +=
-                                        '<div class="personal_detail text-center text-md-start">';
-                                    tutorHTML += '<h5>' + item.f_name +  item.l_name + '</h5>';
-                                    tutorHTML += '<span>' + item.gender + ', ' +
-                                        item.age +
-                                        ' years <span style="background-color: red" class="text-light font-s px-1">Pro</span></span>';
-                                    tutorHTML += '<p class="m-0">' + item
-                                        .experience +
-                                        ' years of teaching experience</p>';
-                                    tutorHTML +=
-                                        '<span class="d-flex align-items-center text-warning d-flex justify-content-center justify-content-md-start">';
-                                    for (var i = 0; i < item.starRating; i++) {
-                                        tutorHTML += '<i class="fa fa-star"></i>';
-                                    }
-                                    tutorHTML += '</span>';
-                                    tutorHTML += '<p class="text-danger m-0">(' +
-                                        item.reviews + ' reviews)</p>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML +=
-                                        '<div class="qualification col-lg-6">';
-                                    tutorHTML += '<div class="row p-0">';
-                                    tutorHTML += '<table class="col-12">';
-                                    tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="text-dark fw-bold font-s">Qualification</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
-                                        item.qualification + '</td></tr>';
-                                    tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="font-s text-dark fw-bold">Country</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
-                                        item.location + '</td></tr>';
-                                    tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="font-s text-dark fw-bold">City</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
-                                        item.city + '</td></tr>';
-                                    tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="font-s text-dark fw-bold">Mobile</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
-                                        item.phone +
-                                        '<button class="text-success bg-transparent fw-bold border-0">view contact</button></td></tr>';
-                                    tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="font-s fw-bold">WhatsApp</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
-                                        item.whatsapp +
-                                        '<button class="text-success bg-transparent fw-bold border-0">view contact</button></td></tr>';
-                                    tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="font-s fw-bold">Availability</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
-                                        item.availability + '</td></tr>';
-                                    tutorHTML +=
-                                        '<tr class="title-1 col col-md-3"><td class="font-s fw-bold">Date of Birth</td><td class="d-none d-md-block px-2">:</td><td class="font-s text-secondary">' +
-                                        item.dob + '</td></tr>';
-                                    tutorHTML += '</table>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML += '<div class="row mt-3">';
-                                    tutorHTML +=
-                                        '<div class="col-12 d-flex m-1 align-items-center align-items-sm-center flex-column flex-sm-row">';
-                                    tutorHTML +=
-                                        '<div class="option d-flex align-items-start py-1"><h5 class="label-h m-0 m-1 font-s1 text-center text-md-left fw-bold">Teaches</h5><span class="d-none d-sm-block">:</span></div>';
-                                    teachingArray.forEach(function(subject) {
+                                    var tutorHTML ='<div class="ad-form">';
+                                        tutorHTML +='<div class="ad-img-card">';
+                                        tutorHTML +='<div style="display: flex; justify-content: center;">';
+                                        tutorHTML +='<img src="storage/' +
+                                        item.profileImage + '" alt=""  class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">';
+                                        tutorHTML +='</div>'
+                                        tutorHTML +='<div class="ad-icons">';
+                                        tutorHTML +='<p class="mb-0 mx-1 fs-5">4.5 <i class="fa-solid fa-star"></i></p>';
+                                        tutorHTML +='</div>'
+                                        tutorHTML +='</div>'
+                                        tutorHTML +='<div class="ad-detail my-3  w-100">';
+                                        tutorHTML +='<div class="ae-div row">'
+
+                                        tutorHTML +='<div class="col-9">';
+
+                                        tutorHTML +='<div class="ae-detail-div">';
+                                        tutorHTML +='<span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Name :</strong>'+ item.f_name +  item.l_name +' </span>';
+                                        tutorHTML +='<div class="ae-detail-child">';
+                                        tutorHTML +='<span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong>';
+                                        teachingArray.forEach(function(subject) {
                                         // Add each subject to the tutorHTML
                                         tutorHTML +=
-                                            '<span class="bg-body-secondary rounded font-s m-1 d-inline-block p-1 bg_green_hover text-center">' +
+                                            '<span class=" rounded font-s  d-inline-block p-1 bg_green_hover text-center" style="text-transform: capitalize;">' +
                                             subject + '</span>';
                                     });
+                                    tutorHTML +='</span>';
+                                        tutorHTML +='<span><i class="fa-solid fa-globe"></i><strong>Country :</strong> '+item.location + '</span>';
+                                        tutorHTML += '</div>';
 
-                                    // After adding all subjects, add the "+1 more" button and other HTML elements
-                                    tutorHTML +=
-                                        '<button class="m-1 text-danger border-0 bg-transparent">+1 more</button>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML += '</div>';
-                                    tutorHTML +=
-                                        '<div class="col-12 d-flex m-1 align-items-center flex-column flex-sm-row ps-5">';
-                                    tutorHTML +=
-                                        '<h5 class="label-h m-0 m-1 font-s1 text-center text-md-left fw-bold">Curriculum</h5>';
-                                    tutorHTML +=
-                                        '<span class="d-none d-sm-block">:</span>';
-                                    // Unserialize the serialized data
-
-                                    // Add a span for each curriculum item to tutorHTML
-                                    // sorttedArry.forEach(element => {
-                                    //     tutorHTML +=
-                                    //         '<span class="bg-body-secondary d-inline-block rounded font-s mx-1 p-1 bg_green_hover text-center">' +
-                                    //         element + '</span>';
-
-                                    // })
-
+                                        tutorHTML +='<div class="ae-detail-child">';
+                                        tutorHTML +='<span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong>' + item.gender + '</span>';
+                                        tutorHTML +='<span class="d-flex align-item-center"> ';
+                                        tutorHTML +='<i class="fa-solid fa-user mt-1"></i>';
+                                        tutorHTML +='<strong style="margin-left: 15px;">Intro :</strong>';
+                                        tutorHTML +='<p class="px-2">Conten will be reqiured</p>';
+                                        tutorHTML += '</div>';
+                                        tutorHTML += '</div>';
+                                        tutorHTML += '</div>';
+                                        tutorHTML +='<div class="ad-div col-3">';
+                                        tutorHTML +='<span>';
+                                        tutorHTML +='<b>20 AED for 50 mintues</b>';
+                                        tutorHTML +=' </span>';
+                                        tutorHTML +='<div class="ae-detail">';
+                                        tutorHTML +='<h4 class="fs-6 mt-1">Free Trial Section</h4>';
+                                        tutorHTML +='</div>';
+                                        tutorHTML += '</div>';
+                                        tutorHTML += '</div>';
                                     tutorHTML += '</div>';
                                     // Append tutor HTML to container
                                     $('#tutorsContainer').append(tutorHTML);
