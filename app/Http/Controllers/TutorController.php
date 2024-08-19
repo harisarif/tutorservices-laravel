@@ -125,147 +125,157 @@ return response()->json($serializedData);
     {
         // Your store method logic here
     }
-    public function create(Request $request){
-        // dd($request);
-        // Validate form data
-        $rules = [
-            'f_name' => 'required|string|max:255',
-            'l_name' => 'required|string|max:255',
-            'qualification'=> 'required|string|max:255',
-            'profileImage' => 'required|image|mimes:jpeg,png,jpg|max:2048', // max:2048 is for maximum 2MB file size, adjust as needed
-            'email' => 'required|string|email|max:255|unique:tutors,email',
-            'experience'=> 'required|string|max:255',
+    use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Models\Tutor;
 
-            
-        ];
-        // dd($request);
-        $validator = Validator::make($request->all(), $rules);
+public function create(Request $request)
+{
+    // Validate form data
+    $rules = [
+        'f_name' => 'required|string|max:255',
+        'l_name' => 'required|string|max:255',
+        'qualification' => 'required|string|max:255',
+        'profileImage' => 'required|image|mimes:jpeg,png,jpg|max:2048', // max:2048 is for maximum 2MB file size, adjust as needed
+        'email' => 'required|string|email|max:255|unique:tutors,email',
+        'experience' => 'required|string|max:255',
+    ];
 
-        // Check if validation fails
-        if ($validator->fails()) {
-            return redirect()->back()
-                             ->withErrors($validator)
-                             ->withInput();
-        }
-        $tutor = new Tutor();
-        $tutor->f_name = $request->input('f_name');
-        $tutor->l_name = $request->input('l_name');
-        $tutor->city = $request->input('city');
-        $tutor->email = $request->input('email');
-        $tutor->dob = $request->input('dob');
-        $tutor->qualification = $request->input('qualification');
-        $tutor->gender = $request->input('gender');
-        $tutor->location = $request->input('location');
-        $tutor->experience = $request->input('experience');
-        $tutor->curriculum = serialize($request->input('curriculum'));
-        $tutor->availability = $request->input('availability');
-        $tutor->teaching = serialize($request->input('teaching'));
-        $tutor->phone = $request->input('phone');
-        // $tutor->whatsapp = $request->input('whatsapp');
+    $validator = Validator::make($request->all(), $rules);
 
-        // Upload profile image
-        $imagePath = $request->file('profileImage')->store('uploads', 'public');
-        $tutor->profileImage = $imagePath;
+    // Check if validation fails
+    if ($validator->fails()) {
+        return redirect()->back()
+                         ->withErrors($validator)
+                         ->withInput();
+    }
 
-        // Save the Tutor instance to the database
-        $tutor->save();
-        $toStudent = $tutor->email;
-        $subjectStudent = "Welcome to Edexcel! Your Learning Journey Starts Now!";
+    $tutor = new Tutor();
+    $tutor->f_name = $request->input('f_name');
+    $tutor->l_name = $request->input('l_name');
+    $tutor->city = $request->input('city');
+    $tutor->email = $request->input('email');
+    $tutor->dob = $request->input('dob');
+    $tutor->qualification = $request->input('qualification');
+    $tutor->gender = $request->input('gender');
+    $tutor->location = $request->input('location');
+    $tutor->experience = $request->input('experience');
+    $tutor->curriculum = serialize($request->input('curriculum'));
+    $tutor->availability = $request->input('availability');
+    $tutor->teaching = serialize($request->input('teaching'));
+    $tutor->phone = $request->input('phone');
 
-        $messageStudent = "
-        <html>
-        <head>
-            <style>
-                body {
-                    background-image: url('https://edexceledu.com/images/logo.png');
-                    background-repeat: no-repeat;
-                    background-position: center;
-                    background-size: cover;
-                    padding: 20px;
-                    font-family: Arial, sans-serif;
-                    color: #333;
-                }
-                .content {
-                    background-color: rgba(255, 255, 255, 0.8);
-                    padding: 20px;
-                    border-radius: 10px;
-                    max-width: 600px;
-                    margin: 0 auto;
-                }
-            </style>
-        </head>
-        <body>
+    // Upload profile image
+    $imagePath = $request->file('profileImage')->store('uploads', 'public');
+    $tutor->profileImage = $imagePath;
+
+    // Save the Tutor instance to the database
+    $tutor->save();
+
+    // Prepare and send email to the student
+    $toStudent = $tutor->email;
+    $subjectStudent = "Welcome to Edexcel! Your Learning Journey Starts Now!";
+    $messageStudent = "
+    <html>
+    <head>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: Arial, sans-serif;
+            }
+            .email-container {
+                background-image: url('https://edexceledu.com/images/logo.png');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                padding: 20px;
+                color: #333;
+                height: 100%;
+            }
+            .content {
+                background-color: rgba(255, 255, 255, 0.8); /* Optional for readability */
+                padding: 20px;
+                border-radius: 10px;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div class='email-container'>
             <div class='content'>
                 <p>Dear {$tutor->f_name} {$tutor->l_name},</p>
-        
+
                 <p>Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.</p>
-        
+
                 <p>Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at <a href='mailto:info@edexceledu.com'>info@edexceledu.com</a> or +971566428066.</p>
-        
+
                 <p>We’re here to help you succeed!</p>
-        
+
                 <p>Best regards,<br>
                 The Edexcel Team</p>
             </div>
-        </body>
-        </html>
-        ";
+        </div>
+    </body>
+    </html>
+    ";
 
-        $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
+    Mail::send([], [], function ($message) use ($toStudent, $subjectStudent, $messageStudent) {
+        $message->to($toStudent)
+                ->subject($subjectStudent)
+                ->setBody($messageStudent, 'text/html'); // Set the email body with HTML content
+    });
 
-        $toAdmin = 'info@edexceledu.com';
-        $subjectAdmin = "Edexcel Notification";
-        $messageAdmin = "
-            <html>
-            <head>
-                <style>
-                    body {
-                        background-image: url('https://edexceledu.com/images/logo.png');
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        background-size: cover;
-                        padding: 20px;
-                        font-family: Arial, sans-serif;
-                        color: #333;
-                    }
-                    .content {
-                        background-color: rgba(255, 255, 255, 0.8);
-                        padding: 20px;
-                        border-radius: 10px;
-                    }
-                </style>
-            </head>
-            <body>
-                <div class='content'>
-                    <p>Subject: New Teacher Enrollment Notification</p>
+    // Prepare and send email to the admin
+    $toAdmin = 'info@edexceledu.com';
+    $subjectAdmin = "Edexcel Notification";
+    $messageAdmin = "
+    <html>
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                color: #333;
+                padding: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <p>Dear Babar,</p>
 
-                    <p>Dear Babar,</p>
+        <p>I hope this email finds you well.</p>
 
-                    <p>I hope this email finds you well.</p>
+        <p>I am pleased to inform you that a new teacher, {$tutor->f_name} {$tutor->l_name}, has successfully enrolled through our website. Below are the details of the new enrollment:</p>
 
-                    <p>I am pleased to inform you that a new teacher, {$tutor->f_name} {$tutor->l_name}, has successfully enrolled through our website. Below are the details of the new enrollment:</p>
+        <ul>
+            <li><strong>Full Name:</strong> {$tutor->f_name} {$tutor->l_name}</li>
+            <li><strong>Email Address:</strong> {$tutor->email}</li>
+            <li><strong>Contact Number:</strong> {$tutor->phone}</li>
+            <li><strong>Location:</strong> {$tutor->location}</li>
+        </ul>
 
-                    <ul>
-                        <li><strong>Full Name:</strong> {$tutor->f_name} {$tutor->l_name}</li>
-                        <li><strong>Email Address:</strong> {$tutor->email}</li>
-                        <li><strong>Contact Number:</strong> {$tutor->phone}</li>
-                        <li><strong>Location:</strong> {$tutor->location}</li>
-                    </ul>
+        <p>Please ensure that {$tutor->f_name} {$tutor->l_name} is added to our records and receives all necessary welcome materials and instructions. If any further information is needed, feel free to contact me.</p>
 
-                    <p>Please ensure that {$tutor->f_name} {$tutor->l_name} is added to our records and receives all necessary welcome materials and instructions. If any further information is needed, feel free to contact me.</p>
+        <p>Thank you for your prompt attention to this new enrollment.</p>
 
-                    <p>Thank you for your prompt attention to this new enrollment.</p>
+        <p>Best regards,<br>
+        The Edexcel Team</p>
+    </body>
+    </html>
+    ";
 
-                    <p>Best regards,<br>
-                    The Edexcel Team</p>
-                </div>
-            </body>
-            </html>
-            ";
-        $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
-        // Optionally, you can redirect the user or return a response
-        return redirect()->route('newhome')->with('success', 'Tutor created successfully.');
-    }
+    Mail::send([], [], function ($message) use ($toAdmin, $subjectAdmin, $messageAdmin) {
+        $message->to($toAdmin)
+                ->subject($subjectAdmin)
+                ->setBody($messageAdmin, 'text/html'); // Set the email body with HTML content
+    });
+
+    // Optionally, you can redirect the user or return a response
+    return redirect()->route('newhome')->with('success', 'Tutor created successfully.');
+}
+
     public function hiretutor(Request $request)
     {
         return redirect('/hire-tutor');
