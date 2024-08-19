@@ -11,8 +11,6 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
-                <th>Start Time</th>
-                <th>End Time</th>
                 <th>Country</th>
                 <th>City</th>
                 <th>Subject</th>
@@ -26,8 +24,6 @@
                 <td>{{ $student->name }}</td>
                 <td>{{ $student->email }}</td>
                 <td>{{ $student->phone }}</td>
-                <td>{{ $student->class_start_time }}</td>
-                <td>{{ $student->class_end_time }}</td>
                 <td>{{ $student->country }}</td>
                 <td>{{ $student->city }}</td>
                 <td>{{ $student->subject }}</td>
