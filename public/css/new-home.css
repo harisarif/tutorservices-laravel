@@ -681,9 +681,12 @@ align-items: center;
     padding: 10px;
     text-align: center;
 }
-.ad-icons span{
-    color: #ffc000;
+.ad-icons{
+    color: #42b979;
     font-size: 14px;
+}
+.ad-icons p i{
+    font-size: 1.1rem;
 }
 .ad-button{
     padding: 10px 0;
@@ -698,7 +701,6 @@ align-items: center;
 }
 .ad-detail span{
     display: block;
-    margin-left: 10px;
 }
 .ad-detail span strong{
     margin: 0 10px;
@@ -1027,10 +1029,12 @@ footer{
     color: #43b979;
     width: 91%;
     padding: 8px 0;
+    text-align: center;
     white-space: nowrap;
  } 
  .ad-div span b{
     color: #42b979;
+    white-space: nowrap;
  }
  .ad-border-div{
     background:#f4f4f6; 
@@ -1055,6 +1059,6 @@ footer{
  }
 
  .ad-icons p{
-    margin-top: 5px;
+    margin-top: 10px;
     color: #42b979;
  }

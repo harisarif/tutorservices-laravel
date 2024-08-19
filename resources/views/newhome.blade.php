@@ -383,7 +383,7 @@
                                             <img src="{{ asset('storage/' . $item->profileImage) }}" alt="..." class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">
                                         </div>
                                         <div class="ad-icons">
-                                          <p class="mb-0 mx-1 fs-5">4.5<sub>/5</sub></p>
+                                          <p class="mb-0 mx-1 fs-5">4.5 <i class="fa-solid fa-star"></i></p>
                                          </div>
                                          
                                     </div>
@@ -397,16 +397,19 @@
                                                     <span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong> English</span>
 
                                                     <span><i class="fa-solid fa-globe"></i><strong>Country :</strong> {{ $item->location }}</span>
-                                                    <!-- <span><i class="fa-solid fa-location-dot"></i></i><strong style="margin-left: 14px;">City :</strong> {{ $item->city }}</span> -->
                                                 </div>
-                                                <div class="ae-detail-child">
-                                                        <!-- <span><i class="fa-regular fa-clock"></i><strong >Time Available :</strong>{{ $item->availability }}</span> -->
-                                                        
+                                                <div class="ae-detail-child">  
                                                         <span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong>{{ $item->gender }}</span>
                                                 </div>
-                                         </div>
+                                                <span class="d-flex align-item-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="#42b979">
+                                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                                </svg>
+                                                <strong style="margin-left: 15px;">Intro :</strong>{{ $item->introduction }}
+                                                <p class="px-2">Conten will be reqiured</p>                                                
+                                             </span>
+                                            </div>
                                          <div class="ad-div col-3">
-                                                <span class="fs-6" ><b>20 AED for 1 hour</b>
+                                                <span class="fs-6" style="margin: 0 -6px;"><b>20 AED for 50 mintues</b>
                                                 </span>
 
                                                 <div class="ae-detail">
