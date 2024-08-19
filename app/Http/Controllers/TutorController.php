@@ -170,13 +170,46 @@ return response()->json($serializedData);
         // Save the Tutor instance to the database
         $tutor->save();
         $toStudent = $tutor->email;
-        $subjectStudent = "Welcome to Edexcel Your Learning Journey Starts Now!";
-        $messageStudent = "Dear " . $tutor->full_name = $tutor->f_name . ' ' . $tutor->l_name . "\r\n" .
-        "Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.\r\n" .
-        "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at infoo@edexceledu.com or +971566428066.\r\n" .
-        "We’re here to help you succeed!\r\n\r\n" .
-        "Best regards,\r\n" .
-        "The Edexcel Team";
+        $subjectStudent = "Welcome to Edexcel! Your Learning Journey Starts Now!";
+
+        $messageStudent = "
+        <html>
+        <head>
+            <style>
+                body {
+                    background-image: url('https://edexceledu.com/images/logo.png');
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: cover;
+                    padding: 20px;
+                    font-family: Arial, sans-serif;
+                    color: #333;
+                }
+                .content {
+                    background-color: rgba(255, 255, 255, 0.8);
+                    padding: 20px;
+                    border-radius: 10px;
+                    max-width: 600px;
+                    margin: 0 auto;
+                }
+            </style>
+        </head>
+        <body>
+            <div class='content'>
+                <p>Dear {$tutor->f_name} {$tutor->l_name},</p>
+        
+                <p>Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.</p>
+        
+                <p>Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at <a href='mailto:info@edexceledu.com'>info@edexceledu.com</a> or +971566428066.</p>
+        
+                <p>We’re here to help you succeed!</p>
+        
+                <p>Best regards,<br>
+                The Edexcel Team</p>
+            </div>
+        </body>
+        </html>
+        ";
 
         $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
 
