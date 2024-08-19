@@ -182,25 +182,53 @@ return response()->json($serializedData);
 
         $toAdmin = 'info@edexceledu.com';
         $subjectAdmin = "Edexcel Notification";
-        $messageAdmin = "Subject: New Teacher Enrollment Notification
+        $messageAdmin = "
+            <html>
+            <head>
+                <style>
+                    body {
+                        background-image: url('https://edexceledu.com/images/logo.png');
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        background-size: cover;
+                        padding: 20px;
+                        font-family: Arial, sans-serif;
+                        color: #333;
+                    }
+                    .content {
+                        background-color: rgba(255, 255, 255, 0.8);
+                        padding: 20px;
+                        border-radius: 10px;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class='content'>
+                    <p>Subject: New Teacher Enrollment Notification</p>
 
-        Dear Babar,
+                    <p>Dear Babar,</p>
 
-        I hope this email finds you well.
+                    <p>I hope this email finds you well.</p>
 
-        I am pleased to inform you that a new teacher, {$tutor->f_name} {$tutor->l_name}, has successfully enrolled through our website. Below are the details of the new enrollment:
+                    <p>I am pleased to inform you that a new teacher, {$tutor->f_name} {$tutor->l_name}, has successfully enrolled through our website. Below are the details of the new enrollment:</p>
 
-        - *Full Name:* {$tutor->f_name} {$tutor->l_name}
-        - *Email Address:* {$tutor->email}
-        - *Contact Number:* {$tutor->phone}
-        - *Location:* {$tutor->location}
+                    <ul>
+                        <li><strong>Full Name:</strong> {$tutor->f_name} {$tutor->l_name}</li>
+                        <li><strong>Email Address:</strong> {$tutor->email}</li>
+                        <li><strong>Contact Number:</strong> {$tutor->phone}</li>
+                        <li><strong>Location:</strong> {$tutor->location}</li>
+                    </ul>
 
-        Please ensure that {$tutor->f_name} {$tutor->l_name} is added to our records and receives all necessary welcome materials and instructions. If any further information is needed, feel free to contact me.
+                    <p>Please ensure that {$tutor->f_name} {$tutor->l_name} is added to our records and receives all necessary welcome materials and instructions. If any further information is needed, feel free to contact me.</p>
 
-        Thank you for your prompt attention to this new enrollment.
+                    <p>Thank you for your prompt attention to this new enrollment.</p>
 
-        Best regards,
-        The Edexcel Team";
+                    <p>Best regards,<br>
+                    The Edexcel Team</p>
+                </div>
+            </body>
+            </html>
+            ";
         $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
         // Optionally, you can redirect the user or return a response
         return redirect()->route('newhome')->with('success', 'Tutor created successfully.');
