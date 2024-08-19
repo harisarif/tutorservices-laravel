@@ -125,12 +125,7 @@ return response()->json($serializedData);
     {
         // Your store method logic here
     }
-    use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Mail;
-use App\Models\Tutor;
-
-public function create(Request $request)
+    public function create(Request $request)
 {
     // Validate form data
     $rules = [
@@ -275,7 +270,6 @@ public function create(Request $request)
     // Optionally, you can redirect the user or return a response
     return redirect()->route('newhome')->with('success', 'Tutor created successfully.');
 }
-
     public function hiretutor(Request $request)
     {
         return redirect('/hire-tutor');
