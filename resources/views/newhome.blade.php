@@ -54,13 +54,13 @@
     }
     .custom-select-wrapper {
         position: relative;
-        display: inline-block;
+        display: flex;
     }
 
     .custom-select {
         cursor: pointer;
-        display: flex;
-        align-items: center;
+        /* display: flex;
+        align-items: center; */
     }
 
     .custom-select i {
@@ -151,11 +151,13 @@
 
                         <!-- Off-canvas component -->
                         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                            <div class="offcanvas-header">
-                                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Header</h5>
+                            <div class="offcanvas-header p-1">
+                                <a class="navbar-brand" href="{{ route('newhome') }}">
+                                 <img src="images/white-logo.jpeg" height="50px" alt="logo" style="height: 50px; border-radius: 10px;">
+                                </a>
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
-                            <div class="offcanvas-body">
+                            <div class="offcanvas-body p-2">
                                 <ul class="navbar-nav align-items-md-center">
                                     <div class="ai-nav">
                                         <div class="AI">    
@@ -187,8 +189,9 @@
                                             </a>
                                         </div>
                                         <div class="custom-select-wrapper">
-                                            <div class="custom-select">
+                                            <div class="custom-select mx-1 d-flex" style="align-items: center;">
                                                 <i class="fa-solid fa-globe" style="color:#42b979 !important" aria-hidden="true" onclick="toggleDropdown()"></i>
+                                                <label class="d-block mx-2" style="color:#42b979;font-size:15px;">Language</label>
                                                 <div class="custom-options" id="language-select">
                                                     <div class="custom-option" data-value="en" onclick="changeLanguage('en')">English</div>
                                                     <div class="custom-option" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>

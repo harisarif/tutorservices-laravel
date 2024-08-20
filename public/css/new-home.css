@@ -281,11 +281,6 @@ width: 100%;
         padding-top: 10px !important;
         margin: 0 auto;
     }
-    .navbar-toggler{
-        position: fixed;
-        top: 10px;
-        left: 273px;
-    }
     .header-ul li label{
         display: block;
         color: #fff;
@@ -339,6 +334,7 @@ width: 100%;
     .nav-link {
         text-align: left;
         color: #42b979;
+        font-size: 18px;
     }
     .email-container{
         display: flex !important;
@@ -359,10 +355,10 @@ width: 100%;
         font-size: 15px;
     }
     #language-select{
-
-        border: none !important;
+        position: absolute;
+        left: -3px;
+        border: 1px solid #42b979 !important;
         color: #42b979 !important;
-        position: static;
         background: transparent;
         box-shadow: 0 0 0 0;
         font-size: 12px;
