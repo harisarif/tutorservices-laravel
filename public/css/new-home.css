@@ -363,6 +363,38 @@ width: 100%;
         box-shadow: 0 0 0 0;
         font-size: 12px;
     }
+    .ad-form{
+        flex-direction: column;
+    }
+    .ad-div span b{
+        margin: 0 27px !important;
+    }
+    .ad-img-card{
+        width: 100% !important;
+    }
+    .ad-div{
+        width: 100%;
+        margin: 0 17px;
+    }
+    .ae-div{
+        flex-direction: column;
+        white-space: nowrap;
+        font-size: 14px;
+    }
+    .im{
+        flex-direction: column;
+    }
+    .ai-image-div img {
+        width:70% !important;
+        height: 570px !important;
+    }
+    .img-reqire {
+        width: 100%;
+        
+    }
+    .Ai{
+        width: 100%;
+    }
 }
 .banner-section {
     position: relative;

@@ -725,8 +725,8 @@
                     <div class="ai-heading-div">
                         <h2 class="text-center  fw-bold" >Inquiry Overview</h2>
                     </div>
-                 <div class="row">
-                    <div class="col-5 " >
+                 <div class="im row">
+                    <div class=" Ai col-5 " >
                 <form>
                      <div class=" mt-3 mb-5 " >
                         <div class="ai-card px-3 py-4" style="border: 1px solid #ddd; border-radius: 5px;">
