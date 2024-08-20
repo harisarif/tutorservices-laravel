@@ -142,50 +142,66 @@
                     </a>
                 </li>
                 <nav class="navbar navbar-expand-lg adjust-header-mobile">
-
                     <div class="container-fluid">
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                             aria-label="Toggle navigation">
+                        <!-- Button to trigger the off-canvas -->
+                        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                                aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-                        <ul class="navbar-nav align-items-md-center">
-                        <div class="ai-nav">
-                        <div class="AI">    
-                            <li class="nav-item m-1  rounded w-1 py-0" >
-                                <a class="nav-link text-decoration-none solid_btn p-0" href="{{ route('login') }}
-                                "><i class="fas fa-sign-in-alt"></i> {{__('messages.login')}}
-                                </a>
-                            </li>
+                        </button>
+
+                        <!-- Off-canvas component -->
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                            <div class="offcanvas-header">
+                                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Header</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                                <ul class="navbar-nav align-items-md-center">
+                                    <div class="ai-nav">
+                                        <div class="AI">    
+                                            <li class="nav-item m-1 rounded w-1 py-0">
+                                                <a class="nav-link text-decoration-none solid_btn p-0" href="{{ route('login') }}">
+                                                    <i class="fas fa-sign-in-alt"></i> {{ __('messages.login') }}
+                                                </a>
+                                            </li>
+                                        </div>
+                                        <div class="AI">
+                                            <li class="nav-item m-1 rounded w-1 py-0">
+                                                <a class="nav-link text-decoration-none solid_btn p-0" href="{{ route('basicsignup') }}">
+                                                    <i class="fa-regular fa-clipboard"></i> Register
+                                                </a>
+                                            </li>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div class="email-container mx-1">
+                                            <i class="fa fa-envelope-square" aria-hidden="true" style="color: #42b979;"></i>
+                                            <a class="email text-decoration-none" href="mailto:info@eduexceledu.com" style="color: #42b979;">
+                                                info@eduexceledu.com
+                                            </a>
+                                        </div>
+                                        <div class="d-flex alig header-phone-number phone-container mx-1" style="align-items: center;">
+                                            <i class="fa-solid fa-phone" aria-hidden="true" style="color: #42b979;"></i>
+                                            <a class="phone-number-header text-decoration-none" href="tel:+971566428066" style="color: #42b979;">
+                                                +971 56 642 8066
+                                            </a>
+                                        </div>
+                                        <div class="custom-select-wrapper">
+                                            <div class="custom-select">
+                                                <i class="fa-solid fa-globe" style="color:#42b979 !important" aria-hidden="true" onclick="toggleDropdown()"></i>
+                                                <div class="custom-options" id="language-select">
+                                                    <div class="custom-option" data-value="en" onclick="changeLanguage('en')">English</div>
+                                                    <div class="custom-option" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="AI ">
-                            <li class="nav-item m-1 rounded w-1 py-0">
-                                <a class="nav-link text-decoration-none solid_btn p-0" href="{{ route('basicsignup') }}"><i class="fa-regular fa-clipboard"></i> Register</a>
-                            </li>
-                        </div>
-                    </div>
-                    <div class="">
-                    <div class="email-container mx-1">
-                        <i class="fa fa-envelope-square" aria-hidden="true" style="color: #42b979;"></i>
-                        <a class="email text-decoration-none" href="mailto:info@eduexceledu.com" style="color: #42b979;">info@eduexceledu.com</a>
-                    </div>
-               
-                    <div class="d-flex alig header-phone-number phone-container mx-1" style="align-items: center;">
-                    
-                        <i class="fa-solid fa-phone " aria-hidden="true" style="color: #42b979;"></i>
-                        <a class="phone-number-header text-decoration-none " href="tel:+971566428066" style="color: #42b979;">+971 56 642 8066</a>
-                    </div>
-                    <div class="custom-select-wrapper">
-                    <div class="custom-select">
-                        <i class="fa-solid fa-globe" style="color:#42b979 !important" aria-hidden="true" onclick="toggleDropdown()"></i>
-                        <div class="custom-options" id="language-select">
-                            <div class="custom-option" data-value="en" onclick="changeLanguage('en')">English</div>
-                            <div class="custom-option" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
-                        </div>
-                    </div>
                     </div>
                 </nav>
+
             </ul>
             <a href="{{ route('hire.tutor') }}" class="hiring-button">
                         Book a free demo for your child

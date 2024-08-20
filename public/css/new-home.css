@@ -322,13 +322,13 @@ width: 100%;
 
 @media (max-width: 425px) {
     .navbar-nav {
-        position: absolute;
+        /* position: absolute;
         z-index: 9;
         left: -300px;
         top: 35px;
         background: #fff;
         padding: 10px;
-        width: 320px;
+        width: 320px; */
     }
     .AI{
         text-align: justify;
