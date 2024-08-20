@@ -135,19 +135,57 @@
     
     <div class="row mini_header m-0 p-0 container-fluid position-relative">
         <div class="col-sm-12 px-3  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0">
-            <ul class="p-2 m-0 d-sm-inline d-block text-center header-ul">
-                <li class=" p-2">
-                <a class="navbar-brand" href="{{ route('newhome') }}">
-                        <img src="images/white-logo.jpeg" height="50px" alt="logo" style="height: 50px">
+            <ul class="p-1 m-0 d-sm-inline d-block text-center header-ul">
+                <li class=" p-0">
+                     <a class="navbar-brand" href="{{ route('newhome') }}">
+                        <img src="images/white-logo.jpeg" height="50px" alt="logo" style="height: 50px; border-radius: 10px;">
                     </a>
-                    
                 </li>
-             <li>
-           
-             </li>
-             <li>
-            
-             </li>
+                <nav class="navbar navbar-expand-lg adjust-header-mobile">
+
+                    <div class="container-fluid">
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                              data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                             aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                        <ul class="navbar-nav align-items-md-center">
+                        <div class="ai-nav">
+                        <div class="AI">    
+                            <li class="nav-item m-1  rounded w-1 py-0" >
+                                <a class="nav-link text-decoration-none solid_btn p-0" href="{{ route('login') }}
+                                "><i class="fas fa-sign-in-alt"></i> {{__('messages.login')}}
+                                </a>
+                            </li>
+                        </div>
+                        <div class="AI ">
+                            <li class="nav-item m-1 rounded w-1 py-0">
+                                <a class="nav-link text-decoration-none solid_btn p-0" href="{{ route('basicsignup') }}"><i class="fa-regular fa-clipboard"></i> Register</a>
+                            </li>
+                        </div>
+                    </div>
+                    <div class="">
+                    <div class="email-container mx-1">
+                        <i class="fa fa-envelope-square" aria-hidden="true" style="color: #42b979;"></i>
+                        <a class="email text-decoration-none" href="mailto:info@eduexceledu.com" style="color: #42b979;">info@eduexceledu.com</a>
+                    </div>
+               
+                    <div class="d-flex alig header-phone-number phone-container mx-1" style="align-items: center;">
+                    
+                        <i class="fa-solid fa-phone " aria-hidden="true" style="color: #42b979;"></i>
+                        <a class="phone-number-header text-decoration-none " href="tel:+971566428066" style="color: #42b979;">+971 56 642 8066</a>
+                    </div>
+                    <div class="custom-select-wrapper">
+                    <div class="custom-select">
+                        <i class="fa-solid fa-globe" style="color:#42b979 !important" aria-hidden="true" onclick="toggleDropdown()"></i>
+                        <div class="custom-options" id="language-select">
+                            <div class="custom-option" data-value="en" onclick="changeLanguage('en')">English</div>
+                            <div class="custom-option" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
+                        </div>
+                    </div>
+                    </div>
+                </nav>
             </ul>
             <a href="{{ route('hire.tutor') }}" class="hiring-button">
                         Book a free demo for your child
@@ -222,26 +260,7 @@
             <!-- WhatsApp Button html start -->
             @include('whatsapp')
 
-            <nav class="navbar navbar-expand-lg">
-
-                <div class="container-fluid">
-
-
-                    <!-- <a class="navbar-brand" href="#">
-                        <img src="images/logo.png" height="50px" alt="logo" style="height: 50px" />
-                    </a> -->
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-                        <ul class="navbar-nav align-items-md-center">
-                        
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+           
             <!-- header end -->
 
             <!-- banner start -->
@@ -1124,7 +1143,6 @@
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <!-- Your custom script -->
     <script>
         $(document).on('select2:open', function(e) {

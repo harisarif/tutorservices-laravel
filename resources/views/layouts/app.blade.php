@@ -113,15 +113,6 @@
 <script src="./js/app.js"></script>
 
 <script>
-      $(document).ready(function() {
-        $('.navbar-toggler').on('click', function() {
-                $('#navbarNavDropdown').toggleClass('show');
-            });
-            // Attach click event handler to elements with class 'hiring-btn'
-            $('.hiring-btn').on('click', function() {
-                // Add the 'highlight' class to the clicked element
-                $('#allModal').addClass('d-none');
-            });
-        });
+
     $(document).ready(function($) { $('.country').select2(); });
 </script>
