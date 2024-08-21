@@ -736,43 +736,48 @@
                          <div class="card-body">
                                  <h6 class="card-title mb-3 text-center fw-bold fs-6 ">Submit your inquiry to request a callback for further assistance</h6> 
                                   <h3 class="fw-bold text-center" style="font-size: 15px;color: red;"><i>"Please Complete All Required Fields"</i></h3>
-                              <div class="row">
-                                  <div class="col-sm-12">
-                            <div class="form-group p-2 px-0">
-                                <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your Name <b style="color: red;font-size: 20px;">*</b></strong></label>
-                                  <input class="form-control" type="text" placeholder="Name">
-                            </div>      
-                            </div>
-                             </div>
+                              
            
-                             <div class="row">
-                            <div class="col-sm-12">
-                            <div class="form-group p-2 px-0">
-                            <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your   Email <b style="color: red; font-size: 20px;">*</b></strong></label>
-                            <div class="input-group"> <input class="form-control" type="text" placeholder="Email ID"></div>
+                             <div class="row g-0">
+                                    <div class="col-sm-12">
+                                        <div class="form-group p-2 px-0">
+                                            <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your Name <b style="color: red;font-size: 20px;">*</b></strong></label>
+                                            <input class="form-control" type="text" placeholder="Name">
+                                        </div>      
+                                  </div>
+                                <div class="col-sm-12">
+                                        <div class="form-group p-2 px-0">
+                                        <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your   Email <b style="color: red; font-size: 20px;">*</b></strong></label>
+                                        <div class="input-group"> <input class="form-control" type="text" placeholder="Email ID"></div>
+                                        </div>
+                                        </div>
+                                </div>  
+                                <div class="col-sm-12">
+                                    <div class="form-group p-2 px-0">
+                                    <label for="curriculum" class="form-label" style="color:#42b979;">
+                                        <strong>Enter your Number <b style="color: red; font-size: 20px;">*</b></strong>
+                                    </label>
+                                    <div class="inquiry-select input-group d-flex justify-content-between align-items-center" style="width: 100%;">
+                                                
+                                                <select name="countrySelect" id="countrySelect" class="form-select country-select w-50" required>
+                                                    @foreach ($countriesPhone as $key => $country)
+                                                        <option value="{{ $key }}">{{ $country }}</option>
+                                                    @endforeach
+                                                </select>
+                                            
+                                                <input  class="form-control w-50" required name="phone" id="phone" type="text" placeholder="e.g +92XXXXXXXXXX" style="border: 1px solid #ddd; height: 50px; box-shadow: none;">
+                                            </div>
+                                            <div class="col-12  py-2">
+                                                <label for="curriculum" class="form-label" style="color:#42b979;">
+                                                    <strong>Description (Optional) <b style="color: red; font-size: 20px;">*</b>
+                                                    </strong>
+                                                </label>
+                                                <textarea class="form-control" id="curriculum" name="reviews" rows="2" placeholder="Description" style="box-shadow: none;border: 1px solid #ddd;"></textarea>
+                                            </div>
+                                </div>
+                                
                             </div>
-                            </div>
-                              </div>
-                            <div class="row">
-                            <div class="col-sm-12">
-                             <div class="form-group p-2 px-0">
-                             <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your Number <b style="color: red; font-size: 20px;">*</b></strong></label>
-                             <div class="input-group d-flex justify-content-between align-items-center" style="width: 101%;">
-                                        
-                                        <select name="countrySelect" id="countrySelect" class="form-select country-select w-50" required>
-                                            @foreach ($countriesPhone as $key => $country)
-                                                <option value="{{ $key }}">{{ $country }}</option>
-                                            @endforeach
-                                        </select>
-                                       
-                                        <input  class="form-control w-50" required name="phone" id="phone" type="text" placeholder="e.g +92XXXXXXXXXX" style="border: 1px solid #aaa; height: 28px; box-shadow: none;">
-                                    </div>
-                            </div>
-                            </div>
-                            </div>
-                            <div class="col-12  py-2"><label for="curriculum" class="form-label" style="color:#42b979;"><strong>Description (Optional) <b style="color: red; font-size: 20px;">*</b></strong></label>
-                            <textarea class="form-control" id="curriculum" name="reviews" rows="2" placeholder="Description" style="box-shadow: none;border: 1px solid #ddd;"></textarea>
-                            </div>
+                           
                             <div class=" d-flex flex-column text-center px-5  mb-3">  </div> <button class="btn btn-success btn-block confirm-button">Confirm</button>
                            </div>
                         </div>
@@ -799,7 +804,7 @@
                         <h2>Become A Tutor</h2>
                     </div>
                     <div class="AE row border mx-0" >
-                        <div class="col-6 im-div">
+                        <div class="col-lg-6 col-sm-4 im-div p-0">
                             <div class="im-img">
                                 <img src="images/im-teacher.jpg" alt="">
                             </div>
@@ -808,17 +813,17 @@
                         <div class="col-6 ad-div-child">
                             <div class="im-heading-div text-white mt-4">
                                 <h1 class="text-white fw-bold">Guide and Inspire Learners</h1>
-                                <p class="mx-2">Earn while you teach—share your expertise with students on Preply. Sign up to start tutoring online.</p>
+                                <p class="mx-md-2 mx-sm-0">Earn while you teach—share your expertise with students on Preply. Sign up to start tutoring online.</p>
 
                                 <div class="im-detail">
-                                    <ul>
+                                    <ul class="mt-lg-5 mt-md-3 mt-sm-0">
                                         <li class="AH fs-5">Expand Your Student Base</li>
                                         <li class="AH fs-5">Boost Your Business</li>
                                         <li class="AH fs-5">Guaranteed Payment Security</li>
                                     </ul>
                                 </div>
-                                <div class="im-button d-flex mx-3">
-                                <a href="{{route('tutor')}}" class="btn btn-light bg-white mt-5 fs-6" style="color : #42b979;">Register yourself as a professional teacher <i class="fa-solid fa-arrow-right"></i></a>
+                                <div class="im-button d-flex mx-3 mb-lg-0 mb-2">
+                                <a href="{{route('tutor')}}" class="btn btn-light bg-white my-lg-5 my-sm-3  fs-lg-6 fs-sm-3" style="color : #42b979;">Register yourself as a professional teacher <i class="fa-solid fa-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>

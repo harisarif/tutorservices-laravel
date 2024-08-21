@@ -111,7 +111,7 @@
 }
 
 .select2-container {
-    width: 65% !important;
+    width: 200px;
 
 }
 .AB{
@@ -237,9 +237,12 @@
 
 @media (max-width: 1440px) {
     .select2-container {
-        width: 100% !important;
+        width: 100% ;
 
     }
+    .inquiry-select .select2-container { 
+        width: 30% !important;
+     }
 }
 
 /* @media (min-width: 991px) {
@@ -250,11 +253,23 @@ width: 100%;
     }
 }
 } */
+ #countrySelect{
+    width: 29% !important;
+ }
+ .country-row .select2-container { 
+    width: 90%;
+ }
 @media (min-width:1441px) and (max-width: 2060px) {
     .select2-container {
-        width: 91% !important;
+        width: 30%;
 
     }
+    .country-row .select2-container { 
+        width: 90% !important;
+     }
+     .inquiry-select .select2-container { 
+        width: 30% !important;
+     }
 }
 
 @media (max-width: 991px) {
@@ -337,8 +352,9 @@ width: 100%;
     .im-div{
         width: 100%;
     }
-    .im-img{
-        width: 320px !important;
+    .im-img img {
+        width: 100%;
+        height: auto !important;
     }
     .im-heading-div h1{
         font-size: 18px !important;
@@ -425,11 +441,12 @@ width: 100%;
         flex-direction: column;
     }
     .ai-image-div img {
-        width:70% !important;
-        height: 570px !important;
+        width:100% !important;
     }
     .img-reqire {
         width: 100%;
+        height: auto;
+        overflow: hidden;
         
     }
     .Ai{
@@ -1096,11 +1113,7 @@ footer{
     border-radius: 5px;
     margin-top: 17px;
     padding-left: 0;
-    height: 570px;
-    overflow: hidden;
-  }
-  .ai-image-div{
-    width: 855px;
+    
   }
   .ai-image-div img{
     width: 100%;
@@ -1117,13 +1130,9 @@ footer{
   }
   .im-div{
     border: 1px solid #ddd;
-    overflow: hidden;
     padding-left: 0;
-    height: 617px;
   }
-  .im-img{
-    width: 660px;
-  }
+ 
   .im-img img{
     width: 100%;
     height: 615px;
@@ -1132,13 +1141,12 @@ footer{
     background-color: #42b979;
   }
   .im-detail ul{
-    margin-top: 5rem;
     transition: 0.5s;
   }
   .im-detail ul li:hover{
     cursor: pointer;
-    transform: scale(1.1);
-    margin-left: 25px;
+    transform: scale(0.9);
+    /* margin-left: 25px; */
  }
  .im-button button{
     width: 38%;
