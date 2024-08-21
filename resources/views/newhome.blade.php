@@ -958,8 +958,6 @@
     <script>
         $(document).on('select2:open', function(e) {
             let scrollPos = $(window).scrollTop();
-    
-    // Restore the scroll position after a short delay to allow Select2 to open
             setTimeout(function() {
                 $(window).scrollTop(scrollPos);
             }, 0);
@@ -1001,387 +999,387 @@
     <script>
         
 
-        $(document).ready(function($) {
-            setTimeout(function() {
-                $(".alert").fadeOut("slow");
-            }, 5000);
-            // Your jQuery code here
-            $('#country').change(function(e) {
-            e.preventDefault();
-            var selectedCountry = $(this).val();
-            var locationData = {
-                location: selectedCountry !== "all" ? selectedCountry : "all",
-                _token: '{{ csrf_token() }}' // Include CSRF token
-            };
+                $(document).ready(function($) {
+                    setTimeout(function() {
+                        $(".alert").fadeOut("slow");
+                    }, 5000);
+                    // Your jQuery code here
+                    $('#country').change(function(e) {
+                    e.preventDefault();
+                    var selectedCountry = $(this).val();
+                    var locationData = {
+                        location: selectedCountry !== "all" ? selectedCountry : "all",
+                        _token: '{{ csrf_token() }}' // Include CSRF token
+                    };
 
-            // Send AJAX request with the appropriate location data
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('fetch-data') }}',
-                data: locationData,
-                dataType: 'json',
-                success: function(response) {
-            console.log('Success function triggered', response);
-                $('#tutorsContainer').empty();
+                    // Send AJAX request with the appropriate location data
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ route('fetch-data') }}',
+                        data: locationData,
+                        dataType: 'json',
+                        success: function(response) {
+                        console.log('Success function triggered', response);
+                        $('#tutorsContainer').empty();
 
-                if (response && response.tutors) {
-                    if (response.tutors.length > 0) {
-                        response.tutors.forEach(function(item) {
-                            // Ensure that `item.teaching` is handled properly
-                            var teachingArray = [];
-                            if (item.teaching) {
-                                var matches = item.teaching.match(/s:\d+:"(.*?)";/g);
-                                if (matches) {
-                                    matches.forEach(function(match) {
-                                        teachingArray.push(match.match(/s:\d+:"(.*?)";/)[1]);
-                                    });
-                                }
-                            }
+                        if (response && response.tutors) {
+                            if (response.tutors.length > 0) {
+                                response.tutors.forEach(function(item) {
+                                    // Ensure that `item.teaching` is handled properly
+                                    var teachingArray = [];
+                                    if (item.teaching) {
+                                        var matches = item.teaching.match(/s:\d+:"(.*?)";/g);
+                                        if (matches) {
+                                            matches.forEach(function(match) {
+                                                teachingArray.push(match.match(/s:\d+:"(.*?)";/)[1]);
+                                            });
+                                        }
+                                    }
 
-                        var tutorHTML = '<div class="ad-form">';
-                        tutorHTML += '<div class="ad-img-card">';
-                        tutorHTML += '<div style="display: flex; justify-content: center;">';
-                        tutorHTML += '<img src="storage/' + item.profileImage + '" alt="" class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">';
-                        tutorHTML += '</div>';
-                        tutorHTML += '<div class="ad-icons">';
-                        tutorHTML += '<p class="mb-0 mx-1 fs-5">4.5 <i class="fa-solid fa-star"></i></p>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '<div class="ad-detail my-3 w-100">';
-                        tutorHTML += '<div class="ae-div row">';
-                        tutorHTML += '<div class="col-9">';
-                        tutorHTML += '<div class="ae-detail-div">';
-                        tutorHTML += '<span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Name :</strong>' + item.f_name + ' ' + item.l_name + '</span>';
-                        tutorHTML += '<div class="ae-detail-child">';
-                        tutorHTML += '<span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong>';
-                        teachingArray.forEach(function(subject) {
-                            tutorHTML += '<span class="rounded font-s d-inline-block p-1 bg_green_hover text-center" style="text-transform: capitalize;">' + subject + '</span>';
-                        });
-                        tutorHTML += '</span>';
-                        tutorHTML += '<span><i class="fa-solid fa-globe"></i><strong>Country :</strong> ' + item.location + '</span>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '<div class="ae-detail-child">';
-                        tutorHTML += '<span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong>' + item.gender + '</span>';
-                        tutorHTML += '<span class="d-flex align-item-center">';
-                        tutorHTML += '<i class="fa-solid fa-user mt-1"></i>';
-                        tutorHTML += '<strong style="margin-left: 15px;">Intro :</strong>';
-                        tutorHTML += '<p class="px-2">Content will be required</p>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '<div class="ad-div col-3">';
-                        tutorHTML += '<span>';
-                        tutorHTML += '<b>20 AED for 50 minutes</b>';
-                        tutorHTML += '</span>';
-                        tutorHTML += '<div class="ae-detail">';
-                        tutorHTML += '<h4 class="fs-6 mt-1">Free Trial Section</h4>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '</div>';
-
-                        // Append tutor HTML to container
-                        $('#tutorsContainer').append(tutorHTML);
-                    });
-
-                    var totalTutorsCount = response.pagination.total;
-
-                    // Update the perPage value with the count returned in the response
-                    var perPage = response.pagination.perPage;
-
-                    // Calculate firstItem
-                    var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
-
-                    // Calculate lastItem
-                    var lastItem = Math.min(response.pagination.currentPage * perPage, totalTutorsCount);
-
-                    // Update the totalTutorsCount displayed in the UI
-                    $('.total-tutors-count').text(totalTutorsCount);
-
-                    // Update the range displayed in the UI
-                    $('.tutors-range').text(firstItem + ' to ' + lastItem + ' of ' + totalTutorsCount + ' tutors');
-
-                    // Hide pagination if totalTutorsCount is less than or equal to perPage
-                    if (totalTutorsCount <= perPage) {
-                        $('#paginationContainer').hide();
-                    } else {
-                        $('#paginationContainer').show();
-                    }
-
-                } else {
-                    // Handle case where no tutors are found
-                    $('#tutorsContainer').html('<p>No tutors found for the selected country.</p>');
-                }
-
-                // Update pagination links
-                $('#paginationContainer').html(response.pagination);
-            } else {
-                // Handle case where no tutors are found
-                console.log('No tutors found for the selected country.');
-                $('#tutorsContainer').html('<p>No tutors found for the selected country.</p>');
-            }
-        },
-        error: function(xhr, status, error) {
-            // Handle error response
-            console.log('An error occurred:', error);
-        }
-    });
-});
-
-$('#citysearch').keyup(function() {
-    var searchQuery = $(this).val(); // Get the value from the city search input field
-    var locationData = {
-        citysearch: searchQuery,
-        _token: '{{ csrf_token() }}' // Include CSRF token
-    };
-
-    // Send AJAX request with the appropriate location data
-    $.ajax({
-        type: 'POST',
-        url: '{{ route('fetch-data') }}',
-        data: locationData,
-        dataType: 'json',
-        success: function(response) {
-            console.log('Success function triggered', response);
-            $('#tutorsContainer').empty();
-
-            if (response && response.tutors) {
-                // Check if there are tutors
-                if (response.tutors.length > 0) {
-                    // Iterate over tutors and update content
-                    response.tutors.forEach(function(item) {
-                        // Assuming item.teaching is already an array in the response
-                        var teachingArray = item.teaching || []; 
-
-                        var tutorHTML = '<div class="ad-form">';
-                        tutorHTML += '<div class="ad-img-card">';
-                        tutorHTML += '<div style="display: flex; justify-content: center;">';
-                        tutorHTML += '<img src="storage/' + item.profileImage + '" alt="" class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">';
-                        tutorHTML += '</div>';
-                        tutorHTML += '<div class="ad-icons">';
-                        tutorHTML += '<p class="mb-0 mx-1 fs-5">4.5 <i class="fa-solid fa-star"></i></p>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '<div class="ad-detail my-3 w-100">';
-                        tutorHTML += '<div class="ae-div row">';
-                        tutorHTML += '<div class="col-9">';
-                        tutorHTML += '<div class="ae-detail-div">';
-                        tutorHTML += '<span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Name :</strong>' + item.f_name + ' ' + item.l_name + '</span>';
-                        tutorHTML += '<div class="ae-detail-child">';
-                        tutorHTML += '<span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong>';
-                        teachingArray.forEach(function(subject) {
-                            tutorHTML += '<span class="rounded font-s d-inline-block p-1 bg_green_hover text-center" style="text-transform: capitalize;">' + subject + '</span>';
-                        });
-                        tutorHTML += '</span>';
-                        tutorHTML += '<span><i class="fa-solid fa-globe"></i><strong>Country :</strong> ' + item.location + '</span>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '<div class="ae-detail-child">';
-                        tutorHTML += '<span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong> ' + item.gender + '</span>';
-                        tutorHTML += '<span class="d-flex align-item-center">';
-                        tutorHTML += '<i class="fa-solid fa-user mt-1"></i>';
-                        tutorHTML += '<strong style="margin-left: 15px;">Intro :</strong>';
-                        tutorHTML += '<p class="px-2">Content will be required</p>';
-                        tutorHTML += '</span>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '<div class="ad-div col-3">';
-                        tutorHTML += '<span>';
-                        tutorHTML += '<b>20 AED for 50 minutes</b>';
-                        tutorHTML += '</span>';
-                        tutorHTML += '<div class="ae-detail">';
-                        tutorHTML += '<h4 class="fs-6 mt-1">Free Trial Section</h4>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '</div>';
-
-                        // Append tutor HTML to container
-                        $('#tutorsContainer').append(tutorHTML);
-                    });
-
-                    var totalTutorsCount = response.pagination.total;
-                    var perPage = response.pagination.perPage;
-                    var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
-                    var lastItem = Math.min(response.pagination.currentPage * perPage, totalTutorsCount);
-
-                    // Update the totalTutorsCount displayed in the UI
-                    $('.total-tutors-count').text(totalTutorsCount);
-
-                    // Update the range displayed in the UI
-                    $('.tutors-range').text(firstItem + ' to ' + lastItem + ' of ' + totalTutorsCount + ' tutors');
-
-                    // Hide pagination if totalTutorsCount is less than or equal to perPage
-                    if (totalTutorsCount <= perPage) {
-                        $('#paginationContainer').hide();
-                    } else {
-                        $('#paginationContainer').show();
-                    }
-
-                    // Update pagination links
-                    $('#paginationContainer').html(response.pagination);
-                } else {
-                    // Handle case where no tutors are found
-                    $('#tutorsContainer').html('<p>No tutors found for the selected city.</p>');
-                }
-            } else {
-                // Handle case where no tutors are found
-                console.log('No tutors found for the selected city.');
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error('AJAX Error:', status, error);
-            // Handle error response
-        }
-    });
-});
-
-
-$('#subjectsearch').keyup(function() {
-    var searchQuery = $(this).val(); // Get the value from the subject search input field
-    var locationData = {
-        subjectsearch: searchQuery,
-        _token: '{{ csrf_token() }}' // Include CSRF token
-    };
-
-    // Send AJAX request with the appropriate location data
-    $.ajax({
-        type: 'POST',
-        url: '{{ route('fetch-data') }}',
-        data: locationData,
-        dataType: 'json',
-        success: function(response) {
-            console.log('Success function triggered', response);
-
-            if (response && response.tutors) {
-                $('#tutorsContainer').empty();
-
-                // Check if there are tutors
-                if (response.tutors.length > 0) {
-                    response.tutors.forEach(function(item) {
-                        // Convert PHP serialized array into JavaScript array
-                        var teachingArray = [];
-                        try {
-                            var serializedTeaching = item.teaching;
-                            var matches = serializedTeaching.match(/s:\d+:"(.*?)";/g);
-                            if (matches) {
-                                matches.forEach(function(match) {
-                                    teachingArray.push(match.match(/s:\d+:"(.*?)";/)[1]);
+                                var tutorHTML = '<div class="ad-form">';
+                                tutorHTML += '<div class="ad-img-card">';
+                                tutorHTML += '<div style="display: flex; justify-content: center;">';
+                                tutorHTML += '<img src="storage/' + item.profileImage + '" alt="" class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">';
+                                tutorHTML += '</div>';
+                                tutorHTML += '<div class="ad-icons">';
+                                tutorHTML += '<p class="mb-0 mx-1 fs-5">4.5 <i class="fa-solid fa-star"></i></p>';
+                                tutorHTML += '</div>';
+                                tutorHTML += '</div>';
+                                tutorHTML += '<div class="ad-detail my-3 w-100">';
+                                tutorHTML += '<div class="ae-div row">';
+                                tutorHTML += '<div class="col-9">';
+                                tutorHTML += '<div class="ae-detail-div">';
+                                tutorHTML += '<span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Name :</strong>' + item.f_name + ' ' + item.l_name + '</span>';
+                                tutorHTML += '<div class="ae-detail-child">';
+                                tutorHTML += '<span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong>';
+                                teachingArray.forEach(function(subject) {
+                                    tutorHTML += '<span class="rounded font-s d-inline-block p-1 bg_green_hover text-center" style="text-transform: capitalize;">' + subject + '</span>';
                                 });
+                                tutorHTML += '</span>';
+                                tutorHTML += '<span><i class="fa-solid fa-globe"></i><strong>Country :</strong> ' + item.location + '</span>';
+                                tutorHTML += '</div>';
+                                tutorHTML += '<div class="ae-detail-child">';
+                                tutorHTML += '<span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong>' + item.gender + '</span>';
+                                tutorHTML += '<span class="d-flex align-item-center">';
+                                tutorHTML += '<i class="fa-solid fa-user mt-1"></i>';
+                                tutorHTML += '<strong style="margin-left: 15px;">Intro :</strong>';
+                                tutorHTML += '<p class="px-2">Content will be required</p>';
+                                tutorHTML += '</div>';
+                                tutorHTML += '</div>';
+                                tutorHTML += '</div>';
+                                tutorHTML += '<div class="ad-div col-3">';
+                                tutorHTML += '<span>';
+                                tutorHTML += '<b>20 AED for 50 minutes</b>';
+                                tutorHTML += '</span>';
+                                tutorHTML += '<div class="ae-detail">';
+                                tutorHTML += '<h4 class="fs-6 mt-1">Free Trial Section</h4>';
+                                tutorHTML += '</div>';
+                                tutorHTML += '</div>';
+                                tutorHTML += '</div>';
+                                tutorHTML += '</div>';
+
+                                // Append tutor HTML to container
+                                $('#tutorsContainer').append(tutorHTML);
+                            });
+
+                            var totalTutorsCount = response.pagination.total;
+
+                            // Update the perPage value with the count returned in the response
+                            var perPage = response.pagination.perPage;
+
+                            // Calculate firstItem
+                            var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
+
+                            // Calculate lastItem
+                            var lastItem = Math.min(response.pagination.currentPage * perPage, totalTutorsCount);
+
+                            // Update the totalTutorsCount displayed in the UI
+                            $('.total-tutors-count').text(totalTutorsCount);
+
+                            // Update the range displayed in the UI
+                            $('.tutors-range').text(firstItem + ' to ' + lastItem + ' of ' + totalTutorsCount + ' tutors');
+
+                            // Hide pagination if totalTutorsCount is less than or equal to perPage
+                            if (totalTutorsCount <= perPage) {
+                                $('#paginationContainer').hide();
+                            } else {
+                                $('#paginationContainer').show();
                             }
-                        } catch (error) {
-                            console.error('Error parsing serialized teaching data:', error);
+
+                        } else {
+                            // Handle case where no tutors are found
+                            $('#tutorsContainer').html('<p>No tutors found for the selected country.</p>');
                         }
 
-                        // Generate tutor HTML
-                        var tutorHTML = '<div class="ad-form">';
-                        tutorHTML += '<div class="ad-img-card">';
-                        tutorHTML += '<div style="display: flex; justify-content: center;">';
-                        tutorHTML += '<img src="storage/' + item.profileImage + '" alt="" class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">';
-                        tutorHTML += '</div>';
-                        tutorHTML += '<div class="ad-icons">';
-                        tutorHTML += '<p class="mb-0 mx-1 fs-5">4.5 <i class="fa-solid fa-star"></i></p>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '<div class="ad-detail my-3 w-100">';
-                        tutorHTML += '<div class="ae-div row">';
-                        tutorHTML += '<div class="col-9">';
-                        tutorHTML += '<div class="ae-detail-div">';
-                        tutorHTML += '<span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Name :</strong>' + item.f_name + ' ' + item.l_name + '</span>';
-                        tutorHTML += '<div class="ae-detail-child">';
-                        tutorHTML += '<span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong>';
-                        teachingArray.forEach(function(subject) {
-                            tutorHTML += '<span class="rounded font-s d-inline-block p-1 bg_green_hover text-center" style="text-transform: capitalize;">' + subject + '</span>';
-                        });
-                        tutorHTML += '</span>';
-                        tutorHTML += '<span><i class="fa-solid fa-globe"></i><strong>Country :</strong> ' + item.location + '</span>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '<div class="ae-detail-child">';
-                        tutorHTML += '<span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong> ' + item.gender + '</span>';
-                        tutorHTML += '<span class="d-flex align-item-center">';
-                        tutorHTML += '<i class="fa-solid fa-user mt-1"></i>';
-                        tutorHTML += '<strong style="margin-left: 15px;">Intro :</strong>';
-                        tutorHTML += '<p class="px-2">Content will be required</p>';
-                        tutorHTML += '</span>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '<div class="ad-div col-3">';
-                        tutorHTML += '<span>';
-                        tutorHTML += '<b>20 AED for 50 minutes</b>';
-                        tutorHTML += '</span>';
-                        tutorHTML += '<div class="ae-detail">';
-                        tutorHTML += '<h4 class="fs-6 mt-1">Free Trial Section</h4>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '</div>';
-                        tutorHTML += '</div>';
-
-                        // Append tutor HTML to container
-                        $('#tutorsContainer').append(tutorHTML);
-                    });
-
-                    // Update pagination details
-                    var totalTutorsCount = response.pagination.total;
-                    var perPage = response.pagination.perPage;
-                    var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
-                    var lastItem = Math.min(response.pagination.currentPage * perPage, totalTutorsCount);
-
-                    $('.total-tutors-count').text(totalTutorsCount);
-                    $('.tutors-range').text(firstItem + ' to ' + lastItem + ' of ' + totalTutorsCount + ' tutors');
-
-                    if (totalTutorsCount <= perPage) {
-                        $('#paginationContainer').hide();
+                        // Update pagination links
+                        $('#paginationContainer').html(response.pagination);
                     } else {
-                        $('#paginationContainer').show();
+                        // Handle case where no tutors are found
+                        console.log('No tutors found for the selected country.');
+                        $('#tutorsContainer').html('<p>No tutors found for the selected country.</p>');
                     }
+                },
+                        error: function(xhr, status, error) {
+                            // Handle error response
+                            console.log('An error occurred:', error);
+                        }
+                    });
+                });
 
-                    // Update pagination links
-                    $('#paginationContainer').html(response.pagination);
-                } else {
-                    $('#tutorsContainer').html('<p>No tutors found for the selected subject.</p>');
-                }
-            } else {
-                $('#tutorsContainer').html('<p>No tutors found.</p>');
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error('AJAX error:', status, error);
-        }
-    });
-});
+            $('#citysearch').keyup(function() {
+                var searchQuery = $(this).val(); // Get the value from the city search input field
+                var locationData = {
+                    citysearch: searchQuery,
+                    _token: '{{ csrf_token() }}' // Include CSRF token
+                };
 
-$('#resetFilterBtn').click(function() {
-    // Send an AJAX request to reset filters
-    $.ajax({
-        type: 'POST',
-        url: '{{ route('fetch-data') }}',
-        data: {
-            reset: true,
-            _token: '{{ csrf_token() }}' // Include CSRF token
-        },
-        dataType: 'json',
-        success: function(response) {
-            // Handle success response for reset
-            // Clear the input fields
-            $('#citysearch').val('');
-            $('#subjectsearch').val('');
+                // Send AJAX request with the appropriate location data
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('fetch-data') }}',
+                    data: locationData,
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log('Success function triggered', response);
+                        $('#tutorsContainer').empty();
 
-            // Refresh the tutor container
-            $('#tutorsContainer').empty();
-            
-            // Update pagination if necessary
-            if (response && response.pagination) {
-                $('#paginationContainer').html(response.pagination);
-            } else {
-                $('#paginationContainer').hide();
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error('Error resetting filters:', status, error);
-        }
-    });
-});
+                        if (response && response.tutors) {
+                            // Check if there are tutors
+                            if (response.tutors.length > 0) {
+                                // Iterate over tutors and update content
+                                response.tutors.forEach(function(item) {
+                                    // Assuming item.teaching is already an array in the response
+                                    var teachingArray = item.teaching || []; 
+
+                                    var tutorHTML = '<div class="ad-form">';
+                                    tutorHTML += '<div class="ad-img-card">';
+                                    tutorHTML += '<div style="display: flex; justify-content: center;">';
+                                    tutorHTML += '<img src="storage/' + item.profileImage + '" alt="" class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '<div class="ad-icons">';
+                                    tutorHTML += '<p class="mb-0 mx-1 fs-5">4.5 <i class="fa-solid fa-star"></i></p>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '<div class="ad-detail my-3 w-100">';
+                                    tutorHTML += '<div class="ae-div row">';
+                                    tutorHTML += '<div class="col-9">';
+                                    tutorHTML += '<div class="ae-detail-div">';
+                                    tutorHTML += '<span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Name :</strong>' + item.f_name + ' ' + item.l_name + '</span>';
+                                    tutorHTML += '<div class="ae-detail-child">';
+                                    tutorHTML += '<span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong>';
+                                    teachingArray.forEach(function(subject) {
+                                        tutorHTML += '<span class="rounded font-s d-inline-block p-1 bg_green_hover text-center" style="text-transform: capitalize;">' + subject + '</span>';
+                                    });
+                                    tutorHTML += '</span>';
+                                    tutorHTML += '<span><i class="fa-solid fa-globe"></i><strong>Country :</strong> ' + item.location + '</span>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '<div class="ae-detail-child">';
+                                    tutorHTML += '<span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong> ' + item.gender + '</span>';
+                                    tutorHTML += '<span class="d-flex align-item-center">';
+                                    tutorHTML += '<i class="fa-solid fa-user mt-1"></i>';
+                                    tutorHTML += '<strong style="margin-left: 15px;">Intro :</strong>';
+                                    tutorHTML += '<p class="px-2">Content will be required</p>';
+                                    tutorHTML += '</span>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '<div class="ad-div col-3">';
+                                    tutorHTML += '<span>';
+                                    tutorHTML += '<b>20 AED for 50 minutes</b>';
+                                    tutorHTML += '</span>';
+                                    tutorHTML += '<div class="ae-detail">';
+                                    tutorHTML += '<h4 class="fs-6 mt-1">Free Trial Section</h4>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '</div>';
+
+                                    // Append tutor HTML to container
+                                    $('#tutorsContainer').append(tutorHTML);
+                                });
+
+                                var totalTutorsCount = response.pagination.total;
+                                var perPage = response.pagination.perPage;
+                                var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
+                                var lastItem = Math.min(response.pagination.currentPage * perPage, totalTutorsCount);
+
+                                // Update the totalTutorsCount displayed in the UI
+                                $('.total-tutors-count').text(totalTutorsCount);
+
+                                // Update the range displayed in the UI
+                                $('.tutors-range').text(firstItem + ' to ' + lastItem + ' of ' + totalTutorsCount + ' tutors');
+
+                                // Hide pagination if totalTutorsCount is less than or equal to perPage
+                                if (totalTutorsCount <= perPage) {
+                                    $('#paginationContainer').hide();
+                                } else {
+                                    $('#paginationContainer').show();
+                                }
+
+                                // Update pagination links
+                                $('#paginationContainer').html(response.pagination);
+                            } else {
+                                // Handle case where no tutors are found
+                                $('#tutorsContainer').html('<p>No tutors found for the selected city.</p>');
+                            }
+                        } else {
+                            // Handle case where no tutors are found
+                            console.log('No tutors found for the selected city.');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', status, error);
+                        // Handle error response
+                    }
+                });
+            });
+
+
+            $('#subjectsearch').keyup(function() {
+                var searchQuery = $(this).val(); // Get the value from the subject search input field
+                var locationData = {
+                    subjectsearch: searchQuery,
+                    _token: '{{ csrf_token() }}' // Include CSRF token
+                };
+
+                // Send AJAX request with the appropriate location data
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('fetch-data') }}',
+                    data: locationData,
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log('Success function triggered', response);
+
+                        if (response && response.tutors) {
+                            $('#tutorsContainer').empty();
+
+                            // Check if there are tutors
+                            if (response.tutors.length > 0) {
+                                response.tutors.forEach(function(item) {
+                                    // Convert PHP serialized array into JavaScript array
+                                    var teachingArray = [];
+                                    try {
+                                        var serializedTeaching = item.teaching;
+                                        var matches = serializedTeaching.match(/s:\d+:"(.*?)";/g);
+                                        if (matches) {
+                                            matches.forEach(function(match) {
+                                                teachingArray.push(match.match(/s:\d+:"(.*?)";/)[1]);
+                                            });
+                                        }
+                                    } catch (error) {
+                                        console.error('Error parsing serialized teaching data:', error);
+                                    }
+
+                                    // Generate tutor HTML
+                                    var tutorHTML = '<div class="ad-form">';
+                                    tutorHTML += '<div class="ad-img-card">';
+                                    tutorHTML += '<div style="display: flex; justify-content: center;">';
+                                    tutorHTML += '<img src="storage/' + item.profileImage + '" alt="" class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '<div class="ad-icons">';
+                                    tutorHTML += '<p class="mb-0 mx-1 fs-5">4.5 <i class="fa-solid fa-star"></i></p>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '<div class="ad-detail my-3 w-100">';
+                                    tutorHTML += '<div class="ae-div row">';
+                                    tutorHTML += '<div class="col-9">';
+                                    tutorHTML += '<div class="ae-detail-div">';
+                                    tutorHTML += '<span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Name :</strong>' + item.f_name + ' ' + item.l_name + '</span>';
+                                    tutorHTML += '<div class="ae-detail-child">';
+                                    tutorHTML += '<span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong>';
+                                    teachingArray.forEach(function(subject) {
+                                        tutorHTML += '<span class="rounded font-s d-inline-block p-1 bg_green_hover text-center" style="text-transform: capitalize;">' + subject + '</span>';
+                                    });
+                                    tutorHTML += '</span>';
+                                    tutorHTML += '<span><i class="fa-solid fa-globe"></i><strong>Country :</strong> ' + item.location + '</span>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '<div class="ae-detail-child">';
+                                    tutorHTML += '<span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong> ' + item.gender + '</span>';
+                                    tutorHTML += '<span class="d-flex align-item-center">';
+                                    tutorHTML += '<i class="fa-solid fa-user mt-1"></i>';
+                                    tutorHTML += '<strong style="margin-left: 15px;">Intro :</strong>';
+                                    tutorHTML += '<p class="px-2">Content will be required</p>';
+                                    tutorHTML += '</span>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '<div class="ad-div col-3">';
+                                    tutorHTML += '<span>';
+                                    tutorHTML += '<b>20 AED for 50 minutes</b>';
+                                    tutorHTML += '</span>';
+                                    tutorHTML += '<div class="ae-detail">';
+                                    tutorHTML += '<h4 class="fs-6 mt-1">Free Trial Section</h4>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '</div>';
+                                    tutorHTML += '</div>';
+
+                                    // Append tutor HTML to container
+                                    $('#tutorsContainer').append(tutorHTML);
+                                });
+
+                                // Update pagination details
+                                var totalTutorsCount = response.pagination.total;
+                                var perPage = response.pagination.perPage;
+                                var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
+                                var lastItem = Math.min(response.pagination.currentPage * perPage, totalTutorsCount);
+
+                                $('.total-tutors-count').text(totalTutorsCount);
+                                $('.tutors-range').text(firstItem + ' to ' + lastItem + ' of ' + totalTutorsCount + ' tutors');
+
+                                if (totalTutorsCount <= perPage) {
+                                    $('#paginationContainer').hide();
+                                } else {
+                                    $('#paginationContainer').show();
+                                }
+
+                                // Update pagination links
+                                $('#paginationContainer').html(response.pagination);
+                            } else {
+                                $('#tutorsContainer').html('<p>No tutors found for the selected subject.</p>');
+                            }
+                        } else {
+                            $('#tutorsContainer').html('<p>No tutors found.</p>');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX error:', status, error);
+                    }
+                });
+            });
+
+            $('#resetFilterBtn').click(function() {
+                // Send an AJAX request to reset filters
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('fetch-data') }}',
+                    data: {
+                        reset: true,
+                        _token: '{{ csrf_token() }}' // Include CSRF token
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        // Handle success response for reset
+                        // Clear the input fields
+                        $('#citysearch').val('');
+                        $('#subjectsearch').val('');
+
+                        // Refresh the tutor container
+                        $('#tutorsContainer').empty();
+                        
+                        // Update pagination if necessary
+                        if (response && response.pagination) {
+                            $('#paginationContainer').html(response.pagination);
+                        } else {
+                            $('#paginationContainer').hide();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error resetting filters:', status, error);
+                    }
+                });
+            });
 
 
             $('.notification').hide();
