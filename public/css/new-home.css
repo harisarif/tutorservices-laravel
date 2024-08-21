@@ -108,7 +108,7 @@
 }
 
 .select2-container {
-    width: 65% !important;
+    width: 200px;
 
 }
 .AB{
@@ -247,11 +247,23 @@ width: 100%;
     }
 }
 } */
+ #countrySelect{
+    width: 29% !important;
+ }
+ .country-row .select2-container { 
+    width: 90%;
+ }
 @media (min-width:1441px) and (max-width: 2060px) {
     .select2-container {
-        width: 91% !important;
+        width: 30%;
 
     }
+    .country-row .select2-container { 
+        width: 90% !important;
+     }
+     .inquiry-select .select2-container { 
+        width: 30% !important;
+     }
 }
 
 @media (max-width: 991px) {

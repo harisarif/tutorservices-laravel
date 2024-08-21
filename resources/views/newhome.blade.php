@@ -757,7 +757,7 @@
                             <div class="col-sm-12">
                              <div class="form-group p-2 px-0">
                              <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your Number <b style="color: red; font-size: 20px;">*</b></strong></label>
-                             <div class="input-group d-flex justify-content-between align-items-center" style="width: 101%;">
+                             <div class="inquiry-select input-group d-flex justify-content-between align-items-center" style="width: 100%;">
                                         
                                         <select name="countrySelect" id="countrySelect" class="form-select country-select w-50" required>
                                             @foreach ($countriesPhone as $key => $country)
@@ -765,7 +765,7 @@
                                             @endforeach
                                         </select>
                                        
-                                        <input  class="form-control w-50" required name="phone" id="phone" type="text" placeholder="e.g +92XXXXXXXXXX" style="border: 1px solid #aaa; height: 28px; box-shadow: none;">
+                                        <input  class="form-control w-50" required name="phone" id="phone" type="text" placeholder="e.g +92XXXXXXXXXX" style="border: 1px solid #ddd; height: 50px; box-shadow: none;">
                                     </div>
                             </div>
                             </div>
