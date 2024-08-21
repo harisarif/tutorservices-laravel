@@ -9,6 +9,9 @@
     z-index: 9;
     text-align: center;
 }
+.img-reqire {
+    height: 600px;
+}
 .mini_header{
     background-color: #42b979;
 }
@@ -319,6 +322,12 @@ width: 100%;
 }
 
 @media (max-width: 425px) {
+    .ai-image-div img {
+        height: auto;
+    }
+    .img-reqire{
+        height: auto;
+    }
     .AI{
         text-align: justify;
     }
@@ -1095,6 +1104,7 @@ footer{
   }
   .ai-image-div img{
     width: 100%;
+    height: 600px;
   }
   .im-heading h2{
     text-align: center;

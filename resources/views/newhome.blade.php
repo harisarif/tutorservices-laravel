@@ -779,7 +779,7 @@
                       </div>
                     </div>
                     
-                    <div class="col-7 img-reqire">
+                    <div class="col-7 img-reqire p-0">
                         <div class="ai-image-div">
                             <!-- <h1 class="text-center text-white">This Imaage will be Required</h1> -->
                              <img src="images/Ad-Banner.jpeg" alt="">
