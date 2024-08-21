@@ -428,8 +428,8 @@
                                          </div>
                                          
                                     </div>
-                                    <div class="ad-detail my-3  w-100">
-                                        <div class="ae-div row">
+                                    <div class="ad-detail  w-100">
+                                        <div class="ae-div row px-2">
                                             <div class="col-9">
                                                 <div class="ae-detail-div">
                                                     <span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Name :</strong>{{ $item->f_name }} {{$item->l_name}} </span>
@@ -444,7 +444,7 @@
                                                 </div>
                                                 <span class="d-flex align-item-center"><i class="fa-solid fa-user mt-1"></i>
                                                 <strong style="margin-left: 15px;">Intro :</strong>{{ $item->introduction }}
-                                                <p  class="px-2">Conten will be reqiured</p>                                                
+                                                <p  class="">Conten will be reqiured</p>                                                
                                              </span>
                                             </div>
                                          <div class="ad-div col-3">
@@ -593,7 +593,6 @@
                                                         </h5>
                                                         <span class="d-none d-sm-block">:</span>
                                                     </div>
-
                                                     <div class="d-flex flex-column flex-md-row flex-wrap">
 
                                                         @php
@@ -735,7 +734,7 @@
                         <div class="ai-card px-3 py-4" style="border: 1px solid #ddd; border-radius: 5px;">
                          <div class="card-body">
                                  <h6 class="card-title mb-3 text-center fw-bold fs-6 ">Submit your inquiry to request a callback for further assistance</h6> 
-                                  <h3 class="fw-bold text-center" style="font-size: 15px;color: red;"><i>"Please Complete All Required Fields"</i></h3>
+                                  <h3 class="fw-bold text-center" style="font-size: 13px;color: red;"><i>"Please Complete All Required Fields"</i></h3>
                               
            
                              <div class="row g-0">
@@ -778,13 +777,13 @@
                                 
                             </div>
                            
-                            <div class=" d-flex flex-column text-center px-5  mb-3">  </div> <button class="btn btn-success btn-block confirm-button">Confirm</button>
+                            <div class=" d-flex flex-column text-center px-5  mb-3">  </div> <button class="AI-button btn btn-success btn-block confirm-button">Confirm</button>
                            </div>
                         </div>
                       </div>
                     </div>
                     
-                    <div class="col-7 img-reqire">
+                    <div class="col-7 img-reqire p-0">
                         <div class="ai-image-div">
                             <!-- <h1 class="text-center text-white">This Imaage will be Required</h1> -->
                              <img src="images/Ad-Banner.jpeg" alt="">
