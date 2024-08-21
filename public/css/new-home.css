@@ -345,14 +345,14 @@ width: 100%;
         position: static;
         background: transparent;
         box-shadow: 0 0 0 0;
-        font-size: 15px;
+        font-size: 18px;
     }
     .email{
         display: block !important;
         position: static;
         background: transparent;
         box-shadow: 0 0 0 0;
-        font-size: 15px;
+        font-size: 18px;
     }
     #language-select{
         position: absolute;

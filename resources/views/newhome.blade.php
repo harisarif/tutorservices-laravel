@@ -150,27 +150,27 @@
                         </button>
 
                         <!-- Off-canvas component -->
-                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                            <div class="offcanvas-header p-1">
+                        <div class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" style="width:100%;">
+                            <div class="offcanvas-header p-1" style="width:96%;">
                                 <a class="navbar-brand" href="{{ route('newhome') }}">
                                  <img src="images/white-logo.jpeg" height="50px" alt="logo" style="height: 50px; border-radius: 10px;">
                                 </a>
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
-                            <div class="offcanvas-body p-2">
+                            <div class="offcanvas-body p-2 px-3">
                                 <ul class="navbar-nav align-items-md-center">
                                     <div class="ai-nav">
                                         <div class="AI">    
                                             <li class="nav-item m-1 rounded w-1 py-0">
                                                 <a class="nav-link text-decoration-none solid_btn p-0" href="{{ route('login') }}">
-                                                    <i class="fas fa-sign-in-alt"></i> {{ __('messages.login') }}
+                                                    <i class="fas fa-sign-in-alt"></i><span style="margin-left:5px;"> {{ __('messages.login') }}</span>
                                                 </a>
                                             </li>
                                         </div>
                                         <div class="AI">
                                             <li class="nav-item m-1 rounded w-1 py-0">
                                                 <a class="nav-link text-decoration-none solid_btn p-0" href="{{ route('basicsignup') }}">
-                                                    <i class="fa-regular fa-clipboard"></i> Register
+                                                    <i class="fa-regular fa-clipboard"></i> <span class="mx-2">Register</span>
                                                 </a>
                                             </li>
                                         </div>
@@ -178,25 +178,26 @@
                                     <div class="">
                                         <div class="email-container mx-1">
                                             <i class="fa fa-envelope-square" aria-hidden="true" style="color: #42b979;"></i>
-                                            <a class="email text-decoration-none" href="mailto:info@eduexceledu.com" style="color: #42b979;">
+                                            <a class="email text-decoration-none mx-2" href="mailto:info@eduexceledu.com " style="color: #42b979;">
                                                 info@eduexceledu.com
                                             </a>
                                         </div>
                                         <div class="d-flex alig header-phone-number phone-container mx-1" style="align-items: center;">
                                             <i class="fa-solid fa-phone" aria-hidden="true" style="color: #42b979;"></i>
-                                            <a class="phone-number-header text-decoration-none" href="tel:+971566428066" style="color: #42b979;">
+                                            <a class="phone-number-header text-decoration-none mx-2" href="tel:+971566428066" style="color: #42b979;">
                                                 +971 56 642 8066
                                             </a>
                                         </div>
                                         <div class="custom-select-wrapper">
-                                            <div class="custom-select mx-1 d-flex" style="align-items: center;">
+                                            <!-- <div class="custom-select mx-1 d-flex" style="align-items: center;">
+                                                <label class="d-block mx-3" style="color:#42b979;font-size:18px;">Language</label>
                                                 <i class="fa-solid fa-globe" style="color:#42b979 !important" aria-hidden="true" onclick="toggleDropdown()"></i>
-                                                <label class="d-block mx-2" style="color:#42b979;font-size:15px;">Language</label>
+                                                
                                                 <div class="custom-options" id="language-select">
                                                     <div class="custom-option" data-value="en" onclick="changeLanguage('en')">English</div>
                                                     <div class="custom-option" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </ul>
