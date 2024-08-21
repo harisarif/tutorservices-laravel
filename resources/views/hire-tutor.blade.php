@@ -319,56 +319,56 @@
         });
         $(document).ready(function() {
       // Initialize Select2
-      $('#countrySelect').select2();
+            $('#countrySelect').select2();
 
-      const defaultCountry = 'US';
-      const countriesPrefix = @json($countries_prefix);
-      const countriesNumberLength = @json($countries_number_length);
-      let countryValue = defaultCountry;
+            const defaultCountry = 'US';
+            const countriesPrefix = @json($countries_prefix);
+            const countriesNumberLength = @json($countries_number_length);
+            let countryValue = defaultCountry;
 
-      const country = $('#countrySelect');
-      const userNumber = $('#phone');
+            const country = $('#countrySelect');
+            const userNumber = $('#phone');
 
-      function setCountryPrefix() {
-        const prefix = countriesPrefix[countryValue];
-        userNumber.val(prefix);
-        userNumber.attr('data-prefix', prefix); // Store the prefix in a data attribute
-      }
+            function setCountryPrefix() {
+                const prefix = countriesPrefix[countryValue];
+                userNumber.val(prefix);
+                userNumber.attr('data-prefix', prefix); // Store the prefix in a data attribute
+            }
 
-      // Prevent users from clearing the prefix
-      userNumber.on('keydown', function(event) {
-        const prefix = userNumber.attr('data-prefix');
-        const cursorPosition = this.selectionStart;
-        
-        // Prevent deletion or backspace within the prefix
-        if (cursorPosition <= prefix.length && (event.key === 'Backspace' || event.key === 'Delete')) {
-          event.preventDefault();
-        }
+            // Prevent users from clearing the prefix
+            userNumber.on('keydown', function(event) {
+                const prefix = userNumber.attr('data-prefix');
+                const cursorPosition = this.selectionStart;
+                
+                // Prevent deletion or backspace within the prefix
+                if (cursorPosition <= prefix.length && (event.key === 'Backspace' || event.key === 'Delete')) {
+                event.preventDefault();
+                }
 
-        // Prevent typing within the prefix
-        if (cursorPosition < prefix.length && !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
-          event.preventDefault();
-        }
-      });
+                // Prevent typing within the prefix
+                if (cursorPosition < prefix.length && !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
+                event.preventDefault();
+                }
+            });
 
-      // Adjust input length based on the selected country
-      userNumber.on('input', function() {
-        const prefix = userNumber.attr('data-prefix');
-        const maxLength = countriesNumberLength[countryValue];
-        if (userNumber.val().length > maxLength) {
-          userNumber.val(userNumber.val().slice(0, maxLength));
-        }
-      });
+            // Adjust input length based on the selected country
+            userNumber.on('input', function() {
+                const prefix = userNumber.attr('data-prefix');
+                const maxLength = countriesNumberLength[countryValue];
+                if (userNumber.val().length > maxLength) {
+                userNumber.val(userNumber.val().slice(0, maxLength));
+                }
+            });
 
-      // Change the prefix when the country selection changes
-      country.on('change', function() {
-        countryValue = country.val();
-        setCountryPrefix();
-      });
+            // Change the prefix when the country selection changes
+            country.on('change', function() {
+                countryValue = country.val();
+                setCountryPrefix();
+            });
 
-      // Set default country and prefix on page load
-      country.val(defaultCountry).trigger('change');
-      setCountryPrefix();
+            // Set default country and prefix on page load
+            country.val(defaultCountry).trigger('change');
+            setCountryPrefix();
     });
 </script>
 @endsection

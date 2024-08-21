@@ -36,12 +36,17 @@ class TutorController extends Controller
                 }
             }
             $countries = collect(config('countries_assoc.countries'));
-
+            $countriesPhone = collect(config('phonecountries.countries'));
+            $countries_number_length = collect(config('countries_number_length.countries'));
+            $countries_prefix = collect(config('countries_prefix.countries'));
             return view('newhome', [
                 'tutors' => $tutors,
                 'totalTutorsCount' => $totalTutorsCount,
                 'perPage' => $perPage,
                 'countries' => $countries,
+                'countriesPhone'=>$countriesPhone,
+                'countries_number_length'=>$countries_number_length,
+                'countries_prefix'=>$countries_prefix
             ]);
         }
         public function tutorDetail (){

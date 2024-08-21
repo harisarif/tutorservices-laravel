@@ -289,7 +289,7 @@
            
             <!--  -->
 
-            <section class="row justify-content-center">
+            <section class="row justify-content-center mx-0">
                 <div class="col-12 row-gap-1 p-1 d-none">
                     <a class="tutorLinks d-inline-block text-center text-decoration-none" href="{{ route('hire.tutor') }}">Browse
                         Tutor</a>
@@ -366,7 +366,7 @@
                     <div class="ae-heading my-4">
                         <h2 class="text-center fw-bold ">Find A Tutor</h2>
                     </div>
-                    <div class="row justify-content-center px-0">
+                    <div class="row justify-content-center px-0 mx-0">
                     
                     
                     <div class="col-md-9">
@@ -728,7 +728,7 @@
                     <div class="ai-heading-div">
                         <h2 class="text-center  fw-bold" >Inquiry Overview</h2>
                     </div>
-                 <div class="im row">
+                 <div class="im row mx-0">
                     <div class=" Ai col-5 " >
                 <form>
                      <div class=" mt-3 mb-5 " >
@@ -757,7 +757,16 @@
                             <div class="col-sm-12">
                              <div class="form-group p-2 px-0">
                              <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your Number <b style="color: red; font-size: 20px;">*</b></strong></label>
-                            <div class="input-group"> <input class="form-control" type="text" placeholder="Mobile"> </div>
+                             <div class="input-group d-flex justify-content-between align-items-center" style="width: 101%;">
+                                        
+                                        <select name="countrySelect" id="countrySelect" class="form-select country-select w-50" required>
+                                            @foreach ($countriesPhone as $key => $country)
+                                                <option value="{{ $key }}">{{ $country }}</option>
+                                            @endforeach
+                                        </select>
+                                       
+                                        <input  class="form-control w-50" required name="phone" id="phone" type="text" placeholder="e.g +92XXXXXXXXXX" style="border: 1px solid #aaa; height: 28px; box-shadow: none;">
+                                    </div>
                             </div>
                             </div>
                             </div>
@@ -789,7 +798,7 @@
                     <div class="im-heading py-3">
                         <h2>Become A Tutor</h2>
                     </div>
-                    <div class="AE row border" >
+                    <div class="AE row border mx-0" >
                         <div class="col-6 im-div">
                             <div class="im-img">
                                 <img src="images/im-teacher.jpg" alt="">
@@ -1626,5 +1635,57 @@ $('#resetFilterBtn').click(function() {
         var url = "{{ url('lang') }}/" + locale;
         window.location.href = url;
     }
+    $(document).ready(function() {
+            $('#countrySelect').select2();
+
+            const defaultCountry = 'US';
+            const countriesPrefix = @json($countries_prefix);
+            const countriesNumberLength = @json($countries_number_length);
+            let countryValue = defaultCountry;
+
+            const country = $('#countrySelect');
+            const userNumber = $('#phone');
+
+            function setCountryPrefix() {
+                const prefix = countriesPrefix[countryValue];
+                userNumber.val(prefix);
+                userNumber.attr('data-prefix', prefix); // Store the prefix in a data attribute
+            }
+
+            // Prevent users from clearing the prefix
+            userNumber.on('keydown', function(event) {
+                const prefix = userNumber.attr('data-prefix');
+                const cursorPosition = this.selectionStart;
+                
+                // Prevent deletion or backspace within the prefix
+                if (cursorPosition <= prefix.length && (event.key === 'Backspace' || event.key === 'Delete')) {
+                event.preventDefault();
+                }
+
+                // Prevent typing within the prefix
+                if (cursorPosition < prefix.length && !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
+                event.preventDefault();
+                }
+            });
+
+            // Adjust input length based on the selected country
+            userNumber.on('input', function() {
+                const prefix = userNumber.attr('data-prefix');
+                const maxLength = countriesNumberLength[countryValue];
+                if (userNumber.val().length > maxLength) {
+                userNumber.val(userNumber.val().slice(0, maxLength));
+                }
+            });
+
+            // Change the prefix when the country selection changes
+            country.on('change', function() {
+                countryValue = country.val();
+                setCountryPrefix();
+            });
+
+            // Set default country and prefix on page load
+            country.val(defaultCountry).trigger('change');
+            setCountryPrefix();
+    });
 </script>
 @endsection
