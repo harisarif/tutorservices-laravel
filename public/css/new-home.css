@@ -9,6 +9,9 @@
     z-index: 9;
     text-align: center;
 }
+.img-reqire {
+    height: 600px;
+}
 .mini_header{
     background-color: #42b979;
 }
@@ -334,6 +337,13 @@ width: 100%;
 }
 
 @media (max-width: 425px) {
+    .ai-image-div img {
+        height: auto;
+    }
+    .img-reqire{
+        height: auto;
+        order: 1;
+    }
     .AI{
         text-align: justify;
     }
@@ -436,6 +446,11 @@ width: 100%;
     }
     .ai-image-div img {
         width:100% !important;
+        height: auto !important;
+    }
+    .AI-button{
+        margin: 0 auto;
+        display: flex;
     }
     .img-reqire {
         width: 100%;
@@ -445,6 +460,7 @@ width: 100%;
     }
     .Ai{
         width: 100%;
+        order: 2;
     }
 }
 .banner-section {
@@ -855,14 +871,7 @@ align-items: center;
     padding: 0 5px;
     color: #42b979;
 }
-/* end  */
 
-  
-
-  
-
-
-  /* General styling for the red dot */
 .red-dot {
     width: 15px;
     height: 15px;
@@ -1106,16 +1115,12 @@ footer{
     border: 1px solid #ddd;
     border-radius: 5px;
     margin-top: 17px;
-    padding-left: 0;
+    padding: 0;
     
   }
   .ai-image-div img{
     width: 100%;
     height: 100%;
-  }
-  .AI-button{
-    margin: 0 auto;
-    display: flex;
   }
   .im-heading h2{
     text-align: center;
