@@ -442,6 +442,7 @@ width: 100%;
     }
     .ai-image-div img {
         width:100% !important;
+        height: auto !important;
     }
     .img-reqire {
         width: 100%;
