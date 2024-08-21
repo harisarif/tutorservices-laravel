@@ -234,9 +234,12 @@
 
 @media (max-width: 1440px) {
     .select2-container {
-        width: 100% !important;
+        width: 100% ;
 
     }
+    .inquiry-select .select2-container { 
+        width: 30% !important;
+     }
 }
 
 /* @media (min-width: 991px) {
