@@ -1,9 +1,9 @@
 <footer class="row text-center text-lg-start justify-content-center m-0 p-0">
 <div class="container" style="width: 1100px;">
           <div class="row py-5">
-            <div class="col-4">
-                <ul>
-                    <li class="text-white fs-5 d-block fw-bold">Other Pages</li>
+            <div class="col-lg-4 col-sm-12">
+                <ul class="my-2">
+                    <li class="AB-footer text-white fs-5 d-block fw-bold">Other Pages</li>
                     <li class="ad-footer d-block py-1 ease-in-out duration-300">
                         
                          <a class="text-decoration-none text-light ease-in-out duration-300 ... "href="{{route('faq.index')}}">FAQ</a>
@@ -17,9 +17,9 @@
                 </ul>
                
             </div>
-            <div class="col-4">
-                 <ul>
-                    <li class="text-white fs-5 d-block fw-bold">Edexcel Socials</li>
+            <div class="col-lg-4 col-sm-12">
+                 <ul class="my-2">
+                    <li class="AB-footer text-white fs-5 d-block fw-bold">Edexcel Socials</li>
                     <li class="ad-footer d-block py-1">
                         <a target="_blank"
                             href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d"class="text-decoration-none">
@@ -52,16 +52,16 @@
                  </ul>
             </div>
 
-            <div class="col-4">
-                <ul>
-                    <li class="text-white fs-5 d-block fw-bold">Contact Us</li>
+            <div class="col-lg-4 col-sm-12col-4">
+                <ul class="my-2">
+                    <li class="AB-footer text-white fs-5 d-block fw-bold">Contact Us</li>
                     <li class="ad-footer d-block py-1">
                      <i class="fa-solid fa-location-dot text-white"></i>
                      <span class="text-white">Dubai</span>
                     </li>
-                    <li class="ad-footer d-block py-1">
+                    <li class="ad-footer d-block py-1 d-flex" style="align-items: center;">
                         <i class="fa fa-envelope-square text-white" aria-hidden="true" ></i>
-                         <a class=" text-decoration-none text-white" href="mailto:info@eduexceledu.com" >info@eduexceledu.com</a>
+                         <a class=" text-decoration-none text-white mx-1" href="mailto:info@eduexceledu.com" >info@eduexceledu.com</a>
                     </li>
                     <li class="ad-footer d-block py-1">
                      <i class="fa-solid fa-phone text-white" aria-hidden="true" ></i>

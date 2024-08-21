@@ -265,16 +265,18 @@
                     Your browser does not support the video tag.
                 </video> -->
                 <div class="banner-content">
-                    <h1 class=" text-white" style="margin-top:10rem;">The Content will be requried</h1>
+                    <h1 class="aa text-white" style="margin-top:10rem;">The Content will be requried</h1>
                 </div>
                 {{-- <button class="p-2  btn-an rounded border-0 text-light">
                         Student
                     </button> --}}
-                    <button class="p-2  btn-an rounded border-0 text-success" style="margin: 5px 46%; white-space: nowrap; background: #42b979;">
-                        <a class=" text-decoration-none active solid_btn" aria-current="page"
+                   <div class="AB">
+                        <button class="ab  p-2  btn-an rounded border-0 text-success" style=" white-space: nowrap; background: #42b979;">
+                            <a class=" text-decoration-none active solid_btn" aria-current="page"
                             href="{{ route('hire.tutor') }}">Request A Tutor </a>
 
                     </button>
+                   </div>
     </section>
     <div class="wrapper container">
             <!-- WhatsApp Button html start -->
@@ -787,7 +789,7 @@
                     <div class="im-heading py-3">
                         <h2>Become A Tutor</h2>
                     </div>
-                    <div class="row border" >
+                    <div class="AE row border" >
                         <div class="col-6 im-div">
                             <div class="im-img">
                                 <img src="images/im-teacher.jpg" alt="">
@@ -801,9 +803,9 @@
 
                                 <div class="im-detail">
                                     <ul>
-                                        <li class="fs-5">Expand Your Student Base</li>
-                                        <li class="fs-5">Boost Your Business</li>
-                                        <li class="fs-5">Guaranteed Payment Security</li>
+                                        <li class="AH fs-5">Expand Your Student Base</li>
+                                        <li class="AH fs-5">Boost Your Business</li>
+                                        <li class="AH fs-5">Guaranteed Payment Security</li>
                                     </ul>
                                 </div>
                                 <div class="im-button d-flex mx-3">

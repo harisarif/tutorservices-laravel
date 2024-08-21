@@ -111,7 +111,10 @@
     width: 65% !important;
 
 }
-
+.AB{
+    display: flex;
+    justify-content: center;
+}
 @media (min-width: 768px) {
 
     /* .select2-container {
@@ -316,17 +319,26 @@ width: 100%;
 }
 
 @media (max-width: 425px) {
-    .navbar-nav {
-        /* position: absolute;
-        z-index: 9;
-        left: -300px;
-        top: 35px;
-        background: #fff;
-        padding: 10px;
-        width: 320px; */
-    }
     .AI{
         text-align: justify;
+    }
+    .AE{
+        flex-direction: column;
+    }
+    .im-div{
+        width: 100%;
+    }
+    .im-img{
+        width: 320px !important;
+    }
+    .im-heading-div h1{
+        font-size: 18px !important;
+    }
+    .AH{
+        font-size: 15px !important;
+    }
+    .ad-div-child {
+        width: 100%;
     }
     .ai-nav{
         display: block !important;
@@ -362,6 +374,25 @@ width: 100%;
         background: transparent;
         box-shadow: 0 0 0 0;
         font-size: 12px;
+    }
+    .ad-footer{
+        text-align: justify;
+    }
+    .AB-footer{
+        text-align: justify;
+    }
+    .aa{
+        margin-top: 0 !important;
+        font-size: 22px;
+        color: #42b979 !important;
+    }
+    .AB{
+       display: flex;
+       justify-content: center;
+       margin: 10px 0;
+    }
+    .banner-section{
+        height: auto !important;
     }
     .ad-form{
         flex-direction: column;
@@ -1072,7 +1103,7 @@ footer{
     
   }
   .im-heading-div h1{
-    font-size: 3.5rem !important;
+    font-size: 3.5rem ;
   }
   .im-div{
     border: 1px solid #ddd;
