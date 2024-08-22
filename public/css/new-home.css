@@ -486,7 +486,7 @@ width: 100%;
        margin: 10px 0;
     }
     .banner-section{
-        height: auto !important;
+        height: 22vh !important;
     }
     .ad-form{
         flex-direction: column;

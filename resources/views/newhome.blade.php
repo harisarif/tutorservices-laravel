@@ -415,7 +415,7 @@
                                                 </div>
                                                 
                                             </div>
-                                            <div class="ad-detail my-1 mx-2 w-100">
+                                            <div class="ad-detail my-1 mx-4 w-100">
                                                 <div class="ae-div row">
                                                     <div class="col-9">
                                                         <div class="ae-detail-div">
@@ -777,7 +777,7 @@
                         </div>
                     </div>
                     
-                    <section class="ad-Tutor my-4" >
+                    <section class="ad-Tutor " >
                             <div class="im-heading py-3">
                                 <h2>Become A Tutor</h2>
                             </div>
