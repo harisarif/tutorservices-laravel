@@ -104,9 +104,9 @@
 
                             
                             <div class="form-group" style="text-align:left; width:90%; margin: 0 auto;" >
-                            <label for="dropdown1" class=" pb-1">
-                                    <strong style="color:#42b979;">Select your Grade <b style="color: red;
-                                    font-size: 20px;">*</b></strong>
+                                    <label for="dropdown1" class=" pb-1">
+                                        <strong style="color:#42b979;">Select your Grade <b style="color: red;
+                                         font-size: 20px;">*</b></strong>
                                    </label>
                                 <select class="form-control" id="school_class" name="school_class" style="height:50px;">>
                                     @foreach($schoolClasses as $schoolClass)

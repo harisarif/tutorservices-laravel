@@ -189,7 +189,15 @@
                                             </a>
                                         </div>
                                         <div class="custom-select-wrapper">
-                                           
+                                            <!-- <div class="custom-select mx-1 d-flex" style="align-items: center;">
+                                                <label class="d-block mx-3" style="color:#42b979;font-size:18px;">Language</label>
+                                                <i class="fa-solid fa-globe" style="color:#42b979 !important" aria-hidden="true" onclick="toggleDropdown()"></i>
+                                                
+                                                <div class="custom-options" id="language-select">
+                                                    <div class="custom-option" data-value="en" onclick="changeLanguage('en')">English</div>
+                                                    <div class="custom-option" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
+                                                </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </ul>
@@ -251,6 +259,11 @@
         <div class="notification mb-2 w-25 p-2 bg-info-subtle position-absolute end-0 top-100 z-1">This is a demo</div>
     </div>
     <section class="banner-section" style="background-image: url(images/Potrate.webp); background-size: cover;">
+                
+                <!-- <video autoplay muted loop playsinline>
+                    <source src="{{ asset('images/banner-video.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video> -->
                 <div class="banner-content">
                     <h1 class="aa text-white" style="margin-top:10rem;">The Content will be requried</h1>
                 </div>
@@ -389,41 +402,41 @@
                                 <!-- Tutor profile -->
                                 @if ($tutors->count() > 0)
 
-                                
-                            <div id="tutorsContainer">
-                                @foreach ($tutors as $item)
-                                <div class="ad-form">
-                                    <div class="ad-img-card">
-                                        <div style="display: flex; justify-content: center;">
-                                            <img src="{{ asset('storage/' . $item->profileImage) }}" alt="..." class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">
-                                        </div>
-                                        <div class="ad-icons">
-                                          <p class="mb-0 mx-1 fs-5">4.5 <i class="fa-solid fa-star"></i></p>
-                                         </div>
-                                         
-                                    </div>
-                                    <div class="ad-detail my-3  w-100">
-                                        <div class="ae-div row px-2">
-                                            <div class="col-9">
-                                                <div class="ae-detail-div">
-                                                    <span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Name :</strong>{{ $item->f_name }} {{$item->l_name}} </span>
-                                                    <!-- <span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Qualification :</strong> {{ $item->qualification }} </span> -->
-                                                    
-                                                    <span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong> English</span>
-
-                                                    <span><i class="fa-solid fa-globe"></i><strong>Country :</strong> {{ $item->location }}</span>
+                                        
+                                    <div id="tutorsContainer">
+                                        @foreach ($tutors as $item)
+                                        <div class="ad-form">
+                                            <div class="ad-img-card">
+                                                <div style="display: flex; justify-content: center;">
+                                                    <img src="{{ asset('storage/' . $item->profileImage) }}" alt="..." class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">
                                                 </div>
-                                                <div class="ae-detail-child">  
-                                                        <span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong>{{ $item->gender }}</span>
+                                                <div class="ad-icons">
+                                                <p class="mb-0 mx-1 fs-5">4.5 <i class="fa-solid fa-star"></i></p>
                                                 </div>
-                                                <span class="d-flex align-item-center"><i class="fa-solid fa-user mt-1"></i>
-                                                <strong style="margin-left: 15px;">Intro :</strong>{{ $item->introduction }}
-                                                <p  class="px-2">Conten will be reqiured</p>                                                
-                                             </span>
+                                                
                                             </div>
-                                         <div class="ad-div col-3">
-                                                <span ><b>20 AED for 50 mintues</b>
-                                                </span>
+                                            <div class="ad-detail my-1 mx-2 w-100">
+                                                <div class="ae-div row">
+                                                    <div class="col-9">
+                                                        <div class="ae-detail-div">
+                                                            <span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Name :</strong>{{ $item->f_name }} {{$item->l_name}} </span>
+                                                            <!-- <span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Qualification :</strong> {{ $item->qualification }} </span> -->
+                                                            
+                                                            <span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong> English</span>
+
+                                                            <span><i class="fa-solid fa-globe"></i><strong>Country :</strong> {{ $item->location }}</span>
+                                                        </div>
+                                                        <div class="ae-detail-child">  
+                                                                <span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong>{{ $item->gender }}</span>
+                                                        </div>
+                                                        <span class="d-flex align-item-center"><i class="fa-solid fa-user mt-1"></i>
+                                                        <strong style="margin-left: 15px;">Intro :</strong>{{ $item->introduction }}
+                                                        <p  class="px-2">Conten will be reqiured</p>                                                
+                                                    </span>
+                                                    </div>
+                                                <div class="ad-div col-3">
+                                                        <span ><b>20 AED for 50 mintues</b>
+                                                        </span>
 
                                                         <div class="ae-detail">
                                                             <h4 class="fs-6 mt-1">Free Trial Section</h4>
@@ -551,24 +564,24 @@
                                                                         <td class="font-s text-secondary">
                                                                             {{ $item->dob }}
 
-                                                                </td>
-                                                            </tr>
-                                                        </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-3">
-                                                <div
-                                                    class="col-12 d-flex m-1 align-items-center align-items-sm-center flex-column flex-sm-row">
-                                                    <div class="option d-flex align-items-start py-1">
-                                                        <h5
-                                                            class="label-h m-0 m-1 font-s1 text-center text-md-left fw-bold">
-                                                            Teaches
-                                                        </h5>
-                                                        <span class="d-none d-sm-block">:</span>
-                                                    </div>
+                                                    <div class="row mt-3">
+                                                        <div
+                                                            class="col-12 d-flex m-1 align-items-center align-items-sm-center flex-column flex-sm-row">
+                                                            <div class="option d-flex align-items-start py-1">
+                                                                <h5
+                                                                    class="label-h m-0 m-1 font-s1 text-center text-md-left fw-bold">
+                                                                    Teaches
+                                                                </h5>
+                                                                <span class="d-none d-sm-block">:</span>
+                                                            </div>
 
-                                                    <div class="d-flex flex-column flex-md-row flex-wrap">
+                                                            <div class="d-flex flex-column flex-md-row flex-wrap">
 
                                                                 @php
                                                                     // Assuming $item->teaching is a JSON string
@@ -696,90 +709,84 @@
                         </div>
                     </section>
             
-                    <div class="ai-heading-div">
+                    <div class="ai-heading-div py-2">
                         <h2 class="text-center  fw-bold" >Inquiry Overview</h2>
                     </div>
-                 <div class="im row mx-0">
-                    <div class=" Ai col-5 " >
-                <form>
-                     <div class=" mt-3 mb-5 " >
-                        <div class="ai-card px-3 py-4" style="border: 1px solid #ddd; border-radius: 5px;">
-                         <div class="card-body">
-                                 <h6 class="card-title mb-3 text-center fw-bold fs-6 ">Submit your inquiry to request a callback for further assistance</h6> 
-                                  <h3 class="fw-bold text-center" style="font-size: 15px;color: red;"><i>"Please Complete All Required Fields"</i></h3>
-                              
-           
-                             <div class="row g-0">
-                                    <div class="col-sm-12">
-                                        <div class="form-group p-2 px-0">
-                                            <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your Name <b style="color: red;font-size: 20px;">*</b></strong></label>
-                                            <input class="form-control" type="text" placeholder="Name">
-                                        </div>      
-                                  </div>
-                                <div class="col-sm-12">
-                                        <div class="form-group p-2 px-0">
-                                        <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your   Email <b style="color: red; font-size: 20px;">*</b></strong></label>
-                                        <div class="input-group"> <input class="form-control" type="text" placeholder="Email ID"></div>
-                                        </div>
-                                        </div>
-                                </div>  
-                                <div class="col-sm-12">
-                                    <div class="form-group p-2 px-0">
-                                    <label for="curriculum" class="form-label" style="color:#42b979;">
-                                        <strong>Enter your Number <b style="color: red; font-size: 20px;">*</b></strong>
-                                    </label>
-                                    <div class="inquiry-select input-group d-flex justify-content-between align-items-center" style="width: 100%;">
-                                                
-                                                <select name="countrySelect" id="countrySelect" class="form-select country-select w-50" required>
-                                                    @foreach ($countriesPhone as $key => $country)
-                                                        <option value="{{ $key }}">{{ $country }}</option>
-                                                    @endforeach
-                                                </select>
+                    <div class="im row mx-0">
+                        <div class=" Ai col-5 " >
+                            <form>
+                                <div class=" mt-3 mb-5 " >
+                                    <div class="ai-card px-3 py-4" style="border: 1px solid #ddd; border-radius: 5px;">
+                                        <div class="card-body">
+                                                <h6 class="card-title mb-3 text-center fw-bold fs-6 ">Submit your inquiry to request a callback for further assistance</h6> 
+                                                <h3 class="Ab-heading fw-bold text-center" style="font-size: 15px;color: red;"><i>"Please Complete All Required Fields"</i></h3>
                                             
-                                                <input  class="form-control w-50" required name="phone" id="phone" type="text" placeholder="e.g +92XXXXXXXXXX" style="border: 1px solid #ddd; height: 50px; box-shadow: none;">
+                        
+                                            <div class="row g-0">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group p-2 px-0">
+                                                            <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your Name <b style="color: red;font-size: 20px;">*</b></strong></label>
+                                                            <input class="form-control" type="text" placeholder="Name">
+                                                        </div>      
+                                                </div>
+                                                <div class="col-sm-12">
+                                                        <div class="form-group p-2 px-0">
+                                                        <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your   Email <b style="color: red; font-size: 20px;">*</b></strong></label>
+                                                        <div class="input-group"> <input class="form-control" type="text" placeholder="Email ID"></div>
+                                                        </div>
+                                                        </div>
+                                                </div>  
+                                                <div class="col-sm-12">
+                                                    <div class="form-group p-2 px-0">
+                                                    <label for="curriculum" class="form-label" style="color:#42b979;">
+                                                        <strong>Enter your Number <b style="color: red; font-size: 20px;">*</b></strong>
+                                                    </label>
+                                                    <div class="inquiry-select input-group d-flex justify-content-between align-items-center" style="width: 100%;">
+                                                                
+                                                                <select name="countrySelect" id="countrySelect" class="form-select country-select w-50" required>
+                                                                    @foreach ($countriesPhone as $key => $country)
+                                                                        <option value="{{ $key }}">{{ $country }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            
+                                                                <input  class="form-control w-50" required name="phone" id="phone" type="text" placeholder="e.g +92XXXXXXXXXX" style="border: 1px solid #ddd; height: 50px; box-shadow: none;">
+                                                            </div>
+                                                            <div class="col-12  py-2">
+                                                                <label for="curriculum" class="form-label" style="color:#42b979;">
+                                                                    <strong>Description (Optional) <b style="color: red; font-size: 20px;">*</b>
+                                                                    </strong>
+                                                                </label>
+                                                                <textarea class="form-control" id="curriculum" name="reviews" rows="2" placeholder="Description" style="box-shadow: none;border: 1px solid #ddd;"></textarea>
+                                                            </div>
+                                                </div>
+                                                
                                             </div>
-                                            <div class="col-12  py-2">
-                                                <label for="curriculum" class="form-label" style="color:#42b979;">
-                                                    <strong>Description (Optional) <b style="color: red; font-size: 20px;">*</b>
-                                                    </strong>
-                                                </label>
-                                                <textarea class="form-control" id="curriculum" name="reviews" rows="2" placeholder="Description" style="box-shadow: none;border: 1px solid #ddd;"></textarea>
-                                            </div>
+                                        
+                                            <div class=" d-flex flex-column text-center px-5  mb-3">  </div> <button class="AB-button btn btn-success btn-block confirm-button">Confirm</button>
+                                        </div>
+                                    </div>
                                 </div>
                                 
-                            </div>
-                           
-                            <div class=" d-flex flex-column text-center px-5  mb-3">  </div> <button class="AI-button btn btn-success btn-block confirm-button">Confirm</button>
-                           </div>
+                            </form>
                         </div>
-                      </div>
+                        <div class="col-7 img-reqire p-0">
+                                    <div class="ai-image-div">
+                                        <!-- <h1 class="text-center text-white">This Imaage will be Required</h1> -->
+                                        <img src="images/Ad-Banner.jpeg" alt="">
+                                    </div>
+                        </div>
                     </div>
                     
-                    <div class="col-7 img-reqire">
-                        <div class="ai-image-div">
-                            <!-- <h1 class="text-center text-white">This Imaage will be Required</h1> -->
-                             <img src="images/Ad-Banner.jpeg" alt="">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-7">
-                            <div class="ab-images-div">
+                    <section class="ad-Tutor my-4" >
+                            <div class="im-heading py-3">
+                                <h2>Become A Tutor</h2>
                             </div>
-                        </div>
-                    </div>
-                </form>
-
-                <section class="ad-Tutor my-4" >
-                    <div class="im-heading py-3">
-                        <h2>Become A Tutor</h2>
-                    </div>
-                    <div class="AE row border mx-0" >
-                        <div class="col-lg-6 col-sm-4 im-div p-0">
-                            <div class="im-img">
-                                <img src="images/im-teacher.jpg" alt="">
-                            </div>
-                        </div>
+                            <div class="AE row border mx-0" >
+                                <div class="col-lg-6 col-sm-6 im-div p-0">
+                                    <div class="im-img">
+                                        <img src="images/im-teacher.jpg" alt="">
+                                    </div>
+                                </div>
 
                                 <div class="col-6 ad-div-child">
                                     <div class="im-heading-div text-white mt-4">
@@ -841,7 +848,7 @@
                                                             <div class="col-sm-5 carousel-wrapper p-0 me-2">
                                                                 <div class="">
                                                                     <div class="testimonial w-100">
-                                                                        <p class="fs-6">"A well-structured piece that delivers valuable information in a clear, concise manner. Highly recommended."</p>
+                                                                        <p class="fs-6">"A well-structured piece that delivers valuable information in a clear, concise manner"</p>
                                                                     </div>
                                                                     <div class="media  d-flex">
                                                                         <img src="{{asset('images/profile_dp.png')}}" class="mr-3" alt="">
