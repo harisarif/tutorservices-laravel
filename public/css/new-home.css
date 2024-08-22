@@ -133,12 +133,18 @@
     width: 22%;
     margin: 0 auto;
     white-space: nowrap;
+    display: flex;
+    justify-content: center;
 }
 @media (min-width: 290px) and (max-width: 320px) {
 
     /* .select2-container {
    max-width: 255px !important;
 } */
+.AB-button{
+    margin: 0 auto;
+    display: flex;
+}
     .navbar-brand {
         img {
             max-height: 32px !important;
@@ -168,10 +174,7 @@
         width: 100% !important;
         white-space: nowrap;
     }
-    .AB-button{
-        margin: 0 auto;
-        display: flex;
-    }
+   
     .Ab-heading{
         font-size: 13px !important;
     }
@@ -1007,6 +1010,8 @@ align-items: center;
     width: 22%;
     margin: 0 auto;
     white-space: nowrap;
+    display: flex;
+    justify-content: center;
 }
 .card-title{
     color: #42b979;
@@ -1191,7 +1196,6 @@ footer{
     text-align: center;
     color: #42b979;
     font-weight: 700;
-    
   }
   .im-heading-div h1{
     font-size: 3.5rem ;
@@ -1235,11 +1239,17 @@ footer{
     border-bottom:1px solid #42b979; 
     width: 18%;    
     margin: 0 auto;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
  }
  .ad-headin-div h2{
     border-bottom:1px solid #42b979; 
     width: 18%;
+    white-space: nowrap;
     margin: 0 auto;
+    display: flex;
+    justify-content: center;
  }
  .ae-detail h4{
     border: 1px solid #42b979;
