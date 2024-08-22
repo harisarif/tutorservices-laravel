@@ -390,9 +390,18 @@ width: 100%;
 
     }
 }
+    .md-div  span b{
+        color: #42b979;
+        font-size: 12px;
+        margin: 0 -7px;
+        white-space: nowrap;
+    }
 @media (max-width: 425px) {
     .ai-image-div img {
         height: auto;
+    }
+    .md-div{
+        display: block !important ;
     }
     .AB-heading{
         font-size: 12px;
@@ -500,6 +509,7 @@ width: 100%;
     .ad-div{
         width: 100%;
         margin: 0 17px;
+        display: none;
     }
     .ae-div{
         flex-direction: column;

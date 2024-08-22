@@ -406,14 +406,22 @@
                                     <div id="tutorsContainer">
                                         @foreach ($tutors as $item)
                                         <div class="ad-form">
-                                            <div class="ad-img-card">
-                                                <div style="display: flex; justify-content: center;">
+                                            <div class="ad-img-card d-flex">
+                                                <div class="MD ">
                                                     <img src="{{ asset('storage/' . $item->profileImage) }}" alt="..." class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">
-                                                </div>
                                                 <div class="ad-icons">
-                                                <p class="mb-0 mx-1 fs-5">4.5 <i class="fa-solid fa-star"></i></p>
+
+                                                </div >
+                                                    <p class="mb-0 mx-1 fs-5" style="color:#42b979;">4.5 <i class="fa-solid fa-star"></i></p>
                                                 </div>
-                                                
+                                                <div class="md-div col-9 d-none mt-2">
+                                                        <span class="mb-div"><b>20 AED for 50 mintues</b>
+                                                        </span>
+
+                                                        <div class="ae-detail">
+                                                            <h4 class="fs-6 mt-1">Free Trial Section</h4>
+                                                        </div>
+                                                    </div>
                                             </div>
                                             <div class="ad-detail my-1 mx-4 w-100">
                                                 <div class="ae-div row">
