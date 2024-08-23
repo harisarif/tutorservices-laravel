@@ -170,7 +170,7 @@
                                         <div class="AI">
                                             <li class="nav-item m-1 rounded w-1 py-0">
                                                 <a class="nav-link text-decoration-none solid_btn p-0" href="{{ route('basicsignup') }}">
-                                                    <i class="fa-regular fa-clipboard"></i> <span class="mx-2">Register</span>
+                                                    <i class="fa-regular fa-clipboard"></i> <span class="mx-2">{{ __('messages.register') }}</span>
                                                 </a>
                                             </li>
                                         </div>
@@ -208,7 +208,7 @@
 
             </ul>
             <a href="{{ route('hire.tutor') }}" class="hiring-button">
-                        Book a free demo for your child
+            {{ __('messages.Book a free demo for your child') }} 
                 </a>
             <div>
             <!-- <h1>{{ __('messages.welcome') }}</h1> -->
@@ -223,7 +223,7 @@
                         </div>
                         <div class="col-6 ">
                             <li class="nav-item m-1 btn-an text-center  bg-white rounded w-1 py-1">
-                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}" style="color:#42b979;">Register</a>
+                                <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}" style="color:#42b979;">{{__('messages.register')}}</a>
                             </li>
                         </div>
                     </div>
@@ -273,7 +273,7 @@
                    <div class="AB">
                         <button class="ab  p-2  btn-an rounded border-0 text-success" style=" white-space: nowrap; background: #42b979;">
                             <a class=" text-decoration-none active solid_btn" aria-current="page"
-                            href="{{ route('hire.tutor') }}">Request A Tutor </a>
+                            href="{{ route('hire.tutor') }}">{{ __('messages.Request A Tutor') }} </a>
 
                     </button>
                    </div>
@@ -284,7 +284,7 @@
 
                     <section class="row justify-content-center mx-0">
                         <div class="ad-headin-div mt-2">
-                            <h2 style="text-align: center; color: #42b979; font-weight: 600;">Data Insights</h2>
+                            <h2 style="text-align: center; color: #42b979; font-weight: 600;">{{ __('messages.Data Insights') }}</h2>
                         </div>
                         <div class="row mb-3">
                                 <div class="col-xl-4 col-sm-6 col-12 my-3">
@@ -294,7 +294,7 @@
                                         <div class="media d-flex" style=" justify-content: space-between;">
                                             <div class="media-body text-left">
                                             <h3 class="danger">500+</h3>
-                                            <span>Teachers</span>
+                                            <span>{{ __('messages.Teachers') }}</span>
                                             </div>
                                             <div class="align-self-center animated-icons">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40"   height="64" fill="#42b979">
@@ -314,7 +314,7 @@
                                             <div class="media-body text-left">
                                             
                                             <h3 class="success">1000+</h3>
-                                            <span>Students</span>
+                                            <span>{{ __('messages.Students') }}</span>
                                             </div>
                                             <div class="align-self-center animated-icons">
                                             <svg width="40" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -336,7 +336,7 @@
                                         <div class="media d-flex" style=" justify-content: space-between;">
                                             <div class="media-body text-left">
                                             <h3 class="warning">1500+</h3>
-                                            <span>Subjects</span>
+                                            <span>{{ __('messages.Subjects') }}</span>
                                             </div>
                                             <div class="align-self-center animated-icons">
                                             <i class="fa-solid fa-book-open " style="color:#42b979; font-size:25px;"></i>
@@ -351,7 +351,7 @@
                     </section>
                     <section class="AD-teacher" style="overflow-x:hidden;">
                         <div class="ae-heading my-4">
-                            <h2 class="text-center fw-bold ">Find A Tutor</h2>
+                            <h2 class="text-center fw-bold ">{{ __('messages.Find A Tutor') }}</h2>
                         </div>
                         <div class="row justify-content-center px-0 mx-0">
                         
@@ -363,7 +363,7 @@
                                             0f <span class="total-tutors-count">{{ $totalTutorsCount }}</span> tutors</p>
                                     </div>
                                     <div class="my-2 mx-2">
-                                        <button id="resetFilterBtn" class="ad-btn">Reset Filter</button>
+                                        <button id="resetFilterBtn" class="ad-btn">{{ __('messages.Reset Filter') }}</button>
             
                                     </div>
                                     
@@ -374,7 +374,7 @@
                                             <div class="col-lg-3 country-drop-down" >
 
                                                 <select name="country" id="country" class="country" >
-                                                    <option value="all">All Countries</option>
+                                                    <option value="all">{{ __('messages.All Countries') }}</option>
 
                                                     @foreach($countries as $countryCode => $countryName)
                                                         <option value="{{ $countryCode }}">{{ $countryName }}</option>
@@ -384,12 +384,12 @@
                                             <div class="col-lg-9 adjust-filters-wrap ">
                                                 <div class="col-md-6 px-2 col-lg-4">
                                                     {{-- <label for="citysearch" class="form-label">City</label> --}}
-                                                    <input placeholder="Search city" type="text" class="form-control"
+                                                    <input placeholder="{{ __('messages.Search city') }}" type="text" class="form-control"
                                                         id="citysearch" name="citysearch" required/ style="border:1px solid #42b979;">
                                                 </div>
                                                 <div class="col-md-6 px-2 col-lg-4">
                                                     {{-- <label for="citysearch" class="form-label">City</label> --}}
-                                                    <input placeholder="Search Subject" type="text" class="form-control" style="border:1px solid #42b979;"
+                                                    <input placeholder="{{ __('messages.Search Subject') }}" type="text" class="form-control" style="border:1px solid #42b979;"
                                                         id="subjectsearch" name="subjectsearch" required/>
                                                 </div>
                                             </div>
@@ -427,27 +427,26 @@
                                                 <div class="ae-div row">
                                                     <div class="col-9">
                                                         <div class="ae-detail-div">
-                                                            <span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Name :</strong>{{ $item->f_name }} {{$item->l_name}} </span>
-                                                            <!-- <span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Qualification :</strong> {{ $item->qualification }} </span> -->
+                                                            <span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">{{ __('messages.Name') }} :</strong>{{ $item->f_name }} {{$item->l_name}} </span>
                                                             
-                                                            <span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong> English</span>
+                                                            <span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">{{ __('messages.Subject') }} :</strong> English</span>
 
-                                                            <span><i class="fa-solid fa-globe"></i><strong>Country :</strong> {{ $item->location }}</span>
+                                                            <span><i class="fa-solid fa-globe"></i><strong>{{ __('messages.Country') }} :</strong> {{ $item->location }}</span>
                                                         </div>
                                                         <div class="ae-detail-child">  
-                                                                <span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong>{{ $item->gender }}</span>
+                                                                <span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">{{ __('messages.Gender') }} :</strong>{{ $item->gender }}</span>
                                                         </div>
                                                         <span class="d-flex align-item-center"><i class="fa-solid fa-user mt-1"></i>
-                                                        <strong style="margin-left: 15px;">Intro :</strong>{{ $item->introduction }}
-                                                        <p  class="px-2">Conten will be reqiured</p>                                                
+                                                        <strong style="margin-left: 15px;">{{ __('messages.Intro') }} :</strong>{{ $item->introduction }}
+                                                        <p  class="px-2">{{ __('messages.Conten will be reqiured') }}</p>                                                
                                                     </span>
                                                     </div>
                                                 <div class="ad-div col-3">
-                                                        <span ><b>20 AED for 50 mintues</b>
+                                                        <span ><b>{{ __('messages.20 AED for 50 mintues') }} </b>
                                                         </span>
 
                                                         <div class="ae-detail">
-                                                            <h4 class="fs-6 mt-1">Free Trial Section</h4>
+                                                            <h4 class="fs-6 mt-1">{{ __('messages.Free Trial Section') }}</h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -718,7 +717,7 @@
                     </section>
             
                     <div class="ai-heading-div py-2">
-                        <h2 class="text-center  fw-bold" >Inquiry Overview</h2>
+                        <h2 class="text-center  fw-bold" >{{ __('messages.Inquiry Overview') }}</h2>
                     </div>
                     <div class="im row mx-0">
                         <div class=" Ai col-5 " >
@@ -726,28 +725,28 @@
                                 <div class=" mt-3 mb-5 " >
                                     <div class="ai-card px-3 py-4" style="border: 1px solid #ddd; border-radius: 5px;">
                                         <div class="card-body">
-                                                <h6 class="card-title mb-3 text-center fw-bold fs-6 ">Submit your inquiry to request a callback for further assistance</h6> 
-                                                <h3 class="Ab-heading fw-bold text-center" style="font-size: 15px;color: red;"><i>"Please Complete All Required Fields"</i></h3>
+                                                <h6 class="card-title mb-3 text-center fw-bold fs-6 ">{{ __('messages.Submit your inquiry to request a callback for further assistance') }}</h6> 
+                                                <h3 class="Ab-heading fw-bold text-center" style="font-size: 15px;color: red;"><i>"{{ __('messages.Please Complete All Required Fields') }}"</i></h3>
                                             
                         
                                             <div class="row g-0">
                                                     <div class="col-sm-12">
                                                         <div class="form-group p-2 px-0">
-                                                            <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your Name <b style="color: red;font-size: 20px;">*</b></strong></label>
-                                                            <input class="form-control" type="text" placeholder="Name">
+                                                            <label for="curriculum" class="form-label" style="color:#42b979;"><strong>{{ __('messages.Enter your Name') }} <b style="color: red;font-size: 20px;">*</b></strong></label>
+                                                            <input class="form-control" type="text" placeholder="{{ __('messages.Name') }}">
                                                         </div>      
                                                 </div>
                                                 <div class="col-sm-12">
                                                         <div class="form-group p-2 px-0">
-                                                        <label for="curriculum" class="form-label" style="color:#42b979;"><strong>Enter your   Email <b style="color: red; font-size: 20px;">*</b></strong></label>
-                                                        <div class="input-group"> <input class="form-control" type="text" placeholder="Email ID"></div>
+                                                        <label for="curriculum" class="form-label" style="color:#42b979;"><strong>{{ __('messages.Enter your   Email') }} <b style="color: red; font-size: 20px;">*</b></strong></label>
+                                                        <div class="input-group"> <input class="form-control" type="text" placeholder="{{ __('messages.Email ID') }}"></div>
                                                         </div>
                                                         </div>
                                                 </div>  
                                                 <div class="col-sm-12">
                                                     <div class="form-group p-2 px-0">
                                                     <label for="curriculum" class="form-label" style="color:#42b979;">
-                                                        <strong>Enter your Number <b style="color: red; font-size: 20px;">*</b></strong>
+                                                        <strong>{{ __('messages.Enter your Number ') }}<b style="color: red; font-size: 20px;">*</b></strong>
                                                     </label>
                                                     <div class="inquiry-select input-group d-flex justify-content-between align-items-center" style="width: 100%;">
                                                                 
@@ -761,16 +760,16 @@
                                                             </div>
                                                             <div class="col-12  py-2">
                                                                 <label for="curriculum" class="form-label" style="color:#42b979;">
-                                                                    <strong>Description (Optional) <b style="color: red; font-size: 20px;">*</b>
+                                                                    <strong>{{ __('messages.Description (Optional)') }}  <b style="color: red; font-size: 20px;">*</b>
                                                                     </strong>
                                                                 </label>
-                                                                <textarea class="form-control" id="curriculum" name="reviews" rows="2" placeholder="Description" style="box-shadow: none;border: 1px solid #ddd;"></textarea>
+                                                                <textarea class="form-control" id="curriculum" name="reviews" rows="2" placeholder="{{ __('messages.Description') }}" style="box-shadow: none;border: 1px solid #ddd;"></textarea>
                                                             </div>
                                                 </div>
                                                 
                                             </div>
                                         
-                                            <div class=" d-flex flex-column text-center px-5  mb-3">  </div> <button class="AB-button btn btn-success btn-block confirm-button">Confirm</button>
+                                            <div class=" d-flex flex-column text-center px-5  mb-3">  </div> <button class="AB-button btn btn-success btn-block confirm-button">{{ __('messages.Confirm') }}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -787,7 +786,7 @@
                     
                     <section class="ad-Tutor " >
                             <div class="im-heading py-3">
-                                <h2>Become A Tutor</h2>
+                                <h2>{{ __('messages.Become A Tutor') }}</h2>
                             </div>
                             <div class="AE row border mx-0" >
                                 <div class="col-lg-6 col-sm-6 im-div p-0">
@@ -798,18 +797,18 @@
 
                                 <div class="col-6 ad-div-child">
                                     <div class="im-heading-div text-white mt-4">
-                                        <h1 class="text-white fw-bold">Guide and Inspire Learners</h1>
-                                        <p class="mx-md-2 mx-sm-0">Earn while you teach—share your expertise with students on Preply. Sign up to start tutoring online.</p>
+                                        <h1 class="text-white fw-bold">{{ __('messages.Guide and Inspire Learners') }}</h1>
+                                        <p class="mx-md-2 mx-sm-0">{{ __('messages.Earn while you teach—share your expertise with students on Preply. Sign up to start tutoring online.') }}</p>
 
                                         <div class="im-detail">
                                             <ul class="mt-lg-5 mt-md-3 mt-sm-0">
-                                                <li class="AH fs-5">Expand Your Student Base</li>
-                                                <li class="AH fs-5">Boost Your Business</li>
-                                                <li class="AH fs-5">Guaranteed Payment Security</li>
+                                                <li class="AH fs-5">{{ __('messages.Expand Your Student Base') }}</li>
+                                                <li class="AH fs-5">{{ __('messages.Boost Your Business') }}</li>
+                                                <li class="AH fs-5">{{ __('messages.Guaranteed Payment Security') }}</li>
                                             </ul>
                                         </div>
                                         <div class="im-button d-flex mx-3 mb-lg-0 mb-2">
-                                        <a href="{{route('tutor')}}" class="btn btn-light bg-white my-lg-5 my-sm-3  fs-lg-6 fs-sm-3" style="color : #42b979;">Register yourself as a professional teacher <i class="fa-solid fa-arrow-right"></i></a>
+                                        <a href="{{route('tutor')}}" class="btn btn-light bg-white my-lg-5 my-sm-3  fs-lg-6 fs-sm-3" style="color : #42b979;">{{ __('messages.Register yourself as a professional teacher') }} <i class="fa-solid fa-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -817,7 +816,7 @@
                     </section>
                         <section class="ad-testimonial">
                                 <div class="ad-heading-div">
-                                    <h2 class="text-center">Testimonials</h2>
+                                    <h2 class="text-center">{{ __('messages.Testimonials') }}</h2>
                                 </div>
                                     <div class="container-lg">
                                             <div class="row">               
@@ -831,14 +830,14 @@
                                                             <div class="col-sm-5 carousel-wrapper p-0 me-2">
                                                                 <div class="">
                                                                     <div class="testimonial w-100">
-                                                                        <p class="fs-6">"Captivating storytelling paired with well-researched facts. This content is both informative and enjoyable."</p>
+                                                                        <p class="fs-6">"{{ __('messages.Captivating storytelling paired with well-researched facts. This content is both informative and enjoyable.') }}"</p>
                                                                     </div>
                                                                     <div class="media  d-flex">
                                                                         <img src="{{asset('images/profile_dp.png')}}" class="mr-3" alt="">
                                                                         <div class="media-body">
                                                                             <div class="overview">
-                                                                                <div class="name"><b>Students Reviews</b></div>
-                                                                                <div class="details">Web Developer / SoftBee</div>
+                                                                                <div class="name"><b>{{ __('messages.Students Reviews') }}</b></div>
+                                                                                <div class="details">{{ __('messages.Web Developer / SoftBee') }}</div>
                                                                                 <div class="star-rating">
                                                                                     <ul class="list-inline">
                                                                                         <li class="list-inline-item"><i class="fa fa-star"></i></li>
@@ -856,14 +855,14 @@
                                                             <div class="col-sm-5 carousel-wrapper p-0 me-2">
                                                                 <div class="">
                                                                     <div class="testimonial w-100">
-                                                                        <p class="fs-6">"A well-structured piece that delivers valuable information in a clear, concise manner"</p>
+                                                                        <p class="fs-6">{{ __('messages."A well-structured piece that delivers valuable information in a clear, concise manner"') }}</p>
                                                                     </div>
                                                                     <div class="media  d-flex">
                                                                         <img src="{{asset('images/profile_dp.png')}}" class="mr-3" alt="">
                                                                         <div class="media-body">
                                                                             <div class="overview">
-                                                                                <div class="name"><b>Students Reviews</b></div>
-                                                                                <div class="details">Web Developer / SoftBee</div>
+                                                                                <div class="name"><b>{{ __('messages.Web Developer / SoftBee') }}</b></div>
+                                                                                <div class="details"></div>
                                                                                 <div class="star-rating">
                                                                                     <ul class="list-inline">
                                                                                         <li class="list-inline-item"><i class="fa fa-star"></i></li>
@@ -888,13 +887,13 @@
                                                             <div class="col-sm-5 carousel-wrapper p-0 me-2">
                                                                 <div class="">
                                                                     <div class="testimonial w-100">
-                                                                        <p class="fs-6">"Brilliantly written with a perfect balance of detail and clarity. This content exceeded my expectations."</p>
+                                                                        <p class="fs-6">{{ __('messages."Brilliantly written with a perfect balance of detail and clarity. This content exceeded my expectations."') }}</p>
                                                                     </div>
                                                                     <div class="media  d-flex">
                                                                         <img src="{{asset('images/profile_dp.png')}}" class="mr-3" alt="">
                                                                         <div class="media-body">
                                                                             <div class="overview">
-                                                                                <div class="name"><b>Students Reviews</b></div>
+                                                                                <div class="name"><b>{{ __('messages.Students Reviews') }}</b></div>
                                                                                 <div class="details">Web Developer / SoftBee</div>
                                                                                 <div class="star-rating">
                                                                                     <ul class="list-inline">
