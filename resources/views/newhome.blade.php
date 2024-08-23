@@ -812,7 +812,7 @@
                                             <ul class="mt-lg-5 mt-md-3 mt-sm-0">
                                                 <li class="AH fs-5 mx-3">{{ __('messages.Expand Your Student Base') }}</li>
                                                 <li class="AH fs-5 mx-3">{{ __('messages.Boost Your Business') }}</li>
-                                                <li class="AH fs-5 x-33">{{ __('messages.Guaranteed Payment Security') }}</li>
+                                                <li class="AH fs-5 mx-3">{{ __('messages.Guaranteed Payment Security') }}</li>
                                             </ul>
                                         </div>
                                         <div class="im-button d-flex mx-3 mb-lg-0 mb-2">
@@ -829,121 +829,68 @@
                                     <div class="container-lg">
                                             <div class="row">               
                                                 <div class="col-sm-12">			
-                                                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                                                    <h2></h2>
-                                                    <!-- Wrapper for carousel items -->
-                                                    <div class="carousel-inner">
-                                                        <div class="carousel-item active" >
-                                                            <div class="row justify-content-center">
-                                                            <div class="col-sm-5 carousel-wrapper p-0 me-2">
-                                                                <div class="">
-                                                                    <div class="testimonial w-100">
-                                                                        <p class="fs-6">"{{ __('messages.Captivating storytelling paired with well-researched facts. This content is both informative and enjoyable.') }}"</p>
+                                                        <div id="myCarousel" class="carousel slide"          data-ride="carousel">
+                                                        <h2></h2>
+                                                        <!-- Wrapper for carousel items -->
+                                                        <div class="carousel-inner">
+                                                            <div class="carousel-item active" >
+                                                                <div class="row justify-content-center">
+                                                                <div class="col-sm-5 carousel-wrapper p-0 me-2">
+                                                                    <div class="">
+                                                                        <div class="testimonial w-100">
+                                                                            <p class="fs-6">"{{ __('messages.Captivating storytelling paired with well-researched facts. This content is both informative and enjoyable.') }}"</p>
+                                                                        </div>
+                                                                        <div class="media  d-flex">
+                                                                            <img src="{{asset('images/profile_dp.png')}}" class="mr-3" alt="">
+                                                                            <div class="media-body">
+                                                                                <div class="overview">
+                                                                                    <div class="name"><b>{{ __('messages.Students Reviews') }}</b></div>
+                                                                                    <div class="details">{{ __('messages.Web Developer / SoftBee') }}</div>
+                                                                                    <div class="star-rating">
+                                                                                        <ul class="list-inline">
+                                                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>										
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="media  d-flex">
-                                                                        <img src="{{asset('images/profile_dp.png')}}" class="mr-3" alt="">
-                                                                        <div class="media-body">
-                                                                            <div class="overview">
-                                                                                <div class="name"><b>{{ __('messages.Students Reviews') }}</b></div>
-                                                                                <div class="details">{{ __('messages.Web Developer / SoftBee') }}</div>
-                                                                                <div class="star-rating">
-                                                                                    <ul class="list-inline">
-                                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>										
+                                                                </div>
+                                                                <div class="col-sm-5 carousel-wrapper p-0 me-2">
+                                                                    <div class="">
+                                                                        <div class="testimonial w-100">
+                                                                            <p class="fs-6">{{ __('messages."A well-structured piece that delivers valuable information in a clear, concise manner"') }}</p>
+                                                                        </div>
+                                                                        <div class="media  d-flex">
+                                                                            <img src="{{asset('images/profile_dp.png')}}" class="mr-3" alt="">
+                                                                            <div class="media-body">
+                                                                                <div class="overview">
+                                                                                    <div class="name"><b>{{ __('messages.Web Developer / SoftBee') }}</b></div>
+                                                                                    <div class="details"></div>
+                                                                                    <div class="star-rating">
+                                                                                        <ul class="list-inline">
+                                                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>										
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-5 carousel-wrapper p-0 me-2">
-                                                                <div class="">
-                                                                    <div class="testimonial w-100">
-                                                                        <p class="fs-6">{{ __('messages."A well-structured piece that delivers valuable information in a clear, concise manner"') }}</p>
-                                                                    </div>
-                                                                    <div class="media  d-flex">
-                                                                        <img src="{{asset('images/profile_dp.png')}}" class="mr-3" alt="">
-                                                                        <div class="media-body">
-                                                                            <div class="overview">
-                                                                                <div class="name"><b>{{ __('messages.Web Developer / SoftBee') }}</b></div>
-                                                                                <div class="details"></div>
-                                                                                <div class="star-rating">
-                                                                                    <ul class="list-inline">
-                                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>										
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                            
+                                                            
+                                                            
                                                         </div>
-                                                        
-                                                        
-                                                        
-                                                    </div>
-                                                    <div class="carousel-item" >
-                                                            <div class="row justify-content-center">
-                                                            <div class="col-sm-5 carousel-wrapper p-0 me-2">
-                                                                <div class="">
-                                                                    <div class="testimonial w-100">
-                                                                        <p class="fs-6">{{ __('messages."Brilliantly written with a perfect balance of detail and clarity. This content exceeded my expectations."') }}</p>
-                                                                    </div>
-                                                                    <div class="media  d-flex">
-                                                                        <img src="{{asset('images/profile_dp.png')}}" class="mr-3" alt="">
-                                                                        <div class="media-body">
-                                                                            <div class="overview">
-                                                                                <div class="name"><b>{{ __('messages.Students Reviews') }}</b></div>
-                                                                                <div class="details">Web Developer / SoftBee</div>
-                                                                                <div class="star-rating">
-                                                                                    <ul class="list-inline">
-                                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>										
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-5 carousel-wrapper p-0 me-2">
-                                                                <div class="">
-                                                                    <div class="testimonial w-100">
-                                                                        <p class="fs-6">"Thoroughly engaging with fresh perspectives. The writing style is both approachable and authoritative."</p>
-                                                                    </div>
-                                                                    <div class="media  d-flex">
-                                                                        <img src="{{asset('images/profile_dp.png')}}" class="mr-3" alt="">
-                                                                        <div class="media-body">
-                                                                            <div class="overview">
-                                                                                <div class="name"><b>Students Reviews</b></div>
-                                                                                <div class="details">Web Developer / SoftBee</div>
-                                                                                <div class="star-rating">
-                                                                                    <ul class="list-inline">
-                                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>										
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                </div>
+                                                 </div>
                             
                             
                                             </div>
@@ -977,37 +924,41 @@
                 $(window).scrollTop(scrollPos);
             }, 0);
         });
-        var multipleCardCarousel = document.querySelector("#carouselExampleControls");
-        
-        if (window.matchMedia("(min-width: 576px)").matches) {
-          var carousel = new bootstrap.Carousel(multipleCardCarousel, {
-            interval: false
-          });
+        var multipleCardCarousel = document.querySelector("#myCarousel");
 
-          var carouselWidth = document.querySelector(".carousel-inner").scrollWidth;
-          var cardWidth = document.querySelector(".carousel-item").offsetWidth;
-          var scrollPosition = 0;
-          document.querySelector("#carouselExampleControls .carousel-control-next").addEventListener("click", function () {
+        if (window.matchMedia("(min-width: 576px)").matches) {
+        var carousel = new bootstrap.Carousel(multipleCardCarousel, {
+            interval: false
+        });
+
+        var carouselInner = document.querySelector("#myCarousel .carousel-inner");
+        var carouselWidth = carouselInner.scrollWidth;
+        var cardWidth = document.querySelector("#myCarousel .carousel-item").offsetWidth;
+        var scrollPosition = 0;
+
+        document.querySelector("#myCarousel .carousel-control-next").addEventListener("click", function () {
             if (scrollPosition < carouselWidth - cardWidth * 3) {
-              scrollPosition += cardWidth;
-              document.querySelector("#carouselExampleControls .carousel-inner").scrollTo({
+            scrollPosition += cardWidth;
+            carouselInner.scrollTo({
                 left: scrollPosition,
                 behavior: 'smooth'
-              });
+            });
             }
-          });
-          document.querySelector("#carouselExampleControls .carousel-control-prev").addEventListener("click", function () {
+        });
+
+        document.querySelector("#myCarousel .carousel-control-prev").addEventListener("click", function () {
             if (scrollPosition > 0) {
-              scrollPosition -= cardWidth;
-              document.querySelector("#carouselExampleControls .carousel-inner").scrollTo({
+            scrollPosition -= cardWidth;
+            carouselInner.scrollTo({
                 left: scrollPosition,
                 behavior: 'smooth'
-              });
+            });
             }
-          });
+        });
         } else {
-          multipleCardCarousel.classList.add("slide");
+        multipleCardCarousel.classList.add("slide");
         }
+
     </script>
 
     
