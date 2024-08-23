@@ -93,7 +93,9 @@
         padding: 8px !important;
     }
 }
-
+.navbar-toggler:focus{
+    box-shadow: unset;
+}
 .header-ul {
     margin-top: -9px;
     padding-left: 1rem;
@@ -472,7 +474,7 @@ width: 100%;
     }
     #language-select{
         position: absolute;
-        left: -3px;
+        left: -48px;
         border: 1px solid #42b979 !important;
         color: #42b979 !important;
         background: transparent;

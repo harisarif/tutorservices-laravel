@@ -65,7 +65,7 @@
 
     .custom-select i {
         font-size: 15px; /* Adjust icon size as needed */
-        /* margin-left:5px; */
+        margin-right:-22px;
     }
 
     .custom-options {
@@ -145,10 +145,18 @@
                     <div class="container-fluid">
                         <!-- Button to trigger the off-canvas -->
                         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                                aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                                aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation" style="border:1px solid #fff;">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-
+                        <div class="custom-select-wrapper mx-1">
+                        <div class="custom-select">
+                               <i class="fa-solid fa-globe" style="color:#fff !important" aria-hidden="true" onclick="toggleDropdown()"></i>
+                           <div class="custom-options" id="language-select">
+                              <div class="custom-option" data-value="en" onclick="changeLanguage('en')">English</div>
+                              <div class="custom-option" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
+                            </div>
+                        </div>
+                         </div>
                         <!-- Off-canvas component -->
                         <div class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" style="width:100%;">
                             <div class="offcanvas-header p-1" style="width:96%;">
@@ -797,14 +805,14 @@
 
                                 <div class="col-6 ad-div-child">
                                     <div class="im-heading-div text-white mt-4">
-                                        <h1 class="text-white fw-bold">{{ __('messages.Guide and Inspire Learners') }}</h1>
+                                        <h1 class="text-white fw-bold ">{{ __('messages.Guide and Inspire Learners') }}</h1>
                                         <p class="mx-md-2 mx-sm-0">{{ __('messages.Earn while you teach—share your expertise with students on Preply. Sign up to start tutoring online.') }}</p>
 
                                         <div class="im-detail">
                                             <ul class="mt-lg-5 mt-md-3 mt-sm-0">
-                                                <li class="AH fs-5">{{ __('messages.Expand Your Student Base') }}</li>
-                                                <li class="AH fs-5">{{ __('messages.Boost Your Business') }}</li>
-                                                <li class="AH fs-5">{{ __('messages.Guaranteed Payment Security') }}</li>
+                                                <li class="AH fs-5 mx-3">{{ __('messages.Expand Your Student Base') }}</li>
+                                                <li class="AH fs-5 mx-3">{{ __('messages.Boost Your Business') }}</li>
+                                                <li class="AH fs-5 x-33">{{ __('messages.Guaranteed Payment Security') }}</li>
                                             </ul>
                                         </div>
                                         <div class="im-button d-flex mx-3 mb-lg-0 mb-2">
