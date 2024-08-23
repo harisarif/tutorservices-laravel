@@ -407,7 +407,7 @@
                                         @foreach ($tutors as $item)
                                         <div class="ad-form">
                                             <div class="ad-img-card d-flex">
-                                                <div class="MD col-5">
+                                                <div class="MD col-lg-9 col-sm-9">
                                                     <img src="{{ asset('storage/' . $item->profileImage) }}" alt="..." class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">
                                                 <div class="ad-icons">
 
