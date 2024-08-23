@@ -415,11 +415,11 @@
                                                     <p class="mb-0 mx-1 fs-5" style="color:#42b979;">4.5 <i class="fa-solid fa-star"></i></p>
                                                 </div>
                                                 <div class="md-div col-9 d-none mt-2" style="margin-left: -5px;">
-                                                        <span class="mb-div"><b>20 AED for 50 mintues</b>
+                                                        <span class="mb-div"><b>{{ __('messages.20 AED for 50 mintues') }}</b>
                                                         </span>
 
                                                         <div class="ae-detail">
-                                                            <h4 class="fs-6 mt-1">Free Trial Section</h4>
+                                                            <h4 class="fs-6 mt-1">{{ __('messages.Free Trial Section') }}</h4>
                                                         </div>
                                                     </div>
                                             </div>
