@@ -200,13 +200,13 @@
                                         </div>
                                     </div>
                                     <div class="">
-                                        <div class="email-container mx-1">
+                                        <div class="email-container mx-0 ">
                                             <i class="fa fa-envelope-square" aria-hidden="true" style="color: #42b979;"></i>
                                             <a class="email text-decoration-none mx-2" href="mailto:info@eduexceledu.com " style="color: #42b979;">
                                                 info@eduexceledu.com
                                             </a>
                                         </div>
-                                        <div class="d-flex alig header-phone-number phone-container mx-1" style="align-items: center;">
+                                        <div class="d-flex alig header-phone-number phone-container mx-0" style="align-items: center;">
                                             <i class="fa-solid fa-phone" aria-hidden="true" style="color: #42b979;"></i>
                                             <a class="phone-number-header text-decoration-none mx-2" href="tel:+971566428066" style="color: #42b979;">
                                                 +971 56 642 8066
