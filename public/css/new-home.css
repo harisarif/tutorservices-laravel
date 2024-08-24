@@ -399,6 +399,9 @@ width: 100%;
         margin: 0 -12px !important;
 
     }
+    .custom-select{
+        margin-right: 19px;
+    }
 }
     .md-div  span b{
         color: #42b979;
@@ -478,7 +481,7 @@ width: 100%;
     }
     #language-select{
         position: absolute;
-        left: -48px;
+        left: -25px;
         border: 1px solid #42b979 !important;
         color: #42b979 !important;
         background: transparent;

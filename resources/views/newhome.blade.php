@@ -420,14 +420,14 @@
                                         @foreach ($tutors as $item)
                                         <div class="ad-form">
                                             <div class="ad-img-card d-flex">
-                                                <div class="MD col-lg-9 col-sm-9">
+                                                <div class="MD col-lg-9 col-sm-5">
                                                     <img src="{{ asset('storage/' . $item->profileImage) }}" alt="..." class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">
                                                 <div class="ad-icons">
 
                                                 </div >
                                                     <p class="mb-0 mx-1 fs-5" style="color:#42b979;">4.5 <i class="fa-solid fa-star"></i></p>
                                                 </div>
-                                                <div class="md-div col-9 d-none mt-2" style="margin-left: -5px;">
+                                                <div class="md-div col-lg-5 d-none mt-2" style="margin-left: -5px;">
                                                         <span class="mb-div"><b>{{ __('messages.20 AED for 50 mintues') }}</b>
                                                         </span>
 
