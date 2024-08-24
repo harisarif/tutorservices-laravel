@@ -461,6 +461,9 @@ width: 100%;
         color: #42b979;
         font-size: 18px;
     }
+    [dir="rtl"] .nav-link  {
+        text-align: right !important;
+    }
     .email-container{
         display: flex !important;
         align-items: center;
