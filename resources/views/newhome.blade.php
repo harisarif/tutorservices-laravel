@@ -1,4 +1,5 @@
 @extends('layouts.app')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
     body{
         overflow-x: hidden !important;
@@ -10,13 +11,14 @@
         position: relative;
         display: inline-block;
         cursor:pointer;
+        padding: 8px 4px;
     }
 
     .email {
         display: none;
         position: absolute;
-        left: -114px;
-        top: 25px; /* Adjust as needed to position below the icon */
+        left: -88px;
+        top: 100%; /* Adjust as needed to position below the icon */
         white-space: nowrap;
         background-color: white; /* Optional: add a background color */
         padding: 5px; /* Optional: add some padding */
@@ -25,7 +27,7 @@
         z-index: 100;
     }
 
-    .email-container:hover .email {
+    .email-container:hover .email{
         display: inline-block;
     }
     .phone-container {
@@ -78,6 +80,16 @@
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         z-index: 10;
     }
+    .custom-options-web {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: -30px;
+        background: white;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+    }
 
     .custom-options.open {
         display: block;
@@ -91,6 +103,10 @@
     .custom-option:hover {
         background: #f0f0f0;
     }
+    .custom-options-web.open {
+        display: block;
+    }
+
     .card{
         transition: 0.5s;
     }
@@ -196,17 +212,6 @@
                                                 +971 56 642 8066
                                             </a>
                                         </div>
-                                        <div class="custom-select-wrapper">
-                                            <!-- <div class="custom-select mx-1 d-flex" style="align-items: center;">
-                                                <label class="d-block mx-3" style="color:#42b979;font-size:18px;">Language</label>
-                                                <i class="fa-solid fa-globe" style="color:#42b979 !important" aria-hidden="true" onclick="toggleDropdown()"></i>
-                                                
-                                                <div class="custom-options" id="language-select">
-                                                    <div class="custom-option" data-value="en" onclick="changeLanguage('en')">English</div>
-                                                    <div class="custom-option" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
-                                                </div>
-                                            </div> -->
-                                        </div>
                                     </div>
                                 </ul>
                             </div>
@@ -247,11 +252,11 @@
                         <a class="phone-number-header text-decoration-none " href="tel:+971566428066" style="color: #42b979;">+971 56 642 8066</a>
                     </div>
                     <div class="custom-select-wrapper">
-                    <div class="custom-select">
-                        <i class="fa-solid fa-globe" style="color:#fff !important" aria-hidden="true" onclick="toggleDropdown()"></i>
-                        <div class="custom-options" id="language-select">
-                            <div class="custom-option" data-value="en" onclick="changeLanguage('en')">English</div>
-                            <div class="custom-option" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
+                    <div class="custom-select-web">
+                        <i class="fa-solid fa-globe" style="color:#fff !important" aria-hidden="true" onclick="toggleDropdownWeb()"></i>
+                        <div class="custom-options-web" id="language-select">
+                            <div class="custom-option" data-value="en" onclick="changeLanguageWeb('en')">English</div>
+                            <div class="custom-option" data-value="ar" onclick="changeLanguageWeb('ar')">Arabic</div>
                         </div>
                     </div>
                 </div>
@@ -822,87 +827,65 @@
                                 </div>
                             </div>
                     </section>
-                        <section class="ad-testimonial">
-                                <div class="ad-heading-div">
-                                    <h2 class="text-center">{{ __('messages.Testimonials') }}</h2>
+                        <section class="testimonials">
+                            <div class="AH container">
+                                     <div class="ad-heading-div">
+                                        <h2 class="text-center mt-3">{{ __('messages.Testimonials') }}</h2>
+                                     </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                    <div id="customers-testimonials" class="owl-carousel">
+
+                                        <!--TESTIMONIAL 1 -->
+                                        <div class="item">
+                                        <div class="shadow-effect">
+                                            <img class="img-circle" src="images/profile_dp.png" alt="">
+                                            <p>{{ __('messages.Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.') }}</p>
+                                        </div>
+                                        <div class="testimonial-name">EMILIANO AQUILANI</div>
+                                        </div>
+                                        <!--END OF TESTIMONIAL 1 -->
+                                        <!--TESTIMONIAL 2 -->
+                                        <div class="item">
+                                        <div class="shadow-effect">
+                                            <img class="img-circle" src="images/profile_dp.png" alt="">
+                                            <p>{{ __('messages.Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.') }}</p>
+                                        </div>
+                                        <div class="testimonial-name">ANNA ITURBE</div>
+                                        </div>
+                                        <!--END OF TESTIMONIAL 2 -->
+                                        <!--TESTIMONIAL 3 -->
+                                        <div class="item">
+                                        <div class="shadow-effect">
+                                            <img class="img-circle" src="images/profile_dp.png" alt="">
+                                            <p>{{ __('messages.Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.') }}</p>
+                                        </div>
+                                        <div class="testimonial-name">LARA ATKINSON</div>
+                                        </div>
+                                        <!--END OF TESTIMONIAL 3 -->
+                                        <!--TESTIMONIAL 4 -->
+                                        <div class="item">
+                                        <div class="shadow-effect">
+                                            <img class="img-circle" src="images/profile_dp.png" alt="">
+                                            <p>{{ __('messages.Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.') }}</p>
+                                        </div>
+                                        <div class="testimonial-name">IAN OWEN</div>
+                                        </div>
+                                        <!--END OF TESTIMONIAL 4 -->
+                                        <!--TESTIMONIAL 5 -->
+                                        <div class="item">
+                                        <div class="shadow-effect">
+                                            <img class="img-circle" src="images/profile_dp.png" alt="">
+                                            <p>{{ __('messages.Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.') }}</p>
+                                        </div>
+                                        <div class="testimonial-name">{{ __('messages.MICHAEL TEDDY') }}</div>
+                                        </div>
+                                        <!--END OF TESTIMONIAL 5 -->
+                                    </div>
+                                    </div>
                                 </div>
-                                    <div class="container-lg">
-                                            <div class="row">               
-                                                <div class="col-sm-12">			
-                                                        <div id="myCarousel" class="carousel slide"          data-ride="carousel">
-                                                        <h2></h2>
-                                                        <!-- Wrapper for carousel items -->
-                                                        <div class="carousel-inner">
-                                                            <div class="carousel-item active" >
-                                                                <div class="row justify-content-center">
-                                                                <div class="col-sm-5 carousel-wrapper p-0 me-2">
-                                                                    <div class="">
-                                                                        <div class="testimonial w-100">
-                                                                            <p class="fs-6">"{{ __('messages.Captivating storytelling paired with well-researched facts. This content is both informative and enjoyable.') }}"</p>
-                                                                        </div>
-                                                                        <div class="media  d-flex">
-                                                                            <img src="{{asset('images/profile_dp.png')}}" class="mr-3" alt="">
-                                                                            <div class="media-body">
-                                                                                <div class="overview">
-                                                                                    <div class="name"><b>{{ __('messages.Students Reviews') }}</b></div>
-                                                                                    <div class="details">{{ __('messages.Web Developer / SoftBee') }}</div>
-                                                                                    <div class="star-rating">
-                                                                                        <ul class="list-inline">
-                                                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                                                        </ul>
-                                                                                    </div>
-                                                                                </div>										
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-5 carousel-wrapper p-0 me-2">
-                                                                    <div class="">
-                                                                        <div class="testimonial w-100">
-                                                                            <p class="fs-6">{{ __('messages."A well-structured piece that delivers valuable information in a clear, concise manner"') }}</p>
-                                                                        </div>
-                                                                        <div class="media  d-flex">
-                                                                            <img src="{{asset('images/profile_dp.png')}}" class="mr-3" alt="">
-                                                                            <div class="media-body">
-                                                                                <div class="overview">
-                                                                                    <div class="name"><b>{{ __('messages.Web Developer / SoftBee') }}</b></div>
-                                                                                    <div class="details"></div>
-                                                                                    <div class="star-rating">
-                                                                                        <ul class="list-inline">
-                                                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                                                        </ul>
-                                                                                    </div>
-                                                                                </div>										
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            
-                                                            
-                                                            
-                                                        </div>
-                                                 </div>
-                            
-                            
-                                            </div>
-                                        <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-                                            <i class="fa fa-chevron-left"></i>
-                                        </a>
-                                        <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-                                            <i class="fa fa-chevron-right"></i>
-                                        </a>
-                                </div>
-                    
-                        </section>
+                            </div>
+                    </section>
             </div>
     
     
@@ -916,6 +899,9 @@
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- testiomial -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Your custom script -->
     <script>
         $(document).on('select2:open', function(e) {
@@ -924,44 +910,36 @@
                 $(window).scrollTop(scrollPos);
             }, 0);
         });
-        var multipleCardCarousel = document.querySelector("#myCarousel");
-
-        if (window.matchMedia("(min-width: 576px)").matches) {
-        var carousel = new bootstrap.Carousel(multipleCardCarousel, {
-            interval: false
-        });
-
-        var carouselInner = document.querySelector("#myCarousel .carousel-inner");
-        var carouselWidth = carouselInner.scrollWidth;
-        var cardWidth = document.querySelector("#myCarousel .carousel-item").offsetWidth;
-        var scrollPosition = 0;
-
-        document.querySelector("#myCarousel .carousel-control-next").addEventListener("click", function () {
-            if (scrollPosition < carouselWidth - cardWidth * 3) {
-            scrollPosition += cardWidth;
-            carouselInner.scrollTo({
-                left: scrollPosition,
-                behavior: 'smooth'
-            });
-            }
-        });
-
-        document.querySelector("#myCarousel .carousel-control-prev").addEventListener("click", function () {
-            if (scrollPosition > 0) {
-            scrollPosition -= cardWidth;
-            carouselInner.scrollTo({
-                left: scrollPosition,
-                behavior: 'smooth'
-            });
-            }
-        });
-        } else {
-        multipleCardCarousel.classList.add("slide");
-        }
-
+        
     </script>
-
-    
+     <script>
+        jQuery(document).ready(function($) {
+        		"use strict";
+        		//  TESTIMONIALS CAROUSEL HOOK
+		        $('#customers-testimonials').owlCarousel({
+		            loop: true,
+		            center: true,
+		            items: 3,
+		            margin: 0,
+		            autoplay: true,
+		            dots:true,
+		            autoplayTimeout: 8500,
+		            smartSpeed: 450,
+                    rtl: true ,
+		            responsive: {
+		              0: {
+		                items: 1
+		              },
+		              768: {
+		                items: 2
+		              },
+		              1170: {
+		                items: 3
+		              }
+		            }
+		        });
+        	});
+     </script>    
     <script>
         
 
@@ -1365,8 +1343,6 @@
 
     function changeLanguage(value) {
         document.querySelector('.custom-options').classList.remove('open');
-        // Implement your language change logic here, for example:
-        // window.location.href = '/change-language/' + value;
     }
 
     // Close the dropdown if clicked outside
@@ -1375,7 +1351,25 @@
             document.querySelector('.custom-options').classList.remove('open');
         }
     });
+    function toggleDropdownWeb() {
+        document.querySelector('.custom-options-web').classList.toggle('open');
+    }
+
+    function changeLanguageWeb(value) {
+        document.querySelector('.custom-options-web').classList.remove('open');
+    }
+
+    // Close the dropdown if clicked outside
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.custom-select-web')) {
+            document.querySelector('.custom-options-web').classList.remove('open');
+        }
+    });
     function changeLanguage(locale) {
+        var url = "{{ url('lang') }}/" + locale;
+        window.location.href = url;
+    }
+    function changeLanguageWeb(locale) {
         var url = "{{ url('lang') }}/" + locale;
         window.location.href = url;
     }

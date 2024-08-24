@@ -72,4 +72,7 @@ return [
     'Youtube'=>'يوتيوب',
     'Contact'=>'اتصال',
     'Dubai'=>'دبي',
+    'Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.'=>'حافظ بشكل كبير على حلول النقرات وقذائف الهاون دون حلول وظيفية. تضافر علاقات فرض الضرائب على الموارد بشكل كامل عبر الأسواق المتخصصة الرائدة. زراعة مهنيا.',
+    'Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.'=>'حافظ بشكل كبير على حلول النقرات وقذائف الهاون دون حلول وظيفية. تضافر علاقات فرض الضرائب على الموارد بشكل كامل عبر الأسواق المتخصصة الرائدة. زراعة مهنيا.',
+    'MICHAEL TEDDY'=>'مايكل تيدي',
 ];

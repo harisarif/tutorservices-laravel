@@ -72,4 +72,7 @@ return [
     'Contact'=>'Contact',
     'Dubai'=>'Dubai',
     'info@eduexceledu.com'=>'info@eduexceledu.com',
+    'Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.'=>'Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.',
+    'Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.'=>'Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.',
+    'MICHAEL TEDDY'=>'MICHAEL TEDDY',
 ];
