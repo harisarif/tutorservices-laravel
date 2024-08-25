@@ -14,6 +14,11 @@
 }
 .mini_header{
     background-color: #42b979;
+    height: 21%;
+}
+.MH {
+    border: 5px solid;
+    border-image: linear-gradient(45deg, #42b979, #ffffff) 1;
 }
 .fixed a,
 .fixed i {
@@ -931,10 +936,11 @@ align-items: center;
     justify-content: center;
   }
   .ad-form{
-    border: 1px solid rgb(25 135 84);
+    border: 5px solid rgb(25 135 84);
     border-radius: 5px;
     display: flex;
     margin: 10px 0;
+    border-image: linear-gradient(45deg, #42b979, #ffffff) 1;
 }
 .ad-detail{
     padding: 5px 0;

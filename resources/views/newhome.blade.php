@@ -291,7 +291,7 @@
                     </button>
                    </div>
     </section>
-    <div class="wrapper container">
+    <div class="wrapper mx-5">
             <!-- WhatsApp Button html start -->
             @include('whatsapp')
 
@@ -300,8 +300,8 @@
                             <h2 style="text-align: center; color: #42b979; font-weight: 600;">{{ __('messages.Data Insights') }}</h2>
                         </div>
                         <div class="row mb-3">
-                                <div class="col-xl-4 col-sm-6 col-12 my-3">
-                                    <div class="card" style="border: 1px solid #42b979;">
+                                <div class="col-xl-3 col-sm-6 col-12 my-3">
+                                    <div class="MH card" >
                                     <div class="card-content">
                                         <div class="card-body">
                                         <div class="media d-flex" style=" justify-content: space-between;">
@@ -319,8 +319,8 @@
                                     </div>
                                     </div>
                                 </div>
-                                <div class="col-xl-4 col-sm-6 col-12 my-3">
-                                    <div class="card" style="border: 1px solid #42b979;">
+                                <div class="col-xl-3 col-sm-6 col-12 my-3">
+                                    <div class="MH card">
                                     <div class="card-content">
                                         <div class="card-body">
                                         <div class="media d-flex" style=" justify-content: space-between;">
@@ -342,8 +342,8 @@
                                     </div>
                                 </div>
                             
-                                <div class="col-xl-4 col-sm-6 col-12 my-3">
-                                    <div class="card" style="border: 1px solid #42b979;">
+                                <div class="col-xl-3 col-sm-6 col-12 my-3">
+                                    <div class="MH card">
                                     <div class="card-content">
                                         <div class="card-body">
                                         <div class="media d-flex" style=" justify-content: space-between;">
@@ -353,6 +353,24 @@
                                             </div>
                                             <div class="align-self-center animated-icons">
                                             <i class="fa-solid fa-book-open " style="color:#42b979; font-size:25px;"></i>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-3 col-sm-6 col-12 my-3">
+                                    <div class="MH card">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                        <div class="media d-flex" style=" justify-content: space-between;">
+                                            <div class="media-body text-left">
+                                            <h3 class="danger">500+</h3>
+                                            <span>Languages</span>
+                                            </div>
+                                            <div class="align-self-center animated-icons">
+                                            <i class="fa-solid fa-language" aria-hidden="true" style="    font-size: 35px;"></i>
                                             </div>
                                         </div>
                                         </div>
@@ -427,7 +445,7 @@
                                                 </div >
                                                     <p class="mb-0 mx-1 fs-5" style="color:#42b979;">4.5 <i class="fa-solid fa-star"></i></p>
                                                 </div>
-                                                <div class="md-div col-lg-5 d-none mt-2" style="margin-left: -5px;">
+                                                <div class="md-div col-lg-5 d-none mt-2" style="margin-left: 17px;">
                                                         <span class="mb-div"><b>{{ __('messages.20 AED for 50 mintues') }}</b>
                                                         </span>
 
@@ -782,7 +800,7 @@
                                                 
                                             </div>
                                         
-                                            <div class=" d-flex flex-column text-center px-5  mb-3">  </div> <button class="AB-button btn btn-success btn-block confirm-button">{{ __('messages.Confirm') }}</button>
+                                           <button class="AB-button btn btn-success btn-block confirm-button mt-4">{{ __('messages.Confirm') }}</button>
                                         </div>
                                     </div>
                                 </div>
