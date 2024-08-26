@@ -14,9 +14,9 @@
 }
 .mini_header{
     /* background-color: #42b979; */
-    height: 25%;
+    height: 5%;
     position: absolute !important;
-    top: -50px;
+    top: 20px;
     bottom: 0px;
     width: 100%;
     left: 0px;
