@@ -848,7 +848,7 @@
 
                         <section class="Ed-max">
                                  <div class="mx-heading-div py-4">
-                                    <h2>Recomendation</h2>
+                                    <h2>{{ __('messages.Recomendation') }}</h2>
                                 </div>
                                 <div class="mx-cont row">
                                     <div class="ed col-lg-6 col-sm-3 mx-2">
@@ -856,7 +856,7 @@
                                             <img src="images/House.svg" alt="">
                                         </div>
                                         <div class="mx-detail">
-                                            <p class="fs-5">"Edexcel's operating system is exceptionally robust and holds the collective knowledge of Selectra's entire business operations."</p>
+                                            <p class="fs-5">{{ __('messages.Edexcels operating system is exceptionally robust and holds the collective knowledge of Selectra entire business operations') }}</p>
                                             <div class="video-div">
                                                 <div class="zwc-testimonial-video">
                                                     <img data-lazy="" src="images/profile_dp.png" alt="" class="data-loaded"> <span><i class="fa-brands fa-youtube" aria-hidden="true" style="color: red;font-size: 20px;"></i>Watch video</span>
@@ -866,13 +866,13 @@
                                     </div>
                                     <div class="ed-div col-lg-5 col-sm-3">
                                         <div class="mx-div">
-                                            <h3 class="text-white fs-1 ny-3">Edexcel for Business Solutions</h3>
+                                            <h3 class="text-white fs-1 ny-3">{{ __('messages.Edexcel for Business Solutions') }}</h3>
                                         </div>
                                         <div class="mx-para">
-                                            <p class="text-white my-4">Discover the comprehensive Edexcel ecosystem, offering the professional services, robust infrastructure, dedicated support, and top-tier security that large enterprises demand. Simplify intricate business operations, strengthen customer relationships, and accelerate growth on a grand scale.</p>
+                                            <p class="text-white my-4">{{ __('messages.Discover the comprehensive Edexcel ecosystem, offering the professional services, robust infrastructure, dedicated support, and top-tier security that large enterprises demand. Simplify intricate business operations, strengthen customer relationships, and accelerate growth on a grand scale.') }}</p>
                                         </div>
                                         <div class="mx-button">
-                                            <button type="button" class="btn ">Get in Touch <i class="fa-solid fa-angle-right" aria-hidden="true"></i></button>
+                                            <button type="button" class="btn ">{{ __('messages.Get in Touch') }} <i class="fa-solid fa-angle-right" aria-hidden="true"></i></button>
                                         </div>
                                     </div>
                                 </div>

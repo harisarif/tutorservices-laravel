@@ -570,6 +570,7 @@ width: 100%;
         width: 100%;
         order: 2;
     }
+    
     .mx-detail{
         flex-direction: column;
     }
@@ -1502,4 +1503,10 @@ display: inline-block;
     letter-spacing: -0.2px;
     color: #fff;
     align-items: center;
+}
+[dir="rtl"] .mx-detail p {
+    margin-left: -3%;
+}
+[dir="rtl"] .zwc-testimonial-video{
+    margin-left: 114px;
 }

@@ -75,4 +75,9 @@ return [
     'Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.'=>'Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.',
     'Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.'=>'Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.',
     'MICHAEL TEDDY'=>'MICHAEL TEDDY',
+    'Recomendation'=>'Recomendation',
+    'Edexcels operating system is exceptionally robust and holds the collective knowledge of Selectra entire business operations'=>'Edexcels operating system is exceptionally robust and holds the collective knowledge of Selectra entire business operations',
+    'Edexcel for Business Solutions'=>'Edexcel for Business Solutions',
+    'Discover the comprehensive Edexcel ecosystem, offering the professional services, robust infrastructure, dedicated support, and top-tier security that large enterprises demand. Simplify intricate business operations, strengthen customer relationships, and accelerate growth on a grand scale.'=>'Discover the comprehensive Edexcel ecosystem, offering the professional services, robust infrastructure, dedicated support, and top-tier security that large enterprises demand. Simplify intricate business operations, strengthen customer relationships, and accelerate growth on a grand scale.',
+    'Get in Touch'=>'Get in Touch',
 ];

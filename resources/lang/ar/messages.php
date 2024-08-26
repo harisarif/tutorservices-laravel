@@ -75,4 +75,9 @@ return [
     'Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.'=>'حافظ بشكل كبير على حلول النقرات وقذائف الهاون دون حلول وظيفية. تضافر علاقات فرض الضرائب على الموارد بشكل كامل عبر الأسواق المتخصصة الرائدة. زراعة مهنيا.',
     'Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.'=>'حافظ بشكل كبير على حلول النقرات وقذائف الهاون دون حلول وظيفية. تضافر علاقات فرض الضرائب على الموارد بشكل كامل عبر الأسواق المتخصصة الرائدة. زراعة مهنيا.',
     'MICHAEL TEDDY'=>'مايكل تيدي',
+    'Recomendation'=>'توصية',
+    'Edexcels operating system is exceptionally robust and holds the collective knowledge of Selectra entire business operations'=>'يتميز نظام التشغيل Edexcels بالقوة الاستثنائية ويحمل المعرفة الجماعية للعمليات التجارية لشركة Selectra بأكملها',
+    'Edexcel for Business Solutions'=>'ادكسل لحلول الأعمال',
+    'Discover the comprehensive Edexcel ecosystem, offering the professional services, robust infrastructure, dedicated support, and top-tier security that large enterprises demand. Simplify intricate business operations, strengthen customer relationships, and accelerate growth on a grand scale.'=>'اكتشف نظام Edexcel البيئي الشامل، الذي يقدم الخدمات المهنية والبنية التحتية القوية والدعم المخصص والأمان عالي المستوى الذي تطلبه المؤسسات الكبيرة. قم بتبسيط العمليات التجارية المعقدة، وتعزيز العلاقات مع العملاء، وتسريع النمو على نطاق واسع.',
+    'Get in Touch'=>'تواصل معنا',
 ];
