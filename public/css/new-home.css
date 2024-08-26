@@ -148,6 +148,14 @@
     .adjust-filters-wrap {
         display: flex;
     }
+    .mini_header {
+        position: relative !important;
+        /* top: -50px;
+        bottom: 0px;
+        width: 100%;
+        left: 0px;
+        z-index: 1; */
+    }
 }
 .im-heading h2{
     color: #42b979;
