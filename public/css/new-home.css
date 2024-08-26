@@ -369,6 +369,7 @@ width: 100%;
 @media (min-width:320px) and (max-width: 991px) {
     .mini_header {
         position: relative !important;
+        height: 15%;
         /* top: -50px;
         bottom: 0px;
         width: 100%;
