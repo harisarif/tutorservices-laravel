@@ -588,6 +588,9 @@ width: 100%;
         width: auto !important;
     margin-bottom: 10px;
     }
+    .mx-div h3{
+        font-size: 19px !important;
+    }
 }
 .banner-section {
     position: relative;
