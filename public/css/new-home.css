@@ -369,12 +369,11 @@ width: 100%;
 @media (min-width:320px) and (max-width: 991px) {
     .mini_header {
         position: relative !important;
-        height: 15%;
-        /* top: -50px;
+        height: 12%;
+        top: 0px;
         bottom: 0px;
-        width: 100%;
         left: 0px;
-        z-index: 1; */
+        z-index: auto;
     }
     .adjustMobile {
         height: unset;
