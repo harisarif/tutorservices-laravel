@@ -829,7 +829,7 @@
                                 <div class="col-6 ad-div-child">
                                     <div class="im-heading-div text-white mt-4">
                                         <h1 class="text-white fw-bold ">{{ __('messages.Guide and Inspire Learners') }}</h1>
-                                        <p class="mx-md-2 mx-sm-0">{{ __('messages.Earn while you teach—share your expertise with students on Preply. Sign up to start tutoring online.') }}</p>
+                                        <p class="mx-md-2 mx-sm-0">{{ __('messages.Earn while you teach—share your expertise with students on Edexcel. Sign up to start tutoring online.') }}</p>
 
                                         <div class="im-detail">
                                             <ul class="mt-lg-5 mt-md-3 mt-sm-0">
