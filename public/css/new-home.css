@@ -167,7 +167,14 @@
     justify-content: center;
 }
 @media (min-width: 290px) and (max-width: 320px) {
-
+    .mini_header {
+        position: relative !important;
+        /* top: -50px;
+        bottom: 0px;
+        width: 100%;
+        left: 0px;
+        z-index: 1; */
+    }
     /* .select2-container {
    max-width: 255px !important;
 } */
