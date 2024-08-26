@@ -367,6 +367,17 @@ width: 100%;
     display: none;
 }
 @media (min-width:320px) and (max-width: 991px) {
+    .mini_header {
+        position: relative !important;
+        /* top: -50px;
+        bottom: 0px;
+        width: 100%;
+        left: 0px;
+        z-index: 1; */
+    }
+    .adjustMobile {
+        height: unset;
+    }
     .adjust-header-mobile{
         display: block;
     }

@@ -150,7 +150,7 @@
     @endif
     
     <div class="row mini_header m-0 p-0 container-fluid position-relative">
-        <div class="col-sm-12 px-3  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0" style="background:#42b979;position:fixed !important;height:12%">
+        <div class="col-sm-12 px-3  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0 adjustMobile" style="background:#42b979;position:fixed !important;height:12%">
             <ul class="p-1 m-0 d-sm-inline d-block text-center header-ul pt-2">
                 <li class=" p-0">
                      <a class="navbar-brand" href="{{ route('newhome') }}">
