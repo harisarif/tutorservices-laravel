@@ -14,7 +14,7 @@
 }
 .mini_header{
     background-color: #42b979;
-    height: 21%;
+    height: 15%;
 }
 .MH {
     border: 5px solid;
@@ -570,6 +570,24 @@ width: 100%;
         width: 100%;
         order: 2;
     }
+    .mx-detail{
+        flex-direction: column;
+    }
+    .mx-detail p{
+        width: auto !important;
+        text-align: center;
+    }
+    .zwc-testimonial-video{
+        margin-left: 65px !important;
+    }
+    .ed-div{
+        margin-top: 20px !important;
+        text-align: center;
+    }
+    .mx-button button{
+        width: auto !important;
+    margin-bottom: 10px;
+    }
 }
 .banner-section {
     position: relative;
@@ -936,11 +954,11 @@ align-items: center;
     justify-content: center;
   }
   .ad-form{
-    border: 5px solid rgb(25 135 84);
+    border: 3px solid rgb(25 135 84);
     border-radius: 5px;
     display: flex;
     margin: 10px 0;
-    border-image: linear-gradient(45deg, #42b979, #ffffff) 1;
+    border-image: linear-gradient(45deg, #42b979, #f5f5f5) 1;
 }
 .ad-detail{
     padding: 5px 0;
@@ -1417,4 +1435,68 @@ display: inline-block;
     display: flex;
     justify-content: center;
     margin: 0 auto;
+}
+.Ab-img img{
+    width: 70%;
+   
+}
+.Ab-img{
+    display: flex;
+    justify-content: center;
+}
+.mx-heading-div{
+    display: flex;
+    justify-content: center;
+}
+.mx-heading-div h2{
+    text-align: center;
+    color: #42b979;
+    font-weight: 700;
+    border-bottom: 1px solid #42b979;
+    white-space: nowrap;
+}
+.mx-cont{
+    background: linear-gradient(to right, #42b979, #d7d7d7);
+}
+.mx-detail{
+    display: flex;
+    justify-content: end;
+}
+.ed-div{
+    margin-top: 6rem;
+}
+.mx-detail p{
+    color: #fff;
+    width: 53%;
+    margin-right:9%;
+}
+.mx-button button{
+    background: #42b979;
+    color: #fff;
+    width: 35%;
+    margin-top: 15px;
+    transition: 0.5s;
+}
+.zwc-testimonial-video img{
+    width: 55%;
+    border-radius: 70%;
+}
+.mx-button button:hover{
+    background-color: #fff;
+    color: #42b979;
+    transform: scale(1.1);
+}
+.zwc-testimonial-video{
+    text-align: center;
+    cursor: pointer;
+    width: 130px;
+    margin-left: -50%;
+}
+.zwc-testimonial-video span{
+    display: flex;
+    font-size: 14px;
+    justify-content: center;
+    letter-spacing: -0.2px;
+    color: #fff;
+    align-items: center;
 }
