@@ -54,7 +54,7 @@
 
             <div class="col-lg-4 col-sm-12col-4">
                 <ul class="my-2">
-                    <li class="AB-footer text-white fs-5 d-block fw-bold">{{ __('messages.Contact') }} Us</li>
+                    <li class="AB-footer text-white fs-5 d-block fw-bold">{{ __('messages.Contact Us') }} </li>
                     <li class="ad-footer d-block py-1">
                      <i class="fa-solid fa-location-dot text-white"></i>
                      <span class="text-white">{{ __('messages.Dubai') }}</span>
