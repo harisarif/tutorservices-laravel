@@ -251,17 +251,6 @@
             }
         }
         }
-      
-       
-      /*   body:has(#hamid:checked) .label-div-two{
-            display: none;
-        }
-        body:has(#hamid-raza:checked) .label-div{
-            display: block !important;
-        }
-        body:has(#hamid-raza:checked) .app-sidebar{
-            display: inline-block;
-        } */
     </style>
 
 </head>
@@ -373,8 +362,17 @@
 
                 <div class="scrollbar-sidebar">
                     <div class="app-sidebar__inner mt-3">
-                        <h6>Dashboard</h6>
+                        <!-- <h6>Dashboard</h6> -->
                         <ul class="vertical-nav-menu nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav- w-100 student-listing">
+                                <a id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                                    aria-selected="true" class="mm-active">
+                                    <i class="fa fa-user mx-1" aria-hidden="true"></i>
+
+                                    Dashbord
+                                </a>
+
+                            </li>
                             <li class="nav- w-100 student-listing">
                                 <a id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
                                     aria-selected="true" class="mm-active">

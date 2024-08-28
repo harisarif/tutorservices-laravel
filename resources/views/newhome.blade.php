@@ -305,8 +305,8 @@
                                     <div class="card-content">
                                         <div class="card-body">
                                         <div class="media d-flex" style=" justify-content: space-between;">
-                                            <div class="media-body text-left">
-                                            <h3 class="danger">500+</h3>
+                                            <div class="media-body text-left counter">
+                                            <h3 class="danger"  id="teacher-count">500+</h3>
                                             <span>{{ __('messages.Teachers') }}</span>
                                             </div>
                                             <div class="align-self-center animated-icons">
@@ -324,9 +324,9 @@
                                     <div class="card-content">
                                         <div class="card-body">
                                         <div class="media d-flex" style=" justify-content: space-between;">
-                                            <div class="media-body text-left">
+                                            <div class="media-body text-left counter">
                                             
-                                            <h3 class="success">1000+</h3>
+                                            <h3 class="success" id="count">1000+</h3>
                                             <span>{{ __('messages.Students') }}</span>
                                             </div>
                                             <div class="align-self-center animated-icons">
@@ -347,8 +347,8 @@
                                     <div class="card-content">
                                         <div class="card-body">
                                         <div class="media d-flex" style=" justify-content: space-between;">
-                                            <div class="media-body text-left">
-                                            <h3 class="warning">1500+</h3>
+                                            <div class="media-body text-left counter">
+                                            <h3 class="warning"  id="subject-count">1500+</h3>
                                             <span>{{ __('messages.Subjects') }}</span>
                                             </div>
                                             <div class="align-self-center animated-icons">
@@ -364,10 +364,10 @@
                                     <div class="MH card">
                                     <div class="card-content">
                                         <div class="card-body">
-                                        <div class="media d-flex" style=" justify-content: space-between;">
-                                            <div class="media-body text-left">
-                                            <h3 class="danger">500+</h3>
-                                            <span>Languages</span>
+                                        <div class="media d-flex " style=" justify-content: space-between;">
+                                            <div class="media-body text-left counter">
+                                            <h3 class="danger" id="lang-count">500+</h3>
+                                            <span >Languages</span>
                                             </div>
                                             <div class="align-self-center animated-icons">
                                             <i class="fa-solid fa-language" aria-hidden="true" style="    font-size: 35px;"></i>
@@ -963,6 +963,7 @@
         
     </script>
      <script>
+        
         jQuery(document).ready(function($) {
         		"use strict";
         		//  TESTIMONIALS CAROUSEL HOOK
@@ -1474,6 +1475,126 @@
             // Set default country and prefix on page load
             country.val(defaultCountry).trigger('change');
             setCountryPrefix();
-    });
+        });
+
+        let count = 0;
+        const limit = 1000; // The limit for the counter
+        const countElement = document.getElementById('count');
+
+        // Function to update the counter
+        function updateCounter() {
+            if (count < limit) {
+                count += 100; // Increment by 100 for each interval
+                if (count > limit) {
+                    count = limit; // Ensure count does not exceed the limit
+                }
+                countElement.textContent = count;
+            }
+
+            // Add a plus sign if the counter reaches the limit
+            if (count === limit) {
+                countElement.textContent = count + "+";
+            }
+        }
+
+        // Update counter every 100 milliseconds (0.1 seconds)
+         const intervalId = setInterval(updateCounter, 100);
+
+         // Optional: Clear the interval when the counter reaches the limit
+        function stopCounter() {
+            if (count >= limit) {
+                    clearInterval(intervalId);
+                }
+            }
+
+        let teachercount = 0;
+        const Teacherlimit = 500; // The limit for the counter
+        const TeachercountElement = document.getElementById('teacher-count');
+
+        // Function to update the counter
+        function TupdateCounter() {
+            if (teachercount < Teacherlimit) {
+                teachercount += 50; // Increment by 50 for each interval
+                if (teachercount > Teacherlimit) {
+                    teachercount = Teacherlimit; // Ensure count does not exceed the limit
+                }
+                TeachercountElement.textContent = teachercount;
+            }
+
+            // Add a plus sign if the counter reaches the limit
+            if (teachercount === Teacherlimit) {
+                TeachercountElement.textContent = teachercount + "+";
+            }
+        }
+
+        // Update counter every 100 milliseconds (0.1 seconds)
+        const TintervalId = setInterval(TupdateCounter, 100);
+
+        // Optional: Clear the interval when the counter reaches the limit
+        function TstopCounter() {
+            if (teachercount >= Teacherlimit) {
+                clearInterval(TintervalId);
+            }
+        }
+
+        let subjectcount = 0;
+        const Subjectlimit = 1500; // The limit for the counter
+        const SubjectcountElement = document.getElementById('subject-count');
+
+        // Function to update the counter
+        function SupdateCounter() {
+            if (subjectcount < Subjectlimit) {
+                subjectcount += 50; // Increment by 50 for each interval
+                if (subjectcount > Subjectlimit) {
+                    subjectrcount = Subjectlimit; // Ensure count does not exceed the limit
+                }
+                SubjectcountElement.textContent = subjectcount;
+            }
+
+            // Add a plus sign if the counter reaches the limit
+            if (subjectcount === Subjectlimit) {
+                SubjectcountElement.textContent = subjectcount + "+";
+            }
+        }
+
+        // Update counter every 100 milliseconds (0.1 seconds)
+        const SintervalId = setInterval(SupdateCounter, 100);
+
+        // Optional: Clear the interval when the counter reaches the limit
+        function SstopCounter() {
+            if (subjectcount >= Subjectlimit) {
+                clearInterval(SintervalId);
+            }
+        }
+
+        let langcount = 0;
+        const Langlimit = 500; // The limit for the counter
+        const  LangcountElement = document.getElementById('lang-count');
+
+        // Function to update the counter
+        function LupdateCounter() {
+            if ( langcount < Langlimit) {
+                langcount += 50; // Increment by 50 for each interval
+                if (langcount > Langlimit) {
+                    langrcount = Langlimit; // Ensure count does not exceed the limit
+                }
+                LangcountElement.textContent = langcount;
+            }
+
+            // Add a plus sign if the counter reaches the limit
+            if (langcount === Langlimit) {
+                LangcountElement.textContent = langcount + "+";
+            }
+        }
+
+        // Update counter every 100 milliseconds (0.1 seconds)
+        const lintervalId = setInterval(LupdateCounter, 100);
+
+        // Optional: Clear the interval when the counter reaches the limit
+        function LstopCounter() {
+            if (langcount >= Langlimit) {
+                clearInterval(LintervalId);
+            }
+        }
 </script>
 @endsection
