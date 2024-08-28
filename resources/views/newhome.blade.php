@@ -883,7 +883,7 @@
                                         <h2 class="text-center mt-3">{{ __('messages.Testimonials') }}</h2>
                                      </div>
                                 <div class="row">
-                                    <div class="col-sm-12 ">
+                                    <div class="col-sm-12 sm-div ms-lg-0 ms-3">
                                     <div id="customers-testimonials" class="owl-carousel">
 
                                         <!--TESTIMONIAL 1 -->

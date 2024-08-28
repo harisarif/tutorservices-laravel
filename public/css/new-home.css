@@ -475,11 +475,18 @@ width: 100%;
         height: auto;
         order: 1;
     }
+    
     .AI{
         text-align: justify;
     }
+    .Ed-max{
+        width: 95%;
+        margin: 0 auto;
+    }
     .AE{
         flex-direction: column;
+        width: 95%;
+        margin:0 auto !important;
     }
     .im-div{
         width: 100%;
@@ -575,8 +582,12 @@ width: 100%;
     .ad-div span b{
         margin: 0 27px !important;
     }
+    .mx-para{
+        display: none;
+    }
     .ad-img-card{
         width: 100% !important;
+        justify-content: space-between;
     }
     .ad-div{
         width: 100%;
@@ -654,6 +665,7 @@ width: 100%;
     }
     .mx-div h3{
         font-size: 19px !important;
+        display: none;
     }
 }
 /* .sm-div{
