@@ -57,6 +57,7 @@
     .custom-select-wrapper {
         position: relative;
         display: flex;
+        cursor: pointer;
     }
 
     .custom-select {
