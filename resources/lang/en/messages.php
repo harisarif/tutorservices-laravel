@@ -77,7 +77,7 @@ return [
     'MICHAEL TEDDY'=>'MICHAEL TEDDY',
     'Recomendation'=>'Recomendation',
     'Edexcels operating system is exceptionally robust and holds the collective knowledge of Selectra entire business operations'=>'Edexcels operating system is exceptionally robust and holds the collective knowledge of Selectra entire business operations',
-    'Edexcel for Business Solutions'=>'Edexcel for Business Solutions',
-    'Discover the comprehensive Edexcel ecosystem, offering the professional services, robust infrastructure, dedicated support, and top-tier security that large enterprises demand. Simplify intricate business operations, strengthen customer relationships, and accelerate growth on a grand scale.'=>'Discover the comprehensive Edexcel ecosystem, offering the professional services, robust infrastructure, dedicated support, and top-tier security that large enterprises demand. Simplify intricate business operations, strengthen customer relationships, and accelerate growth on a grand scale.',
+    'Edexcel for Study'=>'Edexcel for Study',
+    'Edexcel for Study offers a diverse range of qualifications, including GCSEs and A-levels, designed to support students academic and professional aspirations. With a focus on critical thinking and practical skills, Edexcel provides high-quality education that prepares learners for further studies or careers, empowering them to excel in their chosen paths.'=>'Edexcel for Study offers a diverse range of qualifications, including GCSEs and A-levels, designed to support students academic and professional aspirations. With a focus on critical thinking and practical skills, Edexcel provides high-quality education that prepares learners for further studies or careers, empowering them to excel in their chosen paths.',
     'Get in Touch'=>'Get in Touch',
 ];

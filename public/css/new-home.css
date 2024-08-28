@@ -16,11 +16,11 @@
     /* background-color: #42b979; */
     height: 5%;
     position: absolute !important;
-    top: 20px;
+    top: 16px;
     bottom: 0px;
     width: 100%;
     left: 0px;
-    z-index: 1;
+    z-index: 2;
 
 }
 .MH {
@@ -369,14 +369,15 @@ width: 100%;
 @media (min-width:320px) and (max-width: 991px) {
     .mini_header {
         position: relative !important;
-        height: 12%;
+        height: 10%;
         top: 0px;
         bottom: 0px;
         left: 0px;
         z-index: auto;
     }
     .adjustMobile {
-        height: unset;
+        height: 10% !important;
+        z-index: 2;
     }
     .adjust-header-mobile{
         display: block;
@@ -398,6 +399,7 @@ width: 100%;
         width: 100%;
         justify-content: space-between;
         align-items: center;
+        margin-top: 13px !important;
     }
     #customers-testimonials .shadow-effect p{
         font-size: 11px !important;
@@ -458,6 +460,10 @@ width: 100%;
 @media (max-width: 425px) {
     .ai-image-div img {
         height: auto;
+    }
+    .wrapper {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
     }
     .md-div{
         display: block !important ;
@@ -594,11 +600,19 @@ width: 100%;
         display: flex;
     }
     .img-reqire {
-        width: 100%;
+        width: 95%;
         height: auto;
         overflow: hidden;
-        
+        margin: 0 10px;
     }
+    .im-heading h2{
+        width: 50% !important;
+    }
+    .Ab-img img{
+        width: 100% !important;
+        margin-left: -14px;
+    }
+   
     .Ai{
         width: 100%;
         order: 2;
@@ -611,8 +625,24 @@ width: 100%;
         width: auto !important;
         text-align: center;
     }
+    .video-div{
+        display: flex;
+        justify-content: center;
+    }
+    .ae-heading h2{
+        width: 40% !important;
+    }
+    .ai-heading-div h2{
+        width: 50% !important;
+    }
+    .ad-headin-div h2{
+        width: 40% !important;
+    }
     .zwc-testimonial-video{
-        margin-left: 65px !important;
+        margin-left: 5px !important;
+    }
+    .mx-para p{
+        text-align: left;
     }
     .ed-div{
         margin-top: 20px !important;
@@ -626,6 +656,9 @@ width: 100%;
         font-size: 19px !important;
     }
 }
+/* .sm-div{
+    padding: 0;
+} */
 .banner-section {
     position: relative;
     width: 100%;
@@ -1474,8 +1507,9 @@ display: inline-block;
     margin: 0 auto;
 }
 .Ab-img img{
-    width: 70%;
-   
+    width: 75%;
+    height: 270px;
+   border-radius: 10px;
 }
 .Ab-img{
     display: flex;
@@ -1494,6 +1528,7 @@ display: inline-block;
 }
 .mx-cont{
     background: linear-gradient(to right, #42b979, #d7d7d7);
+    margin: 0 auto;
 }
 .mx-detail{
     display: flex;
@@ -1504,8 +1539,8 @@ display: inline-block;
 }
 .mx-detail p{
     color: #fff;
-    width: 53%;
-    margin-right:9%;
+    width: 64%;
+    margin-right:3%;
 }
 .mx-button button{
     background: #42b979;
@@ -1527,7 +1562,7 @@ display: inline-block;
     text-align: center;
     cursor: pointer;
     width: 130px;
-    margin-left: -50%;
+    margin-left: -35%;
 }
 .zwc-testimonial-video span{
     display: flex;

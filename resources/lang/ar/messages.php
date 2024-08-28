@@ -77,7 +77,7 @@ return [
     'MICHAEL TEDDY'=>'مايكل تيدي',
     'Recomendation'=>'توصية',
     'Edexcels operating system is exceptionally robust and holds the collective knowledge of Selectra entire business operations'=>'يتميز نظام التشغيل Edexcels بالقوة الاستثنائية ويحمل المعرفة الجماعية للعمليات التجارية لشركة Selectra بأكملها',
-    'Edexcel for Business Solutions'=>'ادكسل لحلول الأعمال',
-    'Discover the comprehensive Edexcel ecosystem, offering the professional services, robust infrastructure, dedicated support, and top-tier security that large enterprises demand. Simplify intricate business operations, strengthen customer relationships, and accelerate growth on a grand scale.'=>'اكتشف نظام Edexcel البيئي الشامل، الذي يقدم الخدمات المهنية والبنية التحتية القوية والدعم المخصص والأمان عالي المستوى الذي تطلبه المؤسسات الكبيرة. قم بتبسيط العمليات التجارية المعقدة، وتعزيز العلاقات مع العملاء، وتسريع النمو على نطاق واسع.',
+    'Edexcel for Study'=>'ادكسل للدراسة',
+    'Edexcel for Study offers a diverse range of qualifications, including GCSEs and A-levels, designed to support students academic and professional aspirations. With a focus on critical thinking and practical skills, Edexcel provides high-quality education that prepares learners for further studies or careers, empowering them to excel in their chosen paths.'=>'يقدم Edexcel for Study مجموعة متنوعة من المؤهلات، بما في ذلك GCSEs والمستويات A، المصممة لدعم تطلعات الطلاب الأكاديمية والمهنية. مع التركيز على التفكير النقدي والمهارات العملية، توفر Edexcel تعليمًا عالي الجودة يعد المتعلمين لمزيد من الدراسات أو الوظائف، وتمكينهم من التفوق في المسارات التي يختارونها.',
     'Get in Touch'=>'تواصل معنا',
 ];

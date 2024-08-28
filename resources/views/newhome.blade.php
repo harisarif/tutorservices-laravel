@@ -853,7 +853,7 @@
                                 <div class="mx-cont row">
                                     <div class="ed col-lg-6 col-sm-3 mx-2">
                                         <div class="Ab-img my-3 mx-2">
-                                            <img src="images/House.svg" alt="">
+                                            <img src="images/ai-generated.webp" alt="">
                                         </div>
                                         <div class="mx-detail">
                                             <p class="fs-5">{{ __('messages.Edexcels operating system is exceptionally robust and holds the collective knowledge of Selectra entire business operations') }}</p>
@@ -866,10 +866,10 @@
                                     </div>
                                     <div class="ed-div col-lg-5 col-sm-3">
                                         <div class="mx-div">
-                                            <h3 class="text-white fs-1 ny-3">{{ __('messages.Edexcel for Business Solutions') }}</h3>
+                                            <h3 class="text-white fs-1 ny-3">{{ __('messages.Edexcel for Study') }}</h3>
                                         </div>
                                         <div class="mx-para">
-                                            <p class="text-white my-4">{{ __('messages.Discover the comprehensive Edexcel ecosystem, offering the professional services, robust infrastructure, dedicated support, and top-tier security that large enterprises demand. Simplify intricate business operations, strengthen customer relationships, and accelerate growth on a grand scale.') }}</p>
+                                            <p class="text-white my-4">{{ __('messages.Edexcel for Study offers a diverse range of qualifications, including GCSEs and A-levels, designed to support students academic and professional aspirations. With a focus on critical thinking and practical skills, Edexcel provides high-quality education that prepares learners for further studies or careers, empowering them to excel in their chosen paths.') }}</p>
                                         </div>
                                         <div class="mx-button">
                                             <button type="button" class="btn ">{{ __('messages.Get in Touch') }} <i class="fa-solid fa-angle-right" aria-hidden="true"></i></button>
@@ -883,7 +883,7 @@
                                         <h2 class="text-center mt-3">{{ __('messages.Testimonials') }}</h2>
                                      </div>
                                 <div class="row">
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-12 ">
                                     <div id="customers-testimonials" class="owl-carousel">
 
                                         <!--TESTIMONIAL 1 -->
