@@ -272,12 +272,7 @@
         </div>
         <div class="notification mb-2 w-25 p-2 bg-info-subtle position-absolute end-0 top-100 z-1">This is a demo</div>
     </div>
-    <section class="banner-section" style="background-image: url(images/Potrate.webp); background-size: cover;">
-                
-                <!-- <video autoplay muted loop playsinline>
-                    <source src="{{ asset('images/banner-video.mp4') }}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video> -->
+    <section class="banner-section" style="background-image: url(images/group-of-kids.jpg); background-size: cover;">
                 <div class="banner-content">
                     <h1 class="aa text-white" style="margin-top:10rem;">The Content will be requried</h1>
                 </div>
@@ -811,7 +806,7 @@
                         <div class="col-7 img-reqire p-0">
                                     <div class="ai-image-div">
                                         <!-- <h1 class="text-center text-white">This Imaage will be Required</h1> -->
-                                        <img src="images/Ad-Banner.jpeg" alt="">
+                                        <img src="images/indian-asian.jpg" alt="">
                                     </div>
                         </div>
                     </div>
@@ -821,13 +816,13 @@
                                 <h2>{{ __('messages.Become A Tutor') }}</h2>
                             </div>
                             <div class="AE row border mx-0" >
-                                <div class="col-lg-6 col-sm-6 im-div p-0">
+                                <div class="col-lg-7 col-sm-6 im-div p-0">
                                     <div class="im-img">
-                                        <img src="images/im-teacher.jpg" alt="">
+                                        <img src="images/group.png" alt="">
                                     </div>
                                 </div>
 
-                                <div class="col-6 ad-div-child">
+                                <div class="col-5 ad-div-child">
                                     <div class="im-heading-div text-white mt-4">
                                         <h1 class="text-white fw-bold ">{{ __('messages.Guide and Inspire Learners') }}</h1>
                                         <p class="mx-md-2 mx-sm-0">{{ __('messages.Earn while you teach—share your expertise with students on Edexcel. Sign up to start tutoring online.') }}</p>
@@ -854,7 +849,7 @@
                                 <div class="mx-cont row">
                                     <div class="ed col-lg-6 col-sm-3 mx-2">
                                         <div class="Ab-img my-3 mx-2">
-                                            <img src="images/ai-generated.webp" alt="">
+                                            <img src="images/back-to-school.png" alt="">
                                         </div>
                                         <div class="mx-detail">
                                             <p class="fs-5">{{ __('messages.Edexcels operating system is exceptionally robust and holds the collective knowledge of Selectra entire business operations') }}</p>
