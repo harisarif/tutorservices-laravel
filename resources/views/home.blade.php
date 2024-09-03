@@ -1,536 +1,563 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Language" content="en">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
-    <meta name="description" content="edexcel dashboard">
-    <meta name="msapplication-tap-highlight" content="no">
-    {{-- <title>{{ config('app.name', 'Edexcel Dashboard') }}</title> --}}
-    <title>Edecel Academy & Educational Consultancy</title>
-    <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
-    <link href="https://demo.dashboardpack.com/architectui-html-free/main.css" rel="stylesheet">
-
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <style>
-        div.dt-buttons {
-            float: right !important;
-            margin-left: 10px;
-        }
-
-        .vertical-nav-menu li a {
-            padding: 0 1.5rem 0 1px !important;
-        }
-
-        .widget-content .widget-content-left .widget-heading {
-            display: flex;
-            gap: 8px;
-        }
-
-        table {
-        border-collapse: collapse; /* Collapse borders */
-        width: 100%; /* Full width */
-    }
-    th, td {
-        border: 1px solid #dddddd; /* Add borders to cells */
-        padding: 8px; /* Add padding */
-        text-align: left; /* Align text to the left */
-    }
-    th {
-        background-color: #f2f2f2; /* Background color for header */
-    }
-    
-    tbody td {
-        text-align: center !important;
-        white-space: nowrap !important;
-    }
-    table.dataTable thead th, table.dataTable thead td {
-        text-align: center;
-    }
-    .fixed-sidebar .app-main .app-main__outer {
-    z-index: 9!important;
-    padding-left: 280px!important;
-    width: calc(100% - 280px)!important;
-}
-@media only screen and (max-width: 600px) {
-    #DataTables_Table_1_wrapper {
-        overflow: scroll;
-    }
-}
-            /* border-collapse: collapse;
-            Collapse borders
-            width: 100%;
-            Full width
-        } */
-
-        th,
-        td {
-            border: 1px solid #dddddd;
-            /* Add borders to cells */
-            padding: 8px;
-            /* Add padding */
-            text-align: left;
-            /* Align text to the left */
-        }
-
-        th {
-            background-color: #f2f2f2;
-            /* Background color for header */
-        }
-
-        tbody td {
-            text-align: center !important;
-            white-space: nowrap !important;
-        }
-
-        table.dataTable thead th,
-        table.dataTable thead td {
-            text-align: center;
-        }
-
-        .fixed-sidebar .app-main .app-main__outer {
-            z-index: 9 !important;
-            padding-left: 280px !important;
-            width: calc(100% - 280px) !important;
-        }
-
-        .student-table-wrapper {
-            overflow-x: scroll;
-        }
-
-        @media(max-width: 600px) {
-            .fixed-sidebar .app-main .app-main__outer {
-                padding-left: 0 !important;
-                width: 100% !important;
-
-            }
-        }
-
-        .app-header .app-header__content {
-            visibility: visible;
-            opacity: 2;
-            box-shadow: unset;
-            position: absolute;
-            left: 5%;
-            width: 90%;
-            top: 0;
-            transition: all .2s;
-            background: transparent;
-            border-radius: 50px;
-            padding: 0 10px;
-            overflow: hidden;
-        }
-
-        .header-user-info {
-            display: block !important;
-        }
-
-        @media(max-width: 991.98px) {
-
-            .app-sidebar {
-                width: auto !important;
-                transform: unset;
-            }
-
-            .dataTables_wrapper .dataTables_filter {
-                text-align: start;
-                float: left;
-            }
-        }
-
-        .fixed-sidebar .app-main .app-main__outer {
-            width: 100% !important;
-        }
-
-        .app-page-title {
-            padding: 10px;
-            margin: -30px -32px 0px;
-            position: relative;
-        }
-
-        .app-theme-white .app-page-title {
-            background-color: white;
-            text-align: justify;
-        }
-
-        .dataTables_wrapper {
-            margin-top: 0.5rem;
-        }
-        .app-main .app-main__inner{
-            padding: 30px 32px 0;
-        }
-        .label-div{
-            & i{
-
-                display: none;
-            }
-        }
-        .log-out-div{
-            display: none !important;
-            /* position: relative; */
-        }
-        .log-out-icon{
-            padding-left: 10px;
-        }
-        .mobile-log-out{
-            display: none !important;
-           /*  position: absolute;
-            top: 40px;
-            right: 0px;
-            background-color: #e3e4e5;
-            z-index: 99999;
-            padding: 10px 14px;
-            border-radius: 5px;
-            overflow: auto; */
-            /* position: absolute; */
-    /* bottom: 10px; */
-            padding: 2px 6px  !important;
-            .main-div{
-                & h6{
-                    color: #3195fe;
-                }
-                & i{
-                    color: red;
-                }
-            }
-        }
-        .widget-content .widget-content-wrapper {
-            top: -13px !important;
-            right: 10px !important;
-        }
-        @media (max-width:321px){
-            .app-main__inner{
-                padding: 30px 17px 0 !important;
-            }
-            .student-data{
-                padding: 0 22px !important;
-            }
-        }
-        @media (max-width: 426px) {
-            .app-sidebar {
-                display: none;
-            }
-          .label-div{
-            & i{
-
-                display: inline-block !important;
-            }
-          }
-          .widget-content-wrapper{
-            display: none !important;
-          }
-          .log-out-div{
-            display: inline-block !important;
-        }
-        body:has(#hamid:checked) .app-sidebar{
-            display: block;
-        }
-        /* body:has(#log-out:checked) .mobile-log-out{
-            display: inline-block !important;
-        } */
-        .dataTables_length,
-        .dt-buttons{
-            display: inline-block !important;
-            text-align: left !important;
-            float: left !important;
-        }
-        .mobile-log-out{
-            display: block !important;
-            & a{
-                text-decoration: none;
-            }
-        }
-        }
-    </style>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Edexcel Dashbord</title>
+    <link rel="stylesheet" href="{{asset('css/fontawesome-free/css/all.min.css')}}"/>
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+<style>
+    .MH{
+        border: 5px solid;
+        border-image: linear-gradient(45deg, #42b979, #ffffff) 1;
+    }
+    .animated-icons{
+        font-size: 50px;
+        color: #42b979;
+         animation: bounce 2s infinite;
+    }
+    .table-responsive{
+        display: inline-table;
+    }
+    @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-15px);
+    }
+  }
+</style>
+<body id="page-top">
 
-<body>
-    <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
-        <div class="app-header header-shadow">
-            <div class="app-header__logo d-block mt-4">
-                <img src="images/logo.png" height="30" width="150" alt="logo" />
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
-            </div>
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <li class=" py-2 mx-2">
+                <a class="navbar-brand" href="{{ route('home') }}">
+                   <img src="{{asset('images/white-logo.jpeg')}}" height="50px" alt="logo" style="height: 50px; border-radius: 10px; width: 100%;">
+               </a>
+           </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" id="dashboard-tab" data-toggle="tab"
+                href="#dashboard" role="tab" aria-controls="dashboard" aria-selected="false">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
             
-          
-          
-            <div class="app-header__content">
-       
-                <div class="app-header-right">
-                    <div class="header-btn-lg pr-0">
-                        <div class="widget-content p-0">   
-                              <div class="label-div d-inline-block">
-                <label for="hamid" >
-                <i class="fa-solid fa-bars fa-lg"></i>
-                    <input type="checkbox" class="d-none" id="hamid" >
-                </label>               
-            </div>
-            <!-- <div class="log-out-div d-inline-block">
-                <label for="log-out" >
-                <i class="fa-solid fa-user  fa-lg log-out-icon "></i>
-                    <input type="checkbox" class="d-none" id="log-out">
-                </label>
-                          
-            </div> -->
-            
-                            <div class="widget-content-wrapper">
-                                <div class="widget-content-left">
-                                    <div class="btn-group">
-                                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                            class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="assets/images/avatars/1.jpg"
-                                                alt="">
-                                            {{-- <i class="fa fa-angle-down ml-2 opacity-8"></i> --}}
-                                        </a>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link py-2" id="profile-tab" data-toggle="tab"
+                href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+                <i class="fas fa-chalkboard-teacher"></i>
+                    <span>Teacher</span>
+                </a>
+            </li>
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link py-2" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+                <i class="fa-solid fa-user-graduate"></i>
+                    <span>Students</span>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
 
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars text-success"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-success" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle text-success" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                        
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-success" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="widget-content-left  ml-3 header-user-info">
+                                </form>
+                            </div>
+                        </li>
 
-                                    <div class="widget-heading">
-                                        Admin
-                                        <nav>
-                                            <a href="#"
-                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                                <i class="fa fa-sign-out" aria-hidden="true"></i>
-                                            </a>
-                                        </nav>
+                        <!-- Nav Item - Alerts -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw text-success"></i>
+                                <!-- Counter - Alerts -->
+                                <span class="badge badge-danger badge-counter">3+</span>
+                            </a>
+                            <!-- Dropdown - Alerts -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header bg-success border-success">
+                                    Alerts Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-success">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 12, 2019</div>
+                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-success">
+                                            <i class="fas fa-donate text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 7, 2019</div>
+                                        $290.29 has been deposited into your account!
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-warning">
+                                            <i class="fas fa-exclamation-triangle text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 2, 2019</div>
+                                        Spending Alert: We've noticed unusually high spending for your account.
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                            </div>
+                        </li>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            style="display: none;">
-                                            @csrf
-                                                </form>
-                                        {{-- <div class="py-12">
-                                            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                                                <div
-                                                    class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                                                    <div class="p-6 text-gray-900 dark:text-gray-100">
-                                                        {{ __("You're logged in!") }}
+                        <!-- Nav Item - Messages -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-envelope fa-fw text-success"></i>
+                                <!-- Counter - Messages -->
+                                <span class="badge badge-danger badge-counter">7</span>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="messagesDropdown">
+                                <h6 class="dropdown-header bg-success border-success">
+                                    Message Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="{{asset('images/undraw_profile_1.svg')}}"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div class="font-weight-bold">
+                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
+                                            problem I've been having.</div>
+                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="{{asset('images/undraw_profile_2.svg')}}"
+                                            alt="...">
+                                        <div class="status-indicator"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">I have the photos that you ordered last month, how
+                                            would you like them sent to you?</div>
+                                        <div class="small text-gray-500">Jae Chun · 1d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="{{asset('images/undraw_profile_3.svg')}}"
+                                            alt="...">
+                                        <div class="status-indicator bg-warning"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Last month's report looks great, I am very happy with
+                                            the progress so far, keep up the good work!</div>
+                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                                            told me that people say this to all dogs, even if they aren't good...</div>
+                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                            </div>
+                        </li>
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <img class="img-profile rounded-circle"
+                                    src="{{asset('images/undraw_profile.svg')}}">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                     style="display: none;">@csrf
+                </form>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div class="tab-content" id="myTabContent">              
+                        <div class="tab-pane fade show active" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+                                            
+                                            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                                            </div>
+                                        <div class="row mb-3">
+                                                    <div class="col-xl-3 col-sm-6 col-12 my-2">
+                                                        <div class="MH card">
+                                                        <div class="card-content">
+                                                            <div class="card-body">
+                                                            <div class="media d-flex" style=" justify-content: space-between;">
+                                                                <div class="media-body text-left counter">
+                                                                <h3 class="danger text-success" id="teacher-count">500+</h3>
+                                                                <span>Teachers</span>
+                                                                </div>
+                                                                <div class="align-self-center animated-icons">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="64" fill="#42b979">
+                                                                <path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-2.67 0-8 1.337-8 4v3h16v-3c0-2.663-5.33-4-8-4zm-8 6v-1c0-1.721 3.468-3 8-3s8 1.279 8 3v1H4z"></path>
+                                                                </svg>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-3 col-sm-6 col-12 my-2">
+                                                        <div class="MH card">
+                                                        <div class="card-content">
+                                                            <div class="card-body">
+                                                            <div class="media d-flex text-success" style=" justify-content: space-between;">
+                                                                <div class="media-body text-left counter">
+                                                                
+                                                                <h3 class="success text-success" id="count">1000+</h3>
+                                                                <span>Students</span>
+                                                                </div>
+                                                                <div class="align-self-center animated-icons">
+                                                                <svg width="40" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <circle cx="32" cy="20" r="12" fill="#42b979"></circle>
+                                                                    <path d="M32 36C22 36 14 44 14 54H50C50 44 42 36 32 36Z" fill="#42b979"></path>
+                                                                    <path d="M32 4L14 14L32 24L50 14L32 4Z" fill="#42b979"></path>
+                                                                </svg>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                
+                                                    <div class="col-xl-3 col-sm-6 col-12 my-2">
+                                                        <div class="MH card">
+                                                        <div class="card-content">
+                                                            <div class="card-body">
+                                                            <div class="media d-flex" style=" justify-content: space-between;">
+                                                                <div class="media-body text-left counter">
+                                                                <h3 class="warning text-success" id="subject-count">1500+</h3>
+                                                                <span>Subjects</span>
+                                                                </div>
+                                                                <div class="align-self-center animated-icons">
+                                                                <i class="fa-solid fa-book-open " style="color:#42b979; font-size:25px;"></i>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xl-3 col-sm-6 col-12 my-2">
+                                                        <div class="MH card">
+                                                        <div class="card-content">
+                                                            <div class="card-body">
+                                                            <div class="media d-flex " style=" justify-content: space-between;">
+                                                                <div class="media-body text-left counter">
+                                                                <h3 class="danger text-success" id="lang-count">500+</h3>
+                                                                <span>Languages</span>
+                                                                </div>
+                                                                <div class="align-self-center animated-icons">
+                                                                <i class="fa-solid fa-language" aria-hidden="true" style="    font-size: 35px;"></i>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                
+                                            </div>
+
+                                        <!-- Content Row -->
+
+                                        <div class="row">
+
+                                            <!-- Area Chart -->
+                                            <div class="col-xl-8 col-lg-7">
+                                                <div class="card shadow mb-4">
+                                                    <!-- Card Header - Dropdown -->
+                                                    <div
+                                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-gradient-success">
+                                                        <h6 class="m-0 font-weight-bold text-white">Edexcel Overview</h6>
+                                                        <div class="dropdown no-arrow">
+                                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                                                aria-labelledby="dropdownMenuLink">
+                                                                <div class="dropdown-header">Dropdown Header:</div>
+                                                                <a class="dropdown-item" href="#">Action</a>
+                                                                <a class="dropdown-item" href="#">Another action</a>
+                                                                <div class="dropdown-divider"></div>
+                                                                <a class="dropdown-item" href="#">Something else here</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Card Body -->
+                                                    <div class="card-body">
+                                                        <div class="chart-area">
+                                                            <canvas id="myAreaChart"></canvas>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div> --}}
 
-
-                                    </div>
-                                    {{-- <div class="widget-subheading">
-                                        VP People Manager
-                                    </div> --}}
-                                </div>
-                                {{-- <div class="widget-content-right header-user-info ml-3">
-                                    <button type="button"
-                                        class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
-                                        <i class="fa text-white fa-calendar pr-1 pl-1"></i>
-                                    </button>
-                                </div> --}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="app-main">
-   
-            <div class="app-sidebar sidebar-shadow">
-              
-        
-                <div class="app-header__logo">
-
-                    <div class="header__pane ml-auto">
-                        <div>
-                            <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
-                                data-class="closed-sidebar">
-                                <span class="hamburger-box">
-                                    <span class="hamburger-inner"></span>
-                                </span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="scrollbar-sidebar">
-                    <div class="app-sidebar__inner mt-3">
-                        <!-- <h6>Dashboard</h6> -->
-                        <ul class="vertical-nav-menu nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav- w-100 student-listing">
-                                <a id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-                                    aria-selected="true" class="mm-active">
-                                    <i class="fa fa-user mx-1" aria-hidden="true"></i>
-
-                                    Dashbord
-                                </a>
-
-                            </li>
-                            <li class="nav- w-100 student-listing">
-                                <a id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-                                    aria-selected="true" class="mm-active">
-                                    <i class="fa fa-user mx-1" aria-hidden="true"></i>
-
-                                    Students
-                                </a>
-
-                            </li>
-                            <li class="nav-item w-100 teacher-listing"> <a id="profile-tab" data-toggle="tab"
-                                    href="#profile" role="tab" aria-controls="profile" aria-selected="false">
-                                    <i class="fa fa-user mx-1" aria-hidden="true"></i>
-
-                                    Teachers
-                                </a></li>
-                                <li>
-                                <div class="mobile-log-out">
-                <a href="{{ route('logout') }}" class="main-div d-flex gap-3 align-items-center"  style="gap:15px;">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <h6 class="m-0">Logout</h6>
-    </a >
-                      </div>
-                                </li>
-                        </ul>
-                    </div>
-                    
-                </div>
-                <!-- <div class="label-div">
-                <label for="hamid" >
-                    <i class="fa-solid fa-xmark"></i>
-                    <input type="checkbox" id="hamid">
-                </label>
-                </div> -->
-              
-            </div>
-
-            <div class="app-main__outer">
-                <div class="app-main__inner">
-                    <div class="app-page-title">
-                        <div class="page-title-wrapper">
-                            <div class="page-title-heading">
-                                <div class="page-title-icon">
-                                    <i class="fa fa-user">
-                                    </i>
-                                </div>
-                                <div class="student-data">
-                                    Student List
-
-                                </div>
-                                <div class="teacher-data d-none">
-                                    Teacher List
-
-                                </div>
-                            </div>
-                            <!-- <div class="page-title-actions">
-                                
-                                <div class="d-inline-block dropdown">
-                                    <a href="{{ route('students.pdf') }}" type="button" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false" class="btn-shadow dropdown-toggle btn btn-info d-none">
-                                        <span class="btn-icon-wrapper pr-2 opacity-7">
-                                            <i class="fa fa-business-time fa-w-20"></i>
-                                        </span>
-                                        Export As PDF
-                                    </a>
-                                    
-                                </div>
-                            </div> -->
-
-                        </div>
-                    </div>
-                    <div class="student-table-wrapper">
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-
-                                @include('student-list')
-
-                            </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                @include('teacher-list')
-                            </div>
-                        </div>
-                        <div id="content">
-                            <!-- Content will be loaded here -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="app-wrapper-footer d-none">
-                    <div class="app-footer">
-                        <div class="app-footer__inner">
-                            <div class="app-footer-left">
-                                <ul class="nav">
-                                    <li class="nav-item">
-                                        <a href="javascript:void(0);" class="nav-link">
-                                            Footer Link 1
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="javascript:void(0);" class="nav-link">
-                                            Footer Link 2
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="app-footer-right">
-                                <ul class="nav">
-                                    <li class="nav-item">
-                                        <a href="javascript:void(0);" class="nav-link">
-                                            Footer Link 3
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="javascript:void(0);" class="nav-link">
-                                            <div class="badge badge-success mr-1 ml-0">
-                                                <small>NEW</small>
+                                            <!-- Pie Chart -->
+                                            <div class="col-xl-4 col-lg-5">
+                                                <div class="card shadow mb-4">
+                                                    <!-- Card Header - Dropdown -->
+                                                    <div
+                                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-gradient-success">
+                                                        <h6 class="m-0 font-weight-bold text-white">Revenue Sources</h6>
+                                                        <div class="dropdown no-arrow">
+                                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                                                aria-labelledby="dropdownMenuLink">
+                                                                <div class="dropdown-header">Dropdown Header:</div>
+                                                                <a class="dropdown-item" href="#">Action</a>
+                                                                <a class="dropdown-item" href="#">Another action</a>
+                                                                <div class="dropdown-divider"></div>
+                                                                <a class="dropdown-item" href="#">Something else here</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Card Body -->
+                                                    <div class="card-body">
+                                                        <div class="chart-pie pt-4 pb-2">
+                                                            <canvas id="myPieChart"></canvas>
+                                                        </div>
+                                                        <div class="mt-4 text-center small">
+                                                            <span class="mr-2">
+                                                                <i class="fas fa-circle text-primary"></i> Direct
+                                                            </span>
+                                                            <span class="mr-2">
+                                                                <i class="fas fa-circle text-success"></i> Social
+                                                            </span>
+                                                            <span class="mr-2">
+                                                                <i class="fas fa-circle text-info"></i> Referral
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            Footer Link 4
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                                            </div>
+                                        </div>
+                                                <div class="tab-pane fade show" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                            <h1 class="h3 mb-0 text-gray-800">Student</h1>
+                                            </div>
+                                                    @include('student-list')
+
+                                                </div>
+                                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                                    <h1 class="h3 mb-0 text-gray-800">Teacher</h1>
+                                                </div>
+                                                    @include('teacher-list')
+                                                </div>
+                                            </div>
+                                            <div id="contents">
+                                                <!-- Content will be loaded here -->
+                                            </div>
+                                        <!-- Page Heading -->
+                        </div>              
+
+                    </div>                        
+                </div>                 
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Edexcel</span>
                     </div>
                 </div>
-            </div>
+            </footer>
+            <!-- End of Footer -->
 
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded text-white bg-success" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-success" href="login.html">Logout</a>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{asset('js/js/jquery.min.js')}}"></script>
+    <script src="{{asset('js/js/bootstrap.bundle.min.js')}}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{asset('js/js/jquery.easing.min.js')}}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{asset('js/js/sb-admin-2.min.js')}}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{{asset('js/js/demo/Chart.min.js')}}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{asset('js/js/demo/chart-area-demo.js')}}"></script>
+    <script src="{{asset('js/js/demo/chart-pie-demo.js')}}"></script>
+
 </body>
 
-@if (request()->is('livewire-required-route'))
-    @livewireScripts
-@endif
-
-<!-- <script>
-    function asideOnOff(id){
-        if(id == 'hamid-raza'){
-            $('#hamid-raza').removeClass('d-none');
-            $('#hamid').addClass('d-none');
-        }else if(id == 'hamid'){
-            $('#hamid').removeClass('d-none');
-            $('#hamid-raza').addClass('d-none');
-        }
-    }
-</script> -->
-<script>
-      document.addEventListener('click', function(event) {
-      var checkbox = document.getElementById('hamid');
-      var label = document.querySelector('label[for="hamid"]');
-
-      if (!label.contains(event.target)) {
-        checkbox.checked = false;
-      }
-    });
-</script>
-
 </html>
-
-
-@include('scripts')
