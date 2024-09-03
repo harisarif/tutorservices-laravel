@@ -1520,6 +1520,7 @@ display: inline-block;
 }
 .Ab-img img{
     width: 75%;
+    height: 285px;
    border-radius: 10px;
 }
 .Ab-img{

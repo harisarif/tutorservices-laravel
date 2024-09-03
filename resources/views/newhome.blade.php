@@ -849,7 +849,7 @@
                                 <div class="mx-cont row">
                                     <div class="ed col-lg-6 col-sm-3 mx-2">
                                         <div class="Ab-img my-3 mx-2">
-                                            <img src="images/back-to-school.png" alt="">
+                                            <img src="images/group-of-kids.jpg" alt="">
                                         </div>
                                         <div class="mx-detail">
                                             <p class="fs-5">{{ __('messages.Edexcels operating system is exceptionally robust and holds the collective knowledge of Selectra entire business operations') }}</p>
