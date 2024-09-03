@@ -816,13 +816,13 @@
                                 <h2>{{ __('messages.Become A Tutor') }}</h2>
                             </div>
                             <div class="AE row border mx-0" >
-                                <div class="col-lg-7 col-sm-6 im-div p-0">
+                                <div class="col-lg-6 col-sm-6 im-div p-0">
                                     <div class="im-img">
                                         <img src="images/group.png" alt="">
                                     </div>
                                 </div>
 
-                                <div class="col-5 ad-div-child">
+                                <div class="col-6 ad-div-child">
                                     <div class="im-heading-div text-white mt-4">
                                         <h1 class="text-white fw-bold ">{{ __('messages.Guide and Inspire Learners') }}</h1>
                                         <p class="mx-md-2 mx-sm-0">{{ __('messages.Earn while you teach—share your expertise with students on Edexcel. Sign up to start tutoring online.') }}</p>
