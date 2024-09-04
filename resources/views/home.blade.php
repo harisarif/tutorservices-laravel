@@ -16,6 +16,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
+    .sidebar-dark .nav-item .nav-link:active, .sidebar-dark .nav-item .nav-link:focus, .sidebar-dark .nav-item .nav-link:hover {
+        border:unset;
+    }
+    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+        background-color:transparent;
+        border:unset;
+    }
     .page-item.active .page-link {
         background-color: #42b979;
         border-color: #42b979;
@@ -53,7 +60,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="nav nav-tabs navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <li class=" py-2 mx-2">
                 <a class="navbar-brand" href="{{ route('home') }}">
@@ -145,187 +152,178 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <div class="tab-content" id="myTabContent">              
-                        <div class="tab-pane fade show active" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
-                                            
-                                            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                                            </div>
-                                        <div class="row mb-3">
-                                                    <div class="col-xl-3 col-sm-6 col-12 my-2">
-                                                        <div class="MH card">
-                                                        <div class="card-content">
-                                                            <div class="card-body">
-                                                            <div class="media d-flex" style=" justify-content: space-between;">
-                                                                <div class="media-body text-left counter">
-                                                                <h3 class="danger text-success" id="teacher-count">500+</h3>
-                                                                <span>Teachers</span>
-                                                                </div>
-                                                                <div class="align-self-center animated-icons">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="64" fill="#42b979">
-                                                                <path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-2.67 0-8 1.337-8 4v3h16v-3c0-2.663-5.33-4-8-4zm-8 6v-1c0-1.721 3.468-3 8-3s8 1.279 8 3v1H4z"></path>
-                                                                </svg>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                                        </div>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade active show" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+                            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-xl-3 col-sm-6 col-12 my-2">
+                                    <div class="MH card">
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                <div class="media d-flex" style=" justify-content: space-between;">
+                                                    <div class="media-body text-left counter">
+                                                        <h3 class="danger text-success" id="teacher-count">500+</h3>
+                                                        <span>Teachers</span>
                                                     </div>
-                                                    <div class="col-xl-3 col-sm-6 col-12 my-2">
-                                                        <div class="MH card">
-                                                        <div class="card-content">
-                                                            <div class="card-body">
-                                                            <div class="media d-flex text-success" style=" justify-content: space-between;">
-                                                                <div class="media-body text-left counter">
-                                                                
-                                                                <h3 class="success text-success" id="count">1000+</h3>
-                                                                <span>Students</span>
-                                                                </div>
-                                                                <div class="align-self-center animated-icons">
-                                                                <svg width="40" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <circle cx="32" cy="20" r="12" fill="#42b979"></circle>
-                                                                    <path d="M32 36C22 36 14 44 14 54H50C50 44 42 36 32 36Z" fill="#42b979"></path>
-                                                                    <path d="M32 4L14 14L32 24L50 14L32 4Z" fill="#42b979"></path>
-                                                                </svg>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                                        </div>
-                                                    </div>
-                                                
-                                                    <div class="col-xl-3 col-sm-6 col-12 my-2">
-                                                        <div class="MH card">
-                                                        <div class="card-content">
-                                                            <div class="card-body">
-                                                            <div class="media d-flex" style=" justify-content: space-between;">
-                                                                <div class="media-body text-left counter">
-                                                                <h3 class="warning text-success" id="subject-count">1500+</h3>
-                                                                <span>Subjects</span>
-                                                                </div>
-                                                                <div class="align-self-center animated-icons">
-                                                                <i class="fa-solid fa-book-open " style="color:#42b979; font-size:25px;"></i>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-xl-3 col-sm-6 col-12 my-2">
-                                                        <div class="MH card">
-                                                        <div class="card-content">
-                                                            <div class="card-body">
-                                                            <div class="media d-flex " style=" justify-content: space-between;">
-                                                                <div class="media-body text-left counter">
-                                                                <h3 class="danger text-success" id="lang-count">500+</h3>
-                                                                <span>Languages</span>
-                                                                </div>
-                                                                <div class="align-self-center animated-icons">
-                                                                <i class="fa-solid fa-language" aria-hidden="true" style="    font-size: 35px;"></i>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                                        </div>
-                                                    </div>
-                                
-                                            </div>
-
-                                        <!-- Content Row -->
-
-                                        <div class="row">
-
-                                            <!-- Area Chart -->
-                                            <div class="col-xl-8 col-lg-7">
-                                                <div class="card shadow mb-4">
-                                                    <!-- Card Header - Dropdown -->
-                                                    <div
-                                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-gradient-success">
-                                                        <h6 class="m-0 font-weight-bold text-white">Edexcel Overview</h6>
-                                                        <div class="dropdown no-arrow">
-                                                           
-                                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                                                aria-labelledby="dropdownMenuLink">
-                                                                <div class="dropdown-header">Dropdown Header:</div>
-                                                                <a class="dropdown-item" href="#">Action</a>
-                                                                <a class="dropdown-item" href="#">Another action</a>
-                                                                <div class="dropdown-divider"></div>
-                                                                <a class="dropdown-item" href="#">Something else here</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Card Body -->
-                                                    <div class="card-body">
-                                                        <div class="chart-area">
-                                                            <canvas id="myAreaChart"></canvas>
-                                                        </div>
+                                                    <div class="align-self-center animated-icons">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="64" fill="#42b979">
+                                                            <path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-2.67 0-8 1.337-8 4v3h16v-3c0-2.663-5.33-4-8-4zm-8 6v-1c0-1.721 3.468-3 8-3s8 1.279 8 3v1H4z"></path>
+                                                        </svg>
                                                     </div>
                                                 </div>
-                                            </div>
-
-                                            <!-- Pie Chart -->
-                                            <div class="col-xl-4 col-lg-5">
-                                                <div class="card shadow mb-4">
-                                                    <!-- Card Header - Dropdown -->
-                                                    <div
-                                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-gradient-success">
-                                                        <h6 class="m-0 font-weight-bold text-white">Revenue Sources</h6>
-                                                        <div class="dropdown no-arrow">
-                                                            
-                                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                                                aria-labelledby="dropdownMenuLink">
-                                                                <div class="dropdown-header">Dropdown Header:</div>
-                                                                <a class="dropdown-item" href="#">Action</a>
-                                                                <a class="dropdown-item" href="#">Another action</a>
-                                                                <div class="dropdown-divider"></div>
-                                                                <a class="dropdown-item" href="#">Something else here</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Card Body -->
-                                                    <div class="card-body">
-                                                        <div class="chart-pie pt-4 pb-2">
-                                                            <canvas id="myPieChart"></canvas>
-                                                        </div>
-                                                        <div class="mt-4 text-center small">
-                                                            <span class="mr-2">
-                                                                <i class="fas fa-circle text-primary"></i> Direct
-                                                            </span>
-                                                            <span class="mr-2">
-                                                                <i class="fas fa-circle text-success"></i> Social
-                                                            </span>
-                                                            <span class="mr-2">
-                                                                <i class="fas fa-circle text-info"></i> Referral
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             </div>
                                         </div>
-                                                <div class="tab-pane fade show" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                            <h1 class="h3 mb-0 text-gray-800">Student</h1>
-                                            </div>
-                                                    @include('student-list')
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-sm-6 col-12 my-2">
+                                    <div class="MH card">
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                <div class="media d-flex text-success" style=" justify-content: space-between;">
+                                                    <div class="media-body text-left counter">
 
-                                                </div>
-                                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                                    <h1 class="h3 mb-0 text-gray-800">Teacher</h1>
-                                                </div>
-                                                    @include('teacher-list')
+                                                        <h3 class="success text-success" id="count">1000+</h3>
+                                                        <span>Students</span>
+                                                    </div>
+                                                    <div class="align-self-center animated-icons">
+                                                        <svg width="40" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <circle cx="32" cy="20" r="12" fill="#42b979"></circle>
+                                                            <path d="M32 36C22 36 14 44 14 54H50C50 44 42 36 32 36Z" fill="#42b979"></path>
+                                                            <path d="M32 4L14 14L32 24L50 14L32 4Z" fill="#42b979"></path>
+                                                        </svg>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div id="contents">
-                                                <!-- Content will be loaded here -->
-                                            </div>
-                                        <!-- Page Heading -->
-                        </div>              
+                                        </div>
+                                    </div>
+                                </div>
 
-                    </div>                        
-                </div>                 
+                                <div class="col-xl-3 col-sm-6 col-12 my-2">
+                                    <div class="MH card">
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                <div class="media d-flex" style=" justify-content: space-between;">
+                                                    <div class="media-body text-left counter">
+                                                        <h3 class="warning text-success" id="subject-count">1500+</h3>
+                                                        <span>Subjects</span>
+                                                    </div>
+                                                    <div class="align-self-center animated-icons">
+                                                        <i class="fa-solid fa-book-open " style="color:#42b979; font-size:25px;"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-3 col-sm-6 col-12 my-2">
+                                    <div class="MH card">
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                <div class="media d-flex " style=" justify-content: space-between;">
+                                                    <div class="media-body text-left counter">
+                                                        <h3 class="danger text-success" id="lang-count">500+</h3>
+                                                        <span>Languages</span>
+                                                    </div>
+                                                    <div class="align-self-center animated-icons">
+                                                        <i class="fa-solid fa-language" aria-hidden="true" style="    font-size: 35px;"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <!-- Area Chart -->
+                                <div class="col-xl-8 col-lg-7">
+                                    <div class="card shadow mb-4">
+                                        <!-- Card Header - Dropdown -->
+                                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-gradient-success">
+                                            <h6 class="m-0 font-weight-bold text-white">Edexcel Overview</h6>
+                                            <div class="dropdown no-arrow">
+
+                                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                                    <div class="dropdown-header">Dropdown Header:</div>
+                                                    <a class="dropdown-item" href="#">Action</a>
+                                                    <a class="dropdown-item" href="#">Another action</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Card Body -->
+                                        <div class="card-body">
+                                            <div class="chart-area">
+                                                <canvas id="myAreaChart"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pie Chart -->
+                                <div class="col-xl-4 col-lg-5">
+                                    <div class="card shadow mb-4">
+                                        <!-- Card Header - Dropdown -->
+                                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-gradient-success">
+                                            <h6 class="m-0 font-weight-bold text-white">Revenue Sources</h6>
+                                            <div class="dropdown no-arrow">
+
+                                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                                    <div class="dropdown-header">Dropdown Header:</div>
+                                                    <a class="dropdown-item" href="#">Action</a>
+                                                    <a class="dropdown-item" href="#">Another action</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Card Body -->
+                                        <div class="card-body">
+                                            <div class="chart-pie pt-4 pb-2">
+                                                <canvas id="myPieChart"></canvas>
+                                            </div>
+                                            <div class="mt-4 text-center small">
+                                                <span class="mr-2">
+                                                                                <i class="fas fa-circle text-primary"></i> Direct
+                                                                            </span>
+                                                <span class="mr-2">
+                                                                                <i class="fas fa-circle text-success"></i> Social
+                                                                            </span>
+                                                <span class="mr-2">
+                                                                                <i class="fas fa-circle text-info"></i> Referral
+                                                                            </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                <h1 class="h3 mb-0 text-gray-800">Student</h1>
+                            </div>
+                            @include('student-list')
+
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                <h1 class="h3 mb-0 text-gray-800">Teacher</h1>
+                            </div>
+                            @include('teacher-list')
+                        </div>
+
+                    </div>
+
+              
+            </div>              
                 <!-- /.container-fluid -->
 
             </div>
