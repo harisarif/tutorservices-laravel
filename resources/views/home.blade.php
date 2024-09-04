@@ -14,11 +14,50 @@
      <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
 </head>
 <style>
+     
     .sidebar-dark .nav-item .nav-link:active, .sidebar-dark .nav-item .nav-link:focus, .sidebar-dark .nav-item .nav-link:hover {
-        border:unset;
+        border:1px solid transparent;
     }
+    .sidebar-dark #sidebarToggle::after{
+        color: #fff !important;
+        font-weight: 900;
+        content: '\f104';
+        font-family: 'Font Awesome 5 Free';
+        margin-right: .1rem;
+        margin-left: 2px !important;
+    }
+    .sidebar-dark #sidebarToggle:hover{
+        background-color: #42b979;
+        color: #fff;
+    }
+    .dropdown-menu{
+        cursor: pointer;
+    }
+    .sidebar-dark #sidebarToggle{
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        background-color: #42b979;
+        position: absolute;
+        top: -26px;
+        left:-6px;
+        z-index: 9;
+    }
+    @keyframes blink {
+        50% {
+        opacity: 0;
+     }
+    }
+
+    #sidebarToggle {
+     animation: blink 2s infinite;
+    }
+
     .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
         background-color:transparent;
         border:unset;
@@ -42,30 +81,45 @@
     footer.sticky-footer .copyright{
         font-size:19px;
     }
-    @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-      transform: translateY(0);
+        @keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
     }
-    40% {
-      transform: translateY(-10px);
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
     }
-    60% {
-      transform: translateY(-15px);
+    100% {
+        transform: scale(1);
+        opacity: 1;
     }
-  }
+    }
+
+    #sidebarToggle {
+    width: 50px;
+    height: 50px;
+    background-color: #42b979;
+    animation: pulse 1.5s infinite;
+    border: none;
+    cursor: pointer;
+    }
 </style>
 <body id="page-top">
-
+    
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
         <ul class="nav nav-tabs navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <li class=" py-2 mx-2">
+                    
+            <li class=" py-2 mx-2 d-flex align-items-center">
                 <a class="navbar-brand" href="{{ route('home') }}">
                    <img src="{{asset('images/white-logo.jpeg')}}" height="50px" alt="logo" style="height: 50px; border-radius: 10px; width: 100%;">
                </a>
+                <div class="text-center d-none d-md-inline position-relative">
+                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </div>
            </li>
 
             <!-- Divider -->
@@ -99,11 +153,6 @@
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
         </ul>
         <!-- End of Sidebar -->
 
@@ -115,11 +164,9 @@
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
+                   
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars text-success"></i>
-                    </button>
+                    
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
@@ -135,8 +182,8 @@
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                
-                                <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                <a class="dropdown-item text-success" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-success"></i>
                                     Logout
                                 </a>
                             </div>
@@ -393,7 +440,6 @@
   $('.teachers-table').DataTable();
   $('.student-table').DataTable();
 });
-
 </script>
 </body>
 
