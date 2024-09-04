@@ -17,7 +17,14 @@
     <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
 </head>
 <style>
-     
+        ::-webkit-scrollbar {
+            width: 6px; /* For vertical scrollbars */
+            height: 6px; /* For horizontal scrollbars */
+        }
+
+        ::-webkit-scrollbar-track {
+           background: #42b979; /* Track color */
+        }
     .sidebar-dark .nav-item .nav-link:active, .sidebar-dark .nav-item .nav-link:focus, .sidebar-dark .nav-item .nav-link:hover {
         border:1px solid transparent;
     }
@@ -275,7 +282,7 @@
                                                         <span>Languages</span>
                                                     </div>
                                                     <div class="align-self-center animated-icons">
-                                                        <i class="fa-solid fa-language" aria-hidden="true" style="    font-size: 35px;"></i>
+                                                        <i class="fas fa-globe"  aria-hidden="true" style="    font-size: 25px;"></i>
                                                     </div>
                                                 </div>
                                             </div>
