@@ -7,6 +7,8 @@
         <table class="table teachers-table">
             <thead>
                 <tr>
+                    <th><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked"></label></th>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Degree</th>
@@ -23,6 +25,8 @@
             <tbody>
                 @foreach ($tutors as $tutor)
                 <tr>
+                <td><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                <label class="form-check-label" for="flexCheckChecked"></label></td>
                     <td>{{ $tutor->id }}</td>
                     <td>{{ $tutor->f_name }} {{ $tutor->l_name }}</td>
                     <td>{{ $tutor->qualification }}</td>

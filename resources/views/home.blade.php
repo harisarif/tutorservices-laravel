@@ -205,7 +205,7 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid" >
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade active show" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -343,9 +343,9 @@
                                                 <canvas id="myPieChart"></canvas>
                                             </div>
                                             <div class="mt-4 text-center small">
-                                                <span class="mr-2">
-                                                                                <i class="fas fa-circle text-primary"></i> Direct
-                                                                            </span>
+                                                <span class="mr-2"> 
+                                                     <i class="fas fa-circle text-primary"></i> 
+                                                     Direct </span>
                                                 <span class="mr-2">
                                                                                 <i class="fas fa-circle text-success"></i> Social
                                                                             </span>
@@ -360,9 +360,14 @@
                         </div>
 
 
-                        <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab" >
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                                 <h1 class="h3 mb-0 text-gray-800">Student</h1>
+                                <div class="del-button">
+                                    <a href="#">
+                                     <button type="button" class="btn btn-danger">Delet All</button>
+                                    </a>
+                                </div>
                             </div>
                             @include('student-list')
 
@@ -370,6 +375,11 @@
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                                 <h1 class="h3 mb-0 text-gray-800">Teacher</h1>
+                                <div class="del-button">
+                                 <a href="#">
+                                    <button type="button" class="btn btn-danger">Delet All</button>
+                                 </a>
+                                </div>
                             </div>
                             @include('teacher-list')
                         </div>

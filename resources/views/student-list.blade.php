@@ -7,6 +7,8 @@
     <table class="student-table table table-responsive">
         <thead>
             <tr>
+                <th><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                <label class="form-check-label" for="flexCheckChecked"></label></th>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
@@ -20,6 +22,8 @@
         <tbody>
             @foreach ($students as $student)
             <tr>
+                <td><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                <label class="form-check-label" for="flexCheckChecked"></label></td>
                 <td>{{ $student->id }}</td>
                 <td>{{ $student->name }}</td>
                 <td>{{ $student->email }}</td>
