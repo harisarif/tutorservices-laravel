@@ -31,6 +31,12 @@ use App\Http\Controllers\LanguageController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('lang/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'ar'])) { // Only 'en' and 'ar' for English and Arabic
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+})->name('language.change');
 Route::view('/welcome', 'welcome');
 Route::get('/', [TutorController::class, 'index'])->name('newhome');
 Route::get('/basicsignup', function () {
@@ -66,12 +72,7 @@ Route::get('/school-classes', [StudentController::class, 'indexClasses']);
 Route::get('/subjects/{schoolClassId}', [StudentController::class, 'getSubjects']);
 // routes/web.php
 // routes/web.php
-Route::get('lang/{locale}', function ($locale) {
-    if (in_array($locale, ['en', 'ar'])) { // Only 'en' and 'ar' for English and Arabic
-        session(['locale' => $locale]);
-    }
-    return redirect()->back();
-})->name('language.change');
+
 
 
 

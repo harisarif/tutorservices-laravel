@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -111,6 +111,45 @@
     border: none;
     cursor: pointer;
     }
+    .custom-select-wrapper{
+        position: relative;
+       display: flex;
+       cursor: pointer;
+    }
+    .custom-options.open{
+        display: block !important;
+    }
+    #language-select{
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 5px;
+        font-size: 14px;
+        color: #333;
+        width: 68px;
+        max-width: 200px;
+        outline: none;
+        cursor: pointer;
+        transition: border-color 0.3s, box-shadow 0.3s;
+        position: absolute;
+        top: 35px;
+        left: -33px;
+    }
+    [dir="rtl"] .sidebar  {
+        z-index: 9;
+        padding: 0;
+    }
+    [dir="rtl"] .nav-link  {
+        text-align: justify !important;
+    }
+    [dir="rtl"] .sidebar-dark  #sidebarToggle{
+        left:-27px !important;
+    }
+    [dir="rtl"] .media-body{
+        text-align: justify !important;
+    }
 </style>
 <body id="page-top">
     
@@ -137,7 +176,7 @@
                 <a class="nav-link" id="dashboard-tab" data-toggle="tab"
                 href="#dashboard" role="tab" aria-controls="dashboard" aria-selected="false">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
+                    <span>{{ __('messages.Dashboard') }}</span>
                 </a>
             </li>
             
@@ -148,14 +187,14 @@
                 <a class="nav-link py-2" id="profile-tab" data-toggle="tab"
                 href="#profile" role="tab" aria-controls="profile" aria-selected="false">
                 <i class="fas fa-chalkboard-teacher"></i>
-                    <span>Teacher</span>
+                    <span>{{ __('messages.Teacher') }}</span>
                 </a>
             </li>
             <hr class="sidebar-divider">
             <li class="nav-item">
                 <a class="nav-link py-2" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
                 <i class="fa-solid fa-user-graduate"></i>
-                    <span>Students</span>
+                    <span>{{ __('messages.Students') }}</span>
                 </a>
             </li>
             <!-- Divider -->
@@ -177,7 +216,7 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
+                        <li class="nav-item dropdown no-arrow d-flex align-items-center">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">@if(auth()->check())
@@ -191,9 +230,18 @@
                                
                                 <a class="dropdown-item text-success" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-success"></i>
-                                    Logout
+                                    {{ __('messages.Logout') }} 
                                 </a>
                             </div>
+                            <div class="custom-select-wrapper mx-1">
+                                <div class="custom-select-web">
+                                    <i class="fa-solid fa-globe" style="color:#42b979 !important" aria-hidden="true" onclick="toggleDropdown()"></i>
+                                <div class="custom-options" id="language-select">
+                                    <div class="custom-option text-center text-success py-1" data-value="en" onclick="changeLanguage('en')">English</div>
+                                    <div class="custom-option text-center text-success py-1" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
+                                    </div>
+                                </div>
+                                </div>
                         </li>
 
                     </ul>
@@ -209,7 +257,7 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade active show" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                                <h1 class="h3 mb-0 text-gray-800">{{ __('messages.Dashboard') }} </h1>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-xl-3 col-sm-6 col-12 my-2">
@@ -219,7 +267,7 @@
                                                 <div class="media d-flex" style=" justify-content: space-between;">
                                                     <div class="media-body text-left counter">
                                                         <h3 class="danger text-success" id="teacher-count">500+</h3>
-                                                        <span>Teachers</span>
+                                                        <span>{{ __('messages.Teachers') }} </span>
                                                     </div>
                                                     <div class="align-self-center animated-icons">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="64" fill="#42b979">
@@ -239,7 +287,7 @@
                                                     <div class="media-body text-left counter">
 
                                                         <h3 class="success text-success" id="count">1000+</h3>
-                                                        <span>Students</span>
+                                                        <span>{{ __('messages.Students') }}</span>
                                                     </div>
                                                     <div class="align-self-center animated-icons">
                                                         <svg width="40" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -261,7 +309,7 @@
                                                 <div class="media d-flex" style=" justify-content: space-between;">
                                                     <div class="media-body text-left counter">
                                                         <h3 class="warning text-success" id="subject-count">1500+</h3>
-                                                        <span>Subjects</span>
+                                                        <span>{{ __('messages.Subjects') }}</span>
                                                     </div>
                                                     <div class="align-self-center animated-icons">
                                                         <i class="fa-solid fa-book-open " style="color:#42b979; font-size:25px;"></i>
@@ -279,7 +327,7 @@
                                                 <div class="media d-flex " style=" justify-content: space-between;">
                                                     <div class="media-body text-left counter">
                                                         <h3 class="danger text-success" id="lang-count">500+</h3>
-                                                        <span>Languages</span>
+                                                        <span>{{ __('messages.Languages') }}</span>
                                                     </div>
                                                     <div class="align-self-center animated-icons">
                                                         <i class="fas fa-globe"  aria-hidden="true" style="    font-size: 25px;"></i>
@@ -299,7 +347,7 @@
                                     <div class="card shadow mb-4">
                                         <!-- Card Header - Dropdown -->
                                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-gradient-success">
-                                            <h6 class="m-0 font-weight-bold text-white">Edexcel Overview</h6>
+                                            <h6 class="m-0 font-weight-bold text-white">{{ __('messages.Edexcel Overview') }}</h6>
                                             <div class="dropdown no-arrow">
 
                                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
@@ -325,7 +373,7 @@
                                     <div class="card shadow mb-4">
                                         <!-- Card Header - Dropdown -->
                                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-gradient-success">
-                                            <h6 class="m-0 font-weight-bold text-white">Revenue Sources</h6>
+                                            <h6 class="m-0 font-weight-bold text-white">{{ __('messages.Revenue Sources') }}</h6>
                                             <div class="dropdown no-arrow">
 
                                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
@@ -362,10 +410,10 @@
 
                         <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab" >
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                <h1 class="h3 mb-0 text-gray-800">Student</h1>
+                                <h1 class="h3 mb-0 text-gray-800">{{ __('messages.Student') }}</h1>
                                 <div class="del-button">
                                     <a href="#">
-                                     <button type="button" class="btn btn-danger">Delet All</button>
+                                     <button type="button" class="btn btn-danger">{{ __('messages.Delet All') }}</button>
                                     </a>
                                 </div>
                             </div>
@@ -374,10 +422,10 @@
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                <h1 class="h3 mb-0 text-gray-800">Teacher</h1>
+                                <h1 class="h3 mb-0 text-gray-800">{{ __('messages.Teacher') }}</h1>
                                 <div class="del-button">
                                  <a href="#">
-                                    <button type="button" class="btn btn-danger">Delet All</button>
+                                    <button type="button" class="btn btn-danger">{{ __('messages.Delet All') }}</button>
                                  </a>
                                 </div>
                             </div>
@@ -457,7 +505,30 @@
   $('.teachers-table').DataTable();
   $('.student-table').DataTable();
 });
+
+
 </script>
 </body>
 
 </html>
+<script>
+    function toggleDropdown() {
+        document.querySelector('.custom-options-web').classList.toggle('open');
+    }
+
+    function changeLanguage(value) {
+        document.querySelector('.custom-options-web').classList.remove('open');
+    }
+
+    // Close the dropdown if clicked outside
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.custom-select-web')) {
+            document.querySelector('.custom-options-web').classList.remove('open');
+        }
+    });
+    function changeLanguage(locale) {
+        console.log(locale)
+        var url = "{{ url('lang') }}/" + locale;
+        window.location.href = url;
+    }
+</script>
