@@ -103,22 +103,31 @@
     }
     }
 
-    #sidebarToggle {
-    width: 50px;
-    height: 50px;
-    background-color: #42b979;
-    animation: pulse 1.5s infinite;
-    border: none;
+    .custom-options {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.custom-options.show {
+    display: block;
+}
+
+.custom-option:hover {
+    background-color: #f1f1f1;
     cursor: pointer;
-    }
-    .custom-select-wrapper{
-        position: relative;
-       display: flex;
-       cursor: pointer;
-    }
-    .custom-options.open{
-        display: block !important;
-    }
+}
+
+#current-language {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#selected-language {
+    color: #42b979;
+}
     #language-select{
         -webkit-appearance: none;
         -moz-appearance: none;
@@ -134,12 +143,15 @@
         cursor: pointer;
         transition: border-color 0.3s, box-shadow 0.3s;
         position: absolute;
-        top: 35px;
-        left: -33px;
+        top: 55px;
+        left: 75px;
     }
     [dir="rtl"] .sidebar  {
         z-index: 9;
         padding: 0;
+    }
+    [dir="rtl"] .sidebar-dark #sidebarToggle::after  {
+       text-align:center;
     }
     [dir="rtl"] .nav-link  {
         text-align: justify !important;
@@ -149,6 +161,19 @@
     }
     [dir="rtl"] .media-body{
         text-align: justify !important;
+    }
+    [dir="rtl"] .ml-auto, .mx-aut{
+        margin-left:0 !important;
+    }
+    [dir="rtl"] #language-select{
+        left: -15px;
+    }
+    [dir="rtl"] .topbar{
+        justify-content: end;
+    }
+    [dir="rtl"] .icons{
+        display: block !important;
+        color:#fff;
     }
 </style>
 <body id="page-top">
@@ -164,7 +189,12 @@
                    <img src="{{asset('images/white-logo.jpeg')}}" height="50px" alt="logo" style="height: 50px; border-radius: 10px; width: 100%;">
                </a>
                 <div class="text-center d-none d-md-inline position-relative">
-                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                 <button class="rounded-circle border-0" id="sidebarToggle">
+                    <div class="icons d-none">
+                        <i class="fa-solid fa-angle-right"></i>
+                    </div>
+                 </button>
+                 
                 </div>
            </li>
 
@@ -233,15 +263,18 @@
                                     {{ __('messages.Logout') }} 
                                 </a>
                             </div>
-                            <div class="custom-select-wrapper mx-1">
+                            <div class="custom-select-wrapper mx-1" style="cursor: pointer;">
                                 <div class="custom-select-web">
-                                    <i class="fa-solid fa-globe" style="color:#42b979 !important" aria-hidden="true" onclick="toggleDropdown()"></i>
-                                <div class="custom-options" id="language-select">
-                                    <div class="custom-option text-center text-success py-1" data-value="en" onclick="changeLanguage('en')">English</div>
-                                    <div class="custom-option text-center text-success py-1" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
-                                    </div>
+                                        <!-- Clickable Globe Icon -->
+                                        <i class="fa-solid fa-globe" style="color:#42b979 !important" aria-hidden="true" onclick="toggleDropdown()"></i>
+
+                                        <!-- Dropdown Options -->
+                                        <div class="custom-options" id="language-select">
+                                            <div class="custom-option text-center text-success py-1" data-value="en" onclick="changeLanguage('en')">English</div>
+                                            <div class="custom-option text-center text-success py-1" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
+                                        </div>
                                 </div>
-                                </div>
+                             </div>
                         </li>
 
                     </ul>
@@ -531,4 +564,29 @@
         var url = "{{ url('lang') }}/" + locale;
         window.location.href = url;
     }
+</script>
+<script>
+    function toggleDropdown() {
+    const dropdown = document.getElementById("language-select");
+
+    if (dropdown) { // Check if the dropdown element exists
+        dropdown.classList.toggle("show");
+    } else {
+        console.error("Element with id 'language-select' not found.");
+    }
+}
+
+// Close the dropdown if clicked outside of the select box
+document.addEventListener("click", function (e) {
+    const selectWrapper = document.querySelector(".custom-select-web");
+    const dropdown = document.getElementById("language-select");
+
+    if (!selectWrapper.contains(e.target)) {
+        if (dropdown) { // Check if the dropdown element exists
+            dropdown.classList.remove("show");
+        } else {
+            console.error("Element with id 'language-select' not found.");
+        }
+    }
+});
 </script>
