@@ -183,7 +183,9 @@
 
         <!-- Sidebar -->
         <ul class="nav nav-tabs navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
-                    
+                    <!-- <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button> -->
             <li class=" py-2 mx-2 d-flex align-items-center">
                 <a class="navbar-brand" href="{{ route('home') }}">
                    <img src="{{asset('images/white-logo.jpeg')}}" height="50px" alt="logo" style="height: 50px; border-radius: 10px; width: 100%;">
@@ -240,7 +242,9 @@
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                   
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3 bg-success text-white">
+                        <i class="fa fa-bars"></i>
+                    </button>
                     <!-- Sidebar Toggle (Topbar) -->
                     
                     <!-- Topbar Navbar -->
