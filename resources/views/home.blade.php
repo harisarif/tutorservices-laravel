@@ -169,7 +169,7 @@
         left: -15px;
     }
     [dir="rtl"] .topbar{
-        justify-content: end;
+        justify-content: space-between;
     }
     [dir="rtl"] .icons{
         display: block !important;
@@ -242,9 +242,11 @@
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3 bg-success text-white">
-                        <i class="fa fa-bars"></i>
-                    </button>
+                    <div class="button-div">
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3 bg-success text-white">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </div>
                     <!-- Sidebar Toggle (Topbar) -->
                     
                     <!-- Topbar Navbar -->
