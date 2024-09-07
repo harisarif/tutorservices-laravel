@@ -175,6 +175,20 @@
         display: block !important;
         color:#fff;
     }
+    @media (max-width: 425px) {
+        #language-select{
+            left: 78%;
+        }
+        [dir="rtl"]  #language-select{
+            left: 1%;
+    }
+        .container-fluid{
+            padding: 0 6px;
+        }
+        .SB{
+            display: flex;
+        }
+    }
 </style>
 <body id="page-top">
     
@@ -186,9 +200,13 @@
                     <!-- <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button> -->
+                   
             <li class=" py-2 mx-2 d-flex align-items-center">
                 <a class="navbar-brand" href="{{ route('home') }}">
-                   <img src="{{asset('images/white-logo.jpeg')}}" height="50px" alt="logo" style="height: 50px; border-radius: 10px; width: 100%;">
+                   <img src=" {{asset('images/white-logo.jpeg')}}" class="d-lg-block d-none" id="toggleImage" height="50px" alt="logo" style="height: 50px; border-radius: 10px; width: 100%;">
+               </a>
+               <a href="{{ route('home') }}">
+                    <img src=" {{asset('images/favicon.png')}}" id="toggleImage" class="d-lg-none d-sm-block" alt="Image" style="width:100%;">
                </a>
                 <div class="text-center d-none d-md-inline position-relative">
                  <button class="rounded-circle border-0" id="sidebarToggle">
@@ -196,7 +214,7 @@
                         <i class="fa-solid fa-angle-right"></i>
                     </div>
                  </button>
-                 
+                   
                 </div>
            </li>
 
@@ -295,7 +313,7 @@
                 <div class="container-fluid" >
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade active show" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
-                            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <div class="d-sm-flex align-items-center justify-content-between mb-4 ">
                                 <h1 class="h3 mb-0 text-gray-800">{{ __('messages.Dashboard') }} </h1>
                             </div>
                             <div class="row mb-3">
@@ -448,7 +466,7 @@
 
 
                         <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab" >
-                            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <div class="d-sm-flex align-items-center justify-content-between mb-4 SB">
                                 <h1 class="h3 mb-0 text-gray-800">{{ __('messages.Student') }}</h1>
                                 <div class="del-button">
                                     <a href="#">
@@ -460,7 +478,7 @@
 
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <div class="d-sm-flex align-items-center justify-content-between mb-4 SB">
                                 <h1 class="h3 mb-0 text-gray-800">{{ __('messages.Teacher') }}</h1>
                                 <div class="del-button">
                                  <a href="#">
@@ -595,4 +613,5 @@ document.addEventListener("click", function (e) {
         }
     }
 });
+
 </script>
