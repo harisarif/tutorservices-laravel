@@ -196,14 +196,14 @@
         [dir="rtl"] .AB-img{
             margin-left: 33px;
         }
-        [dir="rtl"] .div.dataTables_wrapper{
+        [dir="rtl"] .dataTables_wrapper div.dataTables_paginate ul.pagination{
             display: flex;
             justify-content: space-between !important;
             padding: 0 25%;
         }
         [dir="rtl"] .paginate_button {
-            border: 1px solid #42b979;
-            border-radius: 5px;
+            border: 1px solid #42b979 !important;
+            border-radius: 5px !important;
         }
     }
 </style>
