@@ -188,6 +188,10 @@
         .SB{
             display: flex;
         }
+        .odd{
+            display: flex;
+            justify-content: end;
+        }
     }
 </style>
 <body id="page-top">
