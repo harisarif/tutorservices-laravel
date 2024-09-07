@@ -209,7 +209,7 @@
             border: 1px solid #42b979 !important;
             border-radius: 5px !important;
         }
-        .dataTables_wrapper div.dataTables_paginate ul.pagination{
+        div.dataTables_wrapper div.dataTables_paginate ul.pagination{
             display: flex;
             justify-content: space-between !important;
             padding: 0 16%;
