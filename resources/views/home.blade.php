@@ -190,7 +190,7 @@
         }
         .odd{
             display: flex;
-            margin-left: -60%;
+            /* margin-left: -60%; */
             white-space:nowrap;
         }
         [dir="rtl"] .AB-img{
@@ -205,6 +205,15 @@
             border: 1px solid #42b979 !important;
             border-radius: 5px !important;
         }
+        .paginate_button{
+            border: 1px solid #42b979 !important;
+            border-radius: 5px !important;
+        }
+        .dataTables_wrapper div.dataTables_paginate ul.pagination{
+            display: flex;
+            justify-content: space-between !important;
+            padding: 0 16%;
+        }
     }
 </style>
 <body id="page-top">
@@ -214,7 +223,7 @@
 
         <!-- Sidebar -->
         <ul class="nav nav-tabs navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
-            
+
             <li class=" py-2 mx-2 d-flex align-items-center">
                 <a class="navbar-brand" href="{{ route('home') }}">
                    <img src=" {{asset('images/white-logo.jpeg')}}" class="d-lg-block d-none" id="toggleImage" height="50px" alt="logo" style="height: 50px; border-radius: 10px; width: 100%;">
