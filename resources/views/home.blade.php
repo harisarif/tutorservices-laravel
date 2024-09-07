@@ -199,7 +199,7 @@
         [dir="rtl"] .dataTables_wrapper div.dataTables_paginate ul.pagination{
             display: flex;
             justify-content: space-between !important;
-            padding: 0 25%;
+            padding: 0 16%;
         }
         [dir="rtl"] .paginate_button {
             border: 1px solid #42b979 !important;
