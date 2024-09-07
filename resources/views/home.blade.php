@@ -219,7 +219,7 @@
         }
         .AB-sb{
             overflow-x: scroll;
-             margin: 0px 10px;
+         margin: 0px 10px;
         }
     }
 </style>
@@ -590,11 +590,11 @@
 <script>
     $(document).ready(function() {
   $('.teachers-table').DataTable({
-    responsive:true;
+    responsive:true
   });
   $('.student-table').DataTable(
     {
-    responsive:true;
+    responsive:true
   }
   );
 });
