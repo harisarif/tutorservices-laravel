@@ -3,7 +3,7 @@
     $tutors = DB::table('tutors')->get();
 @endphp
     {{-- <h1>All Teachers</h1> --}}
-    <div class="">
+    <div class=" AB-sb">
         <table class="table teachers-table">
             <thead>
                 <tr>

@@ -214,6 +214,13 @@
             justify-content: space-between !important;
             padding: 0 16%;
         }
+        th:first-child {
+            width: 50px;
+        }
+        .AB-sb{
+            overflow-x: scroll;
+             margin: 0px 10px;
+        }
     }
 </style>
 <body id="page-top">
@@ -582,8 +589,14 @@
     <script src="{{asset('js/js/dataTables.bootstrap4.min.js')}}"></script>
 <script>
     $(document).ready(function() {
-  $('.teachers-table').DataTable();
-  $('.student-table').DataTable();
+  $('.teachers-table').DataTable({
+    responsive:true;
+  });
+  $('.student-table').DataTable(
+    {
+    responsive:true;
+  }
+  );
 });
 
 
