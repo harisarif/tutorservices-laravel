@@ -190,7 +190,20 @@
         }
         .odd{
             display: flex;
-            justify-content: end;
+            margin-left: -60%;
+            white-space:nowrap;
+        }
+        [dir="rtl"] .AB-img{
+            margin-left: 33px;
+        }
+        [dir="rtl"] .div.dataTables_wrapper{
+            display: flex;
+            justify-content: space-between !important;
+            padding: 0 25%;
+        }
+        [dir="rtl"] .paginate_button {
+            border: 1px solid #42b979;
+            border-radius: 5px;
         }
     }
 </style>
@@ -210,7 +223,7 @@
                    <img src=" {{asset('images/white-logo.jpeg')}}" class="d-lg-block d-none" id="toggleImage" height="50px" alt="logo" style="height: 50px; border-radius: 10px; width: 100%;">
                </a>
                <a href="{{ route('home') }}">
-                    <img src=" {{asset('images/favicon.png')}}" id="toggleImage" class="d-lg-none d-sm-block" alt="Image" style="width:100%;">
+                    <img src=" {{asset('images/favicon.png')}}" id="toggleImage" class="d-lg-none d-sm-block AB-img" alt="Image" style="width:70%;">
                </a>
                 <div class="text-center d-none d-md-inline position-relative">
                  <button class="rounded-circle border-0" id="sidebarToggle">
