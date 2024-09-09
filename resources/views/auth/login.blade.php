@@ -118,7 +118,7 @@
                                 <div class="form-check ">
                                     <input class="form-check-input mt-2" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} style="box-shadow: none;">
 
-                                    <label class="form-check-label" for="remember">
+                                    <label class="form-check-label" for="remember" style="font-size: 13px;">
                                         {{ __('Remember Me') }}
                                     </label>
                                     
