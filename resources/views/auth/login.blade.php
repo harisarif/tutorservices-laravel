@@ -2,9 +2,9 @@
 <style>
     footer {
         /* display: none !important; */
-        position: absolute;
+        position: fixed;
         bottom: 0;
-        left: 0;
+        left: 0; 
     }
     .modalBox{
         display: none !important;
@@ -12,41 +12,69 @@
     .card-header{
         background: #42b979 !important;
     color: white !important;
-}
-.login-button{
-    background: #42b979 !important;
-    border: none !important;
-}
-@media(max-width: 425px){
-    footer{
-        top: 409px;
     }
-}
+    .login-button{
+        background: #42b979 !important;
+        border: none !important;
+    }
+    @media(max-width: 425px){
+        footer{
+            top: 409px;
+        }
+    }
+    .img-cards{
+        border-radius: 5px;
+    }
+    .img-cards img{
+        width: 70%;
+        margin-left: -9%;
+    }
+    .header-img img{
+        width: 75%;
+    }
+   
+    .row{
+        --bs-gutter-x: none !important;
+    }
+    .login-button{
+        width: 65%;
+    }
+    .form-check-input{
+        cursor: pointer;
+    }
+    .input-div{
+        display: flex;
+        align-items: center;
+        width: 350px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
 </style>
 @section('content')
-<header class="main_header d-flex bg-white py-2 align-items-end justify-content-center">
-        {{-- <a class="nav-link active px-3 py-0 fw-bold" aria-current="page" href="./hire_tutor.html"><i>&#8592; Hire
-                Tutor</i></a> --}}
-        <a class="arrow" href="{{ route('newhome') }}"><img style="height: 50px" src="{{asset('images/logo.png')}}" alt="EDEXCEL-logo"
-                                                          height="50px"></a>
+        <div  id="login">
+            <div class="row align-items-center" >
+                <div class="col-lg-6 col-sm-4  img-cards my-4 mx-1 d-flex justify-content-center">
+                    <img src="images/login-pg.jpg" alt="">
+                </div>
+                <div class="col-lg-5 col-sm-4">
+                    <div class="header-img mt-5 d-flex align-items-center">
+                        <a href="" style=" margin-left: -13px;">
+                            <img src="images/white-logo.jpeg" alt="">
+                        </a>
+                       
+                    </div>
 
-    </header>
-<div class="container" id="login">
-
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
-                <div class="card-body">
+                    <div class="login-heading">
+                            <h3 class="my-2 fw-bold fs-4">Login Your Account</h3>
+                    </div>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                        <div class="row mb-1 d-block">
+                            <label for="email" class="col-md-4 col-form-label text-md-justify" style="white-space: nowrap; text-decoration: none;">{{ __('Email Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus style="width: 350; box-shadow: none;">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -56,11 +84,14 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                        <div class="row mb-3 d-block">
+                            <label for="password" class="col-md-4 col-form-label text-md-justify ">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                               <div class="input-div">
+                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" style="width: 350px; border: none; box-shadow: none;">
+                                 <span style="cursor: pointer;"><i class="fa-regular fa-eye mx-2 cursor-pointer"></i></span>
+                               </div>
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -71,35 +102,34 @@
                         </div>
 
                         <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                            <div >
+                                <div class="form-check ">
+                                    <input class="form-check-input mt-2" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} style="box-shadow: none;">
 
                                     <label class="form-check-label" for="remember">
                                         {{ __('Remember Me') }}
                                     </label>
+                                    
+                                    @if (Route::has('password.request'))
+                                        <a class="btn btn-link text-nowrap text-decoration-none text-black" href="{{ route('password.request') }}" style="margin-left: 12%; font-size: 13px;">
+                                            {{ __('Forgot Your Password?') }}
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
 
                         <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
+                            <div class="col-lg-12">
                                 <button type="submit" class="btn btn-primary login-button">
                                     {{ __('Login') }}
                                 </button>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
-    
-</div>
 @endsection
+
