@@ -48,6 +48,7 @@
         width: 350px;
         border: 1px solid #ddd;
         border-radius: 5px;
+        background-color: #fff;
     }
     .login-button {
         transition: 0.5s !important;
@@ -59,13 +60,16 @@
         box-shadow: 0 0 15px rgba(66, 185, 121, 0.6);
         transform: scale(1.1);
     }
-
+    main{
+        background: linear-gradient(45deg, #42b979, transparent);
+        height: 100vh;
+    }
     
 </style>
 @section('content')
-        <div  id="login">
+        <div  id="login bg-gradient-success">
             <div class="row align-items-center" >
-                <div class="col-lg-6 col-sm-4  img-cards my-4 mx-1 d-flex justify-content-center">
+                <div class="col-lg-6 col-sm-4  img-cards my-4 mx-1 d-flex justify-content-center ">
                     <img src="images/login-pg.jpg" alt="">
                 </div>
                 <div class="col-lg-5 col-sm-4">
@@ -102,7 +106,7 @@
                             <div class="col-md-6">
                                <div class="input-div">
                                  <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" style="width: 350px; border: none; box-shadow: none;">
-                                 <span style="cursor: pointer;"><i class="fa-regular fa-eye mx-2 cursor-pointer"></i></span>
+                                 <span style="cursor: pointer; color: #dd;><i class="fa-regular fa-eye mx-2 cursor-pointer"></i></span>
                                </div>
 
                                 @error('password')
