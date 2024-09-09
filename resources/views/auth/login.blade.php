@@ -49,6 +49,18 @@
         border: 1px solid #ddd;
         border-radius: 5px;
     }
+    .login-button {
+        transition: 0.5s !important;
+    }
+
+    /* Pulse effect on hover */
+    .login-button:hover {
+        background-color: #36a367;
+        box-shadow: 0 0 15px rgba(66, 185, 121, 0.6);
+        transform: scale(1.1);
+    }
+
+    
 </style>
 @section('content')
         <div  id="login">
