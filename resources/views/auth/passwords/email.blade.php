@@ -1,3 +1,4 @@
+<link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" type="image/png" />
 @extends('layouts.app')
 <style>
     #allModal {
