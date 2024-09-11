@@ -13,7 +13,16 @@
         cursor:pointer;
         padding: 8px 4px;
     }
-
+    @media (max-width: 1514px){
+        .img-reqire{
+            height: 608px !important;
+        }
+    }
+    /* @media (max-width: 1362px) {
+        .img-reqire{
+            height: 608px !important;
+        }
+    } */
     .email {
         display: none;
         position: absolute;

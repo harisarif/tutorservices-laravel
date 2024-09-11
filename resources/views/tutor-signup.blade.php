@@ -122,33 +122,39 @@
         }
         @media(max-width:426px) {
             .select2-container--open .select2-dropdown {
-    left: 0;
-    top: -44px !important;
-}
-      }
+             left: 0;
+            top: -44px !important;
+         }
+        }
         }
 
         .date-picker-input{
             width: 100%;
-    padding: 6px 12px;
-    border-radius: 6px;
-    outline: none;
-    border: 1px solid #dee2e6;
+            padding: 6px 12px;
+            border-radius: 6px;
+            outline: none;
+            border: 1px solid #dee2e6;
 
         }
         .date-picker-label{
             margin-bottom: 7px !important;
         }
-        </style>
+        .alert-danger{
+            position: fixed;
+            width: 28%; 
+            right: 0;
+            width: 27%;
+            padding: 0 16px;
+            margin: 10px;
+            border-radius: 4px;
+            border-style: solid;
+            border-width: 1px;
+            font-size: 16px;
+        }
+    </style>
 
 @if ($errors->any())
-        <div class="alert alert-danger" id="close" style="position: fixed; width: 28%; right: 0;width: 27%;
-  padding: 0 16px;
-  margin: 10px;
-  border-radius: 4px;
-  border-style: solid;
-  border-width: 1px;
-  font-size: 16px;">
+        <div class="alert alert-danger" id="close" style="">
             <ul style="margin: 0; padding: 10px 0;">
                 @foreach ($errors->all() as $error)
                     <li style="display:flex; justify-content: space-between; align-items: center;">{{ $error }}  <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true"></i></li> 
@@ -158,174 +164,15 @@
         </div>
     @endif
     @section('content')
-<body>
-<header class="text-center bg-white m-0 p-2 d-flex align-items-end justify-content-center">
-            <!-- <a class="nav-link active  px-3" aria-current="page" href="./hire_tutor.html"><i> &#8592; Hire Tutor</i></a> -->
-            <a class="mx-auto" href="{{ route('newhome') }}"><img src="{{ asset('images/logo.png') }}" alt="EDEXCEL-logo"
-                    height="50px"></a>
-
-        </header>
-        
-    @include('whatsapp')
-    <main class="container-fluid m-0 bg-body-secondary p-0">
-       
-        <div class="d-flex justify-content-center">
-            <form class="bg-light rounded shadow p-3" method="POST" action="{{ route('tutor-create') }}"
-                enctype="multipart/form-data" style="margin:15px 0;">
-                @csrf
-                <div class="ad-heading">
-                        <h3 style="text-align: center;color: red; padding: 10px; font-size: 20px;"><b><i>Please fill all mandatory fields</i></b></h3>
-                    </div>
-                <div class="form-row d-flex flex-column flex-md-row">
-                    
-                    <div class="col-md-6 px-2 mb-2">
-                        <label for="f_name" class="form-label" style="color:#42b979;"><strong>First Name</strong></label> <span class="text-danger fs-4" style="color:#42b979;">*</span>
-                        <input type="text" class="form-control" id="f_name" name="f_name"   style="box-shadow: none;border: 1px solid #aaa;">
-                    </div>
-                    <div class="col-md-6 px-2 mb-2">
-                        <label for="l_name" class="form-label" style="color:#42b979;"><strong>Last Name</strong></label> <span class="text-danger fs-4">*</span>
-                        <input type="text" class="form-control" id="l_name" name="l_name"    style="box-shadow: none;border: 1px solid #aaa;">
-                    </div>
+    <body>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="image-div">
+                    <img src="mountain.jpg" alt="">
                 </div>
-               
-
-                <div class="form-row d-flex flex-column flex-md-row">
-                    <div class="col-md-6 px-2 mb-2">
-                        <label for="email" class="form-label" style="color:#42b979;"><strong>Email</strong></label> <span class="text-danger fs-4">*</span>
-                        <input type="email" class="form-control" id="email" name="email"   style="box-shadow: none;border: 1px solid #aaa;">
-                    </div>
-                    <div class="col-md-6 px-2 mb-2">
-                        <label for="gender" class="form-label" style="color:#42b979;"><strong>Gender</strong></label> <span class="text-danger fs-4">*</span>
-                        <select class="form-select" id="gender" name="gender"  >
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row d-flex flex-column flex-md-row">
-                    <div class="col-md-6 px-2 mb-2">
-                       <div class="form-group">
-                            <label for="datePicker" class="date-picker-label" style="color:#42b979;"><strong>DOB </strong><span class="text-danger fs-4"> *</span></label>
-                                <input type="date" id="datePicker" class="date-picker-input" name="dob">
-      
-        
-                        </div>
-
-
-                    </div>
-                    <div class="col-md-6 px-2 mb-2">
-                        <label for="qualification" class="form-label" style="color:#42b979;"><strong>Highest Qualifications</strong></label> <span class="text-danger fs-4">*</span>
-                        <input type="text" class="form-control" id="qualification" name="qualification"   style="box-shadow: none;border: 1px solid #aaa;">
-                    </div>
-                </div>
-
-                <div class="form-row d-flex flex-column flex-md-row">
-                    <div class="col-md-6 px-2 mb-2">
-                        <label for="teaching" class="form-label" style="color:#42b979;"><strong>Subject You Can Teach</strong></label> <span class="text-danger fs-4">*</span><br>
-                        <select class="form-select teaching" id="teaching" name="teaching[]"  >
-                            <option value="english">English</option>
-                            <option value="maths">Mathematics</option>
-                            <option value="physics">Physics</option>
-                            <option value="chemistry">Chemistry</option>
-                            <option value="islamiyat">Islamiyat</option>
-                            <option value="urdu">Urdu</option>
-                            <option value="biology">Biology</option>
-                            <option value="computer">Computer Science</option>
-                            <option value="pakstudies">Pak Studies</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6 px-2 mb-2">
-                        <label for="experience" class="form-label" style="color:#42b979;"><strong>Experience (in teaching)</strong></label> <span class="text-danger fs-4">*</span>
-                        <input type="number" min="0" class="form-control" id="experience" name="experience"
-                              style="box-shadow: none;border: 1px solid #aaa;">
-                    </div>
-                    <div class="choice col-12 px-3 py-1">
-                    <h3 class=" pt-3" style=" text-align: left; font-size:16px;color:#42b979;"><strong>Services</strong></h3>
-                                <ul class="p-0 ">
-                                    <li class="d-flex align-items-center fs-5 py-1">
-                                        <input class="m-2 d-none chose-subject" type="radio" value="Online Tutor" name="subjects" id="option-1">
-                                        <label for="option-1" style="font-size:15px;">Online</label>
-                                    </li>
-                                    <li class="d-flex align-items-center fs-5 py-1">
-                                        <input class="m-2 d-none chose-subject" type="radio" value="Tutor for home" name="subjects" id="option-2">
-                                        <label for="option-2" style="font-size:15px;">Physical</label>
-                                    </li>
-                                    <li class="d-flex align-items-center fs-5 py-1">
-                                        <input class="m-2 d-none chose-subject" type="radio" value="Both" name="subjects" id="option-3">
-                                        <label for="option-3" style="font-size:15px;">Both</label>
-                                    </li>
-                                </ul>
-                            </div>
-                </div>
-                <div class="form-row d-flex flex-column flex-md-row">
-                    <div class="col-md-6 px-2 mb-2">
-                        <label for="location" class="form-label " style="color:#42b979;"><strong>Country Residence</strong></label> <span class="text-danger fs-4" style="color:#42b979;">*</span>
-                        </br>
-                        <select name="location" id="location" class="form-select" required style="margin: 0 auto !important; width: 92%; height: 50px;">
-                                <option value="">Select Country</option>
-                                    @foreach($countries as $code => $country)
-                                        <option value="{{ $code }}">{{ $country }}</option>
-                                    @endforeach
-                        </select>
-                       </div>
-                    <div class="col-md-6 px-2 mb-2">
-                        <label for="city" class="form-label" style="color:#42b979;"><strong>City</strong></label> <span class="text-danger fs-4">*</span>
-                        <!-- <input type="text" class="form-control" id="city" name="city"   style="box-shadow: none;border: 1px solid #aaa;"> -->
-                        <select name="city" id="city" class="form-select" required style="margin: 0 auto !important; width: 92%; height: 43px;">
-                                        <option value="" style="color:#42b979;"><strong>Select City</strong></option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row d-flex flex-column flex-md-row">
-                    <div class="col-md-6 px-2 mb-2" >
-                        <label for="mobile" class="form-label" style="color:#42b979;"><strong>Mobile Number</strong></label> <span class="text-danger fs-4">*</span>
-                        <div class="input-group d-flex justify-content-between align-items-center" style="width: 545px;">
-                            <select name="countrySelect" id="countrySelect" class="form-select country-select w-50"  >
-                                @foreach ($countriesPhone as $key => $country)
-                                    <option value="{{ $key }}">{{ $country }}</option>
-                                @endforeach
-                            </select>
-                            <input type="text" class="form-control w-50" id="phone" name="phone" placeholder="e.g +92XXXXXXXXXX"   style="box-shadow: none;border: 1px solid #aaa;">
-                        </div>
-                    </div>
-                    <div class="col-md-6 px-2 mb-2 d-none">
-                        <label for="whatsapp" class="form-label" style="color:#42b979;"><strong>WhatsApp Number</strong></label> <span class="text-danger fs-4">*</span>
-                        <input type="text" class="form-control" id="whatsapp" name="whatsapp" placeholder="e.g +92XXXXXXXXXX"   style="box-shadow: none;border: 1px solid #aaa;">
-                    </div>
-                </div>
-
-                <div class="form-row d-flex flex-column flex-md-row">
-                    <div class="col-md-6 px-2 mb-2">
-                        <label for="profilePicture" class="form-label" style="color:#42b979;"><strong>Profile Picture</strong></label> <span class="text-danger fs-4">*</span>
-                        <input type="file" class="form-control" id="profilePicture"  
-                            name="profileImage" style="box-shadow: none;">
-
-
-                    </div>
-                    <div class="col-md-6 px-2 mb-2">
-                        <label for="teaching" class="form-label" style="color:#42b979;"><strong>Available Time</strong></label> <span class="text-danger fs-4">*</span>
-                        <select class="form-select" id="teaching"   name="availability">
-                            <option selected>Select Time</option>
-                            <option value="9:00AM to 10:00AM">9:00AM to 10:00AM</option>
-                            <option value="10:00AM to 11:00AM">10:00AM to 11:00AM</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-12 px-2 py-2"><label for="curriculum" class="form-label" style="color:#42b979;"><strong>Description (Optional)</strong></label>
-                    <textarea class="form-control" id="curriculum" name="curriculum[]" rows="2" placeholder="Add comma after one" style="box-shadow: none;border: 1px solid #aaa;"></textarea>
-                </div>
-
-                <div class="col d-flex justify-content-center py-3">
-                    <button type="submit" class="btn bg_theme_green text-light fw-bold">Submit Form</button>
-                </div>
-
-            </form>
-        </div>
-    </main>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-</body>
+            </div>
+        </div>    
+    </body>
 
 @endsection
 @section('js')
@@ -442,6 +289,7 @@
         close.style.display = "none";
     }
 </script>
-
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 @endsection
