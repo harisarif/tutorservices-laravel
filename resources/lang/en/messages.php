@@ -94,4 +94,6 @@ return [
     'Student'=>'Student',
     'Delet All'=>'Delet All',
     'Teacher'=>'Teacher',
+    'Direct inquiry'=>'Direct inquiry',
+    'Teacher inquiry'=>'Teacher inquiry',
 ];

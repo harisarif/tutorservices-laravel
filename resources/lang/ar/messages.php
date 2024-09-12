@@ -94,4 +94,6 @@ return [
     'Student'=>'طالب',
     'Delet All'=>'حذف الكل',
     'Teacher'=>'مدرس',
+    'Direct inquiry'=>'الاستفسار المباشر',
+    'Teacher inquiry'=>'استفسار المعلم',
 ];

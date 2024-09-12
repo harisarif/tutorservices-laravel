@@ -1350,8 +1350,8 @@ footer{
   }
  
   .im-img img{
-    width: 85%;
-    height: 615px;
+    width: 100%;
+    height: 100%;
   }
   .ad-div-child{
     background-color: #42b979;
@@ -1511,7 +1511,10 @@ display: inline-block;
     transition: all 250ms ease-out 0s;
     width: 20px;
 }
-.ad-heading-div{
+.im-img{
+    height: 100%;
+}
+.ad-heading-div-child{
     border-bottom: 1px solid #42b979;
     width: 22%;
     display: flex;

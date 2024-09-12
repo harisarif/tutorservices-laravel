@@ -73,8 +73,7 @@
             <a href="{{route('login')}}" class="login_typ">Already Have an Account? <span>SIGN IN</span></a>
         </div>
     </section>
-  
-
+    
     <footer class="row text-center text-lg-start justify-content-center m-0 p-0">
         
         <div class="col-12 footer-bottom">

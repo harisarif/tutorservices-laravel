@@ -37,7 +37,7 @@
         --bs-gutter-x: none !important;
     }
     .login-button{
-        width: 65%;
+        width: 350px;
     }
     .form-check-input{
         cursor: pointer;

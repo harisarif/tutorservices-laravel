@@ -415,7 +415,7 @@ main {
     /* background-color: rgb(var(--green)); */
     border: 2px solid #fff;
     outline: 1px solid #777;
-    margin: 0 0.9rem;
+    margin:0 10px;
     border-radius: 50%;
 }
 
