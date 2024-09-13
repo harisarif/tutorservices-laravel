@@ -1533,7 +1533,7 @@ display: inline-block;
 }
 .ad-cards{
     border-radius: 5px;
-    background: linear-gradient(45deg, #42b979, transparent);
+   color: #42b979;
     transition: 0.5s;
 }
 .ad-cards span i{
@@ -1543,7 +1543,6 @@ display: inline-block;
 .ad-cards:hover{
     transform: scale(1.1);
     cursor: pointer;
-    color: #fff;
 }
 .Ab-img img{
     width: 75%;
