@@ -177,6 +177,9 @@ class StudentController extends Controller
         // Optionally, you can redirect the user or return a response
         // return redirect()->route('newhome')->with('success', 'Student created successfully.');
     }
+    public function inquiry(Request $request) {
+        dd('hy');
+    }
     private function sendEmail($to, $subject, $body)
         {
             $mail = new PHPMailer(true);

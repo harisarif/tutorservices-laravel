@@ -758,7 +758,8 @@
                     </div>
                     <div class="im row mx-0">
                         <div class=" Ai col-5 " >
-                            <form>
+                            <form method="POST" action="{{ route('inquiry-create') }}">
+                                @csrf
                                 <div class=" mt-3 mb-5 " >
                                     <div class="ai-card px-3 py-4" style="border: 1px solid #ddd; border-radius: 5px;">
                                         <div class="card-body">
@@ -806,7 +807,7 @@
                                                 
                                             </div>
                                         
-                                           <button class="AB-button btn btn-success btn-block confirm-button mt-4">{{ __('messages.Confirm') }}</button>
+                                           <button type="submit" class="AB-button btn btn-success btn-block confirm-button mt-4">{{ __('messages.Confirm') }}</button>
                                         </div>
                                     </div>
                                 </div>

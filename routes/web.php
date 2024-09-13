@@ -56,6 +56,7 @@ Route::get('/tutor-detail', [TutorController::class, 'tutorDetail'])->name('tuto
 
 Route::get('/qr-code', [StudentController::class, 'qrcode'])->name('qrcode');
 Route::post('/hire-tutor/create', [StudentController::class, 'create'])->name('student-create');
+Route::post('/inquiry/create', [StudentController::class, 'inquiry'])->name('inquiry-create');
 Route::get('/student-list/{id}/edit', [StudentController:: class, 'edit'])->name('edit-student');
 Route::put('/student-list/{id}', [StudentController:: class, 'update'])->name('students.update');
 Route::delete('/student-list/{id}', [StudentController:: class, 'destroy'])->name('students.destroy');
