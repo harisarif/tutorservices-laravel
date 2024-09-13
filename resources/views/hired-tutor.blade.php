@@ -5,6 +5,7 @@
     .modalBox{
         display: none !important;
     }
+    
 </style>
 @section('content')
     @if (session('success'))

@@ -11,7 +11,6 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <link rel="stylesheet" href="./css/login.css" />
 </head>
-
 <body>
 <main>
     <header class="d-flex align-items-end py-2">
@@ -64,11 +63,14 @@
     </section>
 
     <!-- footer start -->
-{{-- @include('layouts.footer') --}}
+    
 
     <!-- footer end.. -->
 </main>
 </body>
+    <footer>
+     {{-- @include('layouts.footer') --}}
+     </footer>
 <script  src="js/app.js"></script>
 
 </html>

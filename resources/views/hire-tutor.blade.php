@@ -35,6 +35,9 @@
     background: url(./images/bg_image_1.png), #f1f1f1a0;
     background-blend-mode: screen;
 }
+    footer{
+        background-color: #42b979;
+    }
 </style>
 @if ($errors->any())
         <div class="alert alert-danger">

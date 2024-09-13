@@ -46,6 +46,9 @@
         color: #42b979;
         border-radius: 5px;
     }
+    .main-footer{
+        display: none;
+    }
 </style>
 @section('content')
     <div class="row">

@@ -6,6 +6,9 @@
         bottom: 0;
         left: 0; 
     }
+    .container{
+        display: none;
+    }
     .modalBox{
         display: none !important;
     }
