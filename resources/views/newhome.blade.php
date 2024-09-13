@@ -884,10 +884,41 @@
                                     </div>
                                 </div>
                     </section>
+                    <section>
+                        <div class="keys-heading">
+                            <h2 class="text-center my-4 fw-bold">Edexcel key services</h2>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-3">
+                                <div class="ad-cards border m-3 p-1 ">
+                                    <span><i class="fa-regular fa-clock fs-1 text-center mx-1 text-white"></i></span>
+                                    <h4 class="py-2 fs-5 mx-3 text-center text-white">24/7</h4>
+                                    <p class="mx-3 text-center text-white">Our expert engineering team is available 24/7, providing specialized services including customized monitoring solutions, performance enhancements, comprehensive training programs, and continuous technical support.</p>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="ad-cards border m-3 p-1 ">
+                                    <span><i class="fa-solid fa-users fs-1 text-center mx-1 text-white"></i>
+                                    </span>
+                                    <h4 class="py-2 fs-5 mx-3 text-center text-white">Why chose Edexcel</h4>
+                                    <p class="mx-3 text-center text-white">Choosing Edexcel means opting for a globally recognized and respected qualification provider known for its high academic standards and practical approach to learning.  By choosing Edexcel, you’re investing quality education </p>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="ad-cards border m-3 p-1 ">
+                                    <span><i class="fa-regular fa-clock fs-1 text-center mx-1 text-white"></i></span>
+                                    <h4 class="py-2 fs-5 mx-3 text-center text-white">24/7</h4>
+                                    <p class="mx-3 text-center text-white">Our expert engineering team is available 24/7, providing specialized services including customized monitoring solutions, performance enhancements, comprehensive training programs, and continuous technical support.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                         <section class="testimonials">
                             <div class="AH container">
                                      <div class="ad-heading-div-child">
-                                        <h2 class="text-center mt-3">{{ __('messages.Testimonials') }}</h2>
+                                        <h2 class="text-center mt-3 fw-bold">{{ __('messages.Testimonials') }}</h2>
                                      </div>
                                 <div class="row">
                                     <div class="col-sm-12 sm-div ms-lg-0 ms-3">
