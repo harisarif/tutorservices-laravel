@@ -1,6 +1,11 @@
 <link rel="stylesheet" href="{{ asset('css/terms.css') }}">
 @extends('layouts.app')
 @section('content')
+<style>
+    footer{
+        background-color: #42b979;
+    }
+</style>
  <body>
    @include('whatsapp')
         <header class="text-center bg-white m-0 p-2 d-flex align-items-end justify-content-center">

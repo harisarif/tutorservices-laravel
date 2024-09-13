@@ -17,8 +17,8 @@
             color: #fff;
             margin-top: 0px !important;
         }
-        footer{
-            background-color: #42b979;
+        .main-footer{
+            display: none;
         }
         .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
             color: #fff !important;
@@ -176,10 +176,12 @@
     <body>
         <main>
             <div class="">
-                <div class="row" style="border-bottom: 1px solid #ddd;">
+                <div class="row">
+                   
                     <div class="col-lg-6 ad-sign">
-                        <h2 class="text-white fw-bold pb-2 fs-1 border-bottom">Register Yourself</h2>
-                        <ul>
+                        <h2 class="text-white fw-bold pb-2 fs-1 m-2">Register Yourself</h2>
+                        <div class="lline border-bottom"></div>
+                        <ul class="mt-4">
                             <li class="text-white py-1">Join us today and unlock your potential!</li>
                             <li class="text-white py-1">Don’t miss out—register now and take the first step towards success</li>
                             <li class="text-white py-1">Sign up and start your journey to greatness</li>
