@@ -290,10 +290,9 @@
         </div>
         <div class="notification mb-2 w-25 p-2 bg-info-subtle position-absolute end-0 top-100 z-1">This is a demo</div>
     </div>
-    <section class="banner-section" style="background-image: url(images/group-of-kids.jpg); background-size: cover;">
+    <section class="banner-section" style="background-image: url(images/group-of-kids.jpg); background-size: cover; background-blend-mode: multiply; background-color: #a5a5a5;">
                 <div class="banner-content">
-                    <h1 class="aa fs-2" style="margin-top:10rem;">Edexcel Academically with tailored tutoring and 
-                    <span class="d-flex justify-content-center"> professional guidance</span></h1>
+                    <h1 class="aa fs-2" style="margin-top:10rem;">Edexcel Academically with tailored tutoring and professional guidance</h1>
                 </div>
                 {{-- <button class="p-2  btn-an rounded border-0 text-light">
                         Student

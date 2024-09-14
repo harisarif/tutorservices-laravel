@@ -17,7 +17,6 @@
                 <div data-aos="fade-right" class="ad-banner-child">
                     <div class="ad-heading">
                         <div class="line"></div>
-                        <h3><b>Terms and Conditions</b></h3>
                         <h1><b>Terms and Conditions</b></h1>
                         <h4><b>for Edexcel Academy & Educational Consultancy</b></h4>
                     </div>

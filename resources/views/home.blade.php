@@ -222,6 +222,19 @@
          margin: 0px 10px;
         }
     }
+    [dir="rtl"] .topbar .dropdown .dropdown-menu{
+        right: -135px !important;
+    }
+    [dir="rtl"] .topbar .dropdown-list .dropdown-header{
+        text-align: justify;
+        font-size: 15px;
+    }
+    [dir="rtl"] .ntf{
+        margin: 0 6px;
+    }
+    [dir="rtl"] .small{
+        text-align: justify;
+    }
 </style>
 <body id="page-top">
     
@@ -324,7 +337,7 @@
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header bg-success border-success">
-                                    Alerts Center
+                                {{ __('messages.Alerts Center') }}
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
@@ -332,9 +345,9 @@
                                             <i class="fas fa-file-alt text-white"></i>
                                         </div>
                                     </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                    <div class="ntf">
+                                        <div class="small text-gray-500">{{ __('messages.December 12, 2019') }}</div>
+                                        <span class="font-weight-bold">{{ __('messages.A new monthly report is ready to download!') }}</span>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -343,9 +356,9 @@
                                             <i class="fas fa-donate text-white"></i>
                                         </div>
                                     </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
+                                    <div class="ntf">
+                                        <div class="small text-gray-500">{{ __('messages.December 7, 2019') }}</div>
+                                        {{ __('messages.$290.29 has been deposited into your account!') }}
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -354,9 +367,9 @@
                                             <i class="fas fa-exclamation-triangle text-white"></i>
                                         </div>
                                     </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
+                                    <div class="ntf">
+                                        <div class="small text-gray-500">{{ __('messages.December 2, 2019') }}</div>
+                                        {{ __('messages.Spending Alert: We noticed unusually high spending for your account.') }}
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>

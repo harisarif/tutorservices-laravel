@@ -94,6 +94,14 @@ return [
     'Student'=>'طالب',
     'Delet All'=>'حذف الكل',
     'Teacher'=>'مدرس',
+    '$290.29 has been deposited into your account!'=>'تم إيداع 290.29 دولارًا في حسابك!',
     'Direct inquiry'=>'الاستفسار المباشر',
     'Teacher inquiry'=>'استفسار المعلم',
+    'Alerts Center'=>'مركز التنبيهات',
+    'December 12, 2019'=>'12 ديسمبر 2019',
+    'A new monthly report is ready to download!'=>'التقرير الشهري الجديد جاهز للتنزيل!',
+    'December 7, 2019'=>'7 ديسمبر 2019',
+    'December 2, 2019'=>'2 ديسمبر 2019',
+    'Spending Alert: We noticed unusually high spending for your account.'=>'تنبيه بشأن الإنفاق: لقد لاحظنا ارتفاعًا غير معتاد في إنفاق حسابك',
+    
 ];

@@ -96,4 +96,11 @@ return [
     'Teacher'=>'Teacher',
     'Direct inquiry'=>'Direct inquiry',
     'Teacher inquiry'=>'Teacher inquiry',
+    'Alerts Center'=>'Alerts Center',
+    'December 12, 2019'=>'December 12, 2019',
+    'A new monthly report is ready to download!'=>'A new monthly report is ready to download!',
+    'December 7, 2019'=>'December 7, 2019',
+    '$290.29 has been deposited into your account!'=>'$290.29 has been deposited into your account!',
+    'December 2, 2019'=>'December 2, 2019','December 2, 2019',
+    'Spending Alert: We noticed unusually high spending for your account.'=>'Spending Alert: We noticed unusually high spending for your account.',
 ];

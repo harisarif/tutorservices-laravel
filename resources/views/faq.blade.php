@@ -34,6 +34,7 @@
                         <h2 class="py-0 my-4 text-left text-capitalize fw-bold" style="color:#42b979;">
                             Frequently Asked Questions
                         </h2>
+                        <h4><b>for Edexcel Academy &amp; Educational Consultancy</b></h4>
                        </div>
                     </div>
                 </div>

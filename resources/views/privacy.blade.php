@@ -41,7 +41,8 @@
         <div class="row">
             <div class="ad-heading-child">
                 <div class="ad-line"></div>
-            <h1>Privacy Policy</h1>
+                <h1>Privacy Policy</h1>
+                <h4><b>for Edexcel Academy &amp; Educational Consultancy</b></h4>
             </div>
         </div>
     </div>
