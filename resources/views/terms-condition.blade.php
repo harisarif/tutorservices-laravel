@@ -5,6 +5,9 @@
     footer{
         background-color: #42b979;
     }
+    .fb-ad {
+        margin: 0 40px;
+    }
 </style>
  <body>
    @include('whatsapp')
@@ -12,7 +15,7 @@
             <a class="mx-auto" href="{{ route('newhome') }}"><img src="{{ asset('images/logo.png') }}" alt="EDEXCEL-logo"height="50px"></a>
         </header>
     <section class="ad-banner">
-        <div class="container">
+        <div class="fb-ad">
             <div class="row">
                 <div data-aos="fade-right" class="ad-banner-child">
                     <div class="ad-heading">
@@ -26,7 +29,7 @@
     </section>
 
     <section class="ad-video" style="display: flex; margin: 0 26px;">
-    <section class="container">
+    <section class="container ">
         <div data-aos="fade-left" class="ad-trems">
             <div class="ad-line"></div>
             <div class="ad-heading-div">

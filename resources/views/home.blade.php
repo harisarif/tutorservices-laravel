@@ -222,7 +222,7 @@
          margin: 0px 10px;
         }
     }
-    [dir="rtl"] .topbar .dropdown .dropdown-menu{
+    [dir="rtl"] .BD{
         right: -135px !important;
     }
     [dir="rtl"] .topbar .dropdown-list .dropdown-header{
@@ -234,7 +234,26 @@
     }
     [dir="rtl"] .small{
         text-align: justify;
+        margin: 0 10px;
     }
+    [dir="rtl"] .md{
+       right: -47px !important;
+    }
+    [dir="rtl"] .dataTables_length{
+       
+        display: flex;
+    }
+    .nav-tabs{
+        border-bottom:none;
+    }
+    [dir="rtl"] .dataTables_filter{
+       justify-content: end;
+       display: flex;
+   }
+   [dir="rtl"] .dataTables_paginate{
+       display: flex;
+   }
+    
 </style>
 <body id="page-top">
     
@@ -335,7 +354,7 @@
                                 <span class="badge badge-danger badge-counter">3+</span>
                             </a>
                             <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in BD" aria-labelledby="alertsDropdown ">
                                 <h6 class="dropdown-header bg-success border-success">
                                 {{ __('messages.Alerts Center') }}
                                 </h6>
@@ -384,7 +403,7 @@
                                     src="{{asset('images/undraw_profile.svg')}}">
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in md"
                                 aria-labelledby="userDropdown">
                                
                                 <a class="dropdown-item text-success" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

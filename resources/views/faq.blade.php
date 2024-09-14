@@ -23,6 +23,9 @@
         font-size: 23px;
         color:#42b979
       }
+      .fb-ad {
+        margin: 0 40px;
+      }
     </style>
    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -35,19 +38,19 @@
                 <a class="mx-auto" href="{{ route('newhome') }}"><img src="/images/logo.png" alt="EDEXCEL-logo" height="50px"></a>
             </header>
             <section class="ad-heading-div">
-                <div class="container">
+                <div class="fb-ad">
                     <div class="row">
                        <div class="col-12">
                         <div class="ad-line-child"></div>
-                        <h2 class="py-0 my-4 text-left text-capitalize fw-bold" style="color:#42b979;">
+                        <h1 class="py-0 my-4 text-left text-capitalize fw-bold" style="color:#42b979; font-size: 50px;">
                             Frequently Asked Questions
-                        </h2>
+                        </h1>
                         <h4><b>For Edexcel Academy &amp; Educational Consultancy</b></h4>
                        </div>
                     </div>
                 </div>
             </section>
-            <section class="container">
+            <section class="fb-ad ">
                 <div class="ad-line"></div>
                 <div class="ad-heading-te">
                     <h3 ><b>Frequently  Questions for Edexcel Academy &amp; Educational Consultancy
@@ -55,8 +58,8 @@
                     <span>Effective Date: 26.7.2024</span>
                 </div>
             </section>
-            <section class="ad-flex" style="display: flex;  margin: 10px 50px;">
-                <div data-aos="fade-left" class="wrapper container" style="margin: 0 30px;">
+            <section class="ad-flex" style="display: flex;  margin: 10px 20px;">
+                <div data-aos="fade-left" class="wrapper container">
                     
                     <div class="p-0" id="FAQ">
                             <div class="col-12 ms-1 ">
