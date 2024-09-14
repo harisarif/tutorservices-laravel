@@ -201,9 +201,11 @@ class StudentController extends Controller
         $toStudent = $inquiry->email;
         $subjectStudent = "Welcome to Edexcel!";
         $messageStudent = "Dear " . $inquiry->name . "\r\n" .
-            "We’re here to help you succeed!\r\n\r\n" .
-            "Best regards,\r\n" .
-            "The Edexcel Team";
+        "Welcome to Edexcel! 🎉 We’re excited to to got you inquiry soon you will notified.\r\n" .
+        "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at info@edexceledu.com or +971566428066.\r\n" .
+        "We’re here to help you succeed!\r\n\r\n" .
+        "Best regards,\r\n" .
+        "The Edexcel Team";
 
         $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
 
