@@ -28,7 +28,15 @@
     border-bottom-right-radius: 170px;
     background: #fafafa;
 }
-
+    .ad-line {
+        border: 5px solid var(--primary-color);
+        width: 60px;
+        margin: 17px 0;
+    }
+    .ad-heading-div h3 {
+    font-size: 23px;
+    color: var(--primary-color);    
+    }
 </style>
 <body>
 @include('whatsapp')
@@ -41,14 +49,20 @@
         <div class="row">
             <div class="ad-heading-child">
                 <div class="ad-line"></div>
-                <h1>Privacy Policy</h1>
-                <h4><b>for Edexcel Academy &amp; Educational Consultancy</b></h4>
+                <h1 class="fw-bold">Privacy Policy</h1>
+                <h4><b>For Edexcel Academy &amp; Educational Consultancy</b></h4>
             </div>
         </div>
     </div>
  </section>
     <section class="ad-slexx-sec" style=" display: flex; margin: 10px 30px;">
     <section class="container">
+        <div class="ad-line"></div>
+            <div class="ad-heading-div">
+                <h3 ><b>Privacy Policy for Edexcel Academy &amp; Educational Consultancy
+                    </b></h3>
+                <span>Effective Date: 26.7.2024</span>
+            </div>
         <div data-aos="fade-left" class="ad-detail-child">
             <p>Edexcel Academy & Educational Consultancy, a company registered in Pakistan and Wales (No. +971566428066),
                 herein referred to as Spires. We have created this privacy statement ("Statement"™) in order to
