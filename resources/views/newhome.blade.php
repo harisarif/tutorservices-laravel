@@ -149,6 +149,15 @@
             background: #42b979; /* Color when hovering */
             }
     </style>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 @section('content')
     @if (session('success'))
         <div class="alert alert-success" style="z-index: 6;
@@ -771,13 +780,13 @@
                                                     <div class="col-sm-12">
                                                         <div class="form-group p-2 px-0">
                                                             <label for="curriculum" class="form-label" style="color:#42b979;"><strong>{{ __('messages.Enter your Name') }} <b style="color: red;font-size: 20px;">*</b></strong></label>
-                                                            <input class="form-control" type="text" placeholder="{{ __('messages.Name') }}">
+                                                            <input name="fname" class="form-control" type="text" placeholder="{{ __('messages.Name') }}">
                                                         </div>      
                                                 </div>
                                                 <div class="col-sm-12">
                                                         <div class="form-group p-2 px-0">
                                                         <label for="curriculum" class="form-label" style="color:#42b979;"><strong>{{ __('messages.Enter your   Email') }} <b style="color: red; font-size: 20px;">*</b></strong></label>
-                                                        <div class="input-group"> <input class="form-control" type="text" placeholder="{{ __('messages.Email ID') }}"></div>
+                                                        <div class="input-group"> <input name="email"  class="form-control" type="text" placeholder="{{ __('messages.Email ID') }}"></div>
                                                         </div>
                                                         </div>
                                                 </div>  
@@ -801,7 +810,7 @@
                                                                     <strong>{{ __('messages.Description (Optional)') }}  <b style="color: red; font-size: 20px;">*</b>
                                                                     </strong>
                                                                 </label>
-                                                                <textarea class="form-control" id="curriculum" name="reviews" rows="2" placeholder="{{ __('messages.Description') }}" style="box-shadow: none;border: 1px solid #ddd;"></textarea>
+                                                                <textarea class="form-control" id="curriculum" name="description" rows="2" placeholder="{{ __('messages.Description') }}" style="box-shadow: none;border: 1px solid #ddd;"></textarea>
                                                             </div>
                                                 </div>
                                                 
@@ -886,14 +895,14 @@
                     </section>
                     <section>
                         <div class="keys-heading">
-                            <h2 class="text-center my-4 fw-bold">Edexcel key services</h2>
+                            <h2 class="text-center my-4 fw-bold">Our key services</h2>
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-lg-3">
                                 <div class="ad-cards border m-3 p-1 ">
                                     <span><i class="fa-regular fa-clock fs-1 text-center mx-1"></i></span>
                                     <h4 class="py-2 fs-5 mx-3 text-center">24/7</h4>
-                                    <p class="mx-3 text-cente">Our expert engineering team is available 24/7, providing specialized services including customized monitoring solutions, performance enhancements, comprehensive training programs, and continuous technical support.</p>
+                                    <p class="mx-3 text-center">Our expert engineering team is available 24/7, providing specialized services including customized monitoring solutions, performance enhancements, comprehensive training programs, and continuous technical support.</p>
                                 </div>
                             </div>
 

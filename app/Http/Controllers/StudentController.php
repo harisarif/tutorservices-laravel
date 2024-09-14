@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Student;
+use App\Models\Inquiry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -178,7 +179,60 @@ class StudentController extends Controller
         // return redirect()->route('newhome')->with('success', 'Student created successfully.');
     }
     public function inquiry(Request $request) {
-        dd('hy');
+        $rules = [
+            'email' => 'required|string|email|max:255|unique:inquiries,email',
+
+        ];
+    
+        $validator = Validator::make($request->all(), $rules);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                             ->withErrors($validator)
+                             ->withInput();
+        }
+        $inquiry = new Inquiry();
+        $inquiry->description = $request->input('subjects');
+        $inquiry->name = $request->input('fname');
+        $inquiry->email = $request->input('email');
+        $inquiry->phone = $request->input('phone');
+        $inquiry->save();
+        $toStudent = $inquiry->email;
+        $subjectStudent = "Welcome to Edexcel!";
+        $messageStudent = "Dear " . $inquiry->name . "\r\n" .
+            "We’re here to help you succeed!\r\n\r\n" .
+            "Best regards,\r\n" .
+            "The Edexcel Team";
+
+        $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
+
+        $toAdmin = 'info@edexceledu.com';
+        $subjectAdmin = "Edexcel Notification";
+        $messageAdmin = "Inquiry Added
+
+        Dear Babar,
+
+        I hope this email finds you well.
+
+        I am pleased to inform you that a new student, {$inquiry->name}, has successfully enrolled through our website. Below are the details of the new enrollment:
+
+        - *Full Name:* {$inquiry->name}
+        - *Email Address:* {$inquiry->email}
+        - *Contact Number:* {$inquiry->phone}
+        - *Program/Course Enrolled:* {$inquiry->subjects}
+
+        Please ensure that {$inquiry->name} is added to our records and receives all necessary welcome materials and instructions. If any further information is needed, feel free to contact me.
+
+        Thank you for your prompt attention to this new enrollment.
+
+        Best regards,
+        The Edexcel Team";
+
+
+
+        $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
+        return redirect()->route('newhome')->with('success', 'Inquiry created successfully.');
     }
     private function sendEmail($to, $subject, $body)
         {
