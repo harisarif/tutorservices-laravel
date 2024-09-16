@@ -200,15 +200,15 @@
                                     <input required type="password" name="c_password" placeholder="*Confirm Password"  class="inp-1" style=" display: flex; width: 100%;">
                                 </div>
                         
-                        <div class="col-12 d-none">
-                           
-                         <div class="col-12 ">
-                               <div class="input-design">                               
-                            <div class="input-div">
-                               <label for="classStartTime" class="d-block text-start " style=" width: 86%; margin: 0 auto; font-weight: 600;">Starting time</label>
-                                <input class="inp-1" title="Class start time" type="time" name="class_start_time" id="classStartTime">
-                            </div>
-                        <div class="input-box">
+                            <div class="col-12 d-none">
+                            
+                            <div class="col-12 ">
+                                <div class="input-design">                               
+                                <div class="input-div">
+                                <label for="classStartTime" class="d-block text-start " style=" width: 86%; margin: 0 auto; font-weight: 600;">Starting time</label>
+                                    <input class="inp-1" title="Class start time" type="time" name="class_start_time" id="classStartTime">
+                                </div>
+                            <div class="input-box">
 
                             <label for="classEndTime" class="d-block text-start " style=" width: 86%; margin: 0 auto; font-weight: 600;">Ending time</label>
                             <input class="inp-1" title="Class end time" type="time" name="class_end_time" id="classEndTime">
@@ -228,9 +228,9 @@
                         
                         <div class="col-12 d-none px-4" id="page-3" style="text-align:left;">
                             
-                        <div class="col-12 px-2 py-2"><label for="curriculum" class="form-label" style="color:#42b979;"><strong>Description (Optional)</strong></label>
-                    <textarea class="form-control" id="curriculum" name="reviews" rows="2" placeholder="Description" style="box-shadow: none;border: 1px solid #aaa;"></textarea>
-                </div>  
+                            <div class="col-12 px-2 py-2"><label for="curriculum" class="form-label" style="color:#42b979;"><strong>Description (Optional)</strong></label>
+                                <textarea class="form-control" id="curriculum" name="reviews" rows="2" placeholder="Description" style="box-shadow: none;border: 1px solid #aaa;"></textarea>
+                            </div>  
                         </div>
 
                     </div>
