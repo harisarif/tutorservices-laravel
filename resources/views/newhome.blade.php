@@ -292,12 +292,12 @@
     </div>
     <section class="banner-section" style="background-image: url(images/group-of-kids.jpg); background-size: cover; background-blend-mode: multiply; background-color: #a5a5a5;">
                 <div class="banner-content">
-                    <h1 class="aa fs-2" style="margin-top:10rem;">Edexcel Academically with tailored tutoring and professional guidance</h1>
+                    <h1 class="aa fs-2" style="margin-top:10rem;" >Edexcel Academically with tailored tutoring and professional guidance</h1>
                 </div>
                 {{-- <button class="p-2  btn-an rounded border-0 text-light">
                         Student
                     </button> --}}
-                   <div class="AB">
+                   <div class="AB mt-5">
                         <button class="ab  p-2  btn-an rounded border-0 text-success" style=" white-space: nowrap; background: #42b979;">
                             <a class=" text-decoration-none active solid_btn" aria-current="page"
                             href="{{ route('hire.tutor') }}">{{ __('messages.Request A Tutor') }} </a>
@@ -998,6 +998,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!-- testiomial -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="script.js"></script>
     <!-- Your custom script -->
     <script>
         $(document).on('select2:open', function(e) {

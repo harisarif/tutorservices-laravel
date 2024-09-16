@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
+use App\Models\SchoolClass;
 use App\Models\Tutor; // Add the Tutor model namespace
 
 class TutorController extends Controller
@@ -52,6 +53,8 @@ class TutorController extends Controller
         public function tutorDetail (){
             return view('teacher-detail');
         }
+       
+        
         public function changeLanguage(Request $request)
         {
             // dd($request);
@@ -269,11 +272,12 @@ class TutorController extends Controller
         }
 
     public function signup() {
+        $schoolClasses = SchoolClass::all();
         $countriesPhone = collect(config('phonecountries.countries'));
         $countries_number_length = collect(config('countries_number_length.countries'));
         $countries_prefix = collect(config('countries_prefix.countries'));
         $countries = collect(config('countries_assoc.countries'));
-        return view('tutor-signup', compact(['countriesPhone','countries', 'countries_number_length', 'countries_prefix']));
+        return view('tutor-signup', compact(['countriesPhone','countries','schoolClasses' ,'countries_number_length', 'countries_prefix']));
     }
 
     public function edit($id) {

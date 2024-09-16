@@ -16,7 +16,6 @@ class SchoolClassSeeder extends Seeder
             ['name' => 'Please Select'],
             ['name' => 'Diploma/Certifications'],
             ['name' => 'A Level'],
-            ['name' => 'Montessori'],
             ['name' => 'ACCA'],
             ['name' => 'IGCSE'],
             ['name' => 'Class 1 to 5'],
@@ -31,7 +30,6 @@ class SchoolClassSeeder extends Seeder
             ['name' => 'Language Training'],
             ['name' => 'Quran'],
         ];
-
         foreach ($classes as $class) {
             SchoolClass::create($class);
         }

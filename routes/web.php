@@ -43,9 +43,7 @@ Route::get('/basicsignup', function () {
     return view('basicsignup');
 })->name('basicsignup');
 
-Route::get('/tutor-signup', function () {
-    return view('tutor-signup');
-})->name('tutor');
+Route::get('/tutor-signup', [TutorController::class, 'signup'])->name('tutor');
 Route::get('/hire-tutor', [StudentController::class, 'index'])->name('hire.tutor');
 Route::get('/faq', [StudentController::class, 'FAQ'])->name('faq.index');
 Route::get('/cities', [StudentController::class, 'getCities'])->name('cities');
@@ -90,7 +88,7 @@ Route::view('profile', 'profile')
         return redirect('/');
     })->name('logout');
 
-    Route::get('/tutor-signup', [TutorController::class, 'signup'])->name('tutor');
+    
 
 Auth::routes();
 

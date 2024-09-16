@@ -319,13 +319,6 @@
                 </a>
             </li>
             <hr class="sidebar-divider d-none d-md-block">
-            <li class="nav-item">
-                <a class="nav-link py-2" id="profile-tab" data-toggle="tab"
-                href="#profile" role="tab" aria-controls="profile" aria-selected="false">
-                    <i class="fa-solid fa-person-chalkboard"></i>
-                    <span>{{ __('messages.Teacher inquiry') }}</span>
-                </a>
-            </li>
         </ul>
         <!-- End of Sidebar -->
 
