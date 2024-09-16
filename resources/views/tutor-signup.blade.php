@@ -181,6 +181,10 @@
                     <div class="col-lg-6 ad-sign">
                         <h2 class="text-white fw-bold pb-2 fs-1 m-2">Register Yourself</h2>
                         <div class="lline border-bottom"></div>
+                        <div class="form-group d-none" >
+                           
+                                <input type="search" value="English" name="subject" class="form-control" id="page1-search" placeholder="Search" style="height:50px;">
+                            </div>
                         <ul class="mt-4">
                             <li class="text-white py-1">Join us today and unlock your potential!</li>
                             <li class="text-white py-1">Don’t miss out—register now and take the first step towards success</li>
@@ -191,154 +195,183 @@
                         </ul>
                     </div>
                     <div class="col-lg-6 col-sm-4">
-                        <form class="p-3" method="POST" action="{{ route('tutor-create') }}"
+                        <div class="col-12 d-flex justify-content-center py-3 border-bottom">
+                            <b class="theme_text_green px-2 persentage-num">33%</b>
+                            <div class="loading bg-body-secondary my-2">
+                                <div class="percentage bg_theme_green"></div>
+                            </div>
+                        </div>
+                        <form id="tutorForm"  class="p-3 pages" method="POST" action="{{ route('tutor-create') }}"
                             enctype="multipart/form-data" >
                             @csrf
-                            <div class="ad-heading">
-                                <h2 class="fs-4 text-center fw-bold">Fill a form to sign-up yourself</h2>
-                                    <h3  style="text-align: center;color: red; padding: 10px; font-size: 15px;"><b><i>Please fill all mandatory fields</i></b></h3>
+                            <div style="min-height: 325px;">
+                                <div id="page-1">
+                                    <div class="form-group d-none" >
+                           
+                                <input type="search" value="English" name="subject" class="form-control" id="page1-search" placeholder="Search" style="height:50px;">
                             </div>
-                            <div class="form-row d-flex flex-column flex-md-row">
+                            <ul class="list-group d-none" id="searchList">
+                                <li onclick="page1List(this)" class="list-group-item text-start">English</li>
+                                <li onclick="page1List(this)" class="list-group-item text-start">Mathematics</li>
+                                <li onclick="page1List(this)" class="list-group-item text-start">Physics</li>
+                                <li onclick="page1List(this)" class="list-group-item text-start">Chemistry</li>
+                                <li onclick="page1List(this)" class="list-group-item text-start">Urdu</li>
+                            </ul>
                                 
-                                <div class="col-md-6 px-2 mb-2">
-                                    <label for="f_name" class="form-label" style="color:#42b979;"><strong>First Name</strong></label> <span class="text-danger fs-4" style="color:#42b979;">*</span>
-                                    <input type="text" class="form-control" id="f_name" name="f_name"   style="box-shadow: none;border: 1px solid #aaa;">
-                                </div>
-                                <div class="col-md-6 px-2 mb-2">
-                                    <label for="l_name" class="form-label" style="color:#42b979;"><strong>Last Name</strong></label> <span class="text-danger fs-4">*</span>
-                                    <input type="text" class="form-control" id="l_name" name="l_name"    style="box-shadow: none;border: 1px solid #aaa;">
-                                </div>
-                            </div>
-                        
-
-                            <div class="form-row d-flex flex-column flex-md-row">
-                                <div class="col-md-6 px-2 mb-2">
-                                    <label for="email" class="form-label" style="color:#42b979;"><strong>Email</strong></label> <span class="text-danger fs-4">*</span>
-                                    <input type="email" class="form-control" id="email" name="email"   style="box-shadow: none;border: 1px solid #aaa;">
-                                </div>
-                                <div class="col-md-6 px-2 mb-2">
-                                    <label for="gender" class="form-label" style="color:#42b979;"><strong>Gender</strong></label> <span class="text-danger fs-4">*</span>
-                                    <select class="form-select" id="gender" name="gender"  >
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-row d-flex flex-column flex-md-row">
-                                <div class="col-md-6 px-2 mb-2">
-                                <div class="form-group">
-                                        <label for="datePicker" class="date-picker-label" style="color:#42b979;"><strong>DOB </strong><span class="text-danger fs-4"> *</span></label>
-                                            <input type="date" id="datePicker" class="date-picker-input" name="dob">
-                
-                    
-                                    </div>
-
-
-                                </div>
-                                <div class="col-md-6 px-2 mb-2">
-                                    <label for="qualification" class="form-label" style="color:#42b979;"><strong>Highest Qualifications</strong></label> <span class="text-danger fs-4">*</span>
-                                    <input type="text" class="form-control" id="qualification" name="qualification"   style="box-shadow: none;border: 1px solid #aaa;">
-                                </div>
-                            </div>
-
-                            <div class="form-row d-flex flex-column flex-md-row">
-                                <div class="col-md-6 px-2 mb-2">
-                                    <label for="teaching" class="form-label" style="color:#42b979;"><strong>Subject You Can Teach</strong></label> <span class="text-danger fs-4">*</span><br>
-                                    <select class="form-select teaching" id="teaching" name="teaching[]"  >
-                                        <option value="english">English</option>
-                                        <option value="maths">Mathematics</option>
-                                        <option value="physics">Physics</option>
-                                        <option value="chemistry">Chemistry</option>
-                                        <option value="islamiyat">Islamiyat</option>
-                                        <option value="urdu">Urdu</option>
-                                        <option value="biology">Biology</option>
-                                        <option value="computer">Computer Science</option>
-                                        <option value="pakstudies">Pak Studies</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 px-2 mb-2">
-                                    <label for="experience" class="form-label" style="color:#42b979;"><strong>Experience (in teaching)</strong></label> <span class="text-danger fs-4">*</span>
-                                    <input type="number" min="0" class="form-control" id="experience" name="experience"
-                                        style="box-shadow: none;border: 1px solid #aaa;">
-                                </div>
-                                <div class="choice col-6 mx-1">
-                                <h3 class=" pt-3" style=" font-size:16px;color:#42b979;"><strong>Services</strong></h3>
-                                            <ul class="p-0 d-flex mb-0">
-                                                <li class="d-flex align-items-center fs-5 py-1">
-                                                    <input class="m-2 d-none chose-subject" type="radio" value="Online Tutor" name="subjects" id="option-1">
-                                                    <label for="option-1" style="font-size:15px;">Online</label>
-                                                </li>
-                                                <li class="d-flex align-items-center fs-5 py-1">
-                                                    <input class="m-2 d-none chose-subject" type="radio" value="Tutor for home" name="subjects" id="option-2">
-                                                    <label for="option-2" style="font-size:15px;">Physical</label>
-                                                </li>
-                                                <li class="d-flex align-items-center fs-5 py-1">
-                                                    <input class="m-2 d-none chose-subject" type="radio" value="Both" name="subjects" id="option-3">
-                                                    <label for="option-3" style="font-size:15px;">Both</label>
-                                                </li>
-                                            </ul>
+                                    <div class="form-row d-flex flex-column flex-md-row">
+                                        
+                                        <div class="col-md-6 px-2 mb-2">
+                                            <label for="f_name" class="form-label" style="color:#42b979;"><strong>First Name</strong></label> <span class="text-danger fs-4" style="color:#42b979;">*</span>
+                                            <input type="text" class="form-control" id="f_name" name="f_name"   style="box-shadow: none;border: 1px solid #aaa;">
                                         </div>
-                            </div>
-                            <div class="form-row d-flex flex-column flex-md-row">
-                                <div class="col-md-6 px-2 mb-2">
-                                    <label for="location" class="form-label " style="color:#42b979;"><strong>Country Residence</strong></label> <span class="text-danger fs-4" style="color:#42b979;">*</span>
-                                    </br>
-                                    <select name="location" id="location" class="form-select" required style="margin: 0 auto !important; width: 92%; height: 50px;">
-                                            <option value="">Select Country</option>
-                                                @foreach($countries as $code => $country)
-                                                    <option value="{{ $code }}">{{ $country }}</option>
-                                                @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-6 px-2 mb-2">
-                                    <label for="city" class="form-label" style="color:#42b979;"><strong>City</strong></label> <span class="text-danger fs-4">*</span>
-                                    <!-- <input type="text" class="form-control" id="city" name="city"   style="box-shadow: none;border: 1px solid #aaa;"> -->
-                                    <select name="city" id="city" class="form-select" required style="margin: 0 auto !important; width: 92%; height: 43px;">
-                                                    <option value="" style="color:#42b979;"><strong>Select City</strong></option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-row d-flex flex-column flex-md-row">
-                                <div class="col-md-12 px-2 mb-2" >
-                                    <label for="mobile" class="form-label" style="color:#42b979;"><strong>Mobile Number</strong></label> <span class="text-danger fs-4">*</span>
-                                    <div class="input-group d-flex justify-content-between align-items-center" style="width: 99%">
-                                        <select name="countrySelect" id="countrySelect" class="form-select country-select w-50"  >
-                                            @foreach ($countriesPhone as $key => $country)
-                                                <option value="{{ $key }}">{{ $country }}</option>
-                                            @endforeach
-                                        </select>
-                                        <input type="text" class="form-control w-50" id="phone" name="phone" placeholder="e.g +92XXXXXXXXXX"   style="box-shadow: none;border: 1px solid #aaa;">
+                                        <div class="col-md-6 px-2 mb-2">
+                                            <label for="l_name" class="form-label" style="color:#42b979;"><strong>Last Name</strong></label> <span class="text-danger fs-4">*</span>
+                                            <input type="text" class="form-control" id="l_name" name="l_name"    style="box-shadow: none;border: 1px solid #aaa;">
+                                        </div>
+                                    </div>
+                                    <div class="form-row d-flex flex-column flex-md-row">
+                                        <div class="col-md-6 px-2 mb-2">
+                                            <label for="email" class="form-label" style="color:#42b979;"><strong>Email</strong></label> <span class="text-danger fs-4">*</span>
+                                            <input type="email" class="form-control" id="email" name="email"   style="box-shadow: none;border: 1px solid #aaa;">
+                                        </div>
+                                        <div class="col-md-6 px-2 mb-2">
+                                            <label for="gender" class="form-label" style="color:#42b979;"><strong>Gender</strong></label> <span class="text-danger fs-4">*</span>
+                                            <select class="form-select" id="gender" name="gender"  >
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row d-flex flex-column flex-md-row">
+                                        <div class="col-md-6 px-2 mb-2">
+                                            <div class="form-group">
+                                                <label for="datePicker" class="date-picker-label" style="color:#42b979;"><strong>DOB </strong><span class="text-danger fs-4"> *</span></label>
+                                                    <input type="date" id="datePicker" class="date-picker-input" name="dob">
+                        
+                            
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-md-6 px-2 mb-2">
+                                            <label for="qualification" class="form-label" style="color:#42b979;"><strong>Highest Qualifications</strong></label> <span class="text-danger fs-4">*</span>
+                                            <input type="text" class="form-control" id="qualification" name="qualification"   style="box-shadow: none;border: 1px solid #aaa;">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 px-2 mb-2 d-none">
-                                    <label for="whatsapp" class="form-label" style="color:#42b979;"><strong>WhatsApp Number</strong></label> <span class="text-danger fs-4">*</span>
-                                    <input type="text" class="form-control" id="whatsapp" name="whatsapp" placeholder="e.g +92XXXXXXXXXX"   style="box-shadow: none;border: 1px solid #aaa;">
+                                <div class="d-none" id="page-2">
+                                
+
+                                    <div class="form-row d-flex flex-column flex-md-row">
+                                        <div class="col-md-6 px-2 mb-2">
+                                            <label for="teaching" class="form-label" style="color:#42b979;"><strong>Subject You Can Teach</strong></label> <span class="text-danger fs-4">*</span><br>
+                                            <select class="form-select teaching" id="teaching" name="teaching[]"  >
+                                                <option value="english">English</option>
+                                                <option value="maths">Mathematics</option>
+                                                <option value="physics">Physics</option>
+                                                <option value="chemistry">Chemistry</option>
+                                                <option value="islamiyat">Islamiyat</option>
+                                                <option value="urdu">Urdu</option>
+                                                <option value="biology">Biology</option>
+                                                <option value="computer">Computer Science</option>
+                                                <option value="pakstudies">Pak Studies</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 px-2 mb-2">
+                                            <label for="experience" class="form-label" style="color:#42b979;"><strong>Experience (in teaching)</strong></label> <span class="text-danger fs-4">*</span>
+                                            <input type="number" min="0" class="form-control" id="experience" name="experience"
+                                                style="box-shadow: none;border: 1px solid #aaa;">
+                                        </div>
+                                        <div class="choice col-6 mx-1">
+                                        <h3 class=" pt-3" style=" font-size:16px;color:#42b979;"><strong>Services</strong></h3>
+                                                    <ul class="p-0 d-flex mb-0">
+                                                        <li class="d-flex align-items-center fs-5 py-1">
+                                                            <input class="m-2 d-none chose-subject" type="radio" value="Online Tutor" name="subjects" id="option-1">
+                                                            <label for="option-1" style="font-size:15px;">Online</label>
+                                                        </li>
+                                                        <li class="d-flex align-items-center fs-5 py-1">
+                                                            <input class="m-2 d-none chose-subject" type="radio" value="Tutor for home" name="subjects" id="option-2">
+                                                            <label for="option-2" style="font-size:15px;">Physical</label>
+                                                        </li>
+                                                        <li class="d-flex align-items-center fs-5 py-1">
+                                                            <input class="m-2 d-none chose-subject" type="radio" value="Both" name="subjects" id="option-3">
+                                                            <label for="option-3" style="font-size:15px;">Both</label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                    </div>
+                                    <div class="form-row d-flex flex-column flex-md-row">
+                                        <div class="col-md-6 px-2 mb-2">
+                                            <label for="location" class="form-label " style="color:#42b979;"><strong>Country Residence</strong></label> <span class="text-danger fs-4" style="color:#42b979;">*</span>
+                                            </br>
+                                            <select name="location" id="location" class="form-select" required style="margin: 0 auto !important; width: 92%; height: 50px;">
+                                                    <option value="">Select Country</option>
+                                                        @foreach($countries as $code => $country)
+                                                            <option value="{{ $code }}">{{ $country }}</option>
+                                                        @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 px-2 mb-2">
+                                            <label for="city" class="form-label" style="color:#42b979;"><strong>City</strong></label> <span class="text-danger fs-4">*</span>
+                                            <!-- <input type="text" class="form-control" id="city" name="city"   style="box-shadow: none;border: 1px solid #aaa;"> -->
+                                            <select name="city" id="city" class="form-select" required style="margin: 0 auto !important; width: 92%; height: 43px;">
+                                                            <option value="" style="color:#42b979;"><strong>Select City</strong></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row d-flex flex-column flex-md-row">
+                                        <div class="col-md-12 px-2 mb-2" >
+                                            <label for="mobile" class="form-label" style="color:#42b979;"><strong>Mobile Number</strong></label> <span class="text-danger fs-4">*</span>
+                                            <div class="input-group d-flex justify-content-between align-items-center" style="width: 99%">
+                                                <select name="countrySelect" id="countrySelect" class="form-select country-select w-50"  >
+                                                    @foreach ($countriesPhone as $key => $country)
+                                                        <option value="{{ $key }}">{{ $country }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <input type="text" class="form-control w-50" id="phone" name="phone" placeholder="e.g +92XXXXXXXXXX"   style="box-shadow: none;border: 1px solid #aaa;">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 px-2 mb-2 d-none">
+                                            <label for="whatsapp" class="form-label" style="color:#42b979;"><strong>WhatsApp Number</strong></label> <span class="text-danger fs-4">*</span>
+                                            <input type="text" class="form-control" id="whatsapp" name="whatsapp" placeholder="e.g +92XXXXXXXXXX"   style="box-shadow: none;border: 1px solid #aaa;">
+                                        </div>
+                                    </div>
+
+                                    
+                                </div>
+                                <div class="d-none" id="page-3">
+                                <input required type="email" name="c_email" placeholder="*Email" class="inp-1 d-none" readonly >
+
+                                    <div class="form-row d-flex flex-column flex-md-row">
+                                        <div class="col-md-6 px-2 mb-2">
+                                            <label for="profilePicture" class="form-label" style="color:#42b979;"><strong>Profile Picture</strong></label> <span class="text-danger fs-4">*</span>
+                                            <input type="file" class="form-control" id="profilePicture"  
+                                                name="profileImage" style="box-shadow: none;">
+
+
+                                        </div>
+                                        <div class="col-md-6 px-2 mb-2">
+                                            <label for="teaching" class="form-label" style="color:#42b979;"><strong>Available Time</strong></label> <span class="text-danger fs-4">*</span>
+                                            <select class="form-select" id="teaching"   name="availability">
+                                                <option selected>Select Time</option>
+                                                <option value="9:00AM to 10:00AM">9:00AM to 10:00AM</option>
+                                                <option value="10:00AM to 11:00AM">10:00AM to 11:00AM</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 px-2 py-2"><label for="curriculum" class="form-label" style="color:#42b979;"><strong>Description (Optional)</strong></label>
+                                        <textarea class="form-control" id="curriculum" name="curriculum[]" rows="2" placeholder="Add comma after one" style="box-shadow: none;border: 1px solid #aaa;"></textarea>
+                                    </div>
                                 </div>
                             </div>
+                            
+                            <div class="col-12 my-5 d-flex justify-content-center px-5 " style="margin-bottom: 1rem !important;">
 
-                            <div class="form-row d-flex flex-column flex-md-row">
-                                <div class="col-md-6 px-2 mb-2">
-                                    <label for="profilePicture" class="form-label" style="color:#42b979;"><strong>Profile Picture</strong></label> <span class="text-danger fs-4">*</span>
-                                    <input type="file" class="form-control" id="profilePicture"  
-                                        name="profileImage" style="box-shadow: none;">
-
-
-                                </div>
-                                <div class="col-md-6 px-2 mb-2">
-                                    <label for="teaching" class="form-label" style="color:#42b979;"><strong>Available Time</strong></label> <span class="text-danger fs-4">*</span>
-                                    <select class="form-select" id="teaching"   name="availability">
-                                        <option selected>Select Time</option>
-                                        <option value="9:00AM to 10:00AM">9:00AM to 10:00AM</option>
-                                        <option value="10:00AM to 11:00AM">10:00AM to 11:00AM</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-12 px-2 py-2"><label for="curriculum" class="form-label" style="color:#42b979;"><strong>Description (Optional)</strong></label>
-                                <textarea class="form-control" id="curriculum" name="curriculum[]" rows="2" placeholder="Add comma after one" style="box-shadow: none;border: 1px solid #aaa;"></textarea>
-                            </div>
-
-                            <div class="col d-flex justify-content-center py-3">
-                                <button type="submit" class="btn bg_theme_green text-light fw-bold">Submit Form</button>
+                                <input onclick="backStep(this)" id="back-btn" type="button" value="Previous"
+                                    class="border-0 bg-body-secondary text-dark fs-6 py-1 px-4 rounded d-none">
+                                <input onclick="NextStep(this)" id="next-btn" type="button" value="Next"
+                                    class="border-0 bg_theme_green text-light fs-6 py-1 px-4 rounded">
+                                    
                             </div>
 
                         </form>
@@ -351,6 +384,7 @@
 
 @endsection
 @section('js')
+<script src="./js/tutor.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <script>
         $(document).ready(function() {
