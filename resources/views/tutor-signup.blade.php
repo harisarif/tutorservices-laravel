@@ -160,6 +160,19 @@
         .ad-sign{
             background: #42b979;
         }
+        .form-label{
+            display: flex;
+            text-align: justify;
+        }
+        .date-picker-label{
+            display: flex;
+            text-align: justify;
+        }
+        main{
+            background: url(./images/bg_image_1.png), #f1f1f1a0;
+            background-blend-mode: screen;
+            height: 110vh;
+        }
     </style>
 
 @if ($errors->any())
@@ -173,38 +186,28 @@
         </div>
     @endif
     @section('content')
-    <body>
-        <main>
-            <div class="">
-                <div class="row">
-                   
-                    <div class="col-lg-6 ad-sign">
-                        <h2 class="text-white fw-bold pb-2 fs-1 m-2">Register Yourself</h2>
-                        <div class="lline border-bottom"></div>
-                        <div class="form-group d-none" >
-                           
-                                <input type="search" value="English" name="subject" class="form-control" id="page1-search" placeholder="Search" style="height:50px;">
-                            </div>
-                        <ul class="mt-4">
-                            <li class="text-white py-1">Join us today and unlock your potential!</li>
-                            <li class="text-white py-1">Don’t miss out—register now and take the first step towards success</li>
-                            <li class="text-white py-1">Sign up and start your journey to greatness</li>
-                            <li class="text-white py-1">Your future starts here. Register today</li>
-                            <li class="text-white py-1">Success is one click away. Register and thrive</li>
-                            <li class="text-white py-1">Your next big adventure starts here—register today</li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-6 col-sm-4">
+            <header class="main_header d-flex bg-white  py-2 align-items-end justify-content-center">  
+                <a class="arrow" href="https://edexceledu.com">
+                <img style="height: 50px" src="/images/logo.png" alt="EDEXCEL-logo" height="50px">
+                </a>
+            </header>
+            <div class="main-page col-12 bg-white col-md-6 mx-auto p-0 text-center my-4">
+                        <div class="step-form-heading col py-3 bg-success text-center flex-column rounded-top bg-body-secondary">
+                            <h2 class="text-center my-2">Register Now Two Steps Away from Joining</h2>
+                        </div>
+                <div class="row justify-content-center">
+
+                    <div class="col-lg-12 col-sm-4">
                         <div class="col-12 d-flex justify-content-center py-3 border-bottom">
                             <b class="theme_text_green px-2 persentage-num">33%</b>
                             <div class="loading bg-body-secondary my-2">
                                 <div class="percentage bg_theme_green"></div>
                             </div>
                         </div>
-                        <form id="tutorForm"  class="p-3 pages" method="POST" action="{{ route('tutor-create') }}"
-                            enctype="multipart/form-data" >
+                        
+                        <form id="tutorForm"  class="p-3 pages" method="POST" action="{{ route('tutor-create') }}" enctype="multipart/form-data">
                             @csrf
-                            <div style="min-height: 325px;">
+                            <div>
                                 <div id="page-1">
                                     <div class="form-group d-none" >
                            
@@ -221,28 +224,46 @@
                                     <div class="form-row d-flex flex-column flex-md-row">
                                         
                                         <div class="col-md-6 px-2 mb-2">
-                                            <label for="f_name" class="form-label" style="color:#42b979;"><strong>First Name</strong></label> <span class="text-danger fs-4" style="color:#42b979;">*</span>
+                                            <label for="f_name" class="form-label" style="color:#42b979;"><strong>First Name  <span class="text-danger fs-4" style="color:#42b979; ">*</span></strong></label>
                                             <input type="text" class="form-control" id="f_name" name="f_name"   style="box-shadow: none;border: 1px solid #aaa;">
                                         </div>
                                         <div class="col-md-6 px-2 mb-2">
-                                            <label for="l_name" class="form-label" style="color:#42b979;"><strong>Last Name</strong></label> <span class="text-danger fs-4">*</span>
+                                            <label for="l_name" class="form-label" style="color:#42b979;"><strong>Last Name <span class="text-danger fs-4">*</span></strong></label> 
                                             <input type="text" class="form-control" id="l_name" name="l_name"    style="box-shadow: none;border: 1px solid #aaa;">
                                         </div>
                                     </div>
                                     <div class="form-row d-flex flex-column flex-md-row">
                                         <div class="col-md-6 px-2 mb-2">
-                                            <label for="email" class="form-label" style="color:#42b979;"><strong>Email</strong></label> <span class="text-danger fs-4">*</span>
+                                            <label for="email" class="form-label" style="color:#42b979;"><strong>Email <span class="text-danger fs-4">*</span></strong></label> 
                                             <input type="email" class="form-control" id="email" name="email"   style="box-shadow: none;border: 1px solid #aaa;">
                                         </div>
                                         <div class="col-md-6 px-2 mb-2">
-                                            <label for="gender" class="form-label" style="color:#42b979;"><strong>Gender</strong></label> <span class="text-danger fs-4">*</span>
+                                                <label for="" class="form-label" style=" color:#42b979;"><strong> Password <b style="color: red;
+                                                font-size: 20px;">*</b></strong></label>
+                                                <input required type="password" name="password" placeholder="*Password"  class="inp-1"style=" display: flex; width: 100%; flex-direction: column;border-radius: 5px;padding: 6px 8px;margin: 7px 0px;border: 1px solid #aaa" >
+                                        </div>
+                                        <div class="col-md-6 px-2 mb-2" >
+                                            <label for="mobile" class="form-label" style="color:#42b979;"><strong>Mobile Number <span class="text-danger fs-4">*</span></strong></label> 
+                                            <div class="input-group d-flex justify-content-between align-items-center" style="width: 99%">
+                                                <select name="countrySelect" id="countrySelect" class="form-select country-select w-50"  >
+                                                    @foreach ($countriesPhone as $key => $country)
+                                                        <option value="{{ $key }}">{{ $country }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <input type="text" class="form-control w-50" id="phone" name="phone" placeholder="e.g +92XXXXXXXXXX"   style="box-shadow: none;border: 1px solid #aaa;">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 px-2 mb-2">
+                                            <label for="gender" class="form-label" style="color:#42b979;"><strong>Gender  <span class="text-danger fs-4">*</span></strong></label>
                                             <select class="form-select" id="gender" name="gender"  >
                                                 <option value="male">Male</option>
                                                 <option value="female">Female</option>
                                             </select>
                                         </div>
                                     </div>
+                                    
                                     <div class="form-row d-flex flex-column flex-md-row">
+                                       
                                         <div class="col-md-6 px-2 mb-2">
                                             <div class="form-group">
                                                 <label for="datePicker" class="date-picker-label" style="color:#42b979;"><strong>DOB </strong><span class="text-danger fs-4"> *</span></label>
@@ -250,12 +271,16 @@
                         
                             
                                             </div>
-
-
+                                            
                                         </div>
+                                       
+                                        
                                         <div class="col-md-6 px-2 mb-2">
-                                            <label for="qualification" class="form-label" style="color:#42b979;"><strong>Highest Qualifications</strong></label> <span class="text-danger fs-4">*</span>
-                                            <input type="text" class="form-control" id="qualification" name="qualification"   style="box-shadow: none;border: 1px solid #aaa;">
+                                            <label for="profilePicture" class="form-label" style="color:#42b979;"><strong>Profile Picture <span class="text-danger fs-4">*</span></strong></label> 
+                                            <input type="file" class="form-control" id="profilePicture"  
+                                                name="profileImage" style="box-shadow: none;">
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -264,7 +289,26 @@
 
                                     <div class="form-row d-flex flex-column flex-md-row">
                                         <div class="col-md-6 px-2 mb-2">
-                                            <label for="teaching" class="form-label" style="color:#42b979;"><strong>Subject You Can Teach</strong></label> <span class="text-danger fs-4">*</span><br>
+                                            <label for="qualification" class="form-label" style="color:#42b979;"><strong>Highest Qualifications <span class="text-danger fs-4">*</span></strong></label>
+                                            <select class="form-control" id="school_class" name="school_class">
+
+                                            @foreach($schoolClasses as $schoolClass)
+                                            <option value="{{ $schoolClass->id }}">{{ $schoolClass->name }}</option>
+                                            @endforeach
+                                            <option value="">Others</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 px-2 mb-2">
+                                                <label for="profilePicture" class="form-label" style="color:#42b979;"><strong>Add your qualification ducoment <span class="text-danger fs-4">*</span></strong></label> 
+                                                <input type="file" class="form-control" id="profilePicture"  
+                                                name="profileImage" style="box-shadow: none;">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="qualification" class="form-label" style="color:#42b979;"><strong>Courses teaching <span class="text-danger fs-4">*</span></strong></label>
+                                            <input type="text" class="form-control" id="other_qualification_input" name="other_qualification_input" />
+                                        </div>
+                                        <div class="col-md-6 px-2 mb-2">
+                                            <label for="teaching" class="form-label" style="color:#42b979;"><strong>Subject You Can Teaching <span class="text-danger fs-4">*</span></strong></label>
                                             <select class="form-select teaching" id="teaching" name="teaching[]"  >
                                                 <option value="english">English</option>
                                                 <option value="maths">Mathematics</option>
@@ -277,32 +321,45 @@
                                                 <option value="pakstudies">Pak Studies</option>
                                             </select>
                                         </div>
+                                        <div class="col-md-6">
+                                             <label for="teaching" class="form-label" style="color:#42b979;"><strong>Language teaching <span class="text-danger fs-4">*</span></strong></label>
+                                            <input type="text" class="form-control" id="other_qualification_input" name="other_qualification_input" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="other_qualification_input" class="form-label" style="color:#42b979;"><strong>Technology Teaching</strong><span class="text-danger fs-4">*</span></label>
+                                            <input type="text" class="form-control" id="other_qualification_input" name="other_qualification_input" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="other_qualification_input" class="form-label" style="color:#42b979;"><strong>Islamic</strong><span class="text-danger fs-4">*</span></label>
+                                            <input type="text" class="form-control" id="other_qualification_input" name="other_qualification_input" />
+                                        </div>
                                         <div class="col-md-6 px-2 mb-2">
-                                            <label for="experience" class="form-label" style="color:#42b979;"><strong>Experience (in teaching)</strong></label> <span class="text-danger fs-4">*</span>
+                                            <label for="experience" class="form-label" style="color:#42b979;"><strong>Experience (in teaching)  <span class="text-danger fs-4">*</span></strong></label>
                                             <input type="number" min="0" class="form-control" id="experience" name="experience"
                                                 style="box-shadow: none;border: 1px solid #aaa;">
                                         </div>
-                                        <div class="choice col-6 mx-1">
-                                        <h3 class=" pt-3" style=" font-size:16px;color:#42b979;"><strong>Services</strong></h3>
-                                                    <ul class="p-0 d-flex mb-0">
-                                                        <li class="d-flex align-items-center fs-5 py-1">
-                                                            <input class="m-2 d-none chose-subject" type="radio" value="Online Tutor" name="subjects" id="option-1">
-                                                            <label for="option-1" style="font-size:15px;">Online</label>
-                                                        </li>
-                                                        <li class="d-flex align-items-center fs-5 py-1">
-                                                            <input class="m-2 d-none chose-subject" type="radio" value="Tutor for home" name="subjects" id="option-2">
-                                                            <label for="option-2" style="font-size:15px;">Physical</label>
-                                                        </li>
-                                                        <li class="d-flex align-items-center fs-5 py-1">
-                                                            <input class="m-2 d-none chose-subject" type="radio" value="Both" name="subjects" id="option-3">
-                                                            <label for="option-3" style="font-size:15px;">Both</label>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                        <div class="choice col-6">
+                                             <label for="experience" class="form-label" style="color:#42b979;"><strong>How We Can Help<span class="text-danger fs-4">*</span></strong></label>
+                                            <select class="form-select" aria-label="Default select example" style="width: 100% !important;">
+                                                <option value="Online" selected>Online</option>
+                                                <option value="Physical">Physical</option>
+                                                <option value="Both">Both</option>
+                                            </select>
+                                        </div>   
                                     </div>
                                     <div class="form-row d-flex flex-column flex-md-row">
+                                        
+                                        <div class="col-md-6 px-2 mb-2 d-none">
+                                            <label for="whatsapp" class="form-label" style="color:#42b979;"><strong>WhatsApp Number  <span class="text-danger fs-4">*</span></strong></label>
+                                            <input type="text" class="form-control" id="whatsapp" name="whatsapp" placeholder="e.g +92XXXXXXXXXX"   style="box-shadow: none;border: 1px solid #aaa;">
+                                        </div>
+                                    </div>
+
+                                    
+                                </div>
+                                <div class="d-none" id="page-3">
                                         <div class="col-md-6 px-2 mb-2">
-                                            <label for="location" class="form-label " style="color:#42b979;"><strong>Country Residence</strong></label> <span class="text-danger fs-4" style="color:#42b979;">*</span>
+                                            <label for="location" class="form-label " style="color:#42b979;"><strong>Country Residence <span class="text-danger fs-4" style="color:#42b979;">*</span></strong></label> 
                                             </br>
                                             <select name="location" id="location" class="form-select" required style="margin: 0 auto !important; width: 92%; height: 50px;">
                                                     <option value="">Select Country</option>
@@ -312,46 +369,18 @@
                                             </select>
                                         </div>
                                         <div class="col-md-6 px-2 mb-2">
-                                            <label for="city" class="form-label" style="color:#42b979;"><strong>City</strong></label> <span class="text-danger fs-4">*</span>
+                                            <label for="city" class="form-label" style="color:#42b979;"><strong>City <span class="text-danger fs-4">*</span></strong></label> 
                                             <!-- <input type="text" class="form-control" id="city" name="city"   style="box-shadow: none;border: 1px solid #aaa;"> -->
                                             <select name="city" id="city" class="form-select" required style="margin: 0 auto !important; width: 92%; height: 43px;">
                                                             <option value="" style="color:#42b979;"><strong>Select City</strong></option>
                                             </select>
                                         </div>
-                                    </div>
-                                    <div class="form-row d-flex flex-column flex-md-row">
-                                        <div class="col-md-12 px-2 mb-2" >
-                                            <label for="mobile" class="form-label" style="color:#42b979;"><strong>Mobile Number</strong></label> <span class="text-danger fs-4">*</span>
-                                            <div class="input-group d-flex justify-content-between align-items-center" style="width: 99%">
-                                                <select name="countrySelect" id="countrySelect" class="form-select country-select w-50"  >
-                                                    @foreach ($countriesPhone as $key => $country)
-                                                        <option value="{{ $key }}">{{ $country }}</option>
-                                                    @endforeach
-                                                </select>
-                                                <input type="text" class="form-control w-50" id="phone" name="phone" placeholder="e.g +92XXXXXXXXXX"   style="box-shadow: none;border: 1px solid #aaa;">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 px-2 mb-2 d-none">
-                                            <label for="whatsapp" class="form-label" style="color:#42b979;"><strong>WhatsApp Number</strong></label> <span class="text-danger fs-4">*</span>
-                                            <input type="text" class="form-control" id="whatsapp" name="whatsapp" placeholder="e.g +92XXXXXXXXXX"   style="box-shadow: none;border: 1px solid #aaa;">
-                                        </div>
-                                    </div>
-
-                                    
-                                </div>
-                                <div class="d-none" id="page-3">
-                                <input required type="email" name="c_email" placeholder="*Email" class="inp-1 d-none" readonly >
+                                    <input required type="email" name="c_email" placeholder="*Email" class="inp-1 d-none" readonly >
 
                                     <div class="form-row d-flex flex-column flex-md-row">
+                                        
                                         <div class="col-md-6 px-2 mb-2">
-                                            <label for="profilePicture" class="form-label" style="color:#42b979;"><strong>Profile Picture</strong></label> <span class="text-danger fs-4">*</span>
-                                            <input type="file" class="form-control" id="profilePicture"  
-                                                name="profileImage" style="box-shadow: none;">
-
-
-                                        </div>
-                                        <div class="col-md-6 px-2 mb-2">
-                                            <label for="teaching" class="form-label" style="color:#42b979;"><strong>Available Time</strong></label> <span class="text-danger fs-4">*</span>
+                                            <label for="teaching" class="form-label" style="color:#42b979;"><strong>Available Time <span class="text-danger fs-4">*</span></strong></label> 
                                             <select class="form-select" id="teaching"   name="availability">
                                                 <option selected>Select Time</option>
                                                 <option value="9:00AM to 10:00AM">9:00AM to 10:00AM</option>
@@ -365,7 +394,7 @@
                                 </div>
                             </div>
                             
-                            <div class="col-12 my-5 d-flex justify-content-center px-5 " style="margin-bottom: 1rem !important;">
+                            <div class="col-12 my-2 d-flex justify-content-center px-5 " style="margin-bottom: 1rem !important;">
 
                                 <input onclick="backStep(this)" id="back-btn" type="button" value="Previous"
                                     class="border-0 bg-body-secondary text-dark fs-6 py-1 px-4 rounded d-none">
@@ -378,9 +407,8 @@
                     </div>
                 </div> 
             </div>
-        </main>
           
-    </body>
+
 
 @endsection
 @section('js')
