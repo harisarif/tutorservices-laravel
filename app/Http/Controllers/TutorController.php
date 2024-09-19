@@ -18,7 +18,7 @@ class TutorController extends Controller
     public function index(Request $request)
         {
 
-            $query = Tutor::query();           
+            $query = Tutor::where('status', 'active');           
 
             $perPage = 5; // Define the number of tutors per page
 
@@ -142,7 +142,22 @@ class TutorController extends Controller
             // Return the serialized data as JSON response
             return response()->json($serializedData);
         }
-        
+        public function updateStatus(Request $request)
+        {
+            $tutor = Tutor::find($request->id);
+            
+            if ($tutor) {
+                // Update status
+                $tutor->status = $request->status;
+                $tutor->save();
+
+                return response()->json(['success' => 'Status updated successfully']);
+            }
+
+            return response()->json(['error' => 'Tutor not found'], 404);
+        }
+
+
 
 
     public function store(Request $request)
