@@ -1,4 +1,4 @@
-
+ 
 @extends('layouts.app')
 <!-- aos animation link -->
 
@@ -154,12 +154,6 @@
             --bs-gutter-x: 0rem !important;
             justify-content: space-between;
         }
-        .ad-heading h2{
-            color: #42b979;
-        }
-        .ad-sign{
-            background: #42b979;
-        }
         .form-label{
             display: flex;
             text-align: justify;
@@ -167,11 +161,26 @@
         .date-picker-label{
             display: flex;
             text-align: justify;
+            align-items: center;
         }
         main{
             background: url(./images/bg_image_1.png), #f1f1f1a0;
             background-blend-mode: screen;
             height: 110vh;
+        }
+        .step-form-heading h2{
+            color: #42b979;
+        }
+        SELECT{
+          padding: 5px;
+          border: none;
+        }
+        .ad-dob{
+            border: 1px solid #ddd;
+            padding: 3px 0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
         }
     </style>
 
@@ -191,12 +200,14 @@
                 <img style="height: 50px" src="/images/logo.png" alt="EDEXCEL-logo" height="50px">
                 </a>
             </header>
-            <div class="main-page col-12 bg-white col-md-6 mx-auto p-0 text-center my-4">
-                        <div class="step-form-heading col py-3 bg-success text-center flex-column rounded-top bg-body-secondary">
+            <div class="main-page col-12 bg-white col-md-6 mx-auto p-0 text-center my-2">
+                        <div class="step-form-heading col py-2 bg-success text-center flex-column rounded-top bg-body-secondary">
                             <h2 class="text-center my-2">Register Now Two Steps Away from Joining</h2>
+                            <div class="ad-heading">
+                                    <h3 style="text-align: center;color: red; padding: 10px; font-size: 15px;"><b><i>Please fill all mandatory fields</i></b></h3>
+                            </div>
                         </div>
                 <div class="row justify-content-center">
-
                     <div class="col-lg-12 col-sm-4">
                         <div class="col-12 d-flex justify-content-center py-3 border-bottom">
                             <b class="theme_text_green px-2 persentage-num">33%</b>
@@ -205,22 +216,14 @@
                             </div>
                         </div>
                         
-                        <form id="tutorForm"  class="p-3 pages" method="POST" action="{{ route('tutor-create') }}" enctype="multipart/form-data">
+                        <form id="tutorForm"  class="p-3 pages" method="POST" action="{{ route('tutor-create') }}" enctype="multipart/form-data" >
                             @csrf
                             <div>
                                 <div id="page-1">
                                     <div class="form-group d-none" >
                            
-                                <input type="search" value="English" name="subject" class="form-control" id="page1-search" placeholder="Search" style="height:50px;">
-                            </div>
-                            <ul class="list-group d-none" id="searchList">
-                                <li onclick="page1List(this)" class="list-group-item text-start">English</li>
-                                <li onclick="page1List(this)" class="list-group-item text-start">Mathematics</li>
-                                <li onclick="page1List(this)" class="list-group-item text-start">Physics</li>
-                                <li onclick="page1List(this)" class="list-group-item text-start">Chemistry</li>
-                                <li onclick="page1List(this)" class="list-group-item text-start">Urdu</li>
-                            </ul>
-                                
+                                     <input type="search" value="English" name="subject" class="form-control" id="page1-search" placeholder="Search" style="height:50px;">
+                                </div>
                                     <div class="form-row d-flex flex-column flex-md-row">
                                         
                                         <div class="col-md-6 px-2 mb-2">
@@ -267,9 +270,14 @@
                                         <div class="col-md-6 px-2 mb-2">
                                             <div class="form-group">
                                                 <label for="datePicker" class="date-picker-label" style="color:#42b979;"><strong>DOB </strong><span class="text-danger fs-4"> *</span></label>
-                                                    <input type="date" id="datePicker" class="date-picker-input" name="dob">
-                        
-                            
+                                                <div class="ad-dob">
+                                                    <SELECT id ="year" name = "yyyy" onchange="change_year(this)">
+                                                    </SELECT>
+                                                    <SELECT  id ="month" name = "mm" onchange="change_month(this)">
+                                                    </SELECT>
+                                                    <SELECT id ="day" name = "dd" >
+                                                    </SELECT> 
+                                                </div>
                                             </div>
                                             
                                         </div>
@@ -322,6 +330,10 @@
                                             </select>
                                         </div>
                                         <div class="col-md-6">
+                                             <label for="teaching" class="form-label" style="color:#42b979;"><strong>Language Proifient<span class="text-danger fs-4">*</span></strong></label>
+                                            <input type="text" class="form-control" id="other_qualification_input" name="other_qualification_input" />
+                                        </div>
+                                        <div class="col-md-6">
                                              <label for="teaching" class="form-label" style="color:#42b979;"><strong>Language teaching <span class="text-danger fs-4">*</span></strong></label>
                                             <input type="text" class="form-control" id="other_qualification_input" name="other_qualification_input" />
                                         </div>
@@ -330,7 +342,7 @@
                                             <input type="text" class="form-control" id="other_qualification_input" name="other_qualification_input" />
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="other_qualification_input" class="form-label" style="color:#42b979;"><strong>Islamic</strong><span class="text-danger fs-4">*</span></label>
+                                            <label for="other_qualification_input" class="form-label" style="color:#42b979;"><strong>Islamic teaching</strong><span class="text-danger fs-4">*</span></label>
                                             <input type="text" class="form-control" id="other_qualification_input" name="other_qualification_input" />
                                         </div>
                                         <div class="col-md-6 px-2 mb-2">
@@ -358,33 +370,36 @@
                                     
                                 </div>
                                 <div class="d-none" id="page-3">
-                                        <div class="col-md-6 px-2 mb-2">
-                                            <label for="location" class="form-label " style="color:#42b979;"><strong>Country Residence <span class="text-danger fs-4" style="color:#42b979;">*</span></strong></label> 
-                                            </br>
-                                            <select name="location" id="location" class="form-select" required style="margin: 0 auto !important; width: 92%; height: 50px;">
-                                                    <option value="">Select Country</option>
-                                                        @foreach($countries as $code => $country)
-                                                            <option value="{{ $code }}">{{ $country }}</option>
-                                                        @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6 px-2 mb-2">
-                                            <label for="city" class="form-label" style="color:#42b979;"><strong>City <span class="text-danger fs-4">*</span></strong></label> 
-                                            <!-- <input type="text" class="form-control" id="city" name="city"   style="box-shadow: none;border: 1px solid #aaa;"> -->
-                                            <select name="city" id="city" class="form-select" required style="margin: 0 auto !important; width: 92%; height: 43px;">
-                                                            <option value="" style="color:#42b979;"><strong>Select City</strong></option>
-                                            </select>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-2">
+                                                <label for="location" class="form-label " style="color:#42b979;"><strong>Country Residence <span class="text-danger fs-4" style="color:#42b979;">*</span></strong></label>
+                                                <select name="location" id="location" class="form-select " required style="margin: 0 auto !important; width: 100%; height: 50px;">
+                                                        <option value="" class="text-justify">Select Country</option>
+                                                            @foreach($countries as $code => $country)
+                                                                <option value="{{ $code }}">{{ $country }}</option>
+                                                            @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 px-2 mb-2">
+                                                <label for="city" class="form-label" style="color:#42b979;"><strong>City <span class="text-danger fs-4">*</span></strong></label> 
+                                                <select name="city" id="city" class="form-select" required >
+                                                    <option value="" style="color:#42b979;"><strong>Select City</strong></option>
+                                                </select>
+                                            </div>
                                         </div>
                                     <input required type="email" name="c_email" placeholder="*Email" class="inp-1 d-none" readonly >
 
                                     <div class="form-row d-flex flex-column flex-md-row">
                                         
-                                        <div class="col-md-6 px-2 mb-2">
+                                        <div class="col-md-12 px-2 mb-2">
                                             <label for="teaching" class="form-label" style="color:#42b979;"><strong>Available Time <span class="text-danger fs-4">*</span></strong></label> 
                                             <select class="form-select" id="teaching"   name="availability">
                                                 <option selected>Select Time</option>
                                                 <option value="9:00AM to 10:00AM">9:00AM to 10:00AM</option>
                                                 <option value="10:00AM to 11:00AM">10:00AM to 11:00AM</option>
+                                                <option value="10:00AM to 11:00AM">12:00pm to 1:00pm</option>
+                                                <option value="10:00AM to 11:00AM">5:00pm to 6:00pm</option>
+                                                <option value="10:00AM to 11:00AM">7:00pm to 8:00pm</option>
                                             </select>
                                         </div>
                                     </div>
@@ -394,7 +409,7 @@
                                 </div>
                             </div>
                             
-                            <div class="col-12 my-2 d-flex justify-content-center px-5 " style="margin-bottom: 1rem !important;">
+                            <div class="col-12 my-2 d-flex justify-content-center px-5 " style="margin-bottom: 1rem !important;  ">
 
                                 <input onclick="backStep(this)" id="back-btn" type="button" value="Previous"
                                     class="border-0 bg-body-secondary text-dark fs-6 py-1 px-4 rounded d-none">
@@ -525,6 +540,82 @@
         var close = document.getElementById("close");
         close.style.display = "none";
     }
+// date of birth\
+var Days = [31,28,31,30,31,30,31,31,30,31,30,31];// index => month [0-11]
+$(document).ready(function(){
+    var option = '<option value="day">day</option>';
+    var selectedDay="day";
+    for (var i=1;i <= Days[0];i++){ //add option days
+        option += '<option value="'+ i + '">' + i + '</option>';
+    }
+    $('#day').append(option);
+    $('#day').val(selectedDay);
+
+    var option = '<option value="month">month</option>';
+    var selectedMon ="month";
+    for (var i=1;i <= 12;i++){
+        option += '<option value="'+ i + '">' + i + '</option>';
+    }
+    $('#month').append(option);
+    $('#month').val(selectedMon);
+
+    var option = '<option value="month">month</option>';
+    var selectedMon ="month";
+    for (var i=1;i <= 12;i++){
+        option += '<option value="'+ i + '">' + i + '</option>';
+    }
+    $('#month2').append(option);
+    $('#month2').val(selectedMon);
+  
+    var d = new Date();
+    var option = '<option value="year">year</option>';
+    selectedYear ="year";
+    for (var i=1970;i <= (d.getFullYear() + 10);i++){// years start i
+        option += '<option value="'+ i + '">' + i + '</option>';
+    }
+    $('#year').append(option);
+    $('#year').val(selectedYear);
+});
+function isLeapYear(year) {
+    year = parseInt(year);
+    if (year % 4 != 0) {
+	      return false;
+	  } else if (year % 400 == 0) {
+	      return true;
+	  } else if (year % 100 == 0) {
+	      return false;
+	  } else {
+	      return true;
+	  }
+}
+
+function change_year(select)
+{
+    if( isLeapYear( $(select).val() ) )
+	  {
+		    Days[1] = 29;
+		    
+    }
+    else {
+        Days[1] = 28;
+    }
+    if( $("#month").val() == 2)
+		    {
+			       var day = $('#day');
+			       var val = $(day).val();
+			       $(day).empty();
+			       var option = '<option value="day">day</option>';
+			       for (var i=1;i <= Days[1];i++){ //add option days
+				         option += '<option value="'+ i + '">' + i + '</option>';
+             }
+			       $(day).append(option);
+			       if( val > Days[ month ] )
+			       {
+				          val = 1;
+			       }
+			       $(day).val(val);
+		     }
+  } 
 </script>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
