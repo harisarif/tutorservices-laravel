@@ -450,6 +450,9 @@
                                         
                                     <div id="tutorsContainer">
                                         @foreach ($tutors as $item)
+                                        @if($item->status !='inactive')
+
+                                       
                                         <div class="ad-form">
                                             <div class="ad-img-card d-flex">
                                                 <div class="MD col-lg-9 col-sm-5">
@@ -737,6 +740,8 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        
+                                        @endif
                                         @endforeach
                                     </div>
                                     <!-- Display pagination links -->

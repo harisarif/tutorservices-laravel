@@ -47,6 +47,7 @@ Route::get('/tutor-signup', [TutorController::class, 'signup'])->name('tutor');
 Route::get('/hire-tutor', [StudentController::class, 'index'])->name('hire.tutor');
 Route::get('/faq', [StudentController::class, 'FAQ'])->name('faq.index');
 Route::get('/cities', [StudentController::class, 'getCities'])->name('cities');
+Route::post('/update-tutor-status', [TutorController::class, 'updateStatus'])->name('update.tutor.status');
 
 Route::get('/policy', [StudentController::class, 'privacyPolicy'])->name('policy.index');
 Route::get('/terms', [StudentController::class, 'termsCondition'])->name('terms.condition');

@@ -40,6 +40,7 @@
         }
      </style>
     {{-- <h1>All Teachers</h1> --}}
+    <div id="statusMessage" style="display:none;" class="alert alert-success"></div>
     <div class=" AB-sb">
         <table class="table teachers-table">
             <thead>
@@ -77,9 +78,12 @@
                 <td>{{ $tutor->phone }}</td>
                 <!-- Toggle Switch -->
                 <td>
-                    <input type="checkbox" hidden="hidden" id="toggle-{{ $tutor->id }}">
+                    <input type="checkbox" hidden="hidden" id="toggle-{{ $tutor->id }}" 
+                        onchange="updateStatus({{ $tutor->id }}, this.checked)"
+                        {{ $tutor->status === 'active' ? 'checked' : '' }}>
                     <label class="switch" for="toggle-{{ $tutor->id }}"></label>
                 </td>
+
                 <td>
                     <a href="{{ route('edit-teacher', $tutor->id) }}" class="btn btn-sm btn-primary">
                         <i class="fa-regular fa-pen-to-square"></i>
@@ -97,5 +101,28 @@
             </tbody>
         </table>
     </div>
-    
+    <script>
+        function updateStatus(tutorId, status) {
+        $.ajax({
+            url: '{{ route('update.tutor.status') }}', // Define your route
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}', // Add CSRF token for security
+                id: tutorId,
+                status: status ? 'active' : 'inactive' // Set status based on switch state
+            },
+            success: function(response) {
+                $('#statusMessage').text('Status updated successfully!').show();
+
+                // Hide the message after 3 seconds
+                setTimeout(function() {
+                    $('#statusMessage').fadeOut();
+                }, 3000);
+            },
+            error: function(xhr) {
+                console.error('Error updating status');
+            }
+        });
+    }
+    </script>
     

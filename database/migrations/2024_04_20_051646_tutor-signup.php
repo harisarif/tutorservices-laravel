@@ -27,8 +27,8 @@ return new class extends Migration
             $table->string('availability');
             $table->string('profileImage');
             $table->string('phone', 20);
-            $table->string('whatsapp', 20);
             $table->date('dob');
+            $table->string('status')->default('inactive');
             $table->timestamps();
         });
     }
