@@ -157,6 +157,7 @@
         .form-label{
             display: flex;
             text-align: justify;
+            align-items: center;
         }
         .date-picker-label{
             display: flex;
@@ -181,6 +182,12 @@
             display: flex;
             justify-content: space-between;
         }
+        .footer-bottom{
+            padding: 5px 0;
+        }
+        .pg-1-heading h3{
+            color: #42b979;
+        }
     </style>
 
 @if ($errors->any())
@@ -200,25 +207,30 @@
                 </a>
             </header>
             <div class="main-page col-12 bg-white col-md-6 mx-auto p-0 text-center my-2">
-                        <div class="step-form-heading col py-2 bg-success text-center flex-column rounded-top bg-body-secondary">
-                            <h2 class="text-center my-2">Register Now Two Steps Away from Joining</h2>
-                            <div class="ad-heading">
-                                    <h3 style="text-align: center;color: red; padding: 10px; font-size: 15px;"><b><i>Please fill all mandatory fields</i></b></h3>
-                            </div>
-                        </div>
+                       
                 <div class="row justify-content-center">
                     <div class="col-lg-12 col-sm-4">
-                        <div class="col-12 d-flex justify-content-center py-3 border-bottom">
-                            <b class="theme_text_green px-2 persentage-num">33%</b>
-                            <div class="loading bg-body-secondary my-2">
-                                <div class="percentage bg_theme_green"></div>
-                            </div>
-                        </div>
                         
-                        <form id="tutorForm"  class="p-3 pages" method="POST" action="{{ route('tutor-create') }}" enctype="multipart/form-data" >
+                        
+                        <form id="tutorForm"  class=" pages" method="POST" action="{{ route('tutor-create') }}" enctype="multipart/form-data" >
+                                    <div class="step-form-heading col py-2 bg-success text-center flex-column rounded-top bg-body-secondary">
+                                    <h2 class="text-center my-2">Register Now</h2>
+                                    <div class="ad-heading">
+                                        <h3 style="text-align: center;color: red; padding: 10px; font-size: 15px;"><b><i>Please fill all mandatory fields</i></b></h3>
+                                    </div>
+                                </div>
+                                <div class="col-12 d-flex justify-content-center py-3 border-bottom">
+                                    <b class="theme_text_green px-2 persentage-num">33%</b>
+                                    <div class="loading bg-body-secondary my-2">
+                                        <div class="percentage bg_theme_green"></div>
+                                    </div>
+                                </div>
                             @csrf
                             <div>
-                                <div id="page-1">
+                                <div id="page-1" class="mx-3">
+                                    <div class="pg-1-heading">
+                                        <h3 class="fs-5 fw-bold py-3">You have three steps to join your jurney</h3>
+                                    </div>
                                     <div class="form-group d-none" >
                            
                                      <input type="search" value="English" name="subject" class="form-control" id="page1-search" placeholder="Search" style="height:50px;">
@@ -242,7 +254,12 @@
                                         <div class="col-md-6 px-2 mb-2">
                                                 <label for="" class="form-label" style=" color:#42b979;"><strong> Password <b style="color: red;
                                                 font-size: 20px;">*</b></strong></label>
-                                                <input required type="password" name="password" placeholder="*Password"  class="inp-1"style=" display: flex; width: 100%; flex-direction: column;border-radius: 5px;padding: 6px 8px;margin: 7px 0px;border: 1px solid #aaa" >
+                                                <input required type="password" name="password" placeholder="*Password"  class="inp-1"style=" width: 100%; flex-direction: column;border-radius: 5px;padding: 5px 8px;margin: 7px 0px;border: 1px solid #aaa" >
+                                        </div>
+                                        <div class="col-md-6 px-2 mb-2">
+                                                <label for="" class="form-label" style=" color:#42b979;"><strong>Confirm password <b style="color: red;
+                                                font-size: 20px;">*</b></strong></label>
+                                                <input required="" type="password" name="c_password" placeholder="*Confirm Password" class="inp-1" style=" display: flex; width: 100%; flex-direction: column; border-radius: 5px; padding: 5px 8px;margin: 16px 0px; border: 1px solid rgb(201, 197, 197);">
                                         </div>
                                         <div class="col-md-6 px-2 mb-2" >
                                             <label for="mobile" class="form-label" style="color:#42b979;"><strong>Mobile Number <span class="text-danger fs-4">*</span></strong></label> 
@@ -262,13 +279,9 @@
                                                 <option value="female">Female</option>
                                             </select>
                                         </div>
-                                    </div>
-                                    
-                                    <div class="form-row d-flex flex-column flex-md-row">
-                                       
                                         <div class="col-md-6 px-2 mb-2">
                                             <div class="form-group">
-                                                <label for="datePicker" class="date-picker-label" style="color:#42b979;"><strong>DOB </strong><span class="text-danger fs-4"> *</span></label>
+                                                <label for="datePicker" class="date-picker-label" style="color:#42b979;"><strong>Date of birth </strong><span class="text-danger fs-4"> *</span></label>
                                                 <div class="ad-dob">
                                                     <SELECT id ="year" name = "yyyy" onchange="change_year(this)">
                                                     </SELECT>
@@ -280,7 +293,19 @@
                                             </div>
                                             
                                         </div>
+                                    </div>
+                                    
+                                    <div class="form-row d-flex flex-column flex-md-row">
                                        
+                                        
+                                        <div class="choice col-6">
+                                             <label for="experience" class="form-label" style="color:#42b979;"><strong>How We Can Help<span class="text-danger fs-4">*</span></strong></label>
+                                            <select class="form-select" aria-label="Default select example" style="width: 100% !important;">
+                                                <option value="Online" selected>Online</option>
+                                                <option value="Physical">Physical</option>
+                                                <option value="Both">Both</option>
+                                            </select>
+                                        </div> 
                                         
                                         <div class="col-md-6 px-2 mb-2">
                                             <label for="profilePicture" class="form-label" style="color:#42b979;"><strong>Profile Picture <span class="text-danger fs-4">*</span></strong></label> 
@@ -291,9 +316,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="d-none" id="page-2">
-                                
-
+                                <div class="d-none px-3" id="page-2">
+                                    <div class="pg-1-heading">
+                                        <h3 class="fs-5 fw-bold py-3">You have two steps to join your jurney</h3>
+                                    </div>
                                     <div class="form-row d-flex flex-column flex-md-row">
                                         <div class="col-md-6 px-2 mb-2">
                                             <label for="qualification" class="form-label" style="color:#42b979;"><strong>Highest Qualifications <span class="text-danger fs-4">*</span></strong></label>
@@ -306,16 +332,16 @@
                                             </select>
                                         </div>
                                         <div class="col-md-6 px-2 mb-2">
-                                                <label for="profilePicture" class="form-label" style="color:#42b979;"><strong>Add your qualification ducoment <span class="text-danger fs-4">*</span></strong></label> 
+                                                <label for="profilePicture" class="form-label" style="color:#42b979;"><strong>Add your qualification document <span class="text-danger fs-4">*</span></strong></label> 
                                                 <input type="file" class="form-control" id="profilePicture"  
                                                 name="profileImage" style="box-shadow: none;">
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="qualification" class="form-label" style="color:#42b979;"><strong>Courses teaching <span class="text-danger fs-4">*</span></strong></label>
+                                            <label for="qualification" class="form-label" style="color:#42b979;"><strong>Courses Teaching <span class="text-danger fs-4">*</span></strong></label>
                                             <input type="text" class="form-control" id="other_qualification_input" name="other_qualification_input" />
                                         </div>
                                         <div class="col-md-6 px-2 mb-2">
-                                            <label for="teaching" class="form-label" style="color:#42b979;"><strong>Subject You Can Teaching <span class="text-danger fs-4">*</span></strong></label>
+                                            <label for="teaching" class="form-label" style="color:#42b979;"><strong>Subject You Can Teach <span class="text-danger fs-4">*</span></strong></label>
                                             <select class="form-select teaching" id="teaching" name="teaching[]"  >
                                                 <option value="english">English</option>
                                                 <option value="maths">Mathematics</option>
@@ -333,7 +359,11 @@
                                             <input type="text" class="form-control" id="other_qualification_input" name="other_qualification_input" />
                                         </div>
                                         <div class="col-md-6">
-                                             <label for="teaching" class="form-label" style="color:#42b979;"><strong>Language teaching <span class="text-danger fs-4">*</span></strong></label>
+                                             <label for="teaching" class="form-label" style="color:#42b979;"><strong>Language Teaching <span class="text-danger fs-4">*</span></strong></label>
+                                            <input type="text" class="form-control" id="other_qualification_input" name="other_qualification_input" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="qualification" class="form-label" style="color:#42b979;"><strong>Educational Teaching <span class="text-danger fs-4">*</span></strong></label>
                                             <input type="text" class="form-control" id="other_qualification_input" name="other_qualification_input" />
                                         </div>
                                         <div class="col-md-6">
@@ -341,7 +371,7 @@
                                             <input type="text" class="form-control" id="other_qualification_input" name="other_qualification_input" />
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="other_qualification_input" class="form-label" style="color:#42b979;"><strong>Islamic teaching</strong><span class="text-danger fs-4">*</span></label>
+                                            <label for="other_qualification_input" class="form-label" style="color:#42b979;"><strong>Islamic Teaching</strong><span class="text-danger fs-4">*</span></label>
                                             <input type="text" class="form-control" id="other_qualification_input" name="other_qualification_input" />
                                         </div>
                                         <div class="col-md-6 px-2 mb-2">
@@ -349,14 +379,7 @@
                                             <input type="number" min="0" class="form-control" id="experience" name="experience"
                                                 style="box-shadow: none;border: 1px solid #aaa;">
                                         </div>
-                                        <div class="choice col-6">
-                                             <label for="experience" class="form-label" style="color:#42b979;"><strong>How We Can Help<span class="text-danger fs-4">*</span></strong></label>
-                                            <select class="form-select" aria-label="Default select example" style="width: 100% !important;">
-                                                <option value="Online" selected>Online</option>
-                                                <option value="Physical">Physical</option>
-                                                <option value="Both">Both</option>
-                                            </select>
-                                        </div>   
+                                          
                                     </div>
                                     <div class="form-row d-flex flex-column flex-md-row">
                                         
@@ -368,7 +391,10 @@
 
                                     
                                 </div>
-                                <div class="d-none" id="page-3">
+                                <div class="d-none mx-3" id="page-3">
+                                    <div class="pg-1-heading">
+                                        <h3 class="fs-5 fw-bold py-3">Your registration complete know join your jurney</h3>
+                                    </div>
                                         <div class="row">
                                             <div class="col-md-6 mb-2">
                                                 <label for="location" class="form-label " style="color:#42b979;"><strong>Country Residence <span class="text-danger fs-4" style="color:#42b979;">*</span></strong></label>
@@ -408,7 +434,7 @@
                                 </div>
                             </div>
                             
-                            <div class="col-12 my-2 d-flex justify-content-center px-5 " style="margin-bottom: 1rem !important;  ">
+                            <div class="col-12 my-4 d-flex justify-content-center" style="margin-bottom: 1rem !important;  ">
 
                                 <input onclick="backStep(this)" id="back-btn" type="button" value="Previous"
                                     class="border-0 bg-body-secondary text-dark fs-6 py-1 px-4 rounded d-none">
@@ -486,7 +512,7 @@
       // Initialize Select2
       $('#countrySelect').select2();
 
-      const defaultCountry = 'US';
+      const defaultCountry = 'AE';
       const countriesPrefix = @json($countries_prefix);
       const countriesNumberLength = @json($countries_number_length);
       let countryValue = defaultCountry;
