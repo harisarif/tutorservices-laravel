@@ -166,7 +166,6 @@
         main{
             background: url(./images/bg_image_1.png), #f1f1f1a0;
             background-blend-mode: screen;
-            height: 110vh;
         }
         .step-form-heading h2{
             color: #42b979;
