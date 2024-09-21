@@ -49,6 +49,7 @@ Route::get('/faq', [StudentController::class, 'FAQ'])->name('faq.index');
 Route::get('/cities', [StudentController::class, 'getCities'])->name('cities');
 Route::post('/update-tutor-status', [TutorController::class, 'updateStatus'])->name('update.tutor.status');
 Route::delete('/teachers/destroy-bulk', [TutorController::class, 'destroyBulk'])->name('teachers.destroy.bulk');
+Route::delete('/student/destroy-bulk', [StudentController::class, 'destroystudentBulk'])->name('student.destroy.bulk');
 
 Route::get('/policy', [StudentController::class, 'privacyPolicy'])->name('policy.index');
 Route::get('/terms', [StudentController::class, 'termsCondition'])->name('terms.condition');

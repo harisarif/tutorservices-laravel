@@ -19,33 +19,42 @@ const NextStep = (button) => {
     //set email to create account
     sEmail[1].value = sEmail[0].value;
 
-    if (stepCounter == 3) {
-        button.type = 'submit'
+    if (stepCounter === 3) {
+        button.type = 'submit';  // Make the button a submit button only on step 3
+        return;  // End the function since you're on the last step
     }
-    if (firstPageSearch.value != '' && firstPageSearch.value != ' ') {
-        if (stepCounter == 1) {
-            backBtn.classList.remove('d-none')
-        }
-        if (stepCounter < 3) {
-            // alert('dfds')
-            step = document.getElementById('page-' + stepCounter);
-            step.classList.add('d-none')
-            secondStep = document.getElementById('page-' + (stepCounter + 1))
-            secondStep.classList.remove('d-none')
-            stepCounter++
-            stepPersentage.style.width = (persentage + 100/3) + '%';
-            persentage_num.innerHTML = ((persentage + 100 / 3).toFixed(0)) + '%';
 
-            // alert(persentage_num.innerHTML)
+    // Check if the first page search input is not empty or just spaces
+    if (firstPageSearch.value.trim() !== '') {
+        if (stepCounter === 1) {
+            backBtn.classList.remove('d-none');
+        }
+
+        if (stepCounter < 3) {
+            // Hide the current step
+            const currentStep = document.getElementById('page-' + stepCounter);
+            currentStep.classList.add('d-none');
+
+            // Show the next step
+            const nextStep = document.getElementById('page-' + (stepCounter + 1));
+            nextStep.classList.remove('d-none');
+            
+            stepCounter++;
+
+            // Update the progress bar and percentage
+            persentage += 100 / 3;
+            stepPersentage.style.width = persentage + '%';
+            persentage_num.innerHTML = persentage.toFixed(0) + '%';
+
+            // Adjust the button layout
             button.parentElement.classList.remove('justify-content-center');
             button.parentElement.classList.add('justify-content-between');
-            // console.log(persentage);
-            persentage = persentage + 100/3;
-            
-            if (stepCounter == 3) {
-                button.type = 'submit'
-                button.value = 'Submit'
-                // console.log(stepCounter);
+
+            // When on step 3, change button type to 'submit' and update button text
+            if (stepCounter === 3) {
+                event.preventDefault();
+                button.type = 'submit';  // Make button a submit button on step 3
+                button.value = 'Submit'; // Change button text to 'Submit'
             }
         }
     }

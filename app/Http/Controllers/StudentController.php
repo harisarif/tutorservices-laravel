@@ -25,6 +25,17 @@ class StudentController extends Controller
         $countries_prefix = collect(config('countries_prefix.countries'));
         return view('hire-tutor', compact('countriesPhone','countries','schoolClasses','countries_prefix','countries_number_length'));
     }
+    public function destroystudentBulk(Request $request){
+                $request->validate([
+                    'ids' => 'required|array',
+                    'ids.*' => 'exists:student,id', // Assuming 'tutors' is your table name
+                ]);
+
+                // Delete the selected tutors
+                Student::destroy($request->ids);
+
+                return response()->json(['success' => 'Students deleted successfully.']);
+            }
     public function getCities(Request $request)
     {
         $countryCode = $request->query('country');
