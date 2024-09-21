@@ -32,7 +32,7 @@ use App\Http\Controllers\LanguageController;
 |
 */
 Route::get('lang/{locale}', function ($locale) {
-    if (in_array($locale, ['en', 'ar'])) { // Only 'en' and 'ar' for English and Arabic
+    if (in_array($locale, ['en', 'ar','rs','ch'])) { // Only 'en' and 'ar' for English and Arabic
         session(['locale' => $locale]);
     }
     return redirect()->back();

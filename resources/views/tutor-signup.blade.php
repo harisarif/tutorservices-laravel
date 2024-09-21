@@ -188,6 +188,9 @@
         .pg-1-heading h3{
             color: #42b979;
         }
+        .select2 {
+            width: 100% !important;
+        }
     </style>
 
 @if ($errors->any())
@@ -421,11 +424,15 @@
                                             <label for="teaching" class="form-label" style="color:#42b979;"><strong>Available Time <span class="text-danger fs-4">*</span></strong></label> 
                                             <select class="form-select" id="teaching"   name="availability">
                                                 <option selected>Select Time</option>
-                                                <option value="9:00AM to 10:00AM">9:00AM to 10:00AM</option>
-                                                <option value="10:00AM to 11:00AM">10:00AM to 11:00AM</option>
-                                                <option value="10:00AM to 11:00AM">12:00pm to 1:00pm</option>
-                                                <option value="10:00AM to 11:00AM">5:00pm to 6:00pm</option>
-                                                <option value="10:00AM to 11:00AM">7:00pm to 8:00pm</option>
+                                                <option value="9:00AM to 10:00AM">6:00AM to 7:00AM</option>
+                                                <option value="10:00AM to 11:00AM">8:00AM to 9:00AM</option>
+                                                <option value="10:00AM to 11:00AM">10:00Am to 11:00Am</option>
+                                                <option value="10:00AM to 11:00AM">12:00PM to 1:00PM</option>
+                                                <option value="10:00AM to 11:00AM">2:00PM to 3:00PM</option>
+                                                <option value="10:00AM to 11:00AM">4:00PM to 5:00PM</option>
+                                                <option value="10:00AM to 11:00AM">6:00PM to 7:00PM</option>
+                                                <option value="10:00AM to 11:00AM">8:00PM to 9:00PM</option>
+                                                <option value="10:00AM to 11:00AM">10:00PM to 11:00PM</option>
                                             </select>
                                         </div>
                                     </div>
@@ -458,6 +465,9 @@
     <script>
         $(document).ready(function() {
             $('#location').select2();
+            $('#city').select2();
+            $('#school_class').select2();
+            $('#teaching').select2();
             $('.teaching').select2({
                 multiple: true
                 });
