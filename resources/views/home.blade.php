@@ -580,11 +580,7 @@
                         <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab" >
                             <div class="d-sm-flex align-items-center justify-content-between mb-4 SB">
                                 <h1 class="h3 mb-0 text-gray-800">{{ __('messages.Student') }}</h1>
-                                <div class="del-button">
-                                    <a href="#">
-                                     <button type="button" class="btn btn-danger">{{ __('messages.Delet All') }}</button>
-                                    </a>
-                                </div>
+                               
                             </div>
                             @include('student-list')
 
@@ -593,9 +589,7 @@
                             <div class="d-sm-flex align-items-center justify-content-between mb-4 SB">
                                 <h1 class="h3 mb-0 text-gray-800">{{ __('messages.Teacher') }}</h1>
                                 <div class="del-button">
-                                 <a href="#">
-                                    <button type="button" class="btn btn-danger">{{ __('messages.Delet All') }}</button>
-                                 </a>
+                                    <button type="button" class="btn btn-danger" id="delete-selected">Multiple</button>
                                 </div>
                             </div>
                             @include('teacher-list')
@@ -671,14 +665,61 @@
     <script src="{{asset('js/js/dataTables.bootstrap4.min.js')}}"></script>
 <script>
     $(document).ready(function() {
-  $('.teachers-table').DataTable({
-    responsive:true
-  });
-  $('.student-table').DataTable(
-    {
-    responsive:true
-  }
-  );
+        $('#select-all').click(function() {
+            // Check/uncheck all checkboxes based on the main checkbox
+            $('.tutor-checkbox').prop('checked', this.checked);
+        });
+
+        // Optional: Uncheck "Select All" if one of the checkboxes is unchecked
+        $('.tutor-checkbox').click(function() {
+            if (!$(this).prop('checked')) {
+                $('#select-all').prop('checked', false);
+            }
+        });
+        $('#delete-selected').click(function() {
+            alert('asdsa')
+            // Gather all checked checkbox values
+            var selected = [];
+            $('.tutor-checkbox:checked').each(function() {
+                selected.push($(this).val());
+            });
+
+            if (selected.length === 0) {
+                alert('Please select at least one tutor to delete.');
+                return;
+            }
+
+            // Confirm deletion
+            if (confirm('Are you sure you want to delete the selected tutors?')) {
+                $.ajax({
+                    url: "{{ route('teachers.destroy.bulk') }}", // Update with your route
+                    type: 'DELETE',
+                    data: {
+                        ids: selected,
+                        _token: '{{ csrf_token() }}' // Include CSRF token for security
+                    },
+                    success: function(response) {
+                        // Handle success (e.g., reload the page or remove deleted rows)
+                        location.reload(); // Reload page after successful deletion
+                    },
+                    error: function(xhr) {
+                        // Handle error
+                        alert('Error occurred while deleting tutors.');
+                    }
+                });
+            }
+        });
+    });
+        $(document).ready(function() {
+    $('.teachers-table').DataTable({
+        responsive:true
+    });
+    $('.student-table').DataTable(
+        {
+        responsive:true
+    }
+    );
+    
 });
 
 
@@ -696,11 +737,11 @@
     }
 
     // Close the dropdown if clicked outside
-    document.addEventListener('click', function(event) {
-        if (!event.target.closest('.custom-select-web')) {
-            document.querySelector('.custom-options-web').classList.remove('open');
-        }
-    });
+    // document.addEventListener('click', function(event) {
+    //     if (!event.target.closest('.custom-select-web')) {
+    //         document.querySelector('.custom-options-web').classList.remove('open');
+    //     }
+    // });
     function changeLanguage(locale) {
         console.log(locale)
         var url = "{{ url('lang') }}/" + locale;

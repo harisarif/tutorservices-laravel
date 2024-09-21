@@ -42,11 +42,12 @@
     {{-- <h1>All Teachers</h1> --}}
     <div id="statusMessage" style="display:none;" class="alert alert-success"></div>
     <div class=" AB-sb">
+        
         <table class="table teachers-table">
             <thead>
                 <tr>
-                    <th><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                    <label class="form-check-label" for="flexCheckChecked"></label></th>
+                    <th> <input class="form-check-input" type="checkbox" id="select-all">
+                    <label class="form-check-label" for="select-all"></label></th>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Degree</th>
@@ -64,9 +65,10 @@
             @foreach ($tutors as $tutor)
                 <tr>
                 <td>
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked-{{ $tutor->id }}" checked>
+                    <input class="form-check-input tutor-checkbox" type="checkbox" value="{{ $tutor->id }}" id="flexCheckChecked-{{ $tutor->id }}">
                     <label class="form-check-label" for="flexCheckChecked-{{ $tutor->id }}"></label>
                 </td>
+
                 <td>{{ $tutor->id }}</td>
                 <td>{{ $tutor->f_name }} {{ $tutor->l_name }}</td>
                 <td>{{ $tutor->qualification }}</td>

@@ -259,7 +259,7 @@
                                         <div class="col-md-6 px-2 mb-2">
                                                 <label for="" class="form-label" style=" color:#42b979;"><strong>Confirm password <b style="color: red;
                                                 font-size: 20px;">*</b></strong></label>
-                                                <input required="" type="password" name="c_password" placeholder="*Confirm Password" class="inp-1" style=" display: flex; width: 100%; flex-direction: column; border-radius: 5px; padding: 5px 8px;margin: 16px 0px; border: 1px solid rgb(201, 197, 197);">
+                                                <input type="password" name="c_password" placeholder="*Confirm Password" class="inp-1" style=" display: flex; width: 100%; flex-direction: column; border-radius: 5px; padding: 5px 8px;margin: 16px 0px; border: 1px solid rgb(201, 197, 197);">
                                         </div>
                                         <div class="col-md-6 px-2 mb-2" >
                                             <label for="mobile" class="form-label" style="color:#42b979;"><strong>Mobile Number <span class="text-danger fs-4">*</span></strong></label> 
@@ -283,13 +283,14 @@
                                             <div class="form-group">
                                                 <label for="datePicker" class="date-picker-label" style="color:#42b979;"><strong>Date of birth </strong><span class="text-danger fs-4"> *</span></label>
                                                 <div class="ad-dob">
-                                                    <SELECT id ="year" name = "yyyy" onchange="change_year(this)">
-                                                    </SELECT>
-                                                    <SELECT  id ="month" name = "mm" onchange="change_month(this)">
-                                                    </SELECT>
-                                                    <SELECT id ="day" name = "dd" >
-                                                    </SELECT> 
+                                                    <select id ="year" name = "yyyy" onchange="change_year(this)">
+                                                    </select>
+                                                    <select  id ="month" name = "mm" onchange="change_month(this)">
+                                                    </select>
+                                                    <select id ="day" name = "dd" >
+                                                    </select> 
                                                 </div>
+                                                <input type="date" name="dob"/>
                                             </div>
                                             
                                         </div>
@@ -323,7 +324,7 @@
                                     <div class="form-row d-flex flex-column flex-md-row">
                                         <div class="col-md-6 px-2 mb-2">
                                             <label for="qualification" class="form-label" style="color:#42b979;"><strong>Highest Qualifications <span class="text-danger fs-4">*</span></strong></label>
-                                            <select class="form-control" id="school_class" name="school_class">
+                                            <select class="form-control" id="school_class" name="qualification">
 
                                             @foreach($schoolClasses as $schoolClass)
                                             <option value="{{ $schoolClass->id }}">{{ $schoolClass->name }}</option>
@@ -334,7 +335,7 @@
                                         <div class="col-md-6 px-2 mb-2">
                                                 <label for="profilePicture" class="form-label" style="color:#42b979;"><strong>Add your qualification document <span class="text-danger fs-4">*</span></strong></label> 
                                                 <input type="file" class="form-control" id="profilePicture"  
-                                                name="profileImage" style="box-shadow: none;">
+                                                name="document" style="box-shadow: none;">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="qualification" class="form-label" style="color:#42b979;"><strong>Courses Teaching <span class="text-danger fs-4">*</span></strong></label>

@@ -405,7 +405,8 @@
                                 <div class="d-flex justify-content-between ad-border-div">
                                     <div class="mx-2">
                                         <p class="m-0 pt-1 tutors-range"> {{ $tutors->firstItem() }} to {{ $tutors->lastItem() }}
-                                            0f <span class="total-tutors-count">{{ $totalTutorsCount }}</span> tutors</p>
+                                            0git pull
+                                            f <span class="total-tutors-count">{{ $totalTutorsCount }}</span> tutors</p>
                                     </div>
                                     <div class="my-2 mx-2">
                                         <button id="resetFilterBtn" class="ad-btn">{{ __('messages.Reset Filter') }}</button>

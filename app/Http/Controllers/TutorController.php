@@ -54,7 +54,19 @@ class TutorController extends Controller
             return view('teacher-detail');
         }
        
-        
+        public function destroyBulk(Request $request)
+            {
+                $request->validate([
+                    'ids' => 'required|array',
+                    'ids.*' => 'exists:tutors,id', // Assuming 'tutors' is your table name
+                ]);
+
+                // Delete the selected tutors
+                Tutor::destroy($request->ids);
+
+                return response()->json(['success' => 'Tutors deleted successfully.']);
+            }
+
         public function changeLanguage(Request $request)
         {
             // dd($request);
