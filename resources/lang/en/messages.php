@@ -103,4 +103,10 @@ return [
     '$290.29 has been deposited into your account!'=>'$290.29 has been deposited into your account!',
     'December 2, 2019'=>'December 2, 2019','December 2, 2019',
     'Spending Alert: We noticed unusually high spending for your account.'=>'Spending Alert: We noticed unusually high spending for your account.',
+    'Edexcel Academically with tailored tutoring and professional guidance'=>'Edexcel Academically with tailored tutoring and professional guidance',
+    'Login Your Account'=>'Login Your Account',
+    'Email Address'=>'Email Address',
+    'Password'=>'Password',
+    'Remember Me'=>'Remember Me',
+    'Forgot Your Password'=>'Forgot Your Password',
 ];

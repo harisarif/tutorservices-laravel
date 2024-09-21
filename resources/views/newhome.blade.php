@@ -189,6 +189,7 @@
                            <div class="custom-options" id="language-select">
                               <div class="custom-option" data-value="en" onclick="changeLanguage('en')">English</div>
                               <div class="custom-option" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
+                            
                             </div>
                         </div>
                          </div>
@@ -276,6 +277,8 @@
                         <div class="custom-options-web" id="language-select">
                             <div class="custom-option" data-value="en" onclick="changeLanguageWeb('en')">English</div>
                             <div class="custom-option" data-value="ar" onclick="changeLanguageWeb('ar')">Arabic</div>
+                            <div class="custom-option" data-value="ar" onclick="changeLanguage('rs')">Russian</div>
+                            <div class="custom-option" data-value="ar" onclick="changeLanguage('ch')">Chineses</div>
                         </div>
                     </div>
                 </div>
@@ -292,7 +295,7 @@
     </div>
     <section class="banner-section" style="background-image: url(images/group-of-kids.jpg); background-size: cover; background-blend-mode: multiply; background-color: #a5a5a5;">
                 <div class="banner-content">
-                    <h1 class="aa fs-2" style="margin-top:10rem;" >Edexcel Academically with tailored tutoring and professional guidance</h1>
+                    <h1 class="aa fs-2" style="margin-top:10rem;" > {{ __('messages.Edexcel Academically with tailored tutoring and professional guidance') }}</h1>
                 </div>
                 {{-- <button class="p-2  btn-an rounded border-0 text-light">
                         Student

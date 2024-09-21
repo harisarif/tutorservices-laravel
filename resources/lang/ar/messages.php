@@ -98,10 +98,10 @@ return [
     'Direct inquiry'=>'الاستفسار المباشر',
     'Teacher inquiry'=>'استفسار المعلم',
     'Alerts Center'=>'مركز التنبيهات',
-    'December 12, 2019'=>'12 ديسمبر 2019',
-    'A new monthly report is ready to download!'=>'التقرير الشهري الجديد جاهز للتنزيل!',
-    'December 7, 2019'=>'7 ديسمبر 2019',
-    'December 2, 2019'=>'2 ديسمبر 2019',
-    'Spending Alert: We noticed unusually high spending for your account.'=>'تنبيه بشأن الإنفاق: لقد لاحظنا ارتفاعًا غير معتاد في إنفاق حسابك',
-    
+    'Edexcel Academically with tailored tutoring and professional guidance'=>'Edexcel أكاديميًا مع دروس خصوصية وتوجيهات مهنية',
+    'Login Your Account'=>'تسجيل الدخول إلى حسابك',
+    'Email Address'=>'عنوان البريد الإلكتروني',
+    'Password'=>'كلمة المرور',
+    'Remember Me'=>'تذكرنى',
+    'Forgot Your Password'=>'نسيت كلمة السر',
 ];
