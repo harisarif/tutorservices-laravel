@@ -290,7 +290,7 @@
                                                     <select id ="day" name = "dd" >
                                                     </select> 
                                                 </div>
-                                                <input type="date" name="dob"/>
+                                                <!-- <input type="date" name="dob"/> -->
                                             </div>
                                             
                                         </div>
