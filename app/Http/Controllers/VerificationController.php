@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-
+use PHPMailer\PHPMailer\PHPMailer;
 
 class VerificationController extends Controller
 {
@@ -23,13 +23,49 @@ class VerificationController extends Controller
     }
     public function sendVerificationEmail(Request $request)
     {
+        $request->validate([
+            'email' => 'required|email', // Just validate that it's a valid email
+        ]);
+    
         $email = $request->input('email');
-        
-        // Send an email with the verification link (tutor-signup link)
-        Mail::to($email)->send(new \App\Mail\SendVerificationLink($email));
-
+        $subject = 'Email Verification';
+        $link = route('tutor'); // Link to the protected route
+        $body = "Thank you for signing up! Please verify your email by clicking the link below:\n$link";
+    
+        // Send the email using the private function
+        $this->sendEmails($email, $subject, $body);
         return back()->with('success', 'Verification link sent to your email!');
     }
+private function sendEmails($to, $subject, $body)
+{
+    $mail = new PHPMailer(true);
+
+    try {
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.hostinger.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'info@edexceledu.com';
+        $mail->Password = 'Babar123!@#';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+
+        // Recipients
+        $mail->setFrom('info@edexceledu.com', 'Edexcel');
+        $mail->addAddress($to);
+
+        // Content
+        $mail->isHTML(true); // Set email format to HTML
+        $mail->Subject = $subject;
+        $mail->Body = $body;
+
+        $mail->send();
+        \Log::info("Verification email sent to: $to"); // Log success
+    } catch (Exception $e) {
+        \Log::error("Failed to send verification email to: $to. Error: {$mail->ErrorInfo}");
+    }
+}
+
     public function sendLink(Request $request)
     {
         $request->validate(['email' => 'required|email']);
