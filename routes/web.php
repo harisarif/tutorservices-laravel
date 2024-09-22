@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TutorController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\LanguageController;
 /*
 |--------------------------------------------------------------------------
@@ -42,8 +43,21 @@ Route::get('/', [TutorController::class, 'index'])->name('newhome');
 Route::get('/basicsignup', function () {
     return view('basicsignup');
 })->name('basicsignup');
+Route::get('/enter-email', function() {
+    return view('emailVerification');
+})->name('enter.email');
+Route::get('/debug-session', function () {
+    return session()->all(); // Display all session data
+})->middleware('auth');
 
-Route::get('/tutor-signup', [TutorController::class, 'signup'])->name('tutor');
+// Route to send verification email
+Route::post('/send-verification-email', [VerificationController::class, 'sendVerificationEmail'])->name('send.verification.email');
+
+// Protected route for tutor signup (requires email verification)
+Route::middleware(['check.email.verified'])->group(function () {
+    Route::get('/tutor-signup', [TutorController::class, 'signup'])->name('tutor');
+});
+
 Route::get('/hire-tutor', [StudentController::class, 'index'])->name('hire.tutor');
 Route::get('/faq', [StudentController::class, 'FAQ'])->name('faq.index');
 Route::get('/cities', [StudentController::class, 'getCities'])->name('cities');
@@ -76,7 +90,9 @@ Route::get('/subjects/{schoolClassId}', [StudentController::class, 'getSubjects'
 // routes/web.php
 
 
-
+Route::get('/verify-email', [VerificationController::class, 'show'])->name('verification.notice');
+Route::post('/send-verification-link', [VerificationController::class, 'sendLink'])->name('verification.send');
+Route::get('/verify/{token}', [VerificationController::class, 'verify'])->name('verification.verify');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
