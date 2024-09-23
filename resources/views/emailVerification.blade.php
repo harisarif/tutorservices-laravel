@@ -30,9 +30,15 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+@if(!request()->query('email_verification'))
+    <script>
+        $(document).ready(function() {
+            $('#emailVerificationModal').modal('show');  // Show modal only if not coming from email link
+        });
+    </script>
+@endif
 <script>
-    $(document).ready(function() {
-        $('#emailVerificationModal').modal('show'); // Show modal on page load
+    $(document).ready(function() {// Show modal on page load
 
         $('#emailForm').submit(function(e) {
             e.preventDefault(); // Prevent the default form submission

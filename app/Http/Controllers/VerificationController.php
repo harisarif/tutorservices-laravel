@@ -30,7 +30,7 @@ class VerificationController extends Controller
     
         $email = $request->input('email');
         $subject = 'Email Verification';
-        $link = route('tutor'); // Link to the protected route
+        $link = route('tutor') . '?email_verification=true'; // Link to the protected route
         $body = "Dear User,\n\nThank you for signing up! Please verify your email by clicking the link below:\n";
         $body .= "<a href='{$link}'>Verify Email</a>\n\n";
         $body .= "Best regards,\nYour Company Name";

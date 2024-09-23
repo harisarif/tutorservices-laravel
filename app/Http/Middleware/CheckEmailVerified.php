@@ -17,17 +17,11 @@ class CheckEmailVerified
      */
     public function handle(Request $request, Closure $next)
     {
-        // Check if the user is authenticated
-        if (Auth::check()) {
-            $user = Auth::user();
-            if (!$user->hasVerifiedEmail()) {
-                // User is authenticated but not verified, show verification modal
-                return response()->view('emailVerification');
-            }
-            return $next($request); // User is authenticated and verified
+        if ($request->query('email_verification') === 'true') {
+            return $next($request); // Proceed to the requested route
         }
-
-        // User is not authenticated, show the email verification modal
+    
+        // Show email verification modal for the signup page
         return response()->view('emailVerification');
     }
 }
