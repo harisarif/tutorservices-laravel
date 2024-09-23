@@ -1,3 +1,6 @@
+:root {
+    --primary-color:  #42b979;
+}
 .fixed {
     padding: 10px;
     background-color: rgb(23, 218, 140);
@@ -13,7 +16,7 @@
     height: 590px;
 }
 .mini_header{
-    /* background-color: #42b979; */
+    /* background-color:  var(--primary-color); */
     height: 5%;
     position: absolute !important;
     top: 16px;
@@ -23,9 +26,15 @@
     z-index: 2;
 
 }
+[dir="ltr"][lang="rs"] .solid_btn {
+    padding: 0 16px;
+}
+[dir="ltr"][lang="rs"] .foucs {
+    width: 39px;
+}
 .MH {
     border: 5px solid;
-    border-image: linear-gradient(45deg, #42b979, #ffffff) 1;
+    border-image: linear-gradient(45deg,  var(--primary-color), #ffffff) 1;
 }
 .fixed a,
 .fixed i {
@@ -51,7 +60,7 @@
 
 .select2-container .select2-selection--single {
     height: 50px !important;
-    border: 1px solid #42b979;
+    border: 1px solid  var(--primary-color);
 }
 
 .pagination {
@@ -159,8 +168,8 @@
     }
 }
 .im-heading h2{
-    color: #42b979;
-    border-bottom: 1px solid #42b979;
+    color:  var(--primary-color);
+    border-bottom: 1px solid  var(--primary-color);
     width: 22%;
     margin: 10px auto;
     white-space: nowrap;
@@ -453,7 +462,7 @@ width: 100%;
     }
 }
     .md-div  span b{
-        color: #42b979;
+        color:  var(--primary-color);
         font-size: 15px;
         margin: 0 -7px;
         white-space: nowrap;
@@ -518,7 +527,7 @@ width: 100%;
     }
     .nav-link {
         text-align: left;
-        color: #42b979;
+        color:  var(--primary-color);
         font-size: 18px;
     }
     [dir="rtl"] .nav-link  {
@@ -549,8 +558,8 @@ width: 100%;
     #language-select{
         position: absolute;
         left: -25px;
-        border: 1px solid #42b979 !important;
-        color: #42b979 !important;
+        border: 1px solid  var(--primary-color) !important;
+        color:  var(--primary-color) !important;
         background: transparent;
         box-shadow: 0 0 0 0;
         font-size: 12px;
@@ -696,6 +705,17 @@ width: 100%;
     padding: 20px
 }
 /* Style the select dropdown */
+[dir="rtl"] #language-select {
+    left: -21px;
+}
+[dir="rtl"] .phone-number-header{
+    left: -36px;
+    top: 34px;
+}
+[dir="rtl"] .email{
+    left: -63px;
+    top: 35px;
+}
 #language-select {
     appearance: none;
     /* Remove default styling */
@@ -705,12 +725,13 @@ width: 100%;
     /* For Firefox */
     background-color: #fff;
     border: 1px solid #ccc;
+    color:  var(--primary-color) !important;
     border-radius: 4px;
     padding: 5px;
     font-size: 12px;
     color: #333;
-    width: 68px;
-    max-width: 200px;
+    width: 95px;
+    max-width: 95px;
     outline: none;
     cursor: pointer;
     transition: border-color 0.3s, box-shadow 0.3s;
@@ -725,7 +746,7 @@ width: 100%;
 
 /* Change the border and box-shadow on focus */
 #language-select:focus {
-    border-color: #42b979;
+    border-color:  var(--primary-color);
     box-shadow: 0 0 5px rgba(66, 185, 121, 0.5);
 }
 
@@ -775,7 +796,7 @@ width: 100%;
 }
 
 .hadding h3 {
-    color: #42b979;
+    color:  var(--primary-color);
     font-size: 30px;
 }
 
@@ -817,7 +838,7 @@ align-items: center;
 
 .deatil h3 {
     font-size: 25px;
-    color: #42b979;
+    color:  var(--primary-color);
     font-weight: 500;
 }
 
@@ -854,7 +875,7 @@ align-items: center;
     margin: auto;
 }
 .job-alert {
-    color: #42b979;
+    color:  var(--primary-color);
 }
 
 /* job section  */
@@ -889,7 +910,7 @@ align-items: center;
   }
   
   .solution_cards_box .solution_card:hover {
-    background: #42b979;
+    background:  var(--primary-color);
     color: #fff;
     transform: scale(1.1);
     z-index: 9;
@@ -937,7 +958,7 @@ align-items: center;
   .solution_card .solu_description button {
     border: 0;
     border-radius: 15px;
-    background: #42b979;
+    background:  var(--primary-color);
     color: #fff;
     font-weight: 500;
     font-size: 1rem;
@@ -953,7 +974,7 @@ align-items: center;
   
   .hover_color_bubble {
     position: absolute;
-    background: #42b979;
+    background:  var(--primary-color);
     width: 100rem;
     height: 100rem;
     left: 0;
@@ -1025,7 +1046,7 @@ align-items: center;
   }
   .ai-heading h3 {
     margin: 20px 0px;
-    color: #42b979;
+    color:  var(--primary-color);
     text-align: center;
   }
   .ai-heading p {
@@ -1040,7 +1061,7 @@ align-items: center;
     border-radius: 5px;
     display: flex;
     margin: 10px 0;
-    border-image: linear-gradient(45deg, #42b979, #f5f5f5) 1;
+    border-image: linear-gradient(45deg,  var(--primary-color), #f5f5f5) 1;
 }
 .ad-detail{
     padding: 5px 0;
@@ -1051,7 +1072,7 @@ align-items: center;
     text-align: center;
 }
 .ad-icons{
-    color: #42b979;
+    color:  var(--primary-color);
     font-size: 14px;
 }
 .ad-icons p i{
@@ -1062,7 +1083,7 @@ align-items: center;
 }
 .ad-button button{
     width: 100%;
-    background: #42b979;
+    background:  var(--primary-color);
     color: #fff;
     border: none;
     padding: 7px;
@@ -1073,12 +1094,12 @@ align-items: center;
 }
 .ad-detail span strong{
     margin: 0 10px;
-    color: #42b979;
+    color:  var(--primary-color);
 }
 .ad-detail span i{
     font-size: 14px;
     padding: 0 5px;
-    color: #42b979;
+    color:  var(--primary-color);
 }
 
 .red-dot {
@@ -1149,8 +1170,8 @@ align-items: center;
     height: 50px;
 }
 .ai-heading-div h2{
-    color: #42b979;
-    border-bottom: 1px solid #42b979;
+    color:  var(--primary-color);
+    border-bottom: 1px solid  var(--primary-color);
     width: 22%;
     margin: 10px auto;
     white-space: nowrap;
@@ -1158,10 +1179,10 @@ align-items: center;
     justify-content: center;
 }
 .card-title{
-    color: #42b979;
+    color:  var(--primary-color);
 }
 .ad-heading-div h2{
-    color: #42b979;
+    color:  var(--primary-color);
     font-weight: 600;
 }
 
@@ -1190,7 +1211,7 @@ align-items: center;
 .carousel .testimonial {
     color: #fff;
     position: relative;    
-    background: #42b979;
+    background:  var(--primary-color);
 	padding: 15px;
 	margin: 0 0 20px 0px;
 }
@@ -1244,12 +1265,12 @@ align-items: center;
 }
 .carousel .overview b {
 	text-transform: uppercase;
-	color: #42b979;
+	color:  var(--primary-color);
 }
 .carousel-control-prev, .carousel-control-next {
 	width: 30px;
 	height: 30px;
-    background: #42b979;
+    background:  var(--primary-color);
     text-shadow: none;
 	top: -40px;
 }
@@ -1290,13 +1311,13 @@ align-items: center;
 	color: #ffdc12;
 }
 .carousel-wrapper{
-    border: 1px solid #42b979;
+    border: 1px solid  var(--primary-color);
 }
 .rousel-item .active{
-    border-left: 1px solid #42b979;
+    border-left: 1px solid  var(--primary-color);
 }
 footer{
-    background-color: #42b979;
+    background-color:  var(--primary-color);
 }
 .ad-footer{
     transition: 0.5s; 
@@ -1310,7 +1331,7 @@ footer{
 }
 .animated-icons {
     font-size: 50px;
-    color: #42b979;
+    color:  var(--primary-color);
     animation: bounce 2s infinite;
   }
   
@@ -1338,14 +1359,14 @@ footer{
   }
   .im-heading h2{
     text-align: center;
-    color: #42b979;
+    color:  var(--primary-color);
     font-weight: 700;
   }
   .im-heading-div h1{
     font-size: 3rem ;
   }
   .im-div{
-    border: 1px solid #42b979;
+    border: 1px solid  var(--primary-color);
     padding-left: 0;
   }
  
@@ -1354,7 +1375,7 @@ footer{
     height: 100%;
   }
   .ad-div-child{
-    background-color: #42b979;
+    background-color:  var(--primary-color);
   }
   .im-detail ul{
     transition: 0.5s;
@@ -1367,7 +1388,7 @@ footer{
  .im-button button{
     width: 38%;
     border-radius: 11px;
-    color: #42b979;
+    color:  var(--primary-color);
     font-weight: 600;
     margin: 0 auto;
     display: flex;
@@ -1376,11 +1397,11 @@ footer{
  }
  .im-button button:hover{
     background-color: #fff;
-    color: #42b979;
+    color:  var(--primary-color);
  }
  .ae-heading h2{
-    color: #42b979;
-    border-bottom:1px solid #42b979; 
+    color:  var(--primary-color);
+    border-bottom:1px solid  var(--primary-color); 
     width: 18%;    
     margin: 25px auto;
     white-space: nowrap;
@@ -1388,7 +1409,7 @@ footer{
     justify-content: center;
  }
  .ad-headin-div h2{
-    border-bottom:1px solid #42b979; 
+    border-bottom:1px solid  var(--primary-color); 
     width: 18%;
     white-space: nowrap;
     margin: 10px auto;
@@ -1397,7 +1418,7 @@ footer{
     /* margin-top: 30px; */
  }
  .ae-detail h4{
-    border: 1px solid #42b979;
+    border: 1px solid  var(--primary-color);
     border-radius: 5px;
     color: #43b979;
     width: 91%;
@@ -1406,7 +1427,7 @@ footer{
     white-space: nowrap;
  } 
  .ad-div span b{
-    color: #42b979;
+    color:  var(--primary-color);
     font-size: 14px;
     margin: 0 -7px;
     white-space: nowrap;
@@ -1415,11 +1436,11 @@ footer{
     background:#f4f4f6; 
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    border-bottom: 1px solid #42b979;
+    border-bottom: 1px solid  var(--primary-color);
     align-items: center;
  }
  .tutors-range{
-    color: #42b979;
+    color:  var(--primary-color);
  }
  .ad-border{
     background:#f4f4f6;
@@ -1427,15 +1448,15 @@ footer{
     border-bottom-right-radius: 5px;
  }
  .ad-btn{
-    border: 1px solid #42b979;
+    border: 1px solid  var(--primary-color);
     padding: 3px;
-    color: #42b979;
+    color:  var(--primary-color);
     border-radius: 5px;
  }
 
  .ad-icons p{
     margin-top: 10px;
-    color: #42b979;
+    color:  var(--primary-color);
  }
  #toggle, .header-ul  label{
     display: none;
@@ -1451,7 +1472,7 @@ border:1px solid #ECECEC;
 #customers-testimonials .shadow-effect p {
     font-family: inherit;
     font-size: 17px;
-    color: #42b979;
+    color:  var(--primary-color);
     line-height: 1.5;
     margin: 0 0 17px 0;
     font-weight: 300;
@@ -1460,7 +1481,7 @@ border:1px solid #ECECEC;
     margin: -17px auto 0;
     display: table;
     width: auto;
-    background: #42b979;
+    background:  var(--primary-color);
     padding: 9px 35px;
     border-radius: 12px;
     text-align: center;
@@ -1490,7 +1511,7 @@ border:1px solid #ECECEC;
 }
 #customers-testimonials.owl-carousel .owl-dots .owl-dot.active span,
 #customers-testimonials.owl-carousel .owl-dots .owl-dot:hover span {
-    background: #42b979;
+    background:  var(--primary-color);
     transform: translate3d(0px, -50%, 0px) scale(0.7);
 }
 #customers-testimonials.owl-carousel .owl-dots{
@@ -1502,7 +1523,7 @@ text-align: center;
 display: inline-block;
 }
 #customers-testimonials.owl-carousel .owl-dots .owl-dot span {
-    background: #42b979;
+    background:  var(--primary-color);
     display: inline-block;
     height: 20px;
     margin: 0 2px 5px;
@@ -1515,25 +1536,25 @@ display: inline-block;
     height: 100%;
 }
 .ad-heading-div-child{
-    border-bottom: 1px solid #42b979;
+    border-bottom: 1px solid  var(--primary-color);
     width: 22%;
     display: flex;
     justify-content: center;
     margin: 0 auto;
-    color: #42b979;
+    color:  var(--primary-color);
 }
 .keys-heading h2{
-    border-bottom: 1px solid #42b979;
+    border-bottom: 1px solid  var(--primary-color);
     width: 22%;
     display: flex;
     justify-content: center;
     margin: 0 auto;
-    color: #42b979;
+    color:  var(--primary-color);
     white-space: nowrap;
 }
 .ad-cards{
     border-radius: 5px;
-   color: #42b979;
+   color:  var(--primary-color);
     transition: 0.5s;
 }
 .ad-cards span i{
@@ -1559,13 +1580,13 @@ display: inline-block;
 }
 .mx-heading-div h2{
     text-align: center;
-    color: #42b979;
+    color:  var(--primary-color);
     font-weight: 700;
-    border-bottom: 1px solid #42b979;
+    border-bottom: 1px solid  var(--primary-color);
     white-space: nowrap;
 }
 .mx-cont{
-    background: linear-gradient(to right, #42b979, #d7d7d7);
+    background: linear-gradient(to right,  var(--primary-color), #d7d7d7);
     margin: 0 auto;
 }
 .mx-detail{
@@ -1581,7 +1602,7 @@ display: inline-block;
     margin-right:3%;
 }
 .mx-button button{
-    background: #42b979;
+    background:  var(--primary-color);
     color: #fff;
     width: 35%;
     margin-top: 15px;
@@ -1593,7 +1614,7 @@ display: inline-block;
 }
 .mx-button button:hover{
     background-color: #fff;
-    color: #42b979;
+    color:  var(--primary-color);
     transform: scale(1.1);
 }
 .zwc-testimonial-video{
