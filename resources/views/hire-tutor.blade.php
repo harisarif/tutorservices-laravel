@@ -57,6 +57,7 @@
         </a>
 
     </header>
+    <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block;" onclick="window.scrollTo(0, 0)"><i class="fa-solid fa-chevron-up"></i></button>
     @include('whatsapp')
     <main class="hireTutor">
         <div class="row m-0 px-4">

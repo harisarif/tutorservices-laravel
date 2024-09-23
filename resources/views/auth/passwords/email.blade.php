@@ -49,6 +49,7 @@
         transform: scale(1.1);
         color: #42b979;
         border-radius: 5px;
+        transition: 0.5s;
     }
     .main-footer{
         display: none;
@@ -61,7 +62,7 @@
                 <img src="{{ asset('images/login-pg.jpg') }}" alt="">
             </div>
         </div>
-                <div class="col-lg-6 col-sm-4 mt-4">
+                <div class="col-lg-6 col-sm-4 mt-5">
                     <div class="header-img mt-5 d-flex align-items-center">
                         <a href="">
                             <img src="{{ asset('images/white-logo.jpeg') }}" alt="">

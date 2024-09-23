@@ -88,7 +88,7 @@
                     <img src="images/login-pg.jpg" alt="">
                 </div>
                 <div class="col-lg-5 col-sm-4">
-                    <div class="header-img mt-5 d-flex align-items-center">
+                    <div class="header-img d-flex align-items-center">
                         <a href="" style=" margin-left: -13px;">
                             <img src="images/white-logo.jpeg" alt="">
                         </a>
