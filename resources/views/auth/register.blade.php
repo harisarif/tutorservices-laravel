@@ -9,11 +9,17 @@
     .card-header{
         background: #42b979 !important;
     color: white !important;
-}
-.login-button{
-    background: #42b979 !important;
-    border: none !important;
-}
+    }
+    .login-button{
+        background: #42b979 !important;
+        border: none !important;
+    }
+    .modalBox{
+        display: none !important;
+     }
+     .main-footer{
+        display: none;
+     }
 </style>
 @section('content')
 <header class="main_header d-flex  py-2 align-items-end justify-content-center">

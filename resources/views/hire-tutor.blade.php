@@ -106,7 +106,7 @@
                             </div>
 
                             
-                            <div class="form-group" style="text-align:left; width:90%; margin: 0 auto;" >
+                            <div class="form-group mx-4" style="text-align:left; width:90%;" >
                                     <label for="dropdown1" class=" pb-1">
                                         <strong style="color:#42b979;">Select your Grade <b style="color: red;
                                          font-size: 20px;">*</b></strong>
@@ -131,7 +131,7 @@
                                 <li onclick="page1List(this)" class="list-group-item text-start">Urdu</li>
                             </ul>
                             
-                            <div style="text-align: left; width:90%; margin: 0 auto;">
+                            <div class="mx-4" style="text-align: left; width:90%; ">
                                 <!-- <select id="subject" name="subject" class="select form-control">
                                     <option value="">Select Subject</option>
                                 </select> -->

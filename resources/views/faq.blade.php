@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="./css/new-home.css">
 @extends('layouts.app')
 @section('content')
+
     <style>    
      .modalBox{
         display: none !important;
@@ -26,6 +27,46 @@
       .fb-ad {
         margin: 0 40px;
       }
+      .custom-select-wrapper {
+        position: relative;
+        display: flex;
+        cursor: pointer;
+        text-align: justify;
+      }
+      
+    #language-select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        color: var(--primary-color) !important;
+        border-radius: 4px;
+        padding: 5px;
+        font-size: 12px;
+        color: #333;
+        width: 95px;
+        max-width: 95px;
+        outline: none;
+        cursor: pointer;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .custom-options-web {
+        display: none;
+        position: absolute;
+        top: 30px;
+        left: -109px;
+        background: white;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+    }
+    .custom-options.open {
+        display: block;
+    }
+    .custom-options-web.open {
+        display: block;
+    }
     </style>
    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -33,9 +74,22 @@
       AOS.init();
     </script>
     <body>
-             @include('whatsapp')    
-            <header class="text-center bg-white m-0 p-2 d-flex align-items-end justify-content-center">
+             @include('whatsapp')
+             <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block;" onclick="window.scrollTo(0, 0)"><i class="fa-solid fa-chevron-up"></i></button>    
+            <header class="text-center bg-white m-0 p-2 d-flex  justify-content-center align-items-center">
+                
                 <a class="mx-auto" href="{{ route('newhome') }}"><img src="/images/logo.png" alt="EDEXCEL-logo" height="50px"></a>
+                <div class="custom-select-wrapper">
+                    <div class="custom-select-web">
+                        <i class="fa-solid fa-globe" style="color:#42b979 !important; margin-left: -71px;" aria-hidden="true" onclick="toggleDropdownWeb()"></i>
+                        <div class="custom-options-web" id="language-select">
+                            <div class="custom-option p-1" data-value="en" onclick="changeLanguageWeb('en')">English</div>
+                            <div class="custom-option p-1" data-value="ar" onclick="changeLanguageWeb('ar')">Arabic</div>
+                            <div class="custom-option p-1" data-value="ar" onclick="changeLanguage('rs')">Russian</div>
+                            <div class="custom-option p-1" data-value="ar" onclick="changeLanguage('ch')">Chinese</div>
+                        </div>
+                    </div>
+                </div>
             </header>
             <section class="ad-heading-div">
                 <div class="fb-ad">
@@ -282,4 +336,16 @@
     </body>
     
  @endsection
- 
+ <script>
+    function toggleDropdownWeb() {
+        document.querySelector('.custom-options-web').classList.toggle('open');
+    }
+    function changeLanguageWeb(value) {
+        document.querySelector('.custom-options-web').classList.remove('open');
+    }
+    function changeLanguage(locale) {
+        console.log(locale)
+        var url = "{{ url('lang') }}/" + locale;
+        window.location.href = url;
+    }
+</script>

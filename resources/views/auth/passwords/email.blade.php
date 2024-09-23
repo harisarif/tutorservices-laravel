@@ -23,7 +23,7 @@
         justify-content: center;
     }
     .header-img img{
-        width: 100%;
+        width: 75%;
     }
     .row{
         --bs-gutter-x: -0.5rem !important;
@@ -38,8 +38,12 @@
     .forget-button button{
         background: #42b979;
         color: #fff;
+        width: 80%; 
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
     }
-    .forget-button:hover {
+    .forget-button button:hover {
         background-color: #fff;
         box-shadow: 0 0 15px rgba(66, 185, 121, 0.6);
         transform: scale(1.1);
@@ -70,7 +74,7 @@
                     <form method="POST" action="{{ route('password.email') }}">
                         @csrf
                         
-                        <div class="row mb-3 d-block">
+                        <div class="row mb-3 d-block mx-0">
                             <label for="email" class="col-md-4 col-form-label text-md-justify">{{ __('Email Address') }}</label>
 
                             <div class="col-md-6">
@@ -86,7 +90,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4 forget-button"  style=" margin-left: 0%;">
-                                <button type="submit" class="btn  w-100">
+                                <button type="submit" class="btn ">
                                     {{ __('Send Password Reset Link') }}
                                 </button>
                             </div>

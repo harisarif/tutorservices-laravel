@@ -192,8 +192,9 @@
             width: 100% !important;
         }
     </style>
-
+    <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block;" onclick="window.scrollTo(0, 0)"><i class="fa-solid fa-chevron-up"></i></button>
 @if ($errors->any())
+            
         <div class="alert alert-danger" id="close" style="">
             <ul style="margin: 0; padding: 10px 0;">
                 @foreach ($errors->all() as $error)

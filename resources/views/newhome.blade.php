@@ -206,7 +206,7 @@
                                     <div class="ai-nav">
                                         <div class="AI">    
                                             <li class="nav-item m-1 rounded w-1 py-0">
-                                                <a class="nav-link text-decoration-none solid_btn p-0 PB" href="{{ route('login') }}">
+                                                <a class="nav-link text-decoration-none solid_btn p-0 " href="{{ route('login') }}">
                                                     <i class="fas fa-sign-in-alt"></i><span style="margin-left:5px;"> {{ __('messages.login') }}</span>
                                                 </a>
                                             </li>
@@ -387,7 +387,7 @@
                                             <span >Languages</span>
                                             </div>
                                             <div class="align-self-center animated-icons">
-                                            <i class="fa-solid fa-language" aria-hidden="true" style="    font-size: 35px;"></i>
+                                            <i class="fas fa-globe" aria-hidden="true" style="font-size: 25px;"></i>
                                             </div>
                                         </div>
                                         </div>
