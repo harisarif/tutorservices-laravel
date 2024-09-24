@@ -1594,7 +1594,7 @@ display: inline-block;
     justify-content: end;
 }
 .ed-div{
-    margin-top: 3rem;
+    margin-top: 2rem;
 }
 .mx-detail p{
     color: #fff;
@@ -1605,7 +1605,6 @@ display: inline-block;
     background:  var(--primary-color);
     color: #fff;
     width: 35%;
-    margin-top: 15px;
     transition: 0.5s;
 }
 .zwc-testimonial-video img{

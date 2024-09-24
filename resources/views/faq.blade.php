@@ -33,7 +33,9 @@
         cursor: pointer;
         text-align: justify;
       }
-      
+      [dir="rtl"] .custom-select-web  {
+        margin-left: 25px;
+        }
     #language-select {
         appearance: none;
         -webkit-appearance: none;
@@ -61,6 +63,10 @@
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         z-index: 10;
     }
+    [dir="rtl"] .ad-heading-div  {
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 170px;
+    }
     .custom-options.open {
         display: block;
     }
@@ -83,8 +89,8 @@
                     <div class="custom-select-web">
                         <i class="fa-solid fa-globe" style="color:#42b979 !important; margin-left: -71px;" aria-hidden="true" onclick="toggleDropdownWeb()"></i>
                         <div class="custom-options-web" id="language-select">
-                            <div class="custom-option p-1" data-value="en" onclick="changeLanguageWeb('en')">English</div>
-                            <div class="custom-option p-1" data-value="ar" onclick="changeLanguageWeb('ar')">Arabic</div>
+                            <div class="custom-option p-1" data-value="en" onclick="changeLanguage('en')">English</div>
+                            <div class="custom-option p-1" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
                             <div class="custom-option p-1" data-value="ar" onclick="changeLanguage('rs')">Russian</div>
                             <div class="custom-option p-1" data-value="ar" onclick="changeLanguage('ch')">Chinese</div>
                         </div>
@@ -97,9 +103,9 @@
                        <div class="col-12">
                         <div class="ad-line-child"></div>
                         <h1 class="py-0 my-4 text-left text-capitalize fw-bold" style="color:#42b979; font-size: 50px;">
-                            Frequently Asked Questions
+                            {{ __('messages.Frequently Asked Questions') }}
                         </h1>
-                        <h4><b>For Edexcel Academy &amp; Educational Consultancy</b></h4>
+                        <h4><b>{{ __('messages.For Edexcel Academy &amp; Educational Consultancy') }}</b></h4>
                        </div>
                     </div>
                 </div>
@@ -107,9 +113,9 @@
             <section class="fb-ad ">
                 <div class="ad-line"></div>
                 <div class="ad-heading-te">
-                    <h3 ><b>Frequently  Questions for Edexcel Academy &amp; Educational Consultancy
+                    <h3 ><b>{{ __('messages.Frequently  Questions for Edexcel Academy &amp; Educational Consultancy') }}
                     </b></h3>
-                    <span>Effective Date: 26.7.2024</span>
+                    <span>{{ __('messages.Effective Date: 26.7.2024') }}</span>
                 </div>
             </section>
             <section class="ad-flex" style="display: flex;  margin: 10px 20px;">
@@ -121,22 +127,21 @@
                                     <div class="d-flex justify-content-between align-items-center"
                                         onclick="toggle('para','toggle-arrow')">
                                         <h6 class="fw-bold py-3">
-                                            How can students improve their knowledge?
+                                        {{ __('messages.How can students improve their knowledge?') }}
                                         </h6>
                                         <i class="fa fa-chevron-down" id="toggle-arrow"></i>
                                     </div>
                                     <div id="para" style="height:auto;">
                                         <p>
-                                            Students can improve their knowledge and skills in a number
-                                            of ways like:
+                                        {{ __('messages.Students can improve their knowledge and skills in a number of ways like:') }}
                                         </p>
                                         <ul>
-                                            <li>Practicing solutions regularly.</li>
+                                            <li> {{ __('messages.Practicing solutions regularly.') }}</li>
                                             <li>
-                                                Understand the underlying concepts/formulas clearly.
+                                            {{ __('messages.Understand the underlying concepts/formulas clearly.') }}
                                             </li>
-                                            <li>Solving additional exercises.</li>
-                                            <li>Sharing a positive attitude about the subject.</li>
+                                            <li>{{ __('messages.Solving additional exercises.') }}</li>
+                                            <li>{{ __('messages.Sharing a positive attitude about the subject.') }}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -144,24 +149,22 @@
                                     <div class="d-flex justify-content-between align-items-center"
                                         onclick="toggle('para1','toggle-arrow1')">
                                         <h6 class="fw-bold py-3">
-                                            How can tutors help students improve their score and skills?
+                                        {{ __('messages.How can tutors help students improve their score and skills?') }}
                                         </h6>
                                         <i class="fa fa-chevron-down" id="toggle-arrow1"></i>
                                     </div>
                                     <div id="para1">
                                         <p>
-                                            There are many ways students can improve their skills. But
-                                            experienced tutors in Dubai can help to:
+                                        {{ __('messages.There are many ways students can improve their skills. But experienced tutors in Dubai can help to:') }}
                                         </p>
                                         <ul>
-                                            <li>Build confidence in the student.</li>
-                                            <li>Encourage questioning and make space for curiosity.</li>
-                                            <li>Emphasize conceptual understanding over procedure.</li>
+                                            <li>{{ __('messages.Build confidence in the student.') }}</li>
+                                            <li>{{ __('messages.Encourage questioning and make space for curiosity.') }}</li>
+                                            <li>{{ __('messages.Emphasize conceptual understanding over procedure.') }}</li>
                                             <li>
-                                                Provide authentic problems that increase students’ drive
-                                                to engage with the subject.
+                                            {{ __('messages. Provide authentic problems that increase students’ drive to engage with the subject.') }}
                                             </li>
-                                            <li>Share a positive attitude about the subject.</li>
+                                            <li>{{ __('messages.Share a positive attitude about the subject.') }}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -170,24 +173,22 @@
                                     <div class="d-flex justify-content-between align-items-center"
                                         onclick="toggle('para2','toggle-arrow2')">
                                         <h6 class="fw-bold py-3">
-                                        Want to know what we can offer?
+                                        {{ __('messages.Want to know what we can offer?') }}
                                         </h6>
                                         <i class="fa fa-chevron-down" id="toggle-arrow1"></i>
                                     </div>
                                     <div id="para2">
                                         <p>
-                                            There are many ways students can improve their skills. But
-                                            experienced tutors in Dubai can help to:
+                                        {{ __('messages.There are many ways students can improve their skills. But experienced tutors in Dubai can help to:') }}
                                         </p>
                                         <ul>
-                                            <li>Build confidence in the student.</li>
-                                            <li>Encourage questioning and make space for curiosity.</li>
-                                            <li>Emphasize conceptual understanding over procedure.</li>
-                                            <li>
-                                                Provide authentic problems that increase students’ drive
-                                                to engage with the subject.
+                                            <li>{{ __('messages.Build confidence in the student.') }}</li>
+                                            <li>{{ __('messages.Encourage questioning and make space for curiosity.') }}</li>
+                                            <li>{{ __('messages.Emphasize conceptual understanding over procedure.') }}</li>
+                                            <li>{{ __('messages.EProvide authentic problems that increase students’ drive to engage with the subject.') }}
+                                                
                                             </li>
-                                            <li>Share a positive attitude about the subject.</li>
+                                            <li>{{ __('messages.Share a positive attitude about the subject.') }}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -196,24 +197,22 @@
                                     <div class="d-flex justify-content-between align-items-center"
                                         onclick="toggle('para3','toggle-arrow3')">
                                         <h6 class="fw-bold py-3">
-                                        If you have tried all means and yet looking for a tutor❓
+                                        {{ __('messages.If you have tried all means and yet looking for a tutor❓') }}
                                         </h6>
                                         <i class="fa fa-chevron-down" id="toggle-arrow1"></i>
                                     </div>
                                     <div id="para3">
-                                        <p>
-                                            There are many ways students can improve their skills. But
-                                            experienced tutors in Dubai can help to:
+                                        <p>{{ __('messages.There are many ways students can improve their skills. But experienced tutors in Dubai can help to:') }}
+                                            
                                         </p>
                                         <ul>
-                                            <li>Build confidence in the student.</li>
-                                            <li>Encourage questioning and make space for curiosity.</li>
-                                            <li>Emphasize conceptual understanding over procedure.</li>
-                                            <li>
-                                                Provide authentic problems that increase students’ drive
-                                                to engage with the subject.
+                                            <li>{{ __('messages.Build confidence in the student.') }}</li>
+                                            <li>{{ __('messages.Encourage questioning and make space for curiosity.') }}</li>
+                                            <li>{{ __('messages.Emphasize conceptual understanding over procedure.') }}</li>
+                                            <li>{{ __('messages.Provide authentic problems that increase students’ drive
+                                                to engage with the subject.') }}
                                             </li>
-                                            <li>Share a positive attitude about the subject.</li>
+                                            <li>>{{ __('messages.Share a positive attitude about the subject.') }}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -337,6 +336,7 @@
     
  @endsection
  <script>
+    
     function toggleDropdownWeb() {
         document.querySelector('.custom-options-web').classList.toggle('open');
     }

@@ -471,7 +471,7 @@ button[type="submit"]:hover{
     display: block;
     position: fixed;
     bottom: 20px; /* Position at the bottom right of the screen */
-    right: 20px;
+    right: 32px;
     top: 80%;
     font-size: 20px;
     cursor: pointer;

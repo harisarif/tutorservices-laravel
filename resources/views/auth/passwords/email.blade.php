@@ -24,6 +24,7 @@
     }
     .header-img img{
         width: 75%;
+        margin-top: 1.5rem;
     }
     .row{
         --bs-gutter-x: -0.5rem !important;
@@ -32,7 +33,7 @@
         background: linear-gradient(45deg, #42b979, transparent);
         height: 100vh;
     }
-    .forget-button {
+    .forget-button button{
         transition: 0.5s !important;
     }
     .forget-button button{
@@ -44,12 +45,10 @@
         justify-content: center;
     }
     .forget-button button:hover {
-        background-color: #fff;
-        box-shadow: 0 0 15px rgba(66, 185, 121, 0.6);
+        background-color: #42b979;
+        color: #fff;
         transform: scale(1.1);
-        color: #42b979;
         border-radius: 5px;
-        transition: 0.5s;
     }
     .main-footer{
         display: none;

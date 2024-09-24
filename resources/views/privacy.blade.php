@@ -40,11 +40,77 @@
     .fb-ad {
         margin: 0 40px;
     }
+    .custom-select-wrapper {
+        position: relative;
+        display: flex;
+        cursor: pointer;
+        text-align: justify;
+      }
+      [dir="rtl"] .custom-select-web  {
+        margin-left: 25px;
+        }
+    #language-select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        color: var(--primary-color) !important;
+        border-radius: 4px;
+        padding: 5px;
+        font-size: 12px;
+        color: #333;
+        width: 95px;
+        max-width: 95px;
+        outline: none;
+        cursor: pointer;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .custom-options-web {
+        display: none;
+        position: absolute;
+        top: 30px;
+        left: -109px;
+        background: white;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+    }
+    [dir="rtl"] .ad-heading  {
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 170px;
+    }
+    [dir="rtl"] .whatsApp_button_Warpper12  {
+        right: 94%;
+    }
+    [dir="rtl"] .whatsapp-help  {
+        right: -100px;
+    }
+    [dir="rtl"] .goToTop  {
+        right: 94%;
+    }
+    .custom-options.open {
+        display: block;
+    }
+    .custom-options-web.open {
+        display: block;
+    }
 </style>
 <body>
 @include('whatsapp')
         <header class="text-center bg-white m-0 p-2 d-flex align-items-end justify-content-center">
             <a class="mx-auto" href="{{ route('newhome') }}"><img src="/images/logo.png" alt="EDEXCEL-logo" height="50px"></a>
+                <div class="custom-select-wrapper">
+                    <div class="custom-select-web">
+                        <i class="fa-solid fa-globe" style="color:#42b979 !important; margin-left: -71px;" aria-hidden="true" onclick="toggleDropdownWeb()"></i>
+                        <div class="custom-options-web" id="language-select">
+                            <div class="custom-option p-1" data-value="en" onclick="changeLanguage('en')">English</div>
+                            <div class="custom-option p-1" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
+                            <div class="custom-option p-1" data-value="ar" onclick="changeLanguage('rs')">Russian</div>
+                            <div class="custom-option p-1" data-value="ar" onclick="changeLanguage('ch')">Chinese</div>
+                        </div>
+                    </div>
+                </div>
         </header>
         <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block;" onclick="window.scrollTo(0, 0)"><i class="fa-solid fa-chevron-up"></i></button>
  <section class="ad-heading">
@@ -52,8 +118,8 @@
         <div class="row">
             <div class="ad-heading-child">
                 <div class="ad-line"></div>
-                <h1 class="fw-bold">Privacy Policy</h1>
-                <h4><b>For Edexcel Academy &amp; Educational Consultancy</b></h4>
+                <h1 class="fw-bold">{{ __('messages.Privacy Policy') }}</h1>
+                <h4><b>{{ __('messages.For Edexcel Academy &amp; Educational Consultancy') }}</b></h4>
             </div>
         </div>
     </div>
@@ -62,63 +128,35 @@
     <section class="container">
         <div class="ad-line"></div>
             <div class="ad-heading-div">
-                <h3 ><b>Privacy Policy for Edexcel Academy &amp; Educational Consultancy
+                <h3 ><b>{{ __('messages.Privacy Policy for Edexcel Academy &amp; Educational Consultancy') }}
                     </b></h3>
-                <span>Effective Date: 26.7.2024</span>
+                <span>{{ __('messages.Effective Date: 26.7.2024') }}</span>
             </div>
         <div data-aos="fade-left" class="ad-detail-child">
-            <p>Edexcel Academy & Educational Consultancy, a company registered in Pakistan and Wales (No. +971566428066),
-                herein referred to as Spires. We have created this privacy statement ("Statement"™) in order to
-                demonstrate our firm commitment to the privacy of the details that you provide to us when using this
-                website.</p>
+            <p>{{ __('messages.Edexcel Academy & Educational Consultancy, a company registered in Pakistan and Wales (No. +971566428066),') }}
+            {{ __('messages.herein referred to as Spires. We have created this privacy statement ("Statement"™) in order to  demonstrate our firm commitment to the privacy of the details that you provide to us when using this website.') }}</p>
 
-            <p>This policy applies where we are acting as a data controller with respect to the personal data of our
-                website visitors and service users; in other words, where we determine the purposes and means of the
-                processing of that personal data.</p>
+            <p>{{ __('messages.This policy applies where we are acting as a data controller with respect to the personal data of our') }}
+            {{ __('messages.website visitors and service users; in other words, where we determine the purposes and means of the') }}
+            {{ __('messages.processing of that personal data.') }}</p>
 
-            <p>We may change this Privacy Policy from time to time. We may provide you with additional notice (such as
-                adding a statement to the homepages of our websites or sending you an email notification). We encourage
-                you to review the Privacy Policy whenever you interact with us to stay informed about our information
-                practices and the ways you can help protect your privacy.</p>
+            <p>{{ __('messages.We may change this Privacy Policy from time to time. We may provide you with additional notice (such as adding a statement to the homepages of our websites or sending you an email notification). We encourage you to review the Privacy Policy whenever you interact with us to stay informed about our information practices and the ways you can help protect your privacy.') }}</p>
 
-            <p>WHAT IS PERSONAL INFORMATION
-                Personal information means information about an identifiable individual or information that permits an
-                individual to be identified. It does not include business contact information, such as name, title,
-                business address and business telephone number when used for business communications.</p>
+            <p>{{ __('messages.WHAT IS PERSONAL INFORMATION Personal information means information about an identifiable individual or information that permits an individual to be identified. It does not include business contact information, such as name, title, business address and business telephone number when used for business communications.') }}</p>
 
-            <p>OUR COMMITMENT
-                Spires takes responsibility for maintaining and protecting the personal information under our control.
-                We have appointed a Data Controller who can be contacted directly by the public . Our Data Protection
-                Officer is responsible for our day to day compliance. We review this policy and our personal data
-                protection practices regularly to ensure that we are in compliance with applicable legislation and
-                current best practices.</p>
+            <p>{{ __('messages.OUR COMMITMENT Spires takes responsibility for maintaining and protecting the personal information under our control. We have appointed a Data Controller who can be contacted directly by the public . Our Data Protection Officer is responsible for our day to day compliance. We review this policy and our personal data protection practices regularly to ensure that we are in compliance with applicable legislation and current best practices.') }}</p>
 
-            <p>HOW WE COLLECT, USE AND DISCLOSE PERSONAL INFORMATION
-                We only collect and process personal information as required to meet the purposes that we have
-                identified. We do not indiscriminately collect or retain personal information and will delete all
-                provided information within 6 years of the termination of the usage of our services, save for
-                information required for tax and regulatory purposes for a longer period of limitation.</p>
+            <p>{{ __('messages.HOW WE COLLECT, USE AND DISCLOSE PERSONAL INFORMATION We only collect and process personal information as required to meet the purposes that we have identified. We do not indiscriminately collect or retain personal information and will delete all provided information within 6 years of the termination of the usage of our services, save for information required for tax and regulatory purposes for a longer period of limitation.') }}</p>
 
-            <p>Spires typically collects personal information that is voluntarily provided by the individual in
-                question. At times, however, personal information is obtained from other sources, such as government
-                bodies or third parties such as employers, references and service providers, as permitted by law. Where
-                the purpose for the collection of personal information is unclear, you can ask the Spires representative
-                with whom you are dealing to provide an explanation of the purpose for the data collection. More
-                generally, we are happy to provide you with all personal information we hold upon request in writing to
-                suppor</p>
+            <p>{{ __('messages.Spires typically collects personal information that is voluntarily provided by the individual in question. At times, however, personal information is obtained from other sources, such as government bodies or third parties such as employers, references and service providers, as permitted by law. Where the purpose for the collection of personal information is unclear, you can ask the Spires representative with whom you are dealing to provide an explanation of the purpose for the data collection. More generally, we are happy to provide you with all personal information we hold upon request in writing to suppor') }}</p>
 
-            <p>Our reason for collecting personal information about tutors, students, parents, staff and consultants is
-                to establish and maintain our contractual or other business relationship with that individual.</p>
+            <p>{{ __('messages.Our reason for collecting personal information about tutors, students, parents, staff and consultants is to establish and maintain our contractual or other business relationship with that individual.') }}</p>
 
-            <p>The purpose for collecting personal information about tutors and students is primarily to facilitate the
-                provision of educational tutoring services online, including to allow students to quickly and easily
-                assess the professional and educational background of tutors, as well as allowing us to communicate
-                effectively with tutors, students and parents and to maintain mailing lists. We may also use your
-                personal information to:</p>
-                <p>As appropriate, Spires will ask for specific consent to collect, use and disclose personal information. Such a request, and your consent to such request, may be given in writing, orally or through the Spires platform. In some cases, consent can be implied through an individual relationship or conduct with us, depending on the sensitivity of the information.</p>
-                <p>We may also share aggregated or de-identified information, which cannot reasonably be used to identify you.</p>
-                <p>Generally, personal information supplied to us is confidential and we do not disclose the information to unconnected third parties except with actual or implied consent, or as permitted or required by law. We do not exchange or sell personal information.</p>
-                <p>Spires may use third party service providers from time to time to carry out certain functions for us such as printing, storage, shredding or document scanning. Where we use such outside service providers, we require those third parties to protect personal information in the same manner in which we protect it and to not use or disclose it for any purposes except as directed by Spires.</p>
+            <p>{{ __('messages.The purpose for collecting personal information about tutors and students is primarily to facilitate the provision of educational tutoring services online, including to allow students to quickly and easily assess the professional and educational background of tutors, as well as allowing us to communicate effectively with tutors, students and parents and to maintain mailing lists. We may also use your personal information to:') }}</p>
+                <p>{{ __('messages.As appropriate, Spires will ask for specific consent to collect, use and disclose personal information. Such a request, and your consent to such request, may be given in writing, orally or through the Spires platform. In some cases, consent can be implied through an individual relationship or conduct with us, depending on the sensitivity of the information.') }}</p>
+                <p>{{ __('messages.We may also share aggregated or de-identified information, which cannot reasonably be used to identify you.') }}</p>
+                <p>{{ __('messages.Generally, personal information supplied to us is confidential and we do not disclose the information to unconnected third parties except with actual or implied consent, or as permitted or required by law. We do not exchange or sell personal information.') }}</p>
+                <p>{{ __('messages.Spires may use third party service providers from time to time to carry out certain functions for us such as printing, storage, shredding or document scanning. Where we use such outside service providers, we require those third parties to protect personal information in the same manner in which we protect it and to not use or disclose it for any purposes except as directed by Spires.') }}</p>
         </div>
     </section>
     <div id="filter-col" class="d-none col col-lg-3 d-md-block my-0 p-0" style="overflow: hidden;">
@@ -244,3 +282,17 @@
   AOS.init();
 </script>
 @endsection
+<script>
+    
+    function toggleDropdownWeb() {
+        document.querySelector('.custom-options-web').classList.toggle('open');
+    }
+    function changeLanguageWeb(value) {
+        document.querySelector('.custom-options-web').classList.remove('open');
+    }
+    function changeLanguage(locale) {
+        console.log(locale)
+        var url = "{{ url('lang') }}/" + locale;
+        window.location.href = url;
+    }
+</script>
