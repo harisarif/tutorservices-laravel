@@ -38,7 +38,8 @@ class VerificationController extends Controller
         // Send the email using your SMTP service
         $this->sendEmails($email, $subject, $body);
     
-        return back()->with('success', 'Verification link sent to your email!');
+        return redirect()->route('newhome')->with('success', 'Verification link sent to your email!');
+
     }
     private function sendEmails($to, $subject, $body)
         {
