@@ -461,26 +461,31 @@ button[type="submit"]:hover{
   }
 
   /*scroll button */
-.goToTop{
-    color:white;
-    position: fixed;
-    bottom: 85px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
+  .goToTop {
+    background-color: #42b979; /* Base color */
+    color: white;
     border: none;
-    border-radius: 5px;
-    background-color: rgba(var(--green), .8) !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    border-radius: 50%; /* Makes the button circular */
+    width: 50px; /* Adjust size as needed */
+    height: 50px;
+    display: block;
+    position: fixed;
+    bottom: 20px; /* Position at the bottom right of the screen */
+    right: 32px;
+    top: 80%;
+    font-size: 20px;
     cursor: pointer;
-    /* box-shadow: 0 2px 4px 0 #ddd; */
-    display: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
 }
-.goToTop .fa-solid:hover{
-    transform: translatey(-0.25em);
 
+.goToTop:hover {
+    background-color: #36a56a; /* Darker shade of green for hover effect */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+}
+
+.goToTop:active {
+    transform: scale(0.95); /* Add a slight press effect */
 }
 /* footer */
 footer{

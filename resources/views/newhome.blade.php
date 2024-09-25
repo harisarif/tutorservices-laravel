@@ -93,8 +93,8 @@
     .custom-options-web {
         display: none;
         position: absolute;
-        top: 100%;
-        left: -30px;
+        top: 30px;
+        left: -58px;
         background: white;
         border: 1px solid #ccc;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -206,7 +206,7 @@
                                     <div class="ai-nav">
                                         <div class="AI">    
                                             <li class="nav-item m-1 rounded w-1 py-0">
-                                                <a class="nav-link text-decoration-none solid_btn p-0" href="{{ route('login') }}">
+                                                <a class="nav-link text-decoration-none solid_btn p-0 " href="{{ route('login') }}">
                                                     <i class="fas fa-sign-in-alt"></i><span style="margin-left:5px;"> {{ __('messages.login') }}</span>
                                                 </a>
                                             </li>
@@ -278,7 +278,7 @@
                             <div class="custom-option" data-value="en" onclick="changeLanguageWeb('en')">English</div>
                             <div class="custom-option" data-value="ar" onclick="changeLanguageWeb('ar')">Arabic</div>
                             <div class="custom-option" data-value="ar" onclick="changeLanguage('rs')">Russian</div>
-                            <div class="custom-option" data-value="ar" onclick="changeLanguage('ch')">Chineses</div>
+                            <div class="custom-option" data-value="ar" onclick="changeLanguage('ch')">Chinese</div>
                         </div>
                     </div>
                 </div>
@@ -387,7 +387,7 @@
                                             <span >Languages</span>
                                             </div>
                                             <div class="align-self-center animated-icons">
-                                            <i class="fa-solid fa-language" aria-hidden="true" style="    font-size: 35px;"></i>
+                                            <i class="fas fa-globe" aria-hidden="true" style="font-size: 25px;"></i>
                                             </div>
                                         </div>
                                         </div>

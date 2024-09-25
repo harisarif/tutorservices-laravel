@@ -76,16 +76,19 @@
     [dir="rtl"] .form-check-label {
       width: 69%;
     }
-    
+    .login-heading h3{
+        margin-left: -2%;
+    }
 </style>
 @section('content')
+                
         <div  id="login bg-gradient-success">
             <div class="row align-items-center" >
                 <div class="col-lg-6 col-sm-4  img-cards my-4 mx-1 d-flex justify-content-center ">
                     <img src="images/login-pg.jpg" alt="">
                 </div>
                 <div class="col-lg-5 col-sm-4">
-                    <div class="header-img mt-5 d-flex align-items-center">
+                    <div class="header-img d-flex align-items-center">
                         <a href="" style=" margin-left: -13px;">
                             <img src="images/white-logo.jpeg" alt="">
                         </a>
@@ -95,7 +98,7 @@
                     <div class="login-heading">
                             <h3 class="my-2 fw-bold fs-4">{{ __('messages.Login Your Account') }}</h3>
                     </div>
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('login') }}"  style="margin-left: -2%;">
                         @csrf
 
                         <div class="row mb-1 d-block">

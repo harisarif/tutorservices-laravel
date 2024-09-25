@@ -8,11 +8,78 @@
     .fb-ad {
         margin: 0 40px;
     }
+    .custom-select-wrapper {
+        position: relative;
+        display: flex;
+        cursor: pointer;
+        text-align: justify;
+      }
+      [dir="rtl"] .custom-select-web  {
+        margin-left: 25px;
+        }
+    #language-select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        color: var(--primary-color) !important;
+        border-radius: 4px;
+        padding: 5px;
+        font-size: 12px;
+        color: #333;
+        width: 95px;
+        max-width: 95px;
+        outline: none;
+        cursor: pointer;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .custom-options-web {
+        display: none;
+        position: absolute;
+        top: 30px;
+        left: -109px;
+        background: white;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+    }
+    [dir="rtl"] .ad-heading  {
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 170px;
+    }
+    [dir="rtl"] .whatsApp_button_Warpper12  {
+        right: 94%;
+    }
+    [dir="rtl"] .whatsapp-help  {
+        right: -100px;
+    }
+    [dir="rtl"] .goToTop  {
+        right: 94%;
+    }
+    .custom-options.open {
+        display: block;
+    }
+    .custom-options-web.open {
+        display: block;
+    }
 </style>
  <body>
    @include('whatsapp')
+            <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block;" onclick="window.scrollTo(0, 0)"><i class="fa-solid fa-chevron-up"></i></button>
         <header class="text-center bg-white m-0 p-2 d-flex align-items-end justify-content-center">
             <a class="mx-auto" href="{{ route('newhome') }}"><img src="{{ asset('images/logo.png') }}" alt="EDEXCEL-logo"height="50px"></a>
+                <div class="custom-select-wrapper">
+                    <div class="custom-select-web">
+                        <i class="fa-solid fa-globe" style="color:#42b979 !important; margin-left: -71px;" aria-hidden="true" onclick="toggleDropdownWeb()"></i>
+                        <div class="custom-options-web" id="language-select">
+                            <div class="custom-option p-1" data-value="en" onclick="changeLanguage('en')">English</div>
+                            <div class="custom-option p-1" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
+                            <div class="custom-option p-1" data-value="ar" onclick="changeLanguage('rs')">Russian</div>
+                            <div class="custom-option p-1" data-value="ar" onclick="changeLanguage('ch')">Chinese</div>
+                        </div>
+                    </div>
+                </div>
         </header>
     <section class="ad-banner">
         <div class="fb-ad">
@@ -261,3 +328,17 @@
       AOS.init();
    </script>
 @endsection
+<script>
+    
+    function toggleDropdownWeb() {
+        document.querySelector('.custom-options-web').classList.toggle('open');
+    }
+    function changeLanguageWeb(value) {
+        document.querySelector('.custom-options-web').classList.remove('open');
+    }
+    function changeLanguage(locale) {
+        console.log(locale)
+        var url = "{{ url('lang') }}/" + locale;
+        window.location.href = url;
+    }
+</script>

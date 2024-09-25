@@ -109,4 +109,70 @@ return [
     'Password'=>'Password',
     'Remember Me'=>'Remember Me',
     'Forgot Your Password'=>'Forgot Your Password',
+    'Frequently  Questions for Edexcel Academy &amp; Educational Consultancy'=>'Frequently  Questions for Edexcel Academy &amp; Educational Consultancy',
+    'Frequently Asked Questions'=>'Frequently Asked Questions',
+    'For Edexcel Academy &amp; Educational Consultancy'=>'For Edexcel Academy &amp; Educational Consultancy',
+    'Frequently  Questions for Edexcel Academy &amp; Educational Consultancy'=>'Frequently  Questions for Edexcel Academy &amp; Educational Consultancy',
+    'Effective Date: 26.7.2024'=>'Effective Date: 26.7.2024',
+    ' How can students improve their knowledge?'=>' How can students improve their knowledge?',
+    'Students can improve their knowledge and skills in a number of ways like:'=>'Students can improve their knowledge and skills in a number of ways like:',
+    'Practicing solutions regularly.'=>'Practicing solutions regularly.',
+    'Understand the underlying concepts/formulas clearly.'=>'Understand the underlying concepts/formulas clearly.',
+    'Solving additional exercises.'=>'Solving additional exercises.',
+    'Sharing a positive attitude about the subject.'=>'Sharing a positive attitude about the subject.',
+    'How can tutors help students improve their score and skills?'=>'How can tutors help students improve their score and skills?',
+    'There are many ways students can improve their skills. But experienced tutors in Dubai can help to:'=>'There are many ways students can improve their skills. But experienced tutors in Dubai can help to:',
+    'Build confidence in the student.'=>'Build confidence in the student.',
+    'Encourage questioning and make space for curiosity.'=>'Encourage questioning and make space for curiosity.',
+    'Emphasize conceptual understanding over procedure.'=>'Emphasize conceptual understanding over procedure.',
+    'Provide authentic problems that increase students’ drive to engage with the subject.'=>'Provide authentic problems that increase students’ drive to engage with the subject.',
+    'Share a positive attitude about the subject.'=>'Share a positive attitude about the subject.',
+    'Want to know what we can offer?'=>'Want to know what we can offer?',
+    'There are many ways students can improve their skills. But experienced tutors in Dubai can help to:'=>'There are many ways students can improve their skills. But experienced tutors in Dubai can help to:',
+    'Build confidence in the student.'=>'Build confidence in the student.',
+    'Encourage questioning and make space for curiosity.'=>'Encourage questioning and make space for curiosity.',
+    'Emphasize conceptual understanding over procedure.'=>'Emphasize conceptual understanding over procedure.',
+    'EProvide authentic problems that increase students’ drive to engage with the subject.'=>'EProvide authentic problems that increase students’ drive to engage with the subject.',
+    'Share a positive attitude about the subject.'=>'Share a positive attitude about the subject.',
+    'If you have tried all means and yet looking for a tutor❓'=>'If you have tried all means and yet looking for a tutor❓',
+    'There are many ways students can improve their skills. But experienced tutors in Dubai can help to:'=>'There are many ways students can improve their skills. But experienced tutors in Dubai can help to:',
+    'Build confidence in the student.'=>'Build confidence in the student.',
+    'Encourage questioning and make space for curiosity.'=>'Encourage questioning and make space for curiosity.',
+    'Emphasize conceptual understanding over procedure.'=>'Emphasize conceptual understanding over procedure.',
+    ' Provide authentic problems that increase students’ drive to engage with the subject.'=>'Provide authentic problems that increase students’ drive to engage with the subject.',
+    'Share a positive attitude about the subject.'=>'Share a positive attitude about the subject.',
+
+    'Privacy Policy for Edexcel Academy &amp; Educational Consultancy'=>'Privacy Policy for Edexcel Academy &amp; Educational Consultancy',
+
+    'For Edexcel Academy &amp; Educational Consultancy'=>'For Edexcel Academy &amp; Educational Consultancy',
+
+    'herein referred to as Spires. We have created this privacy statement ("Statement"™) in order to  demonstrate our firm commitment to the privacy of the details that you provide to us when using this website.'=>'herein referred to as Spires. We have created this privacy statement ("Statement"™) in order to  demonstrate our firm commitment to the privacy of the details that you provide to us when using this website.',
+
+    'Edexcel Academy & Educational Consultancy, a company registered in Pakistan and Wales (No. +971566428066),'=>'Edexcel Academy & Educational Consultancy, a company registered in Pakistan and Wales (No. +971566428066),',
+
+    'This policy applies where we are acting as a data controller with respect to the personal data of our'=>'This policy applies where we are acting as a data controller with respect to the personal data of our',
+    
+    'processing of that personal data.'=>'processing of that personal data.',
+    
+    'We may change this Privacy Policy from time to time. We may provide you with additional notice (such as adding a statement to the homepages of our websites or sending you an email notification). We encourage you to review the Privacy Policy whenever you interact with us to stay informed about our information practices and the ways you can help protect your privacy.'=>'We may change this Privacy Policy from time to time. We may provide you with additional notice (such as adding a statement to the homepages of our websites or sending you an email notification). We encourage you to review the Privacy Policy whenever you interact with us to stay informed about our information practices and the ways you can help protect your privacy.',
+    
+    'WHAT IS PERSONAL INFORMATION Personal information means information about an identifiable individual or information that permits an individual to be identified. It does not include business contact information, such as name, title, business address and business telephone number when used for business communications.'=>'WHAT IS PERSONAL INFORMATION Personal information means information about an identifiable individual or information that permits an individual to be identified. It does not include business contact information, such as name, title, business address and business telephone number when used for business communications.',
+
+    'OUR COMMITMENT Spires takes responsibility for maintaining and protecting the personal information under our control. We have appointed a Data Controller who can be contacted directly by the public . Our Data Protection Officer is responsible for our day to day compliance. We review this policy and our personal data protection practices regularly to ensure that we are in compliance with applicable legislation and current best practices.'=>'OUR COMMITMENT Spires takes responsibility for maintaining and protecting the personal information under our control. We have appointed a Data Controller who can be contacted directly by the public . Our Data Protection Officer is responsible for our day to day compliance. We review this policy and our personal data protection practices regularly to ensure that we are in compliance with applicable legislation and current best practices.',
+
+    'HOW WE COLLECT, USE AND DISCLOSE PERSONAL INFORMATION We only collect and process personal information as required to meet the purposes that we have identified. We do not indiscriminately collect or retain personal information and will delete all provided information within 6 years of the termination of the usage of our services, save for information required for tax and regulatory purposes for a longer period of limitation.'=>'HOW WE COLLECT, USE AND DISCLOSE PERSONAL INFORMATION We only collect and process personal information as required to meet the purposes that we have identified. We do not indiscriminately collect or retain personal information and will delete all provided information within 6 years of the termination of the usage of our services, save for information required for tax and regulatory purposes for a longer period of limitation.',
+
+    'Spires typically collects personal information that is voluntarily provided by the individual in question. At times, however, personal information is obtained from other sources, such as government bodies or third parties such as employers, references and service providers, as permitted by law. Where the purpose for the collection of personal information is unclear, you can ask the Spires representative with whom you are dealing to provide an explanation of the purpose for the data collection. More generally, we are happy to provide you with all personal information we hold upon request in writing to suppor'=>'Spires typically collects personal information that is voluntarily provided by the individual in question. At times, however, personal information is obtained from other sources, such as government bodies or third parties such as employers, references and service providers, as permitted by law. Where the purpose for the collection of personal information is unclear, you can ask the Spires representative with whom you are dealing to provide an explanation of the purpose for the data collection. More generally, we are happy to provide you with all personal information we hold upon request in writing to suppor',
+
+    'Our reason for collecting personal information about tutors, students, parents, staff and consultants is to establish and maintain our contractual or other business relationship with that individual.'=>'Our reason for collecting personal information about tutors, students, parents, staff and consultants is to establish and maintain our contractual or other business relationship with that individual.',
+
+    'The purpose for collecting personal information about tutors and students is primarily to facilitate the provision of educational tutoring services online, including to allow students to quickly and easily assess the professional and educational background of tutors, as well as allowing us to communicate effectively with tutors, students and parents and to maintain mailing lists. We may also use your personal information to:'=>'The purpose for collecting personal information about tutors and students is primarily to facilitate the provision of educational tutoring services online, including to allow students to quickly and easily assess the professional and educational background of tutors, as well as allowing us to communicate effectively with tutors, students and parents and to maintain mailing lists. We may also use your personal information to:',
+
+    'As appropriate, Spires will ask for specific consent to collect, use and disclose personal information. Such a request, and your consent to such request, may be given in writing, orally or through the Spires platform. In some cases, consent can be implied through an individual relationship or conduct with us, depending on the sensitivity of the information.'=>'As appropriate, Spires will ask for specific consent to collect, use and disclose personal information. Such a request, and your consent to such request, may be given in writing, orally or through the Spires platform. In some cases, consent can be implied through an individual relationship or conduct with us, depending on the sensitivity of the information.',
+
+    'We may also share aggregated or de-identified information, which cannot reasonably be used to identify you.'=>'We may also share aggregated or de-identified information, which cannot reasonably be used to identify you.',
+
+    'Generally, personal information supplied to us is confidential and we do not disclose the information to unconnected third parties except with actual or implied consent, or as permitted or required by law. We do not exchange or sell personal information.'=>'Generally, personal information supplied to us is confidential and we do not disclose the information to unconnected third parties except with actual or implied consent, or as permitted or required by law. We do not exchange or sell personal information.',
+
+    'Spires may use third party service providers from time to time to carry out certain functions for us such as printing, storage, shredding or document scanning. Where we use such outside service providers, we require those third parties to protect personal information in the same manner in which we protect it and to not use or disclose it for any purposes except as directed by Spires.'=>'Spires may use third party service providers from time to time to carry out certain functions for us such as printing, storage, shredding or document scanning. Where we use such outside service providers, we require those third parties to protect personal information in the same manner in which we protect it and to not use or disclose it for any purposes except as directed by Spires.',
 ];

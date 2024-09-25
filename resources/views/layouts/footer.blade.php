@@ -1,6 +1,6 @@
 <footer class="row text-center text-lg-start justify-content-center m-0 p-0 ">
     
-<div class="container main-footer" style="width: 1100px;">
+<div class="container main-footer" style="width: 1100px; background: #43b979;">
                 <div  class="row py-5">
                     <div class="col-lg-4 col-sm-12">
                         <ul class="my-2">
