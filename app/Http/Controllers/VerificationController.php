@@ -27,50 +27,49 @@ class VerificationController extends Controller
         $request->validate([
             'email' => 'required|email',
         ]);
-    
+
         $email = $request->input('email');
         $subject = 'Email Verification';
         $link = route('tutor') . '?email_verification=true'; // Link to the protected route
-        $body = "Dear User,\n\nThank you for signing up! Please verify your email by clicking the link below:\n";
-        $body .= "<a href='{$link}'>Verify Email</a>\n\n";
-        $body .= "Best regards,\nYour Company Name";
-    
-        // Send the email using your SMTP service
-        $this->sendEmails($email, $subject, $body);
-    
+        $body = "Dear User,<br><br>Thank you for signing up! Please verify your email by clicking the link below:<br>";
+        $body .= "<a href='{$link}'>Verify Email</a><br><br>";
+        $body .= "Best regards,<br>Your Company Name";
+
+        // Send the email using PHPMailer
+        $this->sendEmails($email, $subject, $body, true); // true means it's sending HTML content
+
         return redirect()->route('newhome')->with('success', 'Verification link sent to your email!');
-
     }
-    private function sendEmails($to, $subject, $body)
-        {
-            $mail = new PHPMailer(true);
 
-            try {
-                // Server settings
-                // $mail->SMTPDebug = 2;
-                $mail->isSMTP();
-                $mail->Host = 'smtp.hostinger.com';
-                $mail->SMTPAuth = true;
-                $mail->Username = 'info@edexceledu.com';
-                $mail->Password = 'Babar123!@#';
-                $mail->SMTPSecure = 'tls';
-                $mail->Port = 587;
+    private function sendEmails($to, $subject, $body, $isHtml = false)
+    {
+        $mail = new PHPMailer(true);
 
-                // Recipients
-                $mail->setFrom('info@edexceledu.com', 'Edexcel'); // Use direct values here
-                $mail->addAddress($to);
+        try {
+            // Server settings
+            $mail->isSMTP();
+            $mail->Host = 'smtp.hostinger.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'info@edexceledu.com'; // SMTP username
+            $mail->Password = 'Babar123!@#';         // SMTP password
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
 
-                // Content
-                $mail->isHTML(false); // Set email format to plain text
-                $mail->Subject = $subject;
-                $mail->Body = $body;
+            // Recipients
+            $mail->setFrom('info@edexceledu.com', 'Edexcel');
+            $mail->addAddress($to);
 
-                $mail->send();
-                // echo "Email has been sent to $to";
-            } catch (Exception $e) {
-                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            }
+            // Content
+            $mail->isHTML($isHtml);  // Set email format to HTML if $isHtml is true
+            $mail->Subject = $subject;
+            $mail->Body    = $body;
+
+            $mail->send();
+        } catch (Exception $e) {
+            // Handle exception if needed
         }
+    }
+
     
 
     public function sendLink(Request $request)
