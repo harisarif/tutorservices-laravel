@@ -50,6 +50,7 @@
                 success: function(response) {
                     alert(response.success || 'Verification link sent to your email!');
                     $('#emailVerificationModal').modal('hide'); // Optionally hide the modal
+                    window.location.href = '/'
                 },
                 error: function(xhr) {
                     alert(xhr.responseJSON.message || 'An error occurred. Please try again.');
