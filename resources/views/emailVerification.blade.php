@@ -48,7 +48,7 @@
                 type: "POST",
                 data: $(this).serialize(),
                 success: function(response) {
-                    alert(response.success || 'Verification link sent to your email!');
+                    // alert(response.success || 'Verification link sent to your email!');
                     $('#emailVerificationModal').modal('hide'); // Optionally hide the modal
                 },
                 error: function(xhr) {
