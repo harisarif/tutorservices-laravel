@@ -5,6 +5,9 @@
     font-family: sans-serif;
 }
 :root {
+    --primary-color:  #42b979;
+}
+:root {
     --green: 66 ,185 ,121;
     --white: 255, 255, 255;
     --text: 68, 68, 68;
@@ -33,7 +36,7 @@
 .inner h1{
     text-align: center;
     font-size: 34px;
-    color: #555;
+    color: var(--primary-color);
 }
 .inner_wrapper{
  display: flex;
@@ -103,6 +106,7 @@ width: 100%;
     font-weight: 400;
     font-size: 16px;
     width: 200px;
+   
     height: 40px;
     display: flex;
     justify-content: center;
@@ -120,18 +124,18 @@ width: 100%;
     margin-top: 40px;
 }
 .login_typ{
-    color: var(--black);
+    color: var(--primary-color);
     text-decoration: none;
     font-size: 16px;
 }
-.login_typ span{
-    color: rgb(var(--green));
+.login_typ{
+    color: #42b979;
     font-weight: bold;
     margin-left: 1px;
 }
-.login_typ:hover span {
+/* .login_typ:hover span {
     color: var(--black);
-}
+} */
 .tutor_work{
     background-color:rgb(242, 248, 242);
     padding: 50px 0;
@@ -267,4 +271,23 @@ ul.social-network li {
   .hire-tutor-arrow{
     margin: 0 auto !important;
   }
+  /* Button Style */
+  #goToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background-color: #42b979;
+    border: none;
+    border-radius: 50% !important;
+    cursor: pointer;
+    border-radius: 5px;
+    z-index: 9;
+    display: none; /* Hidden initially */
+}
+
+#goToTop i {
+    font-size: 20px;
+    color: white;
+}
 /* footer end */

@@ -1,8 +1,14 @@
 @extends('layouts.app')
 <link rel="stylesheet" href="{{ asset('css/teacher-detail.css') }}">
 @section('content')
+<style>
+    footer{
+        background: #42b979;
+    }
+</style>
 <body>
 @include('whatsapp')
+        <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block; z-index: 9;" onclick="window.scrollTo(0, 0)"><i class="fa-solid fa-chevron-up"></i></button>
         <header class="text-center bg-white m-0 p-2 d-flex align-items-end justify-content-center">
             <a class="mx-auto" href="{{ route('hiring-tutor') }}"><img src="{{ asset('images/logo.png') }}" alt="EDEXCEL-logo"height="50px"></a>
 

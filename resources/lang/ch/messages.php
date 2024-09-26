@@ -138,4 +138,6 @@ return [
     'Emphasize conceptual understanding over procedure.' => '强调概念理解胜过程序。',
     'Provide authentic problems that increase students’ drive to engage with the subject.' => '提供真实的问题，激发学生对学科的参与感。',
     'Share a positive attitude about the subject.' => '分享对学科的积极态度。',
+    'Languages'=>'语言',
+    'Need Help?'=>'需要帮助吗？?',
 ];

@@ -119,4 +119,6 @@ return [
     'We accept various payment methods including credit/debit cards, bank transfers, and online payment platforms.' => 'Мы принимаем различные способы оплаты, включая кредитные/дебетовые карты, банковские переводы и онлайн-платежные платформы.',
     'How can I track my academic progress?' => 'Как я могу отслеживать свой академический прогресс?',
     'Students can track their academic progress through regular assessments, feedback from tutors, and by accessing their academic records on our online platform.' => 'Студенты могут отслеживать свой академический прогресс через регулярные оценки, отзывы от репетиторов и доступ к своим академическим записям на нашей онлайн-платформе.',
+    'Languages'=>'Языки',
+    'Need Help?'=>'Нужна помощь?',
 ];

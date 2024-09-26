@@ -175,4 +175,8 @@ return [
     'Generally, personal information supplied to us is confidential and we do not disclose the information to unconnected third parties except with actual or implied consent, or as permitted or required by law. We do not exchange or sell personal information.'=>'Generally, personal information supplied to us is confidential and we do not disclose the information to unconnected third parties except with actual or implied consent, or as permitted or required by law. We do not exchange or sell personal information.',
 
     'Spires may use third party service providers from time to time to carry out certain functions for us such as printing, storage, shredding or document scanning. Where we use such outside service providers, we require those third parties to protect personal information in the same manner in which we protect it and to not use or disclose it for any purposes except as directed by Spires.'=>'Spires may use third party service providers from time to time to carry out certain functions for us such as printing, storage, shredding or document scanning. Where we use such outside service providers, we require those third parties to protect personal information in the same manner in which we protect it and to not use or disclose it for any purposes except as directed by Spires.',
+
+    'Earn while you teach—share your expertise with students on Edexcel. Sign up to start tutoring online.'=>'Earn while you teach—share your expertise with students on Edexcel. Sign up to start tutoring online.',
+    'Need Help?'=>'Need Help?',
+    'Languages'=>'Languages',
 ];

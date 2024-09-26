@@ -39,7 +39,7 @@
 
                 <div class="Toggle_WhatsApp_Button_Wrapper">
                     <div class="Toggle_WhatApp_Chat_Box">
-                        <span class="whatsapp-help">Need Help?</span>
+                        <span class="whatsapp-help">{{ __('messages.Need Help?') }}</span>
                         <input type="checkbox" id="toggleWhatsAppChat" />
                         <label for="toggleWhatsAppChat">
                             <i class="fab fa-whatsapp" aria-hidden="true"></i>
