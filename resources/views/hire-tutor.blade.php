@@ -38,6 +38,9 @@
     footer{
         background-color: #42b979;
     }
+    .select2-container .select2-selection--single{
+        height: 45px !important;
+    }
 </style>
 @if ($errors->any())
         <div class="alert alert-danger">
@@ -180,7 +183,7 @@
                                 <label for="" style="color:#42b979;"><strong>Mobile Number<b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
                                     <div class="col-md-11 mt-2 mb-2" style="width: 100%;">
-                                        <div class="input-group d-flex justify-content-between align-items-center" style="width: 101%;">
+                                        <div class="input-group d-flex justify-content-between align-items-center" style="width: 100%;">
                                         
                                             <select name="countrySelect" id="countrySelect" class="form-select country-select w-50" required>
                                                 @foreach ($countriesPhone as $key => $country)
@@ -188,7 +191,7 @@
                                                 @endforeach
                                             </select>
                                            
-                                            <input  class="form-control w-50" required name="phone" id="phone" type="text" placeholder="e.g +92XXXXXXXXXX" style="border: 1px solid #aaa; height: 28px; box-shadow: none;">
+                                            <input  class="form-control w-50" required name="phone" id="phone" type="text" placeholder="e.g +92XXXXXXXXXX" style="border: 1px solid #ddd; height: 44px; box-shadow: none;">
                                         </div>
                                     </div>
 
@@ -261,6 +264,7 @@
         $(document).ready(function() {
             $('#country').select2();
             $('#city').select2();
+            $('#school_class').select2();
             $('#country').on('change', function() {
                 
             

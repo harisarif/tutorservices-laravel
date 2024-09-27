@@ -1,7 +1,20 @@
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
+<style>
+    .modal-open .modal{
+        margin-top: 10rem;
+    }
+    .footer-bottom{
+        background: #42b979;
+        position: fixed;
+        top: 89%;
+    }
+</style>
+<header class="text-center bg-white m-0 p-2 d-flex align-items-end justify-content-center">
+            <a class="mx-auto" href="{{ route('newhome') }}"><img src="{{ asset('images/logo.png') }}" alt="EDEXCEL-logo"height="50px"></a>
+                <div class="custom-select-wrapper">
+        </header>
 <div class="container mt-5">
-    <h3>Please verify your email to access the Tutor Signup page</h3>
+    <h3 class="text-success">Please verify your email to access the Tutor Signup page</h3>
 </div>
 
 <!-- Email Verification Modal -->
@@ -9,9 +22,9 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Enter your email</h5>
+                <h5 class="modal-title text-success" id="exampleModalLabel">Enter your email</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span class="text-success" aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
@@ -21,13 +34,25 @@
                         <label for="email">Email address:</label>
                         <input type="email" name="email" class="form-control" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Send Verification Link</button>
+                    <button type="submit" class="btn btn-success">Send Verification Link</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
+    <div class="col-12 footer-bottom border-top">
+        <ul class="p-3 text-center">
+            <li class="d-inline text-light">© Copyright 2024.</li>
+            <li class="d-inline text-light">All Rights Reserved.</li>        
+            <li class="d-inline text-light">|</li>
+            <li class="d-inline text-light">Managed by</li>
+            <li class="d-inline">
+                <a class="text-decoration-none text-light" href="https://techtrack.online/">Techtrack</a>
+            </li>
+           
+            
+        </ul>
+    </div>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 @if(!request()->query('email_verification'))

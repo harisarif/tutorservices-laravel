@@ -254,7 +254,10 @@
    [dir="rtl"] .dataTables_paginate{
        display: flex;
    }
-    
+   .scroll-to-top{
+    border-radius: 49% !important;
+    background-color: rgb(66, 185, 121);
+   }
 </style>
 @php
     $notifications = auth()->user()->unreadNotifications;
@@ -412,18 +415,7 @@
                                     {{ __('messages.Logout') }} 
                                 </a>
                             </div>
-                            <div class="custom-select-wrapper mx-1" style="cursor: pointer;">
-                                <div class="custom-select-web">
-                                        <!-- Clickable Globe Icon -->
-                                        <i class="fa-solid fa-globe" style="color:#42b979 !important" aria-hidden="true" onclick="toggleDropdown()"></i>
-
-                                        <!-- Dropdown Options -->
-                                        <div class="custom-options" id="language-select">
-                                            <div class="custom-option text-center text-success py-1" data-value="en" onclick="changeLanguage('en')">English</div>
-                                            <div class="custom-option text-center text-success py-1" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
-                                        </div>
-                                </div>
-                             </div>
+                            
                         </li>
 
                     </ul>
@@ -588,9 +580,7 @@
                         <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab" >
                             <div class="d-sm-flex align-items-center justify-content-between mb-4 SB">
                                 <h1 class="h3 mb-0 text-gray-800">{{ __('messages.Student') }}</h1>
-                                <div class="del-button">
-                                    <button type="button" class="btn btn-danger" id="delete-student">Multiple Delete</button>
-                                </div>
+                               
                             </div>
                             @include('student-list')
 
@@ -599,7 +589,7 @@
                             <div class="d-sm-flex align-items-center justify-content-between mb-4 SB">
                                 <h1 class="h3 mb-0 text-gray-800">{{ __('messages.Teacher') }}</h1>
                                 <div class="del-button">
-                                    <button type="button" class="btn btn-danger" id="delete-selected">Multiple Delete</button>
+                                    <button type="button" class="btn btn-danger" id="delete-selected">Multiple</button>
                                 </div>
                             </div>
                             @include('teacher-list')
@@ -631,7 +621,7 @@
     <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded text-white bg-success" href="#page-top">
+    <a class="scroll-to-top rounded text-white" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
 
@@ -679,10 +669,6 @@
             // Check/uncheck all checkboxes based on the main checkbox
             $('.tutor-checkbox').prop('checked', this.checked);
         });
-        $('#select-all-student').click(function() {
-            // Check/uncheck all checkboxes based on the main checkbox
-            $('.student-checkbox').prop('checked', this.checked);
-        });
 
         // Optional: Uncheck "Select All" if one of the checkboxes is unchecked
         $('.tutor-checkbox').click(function() {
@@ -691,6 +677,7 @@
             }
         });
         $('#delete-selected').click(function() {
+            alert('asdsa')
             // Gather all checked checkbox values
             var selected = [];
             $('.tutor-checkbox:checked').each(function() {
@@ -718,38 +705,6 @@
                     error: function(xhr) {
                         // Handle error
                         alert('Error occurred while deleting tutors.');
-                    }
-                });
-            }
-        });
-        $('#delete-student').click(function() {
-            // Gather all checked checkbox values
-            var selected = [];
-            $('.student-checkbox:checked').each(function() {
-                selected.push($(this).val());
-            });
-
-            if (selected.length === 0) {
-                alert('Please select at least one student to delete.');
-                return;
-            }
-
-            // Confirm deletion
-            if (confirm('Are you sure you want to delete the selected students?')) {
-                $.ajax({
-                    url: "{{ route('student.destroy.bulk') }}", // Update with your route
-                    type: 'DELETE',
-                    data: {
-                        ids: selected,
-                        _token: '{{ csrf_token() }}' // Include CSRF token for security
-                    },
-                    success: function(response) {
-                        // Handle success (e.g., reload the page or remove deleted rows)
-                        location.reload(); // Reload page after successful deletion
-                    },
-                    error: function(xhr) {
-                        // Handle error
-                        alert('Error occurred while deleting students.');
                     }
                 });
             }

@@ -7,22 +7,18 @@
     #country span.select2.select2-container.select2-container--default {
         width: 100% !important;
     }
+    @media (max-width: 1514px){
+        .img-reqire{
+            height: 608px !important;
+        }
+    }
     .email-container {
         position: relative;
         display: inline-block;
         cursor:pointer;
         padding: 8px 4px;
     }
-    @media (max-width: 1514px){
-        .img-reqire{
-            height: 608px !important;
-        }
-    }
-    /* @media (max-width: 1362px) {
-        .img-reqire{
-            height: 608px !important;
-        }
-    } */
+    
     .email {
         display: none;
         position: absolute;
@@ -167,7 +163,7 @@
             <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
         </div>
     @endif
-    
+        <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block; z-index: 9;" onclick="window.scrollTo(0, 0)"><i class="fa-solid fa-chevron-up"></i></button>
     <div class="row mini_header m-0 p-0 container-fluid position-relative">
         <div class="col-sm-12 px-3  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0 adjustMobile" style="background:#42b979;position:fixed !important;height:12%">
             <ul class="p-1 m-0 d-sm-inline d-block text-center header-ul pt-2">
@@ -239,10 +235,10 @@
                     </div>
                 </nav>
 
-            </ul>
-            <a href="{{ route('hire.tutor') }}" class="hiring-button">
-            {{ __('messages.Book a free demo for your child') }} 
-                </a>
+                </ul>
+                <a href="{{ route('hire.tutor') }}" class="hiring-button">
+                {{ __('messages.Book a free demo for your child') }} 
+                    </a>
             <div>
             <!-- <h1>{{ __('messages.welcome') }}</h1> -->
             
@@ -384,7 +380,7 @@
                                         <div class="media d-flex " style=" justify-content: space-between;">
                                             <div class="media-body text-left counter">
                                             <h3 class="danger" id="lang-count">500+</h3>
-                                            <span >Languages</span>
+                                            <span >{{ __('messages.Languages') }}</span>
                                             </div>
                                             <div class="align-self-center animated-icons">
                                             <i class="fas fa-globe" aria-hidden="true" style="font-size: 25px;"></i>
@@ -408,8 +404,8 @@
                                 <div class="d-flex justify-content-between ad-border-div">
                                     <div class="mx-2">
                                         <p class="m-0 pt-1 tutors-range"> {{ $tutors->firstItem() }} to {{ $tutors->lastItem() }}
-                                            0git pull
-                                            f <span class="total-tutors-count">{{ $totalTutorsCount }}</span> tutors</p>
+                                            0
+                                            of <span class="total-tutors-count">{{ $totalTutorsCount }}</span> tutors</p>
                                     </div>
                                     <div class="my-2 mx-2">
                                         <button id="resetFilterBtn" class="ad-btn">{{ __('messages.Reset Filter') }}</button>
@@ -1652,5 +1648,6 @@
                 clearInterval(LintervalId);
             }
         }
+        
 </script>
 @endsection

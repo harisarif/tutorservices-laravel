@@ -2,8 +2,8 @@
 @php
     $tutors = DB::table('tutors')->get();
 @endphp
-     <style>
-                .switch {
+    <style>
+            .switch {
             display: inline-block;
             position: relative;
             width: 50px;
@@ -38,7 +38,7 @@
         input:checked + .switch:active::before {
             box-shadow: 0 2px 8px rgba(0,0,0,0.28), 0 0 0 20px rgba(0,150,136,0.2);
         }
-     </style>
+    </style>
     {{-- <h1>All Teachers</h1> --}}
     <div id="statusMessage" style="display:none;" class="alert alert-success"></div>
     <div class=" AB-sb">
@@ -54,7 +54,8 @@
                     <th>Gender</th>
                     <th>Country</th>
                     <th>City</th>
-                    <th>Experience</th>
+                    <th>Email</th>
+                    <!-- <th>Experience</th> -->
                     <th>Availability</th>
                     <th>Phone</th>
                     <th>Status</th>
@@ -75,7 +76,8 @@
                 <td>{{ $tutor->gender }}</td>
                 <td>{{ $tutor->location }}</td>
                 <td>{{ $tutor->city }}</td>
-                <td>{{ $tutor->experience }} {{ $tutor->experience > 1 ? 'years' : 'year' }}</td>
+                <td>{{ $tutor->email }}</td>
+                <!-- <td>{{ $tutor->experience }} {{ $tutor->experience > 1 ? 'years' : 'year' }}</td> -->
                 <td>{{ $tutor->availability }}</td>
                 <td>{{ $tutor->phone }}</td>
                 <!-- Toggle Switch -->

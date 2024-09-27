@@ -76,9 +76,9 @@ return [
     'Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.'=>'حافظ بشكل كبير على حلول النقرات وقذائف الهاون دون حلول وظيفية. تضافر علاقات فرض الضرائب على الموارد بشكل كامل عبر الأسواق المتخصصة الرائدة. زراعة مهنيا.',
     'MICHAEL TEDDY'=>'مايكل تيدي',
     'Recomendation'=>'توصية',
-    'Edexcels operating system is exceptionally robust and holds the collective knowledge of Selectra entire business operations'=>'يتميز نظام التشغيل Edexcels بالقوة الاستثنائية ويحمل المعرفة الجماعية للعمليات التجارية لشركة Selectra بأكملها',
+    'Edexcels operating system is exceptionally robust and holds the collective knowledge of Selectra entire business operations'=>'يتميز نظام التشغيل ادكسل بالقوة الاستثنائية ويحمل المعرفة الجماعية للعمليات التجارية لشركة سيليكترا بأكملها',
     'Edexcel for Study'=>'ادكسل للدراسة',
-    'Edexcel for Study offers a diverse range of qualifications, including GCSEs and A-levels, designed to support students academic and professional aspirations. With a focus on critical thinking and practical skills, Edexcel provides high-quality education that prepares learners for further studies or careers, empowering them to excel in their chosen paths.'=>'يقدم Edexcel for Study مجموعة متنوعة من المؤهلات، بما في ذلك GCSEs والمستويات A، المصممة لدعم تطلعات الطلاب الأكاديمية والمهنية. مع التركيز على التفكير النقدي والمهارات العملية، توفر Edexcel تعليمًا عالي الجودة يعد المتعلمين لمزيد من الدراسات أو الوظائف، وتمكينهم من التفوق في المسارات التي يختارونها.',
+    'Edexcel for Study offers a diverse range of qualifications, including GCSEs and A-levels, designed to support students academic and professional aspirations. With a focus on critical thinking and practical skills, Edexcel provides high-quality education that prepares learners for further studies or careers, empowering them to excel in their chosen paths.'=>'يقدم ادكسل للدراسة مجموعة متنوعة من المؤهلات، بما في ذلك GCSEs والمستويات A، المصممة لدعم تطلعات الطلاب الأكاديمية والمهنية. مع التركيز على التفكير النقدي والمهارات العملية، توفر ادكسل تعليمًا عالي الجودة يعد المتعلمين لمزيد من الدراسات أو الوظائف، وتمكينهم من التفوق في المسارات التي يختارونها.',
     'Get in Touch'=>'تواصل معنا',
     'Dashboard'=>'لوحة القيادة',
     'Teacher'=>'مدرس',
@@ -98,7 +98,7 @@ return [
     'Direct inquiry'=>'الاستفسار المباشر',
     'Teacher inquiry'=>'استفسار المعلم',
     'Alerts Center'=>'مركز التنبيهات',
-    'Edexcel Academically with tailored tutoring and professional guidance'=>'Edexcel أكاديميًا مع دروس خصوصية وتوجيهات مهنية',
+    'Edexcel Academically with tailored tutoring and professional guidance'=>'ادكسل أكاديميًا مع دروس خصوصية وتوجيهات مهنية',
     'Login Your Account'=>'تسجيل الدخول إلى حسابك',
     'Email Address'=>'عنوان البريد الإلكتروني',
     'Password'=>'كلمة المرور',
@@ -137,4 +137,8 @@ return [
     'Generally, personal information supplied to us is confidential and we do not disclose the information to unconnected third parties except with actual or implied consent, or as permitted or required by law. We do not exchange or sell personal information.'=>'بشكل عام، تعتبر المعلومات الشخصية المقدمة إلينا سرية ولا نقوم بالكشف عن المعلومات لأطراف ثالثة غير متصلة إلا بموافقة فعلية أو ضمنية، أو على النحو المسموح به أو المطلوب بموجب القانون. نحن لا نتبادل أو نبيع المعلومات الشخصية.',
 
     'Spires may use third party service providers from time to time to carry out certain functions for us such as printing, storage, shredding or document scanning. Where we use such outside service providers, we require those third parties to protect personal information in the same manner in which we protect it and to not use or disclose it for any purposes except as directed by Spires.'=>'قد تستعين شركة Spiers بمقدمي خدمات خارجيين من وقت لآخر لتنفيذ وظائف معينة لنا مثل الطباعة أو التخزين أو التمزيق أو مسح المستندات ضوئيًا. عندما نستخدم مقدمي الخدمات الخارجيين، فإننا نطلب من تلك الأطراف الثالثة حماية المعلومات الشخصية بنفس الطريقة التي نحميها بها وعدم استخدامها أو الكشف عنها لأي غرض باستثناء توجيهات سبايرز.',
+
+    'Need Help?'=>'هل تحتاج إلى مساعدة؟',
+    'Languages'=>'اللغات',
+    'Earn while you teach—share your expertise with students on Edexcel. Sign up to start tutoring online.'=>'اربح أثناء التدريس - شارك خبرتك مع الطلاب على ادكسل. قم بالتسجيل لبدء التدريس عبر الإنترنت.'
 ];
