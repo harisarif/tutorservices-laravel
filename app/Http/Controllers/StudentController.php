@@ -239,7 +239,7 @@ class StudentController extends Controller
         $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
 
         // Send notification to the admin
-        $admin = User::where('email', 'info@edexceledu.com')->first(); // Admin user
+        $admin = User::where('email', 'ceo@edexceledu.com')->first(); // Admin user
         $admin->notify(new InquirySuccessNotification($inquiry)); // Notify the admin
 
         return redirect()->route('newhome')->with('success', 'Inquiry created successfully.');

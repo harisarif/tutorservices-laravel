@@ -7,12 +7,17 @@ use Illuminate\Http\Request;
 class NotificationController extends Controller
 {
     //
-    public function markNotificationAsRead($notificationId)
-    {
-        $notification = auth()->user()->notifications()->where('id', $notificationId)->first();
-        if ($notification) {
+    public function markNotificationAsRead(Request $request)
+{
+    $notification = auth()->user()->notifications()->where('id', $request->notification_id)->first();
+    if ($notification) {
+        if ($request->read) {
             $notification->markAsRead();
+        } else {
+            $notification->markAsUnread();
         }
-        return redirect()->back();
+        return response()->json(['status' => 'success']);
     }
+    return response()->json(['status' => 'error'], 400);
+}
 }

@@ -50,7 +50,7 @@ Route::get('/enter-email', function() {
 Route::get('/debug-session', function () {
     return session()->all(); // Display all session data
 })->middleware('auth');
-Route::get('notifications/read/{id}', [NotificationController::class, 'markNotificationAsRead'])->name('notifications.read');
+Route::get('/notifications/mark-read', [NotificationController::class, 'markNotificationAsRead'])->name('mark.notifications.read');
 
 // Route to send verification email
 Route::post('/send-verification-email', [VerificationController::class, 'sendVerificationEmail'])->name('send.verification.email');

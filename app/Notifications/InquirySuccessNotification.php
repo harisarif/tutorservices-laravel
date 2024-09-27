@@ -14,9 +14,10 @@ class InquirySuccessNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct($inquiry)
     {
         //
+        $this->inquiry = $inquiry;
     }
 
     /**
@@ -26,23 +27,22 @@ class InquirySuccessNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(object $notifiable): MailMessage
+    public function toDatabase($notifiable)
     {
-        return (new MailMessage)
-        ->subject('New Inquiry Received')
-        ->greeting('Hello Admin,')
-        ->line('A new inquiry has been added:')
-        ->line('Name: ' . $this->inquiry->name)
-        ->line('Email: ' . $this->inquiry->email)
-        ->line('Phone: ' . $this->inquiry->phone)
-        ->action('View Inquiry', url('/inquiry/create' . $this->inquiry->id))
-        ->line('Thank you for using our application!');
+        return [
+            'inquiry_id' => $this->inquiry->id,
+            'name' => $this->inquiry->name,
+            'email' => $this->inquiry->email,
+            'phone' => $this->inquiry->phone,
+            'message' => "New inquiry from {$this->inquiry->name} ({$this->inquiry->email})", // Add a message key
+       
+        ];
     }
 
     /**
