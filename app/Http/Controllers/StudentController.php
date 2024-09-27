@@ -14,6 +14,7 @@ use Illuminate\Validation\ValidationException;
 use App\Models\SchoolClass;
 use App\Models\Subject;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\InquirySuccessNotification;
 class StudentController extends Controller
 {
     public function index() {
@@ -189,30 +190,33 @@ class StudentController extends Controller
         // Optionally, you can redirect the user or return a response
         // return redirect()->route('newhome')->with('success', 'Student created successfully.');
     }
-    public function inquiry(Request $request) {
+    
+    public function inquiry(Request $request)
+    {
         $rules = [
             'email' => 'required|string|email|max:255|unique:inquiries,email',
-
         ];
-    
+
         $validator = Validator::make($request->all(), $rules);
 
-        // Check if validation fails
         if ($validator->fails()) {
             return redirect()->back()
-                             ->withErrors($validator)
-                             ->withInput();
+                            ->withErrors($validator)
+                            ->withInput();
         }
+
         $inquiry = new Inquiry();
         $inquiry->description = $request->input('subjects');
         $inquiry->name = $request->input('fname');
         $inquiry->email = $request->input('email');
         $inquiry->phone = $request->input('phone');
         $inquiry->save();
+
+        // Send email to the student
         $toStudent = $inquiry->email;
         $subjectStudent = "Welcome to Edexcel!";
         $messageStudent = "Dear " . $inquiry->name . "\r\n" .
-        "Welcome to Edexcel! 🎉 We’re excited to to got you inquiry soon you will notified.\r\n" .
+        "Welcome to Edexcel! 🎉 We’re excited to to got your inquiry soon you will notified.\r\n" .
         "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at info@edexceledu.com or +971566428066.\r\n" .
         "We’re here to help you succeed!\r\n\r\n" .
         "Best regards,\r\n" .
@@ -220,31 +224,24 @@ class StudentController extends Controller
 
         $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
 
+        // Send email to the admin
         $toAdmin = 'info@edexceledu.com';
         $subjectAdmin = "Edexcel Notification";
-        $messageAdmin = "Inquiry Added
-
-        Dear Babar,
-
-        I hope this email finds you well.
-
-        I am pleased to inform you that a new student, {$inquiry->name}, has successfully enrolled through our website. Below are the details of the new enrollment:
-
-        - *Full Name:* {$inquiry->name}
-        - *Email Address:* {$inquiry->email}
-        - *Contact Number:* {$inquiry->phone}
-        - *Program/Course Enrolled:* {$inquiry->subjects}
-
-        Please ensure that {$inquiry->name} is added to our records and receives all necessary welcome materials and instructions. If any further information is needed, feel free to contact me.
-
-        Thank you for your prompt attention to this new enrollment.
-
-        Best regards,
-        The Edexcel Team";
-
-
+        $messageAdmin = "Inquiry Added\n\n" .
+            "Dear Admin,\n\n" .
+            "A new inquiry has been added:\n\n" .
+            "- Name: {$inquiry->name}\n" .
+            "- Email: {$inquiry->email}\n" .
+            "- Phone: {$inquiry->phone}\n\n" .
+            "Best regards,\n" .
+            "The Edexcel Team";
 
         $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
+
+        // Send notification to the admin
+        $admin = User::where('email', 'info@edexceledu.com')->first(); // Admin user
+        $admin->notify(new InquirySuccessNotification($inquiry)); // Notify the admin
+
         return redirect()->route('newhome')->with('success', 'Inquiry created successfully.');
     }
     private function sendEmail($to, $subject, $body)

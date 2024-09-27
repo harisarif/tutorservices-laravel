@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
 </head>
+
 <style>
         ::-webkit-scrollbar {
             width: 6px; /* For vertical scrollbars */
@@ -255,6 +256,17 @@
    }
     
 </style>
+@php
+    $notifications = auth()->user()->unreadNotifications;
+@endphp
+
+@if($notifications->count() > 0)
+    @foreach($notifications as $notification)
+        <div>{{ $notification->data['message'] }}</div>
+    @endforeach
+@else
+    <p>No new notifications</p>
+@endif
 <body id="page-top">
     
     <!-- Page Wrapper -->
@@ -341,11 +353,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw text-success"></i>
-                                <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
-                            </a>
+                        <!-- -->
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in BD" aria-labelledby="alertsDropdown ">
                                 <h6 class="dropdown-header bg-success border-success">

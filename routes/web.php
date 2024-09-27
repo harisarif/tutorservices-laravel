@@ -22,6 +22,7 @@ use App\Http\Controllers\TutorController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\NotificationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,6 +50,7 @@ Route::get('/enter-email', function() {
 Route::get('/debug-session', function () {
     return session()->all(); // Display all session data
 })->middleware('auth');
+Route::get('notifications/read/{id}', [NotificationController::class, 'markNotificationAsRead'])->name('notifications.read');
 
 // Route to send verification email
 Route::post('/send-verification-email', [VerificationController::class, 'sendVerificationEmail'])->name('send.verification.email');
