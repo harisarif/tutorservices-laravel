@@ -95,21 +95,16 @@
     .custom-options-web.open {
         display: block;
     }
+    .fa-globe{
+        margin-left: -50px;
+    }
 </style>
 <body>
 @include('whatsapp')
-        <header class="text-center bg-white m-0 p-2 d-flex align-items-end justify-content-center">
+        <header class="text-center bg-white m-0 p-2 d-flex align-items-center justify-content-center">
             <a class="mx-auto" href="{{ route('newhome') }}"><img src="/images/logo.png" alt="EDEXCEL-logo" height="50px"></a>
                 <div class="custom-select-wrapper">
-                    <div class="custom-select-web">
-                        <i class="fa-solid fa-globe" style="color:#42b979 !important; margin-left: -71px;" aria-hidden="true" onclick="toggleDropdownWeb()"></i>
-                        <div class="custom-options-web" id="language-select">
-                            <div class="custom-option p-1" data-value="en" onclick="changeLanguage('en')">English</div>
-                            <div class="custom-option p-1" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
-                            <div class="custom-option p-1" data-value="ar" onclick="changeLanguage('rs')">Russian</div>
-                            <div class="custom-option p-1" data-value="ar" onclick="changeLanguage('ch')">Chinese</div>
-                        </div>
-                    </div>
+                    @include('language')
                 </div>
         </header>
         <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block;" onclick="window.scrollTo(0, 0)"><i class="fa-solid fa-chevron-up"></i></button>

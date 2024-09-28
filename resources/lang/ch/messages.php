@@ -140,4 +140,13 @@ return [
     'Share a positive attitude about the subject.' => '分享对学科的积极态度。',
     'Languages'=>'语言',
     'Need Help?'=>'需要帮助吗？?',
+    'Post Learning Requirement - Its Free!'=>'后期学习要求 - 免费！',
+    'Post your learning requirement and let interested tutors contact you'=>'发布您的学习需求，让感兴趣的导师联系您',
+    ' If you are a tutor'=>'如果你是导师',
+    'Please fill all mandatory fields'=>'请填写所有必填字段',
+    'What are you looking for?'=>'你要买什么？',
+    'Online Tutor '=>'在线导师',
+    'Tutor for Home'=>'家庭导师',
+    'Click here'=>'点击这里',
+    'Both'=>'两个都',
 ];

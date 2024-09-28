@@ -121,4 +121,13 @@ return [
     'Students can track their academic progress through regular assessments, feedback from tutors, and by accessing their academic records on our online platform.' => 'Студенты могут отслеживать свой академический прогресс через регулярные оценки, отзывы от репетиторов и доступ к своим академическим записям на нашей онлайн-платформе.',
     'Languages'=>'Языки',
     'Need Help?'=>'Нужна помощь?',
+    'Post Learning Requirement - Its Free!'=>'Требование к послеобучению – это бесплатно!',
+    'Post your learning requirement and let interested tutors contact you'=>'Опубликуйте свои требования к обучению и позвольте заинтересованным преподавателям связаться с вами',
+    ' If you are a tutor'=>'Если вы репетитор',
+    'Please fill all mandatory fields'=>'Пожалуйста, заполните все обязательные поля',
+    'What are you looking for?'=>'Что Вы ищете?',
+    'Online Tutor '=>'Онлайн репетитор',
+    'Tutor for Home'=>'Репетитор для дома',
+    'Click here'=>'кликните сюда',
+    'Both'=>'Оба',
 ];

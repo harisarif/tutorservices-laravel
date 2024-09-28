@@ -1,6 +1,9 @@
 @extends('layouts.app')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
+    .fa-globe{
+        color: #fff !important;
+    }
     body{
         overflow-x: hidden !important;
     }
@@ -268,15 +271,7 @@
                         <a class="phone-number-header text-decoration-none " href="tel:+971566428066" style="color: #42b979;">+971 56 642 8066</a>
                     </div>
                     <div class="custom-select-wrapper">
-                    <div class="custom-select-web">
-                        <i class="fa-solid fa-globe" style="color:#fff !important" aria-hidden="true" onclick="toggleDropdownWeb()"></i>
-                        <div class="custom-options-web" id="language-select">
-                            <div class="custom-option" data-value="en" onclick="changeLanguageWeb('en')">English</div>
-                            <div class="custom-option" data-value="ar" onclick="changeLanguageWeb('ar')">Arabic</div>
-                            <div class="custom-option" data-value="ar" onclick="changeLanguage('rs')">Russian</div>
-                            <div class="custom-option" data-value="ar" onclick="changeLanguage('ch')">Chinese</div>
-                        </div>
-                    </div>
+                    @include('language')
                 </div>
                 </div>
                     

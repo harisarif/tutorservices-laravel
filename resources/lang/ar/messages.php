@@ -97,7 +97,7 @@ return [
     '$290.29 has been deposited into your account!'=>'تم إيداع 290.29 دولارًا في حسابك!',
     'Direct inquiry'=>'الاستفسار المباشر',
     'Teacher inquiry'=>'استفسار المعلم',
-    'Alerts Center'=>'مركز التنبيهات',
+    'Notification'=>'إشعار',
     'Edexcel Academically with tailored tutoring and professional guidance'=>'ادكسل أكاديميًا مع دروس خصوصية وتوجيهات مهنية',
     'Login Your Account'=>'تسجيل الدخول إلى حسابك',
     'Email Address'=>'عنوان البريد الإلكتروني',
@@ -140,5 +140,14 @@ return [
 
     'Need Help?'=>'هل تحتاج إلى مساعدة؟',
     'Languages'=>'اللغات',
-    'Earn while you teach—share your expertise with students on Edexcel. Sign up to start tutoring online.'=>'اربح أثناء التدريس - شارك خبرتك مع الطلاب على ادكسل. قم بالتسجيل لبدء التدريس عبر الإنترنت.'
+    'Earn while you teach—share your expertise with students on Edexcel. Sign up to start tutoring online.'=>'اربح أثناء التدريس - شارك خبرتك مع الطلاب على ادكسل. قم بالتسجيل لبدء التدريس عبر الإنترنت.',
+    'Post Learning Requirement - Its Free!'=>'متطلبات ما بعد التعلم - إنها مجانية!',
+    'Post your learning requirement and let interested tutors contact you'=>'انشر متطلبات التعلم الخاصة بك ودع المعلمين المهتمين يتصلون بك',
+    ' If you are a tutor'=>'إذا كنت مدرسًا',
+    'Please fill all mandatory fields'=>'يرجى ملء جميع الحقول الإلزامية',
+    'What are you looking for?'=>'ما الذي تبحث عنه؟',
+    'Online Tutor '=>'مدرس عبر الإنترنت',
+    'Tutor for Home'=>'مدرس للمنزل',
+    'Click here'=>'انقر هنا',
+    'Both'=>'كلاهما',
 ];

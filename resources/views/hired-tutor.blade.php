@@ -201,16 +201,8 @@
                         <a class="phone-number-header text-decoration-none " href="tel:+971566428066" style="color: #42b979;">+971 56 642 8066</a>
                     </div>
                     <div class="custom-select-wrapper">
-                    <div class="custom-select-web">
-                        <i class="fa-solid fa-globe" style="color:#fff !important" aria-hidden="true" onclick="toggleDropdownWeb()"></i>
-                        <div class="custom-options-web" id="language-select">
-                            <div class="custom-option" data-value="en" onclick="changeLanguageWeb('en')">English</div>
-                            <div class="custom-option" data-value="ar" onclick="changeLanguageWeb('ar')">Arabic</div>
-                            <div class="custom-option" data-value="ar" onclick="changeLanguage('rs')">Russian</div>
-                            <div class="custom-option" data-value="ar" onclick="changeLanguage('ch')">Chinese</div>
-                        </div>
+                        @include('language')
                     </div>
-                </div>
                 </div>
                     
                 
