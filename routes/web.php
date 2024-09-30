@@ -66,7 +66,7 @@ Route::get('/cities', [StudentController::class, 'getCities'])->name('cities');
 Route::post('/update-tutor-status', [TutorController::class, 'updateStatus'])->name('update.tutor.status');
 Route::delete('/teachers/destroy-bulk', [TutorController::class, 'destroyBulk'])->name('teachers.destroy.bulk');
 Route::delete('/student/destroy-bulk', [StudentController::class, 'destroystudentBulk'])->name('student.destroy.bulk');
-
+Route::delete('/inquiry/destroy-bulk', [StudentController::class, 'destroyinquiryBulk'])->name('inquiry.destroy.bulk');
 Route::get('/policy', [StudentController::class, 'privacyPolicy'])->name('policy.index');
 Route::get('/terms', [StudentController::class, 'termsCondition'])->name('terms.condition');
 Route::get('/tutor-detail', [TutorController::class, 'tutorDetail'])->name('tutor.detail');
@@ -80,6 +80,7 @@ Route::delete('/student-list/{id}', [StudentController:: class, 'destroy'])->nam
 Route::post('/tutor/create', [TutorController::class, 'create'])->name('tutor-create');
 Route::get('/tutors', [TutorController::class, 'filterByCountry'])->name('tutors.filterByCountry');
 Route::get('/students-list', [StudentController::class, 'showStudentsList'])->name('students.list');
+Route::get('/inquiries-list', [StudentController::class, 'inquiriesList'])->name('inquiries.list');
 Route::get('/students-pdf', [StudentController::class, 'studentsPDF'])->name('students.pdf');
 Route::get('/teachers-list', [TutorController::class, 'fetchTeachers'])->name('teachers.list');
 Route::get('/teachers-list/{id}/edit', [TutorController::class, 'edit'])->name('edit-teacher');

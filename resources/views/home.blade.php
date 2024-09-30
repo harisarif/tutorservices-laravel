@@ -317,7 +317,7 @@
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
             <li class="nav-item">
-                <a class="nav-link py-2" id="home-tab" data-toggle="tab" href="#home" role="tab"    aria-controls="home" aria-selected="true">
+                <a class="nav-link py-2" id="inquiry-tab" data-toggle="tab" href="#inquiry" role="tab"    aria-controls="inquiry" aria-selected="true">
                     <i class="fa fa-question-circle" aria-hidden="true"></i>
                     <span>{{ __('messages.Direct inquiry') }}
                     </span>
@@ -572,7 +572,16 @@
                             </div>
                         </div>
 
+                        <div class="tab-pane fade" id="inquiry" role="tabpanel" aria-labelledby="inquiry-tab" >
+                            <div class="d-sm-flex align-items-center justify-content-between mb-4 SB">
+                                <h1 class="h3 mb-0 text-gray-800">{{ __('Inquiry') }}</h1>
+                                <div class="del-button">
+                                    <button type="button" class="btn btn-danger" id="delete-inquiry">Multiple Delete</button>
+                                </div>
+                            </div>
+                            @include('inquiry-list')
 
+                        </div>
                         <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab" >
                             <div class="d-sm-flex align-items-center justify-content-between mb-4 SB">
                                 <h1 class="h3 mb-0 text-gray-800">{{ __('messages.Student') }}</h1>
@@ -671,6 +680,10 @@
             // Check/uncheck all checkboxes based on the main checkbox
             $('.student-checkbox').prop('checked', this.checked);
         });
+        $('#select-all-inquiry').click(function() {
+            // Check/uncheck all checkboxes based on the main checkbox
+            $('.inquiry-checkbox').prop('checked', this.checked);
+        });
 
         // Optional: Uncheck "Select All" if one of the checkboxes is unchecked
         $('.tutor-checkbox').click(function() {
@@ -706,6 +719,39 @@
                     error: function(xhr) {
                         // Handle error
                         alert('Error occurred while deleting tutors.');
+                    }
+                });
+            }
+        });
+        
+        $('#delete-inquiry').click(function() {
+            // Gather all checked checkbox values
+            var selected = [];
+            $('.inquiry-checkbox:checked').each(function() {
+                selected.push($(this).val());
+            });
+
+            if (selected.length === 0) {
+                alert('Please select at least one inquiry to delete.');
+                return;
+            }
+
+            // Confirm deletion
+            if (confirm('Are you sure you want to delete the selected inquiries?')) {
+                $.ajax({
+                    url: "{{ route('inquiry.destroy.bulk') }}", // Update with your route
+                    type: 'DELETE',
+                    data: {
+                        ids: selected,
+                        _token: '{{ csrf_token() }}' // Include CSRF token for security
+                    },
+                    success: function(response) {
+                        // Handle success (e.g., reload the page or remove deleted rows)
+                        location.reload(); // Reload page after successful deletion
+                    },
+                    error: function(xhr) {
+                        // Handle error
+                        alert('Error occurred while deleting inquires.');
                     }
                 });
             }

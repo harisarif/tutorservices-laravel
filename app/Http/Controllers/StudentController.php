@@ -37,6 +37,18 @@ class StudentController extends Controller
 
                 return response()->json(['success' => 'Students deleted successfully.']);
             }
+            public function destroyinquiryBulk(Request $request){
+                $request->validate([
+                    'ids' => 'required|array',
+                    'ids.*' => 'exists:inquiries,id', // Assuming 'tutors' is your table name
+                ]);
+
+                // Delete the selected tutors
+                Inquiry::destroy($request->ids);
+
+                return response()->json(['success' => 'Inquires deleted successfully.']);
+            }
+            
     public function getCities(Request $request)
     {
         $countryCode = $request->query('country');
@@ -63,6 +75,11 @@ class StudentController extends Controller
         
         $students = Student::all();
         return view('student-list', compact('students'));
+    }
+    public function inquiriesList() {
+        
+        $inquiries = Inquiry::all();
+        return view('inquiry-list', compact('inquiries'));
     }
     public function indexClass()
     {
