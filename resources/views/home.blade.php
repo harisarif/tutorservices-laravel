@@ -24,7 +24,10 @@
         }
 
         ::-webkit-scrollbar-track {
-           background: #42b979; /* Track color */
+           background: #F5F5F5; /* Track color */
+        }
+        footer.sticky-footer{
+            padding: 1rem 0;
         }
     .sidebar-dark .nav-item .nav-link:active, .sidebar-dark .nav-item .nav-link:focus, .sidebar-dark .nav-item .nav-link:hover {
         border:1px solid transparent;
@@ -220,7 +223,7 @@
         }
         .AB-sb{
             overflow-x: scroll;
-         margin: 0px 10px;
+            margin: 0px 10px;
         }
     }
     [dir="rtl"] .BD{
@@ -254,7 +257,28 @@
    [dir="rtl"] .dataTables_paginate{
        display: flex;
    }
-    
+   .dropdown-menu-right{
+        left: -276px;
+   }
+   .dropdown-item:focus, .dropdown-item:hover{
+        background-color: transparent;
+   }
+    .small{
+        color: #4B0082;
+        font-size: 14px;
+    }
+    .topbar .dropdown-list .dropdown-item{
+        overflow-y: scroll;
+        height: 240px;
+    }
+    .ntf span{
+        font-size: 11px;
+    }
+    .dropdown-item-fector  {
+        display: flex;
+        justify-content: center;
+        padding: 10px 0;
+    }
 </style>
 @php
     $notifications = auth()->user()->unreadNotifications;
@@ -358,60 +382,50 @@
                                 
                             </div>
                             <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in BD notification-dropdown" id="notificationDropdown" aria-labelledby="alertsDropdown "  style="display: none;">
-                                <h6 class="dropdown-header bg-success border-success">
-                                {{ __('messages.Alerts Center') }}
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in BD notification-dropdown " id="notificationDropdown" aria-labelledby="alertsDropdown "  style="display: none;">
+                                <h6 class="dropdown-header bg-success border-success text-center">
+                                {{ __('messages.Notification') }}
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                @if(auth()->user()->notifications->count() > 0)
-                                @foreach(auth()->user()->notifications as $notification)
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div class="ntf">
-                                        <div class="small text-gray-500">{{ $notification->data['message'] }}</div>
-                                        <span class="font-weight-bold">{{ $notification->created_at->diffForHumans() }}</span>
-                                    </div>
-                                    @endforeach
+                                <a class="dropdown-item px-0" href="#">
+                                    @if(auth()->user()->notifications->count() > 0)
+                                        @foreach(auth()->user()->notifications as $notification)
+                                            <div class="classic d-flex py-2 px-3 @if(!$loop->last) border-bottom @endif">
+                                                <div class="mr-3">
+                                                    <div class="icon-circle bg-success">
+                                                        <i class="fas fa-file-alt text-white"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="ntf">
+                                                    <div class="small ">{{ $notification->data['message'] }}</div>
+                                                    <span class="font-weight-bold">{{ $notification->created_at->diffForHumans() }}</span>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     @else
                                             <div>No notifications available.</div>
                                     @endif
                                 </a>
-                                
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                                    <a class="dropdown-item-fector  small text-gray-500" href="#">Show All Alerts</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown no-arrow d-flex align-items-center">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@if(auth()->check())
-                                    {{ auth()->user()->name}}@endif</span>
+                                <!-- <span class="mr-2 d-none d-lg-inline text-gray-600 small">@if(auth()->check())
+                                    {{ auth()->user()->name}}@endif</span> -->
                                 <img class="img-profile rounded-circle"
                                     src="{{asset('images/undraw_profile.svg')}}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in md"
-                                aria-labelledby="userDropdown">
+                                aria-labelledby="userDropdown" style="left: -95px !important; width: 0;">
                                
-                                <a class="dropdown-item text-success" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-success"></i>
+                                <a class="dropdown-item text-success" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-success" ></i>
                                     {{ __('messages.Logout') }} 
                                 </a>
                             </div>
-                            <div class="custom-select-wrapper mx-1" style="cursor: pointer;">
-                                <div class="custom-select-web">
-                                        <!-- Clickable Globe Icon -->
-                                        <i class="fa-solid fa-globe" style="color:#42b979 !important" aria-hidden="true" onclick="toggleDropdown()"></i>
-
-                                        <!-- Dropdown Options -->
-                                        <div class="custom-options" id="language-select">
-                                            <div class="custom-option text-center text-success py-1" data-value="en" onclick="changeLanguage('en')">English</div>
-                                            <div class="custom-option text-center text-success py-1" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
-                                        </div>
-                                </div>
-                             </div>
+                            
                         </li>
 
                     </ul>

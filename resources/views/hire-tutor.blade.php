@@ -41,6 +41,79 @@
     .select2-container .select2-selection--single{
         height: 45px !important;
     }
+    .custom-select-wrapper {
+        position: relative;
+        display: flex;
+        cursor: pointer;
+        text-align: justify;
+      }
+      [dir="rtl"] .custom-select-web  {
+        margin-left: 50px;
+        }
+    #language-select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        color: var(--primary-color) !important;
+        border-radius: 4px;
+        padding: 5px;
+        font-size: 12px;
+        color: #333;
+        width: 95px;
+        max-width: 95px;
+        outline: none;
+        cursor: pointer;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .custom-options-web {
+        display: none;
+        position: absolute;
+        top: 30px;
+        left: -109px;
+        background: white;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+    }
+    [dir="rtl"] .custom-options-web  {
+        left: -5px;
+    }
+    [dir="rtl"] .ad-heading  {
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 170px;
+    }
+    [dir="rtl"] .whatsApp_button_Warpper12  {
+        right: 94%;
+    }
+    [dir="rtl"] .whatsapp-help  {
+        right: -115px;
+        white-space: nowrap;
+        width: 111px;
+    }
+    [dir="rtl"] .goToTop  {
+        right: 94%;
+    }
+    [dir="rtl"] .main-footer{
+        text-align: justify;
+    }
+    [dir="rtl"] .heading-box{
+        text-align: justify !important;
+    }
+    [dir="rtl"] .form-group {
+        text-align: justify !important;
+        width: 0;
+    }
+    .custom-options.open {
+        display: block;
+    }
+    .custom-options-web.open {
+        display: block;
+    }
+    .fa-globe{
+        margin-left: -50px;
+    }
 </style>
 @if ($errors->any())
         <div class="alert alert-danger">
@@ -54,24 +127,25 @@
 @section('content')
 
 <body>
-    <header class="main_header d-flex bg-white  py-2 align-items-end justify-content-center">  
-        <a class="arrow" href="{{ route('newhome') }}">
-          <img style="height: 50px" src="{{asset('images/logo.png')}}" alt="EDEXCEL-logo" height="50px">
-        </a>
 
-    </header>
-    <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block;" onclick="window.scrollTo(0, 0)"><i class="fa-solid fa-chevron-up"></i></button>
+        <header class="text-center bg-white m-0 p-2 d-flex align-items-center justify-content-center">
+            <a class="mx-auto" href="{{ route('newhome') }}"><img src="{{ asset('images/logo.png') }}" alt="EDEXCEL-logo"height="50px"></a>
+                <div class="custom-select-wrapper">
+                    @include('language')
+                </div>
+        </header>
+        <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block; z-index: 9;" onclick="window.scrollTo(0, 0)"><i class="fa-solid fa-chevron-up"></i></button>
     @include('whatsapp')
     <main class="hireTutor">
         <div class="row m-0 px-4">
             <div class="main-page col-12 bg-white col-md-6 mx-auto my-3 p-0 text-center ">
                 <!-- page-1 header -->
                 <div class="col m-1 py-3 bg-success text-center flex-column rounded-top bg-body-secondary">
-                    <h3>Post Learning Requirement - It's Free!</h3>
-                    <p>Post your learning requirement and let interested tutors contact you</p>
-                    <span><i> If you are a tutor </i><a href="{{ route('tutor') }}" class="theme_text_green text-decoration-none">
-                            <b>Click here</b></a></span>
-                            <h3 style="font-size: 18px;color: red;"><i>Please fill all mandatory fields</i></h3>
+                    <h3>{{ __('messages.Post Learning Requirement - Its Free!') }}</h3>
+                    <p>{{ __('messages.Post your learning requirement and let interested tutors contact you') }}</p>
+                    <span><i>{{ __('messages. If you are a tutor') }} </i><a href="{{ route('tutor') }}" class="theme_text_green text-decoration-none">
+                            <b>{{ __('messages.Click here') }}</b></a></span>
+                            <h3 style="font-size: 18px;color: red;"><i>{{ __('messages.Please fill all mandatory fields') }}</i></h3>
                 </div>
                 <!-- loading -->
                 <div class="col-12 d-flex justify-content-center py-3 border-bottom">
@@ -87,24 +161,24 @@
 
                         <!-- page-1 -->
                         <div class="col " id="page-1">
-                            <h3 class=" pt-3" style="padding:0 30px; text-align: left; font-size:16px;color:#42b979;"><strong>What are you looking for?</strong></h3>
+                            <h3 class="heading-box pt-3" style="padding:0 30px; text-align: left; font-size:16px;color:#42b979;"><strong>{{ __('messages.What are you looking for?') }}</strong></h3>
                             <div class="choice col-12 px-3 py-1" >
 
                                 <ul class="p-0 ">
                                     <li class="d-flex align-items-center fs-5 py-1">
                                         <input class="m-2 d-none chose-subject" type="radio" value="Online Tutor" name="subjects"
                                             id="option-1">
-                                        <label for="option-1" style="font-size:15px;">Online Tutor </label>
+                                        <label for="option-1" style="font-size:15px;">{{ __('messages.Online Tutor ') }}</label>
                                     </li>
                                     <li class="d-flex align-items-center fs-5 py-1">
                                         <input class="m-2 d-none chose-subject" type="radio" value="Tutor for home" name="subjects"
                                             id="option-2">
-                                        <label for="option-2" style="font-size:15px;">Tutor for Home</label>
+                                        <label for="option-2" style="font-size:15px;">{{ __('messages.Tutor for Home') }}</label>
                                     </li>
                                     <li class="d-flex align-items-center fs-5 py-1">
                                         <input class="m-2 d-none chose-subject" type="radio" value="Both" name="subjects"
                                             id="option-3">
-                                        <label for="option-3" style="font-size:15px;">Both</label>
+                                        <label for="option-3" style="font-size:15px;">{{ __('messages.Both') }}</label>
                                     </li>
                                 </ul>
                             </div>
@@ -378,5 +452,42 @@
             country.val(defaultCountry).trigger('change');
             setCountryPrefix();
     });
+      
+    function toggleDropdown() {
+        document.querySelector('.custom-options').classList.toggle('open');
+    }
+
+    function changeLanguage(value) {
+        document.querySelector('.custom-options').classList.remove('open');
+    }
+
+    // Close the dropdown if clicked outside
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.custom-select')) {
+            document.querySelector('.custom-options').classList.remove('open');
+        }
+    });
+    function toggleDropdownWeb() {
+        document.querySelector('.custom-options-web').classList.toggle('open');
+    }
+
+    function changeLanguageWeb(value) {
+        document.querySelector('.custom-options-web').classList.remove('open');
+    }
+
+    // Close the dropdown if clicked outside
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.custom-select-web')) {
+            document.querySelector('.custom-options-web').classList.remove('open');
+        }
+    });
+    function changeLanguage(locale) {
+        var url = "{{ url('lang') }}/" + locale;
+        window.location.href = url;
+    }
+    function changeLanguageWeb(locale) {
+        var url = "{{ url('lang') }}/" + locale;
+        window.location.href = url;
+    }
 </script>
 @endsection

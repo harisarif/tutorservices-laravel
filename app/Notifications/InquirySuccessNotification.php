@@ -40,7 +40,7 @@ class InquirySuccessNotification extends Notification
             'name' => $this->inquiry->name,
             'email' => $this->inquiry->email,
             'phone' => $this->inquiry->phone,
-            'message' => "New inquiry from {$this->inquiry->name} ({$this->inquiry->email})", // Add a message key
+            'message' => "New inquiry from {$this->inquiry->name} ", // Add a message key
        
         ];
     }

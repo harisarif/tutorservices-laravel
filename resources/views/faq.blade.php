@@ -73,6 +73,9 @@
     .custom-options-web.open {
         display: block;
     }
+    .fa-globe{
+        margin-left: -50px;
+    }
     </style>
    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -86,15 +89,7 @@
                 
                 <a class="mx-auto" href="{{ route('newhome') }}"><img src="/images/logo.png" alt="EDEXCEL-logo" height="50px"></a>
                 <div class="custom-select-wrapper">
-                    <div class="custom-select-web">
-                        <i class="fa-solid fa-globe" style="color:#42b979 !important; margin-left: -71px;" aria-hidden="true" onclick="toggleDropdownWeb()"></i>
-                        <div class="custom-options-web" id="language-select">
-                            <div class="custom-option p-1" data-value="en" onclick="changeLanguage('en')">English</div>
-                            <div class="custom-option p-1" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
-                            <div class="custom-option p-1" data-value="ar" onclick="changeLanguage('rs')">Russian</div>
-                            <div class="custom-option p-1" data-value="ar" onclick="changeLanguage('ch')">Chinese</div>
-                        </div>
-                    </div>
+                    @include('language')
                 </div>
             </header>
             <section class="ad-heading-div">
@@ -105,7 +100,7 @@
                         <h1 class="py-0 my-4 text-left text-capitalize fw-bold" style="color:#42b979; font-size: 50px;">
                             {{ __('messages.Frequently Asked Questions') }}
                         </h1>
-                        <h4><b>{{ __('messages.For Edexcel Academy &amp; Educational Consultancy') }}</b></h4>
+                        <h4><b>{{ __('messages.For Edexcel Academy  Educational Consultancy') }}</b></h4>
                        </div>
                     </div>
                 </div>
@@ -113,7 +108,7 @@
             <section class="fb-ad ">
                 <div class="ad-line"></div>
                 <div class="ad-heading-te">
-                    <h3 ><b>{{ __('messages.Frequently  Questions for Edexcel Academy &amp; Educational Consultancy') }}
+                    <h3 ><b>{{ __('messages.Frequently  Questions for Edexcel Academy Educational Consultancy') }}
                     </b></h3>
                     <span>{{ __('messages.Effective Date: 26.7.2024') }}</span>
                 </div>
