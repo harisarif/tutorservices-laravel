@@ -150,4 +150,27 @@ return [
     'Tutor for Home'=>'مدرس للمنزل',
     'Click here'=>'انقر هنا',
     'Both'=>'كلاهما',
+    'Select your Grade'=>'اختر درجتك',
+    'Subject'=>'موضوع',
+    'Select Your Residence'=>'اختر مكان إقامتك',
+    'Select your country'=>'اختر بلدك',
+    'Select Country'=>'اختر البلد',
+    'Select your city'=>'اختر مدينتك',
+    'Select City'=>'اختر المدينة',
+    'Please Enter your Details'=>'الرجاء إدخال التفاصيل الخاصة بك',
+    'Name'=>'اسم',
+    'Email'=>'بريد إلكتروني',
+    'Mobile Number'=>'رقم الهاتف المحمول',
+    'Password'=>'كلمة المرور',
+    'Description (Optional)'=>'الوصف (اختياري)',
+    'Previous'=>'سابق',
+    'Next'=>'التالي',
+    'Description'=>'وصف',
+    'Confirm Password'=>'تأكيد كلمة المرور',
+    
+    'Our expert engineering team is available 24/7, providing specialized services including customized monitoring solutions, performance enhancements, comprehensive training programs, and continuous technical support.'=>'يتوفر فريقنا الهندسي الخبير على مدار الساعة طوال أيام الأسبوع، ويقدم خدمات متخصصة بما في ذلك حلول المراقبة المخصصة وتحسينات الأداء وبرامج التدريب الشاملة والدعم الفني المستمر.',
+
+    'Choosing Edexcel means opting for a globally recognized and respected qualification provider known for its high academic standards and practical approach to learning.  By choosing Edexcel, you’re investing quality education'=>'إن اختيار دكسل يعني اختيار مزود مؤهل معترف به ومحترم عالميًا ومعروف بمعاييره الأكاديمية العالية ونهجه العملي في التعلم.  باختيارك ادكسل، فإنك تستثمر في التعليم الجيد',
+
+    'Why chose Edexcel'=>'لماذا اخترت ادكسل',
 ];

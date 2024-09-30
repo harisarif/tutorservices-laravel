@@ -278,16 +278,34 @@
 </script>
 @endsection
 <script>
-    
+  
+    // Close the dropdown if clicked outside
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.custom-select')) {
+            document.querySelector('.custom-options').classList.remove('open');
+        }
+    });
     function toggleDropdownWeb() {
         document.querySelector('.custom-options-web').classList.toggle('open');
     }
+
     function changeLanguageWeb(value) {
         document.querySelector('.custom-options-web').classList.remove('open');
     }
+
+    // Close the dropdown if clicked outside
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.custom-select-web')) {
+            document.querySelector('.custom-options-web').classList.remove('open');
+        }
+    });
     function changeLanguage(locale) {
-        console.log(locale)
         var url = "{{ url('lang') }}/" + locale;
         window.location.href = url;
     }
+    function changeLanguageWeb(locale) {
+        var url = "{{ url('lang') }}/" + locale;
+        window.location.href = url;
+    }
+    
 </script>
