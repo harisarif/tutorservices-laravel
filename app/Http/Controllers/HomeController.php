@@ -28,4 +28,7 @@ class HomeController extends Controller
     public function hiring() {
         return view('hired-tutor');
     }
+    public function studenthiring() {
+        return view('student-hiring');
+    }
 }
