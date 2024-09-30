@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use App\Models\SchoolClass;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Tutor; // Add the Tutor model namespace
 
 class TutorController extends Controller
@@ -213,13 +215,19 @@ class TutorController extends Controller
         $tutor->teaching = serialize($request->input('teaching'));
         $tutor->phone = $request->input('phone');
         // $tutor->whatsapp = $request->input('whatsapp');
-
+        
         // Upload profile image
         $imagePath = $request->file('profileImage')->store('uploads', 'public');
         $tutor->profileImage = $imagePath;
-
-        // Save the Tutor instance to the database
         $tutor->save();
+        $tutor->name = $tutor->f_name . ' ' . $tutor->l_name;
+        $user = new User();
+        $user->name = $tutor->name;
+        $user->email = $tutor->email;
+        $user->password = Hash::make($request->input('password'));
+        $user->role = 'tutor';
+        // Save the Tutor instance to the database
+        $user->save();
         $toStudent = $tutor->email;
         $subjectStudent = "Welcome to Edexcel Your Learning Journey Starts Now!";
         $messageStudent = "Dear " . $tutor->full_name = $tutor->f_name . ' ' . $tutor->l_name . "\r\n" .

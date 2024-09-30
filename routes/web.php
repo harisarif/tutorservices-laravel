@@ -116,3 +116,4 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/hiring', [App\Http\Controllers\HomeController::class, 'hiring'])->name('hiring-tutor');
+Route::get('/student-hiring', [App\Http\Controllers\HomeController::class, 'studenthiring'])->name('students-listing');
