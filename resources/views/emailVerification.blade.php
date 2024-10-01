@@ -8,6 +8,22 @@
         position: fixed;
         top: 89%;
     }
+    .foucs{
+        color: #ffff;
+        width: 30px;
+        transition: 0.5s;
+        display: flex;
+        justify-content: center;
+        height: 30px;
+        border-radius: 24px;
+         align-items: center;
+         background-color: #42b979;
+         margin-bottom:25px ;
+        }
+        .foucs:hover{
+            cursor: pointer;
+            transform: scale(1.3);
+        }
 </style>
 <header class="text-center bg-white m-0 p-2 d-flex align-items-end justify-content-center">
             <a class="mx-auto" href="{{ route('newhome') }}"><img src="{{ asset('images/logo.png') }}" alt="EDEXCEL-logo"height="50px"></a>
@@ -23,9 +39,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-success" id="exampleModalLabel">Enter your email</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span class="text-success" aria-hidden="true">&times;</span>
-                </button>
+                <span class="fs-2 pointer foucs"
+                onclick="document.getElementById('allModal').style.display = 'none'"> &times;</span>
             </div>
             <div class="modal-body">
                 <form method="POST" action="{{ route('send.verification.email') }}" id="emailForm">

@@ -909,7 +909,7 @@
                                 <div class="ad-cards border m-3 p-1 ">
                                     <span><i class="fa-regular fa-clock fs-1 text-center mx-1 mt-2"></i></span>
                                     <h4 class="py-2 fs-5 mx-3 text-center">24/7</h4>
-                                    <p class="mx-3 text-center">Our expert engineering team is available 24/7, providing specialized services including customized monitoring solutions, performance enhancements, comprehensive training programs, and continuous technical support.</p>
+                                    <p class="mx-3 text-center">{{ __('messages.Our expert engineering team is available 24/7, providing specialized services including customized monitoring solutions, performance enhancements, comprehensive training programs, and continuous technical support.') }}</p>
                                 </div>
                             </div>
 
@@ -917,8 +917,8 @@
                                 <div class="ad-cards border m-3 p-1 ">
                                     <span><i class="fa-solid fa-users fs-1 text-center mx-1 mt-2"></i>
                                     </span>
-                                    <h4 class="py-2 fs-5 mx-3 text-center ">Why chose Edexcel</h4>
-                                    <p class="mx-3 text-center ">Choosing Edexcel means opting for a globally recognized and respected qualification provider known for its high academic standards and practical approach to learning.  By choosing Edexcel, you’re investing quality education </p>
+                                    <h4 class="py-2 fs-5 mx-3 text-center ">{{ __('messages.Why chose Edexcel') }}</h4>
+                                    <p class="mx-3 text-center ">{{ __('messages.Choosing Edexcel means opting for a globally recognized and respected qualification provider known for its high academic standards and practical approach to learning.  By choosing Edexcel, you’re investing quality education') }} </p>
                                 </div>
                             </div>
 
@@ -926,7 +926,7 @@
                                 <div class="ad-cards border m-3 p-1 ">
                                     <span><i class="fa-regular fa-clock fs-1 text-center mx-1 mt-2"></i></span>
                                     <h4 class="py-2 fs-5 mx-3 text-center ">24/7</h4>
-                                    <p class="mx-3 text-center ">Our expert engineering team is available 24/7, providing specialized services including customized monitoring solutions, performance enhancements, comprehensive training programs, and continuous technical support.</p>
+                                    <p class="mx-3 text-center ">{{ __('messages.Our expert engineering team is available 24/7, providing specialized services including customized monitoring solutions, performance enhancements, comprehensive training programs, and continuous technical support.') }}</p>
                                 </div>
                             </div>
                         </div>
