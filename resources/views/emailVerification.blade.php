@@ -16,9 +16,10 @@
         justify-content: center;
         height: 30px;
         border-radius: 24px;
-         align-items: center;
+         align-items: end;
          background-color: #42b979;
          margin-bottom:25px ;
+         font-size: 25px;
         }
         .foucs:hover{
             cursor: pointer;
@@ -30,7 +31,7 @@
                 <div class="custom-select-wrapper">
         </header>
 <div class="container mt-5">
-    <h3 class="text-success">Please verify your email to access the Tutor Signup page</h3>
+    <h3 class="text-success" style="margin-top: 12rem;">Please verify your email to access the Tutor Signup page</h3>
 </div>
 
 <!-- Email Verification Modal -->
@@ -39,8 +40,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-success" id="exampleModalLabel">Enter your email</h5>
-                <span class="fs-2 pointer foucs"
-                onclick="document.getElementById('allModal').style.display = 'none'"> &times;</span>
+                <span class="fs-2 pointer foucs" id="close"> &times;</span>
             </div>
             <div class="modal-body">
                 <form method="POST" action="{{ route('send.verification.email') }}" id="emailForm">
@@ -79,7 +79,9 @@
 @endif
 <script>
     $(document).ready(function() {// Show modal on page load
-
+        $('#close').on('click',function(){
+            $('#emailVerificationModal').modal('hide')
+        })
         $('#emailForm').submit(function(e) {
             e.preventDefault(); // Prevent the default form submission
 
@@ -99,3 +101,4 @@
         });
     });
 </script>
+

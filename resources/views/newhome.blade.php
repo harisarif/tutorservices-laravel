@@ -240,8 +240,8 @@
 
                 </ul>
                 <a href="{{ route('hire.tutor') }}" class="hiring-button">
-                {{ __('messages.Book a free demo for your child') }} 
-                    </a>
+                    {{ __('messages.Book a free demo for your child') }}
+                </a>
             <div>
             <!-- <h1>{{ __('messages.welcome') }}</h1> -->
             

@@ -15,6 +15,39 @@
 .img-reqire {
     height: 590px;
 }
+.hiring-button {
+    display: inline-block;
+    padding: 15px 40px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    background-color: #42b979; /* Green contrast color */
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(66, 185, 121, 0.6), 0 0 20px rgba(66, 185, 121, 0.4);
+    animation: pulse 2s infinite; 
+}
+
+.hiring-button:hover {
+    background-color: #36a86c; /* Darker green on hover */
+    transform: scale(1.5); /* Slightly enlarges the button on hover */
+    box-shadow: 0 0 20px rgba(66, 185, 121, 0.8), 0 0 30px rgba(66, 185, 121, 0.6); /* Stronger glow on hover */
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(66, 185, 121, 0.6), 0 0 20px rgba(66, 185, 121, 0.4);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(66, 185, 121, 0.8), 0 0 25px rgba(66, 185, 121, 0.5);
+        transform: scale(1.02); /* Slight pulse */
+    }
+}
 .mini_header{
     /* background-color:  var(--primary-color); */
     height: 5%;
