@@ -171,33 +171,40 @@ class TutorController extends Controller
         //     return response()->json(['error' => 'Tutor not found'], 404);
         // }
 
+        
         public function updateTutorStatus(Request $request)
-        {
-            // Validate the request data
-            $request->validate([
-                'id' => 'required|exists:tutors,id', // Make sure 'tutors' is the correct table
-                'status' => 'required|in:active,inactive',
-            ]);
-        
-            // Find the tutor by ID
-            $tutor = Tutor::find($request->id); // Assuming you have a Tutor model
-        
-            // Update the status
-            $tutor->status = $request->status;
-            $tutor->save();
-        
-            // Check if the updated status is inactive
-            if ($tutor->status === 'inactive') {
-                // dd('sad');
-                // If the logged-in user is the same as the tutor being updated, log them out
-                if (auth()->user()->id === $tutor->id) {
-                    Auth::logout(); // Log out the tutor
+            {
+                // Validate the request data
+                $request->validate([
+                    'id' => 'required|exists:tutors,id', // Assuming the status is in the `tutors` table
+                    'status' => 'required|in:active,inactive',
+                ]);
+
+                // Find the tutor by ID
+                $tutor = Tutor::find($request->id); // Use the Tutor model or adjust based on your setup
+
+                // Update the status
+                $tutor->status = $request->status;
+                $tutor->save();
+
+                // If the status is set to inactive and the current user is the tutor being updated
+                if (auth()->user()->id === $tutor->user_id && $tutor->status === 'inactive') {
+                    // Log out the tutor
+                    Auth::logout();
+
+                    // Invalidate the session to destroy the session data
+                    $request->session()->invalidate();
+
+                    // Regenerate the CSRF token to prevent session fixation attacks
+                    $request->session()->regenerateToken();
+
+                    // Redirect the user to the login page with a logout message
                     return redirect()->route('login')->with('message', 'You have been logged out due to inactivity.');
                 }
+
+                return redirect()->route('home')->with('success', 'Status updated successfully!');
             }
-            return redirect()->route('home')->with('success', 'Status updated successfully!');
-            // return response()->json(['message' => 'Status updated successfully!']);
-        }
+
         
 
 
