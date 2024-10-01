@@ -44,7 +44,7 @@ class LoginController extends Controller
             // Regenerate the CSRF token to avoid session fixation attacks
             $request->session()->regenerateToken();
 
-            return redirect()->route('login')->with('error', 'Your account is inactive. Please contact support.');
+            return redirect()->route('newhome')->with('error', 'Your account is inactive. Please contact support.');
         }
 
         // If the tutor's status is active, redirect to the students listing
