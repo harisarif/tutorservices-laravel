@@ -13,7 +13,7 @@ use App\Models\SchoolClass;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Tutor; // Add the Tutor model namespace
-
+use Illuminate\Support\Facades\Auth;
 class TutorController extends Controller
 {
     //
@@ -156,20 +156,61 @@ class TutorController extends Controller
             // Return the serialized data as JSON response
             return response()->json($serializedData);
         }
-        public function updateStatus(Request $request)
-        {
-            $tutor = Tutor::find($request->id);
+        // public function updateStatus(Request $request)
+        // {
+        //     $tutor = Tutor::find($request->id);
             
-            if ($tutor) {
-                // Update status
-                $tutor->status = $request->status;
-                $tutor->save();
+        //     if ($tutor) {
+        //         // Update status
+        //         $tutor->status = $request->status;
+        //         $tutor->save();
 
-                return response()->json(['success' => 'Status updated successfully']);
-            }
+        //         return response()->json(['success' => 'Status updated successfully']);
+        //     }
 
-            return response()->json(['error' => 'Tutor not found'], 404);
+        //     return response()->json(['error' => 'Tutor not found'], 404);
+        // }
+
+       
+public function updateTutorStatus(Request $request)
+{
+    // Validate the request
+    $request->validate([
+        'id' => 'required|exists:tutors,id',
+        'status' => 'required|in:active,inactive',
+    ]);
+
+    // Find the tutor by ID
+    $tutor = Tutor::find($request->id);
+
+    // Update the status
+    $tutor->status = $request->status;
+    $tutor->save();
+
+    // If the tutor is inactive, destroy their session WITHOUT logging out the current admin
+    if ($tutor->status === 'inactive') {
+        // Get the session ID of the tutor
+        $tutorSessionId = $tutor->session_id;
+
+        // Invalidate the session if it exists
+        if ($tutorSessionId) {
+            // This destroys the tutor's session
+            Session::getHandler()->destroy($tutorSessionId);
+
+            // Optionally, clear the stored session ID
+            $tutor->session_id = null;
+            $tutor->save();
         }
+
+        // Return a success message without logging out the admin
+        return redirect()->route('home')->with('success', 'Tutor updated successfully.');
+
+    }
+
+    return redirect()->route('home')->with('success', 'Tutor updated successfully.');
+}
+
+
 
 
 
@@ -178,92 +219,92 @@ class TutorController extends Controller
     {
         // Your store method logic here
     }
-    public function create(Request $request){
-        // dd($request);
-        // Validate form data
-        $rules = [
-            'f_name' => 'required|string|max:255',
-            'l_name' => 'required|string|max:255',
-            'qualification'=> 'required|string|max:255',
-            'profileImage' => 'required|image|mimes:jpeg,png,jpg|max:2048', // max:2048 is for maximum 2MB file size, adjust as needed
-            'email' => 'required|string|email|max:255|unique:tutors,email',
-            'experience'=> 'required|string|max:255',
+    public function create(Request $request)
+{
+    // Validate form data
+    $rules = [
+        'f_name' => 'required|string|max:255',
+        'l_name' => 'required|string|max:255',
+        'qualification'=> 'required|string|max:255',
+        'profileImage' => 'required|image|mimes:jpeg,png,jpg|max:2048', 
+        'email' => 'required|string|email|max:255|unique:tutors,email',
+        'experience'=> 'required|string|max:255',
+    ];
 
-            
-        ];
-        // dd($request);
-        $validator = Validator::make($request->all(), $rules);
+    $validator = Validator::make($request->all(), $rules);
 
-        // Check if validation fails
-        if ($validator->fails()) {
-            return redirect()->back()
-                             ->withErrors($validator)
-                             ->withInput();
-        }
-        $tutor = new Tutor();
-        $tutor->f_name = $request->input('f_name');
-        $tutor->l_name = $request->input('l_name');
-        $tutor->city = $request->input('city');
-        $tutor->email = $request->input('email');
-        $tutor->dob = $request->input('dob');
-        $tutor->qualification = $request->input('qualification');
-        $tutor->gender = $request->input('gender');
-        $tutor->location = $request->input('location');
-        $tutor->experience = $request->input('experience');
-        $tutor->curriculum = serialize($request->input('curriculum'));
-        $tutor->availability = $request->input('availability');
-        $tutor->teaching = serialize($request->input('teaching'));
-        $tutor->phone = $request->input('phone');
-        // $tutor->whatsapp = $request->input('whatsapp');
-        
-        // Upload profile image
-        $imagePath = $request->file('profileImage')->store('uploads', 'public');
-        $tutor->profileImage = $imagePath;
-        $tutor->save();
-        $tutor->name = $tutor->f_name . ' ' . $tutor->l_name;
-        $user = new User();
-        $user->name = $tutor->name;
-        $user->email = $tutor->email;
-        $user->password = Hash::make($request->input('password'));
-        $user->role = 'tutor';
-        // Save the Tutor instance to the database
-        $user->save();
-        $toStudent = $tutor->email;
-        $subjectStudent = "Welcome to Edexcel Your Learning Journey Starts Now!";
-        $messageStudent = "Dear " . $tutor->full_name = $tutor->f_name . ' ' . $tutor->l_name . "\r\n" .
-        "Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.\r\n" .
-        "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at infoo@edexceledu.com or +971566428066.\r\n" .
-        "We’re here to help you succeed!\r\n\r\n" .
-        "Best regards,\r\n" .
-        "The Edexcel Team";
+    if ($validator->fails()) {
+        return redirect()->back()
+                         ->withErrors($validator)
+                         ->withInput();
+    }
 
-        $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
+    // Create the User first
+    $user = new User();
+    $user->name = $request->input('f_name') . ' ' . $request->input('l_name');
+    $user->email = $request->input('email');
+    $user->password = Hash::make($request->input('password')); // Ensure 'password' is in the request
+    $user->role = 'tutor';
+    $user->save();
 
-        $toAdmin = 'info@edexceledu.com';
-        $subjectAdmin = "Edexcel Notification";
-        $messageAdmin = "Subject: New Teacher Enrollment Notification
+    // Now create the Tutor and associate with the User
+    $tutor = new Tutor();
+    $tutor->f_name = $request->input('f_name');
+    $tutor->l_name = $request->input('l_name');
+    $tutor->city = $request->input('city');
+    $tutor->email = $request->input('email');
+    $tutor->dob = $request->input('dob');
+    $tutor->qualification = $request->input('qualification');
+    $tutor->gender = $request->input('gender');
+    $tutor->location = $request->input('location');
+    $tutor->experience = $request->input('experience');
+    $tutor->curriculum = serialize($request->input('curriculum'));
+    $tutor->availability = $request->input('availability');
+    $tutor->teaching = serialize($request->input('teaching'));
+    $tutor->phone = $request->input('phone');
+
+    // Upload profile image
+    $imagePath = $request->file('profileImage')->store('uploads', 'public');
+    $tutor->profileImage = $imagePath;
+
+    // Assign the user_id to the tutor
+    $tutor->user_id = $user->id;
+
+    // Save the Tutor instance
+    $tutor->save();
+
+    // Send notification emails
+    $toStudent = $tutor->email;
+    $subjectStudent = "Welcome to Edexcel Your Learning Journey Starts Now!";
+    $messageStudent = "Dear " . $tutor->f_name . ' ' . $tutor->l_name . "\r\n" .
+                      "Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.\r\n" .
+                      "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at infoo@edexceledu.com or +971566428066.\r\n" .
+                      "We’re here to help you succeed!\r\n\r\n" .
+                      "Best regards,\r\n" .
+                      "The Edexcel Team";
+    $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
+
+    $toAdmin = 'info@edexceledu.com';
+    $subjectAdmin = "Edexcel Notification";
+    $messageAdmin = "Subject: New Teacher Enrollment Notification
 
         Dear Babar,
 
-        I hope this email finds you well.
+        I am pleased to inform you that a new teacher, {$tutor->f_name} {$tutor->l_name}, has successfully enrolled through our website. Below are the details:
 
-        I am pleased to inform you that a new teacher, {$tutor->f_name} {$tutor->l_name}, has successfully enrolled through our website. Below are the details of the new enrollment:
+        - Full Name: {$tutor->f_name} {$tutor->l_name}
+        - Email: {$tutor->email}
+        - Contact: {$tutor->phone}
+        - Location: {$tutor->location}
 
-        - *Full Name:* {$tutor->f_name} {$tutor->l_name}
-        - *Email Address:* {$tutor->email}
-        - *Contact Number:* {$tutor->phone}
-        - *Location:* {$tutor->location}
+        Please ensure that {$tutor->f_name} {$tutor->l_name} is added to our records and receives all necessary welcome materials.";
+    
+    $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
 
-        Please ensure that {$tutor->f_name} {$tutor->l_name} is added to our records and receives all necessary welcome materials and instructions. If any further information is needed, feel free to contact me.
+    // Redirect with success message
+    return redirect()->route('newhome')->with('success', 'Tutor created successfully.');
+}
 
-        Thank you for your prompt attention to this new enrollment.
-
-        Best regards,
-        The Edexcel Team";
-        $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
-        // Optionally, you can redirect the user or return a response
-        return redirect()->route('newhome')->with('success', 'Tutor created successfully.');
-    }
     public function hiretutor(Request $request)
     {
         return redirect('/hire-tutor');

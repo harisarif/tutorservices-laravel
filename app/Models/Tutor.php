@@ -13,4 +13,8 @@ class Tutor extends Model
         'email'// Add 'name' here
         // Add other fillable attributes if any
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

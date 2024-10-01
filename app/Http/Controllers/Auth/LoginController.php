@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Tutor;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -25,21 +27,36 @@ class LoginController extends Controller
      * @return mixed
      */
     protected function authenticated(Request $request, User $user)
-    {
-        // Redirect based on role
-        // dd($user);
-        if ($user->role === 'admin') {
-            return redirect()->route('home');
-        }
-        if ($user->role === 'tutor') {
-            return redirect()->route('students-listing');
-        }
-        else{
-            return redirect()->route('hiring-tutor');
+{
+    if ($user->role === 'tutor') {
+        $tutor = $user->tutor; // Retrieve the associated tutor
     
+        // Check if the tutor exists and if the status is active
+        if ($tutor && $tutor->status === 'active') {
+            // Store the session ID
+            $tutor->session_id = session()->getId();
+            $tutor->save();
+    
+            return redirect()->route('students-listing'); // Redirect to students listing page
+        } else {
+            // If the tutor is inactive, log them out and redirect with an error message
+            Auth::logout();
+            return redirect()->route('login')->with('error', 'Your account is inactive. Please contact support.');
         }
+    }
 
-        }
+    if ($user->role === 'admin') {
+        return redirect()->route('home');
+    }
+
+    return redirect()->route('hiring-tutor');
+}
+
+
+
+
+
+        
 
     // Other methods...
 }

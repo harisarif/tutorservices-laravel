@@ -59,11 +59,12 @@ Route::post('/send-verification-email', [VerificationController::class, 'sendVer
 Route::middleware(['check.email.verified'])->group(function () {
     Route::get('/tutor-signup', [TutorController::class, 'signup'])->name('tutor');
 });
+Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
 Route::get('/hire-tutor', [StudentController::class, 'index'])->name('hire.tutor');
 Route::get('/faq', [StudentController::class, 'FAQ'])->name('faq.index');
 Route::get('/cities', [StudentController::class, 'getCities'])->name('cities');
-Route::post('/update-tutor-status', [TutorController::class, 'updateStatus'])->name('update.tutor.status');
+Route::post('/update-tutor-status', [TutorController::class, 'updateTutorStatus'])->name('update.tutor.status');
 Route::delete('/teachers/destroy-bulk', [TutorController::class, 'destroyBulk'])->name('teachers.destroy.bulk');
 Route::delete('/student/destroy-bulk', [StudentController::class, 'destroystudentBulk'])->name('student.destroy.bulk');
 Route::delete('/inquiry/destroy-bulk', [StudentController::class, 'destroyinquiryBulk'])->name('inquiry.destroy.bulk');

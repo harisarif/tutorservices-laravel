@@ -80,6 +80,14 @@
         margin-left: -2%;
     }
 </style>
+@if (session('error'))
+        <div class="alert alert-danger" style="z-index: 6;
+    padding: 14px !important;">
+            
+            {{ session('error') }}
+            <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
+        </div>
+    @endif
 @section('content')
                 
         <div  id="login bg-gradient-success">
