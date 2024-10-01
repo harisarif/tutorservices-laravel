@@ -173,41 +173,39 @@ class TutorController extends Controller
 
         
         public function updateTutorStatus(Request $request)
-            {
-               
-                // Validate the request data
-                $request->validate([
-                    'id' => 'required|exists:tutors,id', // Assuming the status is in the `tutors` table
-                    'status' => 'required|in:active,inactive',
-                ]);
+{
+    // Validate the request data
+    $request->validate([
+        'id' => 'required|exists:tutors,id',
+        'status' => 'required|in:active,inactive',
+    ]);
 
-                // Find the tutor by ID
-                $tutor = Tutor::find($request->id); // Use the Tutor model or adjust based on your setup
+    // Find the tutor by ID
+    $tutor = Tutor::find($request->id);
 
-                // Update the status
-                $tutor->status = $request->status;
-                
-                $tutor->save();
-                // dd($tutor->user_id, auth()->user()->id);
-                // If the status is set to inactive and the current user is the tutor being updated
-                if ($tutor->status === 'inactive') {
-                    // dd('asdsa');
-                    // Log out the tutor
-                    Auth::logout();
+    // Update the status
+    $tutor->status = $request->status;
+    $tutor->save();
 
-                    // Invalidate the session to destroy the session data
-                    $request->session()->invalidate();
+    // If the status is inactive, log out the tutor by invalidating their session
+    if ($tutor->status === 'inactive') {
+        // Get the session ID of the tutor
+        $tutorSessionId = $tutor->session_id;
 
-                    // Regenerate the CSRF token to prevent session fixation attacks
-                    $request->session()->regenerateToken();
+        // Invalidate the session if it exists
+        if ($tutorSessionId) {
+            Session::getHandler()->destroy($tutorSessionId);
 
-                    // Redirect the user to the login page with a logout message
-                    return redirect()->route('login')->with('message', 'You have been logged out due to inactivity.');
-                }
+            // Optionally, clear the stored session ID
+            $tutor->session_id = null;
+            $tutor->save();
+        }
 
-                return redirect()->route('home')->with('success', 'Status updated successfully!');
-            }
+        return redirect()->route('login')->with('message', 'The tutor has been logged out due to inactivity.');
+    }
 
+    return redirect()->route('newhome')->with('success', 'Tutor created successfully.');
+}
         
 
 

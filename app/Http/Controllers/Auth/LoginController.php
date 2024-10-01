@@ -27,29 +27,39 @@ class LoginController extends Controller
      * @return mixed
      */
     protected function authenticated(Request $request, User $user)
-        {
-            // Check if the user is a tutor and their status
-            if ($user->role === 'tutor') {
-                $tutor = $user->tutor; // Get the associated tutor
+{
+    // Check if the user is a tutor
+    if ($user->role === 'tutor') {
+        // Assuming there's a 'tutor' relationship on the User model to retrieve additional tutor-specific data
+        $tutor = $user->tutor; // Get the associated tutor model
 
-                // Check if the tutor's status is inactive
-                if ($tutor && $tutor->status === 'inactive') {
-                    // Log out if inactive
-                    Auth::logout();
+        // Check if the tutor's status is inactive
+        if ($tutor && $tutor->status === 'inactive') {
+            // Log out if inactive
+            Auth::logout();
 
-                    return redirect('/')->with('error', 'Your account is inactive. Please contact support.');
-                }
+            // Invalidate the session to clear the session data
+            $request->session()->invalidate();
 
-                return redirect()->route('students-listing'); // Redirect if active
-            }
+            // Regenerate the CSRF token to avoid session fixation attacks
+            $request->session()->regenerateToken();
 
-            // Redirect based on role
-            if ($user->role === 'admin') {
-                return redirect()->route('home');
-            }
-
-            return redirect()->route('hiring-tutor');
+            return redirect()->route('login')->with('error', 'Your account is inactive. Please contact support.');
         }
+
+        // If the tutor's status is active, redirect to the students listing
+        return redirect()->route('students-listing');
+    }
+
+    // Redirect based on the user's role
+    if ($user->role === 'admin') {
+        return redirect()->route('home');
+    }
+
+    // Default redirection for other roles
+    return redirect()->route('hiring-tutor');
+}
+
 
 
 
