@@ -283,7 +283,14 @@
 @php
     $notifications = auth()->user()->unreadNotifications;
 @endphp
-
+@if (session('success'))
+        <div class="alert alert-success" style="z-index: 6;
+    padding: 14px !important;">
+            
+            {{ session('success') }}
+            <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
+        </div>
+    @endif
 <body id="page-top">
     
     <!-- Page Wrapper -->

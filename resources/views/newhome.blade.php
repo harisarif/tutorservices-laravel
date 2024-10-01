@@ -166,6 +166,14 @@
             <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
         </div>
     @endif
+    @if (session('error'))
+        <div class="alert alert-danger" style="z-index: 6;
+    padding: 14px !important;">
+            
+            {{ session('error') }}
+            <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
+        </div>
+    @endif
         <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block; z-index: 9;" onclick="window.scrollTo(0, 0)"><i class="fa-solid fa-chevron-up"></i></button>
     <div class="row mini_header m-0 p-0 container-fluid position-relative">
         <div class="col-sm-12 px-3  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0 adjustMobile" style="background:#42b979;position:fixed !important;height:12%">
