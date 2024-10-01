@@ -204,7 +204,7 @@ class TutorController extends Controller
         return redirect()->route('login')->with('message', 'The tutor has been logged out due to inactivity.');
     }
 
-    return redirect()->route('newhome')->with('success', 'Tutor created successfully.');
+    return redirect()->route('home')->with('success', 'Tutor updated successfully.');
 }
         
 
