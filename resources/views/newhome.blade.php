@@ -1009,6 +1009,7 @@
     <script src="script.js"></script>
     <!-- Your custom script -->
     <script>
+        
         $(document).on('select2:open', function(e) {
             let scrollPos = $(window).scrollTop();
             setTimeout(function() {

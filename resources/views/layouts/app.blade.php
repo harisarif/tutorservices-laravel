@@ -117,6 +117,9 @@
 <script src="./js/app.js"></script>
 
 <script>
+    function cancel(){
+            $('alert').addClass('d-none')
+        }
 $(document).on('select2:open', function(e) {
             let scrollPos = $(window).scrollTop();
             setTimeout(function() {
