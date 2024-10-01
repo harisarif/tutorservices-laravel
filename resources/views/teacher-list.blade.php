@@ -142,14 +142,16 @@
                 <td>{{ $tutor->phone }}</td>
                 <!-- Toggle Switch -->
                 <td>
-                <form action="{{ route('update.tutor.status') }}" method="POST" id="statusForm">
+                <form action="{{ route('update.tutor.status') }}" method="POST" id="statusForm_{{ $tutor->id }}">
                     @csrf
                     <input type="hidden" name="id" value="{{ $tutor->id }}">
-                    <input type="hidden" name="status" id="statusInput" value="{{ $tutor->status }}">
+                    <input type="hidden" name="status" id="statusInput_{{ $tutor->id }}" value="{{ $tutor->status }}">
                     
                     <!-- Switch -->
                     <label class="switch">
-                        <input type="checkbox" id="statusToggle" {{ $tutor->status === 'active' ? 'checked' : '' }}>
+                        <input type="checkbox" id="statusToggle_{{ $tutor->id }}" 
+                            {{ $tutor->status === 'active' ? 'checked' : '' }} 
+                            onchange="updateStatus({{ $tutor->id }})">
                         <span class="slider round"></span>
                     </label>
 
@@ -175,14 +177,26 @@
         </table>
     </div>
     <script>
-        document.getElementById('statusToggle').addEventListener('change', function() {
-            // Update the hidden input value based on the switch state
-            const statusInput = document.getElementById('statusInput');
-            statusInput.value = this.checked ? 'active' : 'inactive';
+        function updateStatus(tutorId) {
+    let statusToggle = document.getElementById(`statusToggle_${tutorId}`);
+    let statusInput = document.getElementById(`statusInput_${tutorId}`);
+    let form = document.getElementById(`statusForm_${tutorId}`);
 
-            // Submit the form
-            document.getElementById('statusForm').submit();
-        });
+    // Update the hidden status input based on the checkbox state
+    statusInput.value = statusToggle.checked ? 'active' : 'inactive';
+
+    // Submit the form
+    form.submit();
+}
+
+        // document.getElementById('statusToggle').addEventListener('change', function() {
+        //     // Update the hidden input value based on the switch state
+        //     const statusInput = document.getElementById('statusInput');
+        //     statusInput.value = this.checked ? 'active' : 'inactive';
+
+        //     // Submit the form
+        //     document.getElementById('statusForm').submit();
+        // });
         // $('form').on('submit', function() {
         //     $(this).find('button[type="submit"]').prop('disabled', true);
         // });
