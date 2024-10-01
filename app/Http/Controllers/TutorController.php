@@ -174,6 +174,7 @@ class TutorController extends Controller
         
         public function updateTutorStatus(Request $request)
             {
+               
                 // Validate the request data
                 $request->validate([
                     'id' => 'required|exists:tutors,id', // Assuming the status is in the `tutors` table
@@ -185,10 +186,12 @@ class TutorController extends Controller
 
                 // Update the status
                 $tutor->status = $request->status;
+                
                 $tutor->save();
-
+                // dd($tutor->user_id, auth()->user()->id);
                 // If the status is set to inactive and the current user is the tutor being updated
-                if (auth()->user()->id === $tutor->user_id && $tutor->status === 'inactive') {
+                if ($tutor->status === 'inactive') {
+                    // dd('asdsa');
                     // Log out the tutor
                     Auth::logout();
 
