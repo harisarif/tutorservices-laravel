@@ -29,15 +29,20 @@ class LoginController extends Controller
     protected function authenticated(Request $request, User $user)
 {
     if ($user->role === 'tutor') {
-        $tutor = $user->tutor;
-        
-        // Store the session ID
-        if ($tutor) {
-            $tutor->session_id = session()->getId(); // Save current session ID
+        $tutor = $user->tutor; // Retrieve the associated tutor
+    
+        // Check if the tutor exists and if the status is active
+        if ($tutor && $tutor->status === 'active') {
+            // Store the session ID
+            $tutor->session_id = session()->getId();
             $tutor->save();
+    
+            return redirect()->route('students-listing'); // Redirect to students listing page
+        } else {
+            // If the tutor is inactive, log them out and redirect with an error message
+            Auth::logout();
+            return redirect()->route('login')->with('error', 'Your account is inactive. Please contact support.');
         }
-
-        return redirect()->route('students-listing');
     }
 
     if ($user->role === 'admin') {
