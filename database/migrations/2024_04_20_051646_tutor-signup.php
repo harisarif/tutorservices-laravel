@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('phone', 20);
             $table->date('dob');
             $table->string('status')->default('inactive');
+            $table->string('session_id')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
@@ -44,6 +45,7 @@ return new class extends Migration
         Schema::table('tutors', function (Blueprint $table) {
             $table->dropForeign(['country_id']);
             $table->dropColumn('country_id');
+            $table->dropColumn('session_id'); 
         });
     }
 };

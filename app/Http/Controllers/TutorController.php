@@ -171,10 +171,10 @@ class TutorController extends Controller
         //     return response()->json(['error' => 'Tutor not found'], 404);
         // }
 
-        
-        public function updateTutorStatus(Request $request)
+       
+public function updateTutorStatus(Request $request)
 {
-    // Validate the request data
+    // Validate the request
     $request->validate([
         'id' => 'required|exists:tutors,id',
         'status' => 'required|in:active,inactive',
@@ -187,13 +187,14 @@ class TutorController extends Controller
     $tutor->status = $request->status;
     $tutor->save();
 
-    // If the status is inactive, log out the tutor by invalidating their session
+    // If the tutor is inactive, destroy their session WITHOUT logging out the current admin
     if ($tutor->status === 'inactive') {
         // Get the session ID of the tutor
         $tutorSessionId = $tutor->session_id;
 
         // Invalidate the session if it exists
         if ($tutorSessionId) {
+            // This destroys the tutor's session
             Session::getHandler()->destroy($tutorSessionId);
 
             // Optionally, clear the stored session ID
@@ -201,12 +202,15 @@ class TutorController extends Controller
             $tutor->save();
         }
 
-        return redirect()->route('login')->with('message', 'The tutor has been logged out due to inactivity.');
+        // Return a success message without logging out the admin
+        return redirect()->route('home')->with('success', 'Tutor updated successfully.');
+
     }
 
     return redirect()->route('home')->with('success', 'Tutor updated successfully.');
 }
-        
+
+
 
 
 
