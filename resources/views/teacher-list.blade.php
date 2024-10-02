@@ -116,8 +116,6 @@
                     <th>Country</th>
                     <th>City</th>
                     <th>Email</th>
-                    <!-- <th>Experience</th> -->
-                    <th>Availability</th>
                     <th>Phone</th>
                     <th>Status</th>
                     <th>Actions</th>
@@ -139,7 +137,7 @@
                 <td>{{ $tutor->city }}</td>
                 <td>{{ $tutor->email }}</td>
                 <!-- <td>{{ $tutor->experience }} {{ $tutor->experience > 1 ? 'years' : 'year' }}</td> -->
-                <td>{{ $tutor->availability }}</td>
+                
                 <td>{{ $tutor->phone }}</td>
                 <!-- Toggle Switch -->
                 <td>
