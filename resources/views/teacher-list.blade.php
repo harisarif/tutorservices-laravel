@@ -179,16 +179,16 @@
     </div>
     <script>
         function updateStatus(tutorId) {
-    let statusToggle = document.getElementById(`statusToggle_${tutorId}`);
-    let statusInput = document.getElementById(`statusInput_${tutorId}`);
-    let form = document.getElementById(`statusForm_${tutorId}`);
+            let statusToggle = document.getElementById(`statusToggle_${tutorId}`);
+            let statusInput = document.getElementById(`statusInput_${tutorId}`);
+            let form = document.getElementById(`statusForm_${tutorId}`);
 
-    // Update the hidden status input based on the checkbox state
-    statusInput.value = statusToggle.checked ? 'active' : 'inactive';
+            // Update the hidden status input based on the checkbox state
+            statusInput.value = statusToggle.checked ? 'active' : 'inactive';
 
-    // Submit the form
-    form.submit();
-}
+            // Submit the form
+            form.submit();
+        }
 
         // document.getElementById('statusToggle').addEventListener('change', function() {
         //     // Update the hidden input value based on the switch state

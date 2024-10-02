@@ -254,7 +254,7 @@
                                     <div class="form-row d-flex flex-column flex-md-row">
                                         <div class="col-md-6 px-2 mb-2">
                                             <label for="email" class="form-label" style="color:#42b979;"><strong>Email <span class="text-danger fs-4">*</span></strong></label> 
-                                            <input type="email" class="form-control" id="email" name="email"   style="box-shadow: none;border: 1px solid #aaa;">
+                                            <input type="email" class="form-control" id="email" name="email"   style="box-shadow: none;border: 1px solid #aaa;" readonly>
                                         </div>
                                         <div class="col-md-6 px-2 mb-2">
                                                 <label for="" class="form-label" style=" color:#42b979;"><strong> Password <b style="color: red;
@@ -420,7 +420,7 @@
                                         </div>
                                     <input required type="email" name="c_email" placeholder="*Email" class="inp-1 d-none" readonly >
 
-                                    <div class="form-row d-flex flex-column flex-md-row">
+                                    <div class="form-row d-none flex-column flex-md-row">
                                         
                                         <div class="col-md-12 px-2 mb-2">
                                             <label for="teaching" class="form-label" style="color:#42b979;"><strong>Available Time <span class="text-danger fs-4">*</span></strong></label> 
@@ -466,6 +466,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <script>
         $(document).ready(function() {
+            var storedEmail = localStorage.getItem('email');
+            if (storedEmail) {
+                // Set the email input value to the stored email
+                $('#email').val(storedEmail);
+            }
             $('#location').select2();
             $('#city').select2();
             $('#school_class').select2();

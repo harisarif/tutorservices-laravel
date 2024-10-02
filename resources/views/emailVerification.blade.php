@@ -47,7 +47,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="email">Email address:</label>
-                        <input type="email" name="email" class="form-control" required>
+                        <input type="email" name="email" class="form-control" required id="emailInput">
                     </div>
                     <button type="submit" class="btn btn-success">Send Verification Link</button>
                 </form>
@@ -84,7 +84,8 @@
         })
         $('#emailForm').submit(function(e) {
             e.preventDefault(); // Prevent the default form submission
-
+            var email = $('#emailInput').val();
+            localStorage.setItem('email', email);
             $.ajax({
                 url: "{{ route('send.verification.email') }}",
                 type: "POST",
