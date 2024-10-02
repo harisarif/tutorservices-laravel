@@ -32,6 +32,14 @@
     .sidebar-dark .nav-item .nav-link:active, .sidebar-dark .nav-item .nav-link:focus, .sidebar-dark .nav-item .nav-link:hover {
         border:1px solid transparent;
     }
+    .alert{ 
+        z-index: 66 !important;
+        font-size: 15px;
+        width: 25%;
+        position: absolute;
+        cursor: pointer;
+    }
+    
     .sidebar-dark #sidebarToggle::after{
         color: #fff !important;
         font-weight: 900;
@@ -39,6 +47,7 @@
         font-family: 'Font Awesome 5 Free';
         margin-right: .1rem;
         margin-left: 2px !important;
+        
     }
     .sidebar-dark #sidebarToggle:hover{
         background-color: #42b979;
@@ -267,10 +276,15 @@
         color: #4B0082;
         font-size: 14px;
     }
-    .topbar .dropdown-list .dropdown-item{
-        overflow-y: scroll;
-        height: 240px;
-    }
+    .topbar .dropdown-list .dropdown-item {
+    height: 45px; /* Default height */
+    overflow-y: scroll;
+    transition: height 0.3s ease;
+}
+
+.topbar .dropdown-list .dropdown-item.has-data {
+    height: auto; /* Automatically expand when data is present */
+}
     .ntf span{
         font-size: 11px;
     }
@@ -279,6 +293,7 @@
         justify-content: center;
         padding: 10px 0;
     }
+    
 </style>
 @php
     $notifications = auth()->user()->unreadNotifications;
@@ -409,7 +424,7 @@
                                             </div>
                                         @endforeach
                                     @else
-                                            <div>No notifications available.</div>
+                                            <div class="text-center mt-2">No notifications available.</div>
                                     @endif
                                 </a>
                                     <a class="dropdown-item-fector  small text-gray-500" href="#">Show All Alerts</a>
@@ -916,5 +931,16 @@ $(document).ready(function() {
         countElement.text(currentCount + change);
     }
     });
-    
+</script>
+<script>
+    function cancel(){
+            $('.alert').addClass('d-none')
+        }
+$(document).on('select2:open', function(e) {
+            let scrollPos = $(window).scrollTop();
+            setTimeout(function() {
+                $(window).scrollTop(scrollPos);
+            }, 0);
+        });
+    $(document).ready(function($) { $('.country').select2(); });
 </script>

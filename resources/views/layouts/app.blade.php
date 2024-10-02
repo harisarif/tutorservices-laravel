@@ -118,7 +118,7 @@
 
 <script>
     function cancel(){
-            $('alert').addClass('d-none')
+            $('.alert').addClass('d-none')
         }
 $(document).on('select2:open', function(e) {
             let scrollPos = $(window).scrollTop();

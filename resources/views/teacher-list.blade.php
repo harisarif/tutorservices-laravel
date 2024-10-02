@@ -45,8 +45,8 @@
     .switch {
         position: relative;
         display: inline-block;
-        width: 60px;
-        height: 34px;
+        width: 50px;
+        height: 20px;
     }
 
     /* Hide default HTML checkbox */
@@ -71,8 +71,9 @@
     .slider:before {
         position: absolute;
         content: "";
-        height: 26px;
-        width: 26px;
+        height: 15px;
+        width: 17px;
+        top: 2px;
         left: 4px;
         bottom: 4px;
         background-color: white;
@@ -148,7 +149,7 @@
                     <input type="hidden" name="status" id="statusInput_{{ $tutor->id }}" value="{{ $tutor->status }}">
                     
                     <!-- Switch -->
-                    <label class="switch">
+                    <label class="switch mb-0 mt-2">
                         <input type="checkbox" id="statusToggle_{{ $tutor->id }}" 
                             {{ $tutor->status === 'active' ? 'checked' : '' }} 
                             onchange="updateStatus({{ $tutor->id }})">

@@ -171,8 +171,3 @@
             </div>
         </div>
 @endsection
-<script>
-function cancel(){
-            $('alert').addClass('d-none')
-        }
-        </script>
