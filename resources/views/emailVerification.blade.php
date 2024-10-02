@@ -8,6 +8,7 @@
         position: fixed;
         top: 89%;
     }
+    
     .foucs{
         color: #ffff;
         width: 30px;
@@ -18,9 +19,8 @@
         border-radius: 24px;
          align-items: end;
          background-color: #42b979;
-         margin-bottom:25px ;
          font-size: 25px;
-        }
+    }
         .foucs:hover{
             cursor: pointer;
             transform: scale(1.3);

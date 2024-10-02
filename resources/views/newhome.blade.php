@@ -765,7 +765,7 @@
                             </div>
                             @if (App::getLocale() === 'en') 
                                 <div class="col col-lg-3 my-0 p-0">
-                                    <video src="{{ asset('videos/english.mp4') }}" class="object-fit-cover mt-2" autoplay muted loop width="100%"></video>
+                                    <video src="{{ asset('images/video.mp4') }}" class="object-fit-cover mt-2" autoplay muted loop width="100%"></video>
                                 </div>
                             @elseif (App::getLocale() === 'ar')
                                 <div class="col col-lg-3 my-0 p-0">

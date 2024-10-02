@@ -9,6 +9,17 @@
     .container{
         display: none;
     }
+    .alert-danger{ 
+        z-index: 6 !important;
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px !important;
+        cursor: pointer;
+        align-items: center;
+    }
+    .fa-times{
+        margin-left: 0 !important;
+    }
     .modalBox{
         display: none !important;
     }
@@ -79,6 +90,7 @@
     .login-heading h3{
         margin-left: -2%;
     }
+    
 </style>
 @if (session('error'))
         <div class="alert alert-danger" style="z-index: 6;
@@ -171,3 +183,15 @@
             </div>
         </div>
 @endsection
+<script>
+    function cancel(){
+            $('.alert').addClass('d-none')
+        }
+$(document).on('select2:open', function(e) {
+            let scrollPos = $(window).scrollTop();
+            setTimeout(function() {
+                $(window).scrollTop(scrollPos);
+            }, 0);
+        });
+    $(document).ready(function($) { $('.country').select2(); });
+</script>
