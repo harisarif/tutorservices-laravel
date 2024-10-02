@@ -259,7 +259,6 @@ public function updateTutorStatus(Request $request)
     $tutor->location = $request->input('location');
     $tutor->experience = $request->input('experience');
     $tutor->curriculum = serialize($request->input('curriculum'));
-    $tutor->availability = $request->input('availability');
     $tutor->teaching = serialize($request->input('teaching'));
     $tutor->phone = $request->input('phone');
 
