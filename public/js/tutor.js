@@ -17,6 +17,7 @@ let sEmail = document.querySelectorAll('input[type="email"]');
 const NextStep = (button) => {
     // Only allow form submission on step 3, not before
     if (stepCounter === 3) {
+        localStorage.removeItem('email');
         button.type = 'submit';  // Make the button a submit button only on step 3
         return;  // End the function since you're on the last step
     }

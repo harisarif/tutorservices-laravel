@@ -763,9 +763,29 @@
 
                                 <!-- form end -->
                             </div>
-                            <div  class=" col col-lg-3  my-0 p-0">
-                                <video src="{{asset('images/video.mp4')}}" class="object-fit-cover mt-2" autoplay muted loop width="100%"></video>
-                            </div>
+                            @if (App::getLocale() === 'en') 
+                                <div class="col col-lg-3 my-0 p-0">
+                                    <video src="{{ asset('videos/english.mp4') }}" class="object-fit-cover mt-2" autoplay muted loop width="100%"></video>
+                                </div>
+                            @elseif (App::getLocale() === 'ar')
+                                <div class="col col-lg-3 my-0 p-0">
+                                    <video src="{{ asset('videos/arabic.mp4') }}" class="object-fit-cover mt-2" autoplay muted loop width="100%"></video>
+                                </div>
+                            @elseif (App::getLocale() === 'rs')
+                                <div class="col col-lg-3 my-0 p-0">
+                                    <video src="{{ asset('videos/russian.mp4') }}" class="object-fit-cover mt-2" autoplay muted loop width="100%"></video>
+                                </div>
+                            @elseif (App::getLocale() === 'zh')
+                                <div class="col col-lg-3 my-0 p-0">
+                                    <video src="{{ asset('videos/chinese.mp4') }}" class="object-fit-cover mt-2" autoplay muted loop width="100%"></video>
+                                </div>
+                            @else
+                                <!-- Default or fallback video in case no matching locale is found -->
+                                <!-- <div class="col col-lg-3 my-0 p-0">
+                                    <video src="{{ asset('videos/default.mp4') }}" class="object-fit-cover mt-2" autoplay muted loop width="100%"></video>
+                                </div> -->
+                            @endif
+
                         </div>
                     </section>
             
