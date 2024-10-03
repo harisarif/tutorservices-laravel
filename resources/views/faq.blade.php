@@ -108,7 +108,7 @@
             <section class="fb-ad ">
                 <div class="ad-line"></div>
                 <div class="ad-heading-te">
-                    <h3 ><b>{{ __('messages.Frequently  Questions for Edexcel Academy Educational Consultancy') }}
+                    <h3 ><b>Frequently  Questions for Edexcel Academy Educational Consultancy
                     </b></h3>
                     <span>{{ __('messages.Effective Date: 26.7.2024') }}</span>
                 </div>

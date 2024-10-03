@@ -38,6 +38,8 @@
         width: 25%;
         position: absolute;
         cursor: pointer;
+        right: 0;
+        top: 4px;
     }
     
     .sidebar-dark #sidebarToggle::after{

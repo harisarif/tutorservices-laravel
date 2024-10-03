@@ -171,4 +171,8 @@ return [
     'Choosing Edexcel means opting for a globally recognized and respected qualification provider known for its high academic standards and practical approach to learning.  By choosing Edexcel, you’re investing quality education'=>'选择爱德思意味着选择一家全球认可且受人尊敬的资格认证机构，该机构以其高学术标准和实用的学习方法而闻名。  选择爱德思，您就是在投资优质教育',
 
     'Why chose Edexcel'=>'为什么选择爱德思',
+    'For Edexcel Academy  Educational Consultancy'=>'爱德思学院教育咨询',
+    'Frequently Questions for Edexcel Academy Educational Consultancy'=>'爱德思学院教育咨询的常见问题',
+    'How can students improve their knowledge?'=>'学生如何提高知识水平？',
+     'Frequently Questions for Edexcel Academy Educational Consultancy'=>'爱德思学院教育咨询的常见问题',
 ];

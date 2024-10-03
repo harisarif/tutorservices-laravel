@@ -191,6 +191,10 @@
         .select2 {
             width: 100% !important;
         }
+        #page-3 footer{
+            position: fixed;
+            top: 100%;
+        }
     </style>
     @include('whatsapp')
     <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block;" onclick="window.scrollTo(0, 0)"><i class="fa-solid fa-chevron-up"></i></button>

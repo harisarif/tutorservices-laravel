@@ -210,4 +210,7 @@ return [
     'Choosing Edexcel means opting for a globally recognized and respected qualification provider known for its high academic standards and practical approach to learning.  By choosing Edexcel, you’re investing quality education'=>'Choosing Edexcel means opting for a globally recognized and respected qualification provider known for its high academic standards and practical approach to learning.  By choosing Edexcel, you’re investing quality education',
 
     'Why chose Edexcel'=>'Why chose Edexcel',
+    'Frequently Questions for Edexcel Academy Educational Consultancy'=>'Frequently Questions for Edexcel Academy Educational Consultancy',
+    'For Edexcel Academy  Educational Consultancy'=>'For Edexcel Academy  Educational Consultancy',
+    'How can students improve their knowledge?'=>'How can students improve their knowledge?',
 ];

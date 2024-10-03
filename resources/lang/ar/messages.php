@@ -173,4 +173,9 @@ return [
     'Choosing Edexcel means opting for a globally recognized and respected qualification provider known for its high academic standards and practical approach to learning.  By choosing Edexcel, you’re investing quality education'=>'إن اختيار دكسل يعني اختيار مزود مؤهل معترف به ومحترم عالميًا ومعروف بمعاييره الأكاديمية العالية ونهجه العملي في التعلم.  باختيارك ادكسل، فإنك تستثمر في التعليم الجيد',
 
     'Why chose Edexcel'=>'لماذا اخترت ادكسل',
+    'For Edexcel Academy  Educational Consultancy'=>'لصالح أكاديمية إدكسل للإستشارات التعليمية',
+    'Frequently Questions for Edexcel Academy Educational Consultancy'=>'Frequently Questions for Edexcel Academy Educational Consultancy',
+    'Frequently Questions for Edexcel Academy Educational Consultancy'=>'الأسئلة الشائعة لأكاديمية إدكسل للاستشارات التعليمية',
+    'How can students improve their knowledge?'=>'كيف يمكن للطلاب تحسين معارفهم؟',
+     'Frequently Questions for Edexcel Academy Educational Consultancy'=>'الأسئلة الشائعة لأكاديمية إدكسل للاستشارات التعليمية',
 ];

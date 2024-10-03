@@ -157,4 +157,8 @@ return [
     'Choosing Edexcel means opting for a globally recognized and respected qualification provider known for its high academic standards and practical approach to learning.  By choosing Edexcel, you’re investing quality education'=>'Выбор Edexcel означает выбор в пользу всемирно признанного и уважаемого поставщика квалификаций, известного своими высокими академическими стандартами и практическим подходом к обучению.  Выбирая Edexcel, вы инвестируете в качественное образование.',
 
     'Why chose Edexcel'=>'Почему выбрали Edexcel',
+    'For Edexcel Academy  Educational Consultancy'=>'Консультации по вопросам образования в Академии Эдекссель',
+    'Frequently Questions for Edexcel Academy Educational Consultancy'=>'Часто задаваемые вопросы к образовательной консультации Академия Эдекссель',
+    'How can students improve their knowledge?'=>'Как студенты могут улучшить свои знания?',
+     'Frequently Questions for Edexcel Academy Educational Consultancy'=>'Часто задаваемые вопросы к образовательной консультации Академия Эдекссель',
 ];
