@@ -191,9 +191,9 @@
         .select2 {
             width: 100% !important;
         }
-        #page-3 footer{
+        #page-3 .footer-bottom{
             position: fixed;
-            top: 100%;
+            top: 100% !important;
         }
     </style>
     @include('whatsapp')
