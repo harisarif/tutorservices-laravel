@@ -4,6 +4,61 @@
 @endphp
 <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Icon Button */
+        .dropdown-icon {
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Hide dropdown menu by default */
+        .dropdown-action {
+            display: none;
+            position: absolute;
+            top: 40px; /* Adjust based on your design */
+            left: -7px;
+            background-color: white;
+            min-width: 100px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Dropdown menu items */
+        .dropdown-action li {
+            display: block;
+            padding: 8px 16px;
+        }
+
+        .dropdown-action li a {
+            color: black;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* Show dropdown menu when the dropdown is active */
+        .dropdown-action.show {
+            display: block;
+            z-index: 66;
+            top: 50px;
+            border-radius: 5px;
+        }
+
+        /* Hover effect on dropdown items */
+        .dropdown-action li:hover {
+            background-color: #f1f1f1;
+        }
+        .dropdown-action li a{
+            margin-left: -15%;
+        }
             .switch {
             display: inline-block;
             position: relative;
@@ -98,6 +153,8 @@
     .slider.round:before {
         border-radius: 50%;
     }
+    /* Dropdown container */
+
 </style>
 
     {{-- <h1>All Teachers</h1> --}}
@@ -157,18 +214,34 @@
                     <button type="submit" style="display:none;"></button> <!-- Optional submit button (hidden) -->
                 </form>
                 </td>
-
+             
                 <td>
-                    <a href="{{ route('edit-teacher', $tutor->id) }}" class="btn btn-sm btn-primary">
-                        <i class="fa-regular fa-pen-to-square"></i>
-                    </a>
-                    <form action="{{ route('teachers.destroy', $tutor->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                    </form>
+                <div class="dropdown">
+                    <button class="dropdown-icon" id="dropdownButton">
+                        <i class="fa-solid fa-ellipsis-vertical"></i> <!-- You can replace this with any icon -->
+                    </button>
+                    <ul class="dropdown-action " id="dropdownMenu">
+                        <li>
+                            <a href="{{ route('edit-teacher', $tutor->id) }}" class="btn btn-sm text-justify">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                            <span>Edit</span>
+                         </a>
+                        </li>
+                        <li>
+                            <form action="{{ route('teachers.destroy', $tutor->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm d-flex align-items-center" onclick="return confirm('Are you sure?')" style="color: black; margin-left: -15%;">
+                                    <i class="fa-solid fa-trash-can mx-1"></i>
+                                    <span>Delete</span>
+                                </button>
+                            </form>
+                        </li>
+                       
+                    </ul>
+                </div>
+                    
+                    
                 </td>
             </tr>
         @endforeach
@@ -176,6 +249,10 @@
         </table>
     </div>
     <script>
+        document.getElementById('dropdownButton').addEventListener('click', function() {
+            var dropdownMenu = document.getElementById('dropdownMenu');
+            dropdownMenu.classList.toggle('show');
+        });
         function updateStatus(tutorId) {
             let statusToggle = document.getElementById(`statusToggle_${tutorId}`);
             let statusInput = document.getElementById(`statusInput_${tutorId}`);
@@ -225,7 +302,8 @@
         //         }
         //     });
         // }
-
+        
+        
 
     </script>
     
