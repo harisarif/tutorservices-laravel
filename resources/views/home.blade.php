@@ -279,9 +279,12 @@
         font-size: 14px;
     }
     .topbar .dropdown-list .dropdown-item {
-    height: 145px; /* Default height */
-    overflow-y: scroll;
-}
+        overflow-y: scroll;
+        height: 188px;
+    } 
+    .topbar .dropdown-list .no-notifications {
+        height: 40px !important;
+    }
     .ntf span{
         font-size: 11px;
     }
@@ -290,13 +293,9 @@
         justify-content: center;
         padding: 10px 0;
     }
-    .notification-icon{
-        margin-top: 20px;
-    }
     .dropdown-list {
-        top: 90px;
+        top: 65px;
     }
-    
 </style>
 @php
     $notifications = auth()->user()->unreadNotifications;
@@ -411,7 +410,7 @@
                                 <h6 class="dropdown-header bg-success border-success text-center">
                                 {{ __('messages.Notification') }}
                                 </h6>
-                                <a class="dropdown-item px-0" href="#">
+                                <a class="dropdown-item px-0 justify-content-center @if(auth()->user()->notifications->count() === 0) no-notifications @endif" href="#">
                                     @if(auth()->user()->notifications->count() > 0)
                                         @foreach(auth()->user()->notifications as $notification)
                                             <div class="classic d-flex py-2 px-3 @if(!$loop->last) border-bottom @endif">
@@ -421,16 +420,19 @@
                                                     </div>
                                                 </div>
                                                 <div class="ntf">
-                                                    <div class="small ">{{ $notification->data['message'] }}</div>
+                                                    <div class="small">{{ $notification->data['message'] }}</div>
                                                     <span class="font-weight-bold">{{ $notification->created_at->diffForHumans() }}</span>
                                                 </div>
                                             </div>
                                         @endforeach
                                     @else
-                                            <div class="text-center mt-2">No notifications available.</div>
+                                        <div class="mt-2 text-center">
+                                            <div class="small no-message">No notifications available.</div>
+                                        </div>
                                     @endif
                                 </a>
-                                    <a class="dropdown-item-fector  small text-gray-500" href="#">Show All Notifications12w3erty/a>
+
+                                    <a class="dropdown-item-fector  small text-gray-500" href="#">Show All Notifications </a>
                             </div>
                         </li>
                         <li class="nav-item dropdown no-arrow d-flex align-items-center">
