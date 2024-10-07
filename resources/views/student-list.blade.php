@@ -41,13 +41,13 @@
                     </button>
                     <ul class="dropdown-action" id="dropdownInq">
                         <li>
-                            <a href="{{ route('edit-teacher', $tutor->id) }}" class="btn btn-sm text-justify">
+                            <a href="{{ route('edit-teacher', $student->id) }}" class="btn btn-sm text-justify">
                             <i class="fa-regular fa-pen-to-square"></i>
                             <span>Edit</span>
                          </a>
                         </li>
                         <li>
-                            <form action="{{ route('teachers.destroy', $tutor->id) }}" method="POST" style="display:inline;">
+                            <form action="{{ route('teachers.destroy', $student->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm d-flex align-items-center" onclick="return confirm('Are you sure?')" style="color: black; margin-left: -15%;">
