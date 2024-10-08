@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 
 <style>
@@ -289,6 +290,7 @@
         font-size: 11px;
     }
     .dropdown-item-fector  {
+
         display: flex;
         justify-content: center;
         padding: 10px 0;
@@ -432,7 +434,7 @@
                                     @endif
                                 </a>
 
-                                    <a class="dropdown-item-fector  small text-gray-500" href="#">Show All Notifications </a>
+                                    <a class="dropdown-item-fector  small" href="#">Show All Notifications </a>
                             </div>
                         </li>
                         <li class="nav-item dropdown no-arrow d-flex align-items-center">
@@ -711,6 +713,7 @@
     <script src="{{asset('js/js/demo/chart-pie-demo.js')}}"></script>
     <script src="{{asset('js/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('js/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 <script>
     $(document).ready(function() {
         
@@ -741,7 +744,14 @@
             });
 
             if (selected.length === 0) {
-                alert('Please select at least one tutor to delete.');
+               
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Please select at least one tutor to delete.',
+                    icon: 'error', // Use 'error' instead of 'danger'
+                    confirmButtonText: 'OK'
+                });
+                
                 return;
             }
 
@@ -774,7 +784,13 @@
             });
 
             if (selected.length === 0) {
-                alert('Please select at least one inquiry to delete.');
+                Swal.fire({
+                title: 'Warning!',
+                text: 'Please select at least one inquiry to delete.',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            });
+
                 return;
             }
 
@@ -806,7 +822,13 @@
             });
 
             if (selected.length === 0) {
-                alert('Please select at least one student to delete.');
+                // alert('Please select at least one student to delete.');
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Please select at least one tutor to delete.',
+                    icon: 'error', // Use 'error' instead of 'danger'
+                    confirmButtonText: 'OK'
+                });
                 return;
             }
 

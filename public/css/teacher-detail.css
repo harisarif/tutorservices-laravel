@@ -23,10 +23,21 @@
     display: flex;
     justify-content: space-between;
 }
+[dir="rtl"] .position{
+    right: -285px;
+}
+[dir="rtl"] .main-footer{
+   text-align: justify;
+}
 .Banner{
     background-color: #FAFAFA;
     border-bottom-right-radius: 170px;
 }
+[dir="rtl"] .whatsapp-help{
+    width: 124px;
+    right: 53px;
+    white-space: nowrap;
+ }
 .line{
     background: #42b979;
     border: 6px solid #42b979;

@@ -35,32 +35,30 @@
                     <td>{{ $student->city }}</td>
                     <td>{{ $student->subject }}</td>
                     <td>
-                <div class="dropdown">
-                    <button class="dropdown-icon" id="dropdownInquiry">
-                        <i class="fa-solid fa-ellipsis-vertical"></i> <!-- You can replace this with any icon -->
-                    </button>
-                    <ul class="dropdown-action" id="dropdownInq">
-                        <li>
-                            <a href="{{ route('edit-teacher', $student->id) }}" class="btn btn-sm text-justify">
-                            <i class="fa-regular fa-pen-to-square"></i>
-                            <span>Edit</span>
-                         </a>
-                        </li>
-                        <li>
-                            <form action="{{ route('teachers.destroy', $student->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm d-flex align-items-center" onclick="return confirm('Are you sure?')" style="color: black; margin-left: -15%;">
-                                    <i class="fa-solid fa-trash-can mx-1"></i>
-                                    <span>Deleted</span>
-                                </button>
-                            </form>
-                        </li>
-                       
-                    </ul>
-                </div>
-                    
-                    
+                    <div class="dropdown">
+                        <button class="dropdown-icon" id="dropdownInquiry">
+                            <i class="fa-solid fa-ellipsis-vertical"></i> <!-- You can replace this with any icon -->
+                        </button>
+                        <ul class="dropdown-action" id="dropdownInq">
+                            <li>
+                                <a href="{{ route('edit-teacher', $student->id) }}" class="btn btn-sm text-justify">
+                                <i class="fa-regular fa-pen-to-square"></i>
+                                <span>Edit</span>
+                            </a>
+                            </li>
+                            <li>
+                                <form action="{{ route('teachers.destroy', $student->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm d-flex align-items-center" onclick="return confirm('Are you sure?')" style="color: black; margin-left: -15%;">
+                                        <i class="fa-solid fa-trash-can mx-1"></i>
+                                        <span>Deleted</span>
+                                    </button>
+                                </form>
+                            </li>
+                        
+                        </ul>
+                    </div>
                 </td>
                 </tr>
                 @endforeach
@@ -68,4 +66,18 @@
         </table>
     </div>
    
-    
+    <script>
+    document.getElementById('dropdownInquiry').addEventListener('click', function(event) {
+        var dropdownMenu = document.getElementById('dropdownInquiry');
+        dropdownMenu.classList.toggle('show');
+        event.stopPropagation(); // Prevent the click from bubbling up to the document
+    });
+
+    // Close the dropdown if the user clicks outside of it
+    document.addEventListener('click', function() {
+        var dropdownMenu = document.getElementById('dropdownInq');
+        if (dropdownMenu.classList.contains('show')) {
+            dropdownMenu.classList.remove('show');
+        }
+    });
+</script>

@@ -199,7 +199,7 @@
                         <div class="custom-select">
                                <i class="fa-solid fa-globe" style="color:#fff !important" aria-hidden="true" onclick="toggleDropdown()"></i>
                            <div class="custom-options" id="language-select">
-                              <div class="custom-option" data-value="en" onclick="changeLanguage('en')">English</div>
+                              <div class="custom-option " data-value="en" onclick="changeLanguage('en')">English</div>
                               <div class="custom-option" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
                             
                             </div>
