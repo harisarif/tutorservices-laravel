@@ -138,6 +138,9 @@
             .fa-globe{
                 color: #fff !important;
             }
+            .main-footer{
+                display: none !important;
+            }
 </style>
 @section('content')
     @if (session('success'))

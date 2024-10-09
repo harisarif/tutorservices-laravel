@@ -153,7 +153,7 @@
            
     <header class="text-center bg-white m-0 p-2 d-flex  justify-content-center align-items-center">
                 
-                <a class="mx-auto" href="http://127.0.0.1:8000"><img src="/images/logo.png" alt="EDEXCEL-logo" height="50px"></a>
+                <a class="mx-auto" href="{{ route('newhome') }}"><img src="/images/logo.png" alt="EDEXCEL-logo" height="50px"></a>
                 <div class="custom-select-wrapper">
                     <div class="custom-select-web">
                         <i class="fa-solid fa-globe" style="color:#42b979 " aria-hidden="true" onclick="toggleDropdownWeb()"></i>

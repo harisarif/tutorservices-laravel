@@ -139,6 +139,9 @@
                 color: var(--primary-color); 
             }
             
+    .main-footer{
+        display: none !important;
+    }
 </style>
 @section('content')
     @if (session('success'))
