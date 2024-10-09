@@ -223,4 +223,5 @@ return [
     'All Subject'=>'All Subject',
     'English,Math,phonics,science.'=>'English,Math,phonics,science.',
     'KS1'=>'KS1',
+    'Blog'=>'Blog',
 ];

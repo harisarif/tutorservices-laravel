@@ -1,10 +1,14 @@
-<footer class="row text-center text-lg-start justify-content-center m-0 p-0 ">
+<footer class="row text-center text-lg-start justify-content-center m-0 p-0 " style=" background: #43b979;">
     
 <div class="container main-footer" style="width: 1100px; background: #43b979;">
-                <div  class="row py-5">
+                <div  class="row py-5" style="width: 1100px;">
                     <div class="col-lg-4 col-sm-12">
                         <ul class="my-2">
                             <li class="AB-footer text-white fs-5 d-block fw-bold ">{{ __('messages.Other Pages') }}</li>
+                            <li class="ad-footer d-block py-1 ease-in-out duration-300">
+                                
+                                <a class="text-decoration-none text-light ease-in-out duration-300 ... "href="{{route('blog.index')}}">{{ __('messages.Blog') }}</a>
+                            </li>
                             <li class="ad-footer d-block py-1 ease-in-out duration-300">
                                 
                                 <a class="text-decoration-none text-light ease-in-out duration-300 ... "href="{{route('faq.index')}}">{{ __('messages.FAQ') }}</a>

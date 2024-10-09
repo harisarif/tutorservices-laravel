@@ -188,4 +188,5 @@ return [
      'All Subject'=>'كل الموضوع',
      'English,Math,phonics,science.'=>'اللغة الإنجليزية والرياضيات والصوتيات والعلوم.',
      'KS1'=>'KS1',
+     'Blog'=>'مدونة',
 ];
