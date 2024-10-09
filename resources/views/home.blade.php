@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 
 <style>
@@ -38,6 +39,8 @@
         width: 25%;
         position: absolute;
         cursor: pointer;
+        right: 0;
+        top: 4px;
     }
     
     .sidebar-dark #sidebarToggle::after{
@@ -277,23 +280,24 @@
         font-size: 14px;
     }
     .topbar .dropdown-list .dropdown-item {
-    height: 45px; /* Default height */
-    overflow-y: scroll;
-    transition: height 0.3s ease;
-}
-
-.topbar .dropdown-list .dropdown-item.has-data {
-    height: auto; /* Automatically expand when data is present */
-}
+        overflow-y: scroll;
+        height: 188px;
+    } 
+    .topbar .dropdown-list .no-notifications {
+        height: 40px !important;
+    }
     .ntf span{
         font-size: 11px;
     }
     .dropdown-item-fector  {
+
         display: flex;
         justify-content: center;
         padding: 10px 0;
     }
-    
+    .dropdown-list {
+        top: 65px;
+    }
 </style>
 @php
     $notifications = auth()->user()->unreadNotifications;
@@ -393,7 +397,7 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow mx-1">
                         
-                            <div class="notification-icon">
+                            <div class="notification-icon" >
                                 <a href="#" class="nav-link dropdown-toggle"  id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-bell fa-fw text-success"></i> {{-- Replace with your icon --}}
                                     @if(auth()->user()->unreadNotifications->count() > 0)
@@ -408,7 +412,7 @@
                                 <h6 class="dropdown-header bg-success border-success text-center">
                                 {{ __('messages.Notification') }}
                                 </h6>
-                                <a class="dropdown-item px-0" href="#">
+                                <a class="dropdown-item px-0 justify-content-center @if(auth()->user()->notifications->count() === 0) no-notifications @endif" href="#">
                                     @if(auth()->user()->notifications->count() > 0)
                                         @foreach(auth()->user()->notifications as $notification)
                                             <div class="classic d-flex py-2 px-3 @if(!$loop->last) border-bottom @endif">
@@ -418,16 +422,19 @@
                                                     </div>
                                                 </div>
                                                 <div class="ntf">
-                                                    <div class="small ">{{ $notification->data['message'] }}</div>
+                                                    <div class="small">{{ $notification->data['message'] }}</div>
                                                     <span class="font-weight-bold">{{ $notification->created_at->diffForHumans() }}</span>
                                                 </div>
                                             </div>
                                         @endforeach
                                     @else
-                                            <div class="text-center mt-2">No notifications available.</div>
+                                        <div class="mt-2 text-center">
+                                            <div class="small no-message">No notifications available.</div>
+                                        </div>
                                     @endif
                                 </a>
-                                    <a class="dropdown-item-fector  small text-gray-500" href="#">Show All Alerts</a>
+
+                                    <a class="dropdown-item-fector  small" href="#">Show All Notifications </a>
                             </div>
                         </li>
                         <li class="nav-item dropdown no-arrow d-flex align-items-center">
@@ -706,8 +713,10 @@
     <script src="{{asset('js/js/demo/chart-pie-demo.js')}}"></script>
     <script src="{{asset('js/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('js/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 <script>
     $(document).ready(function() {
+        
         $('#select-all').click(function() {
             // Check/uncheck all checkboxes based on the main checkbox
             $('.tutor-checkbox').prop('checked', this.checked);
@@ -735,7 +744,14 @@
             });
 
             if (selected.length === 0) {
-                alert('Please select at least one tutor to delete.');
+               
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Please select at least one tutor to delete.',
+                    icon: 'error', // Use 'error' instead of 'danger'
+                    confirmButtonText: 'OK'
+                });
+                
                 return;
             }
 
@@ -768,7 +784,13 @@
             });
 
             if (selected.length === 0) {
-                alert('Please select at least one inquiry to delete.');
+                Swal.fire({
+                title: 'Warning!',
+                text: 'Please select at least one inquiry to delete.',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            });
+
                 return;
             }
 
@@ -800,7 +822,13 @@
             });
 
             if (selected.length === 0) {
-                alert('Please select at least one student to delete.');
+                // alert('Please select at least one student to delete.');
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Please select at least one tutor to delete.',
+                    icon: 'error', // Use 'error' instead of 'danger'
+                    confirmButtonText: 'OK'
+                });
                 return;
             }
 
@@ -843,55 +871,13 @@
 
 </html>
 <script>
-    function toggleDropdown() {
-        document.querySelector('.custom-options-web').classList.toggle('open');
-    }
 
-    function changeLanguage(value) {
-        document.querySelector('.custom-options-web').classList.remove('open');
-    }
 
-    // Close the dropdown if clicked outside
-    // document.addEventListener('click', function(event) {
-    //     if (!event.target.closest('.custom-select-web')) {
-    //         document.querySelector('.custom-options-web').classList.remove('open');
-    //     }
-    // });
-    function changeLanguage(locale) {
-        console.log(locale)
-        var url = "{{ url('lang') }}/" + locale;
-        window.location.href = url;
-    }
-</script>
-<script>
-    function toggleDropdown() {
-    const dropdown = document.getElementById("language-select");
-
-    if (dropdown) { // Check if the dropdown element exists
-        dropdown.classList.toggle("show");
-    } else {
-        console.error("Element with id 'language-select' not found.");
-    }
-}
-
-// Close the dropdown if clicked outside of the select box
-document.addEventListener("click", function (e) {
-    const selectWrapper = document.querySelector(".custom-select-web");
-    const dropdown = document.getElementById("language-select");
-
-    if (!selectWrapper.contains(e.target)) {
-        if (dropdown) { // Check if the dropdown element exists
-            dropdown.classList.remove("show");
-        } else {
-            console.error("Element with id 'language-select' not found.");
-        }
-    }
-});
-$(document).ready(function() {
-        $('#alertsDropdown').on('click', function(e) {
-            e.preventDefault();
-            $('#notificationDropdown').toggle();
-        });
+        $(document).ready(function() {
+                $('#alertsDropdown').on('click', function(e) {
+                    e.preventDefault();
+                    $('#notificationDropdown').toggle();
+                });
 
         // Optionally, close the dropdown if clicking outside of it
         $(document).on('click', function(event) {
@@ -936,11 +922,11 @@ $(document).ready(function() {
     function cancel(){
             $('.alert').addClass('d-none')
         }
-$(document).on('select2:open', function(e) {
-            let scrollPos = $(window).scrollTop();
-            setTimeout(function() {
-                $(window).scrollTop(scrollPos);
-            }, 0);
-        });
+        $(document).on('select2:open', function(e) {
+                    let scrollPos = $(window).scrollTop();
+                    setTimeout(function() {
+                        $(window).scrollTop(scrollPos);
+                    }, 0);
+                });
     $(document).ready(function($) { $('.country').select2(); });
 </script>

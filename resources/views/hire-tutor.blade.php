@@ -118,6 +118,9 @@
     .fa-globe{
         margin-left: -50px;
     }
+    .main-footer{
+        display: none !important;
+    }
 </style>
 @if ($errors->any())
         <div class="alert alert-danger">

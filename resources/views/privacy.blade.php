@@ -80,11 +80,14 @@
         border-bottom-right-radius: 0px;
         border-bottom-left-radius: 170px;
     }
+    [dir="rtl"] #language-select {
+        left: -6px;
+    }
     [dir="rtl"] .whatsApp_button_Warpper12  {
         right: 94%;
     }
     [dir="rtl"] .whatsapp-help  {
-        right: -100px;
+        right: -117px;
     }
     [dir="rtl"] .goToTop  {
         right: 94%;

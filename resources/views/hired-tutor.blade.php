@@ -135,7 +135,9 @@
             .banner-heading-point, .p-h, .H-E, .hf{
                 color: var(--primary-color); 
             }
-            
+            .fa-globe{
+                color: #fff !important;
+            }
 </style>
 @section('content')
     @if (session('success'))
@@ -173,9 +175,7 @@
                 </nav>
 
                 </ul>
-                <a href="{{ route('hire.tutor') }}" class="hiring-button">
-                {{ __('messages.Book a free demo for your child') }} 
-                    </a>
+               
             <div>
             <!-- <h1>{{ __('messages.welcome') }}</h1> -->
             
@@ -234,7 +234,7 @@
                 <div class="row">
                     <div class="col-6 col-md-6 intro_lines mx-0 my-5">
                     @if(Auth::check())
-                        <h1 class="banner-heading-point">Welcome, {{ Auth::user()->name }}!</h1>
+                        <h1 class="banner-heading-point">{{ __('messages.Welcome') }}, {{ Auth::user()->name }}!</h1>
                         @endif
                         <p class="p-h">
                         {{__('messages.about_us')}}
@@ -250,24 +250,20 @@
             </section>
             <section>
                 <div class="row g-3">
-                        <h3 class="text-center H-E">Top Subjects & Programs</h3>
-                        <div class="color-main-div">
-                            <div class="color-div"></div>
-                        </div>
-                            <h4 class="text-center hf">Highlighted Educational Pathways</h4>
+                        <h3 class="text-center H-E">{{ __('messages.Top Subjects & Programs') }}</h3>
                         <div class="col-4">
                            <a href="{{route('tutor.detail')}}" style="text-decoration: none;cursor: pointer;"> <div class=" teacher-main-parent">
                                 <div class="card h-100 teacher-card-wrapper border-0">
                                     <div class="card-div">
                                         <div class="hadding">
-                                            <h3>Little Learners</h3>
-                                            <h4>KS1</h4>
+                                            <h3>{{ __('messages.Little Learners') }}</h3>
+                                            <h4>{{ __('messages.KS1') }}</h4>
                                         </div>
                                         <div class="img-teacher">
                                             
                                             <div class="deatil">
-                                                <h3>All Subject</h3>
-                                                <p>English,Math,phonics,science.</p>
+                                                <h3>{{ __('messages.All Subject') }}</h3>
+                                                <p>{{ __('messages.English,Math,phonics,science.') }}</p>
                                             </div>
                                             <div class="img-card">
                                                 <img src="{{ asset('images/study-removebg-preview.png') }}" alt="">

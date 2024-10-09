@@ -147,6 +147,11 @@
             ::-webkit-scrollbar-thumb:hover {
             background: #42b979; /* Color when hovering */
             }
+            .alert{
+                display: flex !important;
+                align-items: center;
+                font-size: 14px !important;
+            }
     </style>
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -194,7 +199,7 @@
                         <div class="custom-select">
                                <i class="fa-solid fa-globe" style="color:#fff !important" aria-hidden="true" onclick="toggleDropdown()"></i>
                            <div class="custom-options" id="language-select">
-                              <div class="custom-option" data-value="en" onclick="changeLanguage('en')">English</div>
+                              <div class="custom-option " data-value="en" onclick="changeLanguage('en')">English</div>
                               <div class="custom-option" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
                             
                             </div>
@@ -206,7 +211,7 @@
                                 <a class="navbar-brand" href="{{ route('newhome') }}">
                                  <img src="images/white-logo.jpeg" height="50px" alt="logo" style="height: 50px; border-radius: 10px;">
                                 </a>
-                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                <button type="button" class="btn-close " data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body p-2 px-3">
                                 <ul class="navbar-nav align-items-md-center">
@@ -300,7 +305,7 @@
                         Student
                     </button> --}}
                    <div class="AB mt-5">
-                        <button class="ab  p-2  btn-an rounded border-0 text-success" style=" white-space: nowrap; background: #42b979;">
+                        <button class="ab  p-2  btn-an rounded border-0 text-success hover-button" style=" white-space: nowrap;">
                             <a class=" text-decoration-none active solid_btn" aria-current="page"
                             href="{{ route('hire.tutor') }}">{{ __('messages.Request A Tutor') }} </a>
 
@@ -482,7 +487,7 @@
                                                             
                                                             <span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">{{ __('messages.Subject') }} :</strong> English</span>
 
-                                                            <span><i class="fa-solid fa-globe"></i><strong>{{ __('messages.Country') }} :</strong> {{ $item->location }}</span>
+                                                            <span><i class="fa-solid fa-globe" style="color: #42b979 !important;"></i><strong>{{ __('messages.Country') }} :</strong> {{ $item->location }}</span>
                                                         </div>
                                                         <div class="ae-detail-child">  
                                                                 <span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">{{ __('messages.Gender') }} :</strong>{{ $item->gender }}</span>

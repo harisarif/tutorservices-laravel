@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TutorController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\NotificationController;
@@ -63,6 +64,7 @@ Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logou
 
 Route::get('/hire-tutor', [StudentController::class, 'index'])->name('hire.tutor');
 Route::get('/faq', [StudentController::class, 'FAQ'])->name('faq.index');
+Route::get('/blog', [StudentController::class, 'blog'])->name('blog.index');
 Route::get('/cities', [StudentController::class, 'getCities'])->name('cities');
 Route::post('/update-tutor-status', [TutorController::class, 'updateTutorStatus'])->name('update.tutor.status');
 Route::delete('/teachers/destroy-bulk', [TutorController::class, 'destroyBulk'])->name('teachers.destroy.bulk');

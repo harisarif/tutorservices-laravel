@@ -210,4 +210,18 @@ return [
     'Choosing Edexcel means opting for a globally recognized and respected qualification provider known for its high academic standards and practical approach to learning.  By choosing Edexcel, you’re investing quality education'=>'Choosing Edexcel means opting for a globally recognized and respected qualification provider known for its high academic standards and practical approach to learning.  By choosing Edexcel, you’re investing quality education',
 
     'Why chose Edexcel'=>'Why chose Edexcel',
+    'Frequently Questions for Edexcel Academy Educational Consultancy'=>'Frequently Questions for Edexcel Academy Educational Consultancy',
+    'For Edexcel Academy  Educational Consultancy'=>'For Edexcel Academy  Educational Consultancy',
+    'How can students improve their knowledge?'=>'How can students improve their knowledge?',
+    '© Copyright 2024.'=>'© Copyright 2024.',
+    'All Rights Reserved.'=>'All Rights Reserved.',
+    'Managed by'=>'Managed by',
+    'Techtrack'=>'Techtrack',
+    'Welcome'=>'Welcome',
+    'Top Subjects & Programs'=>'Top Subjects & Programs',
+    'Little Learners'=>'Little Learners',
+    'All Subject'=>'All Subject',
+    'English,Math,phonics,science.'=>'English,Math,phonics,science.',
+    'KS1'=>'KS1',
+    'Blog'=>'Blog',
 ];

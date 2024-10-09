@@ -31,7 +31,7 @@
                 <div class="custom-select-wrapper">
         </header>
 <div class="container mt-5">
-    <h3 class="text-success" style="margin-top: 12rem;">Please verify your email to access the Tutor Signup page</h3>
+    <h3 class="text-success" style=" text-align: center;">Please verify your email to access the Tutor Signup page</h3>
 </div>
 
 <!-- Email Verification Modal -->
