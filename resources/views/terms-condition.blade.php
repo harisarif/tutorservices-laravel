@@ -78,6 +78,20 @@
     .fa-globe{
         margin-left: -50px;
     }
+    @media (max-width: 425px) {
+        .ad-banner{
+            border-radius: 0;
+        }
+        .tac{
+            font-size: 30px !important;
+        }
+        .Vl{
+            font-size: 19px !important;
+        }
+        .links-footer{
+            text-align: justify;
+        }
+    }
 </style>
  <body>
    @include('whatsapp')
@@ -94,7 +108,7 @@
                 <div data-aos="fade-right" class="ad-banner-child">
                     <div class="ad-heading">
                         <div class="line"></div>
-                        <h1><b>Terms and Conditions</b></h1>
+                        <h1 class="tac"><b>Terms and Conditions</b></h1>
                         <h4><b>for Edexcel Academy & Educational Consultancy</b></h4>
                     </div>
                 </div>
@@ -107,7 +121,7 @@
         <div data-aos="fade-left" class="ad-trems">
             <div class="ad-line"></div>
             <div class="ad-heading-div">
-                <h3><b>Terms and Conditions for Edexcel Academy & Educational Consultancy
+                <h3 class="Vl"><b>Terms and Conditions for Edexcel Academy & Educational Consultancy
                     </b></h3>
                 <span>Effective Date: 26.7.2024</span>
             </div>

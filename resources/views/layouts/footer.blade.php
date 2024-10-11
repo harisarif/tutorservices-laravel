@@ -1,7 +1,7 @@
 <footer class="row text-center text-lg-start justify-content-center m-0 p-0 " style=" background: #43b979;">
     
 <div class="container main-footer" style="width: 1100px; background: #43b979;">
-                <div  class="row py-5" style="width: 1100px;">
+                <div  class="row py-5 links-footer">
                     <div class="col-lg-4 col-sm-12">
                         <ul class="my-2">
                             <li class="AB-footer text-white fs-5 d-block fw-bold ">{{ __('messages.Other Pages') }}</li>

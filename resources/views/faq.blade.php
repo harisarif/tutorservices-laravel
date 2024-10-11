@@ -80,6 +80,25 @@
     .fa-globe{
         margin-left: -50px;
     }
+    @media (max-width: 425px) {
+        .ad-heading-div{
+            border-radius: 0;
+        }.text-capitalize{
+            font-size: 25px !important;
+        }
+        .ad-heading-b{
+            font-size: 17px !important;
+        }
+        .heading-b, .fw-bold {
+            font-size: 14px;
+        }
+        .list-group-item{
+            font-size: 12px;
+        }
+        #para ul,#para1{
+            padding: 0 20px;
+        }
+    }
     </style>
    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -104,7 +123,7 @@
                         <h1 class="py-0 my-4 text-left text-capitalize fw-bold" style="color:#42b979; font-size: 50px;">
                             {{ __('messages.Frequently Asked Questions') }}
                         </h1>
-                        <h4><b>{{ __('messages.For Edexcel Academy  Educational Consultancy') }}</b></h4>
+                        <h4 class="heading-b"><b>{{ __('messages.For Edexcel Academy  Educational Consultancy') }}</b></h4>
                        </div>
                     </div>
                 </div>
@@ -112,7 +131,7 @@
             <section class="fb-ad ">
                 <div class="ad-line"></div>
                 <div class="ad-heading-te">
-                    <h3 ><b>Frequently  Questions for Edexcel Academy Educational Consultancy
+                    <h3 class="ad-heading-b"><b>Frequently  Questions for Edexcel Academy Educational Consultancy
                     </b></h3>
                     <span>{{ __('messages.Effective Date: 26.7.2024') }}</span>
                 </div>

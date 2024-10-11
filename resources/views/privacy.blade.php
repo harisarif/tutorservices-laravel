@@ -105,6 +105,11 @@
     .fa-globe{
         margin-left: -50px;
     }
+    @media (max-width: 425px) {
+        .ad-heading{
+            border-radius: 0;
+        }
+    }
 </style>
 <body>
 @include('whatsapp')

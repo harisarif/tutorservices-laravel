@@ -19,7 +19,7 @@
         border-radius: 10px;
         box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
         overflow: hidden;
-        width: 400px;
+        width: 380px;
     }
     .card-header img {
         width: 100%;
@@ -32,6 +32,9 @@
         align-items: start;
         padding: 20px;
         min-height: 250px;
+    }
+    .cards-div{
+        margin: 3% 5%;
     }
     .tag {
         background-color: #ccc;
@@ -82,6 +85,21 @@
             grid-template-columns: 1fr;
             justify-items: center;
         }
+    }
+    @media (max-width: 425px) {
+        .links-footer{
+            text-align: justify;
+            width: 100% !important;
+        }
+        .cards-div{
+            margin: 7% 0;
+        }
+        .ad-heading-div{
+            border-radius: 0 !important;
+        }
+    }
+    .links-footer{
+        width: 1100px;
     }
     .custom-select-wrapper {
         position: relative;
@@ -196,14 +214,14 @@
             </div>
         </div>
     </section>
-    <div class="container my-5 mx-5">
+    <div class="container  cards-div">
         <div class="card">
         <div class="card-header">
-            <img src="https://s.aolcdn.com/images/dims?client=fh7w6q744eiognjk&signature=d59d0cf6af1d779a3dca451e0ba259c33bbc6115&image_uri=https%3A%2F%2Fs.aolcdn.com%2Fos%2Fab%2F_cms%2F2019%2F08%2F30142658%2F2020-jeep-wrangler-16.jpg&thumbnail=750%2C422&quality=80" alt="" />
+            <img src="{{ asset('images/Ad-Banner.jpeg') }}" alt="" />
         </div>
         <div class="card-body">
-            <span class="tag tag-teal">Technology</span>
-            <h4>Why is the Tesla Cybertruck designed the way it is?</h4>
+            <span class="tag tag-teal">Education</span>
+            <h4>Students</h4>
             <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur
             tenetur distinctio neque?
@@ -219,12 +237,12 @@
         </div>
         <div class="card">
         <div class="card-header">
-            <img src="https://images.cruisecritic.com/image/18740535/10-best-cruise-destinations-for-hot-air-balloon-rides_600x400_21.jpg" alt="" />
+            <img src="{{ asset('images/im-teacher.jpg') }}" alt="" />
         </div>
         <div class="card-body">
-            <span class="tag tag-purple">Place</span>
+            <span class="tag tag-purple">Education</span>
             <h4>
-            Hot Air Ballooning in Nepal - 1 Day - Nepal Mother House Treks
+                Teachers
             </h4>
             <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat
@@ -242,11 +260,11 @@
         </div>
         <div class="card">
         <div class="card-header">
-            <img src="https://dynaimage.cdn.cnn.com/cnn/q_auto,w_412,c_fill,g_auto,h_232,ar_16:9/http%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F200305114843-01-edge-hudson-yards-observation-deck.jpg" alt="" />
+           <img src="{{ asset('images/back-to-school.png') }}" alt="">
         </div>
         <div class="card-body">
-            <span class="tag tag-pink">Travel</span>
-            <h4>New York City | Layout, People, Economy, Culture, & History</h4>
+            <span class="tag tag-pink">Education</span>
+            <h4>subjects</h4>
             <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
             consequuntur sequi suscipit iure fuga ea!
