@@ -1,5 +1,9 @@
 
 @extends('layouts.app')
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="education, online courses, learning, tutoring, e-learning, eduexceledu">
+    <meta name="description" content="Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
 <link rel="stylesheet" href="{{ asset('css/new-home.css') }}">
 <style>
     :root {

@@ -224,4 +224,5 @@ return [
     'English,Math,phonics,science.'=>'English,Math,phonics,science.',
     'KS1'=>'KS1',
     'Blog'=>'Blog',
+    '+971 56 642 8066'=>'+971 56 642 8066',
 ];

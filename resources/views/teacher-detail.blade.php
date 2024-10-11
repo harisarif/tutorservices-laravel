@@ -1,15 +1,41 @@
 @extends('layouts.app')
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="education, online courses, learning, tutoring, e-learning, eduexceledu">
+    <meta name="description" content="Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
 <link rel="stylesheet" href="{{ asset('css/teacher-detail.css') }}">
 @section('content')
 <style>
     footer{
         background: #42b979;
     }
+    .main-footer{
+        display: none !important;
+    }
+    .back-button { /* Your color */
+            color:#42b979 ;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+    }
+
+    .back-button i {
+        margin-right: 5px;
+    }
 </style>
 <body>
 @include('whatsapp')
         <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block; z-index: 9;" onclick="window.scrollTo(0, 0)"><i class="fa-solid fa-chevron-up"></i></button>
-        <header class="text-center bg-white m-0 p-2 d-flex align-items-end justify-content-center">
+        <header class="text-center bg-white m-0 p-2 d-flex align-items-center justify-content-center">
+
+            <a href="javascript:history.back()" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+            </a>
             <a class="mx-auto" href="{{ route('hiring-tutor') }}"><img src="{{ asset('images/logo.png') }}" alt="EDEXCEL-logo"height="50px"></a>
 
         </header>
