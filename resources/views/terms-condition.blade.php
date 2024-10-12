@@ -1,9 +1,10 @@
-<meta charset="UTF-8">
+
+@extends('layouts.app')
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="education, online courses, learning, tutoring, e-learning, eduexceledu">
     <meta name="description" content="Terms and condition Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
-<link rel="stylesheet" href="{{ asset('css/terms.css') }}">
-@extends('layouts.app')
+    <link rel="stylesheet" href="{{ asset('css/terms.css') }}">
 @section('content')
 <style>
     footer{

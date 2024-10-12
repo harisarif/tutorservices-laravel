@@ -374,6 +374,14 @@
                 </a>
             </li>
             <hr class="sidebar-divider d-none d-md-block">
+            <li class="nav-item">
+                <a class="nav-link py-2" id="inquiry-tab" data-toggle="tab" href="#blogs" role="tab"    aria-controls="blogs" aria-selected="true">
+                    <i class="fa-solid fa-blog" aria-hidden="true"></i>
+                    <span>{{ __('messages.Blogs') }}
+                    </span>
+                </a>
+            </li>
+            <hr class="sidebar-divider d-none d-md-block">
         </ul>
         <!-- End of Sidebar -->
 
@@ -623,6 +631,17 @@
                                 </div>
                             </div>
                             @include('inquiry-list')
+
+                        </div>
+
+                        <div class="tab-pane fade" id="blogs" role="tabpanel" aria-labelledby="blogs" >
+                            <div class="d-sm-flex align-items-center justify-content-between mb-4 SB">
+                                <h1 class="h3 mb-0 text-gray-800">{{ __('Blogs') }}</h1>
+                                <div class="del-button">
+                                    <button type="button" class="btn btn-danger" id="delete-inquiry">Multiple Delete</button>
+                                </div>
+                            </div>
+                            @include('blogs')
 
                         </div>
                         <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab" >

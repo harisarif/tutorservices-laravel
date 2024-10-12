@@ -186,4 +186,5 @@ return [
      'English,Math,phonics,science.'=>'英语、数学、语音、科学。',
      'KS1'=>'KS1',
      'Blog'=>'博客',
+     'Blogs'=>'',
 ];
