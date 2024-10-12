@@ -7,7 +7,7 @@
                             <li class="AB-footer text-white fs-5 d-block fw-bold ">{{ __('messages.Other Pages') }}</li>
                             <li class="ad-footer d-block py-1 ease-in-out duration-300">
                                 
-                                <a class="text-decoration-none text-light ease-in-out duration-300 ... "href="{{route('blog.index')}}">{{ __('messages.Blog') }}</a>
+                                <a class="text-decoration-none text-light ease-in-out duration-300 ... "href="{{route('blogs.index')}}">{{ __('messages.Blog') }}</a>
                             </li>
                             <li class="ad-footer d-block py-1 ease-in-out duration-300">
                                 

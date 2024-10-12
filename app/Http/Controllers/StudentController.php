@@ -26,10 +26,7 @@ class StudentController extends Controller
         $countries_prefix = collect(config('countries_prefix.countries'));
         return view('hire-tutor', compact('countriesPhone','countries','schoolClasses','countries_prefix','countries_number_length'));
     }
-    public function blog()
-    {
-        return view('blog');
-    }
+    
     public function destroystudentBulk(Request $request){
                 $request->validate([
                     'ids' => 'required|array',

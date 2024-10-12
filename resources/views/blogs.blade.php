@@ -55,7 +55,8 @@
     </div>
   <div class="row">
     <div class="col-md-12">
-      <form method="post" role="form">
+      <form method="post" action="{{route('blogs.store')}}"  enctype="multipart/form-data">
+        @csrf
         <div class="form-group">
             <label for="">Blog title</label>
           <input type="text" class="form-control" name="title" placeholder="Title"/>
@@ -63,18 +64,18 @@
         <div class="form-group">
             <label for="">Blog description</label>
            <!-- Textarea that will be replaced by CKEditor -->
-            <textarea id="editor1"></textarea>
+            <textarea id="editor1" name="description"></textarea>
         </div>
         <div class="form-group">
           <label> Image </label>
           <div class="input-group">
             
-            <span class="input-group-btn">
+            <!-- <span class="input-group-btn">
               <span class="btn btn-success btn-file">
                 Browse <input type="file" name="bimgs" multiple>
               </span>
-             </span>
-            <input type="text" class="form-control" readonly>
+             </span> -->
+            <input type="file" name="image" class="form-control">
            </div>
         </div>
         <div class="form-group">
