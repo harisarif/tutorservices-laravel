@@ -13,7 +13,7 @@ class BlogController extends Controller
     public function index()
     {
         //
-        $blogs = Blog::all();
+        $blogs = Blog::latest()->take(3)->get();
         return view('blog', compact('blogs'));
     }
 
@@ -39,7 +39,7 @@ class BlogController extends Controller
 
         // Handle image upload if provided
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('blog'); // Store image in 'public/blogs'
+            $imagePath = $request->file('image')->store('blogs', 'public'); // Store image in 'public/blogs'
         } else {
             $imagePath = null; // No image uploaded
         }

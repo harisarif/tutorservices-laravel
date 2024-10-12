@@ -20,10 +20,11 @@
         box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
         overflow: hidden;
         width: 380px;
+        height: 98% !important;
     }
     .card-header img {
         width: 100%;
-        height: 200px;
+        height: 170px;
         object-fit: cover;
     }
     .card-body {
@@ -31,7 +32,6 @@
         flex-direction: column;
         align-items: start;
         padding: 20px;
-        min-height: 250px;
     }
     .cards-div{
         margin: 3% 5%;
@@ -59,7 +59,7 @@
     }
     .card-body p {
         font-size: 14px;
-        margin: 0 0 40px 0;
+        margin: 0 0 8px 0;
         font-weight: 500;
         color: rgb(70, 68, 68);
     }
@@ -168,6 +168,7 @@
         width: 60px;
         margin: 10px 0;
     }
+    
 </style>
 @section('content')
     @include('whatsapp')
@@ -214,71 +215,45 @@
             </div>
         </div>
     </section>
-    <div class="container  cards-div">
-        <div class="card">
-        <div class="card-header">
-            <img src="{{ asset('images/Ad-Banner.jpeg') }}" alt="" />
-        </div>
-        <div class="card-body">
-            <span class="tag tag-teal">Education</span>
-            <h4>Students</h4>
-            <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur
-            tenetur distinctio neque?
-            </p>
-            <div class="user">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Outdoors-man-portrait_%28cropped%29.jpg" alt="" />
-            <div class="user-info">
-                <h5>Jerome Walton</h5>
-                <small>2h ago</small>
-            </div>
-            </div>
-        </div>
-        </div>
-        <div class="card">
-        <div class="card-header">
-            <img src="{{ asset('images/im-teacher.jpg') }}" alt="" />
-        </div>
-        <div class="card-body">
-            <span class="tag tag-purple">Education</span>
-            <h4>
-                Teachers
-            </h4>
-            <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat
-            dolor nihil saepe. Nobis nihil minus similique hic quas mollitia.
-            Error.
-            </p>
-            <div class="user">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSft5PLhaSb6QUdT0yRu3rjlam1Rt--WDJ6yQ&usqp=CAU" alt="" />
-            <div class="user-info">
-                <h5>Lewis Daniels</h5>
-                <small>Yesterday</small>
-            </div>
-            </div>
-        </div>
-        </div>
-        <div class="card">
-        <div class="card-header">
-           <img src="{{ asset('images/back-to-school.png') }}" alt="">
-        </div>
-        <div class="card-body">
-            <span class="tag tag-pink">Education</span>
-            <h4>subjects</h4>
-            <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
-            consequuntur sequi suscipit iure fuga ea!
-            </p>
-            <div class="user">
-            <img src="https://3.bp.blogspot.com/--sCpJJGYWEA/W2P4C51CYSI/AAAAAAAAQcI/LR4U_--Wf1E3wz7RLZtmwBPObm_ky9tQQCLcBGAs/s1600/beautiful-indian-women-photos-1.jpg" alt="" />
-            <div class="user-info">
-                <h5>Carrie Brewer</h5>
-                <small>23 Dec 2020</small>
-            </div>
-            </div>
-        </div>
+    <div class="container-fluid my-4 d-flex justify-content-center">
+        <div class="row">
+            @if($blogs->count() > 0)
+            @foreach($blogs as $blog)
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-header p-0">
+                                        @if($blog->image)
+                                            <img src="{{ asset('storage/' . $blog->image) }}" class="card-img-top" alt="{{ $blog->title }}">
+                                        @endif
+                        </div>
+                        <div class="card-body">
+                            <span class="tag tag-teal">Education</span>
+                            <h4>{{ $blog->title }}</h4>
+                            <p>
+                            {{ strip_tags($blog->description) }}
+                            </p>
+                            
+                        </div>
+                        <div class="border-top d-flex justify-content-start p-3">
+                        <div class="user">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Outdoors-man-portrait_%28cropped%29.jpg" alt="" />
+                            </div>
+                            <div class="user-info">
+                                <h5>Jerome Walton</h5>
+                                <small>2h ago</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+                @else
+                <p>No blogs available.</p>
+                @endif
+                
         </div>
     </div>
+    
+
 @endsection
 @section('js')
 @endsection
