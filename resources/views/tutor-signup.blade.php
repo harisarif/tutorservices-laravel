@@ -290,14 +290,14 @@
                                             <div class="form-group">
                                                 <label for="datePicker" class="date-picker-label" style="color:#42b979;"><strong>Date of birth </strong><span class="text-danger fs-4"> *</span></label>
                                                 <div class="ad-dob">
-                                                    <select id ="year" name = "yyyy" onchange="change_year(this)">
+                                                    <select id ="year" name = "year" onchange="updateDob()">
                                                     </select>
-                                                    <select  id ="month" name = "mm" onchange="change_month(this)">
+                                                    <select  id ="month" name = "month" oonchange="updateDob()">
                                                     </select>
-                                                    <select id ="day" name = "dd" >
+                                                    <select id ="day" name = "day" onchange="updateDob()">
                                                     </select> 
                                                 </div>
-                                                <input type="date" name="dob"/>
+                                                <input name="dob" type="hidden" id="dob"/>
                                             </div>
                                             
                                         </div>
@@ -467,6 +467,17 @@
 <script src="./js/tutor.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <script>
+         function updateDob() {
+            var year = document.getElementById('year').value;
+            var month = document.getElementById('month').value;
+            var day = document.getElementById('day').value;
+
+            // Concatenate into YYYY-MM-DD format
+            var dob = year + '-' + month + '-' + day;
+
+            // Set the value of the hidden input
+            document.getElementById('dob').value = dob;
+        }
         $(document).ready(function() {
             var storedEmail = localStorage.getItem('email');
             if (storedEmail) {

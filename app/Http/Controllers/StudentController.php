@@ -148,6 +148,12 @@ class StudentController extends Controller
         // $student->class_end_time = $classEndTime;
         
         // $student->whatsapp_number = $request->input('whatsapp_number');
+        $user = new User();
+        $user->name = $student->name;
+        $user->email = $student->email;
+        $user->password = Hash::make($request->input('password'));
+        $user->role = 'user';
+        $user->save();
         $student->country = $request->input('country');
         $student->city = $request->input('city');
         $student->subject = $request->input('subject');
@@ -158,12 +164,7 @@ class StudentController extends Controller
         // Save the student instance to the database
         $student->save();
 
-        $user = new User();
-        $user->name = $student->name;
-        $user->email = $student->email;
-        $user->password = Hash::make($request->input('password'));
-        $user->role = 'user';
-        $user->save();
+        
 
         $toStudent = $student->email;
         $subjectStudent = "Welcome to Edexcel Your Learning Journey Starts Now!";
