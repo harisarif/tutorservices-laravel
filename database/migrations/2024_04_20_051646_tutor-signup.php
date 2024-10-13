@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('f_name');
             $table->string('l_name');
             $table->string('descripition')->nullable();
+            $table->string('document');
             $table->string('email')->unique();
             $table->string('qualification');
             $table->string('gender');

@@ -230,6 +230,7 @@ public function updateTutorStatus(Request $request)
             'email' => 'required|string|email|max:255|unique:tutors,email',
             'experience'=> 'required|string|max:255',
             'dob'=> 'required|string|max:255',
+            'document'=> 'required|mimes:pdf|max:2048',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -247,6 +248,12 @@ public function updateTutorStatus(Request $request)
         $user->password = Hash::make($request->input('password')); // Ensure 'password' is in the request
         $user->role = 'tutor';
         $user->save();
+        if ($request->hasFile('document')) {
+            $file = $request->file('document');
+            // Save the file to 'public/documents' with a unique name
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('documents'), $fileName); // Move the file to public/documents
+        }
 
         // Now create the Tutor and associate with the User
         $tutor = new Tutor();
@@ -254,6 +261,7 @@ public function updateTutorStatus(Request $request)
         $tutor->l_name = $request->input('l_name');
         $tutor->city = $request->input('city');
         $tutor->email = $request->input('email');
+        $tutor->document = 'documents/' . $fileName;
         $tutor->dob = $request->input('dob');
         $tutor->qualification = $request->input('qualification');
         $tutor->gender = $request->input('gender');

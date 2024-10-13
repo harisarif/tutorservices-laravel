@@ -256,7 +256,7 @@
                                     <div class="form-row d-flex flex-column flex-md-row">
                                         <div class="col-md-6 px-2 mb-2">
                                             <label for="email" class="form-label" style="color:#42b979;"><strong>Email <span class="text-danger fs-4">*</span></strong></label> 
-                                            <input type="email" class="form-control" id="email" name="email"   style="box-shadow: none;border: 1px solid #aaa;" readonly>
+                                            <input type="email" class="form-control" id="email" name="email" style="box-shadow: none;border: 1px solid #aaa;" readonly>
                                         </div>
                                         <div class="col-md-6 px-2 mb-2">
                                                 <label for="" class="form-label" style=" color:#42b979;"><strong> Password <b style="color: red;
