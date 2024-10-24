@@ -203,11 +203,11 @@ public function updateTutorStatus(Request $request)
         }
 
         // Return a success message without logging out the admin
-        return redirect()->route('home')->with('success', 'Tutor updated successfully.');
+        return redirect()->route('all.tutors')->with('success', 'Tutor updated successfully.');
 
     }
 
-    return redirect()->route('home')->with('success', 'Tutor updated successfully.');
+    return redirect()->route('all.tutors')->with('success', 'Tutor updated successfully.');
 }
 
 
@@ -354,7 +354,93 @@ public function updateTutorStatus(Request $request)
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
         }
+   
+        public function findTutors(Request $request)
+                {
+                    $country_id = $request->get('country_id');
+                    
+                    // Query tutors based on the selected country ID
+                    $tutors = Tutor::where('location', $country_id)->get();
 
+                    // Return just the HTML for table rows
+                    $html = '';
+                    foreach ($tutors as $tutor) {
+                        $html .= '
+                            <tr>
+                                <td>
+                                    <input class="form-check-input tutor-checkbox" type="checkbox" value="'.$tutor->id.'" id="flexCheckChecked-'.$tutor->id.'">
+                                    <label class="form-check-label" for="flexCheckChecked-'.$tutor->id.'"></label>
+                                </td>
+                                <td>'.$tutor->id.'</td>
+                                <td>'.$tutor->f_name.' '.$tutor->l_name.'</td>
+                                <td>'.$tutor->qualification.'</td>
+                                <td>'.$tutor->gender.'</td>
+                                <td>'.$tutor->location.'</td>
+                                <td><a href="'.url($tutor->document).'" target="_blank">View PDF Document</a></td>
+                                <td>'.$tutor->city.'</td>
+                                <td>'.$tutor->email.'</td>
+                                <td>'.$tutor->phone.'</td>
+                                <td>
+                                    <form action="'.route('update.tutor.status').'" method="POST" id="statusForm_'.$tutor->id.'">
+                                        '.csrf_field().'
+                                        <input type="hidden" name="id" value="'.$tutor->id.'">
+                                        <input type="hidden" name="status" id="statusInput_'.$tutor->id.'" value="'.$tutor->status.'">
+                                        <label class="switch mb-0 mt-2">
+                                            <input type="checkbox" id="statusToggle_'.$tutor->id.'" 
+                                                '.($tutor->status === 'active' ? 'checked' : '').' 
+                                                onchange="updateStatus('.$tutor->id.')">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <button type="submit" style="display:none;"></button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="dropdown-icon" id="dropdownButton">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-action " id="dropdownMenu">
+                                            <li>
+                                                <a href="'.route('edit-teacher', $tutor->id).'" class="btn btn-sm text-justify">
+                                                    <i class="fa-regular fa-pen-to-square" style="color: #4e73df;"></i>
+                                                    <span class="mx-1">Edit</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <form action="'.route('teachers.destroy', $tutor->id).'" method="POST" style="display:inline;">
+                                                    '.csrf_field().'
+                                                    '.method_field('DELETE').'
+                                                    <button type="submit" class="btn btn-sm d-flex align-items-center" onclick="return confirm(\'Are you sure?\')" style="color: black; margin-left: -11%;">
+                                                        <i class="fa-solid fa-trash-can mx-1" style="color: #e74a3b;"></i>
+                                                        <span class="mx-1">Delete</span>
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>';
+                    }
+
+                    if ($tutors->isEmpty()) {
+                        $html .= '
+                            <tr class="text-center">
+                                <td colspan="12">No tutors found for the selected country.</td>
+                            </tr>';
+                    }
+
+                    // Return the generated HTML
+                    return response()->json(['html' => $html]);
+                }
+
+        public function allTutors(Request $request)
+        {
+            $tutors = Tutor::all();
+            $countries = collect(config('countries_assoc.countries'));
+            return view('teacher-list', compact('tutors','countries'));
+        }
+
+        
     public function signup() {
         $schoolClasses = SchoolClass::all();
         $countriesPhone = collect(config('phonecountries.countries'));

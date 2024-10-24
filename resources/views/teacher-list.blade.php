@@ -1,12 +1,24 @@
-
-@php
-    $tutors = DB::table('tutors')->get();
-@endphp
-<meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="education, online courses, learning, tutoring, e-learning, eduexceledu">
-    <meta name="description" content="Teacher list Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="">
+    <meta name="description" content="Home Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
+    <title>Edexcel Dashbord</title>
+    <link rel="stylesheet" href="{{asset('css/fontawesome-free/css/all.min.css')}}"/>
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+     <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}"/>
+    <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+</head>
     <style>
         .dropdown {
             position: relative;
@@ -161,99 +173,357 @@
         /* Dropdown container */
 
     </style>
+@php
+    $notifications = auth()->user()->unreadNotifications;
+@endphp
+@if (session('success'))
+        <div class="alert alert-success" style="z-index: 6;
+    padding: 14px !important;">
+            
+            {{ session('success') }}
+            <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
+        </div>
+    @endif
+<body id="page-top">
+    
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
-    {{-- <h1>All Teachers</h1> --}}
-    <div id="statusMessage" style="display:none;" class="alert alert-success"></div>
-    <div class=" AB-sb">
-        
-        <table class="table teachers-table">
-            <thead>
-                <tr>
-                    <th> <input class="form-check-input" type="checkbox" id="select-all">
-                    <label class="form-check-label" for="select-all"></label></th>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Degree</th>
-                    <th>Gender</th>
-                    <th>Country</th>
-                    <th>Document</th>
-                    <th>City</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            @foreach ($tutors as $tutor)
-                <tr>
-                <td>
-                    <input class="form-check-input tutor-checkbox" type="checkbox" value="{{ $tutor->id }}" id="flexCheckChecked-{{ $tutor->id }}">
-                    <label class="form-check-label" for="flexCheckChecked-{{ $tutor->id }}"></label>
-                </td>
+        <!-- Sidebar -->
+        <ul class="nav nav-tabs navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
-                <td>{{ $tutor->id }}</td>
-                <td>{{ $tutor->f_name }} {{ $tutor->l_name }}</td>
-                <td>{{ $tutor->qualification }}</td>
-                <td>{{ $tutor->gender }}</td>
-                <td>{{ $tutor->location }}</td>
-                <td><a href="{{ url($tutor->document) }}" target="_blank">View PDF Document</a></td>
-                <td>{{ $tutor->city }}</td>
-                <td>{{ $tutor->email }}</td>
-                <!-- <td>{{ $tutor->experience }} {{ $tutor->experience > 1 ? 'years' : 'year' }}</td> -->
-                
-                <td>{{ $tutor->phone }}</td>
-                <!-- Toggle Switch -->
-                <td>
-                <form action="{{ route('update.tutor.status') }}" method="POST" id="statusForm_{{ $tutor->id }}">
-                    @csrf
-                    <input type="hidden" name="id" value="{{ $tutor->id }}">
-                    <input type="hidden" name="status" id="statusInput_{{ $tutor->id }}" value="{{ $tutor->status }}">
-                    
-                    <!-- Switch -->
-                    <label class="switch mb-0 mt-2">
-                        <input type="checkbox" id="statusToggle_{{ $tutor->id }}" 
-                            {{ $tutor->status === 'active' ? 'checked' : '' }} 
-                            onchange="updateStatus({{ $tutor->id }})">
-                        <span class="slider round"></span>
-                    </label>
-
-                    <button type="submit" style="display:none;"></button> <!-- Optional submit button (hidden) -->
-                </form>
-                </td>
-             
-                <td>
-                    <div class="dropdown">
-                        <button class="dropdown-icon" id="dropdownButton">
-                            <i class="fa-solid fa-ellipsis-vertical"></i> <!-- You can replace this with any icon -->
-                        </button>
-                        <ul class="dropdown-action " id="dropdownMenu">
-                            <li>
-                                <a href="{{ route('edit-teacher', $tutor->id) }}" class="btn btn-sm text-justify">
-                                <i class="fa-regular fa-pen-to-square" style="color: #4e73df;"></i>
-                                <span class="mx-1">Edit</span>
-                            </a>
-                            </li>
-                            <li>
-                                <form action="{{ route('teachers.destroy', $tutor->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm d-flex align-items-center" onclick="return confirm('Are you sure?')" style="color: black; margin-left: -11%;">
-                                        <i class="fa-solid fa-trash-can mx-1" style="color: #e74a3b;"></i>
-                                        <span class="mx-1">Delete</span>
-                                    </button>
-                                </form>
-                            </li>
-                        
-                        </ul>
+            <li class=" py-2 mx-2 d-flex align-items-center">
+                <a class="navbar-brand" href="{{ route('home') }}">
+                   <img src=" {{asset('images/white-logo.jpeg')}}" class="d-lg-block d-none" id="toggleImage" height="50px" alt="logo" style="height: 50px; border-radius: 10px; width: 100%;">
+               </a>
+               <a href="{{ route('home') }}">
+                    <img src=" {{asset('images/favicon.png')}}" id="toggleImage" class="d-lg-none d-sm-block AB-img" alt="Image" style="width:70%;">
+               </a>
+                <div class="text-center d-none d-md-inline position-relative">
+                 <button class="rounded-circle border-0" id="sidebarToggle">
+                    <div class="icons d-none">
+                        <i class="fa-solid fa-angle-right"></i>
                     </div>
-                </td>
-            </tr>
-        @endforeach
-            </tbody>
-        </table>
+                 </button>
+                   
+                </div>
+           </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" id="dashboard-tab" data-toggle="tab"
+                href="#dashboard" role="tab" aria-controls="dashboard" aria-selected="false">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>{{ __('messages.Dashboard') }}</span>
+                </a>
+            </li>
+            
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+            <!-- Nav Item - Tables -->
+            <li class="nav-item active">
+                <a class="nav-link py-2" id="profile-tab" data-toggle="tab"
+                href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+                <i class="fas fa-chalkboard-teacher"></i>
+                    <span>{{ __('messages.Teacher') }}</span>
+                </a>
+            </li>
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link py-2" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+                <i class="fa-solid fa-user-graduate"></i>
+                    <span>{{ __('messages.Students') }}</span>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+            <li class="nav-item">
+                <a class="nav-link py-2" id="inquiry-tab" data-toggle="tab" href="#inquiry" role="tab"    aria-controls="inquiry" aria-selected="true">
+                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                    <span>{{ __('messages.Direct inquiry') }}
+                    </span>
+                </a>
+            </li>
+            <hr class="sidebar-divider d-none d-md-block">
+            <li class="nav-item">
+                <a class="nav-link py-2" id="inquiry-tab" data-toggle="tab" href="#blogs" role="tab"    aria-controls="blogs" aria-selected="true">
+                    <i class="fa-solid fa-blog" aria-hidden="true"></i>
+                    <span>{{ __('messages.Blogs') }}
+                    </span>
+                </a>
+            </li>
+            <hr class="sidebar-divider d-none d-md-block">
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <div class="button-div">
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3 bg-success text-white">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </div>
+                    <!-- Sidebar Toggle (Topbar) -->
+                    
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                        
+                            <div class="notification-icon" >
+                                <a href="#" class="nav-link dropdown-toggle"  id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-bell fa-fw text-success"></i> {{-- Replace with your icon --}}
+                                    @if(auth()->user()->unreadNotifications->count() > 0)
+                                        <span class="badge badge-danger badge-counter" id="notificationCount">{{ auth()->user()->unreadNotifications->count() }}</span>
+                                    @endif
+                                </a>
+
+                                
+                            </div>
+                            <!-- Dropdown - Alerts -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in BD notification-dropdown " id="notificationDropdown" aria-labelledby="alertsDropdown "  style="display: none;">
+                                <h6 class="dropdown-header bg-success border-success text-center">
+                                {{ __('messages.Notification') }}
+                                </h6>
+                                <a class="dropdown-item px-0 justify-content-center @if(auth()->user()->notifications->count() === 0) no-notifications @endif" href="#">
+                                    @if(auth()->user()->notifications->count() > 0)
+                                        @foreach(auth()->user()->notifications as $notification)
+                                            <div class="classic d-flex py-2 px-3 @if(!$loop->last) border-bottom @endif">
+                                                <div class="mr-3">
+                                                    <div class="icon-circle bg-success">
+                                                        <i class="fas fa-file-alt text-white"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="ntf">
+                                                    <div class="small">{{ $notification->data['message'] }}</div>
+                                                    <span class="font-weight-bold">{{ $notification->created_at->diffForHumans() }}</span>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <div class="mt-2 text-center">
+                                            <div class="small no-message">No notifications available.</div>
+                                        </div>
+                                    @endif
+                                </a>
+
+                                    <a class="dropdown-item-fector  small" href="#">Show All Notifications </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown no-arrow d-flex align-items-center">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <!-- <span class="mr-2 d-none d-lg-inline text-gray-600 small">@if(auth()->check())
+                                    {{ auth()->user()->name}}@endif</span> -->
+                                <img class="img-profile rounded-circle"
+                                    src="{{asset('images/undraw_profile.svg')}}">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in md"
+                                aria-labelledby="userDropdown" style="left: -95px !important; width: 0;">
+                               
+                                <a class="dropdown-item text-success" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-success" ></i>
+                                    {{ __('messages.Logout') }} 
+                                </a>
+                            </div>
+                            
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                     style="display: none;">@csrf
+                </form>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid" >
+                    <div class="tab-content" id="myTabContent">
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4 SB">
+                                <h1 class="h3 mb-0 text-gray-800">{{ __('messages.Teacher') }}</h1>
+                                <div class="del-button d-flex">
+                                    <div>
+                                    <button type="button" class="btn btn-danger" id="delete-selected">Multiple Delete</button>
+                                    </div>
+                                    <div style="display:grid;margin-left:10px;margin-top:-7px;">
+                                        <label class="mb-0">Search By Country</label>
+                                        <select name="countryTeacher" id="countryTeacher" class="form-select select2 country-select w-50"  >
+                                                        @foreach ($countries as $key => $country)
+                                                            <option value="{{ $key }}">{{ $country }}</option>
+                                                        @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                    <div id="statusMessage" style="display:none;" class="alert alert-success"></div>
+                        <div class=" AB-sb">
+                            
+                            <table class="table teachers-table">
+                                <thead>
+                                    <tr>
+                                        <th> <input class="form-check-input" type="checkbox" id="select-all">
+                                        <label class="form-check-label" for="select-all"></label></th>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Degree</th>
+                                        <th>Gender</th>
+                                        <th>Country</th>
+                                        <th>Document</th>
+                                        <th>City</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($tutors as $tutor)
+                                    <tr>
+                                    <td>
+                                        <input class="form-check-input tutor-checkbox" type="checkbox" value="{{ $tutor->id }}" id="flexCheckChecked-{{ $tutor->id }}">
+                                        <label class="form-check-label" for="flexCheckChecked-{{ $tutor->id }}"></label>
+                                    </td>
+
+                                    <td>{{ $tutor->id }}</td>
+                                    <td>{{ $tutor->f_name }} {{ $tutor->l_name }}</td>
+                                    <td>{{ $tutor->qualification }}</td>
+                                    <td>{{ $tutor->gender }}</td>
+                                    <td>{{ $tutor->location }}</td>
+                                    <td><a href="{{ url($tutor->document) }}" target="_blank">View PDF Document</a></td>
+                                    <td>{{ $tutor->city }}</td>
+                                    <td>{{ $tutor->email }}</td>
+                                    <!-- <td>{{ $tutor->experience }} {{ $tutor->experience > 1 ? 'years' : 'year' }}</td> -->
+                                    
+                                    <td>{{ $tutor->phone }}</td>
+                                    <!-- Toggle Switch -->
+                                    <td>
+                                    <form action="{{ route('update.tutor.status') }}" method="POST" id="statusForm_{{ $tutor->id }}">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $tutor->id }}">
+                                        <input type="hidden" name="status" id="statusInput_{{ $tutor->id }}" value="{{ $tutor->status }}">
+                                        
+                                        <!-- Switch -->
+                                        <label class="switch mb-0 mt-2">
+                                            <input type="checkbox" id="statusToggle_{{ $tutor->id }}" 
+                                                {{ $tutor->status === 'active' ? 'checked' : '' }} 
+                                                onchange="updateStatus({{ $tutor->id }})">
+                                            <span class="slider round"></span>
+                                        </label>
+
+                                        <button type="submit" style="display:none;"></button> <!-- Optional submit button (hidden) -->
+                                    </form>
+                                    </td>
+                                
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="dropdown-icon" id="dropdownButton">
+                                                <i class="fa-solid fa-ellipsis-vertical"></i> <!-- You can replace this with any icon -->
+                                            </button>
+                                            <ul class="dropdown-action " id="dropdownMenu">
+                                                <li>
+                                                    <a href="{{ route('edit-teacher', $tutor->id) }}" class="btn btn-sm text-justify">
+                                                    <i class="fa-regular fa-pen-to-square" style="color: #4e73df;"></i>
+                                                    <span class="mx-1">Edit</span>
+                                                </a>
+                                                </li>
+                                                <li>
+                                                    <form action="{{ route('teachers.destroy', $tutor->id) }}" method="POST" style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm d-flex align-items-center" onclick="return confirm('Are you sure?')" style="color: black; margin-left: -11%;">
+                                                            <i class="fa-solid fa-trash-can mx-1" style="color: #e74a3b;"></i>
+                                                            <span class="mx-1">Delete</span>
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                            
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+              
+            </div>              
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer  bg-gradient-success">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto text-white">
+                        <span>Copyright &copy;Edexcel Academy & Educational Consultancy</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
     </div>
-    <script>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded text-white bg-success" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-success" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+    <!-- Bootstrap core JavaScript-->
+    
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{asset('js/js/jquery.min.js')}}"></script>
+    <script src="{{asset('js/js/sb-admin-2.min.js')}}"></script>
+
+    <script src="{{asset('js/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('js/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
+    integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
         document.getElementById('dropdownButton').addEventListener('click', function() {
             var dropdownMenu = document.getElementById('dropdownMenu');
             dropdownMenu.classList.toggle('show');
@@ -270,45 +540,27 @@
             form.submit();
         }
 
-        // document.getElementById('statusToggle').addEventListener('change', function() {
-        //     // Update the hidden input value based on the switch state
-        //     const statusInput = document.getElementById('statusInput');
-        //     statusInput.value = this.checked ? 'active' : 'inactive';
+        $('.country-select').select2()
+        $('#countryTeacher').on('change', function() {
+            
+            var country_id = $(this).val(); // Get the selected country ID
 
-        //     // Submit the form
-        //     document.getElementById('statusForm').submit();
-        // });
-        // $('form').on('submit', function() {
-        //     $(this).find('button[type="submit"]').prop('disabled', true);
-        // });
-        // function updateStatus(tutorId, status) {
-        //     $.ajax({
-        //         url: '{{ route('update.tutor.status') }}',
-        //         method: 'POST',
-        //         data: {
-        //             _token: $('meta[name="csrf-token"]').attr('content'), // Retrieve CSRF token
-        //             id: tutorId,
-        //             status: status ? 'active' : 'inactive'
-        //         },
-        //         success: function(response) {
-        //             $('#statusMessage').text('Status updated successfully!').show();
-
-        //             if (!status && tutorId === {{ auth()->user()->id }}) {
-        //                 window.location.href = "{{ route('login') }}";
-        //             }
-
-        //             setTimeout(function() {
-        //                 $('#statusMessage').fadeOut();
-        //             }, 3000);
-        //         },
-        //         error: function(xhr) {
-        //             console.error('Error updating status', xhr.responseText);
-        //             $('#statusMessage').text('Error updating status. Please try again.').show();
-        //         }
-        //     });
-        // }
-        
-        
-
+            // Make an AJAX request to find tutors based on the selected country
+            $.ajax({
+                url: '/find-tutors', // Your route for finding tutors
+                type: 'GET', // HTTP method (can be POST if needed)
+                data: { country_id: country_id }, // Send selected country ID
+                success: function(response) {
+                    // Handle the response, e.g., display the tutors on the page
+                    console.log('sadsads',response); 
+                    // You can dynamically update the DOM with the returned data here
+                    $('.teachers-table tbody').html(response.html);
+                },
+                error: function(xhr) {
+                    console.log('Error:', xhr);
+                }
+            });
+        });
+    
     </script>
     

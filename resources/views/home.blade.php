@@ -16,6 +16,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
+    integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <style>
@@ -351,8 +355,8 @@
             <hr class="sidebar-divider">
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link py-2" id="profile-tab" data-toggle="tab"
-                href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+                <a class="nav-link py-2" 
+                href="{{route('all.tutors')}}">
                 <i class="fas fa-chalkboard-teacher"></i>
                     <span>{{ __('messages.Teacher') }}</span>
                 </a>
@@ -657,8 +661,18 @@
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="d-sm-flex align-items-center justify-content-between mb-4 SB">
                                 <h1 class="h3 mb-0 text-gray-800">{{ __('messages.Teacher') }}</h1>
-                                <div class="del-button">
+                                <div class="del-button d-flex">
+                                    <div>
                                     <button type="button" class="btn btn-danger" id="delete-selected">Multiple Delete</button>
+                                    </div>
+                                    <div>
+                                        <label>Select By Country</label>
+                                        <select name="countryTeacher" id="countryTeacher" class="form-select select2 country-select w-50"  >
+                                                        @foreach ($countries as $key => $country)
+                                                            <option value="{{ $key }}">{{ $country }}</option>
+                                                        @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             @include('teacher-list')
@@ -938,6 +952,7 @@
     });
 </script>
 <script>
+    
     function cancel(){
             $('.alert').addClass('d-none')
         }

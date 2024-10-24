@@ -74,6 +74,9 @@ Route::delete('/inquiry/destroy-bulk', [StudentController::class, 'destroyinquir
 Route::get('/policy', [StudentController::class, 'privacyPolicy'])->name('policy.index');
 Route::get('/terms', [StudentController::class, 'termsCondition'])->name('terms.condition');
 Route::get('/tutor-detail', [TutorController::class, 'tutorDetail'])->name('tutor.detail');
+// Route for finding tutors based on selected country
+Route::get('/find-tutors', [TutorController::class, 'findTutors'])->name('find.tutors');
+Route::get('/all-tutors', [TutorController::class, 'allTutors'])->name('all.tutors');
 
 Route::get('/qr-code', [StudentController::class, 'qrcode'])->name('qrcode');
 Route::post('/hire-tutor/create', [StudentController::class, 'create'])->name('student-create');
