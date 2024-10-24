@@ -249,7 +249,7 @@
             </li>
             <hr class="sidebar-divider d-none d-md-block">
             <li class="nav-item">
-                <a class="nav-link py-2" id="inquiry-tab" data-toggle="tab" href="#blogs" role="tab"    aria-controls="blogs" aria-selected="true">
+                <a class="nav-link py-2" href="{{route('blogs.create')}}">
                     <i class="fa-solid fa-blog" aria-hidden="true"></i>
                     <span>{{ __('messages.Blogs') }}
                     </span>

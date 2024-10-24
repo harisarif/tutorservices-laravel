@@ -302,23 +302,36 @@
     .dropdown-list {
         top: 65px;
     }
+    .alert {
+        position: fixed !important;
+        padding: .75rem 1.25rem;
+        /* margin-bottom: 1rem; */
+        border: 1px solid transparent;
+        border-radius: .35rem;
+        float: right;
+        right: -2px !important;
+        display:flex;
+    }
 </style>
 @php
     $notifications = auth()->user()->unreadNotifications;
 @endphp
 @if (session('success'))
-        <div class="alert alert-success" style="z-index: 6;
+        <div class="alert alert-success  justify-content-between" style="z-index: 6;
     padding: 14px !important;">
-            
-            {{ session('success') }}
-            <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
+            <div>
+                {{ session('success') }}
+            </div>
+            <div>
+                <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
+            </div>
         </div>
     @endif
 <body id="page-top">
-    
+
     <!-- Page Wrapper -->
     <div id="wrapper">
-
+    
         <!-- Sidebar -->
         <ul class="nav nav-tabs navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -379,7 +392,7 @@
             </li>
             <hr class="sidebar-divider d-none d-md-block">
             <li class="nav-item">
-                <a class="nav-link py-2" id="inquiry-tab" data-toggle="tab" href="#blogs" role="tab"    aria-controls="blogs" aria-selected="true">
+                <a class="nav-link py-2" href="{{route('blogs.create')}}">
                     <i class="fa-solid fa-blog" aria-hidden="true"></i>
                     <span>{{ __('messages.Blogs') }}
                     </span>
