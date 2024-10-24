@@ -523,6 +523,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
     integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{asset('js/js/bootstrap.bundle.min.js')}}"></script>
 <script>
         document.getElementById('dropdownButton').addEventListener('click', function() {
             var dropdownMenu = document.getElementById('dropdownMenu');
@@ -539,7 +540,49 @@
             // Submit the form
             form.submit();
         }
+        $('#select-all').click(function() {
+            // Check/uncheck all checkboxes based on the main checkbox
+            $('.tutor-checkbox').prop('checked', this.checked);
+        });
+        $('#delete-selected').click(function() {
+            // Gather all checked checkbox values
+            var selected = [];
+            $('.tutor-checkbox:checked').each(function() {
+                selected.push($(this).val());
+            });
 
+            if (selected.length === 0) {
+               
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Please select at least one tutor to delete.',
+                    icon: 'error', // Use 'error' instead of 'danger'
+                    confirmButtonText: 'OK'
+                });
+                
+                return;
+            }
+
+            // Confirm deletion
+            if (confirm('Are you sure you want to delete the selected tutors?')) {
+                $.ajax({
+                    url: "{{ route('teachers.destroy.bulk') }}", // Update with your route
+                    type: 'DELETE',
+                    data: {
+                        ids: selected,
+                        _token: '{{ csrf_token() }}' // Include CSRF token for security
+                    },
+                    success: function(response) {
+                        // Handle success (e.g., reload the page or remove deleted rows)
+                        location.reload(); // Reload page after successful deletion
+                    },
+                    error: function(xhr) {
+                        // Handle error
+                        alert('Error occurred while deleting tutors.');
+                    }
+                });
+            }
+        });
         $('.country-select').select2()
         $('#countryTeacher').on('change', function() {
             
@@ -561,6 +604,58 @@
                 }
             });
         });
-    
+        $(document).ready(function() {
+                $('#alertsDropdown').on('click', function(e) {
+                    e.preventDefault();
+                    $('#notificationDropdown').toggle();
+                });
+
+        // Optionally, close the dropdown if clicking outside of it
+        $(document).on('click', function(event) {
+            if (!$(event.target).closest('.notification-icon').length) {
+                $('#notificationDropdown').hide();
+            }
+        });
+        $('.notification-dropdown').on('click', 'li', function() {
+        var notificationId = $(this).data('id');
+        var isRead = $(this).hasClass('read');
+
+        $.ajax({
+            url: "{{ route('mark.notifications.read') }}", // Define this route in your web.php
+            type: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: { notification_id: notificationId, read: !isRead },
+            success: function(response) {
+                // Update the notification style based on the new read status
+                if (response.status === 'success') {
+                    if (isRead) {
+                        $(this).removeClass('read').addClass('unread');
+                        updateNotificationCount(1); // Increment the count for unread
+                    } else {
+                        $(this).removeClass('unread').addClass('read');
+                        updateNotificationCount(-1); // Decrement the count for read
+                    }
+                }
+            }.bind(this) // Bind `this` to refer to the clicked notification item
+        });
+    });
+
+    function updateNotificationCount(change) {
+        var countElement = $('#notificationCount');
+        var currentCount = parseInt(countElement.text());
+        countElement.text(currentCount + change);
+    }
+    });
+    function cancel(){
+            $('.alert').addClass('d-none')
+        }
+        $(document).on('select2:open', function(e) {
+                    let scrollPos = $(window).scrollTop();
+                    setTimeout(function() {
+                        $(window).scrollTop(scrollPos);
+                    }, 0);
+                });
     </script>
     

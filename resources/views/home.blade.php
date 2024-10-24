@@ -750,10 +750,7 @@
 <script>
     $(document).ready(function() {
         
-        $('#select-all').click(function() {
-            // Check/uncheck all checkboxes based on the main checkbox
-            $('.tutor-checkbox').prop('checked', this.checked);
-        });
+       
         $('#select-all-student').click(function() {
             // Check/uncheck all checkboxes based on the main checkbox
             $('.student-checkbox').prop('checked', this.checked);
@@ -769,45 +766,7 @@
                 $('#select-all').prop('checked', false);
             }
         });
-        $('#delete-selected').click(function() {
-            // Gather all checked checkbox values
-            var selected = [];
-            $('.tutor-checkbox:checked').each(function() {
-                selected.push($(this).val());
-            });
-
-            if (selected.length === 0) {
-               
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Please select at least one tutor to delete.',
-                    icon: 'error', // Use 'error' instead of 'danger'
-                    confirmButtonText: 'OK'
-                });
-                
-                return;
-            }
-
-            // Confirm deletion
-            if (confirm('Are you sure you want to delete the selected tutors?')) {
-                $.ajax({
-                    url: "{{ route('teachers.destroy.bulk') }}", // Update with your route
-                    type: 'DELETE',
-                    data: {
-                        ids: selected,
-                        _token: '{{ csrf_token() }}' // Include CSRF token for security
-                    },
-                    success: function(response) {
-                        // Handle success (e.g., reload the page or remove deleted rows)
-                        location.reload(); // Reload page after successful deletion
-                    },
-                    error: function(xhr) {
-                        // Handle error
-                        alert('Error occurred while deleting tutors.');
-                    }
-                });
-            }
-        });
+       
         
         $('#delete-inquiry').click(function() {
             // Gather all checked checkbox values
@@ -887,14 +846,14 @@
         });
     });
         $(document).ready(function() {
-    $('.teachers-table').DataTable({
-        responsive:true
-    });
-    $('.student-table').DataTable(
-        {
-        responsive:true
-    }
-    );
+            $('.teachers-table').DataTable({
+                responsive:true
+            });
+            $('.student-table').DataTable(
+                {
+                responsive:true
+            }
+            );
     
 });
 
