@@ -37,7 +37,7 @@
     .sidebar-dark .nav-item .nav-link:active, .sidebar-dark .nav-item .nav-link:focus, .sidebar-dark .nav-item .nav-link:hover {
         border:1px solid transparent;
     }
-    .alert{ 
+    .alert{
         z-index: 66 !important;
         font-size: 15px;
         width: 25%;
@@ -46,7 +46,7 @@
         right: 0;
         top: 4px;
     }
-    
+
     .sidebar-dark #sidebarToggle::after{
         color: #fff !important;
         font-weight: 900;
@@ -54,7 +54,7 @@
         font-family: 'Font Awesome 5 Free';
         margin-right: .1rem;
         margin-left: 2px !important;
-        
+
     }
     .sidebar-dark #sidebarToggle:hover{
         background-color: #42b979;
@@ -260,7 +260,7 @@
        right: -47px !important;
     }
     [dir="rtl"] .dataTables_length{
-       
+
         display: flex;
     }
     .nav-tabs{
@@ -286,7 +286,7 @@
     .topbar .dropdown-list .dropdown-item {
         overflow-y: scroll;
         height: 188px;
-    } 
+    }
     .topbar .dropdown-list .no-notifications {
         height: 40px !important;
     }
@@ -331,7 +331,7 @@
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-    
+
         <!-- Sidebar -->
         <ul class="nav nav-tabs navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -348,7 +348,7 @@
                         <i class="fa-solid fa-angle-right"></i>
                     </div>
                  </button>
-                   
+
                 </div>
            </li>
 
@@ -363,12 +363,12 @@
                     <span>{{ __('messages.Dashboard') }}</span>
                 </a>
             </li>
-            
+
             <!-- Divider -->
             <hr class="sidebar-divider">
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link py-2" 
+                <a class="nav-link py-2"
                 href="{{route('all.tutors')}}">
                 <i class="fas fa-chalkboard-teacher"></i>
                     <span>{{ __('messages.Teacher') }}</span>
@@ -399,6 +399,13 @@
                 </a>
             </li>
             <hr class="sidebar-divider d-none d-md-block">
+            <li class="nav-item">
+                <a class="nav-link py-2" href="{{route('all.blogs')}}">
+                    <i class="fa-solid fa-blog" aria-hidden="true"></i>
+                    <span>{{ __('Blog List') }}
+                    </span>
+                </a>
+            </li>
         </ul>
         <!-- End of Sidebar -->
 
@@ -416,12 +423,12 @@
                         </button>
                     </div>
                     <!-- Sidebar Toggle (Topbar) -->
-                    
+
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow mx-1">
-                        
+
                             <div class="notification-icon" >
                                 <a href="#" class="nav-link dropdown-toggle"  id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-bell fa-fw text-success"></i> {{-- Replace with your icon --}}
@@ -430,7 +437,7 @@
                                     @endif
                                 </a>
 
-                                
+
                             </div>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in BD notification-dropdown " id="notificationDropdown" aria-labelledby="alertsDropdown "  style="display: none;">
@@ -473,13 +480,13 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in md"
                                 aria-labelledby="userDropdown" style="left: -95px !important; width: 0;">
-                               
+
                                 <a class="dropdown-item text-success" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-success" ></i>
-                                    {{ __('messages.Logout') }} 
+                                    {{ __('messages.Logout') }}
                                 </a>
                             </div>
-                            
+
                         </li>
 
                     </ul>
@@ -629,7 +636,7 @@
                                                 <canvas id="myPieChart"></canvas>
                                             </div>
                                             <div class="mt-4 text-center small">
-                                                <span class="mr-2"><i class="fas fa-circle text-primary"></i> 
+                                                <span class="mr-2"><i class="fas fa-circle text-primary"></i>
                                                 Direct </span>
                                                 <span class="mr-2"> <i class="fas fa-circle text-success"></i> Social</span>
                                                 <span class="mr-2"><i class="fas fa-circle text-info"></i> Referral</span>
@@ -693,8 +700,8 @@
 
                     </div>
 
-              
-            </div>              
+
+            </div>
                 <!-- /.container-fluid -->
 
             </div>
@@ -762,8 +769,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 <script>
     $(document).ready(function() {
-        
-       
+
+
         $('#select-all-student').click(function() {
             // Check/uncheck all checkboxes based on the main checkbox
             $('.student-checkbox').prop('checked', this.checked);
@@ -779,8 +786,8 @@
                 $('#select-all').prop('checked', false);
             }
         });
-       
-        
+
+
         $('#delete-inquiry').click(function() {
             // Gather all checked checkbox values
             var selected = [];
@@ -867,7 +874,7 @@
                 responsive:true
             }
             );
-    
+
 });
 
 
@@ -924,7 +931,7 @@
     });
 </script>
 <script>
-    
+
     function cancel(){
             $('.alert').addClass('d-none')
         }

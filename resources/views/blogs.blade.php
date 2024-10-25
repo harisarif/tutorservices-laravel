@@ -14,7 +14,7 @@
      <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script> 
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 </head>
     <style>
          .btn-file {
@@ -229,7 +229,7 @@
         input:checked + .switch:active::before {
             box-shadow: 0 2px 8px rgba(0,0,0,0.28), 0 0 0 20px rgba(0,150,136,0.2);
         }
-    
+
         /* The switch - custom styled checkbox */
         .switch {
             position: relative;
@@ -296,13 +296,13 @@
 @if (session('success'))
         <div class="alert alert-success" style="z-index: 6;
     padding: 14px !important;">
-            
+
             {{ session('success') }}
             <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
         </div>
     @endif
 <body id="page-top">
-    
+
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -322,7 +322,7 @@
                         <i class="fa-solid fa-angle-right"></i>
                     </div>
                  </button>
-                   
+
                 </div>
            </li>
 
@@ -337,11 +337,11 @@
                     <span>{{ __('messages.Dashboard') }}</span>
                 </a>
             </li>
-            
+
             <!-- Divider -->
             <hr class="sidebar-divider">
             <!-- Nav Item - Tables -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link py-2" id="profile-tab" data-toggle="tab"
                 href="#profile" role="tab" aria-controls="profile" aria-selected="false">
                 <i class="fas fa-chalkboard-teacher"></i>
@@ -365,7 +365,7 @@
                 </a>
             </li>
             <hr class="sidebar-divider d-none d-md-block">
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link py-2" href="{{route('blogs.create')}}">
                     <i class="fa-solid fa-blog" aria-hidden="true"></i>
                     <span>{{ __('messages.Blogs') }}
@@ -373,6 +373,13 @@
                 </a>
             </li>
             <hr class="sidebar-divider d-none d-md-block">
+            <li class="nav-item">
+                <a class="nav-link py-2" href="{{route('all.blogs')}}">
+                    <i class="fa-solid fa-blog" aria-hidden="true"></i>
+                    <span>{{ __('Blog List') }}
+                    </span>
+                </a>
+            </li>
         </ul>
         <!-- End of Sidebar -->
 
@@ -390,12 +397,12 @@
                         </button>
                     </div>
                     <!-- Sidebar Toggle (Topbar) -->
-                    
+
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow mx-1">
-                        
+
                             <div class="notification-icon" >
                                 <a href="#" class="nav-link dropdown-toggle"  id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-bell fa-fw text-success"></i> {{-- Replace with your icon --}}
@@ -404,7 +411,7 @@
                                     @endif
                                 </a>
 
-                                
+
                             </div>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in BD notification-dropdown " id="notificationDropdown" aria-labelledby="alertsDropdown "  style="display: none;">
@@ -447,13 +454,13 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in md"
                                 aria-labelledby="userDropdown" style="left: -95px !important; width: 0;">
-                               
+
                                 <a class="dropdown-item text-success" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-success" ></i>
-                                    {{ __('messages.Logout') }} 
+                                    {{ __('messages.Logout') }}
                                 </a>
                             </div>
-                            
+
                         </li>
 
                     </ul>
@@ -508,8 +515,8 @@
         </div>
 
 
-              
-            </div>              
+
+            </div>
                 <!-- /.container-fluid -->
 
             </div>
@@ -561,7 +568,7 @@
 </html>
 
     <!-- Bootstrap core JavaScript-->
-    
+
 
     <!-- Custom scripts for all pages-->
     <script src="{{asset('js/js/jquery.min.js')}}"></script>
@@ -581,7 +588,7 @@
       "image": false
     }
   });
-  
+
   $(document).on('change', '.btn-file :file', function() {
     var input = $(this);
     var numFiles = input.get(0).files ? input.get(0).files.length : 1;
@@ -589,17 +596,17 @@
     var label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
     input.trigger('fileselect', [numFiles, label]);
   });
-  
+
   $('.btn-file :file').on('fileselect', function(event, numFiles, label){
     var input = $(this).parents('.input-group').find(':text');
     var log = numFiles > 1 ? numFiles + ' files selected' : label;
-    
+
     if( input.length ) {
       input.val(log);
     } else {
       if( log ){ alert(log); }
     }
-    
+
   });
 });
 
@@ -661,4 +668,4 @@ const image = document.getElementById('image');
         }
 
     </script>
-    
+

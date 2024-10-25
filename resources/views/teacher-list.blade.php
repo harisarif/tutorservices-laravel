@@ -17,7 +17,7 @@
     <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+
 </head>
     <style>
         .dropdown {
@@ -112,7 +112,7 @@
         input:checked + .switch:active::before {
             box-shadow: 0 2px 8px rgba(0,0,0,0.28), 0 0 0 20px rgba(0,150,136,0.2);
         }
-    
+
         /* The switch - custom styled checkbox */
         .switch {
             position: relative;
@@ -179,13 +179,13 @@
 @if (session('success'))
         <div class="alert alert-success" style="z-index: 6;
     padding: 14px !important;">
-            
+
             {{ session('success') }}
             <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
         </div>
     @endif
 <body id="page-top">
-    
+
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -205,7 +205,7 @@
                         <i class="fa-solid fa-angle-right"></i>
                     </div>
                  </button>
-                   
+
                 </div>
            </li>
 
@@ -220,7 +220,7 @@
                     <span>{{ __('messages.Dashboard') }}</span>
                 </a>
             </li>
-            
+
             <!-- Divider -->
             <hr class="sidebar-divider">
             <!-- Nav Item - Tables -->
@@ -256,6 +256,13 @@
                 </a>
             </li>
             <hr class="sidebar-divider d-none d-md-block">
+            <li class="nav-item">
+                <a class="nav-link py-2" href="{{route('all.blogs')}}">
+                    <i class="fa-solid fa-blog" aria-hidden="true"></i>
+                    <span>{{ __('Blog List') }}
+                    </span>
+                </a>
+            </li>
         </ul>
         <!-- End of Sidebar -->
 
@@ -273,12 +280,12 @@
                         </button>
                     </div>
                     <!-- Sidebar Toggle (Topbar) -->
-                    
+
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow mx-1">
-                        
+
                             <div class="notification-icon" >
                                 <a href="#" class="nav-link dropdown-toggle"  id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-bell fa-fw text-success"></i> {{-- Replace with your icon --}}
@@ -287,7 +294,7 @@
                                     @endif
                                 </a>
 
-                                
+
                             </div>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in BD notification-dropdown " id="notificationDropdown" aria-labelledby="alertsDropdown "  style="display: none;">
@@ -330,13 +337,13 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in md"
                                 aria-labelledby="userDropdown" style="left: -95px !important; width: 0;">
-                               
+
                                 <a class="dropdown-item text-success" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-success" ></i>
-                                    {{ __('messages.Logout') }} 
+                                    {{ __('messages.Logout') }}
                                 </a>
                             </div>
-                            
+
                         </li>
 
                     </ul>
@@ -368,7 +375,7 @@
                             </div>
                     <div id="statusMessage" style="display:none;" class="alert alert-success"></div>
                         <div class=" AB-sb">
-                            
+
                             <table class="table teachers-table">
                                 <thead>
                                     <tr>
@@ -404,7 +411,7 @@
                                     <td>{{ $tutor->city }}</td>
                                     <td>{{ $tutor->email }}</td>
                                     <!-- <td>{{ $tutor->experience }} {{ $tutor->experience > 1 ? 'years' : 'year' }}</td> -->
-                                    
+
                                     <td>{{ $tutor->phone }}</td>
                                     <!-- Toggle Switch -->
                                     <td>
@@ -412,11 +419,11 @@
                                         @csrf
                                         <input type="hidden" name="id" value="{{ $tutor->id }}">
                                         <input type="hidden" name="status" id="statusInput_{{ $tutor->id }}" value="{{ $tutor->status }}">
-                                        
+
                                         <!-- Switch -->
                                         <label class="switch mb-0 mt-2">
-                                            <input type="checkbox" id="statusToggle_{{ $tutor->id }}" 
-                                                {{ $tutor->status === 'active' ? 'checked' : '' }} 
+                                            <input type="checkbox" id="statusToggle_{{ $tutor->id }}"
+                                                {{ $tutor->status === 'active' ? 'checked' : '' }}
                                                 onchange="updateStatus({{ $tutor->id }})">
                                             <span class="slider round"></span>
                                         </label>
@@ -424,7 +431,7 @@
                                         <button type="submit" style="display:none;"></button> <!-- Optional submit button (hidden) -->
                                     </form>
                                     </td>
-                                
+
                                     <td>
                                         <div class="dropdown">
                                             <button class="dropdown-icon" id="dropdownButton">
@@ -447,7 +454,7 @@
                                                         </button>
                                                     </form>
                                                 </li>
-                                            
+
                                             </ul>
                                         </div>
                                     </td>
@@ -459,8 +466,8 @@
 
                     </div>
 
-              
-            </div>              
+
+            </div>
                 <!-- /.container-fluid -->
 
             </div>
@@ -512,7 +519,7 @@
 </html>
 
     <!-- Bootstrap core JavaScript-->
-    
+
 
     <!-- Custom scripts for all pages-->
     <script src="{{asset('js/js/jquery.min.js')}}"></script>
@@ -552,14 +559,14 @@
             });
 
             if (selected.length === 0) {
-               
+
                 Swal.fire({
                     title: 'Error!',
                     text: 'Please select at least one tutor to delete.',
                     icon: 'error', // Use 'error' instead of 'danger'
                     confirmButtonText: 'OK'
                 });
-                
+
                 return;
             }
 
@@ -585,7 +592,7 @@
         });
         $('.country-select').select2()
         $('#countryTeacher').on('change', function() {
-            
+
             var country_id = $(this).val(); // Get the selected country ID
 
             // Make an AJAX request to find tutors based on the selected country
@@ -595,7 +602,7 @@
                 data: { country_id: country_id }, // Send selected country ID
                 success: function(response) {
                     // Handle the response, e.g., display the tutors on the page
-                    console.log('sadsads',response); 
+                    console.log('sadsads',response);
                     // You can dynamically update the DOM with the returned data here
                     $('.teachers-table tbody').html(response.html);
                 },
@@ -658,4 +665,4 @@
                     }, 0);
                 });
     </script>
-    
+

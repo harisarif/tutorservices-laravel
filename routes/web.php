@@ -67,6 +67,7 @@ Route::get('/hire-tutor', [StudentController::class, 'index'])->name('hire.tutor
 Route::get('/faq', [StudentController::class, 'FAQ'])->name('faq.index');
 Route::resource('blogs', BlogController::class);
 Route::get('/cities', [StudentController::class, 'getCities'])->name('cities');
+Route::get('/all-blogs', [TutorController::class, 'allBlogs'])->name('all.blogs');
 Route::post('/update-tutor-status', [TutorController::class, 'updateTutorStatus'])->name('update.tutor.status');
 Route::delete('/teachers/destroy-bulk', [TutorController::class, 'destroyBulk'])->name('teachers.destroy.bulk');
 Route::delete('/student/destroy-bulk', [StudentController::class, 'destroystudentBulk'])->name('student.destroy.bulk');
@@ -117,7 +118,7 @@ Route::view('profile', 'profile')
         return redirect('/');
     })->name('logout');
 
-    
+
 
 Auth::routes();
 

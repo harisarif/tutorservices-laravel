@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Blog;
 use Carbon\Carbon;
 use App\Models\Country;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class TutorController extends Controller
     public function index(Request $request)
         {
 
-            $query = Tutor::where('status', 'active');           
+            $query = Tutor::where('status', 'active');
 
             $perPage = 5; // Define the number of tutors per page
 
@@ -55,7 +56,7 @@ class TutorController extends Controller
         public function tutorDetail (){
             return view('teacher-detail');
         }
-       
+
         public function destroyBulk(Request $request)
             {
                 $request->validate([
@@ -73,44 +74,44 @@ class TutorController extends Controller
         {
             // dd($request);
             $language = $request->language;
-    
+
             if (in_array($language, ['en', 'ar'])) {
                 Session::put('locale', $language); // Store the selected language in session
                 App::setLocale($language); // Set the application locale
             }
-    
+
             return redirect()->back();
         }
         public function fetchData(Request $request)
         {
             // Initialize the query builder
             $query = Tutor::query();
-        
+
             // Define the number of tutors per page
             $perPage = 5;
-        
+
             // Apply filters
             // Filter tutors by selected country if a specific country is selected
             if ($request->has('location') && $request->location !== "all") {
                 $query->where('location', $request->location);
             }
-        
+
             // Filter tutors by search query for city
             if ($request->has('citysearch') && $request->citysearch !== "") {
                 $query->where('city', 'LIKE', '%' . $request->citysearch . '%');
             }
-        
+
             // Filter tutors by search query for subject
             if ($request->has('subjectsearch') && $request->filled('subjectsearch')) {
                 $subject = $request->subjectsearch;
-        
+
                 // Filter tutors who teach the specified subject
                 $query->where('teaching', 'LIKE', '%"'.$subject.'"%');
             }
-        
+
             // Paginate the filtered tutors
             $tutors = $query->paginate($perPage);
-        
+
             // Check if there are no tutors
             if ($tutors->isEmpty()) {
                 return response()->json([
@@ -126,7 +127,7 @@ class TutorController extends Controller
                     ],
                 ]);
             }
-        
+
             // Calculate age for each tutor
             foreach ($tutors as $tutor) {
                 if ($tutor->dob) {
@@ -135,10 +136,10 @@ class TutorController extends Controller
                     $tutor->age = null; // or any default value
                 }
             }
-        
+
             // Fetch the total count of tutors after applying filters
             $totalTutorsCount = $query->count();
-        
+
             // Manually serialize the paginated data
             $serializedData = [
                 'tutors' => $tutors->items(), // Get the items from the paginator
@@ -152,14 +153,14 @@ class TutorController extends Controller
                     'lastPage' => $tutors->lastPage(),
                 ],
             ];
-        
+
             // Return the serialized data as JSON response
             return response()->json($serializedData);
         }
         // public function updateStatus(Request $request)
         // {
         //     $tutor = Tutor::find($request->id);
-            
+
         //     if ($tutor) {
         //         // Update status
         //         $tutor->status = $request->status;
@@ -171,7 +172,7 @@ class TutorController extends Controller
         //     return response()->json(['error' => 'Tutor not found'], 404);
         // }
 
-       
+
 public function updateTutorStatus(Request $request)
 {
     // Validate the request
@@ -226,7 +227,7 @@ public function updateTutorStatus(Request $request)
             'f_name' => 'required|string|max:255',
             'l_name' => 'required|string|max:255',
             'qualification'=> 'required|string|max:255',
-            'profileImage' => 'required|image|mimes:jpeg,png,jpg|max:2048', 
+            'profileImage' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'email' => 'required|string|email|max:255|unique:tutors,email',
             'experience'=> 'required|string|max:255',
             'dob'=> 'required|string|max:255',
@@ -306,7 +307,7 @@ public function updateTutorStatus(Request $request)
             - Location: {$tutor->location}
 
             Please ensure that {$tutor->f_name} {$tutor->l_name} is added to our records and receives all necessary welcome materials.";
-        
+
         $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
 
         // Redirect with success message
@@ -317,7 +318,7 @@ public function updateTutorStatus(Request $request)
     {
         return redirect('/hire-tutor');
     }
-    
+
     public function fetchTeachers(Request $request)
     {
         $students = Tutor::all();
@@ -329,7 +330,7 @@ public function updateTutorStatus(Request $request)
 
             try {
                 // Server settings
-                // $mail->SMTPDebug = 2; 
+                // $mail->SMTPDebug = 2;
                 // Enable verbose debug output
                 $mail->isSMTP();
                 $mail->Host = 'smtp.hostinger.com';
@@ -354,11 +355,11 @@ public function updateTutorStatus(Request $request)
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
         }
-   
+
         public function findTutors(Request $request)
                 {
                     $country_id = $request->get('country_id');
-                    
+
                     // Query tutors based on the selected country ID
                     $tutors = Tutor::where('location', $country_id)->get();
 
@@ -386,8 +387,8 @@ public function updateTutorStatus(Request $request)
                                         <input type="hidden" name="id" value="'.$tutor->id.'">
                                         <input type="hidden" name="status" id="statusInput_'.$tutor->id.'" value="'.$tutor->status.'">
                                         <label class="switch mb-0 mt-2">
-                                            <input type="checkbox" id="statusToggle_'.$tutor->id.'" 
-                                                '.($tutor->status === 'active' ? 'checked' : '').' 
+                                            <input type="checkbox" id="statusToggle_'.$tutor->id.'"
+                                                '.($tutor->status === 'active' ? 'checked' : '').'
                                                 onchange="updateStatus('.$tutor->id.')">
                                             <span class="slider round"></span>
                                         </label>
@@ -439,8 +440,12 @@ public function updateTutorStatus(Request $request)
             $countries = collect(config('countries_assoc.countries'));
             return view('teacher-list', compact('tutors','countries'));
         }
+        public function allBlogs(){
+            $blogs = Blog::all();
+            return view('blogs-list', compact('blogs'));
+        }
 
-        
+
     public function signup() {
         $schoolClasses = SchoolClass::all();
         $countriesPhone = collect(config('phonecountries.countries'));

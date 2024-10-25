@@ -59,7 +59,8 @@ class BlogController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $blogs = Blog::all();
+        return view('blog-list', compact('blogs'));
     }
 
     /**
