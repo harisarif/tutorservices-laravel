@@ -172,6 +172,17 @@
         .slider.round:before {
             border-radius: 50%;
         }
+        .alert {
+            position: fixed !important;
+            padding: .75rem 1.25rem;
+            /* margin-bottom: 1rem; */
+            border: 1px solid transparent;
+            border-radius: .35rem;
+            float: right;
+            right: -2px !important;
+            display:flex;
+            width:20%;
+        }
         /* Dropdown container */
 
     </style>

@@ -51,7 +51,7 @@ class BlogController extends Controller
             'image' => $imagePath,
         ]);
 
-        return redirect()->route('home')->with('success', 'Blog created successfully!');
+        return redirect()->route('all.blogs')->with('success', 'Blog created successfully!');
     }
 
     /**
