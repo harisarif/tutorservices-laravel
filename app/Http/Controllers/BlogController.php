@@ -82,8 +82,27 @@ class BlogController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $blog = Blog::find($id);
+
+            if ($blog) {
+                $blog->delete();
+                return redirect()->route('all.blogs')->with('success', 'Blog deleted successfully!');
+            }
+
+            return redirect()->route('all.blogs')->with('error', 'Blog not found.');
+    }
+    public function destroyBulk(Request $request)
+    {
+                $request->validate([
+                    'ids' => 'required|array',
+                    'ids.*' => 'exists:blogs,id', // Assuming 'tutors' is your table name
+                ]);
+
+                // Delete the selected tutors
+                Blog::destroy($request->ids);
+
+                return response()->json(['success' => 'Blogs deleted successfully.']);
     }
 }

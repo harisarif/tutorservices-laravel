@@ -15,9 +15,8 @@
     <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <style>
     .dropdown {
@@ -36,7 +35,7 @@
 
     /* Hide dropdown menu by default */
     .dropdown-action {
-        display: none;
+        /* display: none; */
         position: absolute;
         top: 40px; /* Adjust based on your design */
         left: -7px;
@@ -171,7 +170,17 @@
         border-radius: 50%;
     }
     /* Dropdown container */
-
+    .alert {
+        position: fixed !important;
+        padding: .75rem 1.25rem;
+        /* margin-bottom: 1rem; */
+        border: 1px solid transparent;
+        border-radius: .35rem;
+        float: right;
+        right: -2px !important;
+        display:flex;
+        width:20%;
+    }
 </style>
 @php
     $notifications = auth()->user()->unreadNotifications;
@@ -225,11 +234,11 @@
         <hr class="sidebar-divider">
         <!-- Nav Item - Tables -->
         <li class="nav-item">
-            <a class="nav-link py-2" id="profile-tab" data-toggle="tab"
-               href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+                <a class="nav-link py-2"
+                href="{{route('all.tutors')}}">
                 <i class="fas fa-chalkboard-teacher"></i>
-                <span>{{ __('messages.Teacher') }}</span>
-            </a>
+                    <span>{{ __('messages.Teacher') }}</span>
+                </a>
         </li>
         <hr class="sidebar-divider">
         <li class="nav-item">
@@ -369,62 +378,57 @@
                     <div id="statusMessage" style="display:none;" class="alert alert-success"></div>
                     <div class=" AB-sb">
 
-                        <table class="table teachers-table">
-                            <thead>
+                    <table class="table teachers-table">
+                        <thead>
+                        <tr>
+                            <th><input class="form-check-input" type="checkbox" id="select-all">
+                                <label class="form-check-label" for="select-all"></label></th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Image</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($blogs as $blog)
                             <tr>
-                                <th> <input class="form-check-input" type="checkbox" id="select-all">
-                                    <label class="form-check-label" for="select-all"></label></th>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Image</th>
-                                <th>Action</th>
+                                <td>
+                                    <input class="form-check-input blog-checkbox" type="checkbox" value="{{ $blog->id }}" id="flexCheckChecked-{{ $blog->id }}">
+                                    <label class="form-check-label" for="flexCheckChecked-{{ $blog->id }}"></label>
+                                </td>
+                                <td>{{ $blog->title }}</td>
+                                <td>{{ strip_tags($blog->description) }}</td>
+                                <td><img src="{{ asset('storage/' . $blog->image) }}" alt="Blog Image" style="width: 50px;"/></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <!-- Unique button and menu IDs -->
+                                        <button class="dropdown-icon" id="dropdownButton-{{ $blog->id }}" onclick="toggleDropdown({{ $blog->id }})">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-action d-none" id="dropdownMenu-{{ $blog->id }}">
+                                            <li>
+                                                <a href="{{ route('edit-teacher', $blog->id) }}" class="btn btn-sm text-justify">
+                                                    <i class="fa-regular fa-pen-to-square" style="color: #4e73df;"></i>
+                                                    <span class="mx-1">Edit</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm d-flex align-items-center px-0" onclick="return confirm('Are you sure?')" style="color: black;">
+                                                        <i class="fa-solid fa-trash-can mx-1" style="color: #e74a3b;"></i>
+                                                        <span class="mx-1">Delete</span>
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
                             </tr>
-                            </thead>
-                            <tbody>
-                            @foreach ($blogs as $blog)
-                                <tr>
-                                    <td>
-                                        <input class="form-check-input tutor-checkbox" type="checkbox" value="{{ $blog->id }}" id="flexCheckChecked-{{ $blog->id }}">
-                                        <label class="form-check-label" for="flexCheckChecked-{{ $blog->id }}"></label>
-                                    </td>
-
-                                    <td>{{ $blog->title }}</td>
-                                    <td>{{ strip_tags($blog->description) }}</td>
-                                    <td><img src="{{ asset('storage/' . $blog->image) }}" alt="Blog Image" style="width: 50px;"/></td>
-
-                                    <!-- Toggle Switch -->
-
-
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="dropdown-icon" id="dropdownButton">
-                                                <i class="fa-solid fa-ellipsis-vertical"></i> <!-- You can replace this with any icon -->
-                                            </button>
-                                            <ul class="dropdown-action " id="dropdownMenu">
-                                                <li>
-                                                    <a href="{{ route('edit-teacher', $blog->id) }}" class="btn btn-sm text-justify">
-                                                        <i class="fa-regular fa-pen-to-square" style="color: #4e73df;"></i>
-                                                        <span class="mx-1">Edit</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <form action="{{ route('teachers.destroy', $blog->id) }}" method="POST" style="display:inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm d-flex align-items-center" onclick="return confirm('Are you sure?')" style="color: black; margin-left: -11%;">
-                                                            <i class="fa-solid fa-trash-can mx-1" style="color: #e74a3b;"></i>
-                                                            <span class="mx-1">Delete</span>
-                                                        </button>
-                                                    </form>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                        @endforeach
+                        </tbody>
+                    </table>
                     </div>
 
                 </div>
@@ -495,29 +499,38 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{asset('js/js/bootstrap.bundle.min.js')}}"></script>
 <script>
-    document.getElementById('dropdownButton').addEventListener('click', function() {
-        var dropdownMenu = document.getElementById('dropdownMenu');
-        dropdownMenu.classList.toggle('show');
-    });
-    function updateStatus(tutorId) {
-        let statusToggle = document.getElementById(`statusToggle_${tutorId}`);
-        let statusInput = document.getElementById(`statusInput_${tutorId}`);
-        let form = document.getElementById(`statusForm_${tutorId}`);
+    function toggleDropdown(id) {
+        const dropdownMenu = document.getElementById(`dropdownMenu-${id}`);
 
-        // Update the hidden status input based on the checkbox state
-        statusInput.value = statusToggle.checked ? 'active' : 'inactive';
+        // Hide all other dropdowns first
+        document.querySelectorAll('.dropdown-action').forEach(menu => {
+            if (menu !== dropdownMenu) {
+                menu.classList.add('d-none');
+            }
+        });
 
-        // Submit the form
-        form.submit();
+        // Toggle the selected dropdown menu
+        dropdownMenu.classList.toggle('d-none');
     }
+
+    // Close all dropdowns if clicking outside
+    document.addEventListener('click', function(event) {
+        const isDropdownButton = event.target.closest('.dropdown-icon');
+        const isDropdownMenu = event.target.closest('.dropdown-action');
+
+        // Close all dropdowns if the click is outside dropdown buttons/menus
+        if (!isDropdownButton && !isDropdownMenu) {
+            document.querySelectorAll('.dropdown-action').forEach(menu => menu.classList.add('d-none'));
+        }
+    });
     $('#select-all').click(function() {
         // Check/uncheck all checkboxes based on the main checkbox
-        $('.tutor-checkbox').prop('checked', this.checked);
+        $('.blog-checkbox').prop('checked', this.checked);
     });
     $('#delete-selected').click(function() {
         // Gather all checked checkbox values
         var selected = [];
-        $('.tutor-checkbox:checked').each(function() {
+        $('.blog-checkbox:checked').each(function() {
             selected.push($(this).val());
         });
 
@@ -525,7 +538,7 @@
 
             Swal.fire({
                 title: 'Error!',
-                text: 'Please select at least one tutor to delete.',
+                text: 'Please select at least one blog to delete.',
                 icon: 'error', // Use 'error' instead of 'danger'
                 confirmButtonText: 'OK'
             });
@@ -536,7 +549,7 @@
         // Confirm deletion
         if (confirm('Are you sure you want to delete the selected tutors?')) {
             $.ajax({
-                url: "{{ route('teachers.destroy.bulk') }}", // Update with your route
+                url: "{{ route('blogs.destroy.bulk') }}", // Update with your route
                 type: 'DELETE',
                 data: {
                     ids: selected,

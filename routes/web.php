@@ -69,6 +69,7 @@ Route::resource('blogs', BlogController::class);
 Route::get('/cities', [StudentController::class, 'getCities'])->name('cities');
 Route::get('/all-blogs', [TutorController::class, 'allBlogs'])->name('all.blogs');
 Route::post('/update-tutor-status', [TutorController::class, 'updateTutorStatus'])->name('update.tutor.status');
+Route::delete('/blog/destroy-bulk', [BlogController::class, 'destroyBulk'])->name('blogs.destroy.bulk');
 Route::delete('/teachers/destroy-bulk', [TutorController::class, 'destroyBulk'])->name('teachers.destroy.bulk');
 Route::delete('/student/destroy-bulk', [StudentController::class, 'destroystudentBulk'])->name('student.destroy.bulk');
 Route::delete('/inquiry/destroy-bulk', [StudentController::class, 'destroyinquiryBulk'])->name('inquiry.destroy.bulk');
