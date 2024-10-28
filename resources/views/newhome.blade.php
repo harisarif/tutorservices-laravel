@@ -5,6 +5,27 @@
     <meta name="description" content="Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
+    /* Overlay Styles */
+    .overlay {
+        position: fixed; /* Fixed positioning */
+        top: 0;          /* Cover the whole viewport */
+        left: 0;
+        width: 100%;     /* Full width */
+        height: 100%;    /* Full height */
+        background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        display: flex;   /* Flexbox to center the spinner */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        z-index: 1000;   /* High z-index to overlay on top */
+    }
+
+    /* Spinner Styles (Bootstrap) */
+    .spinner-border {
+        width: 3rem;    /* Spinner size */
+        height: 3rem;
+        color:#42b979 !important
+    }
+
     .fa-globe{
         color: #fff !important;
     }
@@ -183,6 +204,11 @@
             <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
         </div>
     @endif
+    <div id="overlay" class="overlay" style="display: none;">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
         <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block; z-index: 9;" onclick="window.scrollTo(0, 0)"><i class="fa-solid fa-chevron-up"></i></button>
     <div class="row mini_header m-0 p-0 container-fluid position-relative">
         <div class="col-sm-12 px-3  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0 adjustMobile" style="background:#42b979;position:fixed !important;height:12%">
@@ -441,8 +467,15 @@
                                             <div class="col-lg-9 adjust-filters-wrap ">
                                                 <div class="col-md-6 px-2 col-lg-4">
                                                     {{-- <label for="citysearch" class="form-label">City</label> --}}
-                                                    <input placeholder="{{ __('messages.Search city') }}" type="text" class="form-control"
-                                                        id="citysearch" name="citysearch" required/ style="border:1px solid #42b979;">
+                                                    <!-- <input placeholder="{{ __('messages.Search city') }}" type="text" class="form-control"
+                                                        id="citysearch" name="citysearch" required style="border:1px solid #42b979;"> -->
+                                                        <select name="gender" id="gender" class="country" >
+                                                            <option value="all">{{ __('Select gender') }}</option>
+                                                            <option value="male">{{ __('Male') }}</option>
+                                                            <option value="female">{{ __('Female') }}</option>
+
+                                                    
+                                                        </select>
                                                 </div>
                                                 <div class="col-md-6 px-2 col-lg-4">
                                                     {{-- <label for="citysearch" class="form-label">City</label> --}}
@@ -1079,140 +1112,245 @@
     <script>
         
 
+
                 $(document).ready(function($) {
                     setTimeout(function() {
                         $(".alert").fadeOut("slow");
                     }, 5000);
                     // Your jQuery code here
                     $('#country').change(function(e) {
-                    e.preventDefault();
-                    var selectedCountry = $(this).val();
-                    var locationData = {
-                        location: selectedCountry !== "all" ? selectedCountry : "all",
-                        _token: '{{ csrf_token() }}' // Include CSRF token
-                    };
+                            e.preventDefault();
+                            var selectedCountry = $(this).val();
+                            var locationData = {
+                                location: selectedCountry !== "all" ? selectedCountry : "all",
+                                _token: '{{ csrf_token() }}' // Include CSRF token
+                            };
+                            $('#overlay').show();
+                            // Send AJAX request with the appropriate location data
+                            $.ajax({
+                                type: 'POST',
+                                url: '{{ route('fetch-data') }}',
+                                data: locationData,
+                                dataType: 'json',
+                                success: function(response) {
+                                console.log('Success function triggered', response);
+                                $('#tutorsContainer').empty();
+                                $('#overlay').hide();
+                                if (response && response.tutors) {
+                                    if (response.tutors.length > 0) {
+                                        response.tutors.forEach(function(item) {
+                                            // Ensure that `item.teaching` is handled properly
+                                            var teachingArray = [];
+                                            if (item.teaching) {
+                                                var matches = item.teaching.match(/s:\d+:"(.*?)";/g);
+                                                if (matches) {
+                                                    matches.forEach(function(match) {
+                                                        teachingArray.push(match.match(/s:\d+:"(.*?)";/)[1]);
+                                                    });
+                                                }
+                                            }
 
-                    // Send AJAX request with the appropriate location data
-                    $.ajax({
-                        type: 'POST',
-                        url: '{{ route('fetch-data') }}',
-                        data: locationData,
-                        dataType: 'json',
-                        success: function(response) {
-                        console.log('Success function triggered', response);
-                        $('#tutorsContainer').empty();
+                                        var tutorHTML = '<div class="ad-form">';
+                                        tutorHTML += '<div class="ad-img-card">';
+                                        tutorHTML += '<div style="display: flex; justify-content: center;">';
+                                        tutorHTML += '<img src="storage/' + item.profileImage + '" alt="" class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">';
+                                        tutorHTML += '</div>';
+                                        tutorHTML += '<div class="ad-icons">';
+                                        tutorHTML += '<p class="mb-0 mx-1 fs-5">4.5 <i class="fa-solid fa-star"></i></p>';
+                                        tutorHTML += '</div>';
+                                        tutorHTML += '</div>';
+                                        tutorHTML += '<div class="ad-detail my-3 w-100">';
+                                        tutorHTML += '<div class="ae-div row">';
+                                        tutorHTML += '<div class="col-9">';
+                                        tutorHTML += '<div class="ae-detail-div">';
+                                        tutorHTML += '<span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Name :</strong>' + item.f_name + ' ' + item.l_name + '</span>';
+                                        tutorHTML += '<div class="ae-detail-child">';
+                                        
+                                        tutorHTML += '<span><i class="fa-solid fa-globe"></i><strong>Country :</strong> ' + item.location + '</span>';
+                                        tutorHTML += '</div>';
+                                        tutorHTML += '<div class="ae-detail-child">';
+                                        tutorHTML += '<span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong>' + item.gender + '</span>';
+                                        tutorHTML += '<span class="d-flex align-item-center">';
+                                        tutorHTML += '<i class="fa-solid fa-user mt-1"></i>';
+                                        tutorHTML += '<strong style="margin-left: 15px;">Intro :</strong>';
+                                        tutorHTML += '<p class="px-2">Content will be required</p>';
+                                        tutorHTML += '</div>';
+                                        tutorHTML += '</div>';
+                                        tutorHTML += '</div>';
+                                        tutorHTML += '<div class="ad-div col-3">';
+                                        tutorHTML += '<span>';
+                                        tutorHTML += '<b>20 AED for 50 minutes</b>';
+                                        tutorHTML += '</span>';
+                                        tutorHTML += '<div class="ae-detail">';
+                                        tutorHTML += '<h4 class="fs-6 mt-1">Free Trial Section</h4>';
+                                        tutorHTML += '</div>';
+                                        tutorHTML += '</div>';
+                                        tutorHTML += '</div>';
+                                        tutorHTML += '</div>';
 
-                        if (response && response.tutors) {
-                            if (response.tutors.length > 0) {
-                                response.tutors.forEach(function(item) {
-                                    // Ensure that `item.teaching` is handled properly
-                                    var teachingArray = [];
-                                    if (item.teaching) {
-                                        var matches = item.teaching.match(/s:\d+:"(.*?)";/g);
-                                        if (matches) {
-                                            matches.forEach(function(match) {
-                                                teachingArray.push(match.match(/s:\d+:"(.*?)";/)[1]);
-                                            });
-                                        }
+                                        // Append tutor HTML to container
+                                        $('#tutorsContainer').append(tutorHTML);
+                                    });
+
+                                    var totalTutorsCount = response.pagination.total;
+
+                                    // Update the perPage value with the count returned in the response
+                                    var perPage = response.pagination.perPage;
+
+                                    // Calculate firstItem
+                                    var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
+
+                                    // Calculate lastItem
+                                    var lastItem = Math.min(response.pagination.currentPage * perPage, totalTutorsCount);
+
+                                    // Update the totalTutorsCount displayed in the UI
+                                    $('.total-tutors-count').text(totalTutorsCount);
+
+                                    // Update the range displayed in the UI
+                                    $('.tutors-range').text(firstItem + ' to ' + lastItem + ' of ' + totalTutorsCount + ' tutors');
+
+                                    // Hide pagination if totalTutorsCount is less than or equal to perPage
+                                    if (totalTutorsCount <= perPage) {
+                                        $('#paginationContainer').hide();
+                                    } else {
+                                        $('#paginationContainer').show();
                                     }
 
-                                var tutorHTML = '<div class="ad-form">';
-                                tutorHTML += '<div class="ad-img-card">';
-                                tutorHTML += '<div style="display: flex; justify-content: center;">';
-                                tutorHTML += '<img src="storage/' + item.profileImage + '" alt="" class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">';
-                                tutorHTML += '</div>';
-                                tutorHTML += '<div class="ad-icons">';
-                                tutorHTML += '<p class="mb-0 mx-1 fs-5">4.5 <i class="fa-solid fa-star"></i></p>';
-                                tutorHTML += '</div>';
-                                tutorHTML += '</div>';
-                                tutorHTML += '<div class="ad-detail my-3 w-100">';
-                                tutorHTML += '<div class="ae-div row">';
-                                tutorHTML += '<div class="col-9">';
-                                tutorHTML += '<div class="ae-detail-div">';
-                                tutorHTML += '<span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Name :</strong>' + item.f_name + ' ' + item.l_name + '</span>';
-                                tutorHTML += '<div class="ae-detail-child">';
-                                tutorHTML += '<span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong>';
-                                teachingArray.forEach(function(subject) {
-                                    tutorHTML += '<span class="rounded font-s d-inline-block p-1 bg_green_hover text-center" style="text-transform: capitalize;">' + subject + '</span>';
-                                });
-                                tutorHTML += '</span>';
-                                tutorHTML += '<span><i class="fa-solid fa-globe"></i><strong>Country :</strong> ' + item.location + '</span>';
-                                tutorHTML += '</div>';
-                                tutorHTML += '<div class="ae-detail-child">';
-                                tutorHTML += '<span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong>' + item.gender + '</span>';
-                                tutorHTML += '<span class="d-flex align-item-center">';
-                                tutorHTML += '<i class="fa-solid fa-user mt-1"></i>';
-                                tutorHTML += '<strong style="margin-left: 15px;">Intro :</strong>';
-                                tutorHTML += '<p class="px-2">Content will be required</p>';
-                                tutorHTML += '</div>';
-                                tutorHTML += '</div>';
-                                tutorHTML += '</div>';
-                                tutorHTML += '<div class="ad-div col-3">';
-                                tutorHTML += '<span>';
-                                tutorHTML += '<b>20 AED for 50 minutes</b>';
-                                tutorHTML += '</span>';
-                                tutorHTML += '<div class="ae-detail">';
-                                tutorHTML += '<h4 class="fs-6 mt-1">Free Trial Section</h4>';
-                                tutorHTML += '</div>';
-                                tutorHTML += '</div>';
-                                tutorHTML += '</div>';
-                                tutorHTML += '</div>';
+                                } else {
+                                    // Handle case where no tutors are found
+                                    $('#tutorsContainer').html('<p>No tutors found for the selected country.</p>');
+                                }
 
-                                // Append tutor HTML to container
-                                $('#tutorsContainer').append(tutorHTML);
-                            });
-
-                            var totalTutorsCount = response.pagination.total;
-
-                            // Update the perPage value with the count returned in the response
-                            var perPage = response.pagination.perPage;
-
-                            // Calculate firstItem
-                            var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
-
-                            // Calculate lastItem
-                            var lastItem = Math.min(response.pagination.currentPage * perPage, totalTutorsCount);
-
-                            // Update the totalTutorsCount displayed in the UI
-                            $('.total-tutors-count').text(totalTutorsCount);
-
-                            // Update the range displayed in the UI
-                            $('.tutors-range').text(firstItem + ' to ' + lastItem + ' of ' + totalTutorsCount + ' tutors');
-
-                            // Hide pagination if totalTutorsCount is less than or equal to perPage
-                            if (totalTutorsCount <= perPage) {
-                                $('#paginationContainer').hide();
+                                // Update pagination links
+                                $('#paginationContainer').html(response.pagination);
                             } else {
-                                $('#paginationContainer').show();
+                                // Handle case where no tutors are found
+                                console.log('No tutors found for the selected country.');
+                                $('#tutorsContainer').html('<p>No tutors found for the selected country.</p>');
                             }
-
-                        } else {
-                            // Handle case where no tutors are found
-                            $('#tutorsContainer').html('<p>No tutors found for the selected country.</p>');
-                        }
-
-                        // Update pagination links
-                        $('#paginationContainer').html(response.pagination);
-                    } else {
-                        // Handle case where no tutors are found
-                        console.log('No tutors found for the selected country.');
-                        $('#tutorsContainer').html('<p>No tutors found for the selected country.</p>');
-                    }
-                },
+                    },
                         error: function(xhr, status, error) {
                             // Handle error response
                             console.log('An error occurred:', error);
                         }
                     });
+                    
                 });
 
-            $('#citysearch').keyup(function() {
-                var searchQuery = $(this).val(); // Get the value from the city search input field
+                // $('#citysearch').keyup(function() {
+                //     var searchQuery = $(this).val(); // Get the value from the city search input field
+                //     var locationData = {
+                //         citysearch: searchQuery,
+                //         _token: '{{ csrf_token() }}' // Include CSRF token
+                //     };
+
+                //     // Send AJAX request with the appropriate location data
+                //     $.ajax({
+                //         type: 'POST',
+                //         url: '{{ route('fetch-data') }}',
+                //         data: locationData,
+                //         dataType: 'json',
+                //         success: function(response) {
+                //             console.log('Success function triggered', response);
+                //             $('#tutorsContainer').empty();
+
+                //             if (response && response.tutors) {
+                //                 // Check if there are tutors
+                //                 if (response.tutors.length > 0) {
+                //                     // Iterate over tutors and update content
+                //                     response.tutors.forEach(function(item) {
+                //                         // Assuming item.teaching is an array in the response
+                //                         var teachingArray = item.teaching || []; 
+                //                         var teachingSubjects = teachingArray.join(', '); // Convert array to comma-separated string
+
+                //                         var tutorHTML = '<div class="ad-form">';
+                //                         tutorHTML += '<div class="ad-img-card">';
+                //                         tutorHTML += '<div style="display: flex; justify-content: center;">';
+                //                         tutorHTML += '<img src="storage/' + item.profileImage + '" alt="" class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">';
+                //                         tutorHTML += '</div>';
+                //                         tutorHTML += '<div class="ad-icons">';
+                //                         tutorHTML += '<p class="mb-0 mx-1 fs-5">4.5 <i class="fa-solid fa-star"></i></p>';
+                //                         tutorHTML += '</div>';
+                //                         tutorHTML += '</div>';
+                //                         tutorHTML += '<div class="ad-detail my-3 w-100">';
+                //                         tutorHTML += '<div class="ae-div row">';
+                //                         tutorHTML += '<div class="col-9">';
+                //                         tutorHTML += '<div class="ae-detail-div">';
+                //                         tutorHTML += '<span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Name :</strong>' + item.f_name + ' ' + item.l_name + '</span>';
+                //                         tutorHTML += '<div class="ae-detail-child">';
+                //                         tutorHTML += '<span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong> ' + teachingSubjects + '</span>'; // Display subjects here
+                //                         tutorHTML += '</span>';
+                //                         tutorHTML += '<span><i class="fa-solid fa-globe"></i><strong>Country :</strong> ' + item.location + '</span>';
+                //                         tutorHTML += '</div>';
+                //                         tutorHTML += '<div class="ae-detail-child">';
+                //                         tutorHTML += '<span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong> ' + item.gender + '</span>';
+                //                         tutorHTML += '<span class="d-flex align-item-center">';
+                //                         tutorHTML += '<i class="fa-solid fa-user mt-1"></i>';
+                //                         tutorHTML += '<strong style="margin-left: 15px;">Intro :</strong>';
+                //                         tutorHTML += '<p class="px-2">Content will be required</p>';
+                //                         tutorHTML += '</span>';
+                //                         tutorHTML += '</div>';
+                //                         tutorHTML += '</div>';
+                //                         tutorHTML += '</div>';
+                //                         tutorHTML += '<div class="ad-div col-3">';
+                //                         tutorHTML += '<span>';
+                //                         tutorHTML += '<b>20 AED for 50 minutes</b>';
+                //                         tutorHTML += '</span>';
+                //                         tutorHTML += '<div class="ae-detail">';
+                //                         tutorHTML += '<h4 class="fs-6 mt-1">Free Trial Section</h4>';
+                //                         tutorHTML += '</div>';
+                //                         tutorHTML += '</div>';
+                //                         tutorHTML += '</div>';
+                //                         tutorHTML += '</div>';
+
+                //                         // Append tutor HTML to container
+                //                         $('#tutorsContainer').append(tutorHTML);
+                //                     });
+
+                //                     var totalTutorsCount = response.pagination.total;
+                //                     var perPage = response.pagination.perPage;
+                //                     var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
+                //                     var lastItem = Math.min(response.pagination.currentPage * perPage, totalTutorsCount);
+
+                //                     // Update the totalTutorsCount displayed in the UI
+                //                     $('.total-tutors-count').text(totalTutorsCount);
+
+                //                     // Update the range displayed in the UI
+                //                     $('.tutors-range').text(firstItem + ' to ' + lastItem + ' of ' + totalTutorsCount + ' tutors');
+
+                //                     // Hide pagination if totalTutorsCount is less than or equal to perPage
+                //                     if (totalTutorsCount <= perPage) {
+                //                         $('#paginationContainer').hide();
+                //                     } else {
+                //                         $('#paginationContainer').show();
+                //                     }
+
+                //                     // Update pagination links
+                //                     $('#paginationContainer').html(response.pagination);
+                //                 } else {
+                //                     // Handle case where no tutors are found
+                //                     $('#tutorsContainer').html('<p>No tutors found for the selected city.</p>');
+                //                 }
+                //             } else {
+                //                 // Handle case where no tutors are found
+                //                 console.log('No tutors found for the selected city.');
+                //             }
+                //         },
+                //         error: function(xhr, status, error) {
+                //             console.error('AJAX Error:', status, error);
+                //             // Handle error response
+                //         }
+                //     });
+                // });
+
+                $(' #gender').on('keyup change', function() {
+                var searchQuery = $('#citysearch').val(); // Get the value from the city search input field
+                var selectedGender = $('#gender').val(); // Get the selected gender from the dropdown
                 var locationData = {
-                    citysearch: searchQuery,
+                    gender: selectedGender, // Include selected gender
                     _token: '{{ csrf_token() }}' // Include CSRF token
                 };
-
+                $('#overlay').show();
                 // Send AJAX request with the appropriate location data
                 $.ajax({
                     type: 'POST',
@@ -1220,16 +1358,21 @@
                     data: locationData,
                     dataType: 'json',
                     success: function(response) {
+                        
                         console.log('Success function triggered', response);
                         $('#tutorsContainer').empty();
-
+                        $('#overlay').hide();
                         if (response && response.tutors) {
                             // Check if there are tutors
                             if (response.tutors.length > 0) {
+                                
                                 // Iterate over tutors and update content
                                 response.tutors.forEach(function(item) {
-                                    // Assuming item.teaching is already an array in the response
-                                    var teachingArray = item.teaching || []; 
+                                    let teachingSubject = item.teaching;
+                                    const match = teachingSubject.match(/s:\d+:"([^"]+)"/);
+                                    teachingSubject = match ? match[1] : teachingSubject;
+                                    // Assuming item.teaching is an array in the response
+                                    var teachingArray = item.teaching || []; // Convert array to comma-separated string
 
                                     var tutorHTML = '<div class="ad-form">';
                                     tutorHTML += '<div class="ad-img-card">';
@@ -1246,15 +1389,12 @@
                                     tutorHTML += '<div class="ae-detail-div">';
                                     tutorHTML += '<span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Name :</strong>' + item.f_name + ' ' + item.l_name + '</span>';
                                     tutorHTML += '<div class="ae-detail-child">';
-                                    tutorHTML += '<span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong>';
-                                    teachingArray.forEach(function(subject) {
-                                        tutorHTML += '<span class="rounded font-s d-inline-block p-1 bg_green_hover text-center" style="text-transform: capitalize;">' + subject + '</span>';
-                                    });
+                                    tutorHTML += '<span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong> '+teachingSubject+'</span>'; // Display subjects here
                                     tutorHTML += '</span>';
                                     tutorHTML += '<span><i class="fa-solid fa-globe"></i><strong>Country :</strong> ' + item.location + '</span>';
                                     tutorHTML += '</div>';
                                     tutorHTML += '<div class="ae-detail-child">';
-                                    tutorHTML += '<span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong> ' + item.gender + '</span>';
+                                    // tutorHTML += '<span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong> ' + item.gender + '</span>';
                                     tutorHTML += '<span class="d-flex align-item-center">';
                                     tutorHTML += '<i class="fa-solid fa-user mt-1"></i>';
                                     tutorHTML += '<strong style="margin-left: 15px;">Intro :</strong>';
@@ -1277,7 +1417,7 @@
                                     // Append tutor HTML to container
                                     $('#tutorsContainer').append(tutorHTML);
                                 });
-
+                                
                                 var totalTutorsCount = response.pagination.total;
                                 var perPage = response.pagination.perPage;
                                 var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
@@ -1299,12 +1439,13 @@
                                 // Update pagination links
                                 $('#paginationContainer').html(response.pagination);
                             } else {
+                                
                                 // Handle case where no tutors are found
-                                $('#tutorsContainer').html('<p>No tutors found for the selected city.</p>');
+                                $('#tutorsContainer').append('<p>No tutors found for the selected criteria.</p>');
                             }
                         } else {
                             // Handle case where no tutors are found
-                            console.log('No tutors found for the selected city.');
+                            $('#tutorsContainer').append('<p>No tutors found for the selected criteria.</p>');
                         }
                     },
                     error: function(xhr, status, error) {
@@ -1314,14 +1455,13 @@
                 });
             });
 
-
             $('#subjectsearch').keyup(function() {
                 var searchQuery = $(this).val(); // Get the value from the subject search input field
                 var locationData = {
                     subjectsearch: searchQuery,
                     _token: '{{ csrf_token() }}' // Include CSRF token
                 };
-
+                $('#overlay').show();
                 // Send AJAX request with the appropriate location data
                 $.ajax({
                     type: 'POST',
@@ -1333,18 +1473,18 @@
 
                         if (response && response.tutors) {
                             $('#tutorsContainer').empty();
-
+                            $('#overlay').hide();
                             // Check if there are tutors
                             if (response.tutors.length > 0) {
                                 response.tutors.forEach(function(item) {
                                     // Convert PHP serialized array into JavaScript array
                                     var teachingArray = [];
                                     try {
-                                        var serializedTeaching = item.teaching;
-                                        var matches = serializedTeaching.match(/s:\d+:"(.*?)";/g);
+                                        var serializedTeaching = item.teaching; // Assume this contains the serialized string
+                                        var matches = serializedTeaching.match(/s:\d+:"(.*?)";/g); // Match the serialized format
                                         if (matches) {
                                             matches.forEach(function(match) {
-                                                teachingArray.push(match.match(/s:\d+:"(.*?)";/)[1]);
+                                                teachingArray.push(match.match(/s:\d+:"(.*?)";/)[1]); // Extract the subject
                                             });
                                         }
                                     } catch (error) {
@@ -1368,14 +1508,12 @@
                                     tutorHTML += '<span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Name :</strong>' + item.f_name + ' ' + item.l_name + '</span>';
                                     tutorHTML += '<div class="ae-detail-child">';
                                     tutorHTML += '<span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong>';
-                                    teachingArray.forEach(function(subject) {
-                                        tutorHTML += '<span class="rounded font-s d-inline-block p-1 bg_green_hover text-center" style="text-transform: capitalize;">' + subject + '</span>';
-                                    });
+                                    tutorHTML += teachingArray.join(', '); // Join the subjects with a comma
                                     tutorHTML += '</span>';
                                     tutorHTML += '<span><i class="fa-solid fa-globe"></i><strong>Country :</strong> ' + item.location + '</span>';
                                     tutorHTML += '</div>';
                                     tutorHTML += '<div class="ae-detail-child">';
-                                    tutorHTML += '<span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong> ' + item.gender + '</span>';
+                                    // tutorHTML += '<span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong> ' + item.gender + '</span>';
                                     tutorHTML += '<span class="d-flex align-item-center">';
                                     tutorHTML += '<i class="fa-solid fa-user mt-1"></i>';
                                     tutorHTML += '<strong style="margin-left: 15px;">Intro :</strong>';
@@ -1429,8 +1567,8 @@
                 });
             });
 
+
             $('#resetFilterBtn').click(function() {
-                // Send an AJAX request to reset filters
                 $.ajax({
                     type: 'POST',
                     url: '{{ route('fetch-data') }}',
@@ -1440,26 +1578,73 @@
                     },
                     dataType: 'json',
                     success: function(response) {
-                        // Handle success response for reset
-                        // Clear the input fields
-                        $('#citysearch').val('');
-                        $('#subjectsearch').val('');
+                            $('#citysearch').val('');
+                            $('#subjectsearch').val('');
+                            $('#tutorsContainer').empty();
+                            console.log(response);
 
-                        // Refresh the tutor container
-                        $('#tutorsContainer').empty();
-                        
-                        // Update pagination if necessary
-                        if (response && response.pagination) {
-                            $('#paginationContainer').html(response.pagination);
-                        } else {
-                            $('#paginationContainer').hide();
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Error resetting filters:', status, error);
-                    }
-                });
+                            if (response.tutors && response.tutors.length > 0) {
+                                response.tutors.forEach(function(tutor) {
+                                    // Decode the serialized "teaching" string
+                                    let teachingSubject = tutor.teaching;
+                                    const match = teachingSubject.match(/s:\d+:"([^"]+)"/);
+                                    teachingSubject = match ? match[1] : teachingSubject; // Extract the subject if matched
+
+                                    $('#tutorsContainer').append(`
+                                        <div class="ad-form">
+                                            <div class="ad-img-card d-flex">
+                                                <div class="MD col-lg-9 col-sm-5">
+                                                    <img src="/storage/${tutor.profileImage}" alt="profileImage" class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">
+                                                    <div class="ad-icons"></div>
+                                                    <p class="mb-0 mx-1 fs-5" style="color:#42b979;">4.5 <i class="fa-solid fa-star"></i></p>
+                                                </div>
+                                                <div class="md-div col-lg-5 d-none mt-2" style="margin-left: 17px;">
+                                                    <span class="mb-div"><b>20 AED for 50 minutes</b></span>
+                                                    <div class="ae-detail">
+                                                        <h4 class="fs-6 mt-1">Free Trial Section</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="ad-detail my-1 mx-4 w-100">
+                                                <div class="ae-div row">
+                                                    <div class="col-9">
+                                                        <div class="ae-detail-div">
+                                                            <span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Name :</strong>${tutor.f_name}</span>
+                                                            <span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong> ${teachingSubject}</span>
+                                                            <span><i class="fa-solid fa-globe" style="color: #42b979 !important;"></i><strong>Country :</strong> ${tutor.location}</span>
+                                                        </div>
+                                                        <span class="d-flex align-item-center"><i class="fa-solid fa-user mt-1"></i>
+                                                            <strong style="margin-left: 15px;">Intro :</strong>
+                                                            <p class="px-2">${tutor.intro}</p>                                                
+                                                        </span>
+                                                    </div>
+                                                    <div class="ad-div col-3">
+                                                        <span><b>20 AED for 50 minutes</b></span>
+                                                        <div class="ae-detail">
+                                                            <h4 class="fs-6 mt-1">Free Trial Section</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `);
+                                });
+                            } else {
+                                $('#tutorsContainer').append('<p>No tutors found.</p>');
+                            }
+
+                            if (response.pagination) {
+                                $('#paginationContainer').show().html(response.pagination);
+                            } else {
+                                $('#paginationContainer').hide();
+                            }
+            },
+                error: function(xhr, status, error) {
+                    console.error('Error resetting filters:', status, error);
+                }
             });
+        });
+
 
 
             $('.notification').hide();
