@@ -487,18 +487,18 @@
                                                 <div class="ae-div row">
                                                     <div class="col-9">
                                                         <div class="ae-detail-div">
-                                                            <span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">{{ __('messages.Name') }} :</strong>{{ $item->f_name }} {{$item->l_name}} </span>
+                                                            <span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">{{ __('messages.Name') }} :</strong>{{ $item->f_name }}</span>
                                                             
                                                             <span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">{{ __('messages.Subject') }} :</strong> English</span>
 
                                                             <span><i class="fa-solid fa-globe" style="color: #42b979 !important;"></i><strong>{{ __('messages.Country') }} :</strong> {{ $item->location }}</span>
                                                         </div>
-                                                        <div class="ae-detail-child">  
+                                                        <!-- <div class="ae-detail-child">  
                                                                 <span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">{{ __('messages.Gender') }} :</strong>{{ $item->gender }}</span>
-                                                        </div>
+                                                        </div> -->
                                                         <span class="d-flex align-item-center"><i class="fa-solid fa-user mt-1"></i>
-                                                        <strong style="margin-left: 15px;">{{ __('messages.Intro') }} :</strong>{{ $item->introduction }}
-                                                        <p  class="px-2">{{ __('messages.Conten will be reqiured') }}</p>                                                
+                                                        <strong style="margin-left: 15px;">{{ __('messages.Intro') }} :</strong>
+                                                        <p  class="px-2">{{ $item->intro }}</p>                                                
                                                     </span>
                                                     </div>
                                                 <div class="ad-div col-3">

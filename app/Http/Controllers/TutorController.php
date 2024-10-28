@@ -225,6 +225,7 @@ public function updateTutorStatus(Request $request)
         // Validate form data
         $rules = [
             'f_name' => 'required|string|max:255',
+            'intro' => 'required|string|max:255',
             'l_name' => 'required|string|max:255',
             'qualification'=> 'required|string|max:255',
             'profileImage' => 'required|image|mimes:jpeg,png,jpg|max:2048',
@@ -259,6 +260,7 @@ public function updateTutorStatus(Request $request)
         // Now create the Tutor and associate with the User
         $tutor = new Tutor();
         $tutor->f_name = $request->input('f_name');
+        $tutor->intro = $request->input('intro');
         $tutor->l_name = $request->input('l_name');
         $tutor->city = $request->input('city');
         $tutor->email = $request->input('email');

@@ -259,6 +259,10 @@
                                             <input type="email" class="form-control" id="email" name="email" style="box-shadow: none;border: 1px solid #aaa;" readonly>
                                         </div>
                                         <div class="col-md-6 px-2 mb-2">
+                                            <label for="email" class="form-label" style="color:#42b979;"><strong>Intro <span class="text-danger fs-4">*</span></strong></label> 
+                                            <textarea type="text" class="form-control" id="email" name="intro" style="box-shadow: none;border: 1px solid #aaa;"></textarea>
+                                        </div>
+                                        <div class="col-md-6 px-2 mb-2">
                                                 <label for="" class="form-label" style=" color:#42b979;"><strong> Password <b style="color: red;
                                                 font-size: 20px;">*</b></strong></label>
                                                 <input required type="password" name="password" placeholder="*Password"  class="inp-1"style=" width: 100%; flex-direction: column;border-radius: 5px;padding: 5px 8px;margin: 7px 0px;border: 1px solid #aaa" >
