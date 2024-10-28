@@ -26,7 +26,12 @@ class StudentController extends Controller
         $countries_prefix = collect(config('countries_prefix.countries'));
         return view('hire-tutor', compact('countriesPhone','countries','schoolClasses','countries_prefix','countries_number_length'));
     }
-    
+    public function allStudents(Request $request)
+        {
+            $students = Student::all();
+            $countries = collect(config('countries_assoc.countries'));
+            return view('student-list', compact('students','countries'));
+        }
     public function destroystudentBulk(Request $request){
                 $request->validate([
                     'ids' => 'required|array',
@@ -352,8 +357,28 @@ class StudentController extends Controller
     }
 
     public function destroy($id) {
+        // Find the student by ID
         $student = Student::find($id);
-        $student->delete();
-        return back()->with('message', 'Student deleted successfully');
+        
+        // Check if the student exists
+        if ($student) {
+            // Retrieve the associated user (assuming a relationship is defined)
+            $user = $student->user; // Adjust this if your relationship is named differently
+    
+            // Delete the student
+            $student->delete();
+    
+            // Check if the user exists and delete
+            if ($user) {
+                $user->delete(); // This will delete the user record
+            }
+    
+            // Redirect back with a success message
+            return back()->with('message', 'Student and associated user deleted successfully');
+        }
+    
+        // If student not found, return with an error message
+        return back()->with('error', 'Student not found');
     }
+    
 }

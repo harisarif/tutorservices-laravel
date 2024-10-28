@@ -242,10 +242,10 @@
         </li>
         <hr class="sidebar-divider">
         <li class="nav-item">
-            <a class="nav-link py-2" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+                <a class="nav-link py-2" href="{{route('all.students')}}">
                 <i class="fa-solid fa-user-graduate"></i>
-                <span>{{ __('messages.Students') }}</span>
-            </a>
+                    <span>{{ __('messages.Students') }}</span>
+                </a>
         </li>
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
