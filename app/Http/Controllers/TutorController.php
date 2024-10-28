@@ -504,10 +504,28 @@ public function updateTutorStatus(Request $request)
     }
 
     public function destroy($id) {
+        // Find the tutor by ID
         $tutor = Tutor::find($id);
-        $tutor->delete();
-        return back()->with('message', 'Teacher deleted successfully');
+        
+        // Check if the tutor exists
+        if ($tutor) {
+            // Store the user ID to delete later
+            $userId = $tutor->user_id; // Assuming there is a user_id column in the tutors table
+            
+            // Delete the tutor
+            $tutor->delete();
+    
+            // Delete the associated user
+            User::destroy($userId);
+    
+            // Redirect back with a success message
+            return redirect('all.tutors')->with('message', 'Teacher and associated user deleted successfully');
+        }
+    
+        // If tutor not found, return with an error message
+        return back()->with('error', 'Teacher not found');
     }
+    
 }
 
 
