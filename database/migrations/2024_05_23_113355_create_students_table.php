@@ -9,22 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+        public function up(): void
     {
         Schema::create('student', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id'); // Add the user_id column first
             $table->enum('subjects', ['online tutor', 'tutor for home', 'both']);
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone', 20);
             $table->string('description')->nullable();
-            // $table->time('class_start_time');
-            // $table->time('class_end_time');
-
-            // $table->string('class_start_time');
-            // $table->string('class_end_time');
-
-            // $table->string('whatsapp_number', 20);
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            
             $table->string('country');
             $table->string('city');
             $table->string('subject');
@@ -34,6 +30,7 @@ return new class extends Migration
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

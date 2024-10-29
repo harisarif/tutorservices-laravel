@@ -50,4 +50,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(Tutor::class); // Assuming email is the link between them
     }
+    public function student()
+    {
+        return $this->hasOne(Student::class);
+    }
 }

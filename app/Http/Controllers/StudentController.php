@@ -162,7 +162,7 @@ class StudentController extends Controller
         $student->c_email = $request->input('email');
         $student->password = $request->input('password');
         $student->c_password = $request->input('c_password');
-
+        $student->user_id = $user->id;
         // Save the student instance to the database
         $student->save();
 
@@ -362,23 +362,19 @@ class StudentController extends Controller
         
         // Check if the student exists
         if ($student) {
-            // Retrieve the associated user (assuming a relationship is defined)
-            $user = $student->user; // Adjust this if your relationship is named differently
+            $userId = $student->user_id;
     
             // Delete the student
             $student->delete();
     
-            // Check if the user exists and delete
-            if ($user) {
-                $user->delete(); // This will delete the user record
-            }
+            User::destroy($userId);
     
             // Redirect back with a success message
-            return back()->with('message', 'Student and associated user deleted successfully');
+            return redirect()->route('all.students')->with('message', 'Student and associated user deleted successfully');
         }
     
         // If student not found, return with an error message
-        return back()->with('error', 'Student not found');
+        return redirect()->route('all.students')->with('error', 'Student not found');
     }
     
 }

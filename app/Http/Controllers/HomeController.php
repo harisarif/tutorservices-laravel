@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tutor;
-
+use App\Models\Student;
 class HomeController extends Controller
 {
     /**
@@ -25,8 +25,9 @@ class HomeController extends Controller
     public function index()
     {
         $tutors = Tutor::all();
+        $students = Tutor::all();
         $countries = collect(config('countries_assoc.countries'));
-        return view('home',compact('tutors','countries'));
+        return view('home',compact('tutors','countries','students'));
     }
     
     public function hiring() {

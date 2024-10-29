@@ -519,7 +519,7 @@ public function updateTutorStatus(Request $request)
             User::destroy($userId);
     
             // Redirect back with a success message
-            return redirect('all.tutors')->with('message', 'Teacher and associated user deleted successfully');
+            return redirect()->route('all.tutors')->with('message', 'Teacher and associated user deleted successfully');
         }
     
         // If tutor not found, return with an error message
