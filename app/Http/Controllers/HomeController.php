@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Tutor;
 use App\Models\Student;
+use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
     /**
@@ -28,6 +29,10 @@ class HomeController extends Controller
         $students = Tutor::all();
         $countries = collect(config('countries_assoc.countries'));
         return view('home',compact('tutors','countries','students'));
+    }
+    public function inquiry() {
+        $inquires = DB::table('inquiries')->get();
+        return view('inquiry-list',compact('inquires'));
     }
     
     public function hiring() {

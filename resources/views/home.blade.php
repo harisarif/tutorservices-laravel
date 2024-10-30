@@ -384,7 +384,7 @@
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
             <li class="nav-item">
-                <a class="nav-link py-2" id="inquiry-tab" data-toggle="tab" href="#inquiry" role="tab"    aria-controls="inquiry" aria-selected="true">
+                <a class="nav-link py-2" href="{{route('admin.inquiry')}}" role="tab">
                     <i class="fa fa-question-circle" aria-hidden="true"></i>
                     <span>{{ __('messages.Direct inquiry') }}
                     </span>

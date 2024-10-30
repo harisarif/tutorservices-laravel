@@ -223,11 +223,11 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" id="dashboard-tab" data-toggle="tab"
-               href="#dashboard" role="tab" aria-controls="dashboard" aria-selected="false">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>{{ __('messages.Dashboard') }}</span>
-            </a>
+                <a class="nav-link"
+                href="{{route('home')}}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>{{ __('messages.Dashboard') }}</span>
+                </a>
         </li>
 
         <!-- Divider -->
@@ -250,12 +250,12 @@
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
         <li class="nav-item">
-            <a class="nav-link py-2" id="inquiry-tab" data-toggle="tab" href="#inquiry" role="tab"    aria-controls="inquiry" aria-selected="true">
-                <i class="fa fa-question-circle" aria-hidden="true"></i>
-                <span>{{ __('messages.Direct inquiry') }}
+                <a class="nav-link py-2" href="{{route('admin.inquiry')}}" role="tab">
+                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                    <span>{{ __('messages.Direct inquiry') }}
                     </span>
-            </a>
-        </li>
+                </a>
+            </li>
         <hr class="sidebar-divider d-none d-md-block">
         <li class="nav-item">
             <a class="nav-link py-2" href="{{route('blogs.create')}}">

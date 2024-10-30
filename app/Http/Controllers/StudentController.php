@@ -369,8 +369,7 @@ class StudentController extends Controller
     
             User::destroy($userId);
     
-            // Redirect back with a success message
-            return redirect()->route('all.students')->with('message', 'Student and associated user deleted successfully');
+            return redirect()->route('all.students')->with('success', 'Student and associated user deleted successfully.');
         }
     
         // If student not found, return with an error message
