@@ -119,6 +119,7 @@ class StudentController extends Controller
     
 
     public function create(Request $request) {
+
         $rules = [
             'email' => 'required|string|email|max:255|unique:student,email',
             'password' => 'required|min:8',
@@ -214,7 +215,20 @@ class StudentController extends Controller
         // Optionally, you can redirect the user or return a response
         // return redirect()->route('newhome')->with('success', 'Student created successfully.');
     }
-    
+    public function newcreate(Request $request) {
+            $rules = [
+                        'email' => 'required|string|email|max:255|unique:student,email',
+                        'password' => 'required|min:8',
+                        'c_password' => 'required|min:8|same:password',
+                    ];
+            $user = new User();
+                $user->name = $request->name;
+                $user->email = $request->email;
+                $user->password = Hash::make($request->input('password'));
+                $user->role = 'user';
+                $user->save();
+                return redirect()->route('newhome')->with('success', 'Student created successfully.');
+    }
     public function inquiry(Request $request)
     {
         $rules = [

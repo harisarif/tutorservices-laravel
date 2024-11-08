@@ -26,9 +26,10 @@ class HomeController extends Controller
     public function index()
     {
         $tutors = Tutor::all();
+        $inquires = DB::table('inquiries')->get();
         $students = Tutor::all();
         $countries = collect(config('countries_assoc.countries'));
-        return view('home',compact('tutors','countries','students'));
+        return view('home',compact('tutors','countries','students','inquires'));
     }
     public function inquiry() {
         $inquires = DB::table('inquiries')->get();
