@@ -215,6 +215,9 @@ class StudentController extends Controller
         // Optionally, you can redirect the user or return a response
         // return redirect()->route('newhome')->with('success', 'Student created successfully.');
     }
+    public function viewHire(){
+        return redirect()->route('hiring-tutor');
+    }
     public function newcreate(Request $request) {
             $rules = [
                         'email' => 'required|string|email|max:255|unique:student,email',
