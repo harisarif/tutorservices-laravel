@@ -204,7 +204,7 @@ class StudentController extends Controller
 
 
 
-        $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
+        $this->sendEmail($subjectAdmin, $messageAdmin,'admin',$toAdmin);
         
         
         Auth::login($user);
@@ -285,48 +285,40 @@ class StudentController extends Controller
 
         return redirect()->route('newhome')->with('success', 'Inquiry created successfully.');
     }
-    private function sendEmail($to, $subject, $body)
-        {
-            $mail = new PHPMailer(true);
+    function sendEmail($subject, $body, $to_name, $to_email)
+{
 
-            try {
-                // Server settings
-                // $mail->SMTPDebug = 2;
-                $mail->isSMTP();
-                $mail->Host = 'smtp.hostinger.com';
-                $mail->SMTPAuth = true;
-                $mail->Username = 'info@edexceledu.com';
-                $mail->Password = 'Babar123!@#';
-                $mail->SMTPSecure = 'tls';
-                $mail->Port = 587;
 
-                // Recipients
-                $mail->setFrom('info@edexceledu.com', 'Edexcel'); // Use direct values here
-                $mail->addAddress($to);
+    $smtp_details = config('mail.mailers.smtp');
+    $mail = new PHPMailer(true); 
+    try {
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+    $mail->Host = 'smtp.hostinger.com';                 // Specify SparkPost SMTP server
+    $mail->SMTPAuth = true;                               // Enable SMTP authentication
+    $mail->Username =  'info@edexceledu.com';                 // SMTP username
+    $mail->Password = 'Babar123!@#'; 
+    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption
+    $mail->Port = 587;                                    // TCP port to connect to
 
-                // Content
-                $mail->isHTML(false); // Set email format to plain text
-                $mail->Subject = $subject;
-                $mail->Body = $body;
+    // Email settings
+    $mail->setFrom('info@edexceledu.com', 'Edexcel');
+    $mail->addAddress($to_email, $to_name);  // Add a recipient
+    // Content
+    $mail->isHTML(true);                                  // Set email format to HTML
+    $mail->Subject = $subject;
+    $mail->Body    = $body;
+    $mail->AltBody = 'This is the plain text version of the email body.';        // Plain text version (for non-HTML email clients)
 
-                $mail->send();
-                // echo "Email has been sent to $to";
-            } catch (Exception $e) {
-                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            }
-        }
-
-    public function edit($id) {
-
-        $countries = collect(config('countries.countries'))->prepend("Select your country", "");
-        $student = Student::findOrFail($id);
-
-        // Convert stored time format to HH:MM format
-        $student->class_start_time = Carbon::createFromFormat('h:i A', $student->class_start_time)->format('H:i');
-        $student->class_end_time = Carbon::createFromFormat('h:i A', $student->class_end_time)->format('H:i');
-
-        return view('edit-student', compact(['student', 'countries']));
+    // Send the email
+    if ($mail->send()) {
+        echo 'Email sent successfully!';
+    } else {
+        echo 'Email could not be sent.';
     }
+    } catch (Exception $e) {
+        // dd($e->getMessage());
+    }
+}
 
     public function update(Request $request, $id) {
         $rules = [
