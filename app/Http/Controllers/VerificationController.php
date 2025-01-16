@@ -23,55 +23,131 @@ class VerificationController extends Controller
         return view('verify-email'); // view to show modal
     }
     public function sendVerificationEmail(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-        ]);
+{
+    $request->validate([
+        'email' => 'required|email',
+    ]);
 
-        $email = $request->input('email');
-        $subject = 'Email Verification';
-        $link = route('tutor') . '?email_verification=true'; // Link to the protected route
-        $body = "Dear User,<br><br>Thank you for signing up! Please verify your email by  the link below:<br>";
-        $body .= "<a href='{$link}'>Verify Email</a><br><br>";
-        $body .= "Best regards,<br>Your Company Name";
+    $email = $request->input('email');
+    $subject = 'Email Verification';
 
-        // Send the email using PHPMailer
-        $this->sendEmails($email, $subject, $body, true); // true means it's sending HTML content
+    // In the email body
+    $body = "
+        <div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>
+            <table style='max-width: 600px; margin: 0 auto; border: 1px solid #ddd; border-radius: 8px;'>
+                <thead>
+                    <tr>
+                        <th style='background-color: #f4f4f4; padding: 15px; text-align: center;'>
+                            <h2 style='margin: 0; color: #4CAF50;'>Welcome to Edexcel</h2>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style='padding: 20px; text-align: left;'>
+                            <p style='margin: 0; font-size: 16px;'>Dear User,</p>
+                            <p style='margin: 10px 0; font-size: 16px;'>
+                                Thank you for signing up! Please verify your email by clicking the button below:
+                            </p>
+                            <p style='text-align: center; margin: 20px 0;'>
+                                <a href='https://bit.ly/4jm3MAS' style='background-color: #4CAF50; color: #fff; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;'>Verify Your Email</a>
+                            </p>
+                            <p style='margin: 10px 0; font-size: 16px;'>
+                                If you did not sign up for an account, please ignore this email.
+                            </p>
+                            <p style='margin: 10px 0; font-size: 16px;'>Best regards,</p>
+                            <p style='margin: 10px 0; font-size: 16px; font-weight: bold;'>Your Company Name</p>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 14px; color: #777;'>
+                            &copy; " . date('Y') . " Edexcel. All rights reserved.
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    ";
 
-        return redirect()->route('newhome')->with('success', 'Verification link sent to your email!');
-    }
+    // Send the email using PHPMailer
+    $this->sendEmails($subject, $body, 'admin', $email, true); // true means it's sending HTML content
 
-    private function sendEmails($to, $subject, $body, $isHtml = false)
-    {
-        $mail = new PHPMailer(true);
+    return redirect()->route('newhome')->with('success', 'Verification link sent to your email!');
+}
 
-        try {
-            // Server settings
-            $mail->isSMTP();
-            $mail->Host = 'smtp.hostinger.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'info@edexceledu.com'; // SMTP username
-            $mail->Password = 'Babar123!@#';         // SMTP password
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
-
-            // Recipients
-            $mail->setFrom('info@edexceledu.com', 'Edexcel');
-            $mail->addAddress($to);
-
-            // Content
-            $mail->isHTML($isHtml);  // Set email format to HTML if $isHtml is true
-            $mail->Subject = $subject;
-            $mail->Body    = $body;
-
-            $mail->send();
-        } catch (Exception $e) {
-            // Handle exception if needed
-        }
-    }
-
+//     private function sendEmails($to, $subject, $body)
+// {
+//     $mail = new PHPMailer(true);
     
+//     try {
+//         // Server settings
+//         $mail->isSMTP();
+//         $mail->Host = 'smtp.hostinger.com';
+//         $mail->SMTPAuth = true;
+//         $mail->Username = 'info@edexceledu.com';
+//         $mail->Password = 'Babar123!@#';
+//         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+//         $mail->Port = 587;
 
+//         // Email headers
+//         $mail->setFrom('info@edexceledu.com', 'Edexcel');
+//         $mail->addReplyTo('support@edexceledu.com', 'Support Team');
+//         $mail->addAddress($to);
+//          $mail->addCustomHeader('Priority', 'urgent');
+//          $mail->addCustomHeader('Importance', 'high');
+//          $mail->addCustomHeader('X-Mailer', 'PHPMailer');
+//          $mail->addCustomHeader('Precedence', 'bulk');
+//         // Email content
+//         $mail->isHTML(true); // HTML email
+//         $mail->Subject = $subject;
+//         $mail->Body = $body;
+//         $mail->AltBody = strip_tags($body); // Plain text fallback
+        
+
+//         $mail->send();
+//         // dd($to, $subject, $body,$mail);
+//     } catch (Exception $e) {
+//         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+//     }
+// }
+
+function sendEmails($subject, $body, $to_name, $to_email)
+{
+
+
+    $smtp_details = config('mail.mailers.smtp');
+    $mail = new PHPMailer(true); 
+    try {
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+    $mail->Host = 'smtp.hostinger.com';                 // Specify SparkPost SMTP server
+    $mail->SMTPAuth = true;                               // Enable SMTP authentication
+    $mail->Username =  'info@edexceledu.com';                 // SMTP username
+    $mail->Password = 'Babar123!@#'; 
+    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption
+    $mail->Port = 587;                                    // TCP port to connect to
+
+    // Email settings
+    $mail->setFrom('info@edexceledu.com', 'Edexcel');
+    $mail->addAddress($to_email, $to_name);  // Add a recipient
+    // Content
+    $mail->isHTML(true);                                  // Set email format to HTML
+    $mail->Subject = $subject;
+    $mail->Body    = $body;
+    $mail->AltBody = 'This is the plain text version of the email body.';        // Plain text version (for non-HTML email clients)
+
+    // Send the email
+    if ($mail->send()) {
+        echo 'Email sent successfully!';
+    } else {
+        echo 'Email could not be sent.';
+    }
+    } catch (Exception $e) {
+        // dd($e->getMessage());
+    }
+}
+    
     public function sendLink(Request $request)
     {
         $request->validate(['email' => 'required|email']);
