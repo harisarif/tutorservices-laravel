@@ -139,18 +139,6 @@ class StudentController extends Controller
         $student->name = $request->input('name');
         $student->email = $request->input('email');
         $student->phone = $request->input('phone');
-        // $student->class_start_time = $request->input('class_start_time');
-        // $student->class_end_time = $request->input('class_end_time');
-
-        // Convert the input time from 24-hour format to 12-hour format with AM/PM
-        // $classStartTime = date("h:i A", strtotime($request->input('class_start_time')));
-        // $classEndTime = date("h:i A", strtotime($request->input('class_end_time')));
-
-        // Store the times in 12-hour format with AM/PM
-        // $student->class_start_time = $classStartTime;
-        // $student->class_end_time = $classEndTime;
-        
-        // $student->whatsapp_number = $request->input('whatsapp_number');
         $user = new User();
         $user->name = $student->name;
         $user->email = $student->email;

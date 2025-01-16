@@ -56,7 +56,7 @@ class VerificationController extends Controller
                                 If you did not sign up for an account, please ignore this email.
                             </p>
                             <p style='margin: 10px 0; font-size: 16px;'>Best regards,</p>
-                            <p style='margin: 10px 0; font-size: 16px; font-weight: bold;'>Your Company Name</p>
+                            <p style='margin: 10px 0; font-size: 16px; font-weight: bold;'>Edexcel</p>
                         </td>
                     </tr>
                 </tbody>
