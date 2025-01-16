@@ -84,7 +84,7 @@
 <script>
     $(document).ready(function() {// Show modal on page load
         $('#close').on('click',function(){
-            $('#emailVerificationModal').modal('hide')
+            $('#emailVerificationModal').modal('hide');
         })
         $('#emailForm').submit(function(e) {
             e.preventDefault(); // Prevent the default form submission
