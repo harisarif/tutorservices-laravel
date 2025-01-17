@@ -534,8 +534,14 @@
                                 <label for="teaching" class="form-label" style="color:#42b979;"><strong>Language
                                         Proficient <span class="text-danger fs-4"
                                             style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
-                                <input type="text" class="form-control" id="other_qualification_input"
-                                    name="other_qualification_input" style="border: 1px solid rgb(137, 135, 135);" />
+                                <!-- <input type="text" class="form-control" id="other_qualification_input"
+                                    name="other_qualification_input" style="border: 1px solid rgb(137, 135, 135);" /> -->
+                                    <select name="language">
+                                        @foreach ($languages as $code => $name)
+                                            <option value="{{ $code }}">{{ $name }}</option>
+                                        @endforeach
+                                    </select>
+
                             </div>
                             <div class="col-md-6">
                                 <label for="teaching" class="form-label" style="color:#42b979;"><strong>Language

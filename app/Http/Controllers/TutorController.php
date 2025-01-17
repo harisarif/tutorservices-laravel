@@ -458,7 +458,9 @@ public function updateTutorStatus(Request $request)
         $countries_number_length = collect(config('countries_number_length.countries'));
         $countries_prefix = collect(config('countries_prefix.countries'));
         $countries = collect(config('countries_assoc.countries'));
-        return view('tutor-signup', compact(['countriesPhone','countries','schoolClasses' ,'countries_number_length', 'countries_prefix']));
+        $languages = collect(config('languages.languages')); // Fetch languages from config
+
+        return view('tutor-signup', compact(['countriesPhone','countries','schoolClasses' ,'countries_number_length', 'countries_prefix','languages']));
     }
 
     public function edit($id) {
