@@ -361,10 +361,10 @@ main {
 }
 
 /* hire-page */
-.main-page {
+/*.main-page {
     border-radius: 10px;
     box-shadow: 0 0 3px 2px #ddd;
-}
+}*/
 
 .list-group li{
     display: none;

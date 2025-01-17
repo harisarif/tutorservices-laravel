@@ -1,84 +1,130 @@
-
-//  hire tutor script
 let stepCounter = 1;
-let persentage = 100/3;
-const backBtn = document.getElementById('back-btn');
-const nextBtn = document.getElementById('next-btn');
-const classStartTime = document.getElementById('classStartTime');
-const classEndTime = document.getElementById('classEndTime');
-const stepPersentage = document.getElementsByClassName('percentage')[0]
-const persentage_num = document.getElementsByClassName('persentage-num')[0]
-const firstPageSearch = document.getElementById('page1-search');
-// let ul = document.getElementById('searchList');
-// let li = ul.getElementsByTagName('li');
+let persentage = 100 / 3;
+const backBtn = document.getElementById("back-btn");
+const nextBtn = document.getElementById("next-btn");
+const classStartTime = document.getElementById("classStartTime");
+const classEndTime = document.getElementById("classEndTime");
+const stepPersentage = document.getElementsByClassName("percentage")[0];
+const persentage_num = document.getElementsByClassName("persentage-num")[0];
+const firstPageSearch = document.getElementById("page1-search");
 let sEmail = document.querySelectorAll('input[type="email"]');
 
+// Toast display function
+const showToast = (message, type = "info") => {
+    const toast = document.createElement("div");
+    toast.classList.add("toast", type);
+    toast.textContent = message;
+
+    // Append the toast to the body
+    document.body.appendChild(toast);
+
+    // Show the toast with fade-in
+    setTimeout(() => {
+        toast.classList.add("show");
+    }, 100);
+
+    // Hide the toast after 3 seconds
+    setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => {
+            toast.remove();
+        }, 500); // Wait for the fade-out transition before removing it
+    }, 3000);
+};
 
 const NextStep = (button) => {
-    // Only allow form submission on step 3, not before
-    if (stepCounter === 3) {
-        localStorage.removeItem('email');
-        button.type = 'submit';  // Make the button a submit button only on step 3
-        return;  // End the function since you're on the last step
+    const totalSteps = 3; // Total number of steps
+    if (stepCounter === totalSteps) {
+        localStorage.removeItem("email");
+        button.type = "submit"; // Make the button a submit button only on step 3
+        return;
     }
 
-    // Check if the first page search input is not empty or just spaces
-    if (firstPageSearch.value.trim() !== '') {
+    if (firstPageSearch.value.trim() !== "") {
         if (stepCounter === 1) {
-            backBtn.classList.remove('d-none');
+            backBtn.classList.remove("d-none");
         }
 
-        if (stepCounter < 3) {
+        if (stepCounter < totalSteps) {
             // Hide the current step
-            const currentStep = document.getElementById('page-' + stepCounter);
-            currentStep.classList.add('d-none');
+            const currentStep = document.getElementById("page-" + stepCounter);
+            currentStep.classList.add("d-none");
 
             // Show the next step
-            const nextStep = document.getElementById('page-' + (stepCounter + 1));
-            nextStep.classList.remove('d-none');
-            
+            const nextStep = document.getElementById(
+                "page-" + (stepCounter + 1)
+            );
+            nextStep.classList.remove("d-none");
+
             stepCounter++;
 
-            // Update the progress bar and percentage
-            persentage += 100 / 3;
-            stepPersentage.style.width = persentage + '%';
-            persentage_num.innerHTML = persentage.toFixed(0) + '%';
+            // Update the fraction display
+            persentage_num.innerHTML = `step ${stepCounter}/${totalSteps}`;
+
+            // Adjust the progress bar width
+            const progressFraction = (stepCounter / totalSteps) * 100;
+            stepPersentage.style.width = progressFraction + "%";
 
             // Adjust the button layout
-            button.parentElement.classList.remove('justify-content-center');
-            button.parentElement.classList.add('justify-content-between');
+            button.parentElement.classList.remove("justify-content-center");
+            button.parentElement.classList.add("justify-content-between");
 
-            // When on step 3, change button type to 'submit' and update button text
-            if (stepCounter === 3) {
+            // Change the button to 'Submit' on the last step
+            if (stepCounter === totalSteps) {
                 event.preventDefault();
-                button.type = 'submit';  // Make button a submit button on step 3
-                button.value = 'Submit'; // Change button text to 'Submit'
+                button.type = "submit";
+                button.value = "Submit";
+            }
+
+            // Show Toast based on the current step
+            if (stepCounter === 1) {
+                showToast("Fill your personal data", "info");
+            } else if (stepCounter === 2) {
+                showToast("Fill in your qualifications", "info");
+            } else if (stepCounter === 3) {
+                showToast("Fill the descriptions", "info");
             }
         }
     }
 };
 
-
 const backStep = (button) => {
-    if (stepCounter == 2) {
-        button.classList.add('d-none');
-        button.parentElement.classList.remove('justify-content-between');
-            button.parentElement.classList.add('justify-content-center');
-    }
-    if (stepCounter > 1) {
-        step = document.getElementById('page-' + stepCounter)
-        step.classList.add('d-none');
-        backPage = document.getElementById('page-' + (stepCounter - 1))
-        backPage.classList.remove('d-none')
-        stepCounter--
-        // console.log(stepCounter);
-        persentage = persentage - 100/3;
+    const totalSteps = 3; // Total number of steps
 
-        stepPersentage.style.width = persentage + '%'
-        persentage_num.innerHTML = (persentage.toFixed(0)) + '%';
-        // persentage = persentage + 100/3;
-        nextBtn.type = "button"
-        nextBtn.value = 'Next'
-        
+    if (stepCounter == 2) {
+        button.classList.add("d-none");
+        button.parentElement.classList.remove("justify-content-between");
+        button.parentElement.classList.add("justify-content-center");
     }
-}
+
+    if (stepCounter > 1) {
+        // Hide the current step
+        const step = document.getElementById("page-" + stepCounter);
+        step.classList.add("d-none");
+
+        // Show the previous step
+        const backPage = document.getElementById("page-" + (stepCounter - 1));
+        backPage.classList.remove("d-none");
+
+        stepCounter--;
+
+        // Update the fraction display
+        persentage_num.innerHTML = `step ${stepCounter}/${totalSteps}`;
+
+        // Adjust the progress bar width
+        const progressFraction = (stepCounter / totalSteps) * 100;
+        stepPersentage.style.width = progressFraction + "%";
+
+        // Adjust the button layout
+        nextBtn.type = "button";
+        nextBtn.value = "Next \u2192";
+
+        if (stepCounter === 1) {
+            showToast("Fill your personal data", "info");
+        } else if (stepCounter === 2) {
+            showToast("Fill in your qualifications", "info");
+        } else if (stepCounter === 3) {
+            showToast("Fill the descriptions", "info");
+        }
+    }
+};
