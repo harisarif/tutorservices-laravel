@@ -35,6 +35,7 @@
         
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom-select2.css') }}">
     @if(Route::is('newhome'))
     <link rel="stylesheet" href="{{ asset('css/new-home.css') }}">
     @endif
@@ -111,9 +112,7 @@
 </body>
 
 </html>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
-    integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{{ URL::asset('js/select2.js') }}"></script>
 <script src="./js/app.js"></script>
 
 <script>

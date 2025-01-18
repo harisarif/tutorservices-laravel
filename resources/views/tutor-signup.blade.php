@@ -6,9 +6,6 @@
 <meta name="description"
     content="Tutor Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
 <link rel="stylesheet" href="./css/style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
-    integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <!-- Font Awesome CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -385,7 +382,7 @@
 <div class="main-page col-12 bg-white col-md-10 mx-auto p-0 text-center" style="padding: 0px 10px 0px 10px;" 
 ><!--md-8-->
     <div class="row justify-content-center">
-        <div class="col-lg-12 col-sm-4">
+        <div class="col-lg-8 col-sm-4">
             <form id="tutorForm" class=" pages" method="POST" action="{{ route('tutor-create') }}" style="padding-bottom: 20px; padding-top: 20px;border: 1px solid #ccc;border-radius: 10px; margin-top: 10px; margin-bottom: 10px; "
                 enctype="multipart/form-data">
                 <div
@@ -973,7 +970,9 @@ function toggleEye(input, state) {
         $('#gender').select2({
             placeholder: "Select or type your gender",
             allowClear: false,
-            tags: true
+            tags: true,
+            dropdownCssClass: 'custom-select2-templates-lang',
+            selectionCssClass: 'custom-select2-templates-lang',
         });
     });
 
@@ -1021,9 +1020,6 @@ function toggleEye(input, state) {
 <script>
 
     $(document).ready(function () {
-        // $('.select2').select2();
-        // $('.countries').select2();
-        // $('#countrySelect').select2();
 
         setTimeout(function () {
             $(".alert").fadeOut("slow");
