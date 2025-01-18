@@ -59,7 +59,7 @@ const NextStep = (button) => {
             stepCounter++;
 
             // Update the fraction display
-            persentage_num.innerHTML = `step ${stepCounter}/${totalSteps}`;
+            persentage_num.innerHTML = `Step ${stepCounter}/${totalSteps}`;
 
             // Adjust the progress bar width
             const progressFraction = (stepCounter / totalSteps) * 100;
@@ -109,7 +109,7 @@ const backStep = (button) => {
         stepCounter--;
 
         // Update the fraction display
-        persentage_num.innerHTML = `step ${stepCounter}/${totalSteps}`;
+        persentage_num.innerHTML = `Step ${stepCounter}/${totalSteps}`;
 
         // Adjust the progress bar width
         const progressFraction = (stepCounter / totalSteps) * 100;

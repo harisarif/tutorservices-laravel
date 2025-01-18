@@ -103,7 +103,7 @@
         }
 
         .select2-container {
-            width: 300px !important;
+            width: 400px !important;
         }
     }
 
@@ -254,7 +254,7 @@
 
     /* Change the color of the scrollbar to green */
     ::-webkit-scrollbar {
-        width: 8px;
+        width: 4px;
     }
 
     ::-webkit-scrollbar-thumb {
@@ -307,20 +307,20 @@
 }
 
 .toast {
-    background-color: #333;
-    color: #90ee90; /* Light Green Color for Text */
+    background-color: #42b979; /* Light Green Background */
+    color: red; /* Red Text Color */
     padding: 10px 20px;
-    border: 2px solid #90ee90; /* Light Green Border */
+    border: 2px solid #90ee90; 
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin-top: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     font-size: 14px;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.5s ease-in-out, visibility 0.5s;
     position: fixed;
-    bottom: 20px;
-    left: 20px; 
+    top: 20px;
+    right: 20px; 
     z-index: 1000;
 }
 
@@ -330,15 +330,15 @@
 }
 
 .toast-info {
-    background-color: #333; 
+    background-color: #42b979; 
 }
 
 .toast-success {
-    background-color: #333;
+    background-color: #42b979;
 }
 
 .toast-error {
-    background-color: #333; 
+    background-color: #42b979;
 }
 
 </style>
@@ -359,45 +359,41 @@
 @endif
 @section('content')
 
-<header class="header" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; background-color: white; padding: 0px 20px 0px 20px;max-width: 1000px; margin: 0 auto;">
-    <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 10px;">
-        <div style="display: flex; align-items: center; margin-bottom: 5px;">
-            <a class="arrow" href="https://edexceledu.com" style="">
-                <img src="/images/logo.png" alt="EDEXCEL-logo" style="height: 30px;">
-            </a>
-        </div>
-    
-        <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 5px;">
-            <h1 class="main-heading" style="font-size: 2.2rem; font-weight: bold; color: #333; margin: 0; padding-top: 10px;">
-                Join The Community Of Tutors
+<header class="main_header d-flex bg-white  py-2 align-items-end justify-content-center">
+    <a class="arrow" href="https://edexceledu.com">
+        <img style="height: 50px" src="/images/logo.png" alt="EDEXCEL-logo" height="50px">
+    </a>
+</header>
+
+<banner style="display: flex; flex-direction: row; justify-content: center; align-items: center; 
+     background-color: #93bfa8;  width: 100%; height: 350px; gap: 10px;">
+    <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 5px;">
+        <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px;">
+            <h1 class="main-heading" style="font-size: 2rem; font-weight: bold; color: #333; margin: 0;">
+                Join The Community of Tutors
             </h1>
-            <p class="subheading" style="font-size: 1.1rem; color: #42B979; margin: 0;">
+            <p class="subheading" style="font-size: 1rem; color: white; margin: 0;">
                 You Have Three Steps To Start Your Journey
             </p>
         </div>
     </div>
     <div style="flex-shrink: 0;">
-        <img src="/images/tutor_login.png" alt="EDEXCEL-logo" style="height: 550px;">
+        <img src="/images/tutor_login.png" alt="EDEXCEL-logo" style="height: 450px;">
     </div>
-</header>
+</banner>
 
-
-<div class="main-page col-12 bg-white col-md-8 mx-auto p-0 text-center" style="padding: 0px 10px 0px 10px;"
->
-
+<div class="main-page col-12 bg-white col-md-10 mx-auto p-0 text-center" style="padding: 0px 10px 0px 10px;" 
+><!--md-8-->
     <div class="row justify-content-center">
         <div class="col-lg-12 col-sm-4">
-
-
-            <form id="tutorForm" class=" pages" method="POST" action="{{ route('tutor-create') }}" style="padding-bottom: 50px"
+            <form id="tutorForm" class=" pages" method="POST" action="{{ route('tutor-create') }}" style="padding-bottom: 20px; padding-top: 20px;border: 1px solid #ccc;border-radius: 10px; margin-top: 10px; margin-bottom: 10px; "
                 enctype="multipart/form-data">
-                <!--<div
+                <div
                     class="step-form-heading col py-2  text-center flex-column rounded-top ">
-                    <h2 class="text-center my-2">Join The Community Of Tutors</h2>
-                    
-                </div>-->
+                    <h2 class="text-center my-2">Tutors Sign-Up Page</h2> 
+                </div>
                 <div class="col-12 d-flex justify-content-center " style="padding-bottom: 20px;">
-                    <b class="theme_text_green px-2 persentage-num">step 1/3</b>
+                    <b class="theme_text_green px-2 persentage-num">Step 1/3</b>
                     <div class="loading bg-body-secondary my-2">
                         <div class="percentage bg_theme_green"></div>
                     </div>
@@ -418,7 +414,7 @@
                         <div class="form-group d-none">
 
                             <input type="search" value="English" name="subject" class="form-control" id="page1-search"
-                                placeholder="Search" style="height:50px;">
+                                placeholder="Search" style="height:50px; border: 1px solid #ccc;">
                         </div>
                         <div class="form-row d-flex flex-column flex-md-row">
                             <div class="col-md-6 px-2 mb-2">
@@ -426,14 +422,14 @@
                                             class="text-danger fs-4"
                                             style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
                                 <input type="text" class="form-control" id="f_name" name="f_name" placeholder="John"
-                                    style="box-shadow: none;border: 1px solid rgb(137, 135, 135);">
+                                    style="box-shadow: none; border: 1px solid rgba(137, 135, 135, 0.5);">
                             </div>
                             <div class="col-md-6 px-2 mb-2">
                                 <label for="l_name" class="form-label" style="color:#42b979;"><strong>Last Name <span
                                             class="text-danger fs-4"
                                             style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
                                 <input type="text" class="form-control" id="l_name" name="l_name" placeholder="Doe"
-                                    style="box-shadow: none;border: 1px solid rgb(137, 135, 135);">
+                                    style="box-shadow: none; border: 1px solid rgba(137, 135, 135, 0.5);">
                             </div>
                         </div>
                         <div class="form-row d-flex flex-column flex-md-row">
@@ -445,7 +441,7 @@
                                     </strong>
                                 </label>
                                 <input type="email" class="form-control email-field" id="email" name="email"
-                                    style="box-shadow: none; background-color: white;border: 1px solid rgb(137, 135, 135);"
+                                    style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135, 135, 0.5);"
                                     readonly>
                             </div>
                             <div class="col-md-6 px-2 mb-2">
@@ -454,7 +450,7 @@
                                             style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
                                 <textarea type="text" class="form-control" rows="1" id="intro"
                                     placeholder="Short Intro..." name="intro"
-                                    style="box-shadow: none;border: 1px solid rgb(137, 135, 135);"></textarea>
+                                    style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);"></textarea>
                             </div>
                             <div class="col-md-6 px-2 mb-2">
                                 <label for="password" class="form-label" style="color:#42b979;">
@@ -468,7 +464,7 @@
                                         name="password"
                                         placeholder="Password"
                                         class="form-control inp-1"
-                                        style="width: 100%; flex-direction: column; border-radius: 5px; padding: 5px 8px; margin: 7px 0px; border: 1px solid rgb(137, 135, 135);"
+                                        style="width: 100%; flex-direction: column; border-radius: 5px; padding: 5px 8px; margin: 7px 0px;border: 1px solid rgba(137, 135, 135, 0.5);"
                                         onfocus="toggleEye(this, 'open')"
                                         onblur="toggleEye(this, 'closed')"
                                     >
@@ -498,7 +494,7 @@
                                         name="c_password"
                                         placeholder="Confirm Password" 
                                         class="form-control inp-1"
-                                        style="width: 100%; flex-direction: column; border-radius: 5px; padding: 5px 8px; margin: 7px 0px; border: 1px solid rgb(137, 135, 135);"
+                                        style="width: 100%; flex-direction: column; border-radius: 5px; padding: 5px 8px; margin: 7px 0px; border: 1px solid rgba(137, 135, 135, 0.5);"
                                         onfocus="toggleEye2(this, 'open')"
                                         onblur="toggleEye2(this, 'closed')"
                                     />
@@ -533,23 +529,23 @@
                             <div class="col-md-6 px-2 mb-2">
                                 <div class="form-group">
                                     <label for="datePicker" class="date-picker-label" style="color: #42b979;">
-                                        <strong>Date Of Birth 
+                                        <strong>Date of Birth 
                                             <span class="text-danger fs-4" style="color: #42b979; vertical-align: middle;">*</span>
                                         </strong>
                                     </label>
                                     <div class="ad-dob d-flex justify-content-between align-items-center" style="gap: 8px;">
-                                        <select id="year" name="year" class="form-select" style="border: 1px solid #888; padding: 5px;" onchange="updateDob()">
+                                        <select id="year" name="year" class="form-select" style="border: 1px solid rgba(137, 135, 135, 0.5); padding: 5px;" onchange="updateDob()">
                                         </select>
-                                        <select id="month" name="month" class="form-select" style="border: 1px solid #888; padding: 5px;" onchange="updateDob()">
+                                        <select id="month" name="month" class="form-select" style="border: 1px solid rgba(137, 135, 135, 0.5); padding: 5px;" onchange="updateDob()">
                                         </select>
-                                        <select id="day" name="day" class="form-select" style="border: 1px solid #888; padding: 5px;" onchange="updateDob()">
+                                        <select id="day" name="day" class="form-select" style="border: 1px solid rgba(137, 135, 135, 0.5); padding: 5px;" onchange="updateDob()">
                                         </select>
                                     </div>
                                     <input name="dob" type="hidden" id="dob" />
                                 </div>
                             </div>
 
-                            <div class="col-md-9 px-8 mb-4">
+                            <div class="col-md-12 px-8 mb-4">
                                 <label for="mobile" class="form-label" style="color:#42b979;"><strong>Mobile Number
                                         <span class="text-danger fs-4"
                                             style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
@@ -564,7 +560,7 @@
                                     </select>
                                     <input type="text" class="form-control w-50" id="phone" name="phone"
                                         placeholder="e.g +92XXXXXXXXXX"
-                                        style="box-shadow: none;border: 1px solid rgb(137, 135, 135);">
+                                        style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);">
                                 </div>
                             </div>
                         </div>
@@ -575,7 +571,7 @@
                                         Help <span class="text-danger fs-4"
                                             style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
                                 <select class="form-control form-select" aria-label="Default select example"
-                                    style="width: 100% !important;border: 1px solid rgb(137, 135, 135);">
+                                    style="width: 100% !important;border: 1px solid rgba(137, 135, 135, 0.5);">
                                     <option value="Online" selected>Online</option>
                                     <option value="Physical">Physical</option>
                                     <option value="Both">Both</option>
@@ -587,13 +583,13 @@
                                         Picture <span class="text-danger fs-4"
                                             style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
                                 <input type="file" class="form-control" id="profilePicture" name="profileImage"
-                                    style="box-shadow: none;border: 1px solid rgb(137, 135, 135);">
+                                    style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);">
                             </div>
                         </div>
                     </div>
                     <div class="d-none px-3 mx-3" id="page-2">
                         <div class="pg-1-heading">
-                            <h3 class="fs-5 fw-bold py-3">You Have Two Steps To Join Your Journey</h3>
+                            <h3 class="fs-5 fw-bold py-3">2 Steps Left to Unlock Your Teaching Potential</h3>
                         </div>
                         <div class="form-row d-flex flex-column flex-md-row">
                             <div class="col-md-6 px-2 mb-2">
@@ -614,7 +610,7 @@
                                         Qualification Document <span class="text-danger fs-4"
                                             style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
                                 <input type="file" class="form-control" id="profilePicture" name="document"
-                                    style="box-shadow: none;border: 1px solid rgb(137, 135, 135);">
+                                    style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);">
                             </div>
 
                             <div class="row mb-4 col-md-6">
@@ -686,14 +682,14 @@
                                         Teaching <span class="text-danger fs-4"
                                             style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
                                 <input type="text" class="form-control" id="other_qualification_input"
-                                    name="other_qualification_input" style="border: 1px solid rgb(137, 135, 135);" />
+                                    name="other_qualification_input" style="border: 1px solid rgba(137, 135, 135, 0.5);" />
                             </div>
                             <div class="col-md-6 px-2 mb-2 mt-4">
                                 <label for="teaching" class="form-label" style="color:#42b979;"><strong>Subject You Can
                                         Teach <span class="text-danger fs-4"
                                             style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
                                 <select class="form-select teaching" id="teaching" name="teaching[]"
-                                    style="border: 1px solid rgb(137, 135, 135);">
+                                    style="border: 1px solid rgba(137, 135, 135, 0.5);">
                                     <option value="english">English</option>
                                     <option value="maths">Mathematics</option>
                                     <option value="physics">Physics</option>
@@ -720,14 +716,30 @@
                                     <option value="portuguese">Portuguese</option>
                                 </select>
                             </div>
-
+                            <div class="col-md-6">
+                                <label for="language_proficient" class="form-label" style="color:#42b979;">
+                                    <strong>Language Proficient
+                                        <span class="text-danger fs-4" style="color:#42b979; vertical-align: middle;">*</span>
+                                    </strong>
+                                </label>
+                                <select name="language_proficient" class="form-control select2" id="language_proficient">
+                                    <option value="english">English</option>
+                                    <option value="spanish">Spanish</option>
+                                    <option value="french">French</option>
+                                    <option value="german">German</option>
+                                    <option value="chinese">Chinese</option>
+                                    <option value="italian">Italian</option>
+                                    <option value="portuguese">Portuguese</option>
+                                    <!-- Add more languages as needed -->
+                                </select>
+                            </div>
                             
                             <div class="col-md-6">
                                 <label for="qualification" class="form-label" style="color:#42b979;"><strong>Educational
                                         Teaching <span class="text-danger fs-4"
                                             style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
                                 <input type="text" class="form-control" id="other_qualification_input"
-                                    name="other_qualification_input" style="border: 1px solid rgb(137, 135, 135);" />
+                                    name="other_qualification_input" style="border: 1px solid rgba(137, 135, 135, 0.5);" />
                             </div>
                             <!-- <div class="col-md-6">
                                             <label for="other_qualification_input" class="form-label" style="color:#42b979;"><strong>Technology Teaching</strong><span class="text-danger fs-4">*</span></label>
@@ -742,7 +754,7 @@
                                         Teaching) <span class="text-danger fs-4"
                                             style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
                                 <input type="number" min="0" class="form-control" id="experience" name="experience"
-                                    style="box-shadow: none;border: 1px solid rgb(137, 135, 135);">
+                                    style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);">
                             </div>
 
                         </div>
@@ -754,15 +766,13 @@
                                             style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
                                 <input type="text" class="form-control" id="whatsapp" name="whatsapp"
                                     placeholder="e.g +92XXXXXXXXXX"
-                                    style="box-shadow: none;border: 1px solid rgb(137, 135, 135);">
+                                    style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);">
                             </div>
                         </div>
-
-
                     </div>
                     <div class="d-none mx-3" id="page-3">
                         <div class="pg-1-heading">
-                            <h3 class="fs-5 fw-bold py-3">Your Registration Complete Now Join Your Journey</h3>
+                            <h3 class="fs-5 fw-bold py-3">You're Just One Step Away</h3>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-2">
@@ -788,7 +798,7 @@
                             </div>
                         </div>
                         <input required type="email" name="c_email" placeholder="Email" class="inp-1 d-none"
-                            style="border: 1px solid rgb(137, 135, 135);" readonly>
+                            style="border: 1px solid rgba(137, 135, 135, 0.5);" readonly>
 
                         <div class="form-row d-none flex-column flex-md-row">
 
@@ -819,7 +829,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 my-4 d-flex justify-content-center" style="margin-bottom: 1rem !important;">
+                <div class="col-12 my-4 d-flex justify-content-center" style="margin-bottom: 1rem !important; padding-top:20px">
                     <!-- Previous Button -->
                     <input onclick="backStep(this)" id="back-btn" type="button" value="←  Previous"
                         class="border-0 bg-body-secondary text-dark fs-6 py-1 px-3 rounded d-none"
@@ -951,18 +961,18 @@ function toggleEye(input, state) {
     $(document).ready(function() {
         $('#country').select2({
             placeholder: 'Type to search country',
-            allowClear: true,
+            allowClear: false,
         });
         $('#yearSelect').select2({
             placeholder: 'Type to search year',
-            allowClear: true,
+            allowClear: false,
         });
     });
 
     $(document).ready(function() {
         $('#gender').select2({
             placeholder: "Select or type your gender",
-            allowClear: true,
+            allowClear: false,
             tags: true
         });
     });
@@ -970,7 +980,7 @@ function toggleEye(input, state) {
     $(document).ready(function() {
         $('#specialization').select2({
             placeholder: "Select a specialization",  // Optional placeholder text
-            allowClear: true  // Allows clearing the selection
+            allowClear: false  // Allows clearing the selection
         });
     });
 
@@ -985,7 +995,7 @@ function toggleEye(input, state) {
         // Initialize Select2 for the input field as well (allows typing/selecting)
         $('#other_qualification_input').select2({
             placeholder: "Type or select a language",
-            allowClear: true,
+            allowClear: false,
             tags: true // Lets users add a custom language if it's not in the list
         });
     });
@@ -993,9 +1003,20 @@ function toggleEye(input, state) {
     $(document).ready(function() {
         $('#institution').select2({
             placeholder: "Select an institution/university",  // Optional placeholder text
-            allowClear: true  // Allows clearing the selection
+            allowClear: false  // Allows clearing the selection
         });
     });
+
+    
+    $(document).ready(function() {
+        // Initialize Select2 on the language proficiency select field
+        $('#language_proficient').select2({
+            placeholder: 'Select a language',
+            allowClear: false // Allows clearing the selected option
+        });
+    });
+
+
 </script>
 <script>
 
