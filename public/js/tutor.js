@@ -78,11 +78,11 @@ const NextStep = (button) => {
 
             // Show Toast based on the current step
             if (stepCounter === 1) {
-                showToast("Fill your personal data", "info");
+                showToast("Fill your personal data", "success");
             } else if (stepCounter === 2) {
-                showToast("Fill in your qualifications", "info");
+                showToast("Fill in your qualifications", "success");
             } else if (stepCounter === 3) {
-                showToast("Fill the descriptions", "info");
+                showToast("Fill the descriptions", "success");
             }
         }
     }
@@ -120,11 +120,11 @@ const backStep = (button) => {
         nextBtn.value = "Next \u2192";
 
         if (stepCounter === 1) {
-            showToast("Fill your personal data", "info");
+            showToast("Fill your personal data", "success");
         } else if (stepCounter === 2) {
-            showToast("Fill in your qualifications", "info");
+            showToast("Fill in your qualifications", "success");
         } else if (stepCounter === 3) {
-            showToast("Fill the descriptions", "info");
+            showToast("Fill the descriptions", "success");
         }
     }
 };

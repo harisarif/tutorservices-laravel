@@ -100,7 +100,7 @@
         }
 
         .select2-container {
-            width: 400px !important;
+            width: 330px !important;
         }
     }
 
@@ -304,39 +304,34 @@
 }
 
 .toast {
-    background-color: #42b979; /* Light Green Background */
-    color: red; /* Red Text Color */
-    padding: 10px 20px;
-    border: 2px solid #90ee90; 
-    border-radius: 5px;
-    margin-top: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-size: 14px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease-in-out, visibility 0.5s;
     position: fixed;
     top: 20px;
-    right: 20px; 
+    right: 20px;
     z-index: 1000;
-}
-
-.toast.show {
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s, transform 0.3s;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+  }
+  
+  .toast.show {
     opacity: 1;
-    visibility: visible;
-}
+    transform: translateY(0);
+  }
 
-.toast-info {
-    background-color: #42b979; 
-}
+  .toast.success {
+    background-color: #42B979; /* Green background */
+    color: white; /* White text */
+  }
 
-.toast-success {
-    background-color: #42b979;
-}
-
-.toast-error {
-    background-color: #42b979;
-}
+  .toast.info {
+    background-color: #17a2b8; /* Blue background for info */
+    color: white;
+  }
 
 </style>
 @include('whatsapp')
@@ -362,10 +357,10 @@
     </a>
 </header>
 
-<banner style="display: flex; flex-direction: row; justify-content: center; align-items: center; 
-     background-color: #93bfa8;  width: 100%; height: 350px; gap: 10px;">
-    <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 5px;">
-        <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px;">
+<banner style="display: flex; flex-direction: row; justify-content: center; align-items: flex-start; 
+     background-color: #93bfa8; width: 100%; height: 350px; gap: 10px;">
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 5px;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
             <h1 class="main-heading" style="font-size: 2rem; font-weight: bold; color: #333; margin: 0;">
                 Join The Community of Tutors
             </h1>
@@ -374,10 +369,11 @@
             </p>
         </div>
     </div>
-    <div style="flex-shrink: 0;">
-        <img src="/images/tutor_login.png" alt="EDEXCEL-logo" style="height: 450px;">
+    <div style="flex-shrink: 0;height: 450px; border: 1px solid black;">
+<!--Remove height when place image-->
     </div>
 </banner>
+
 
 <div class="main-page col-12 bg-white col-md-10 mx-auto p-0 text-center" style="padding: 0px 10px 0px 10px;" 
 ><!--md-8-->
@@ -829,12 +825,14 @@
                 <div class="col-12 my-4 d-flex justify-content-center" style="margin-bottom: 1rem !important; padding-top:20px">
                     <!-- Previous Button -->
                     <input onclick="backStep(this)" id="back-btn" type="button" value="←  Previous"
-                        class="border-0 bg-body-secondary text-dark fs-6 py-1 px-3 rounded d-none"
-                        style="margin-right: 10px;">
+                    class="ab p-2 btn-an rounded border-0 text-success hover-button bg-body-secondary text-dark fs-6 py-1 px-3 d-none solid_btn"
+                    style="margin-right: 10px; white-space: nowrap;">
 
                     <!-- Next Button -->
-                    <input onclick="NextStep(this)" id="next-btn" type="button" value="Next  →"
-                        class="border-0 bg_theme_green text-light fs-6 py-1 px-3 rounded">
+                    <input onclick="NextStep(this)" id="next-btn" type="button" value="Next  →" 
+                        class="ab p-2 btn-an rounded border-0 text-success hover-button bg_theme_green text-light fs-6 py-1 px-3 solid_btn" 
+                        style="white-space: nowrap;">
+
                 </div>
 
             </form>
@@ -959,10 +957,20 @@ function toggleEye(input, state) {
         $('#country').select2({
             placeholder: 'Type to search country',
             allowClear: false,
+            allowClear: false,
+            tags: true,
+            dropdownCssClass: 'custom-select2-templates-lang',
+            selectionCssClass: 'custom-select2-templates-lang',
+
         });
         $('#yearSelect').select2({
             placeholder: 'Type to search year',
             allowClear: false,
+            allowClear: false,
+            tags: true,
+            dropdownCssClass: 'custom-select2-templates-lang',
+            selectionCssClass: 'custom-select2-templates-lang',
+
         });
     });
 
@@ -979,7 +987,12 @@ function toggleEye(input, state) {
     $(document).ready(function() {
         $('#specialization').select2({
             placeholder: "Select a specialization",  // Optional placeholder text
-            allowClear: false  // Allows clearing the selection
+             // Allows clearing the selection
+            allowClear: false,
+            tags: true,
+            dropdownCssClass: 'custom-select2-templates-lang',
+            selectionCssClass: 'custom-select2-templates-lang',
+
         });
     });
 
@@ -995,14 +1008,19 @@ function toggleEye(input, state) {
         $('#other_qualification_input').select2({
             placeholder: "Type or select a language",
             allowClear: false,
-            tags: true // Lets users add a custom language if it's not in the list
+            tags: true,
+            dropdownCssClass: 'custom-select2-templates-lang',
+            selectionCssClass: 'custom-select2-templates-lang',
         });
     });
 
     $(document).ready(function() {
         $('#institution').select2({
-            placeholder: "Select an institution/university",  // Optional placeholder text
-            allowClear: false  // Allows clearing the selection
+            placeholder: "Select an institution/university",  // Optional placeholder allowClear: false,
+            tags: true,
+            dropdownCssClass: 'custom-select2-templates-lang',
+            selectionCssClass: 'custom-select2-templates-lang',
+
         });
     });
 
@@ -1011,7 +1029,11 @@ function toggleEye(input, state) {
         // Initialize Select2 on the language proficiency select field
         $('#language_proficient').select2({
             placeholder: 'Select a language',
-            allowClear: false // Allows clearing the selected option
+            allowClear: false,
+            tags: true,
+            dropdownCssClass: 'custom-select2-templates-lang',
+            selectionCssClass: 'custom-select2-templates-lang',
+// Allows clearing the selected option
         });
     });
 
