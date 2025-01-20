@@ -14,6 +14,7 @@ const showToast = (message, type = "info") => {
     const toast = document.createElement("div");
     toast.classList.add("toast", type);
     toast.textContent = message;
+    toast.style.top = "350px";
 
     // Append the toast to the body
     document.body.appendChild(toast);
@@ -21,7 +22,7 @@ const showToast = (message, type = "info") => {
     // Show the toast with fade-in
     setTimeout(() => {
         toast.classList.add("show");
-    }, 100);
+    }, 300);
 
     // Hide the toast after 3 seconds
     setTimeout(() => {
@@ -29,8 +30,9 @@ const showToast = (message, type = "info") => {
         setTimeout(() => {
             toast.remove();
         }, 500); // Wait for the fade-out transition before removing it
-    }, 3000);
+    }, 5000);
 };
+
 
 const NextStep = (button) => {
     const totalSteps = 3; // Total number of steps

@@ -1,0 +1,384 @@
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #42B979 !important;
+    color: #fff;
+    margin-top: 0px !important;
+}
+
+.main-footer {
+    display: none;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: #fff !important;
+}
+
+#allModal {
+    display: none !important;
+}
+
+.select2-container--default .select2-selection--multiple {
+    padding: 5px;
+}
+
+/* .select2-container {
+        width: 260px !important;
+    } */
+.iti__selected-flag {
+    top: 6px;
+    height: 33px !important;
+    border-radius: 4px;
+    transition: .3s;
+}
+
+.intl-tel-input .flag-dropdown .selected-flag {
+    padding: 11px 16px 11px 6px;
+}
+
+.intl-tel-input {
+    z-index: 99;
+    width: 100%;
+}
+
+.iti-flag {
+    box-shadow: none;
+}
+
+.intl-tel-input .selected-flag:focus {
+    outline: none !important;
+}
+
+.iti--allow-dropdown .iti__flag-container:hover .iti__selected-flag {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.iti--allow-dropdown input {
+    padding-right: 6px;
+    padding-left: 52px;
+    margin-left: 0;
+}
+
+.iti__country-list {
+    border-radius: 4px !important;
+    z-index: 999 !important;
+    box-shadow: 0 0 16px 0 rgb(0 0 0 / 8%) !important;
+    border: 1px solid #ececec !important;
+    width: 270px !important;
+}
+
+.input-group-append {
+    cursor: pointer;
+}
+
+.form-row {
+    .select2-container {
+        width: 100% !important;
+    }
+}
+
+/* .select2-container{
+        } */
+
+.input-group {
+    #countrySelect {
+        width: 21% !important;
+    }
+
+    .select2-container {
+        width: 330px !important;
+    }
+}
+
+.selection {
+    .select2-selection {
+        height: 38px !important;
+    }
+}
+
+@media(min-width: 322px) and (max-width: 766px) {
+    .select2-container {
+        .select2-dropdown {
+            width: 330px !important;
+
+        }
+    }
+}
+
+@media (max-width: 425px) {
+    .select2-container {
+        .select2-dropdown {
+            width: 283px !important;
+
+        }
+    }
+
+    form {
+        width: 100%;
+    }
+
+    .input-group {
+        width: 100%;
+    }
+}
+
+@media(min-width: 767px) and (max-width: 1441px) {
+    .select2-container {
+        .select2-dropdown {
+            width: 269px !important;
+        }
+    }
+
+    @media(max-width:426px) {
+        .select2-container--open .select2-dropdown {
+            left: 0;
+            top: -44px !important;
+        }
+    }
+}
+
+.date-picker-input {
+    width: 100%;
+    padding: 6px 12px;
+    border-radius: 6px;
+    outline: none;
+    border: 1px solid #dee2e6;
+
+}
+
+.date-picker-label {
+    margin-bottom: 7px !important;
+}
+
+.alert-danger {
+    position: fixed;
+    width: 28%;
+    right: 0;
+    width: 27%;
+    padding: 0 16px;
+    margin: 10px;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 16px;
+}
+
+.row {
+    --bs-gutter-x: 0rem !important;
+    justify-content: space-between;
+}
+
+.form-label {
+    display: flex;
+    text-align: justify;
+    align-items: center;
+}
+
+.date-picker-label {
+    display: flex;
+    text-align: justify;
+    align-items: center;
+}
+
+main {
+    /*background: url(./images/bg_image_1.png), #f1f1f1a0;*/
+    background-blend-mode: screen;
+}
+
+.step-form-heading h2 {
+    color: #42b979;
+}
+
+SELECT {
+    padding: 5px;
+    border: none;
+}
+
+.ad-dob {
+    /*border: 1px solid #ddd;*/
+    padding: 3px 0;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-bottom {
+    padding: 5px 0;
+}
+
+.pg-1-heading h3 {
+    color: #42b979;
+}
+
+.select2 {
+    width: 100% !important;
+}
+
+@keyframes fadeInOut {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.fade-animation {
+    animation: fadeInOut 3s infinite;
+}
+
+.email-field {
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+/* Change the color of the scrollbar to green */
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #42B979 !important;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+input.form-control::placeholder,
+textarea.form-control::placeholder {
+    color: rgb(180, 173, 173);
+}
+
+input[type="password"]::placeholder {
+    color: rgb(180, 173, 173);
+}
+
+.form-control:focus {
+    border-color: #42b979 !important;
+    border-width: 2px !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.inp-1:focus {
+    border-color: #42b979 !important;
+    border-width: 2px !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+#countrySelect {
+    padding-right: 0px !important;
+}
+
+.ad-dob select {
+    /* border: 1px solid #888;*/
+    padding: 5px;
+    width: 30%;
+    /* Adjust width for uniform dropdowns */
+    /* border-radius: 4px;  Optional for rounded corners */
+    font-size: 14px;
+}
+
+.date-picker-label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s, transform 0.3s;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast.success {
+    background-color: #42B979;
+    /* Green background */
+    color: white;
+    /* White text */
+}
+
+.toast.info {
+    background-color: #17a2b8;
+    /* Blue background for info */
+    color: white;
+}
+
+.main-banner {
+    height: 350px;
+    background-color: #93bfa8;
+}
+
+.banner-size {
+    height: 65vh;
+}
+
+.banner-heading {
+    color: #333;
+}
+
+.select2-dropdown.gender-custom-select2-templates-lang.select2-dropdown--below {
+    width: 327px !important; 
+}
+
+.select2-dropdown.countrySelect-custom-select2-templates-lang.select2-dropdown--below {
+    width: 329px !important; 
+}
+
+.select2-dropdown.country-custom-select2-templates-lang.select2-dropdown--below {
+    width: 160px !important; 
+}
+
+.select2-dropdown.year-custom-select2-templates-lang.select2-dropdown--below {
+    width: 160px !important; 
+}
+
+.select2-dropdown.school_class-custom-select2-templates-lang.select2-dropdown--below {
+    width: 310px !important; 
+}
+
+.select2-dropdown.specialization-custom-select2-templates-lang.select2-dropdown--below {
+    width: 317px !important;
+}
+
+.select2-dropdown.institution-custom-select2-templates-lang.select2-dropdown--below {
+    width: 316px !important;
+}
+
+.select2-dropdown.other_qualification_input-custom-select2-templates-lang.select2-dropdown--below {
+    width: 317px !important;
+}
+
+.select2-dropdown.language_proficient-custom-select2-templates-lang.select2-dropdown--below {
+    width: 316px !important;
+}
+
+.select2-dropdown.location-custom-select2-templates-lang.select2-dropdown--below {
+    width: 337px !important;
+}
+
+.select2-dropdown.city-custom-select2-templates-lang.select2-dropdown--below {
+    width: 322px !important;
+}
+
+
+
+

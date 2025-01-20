@@ -1,5 +1,18 @@
-.select2-container--open .custom-select2-templates-lang{
+/* .select2-container--open .custom-select2-templates-lang{
     width: 350px !important;
+} */
+
+.country-custom-select2-templates-lang{
+    width: 10px !important;
 }
+
+select2-dropdown country-custom-select2-templates-lang select2-dropdown--below{
+    width: 400px !important;
+}
+
+/* .custom-select2-templates-lang{
+    width: 350px !important;
+} */
+
 @media(max-width:1399px){ 
 }
