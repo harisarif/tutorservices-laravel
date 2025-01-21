@@ -37,8 +37,8 @@
 </header>
 
 <div class="container-fluid d-flex flex-row justify-content-center align-items-start main-banner">
-    <div class="d-flex flex-column align-items-center justify-content-start gap-3">
-        <div class="d-flex flex-column align-items-center justify-content-center gap-1 banner-size">
+    <div class="d-flex flex-column align-items-center justify-content-start gap-3 my-4">
+        <div class="d-flex flex-column align-items-center justify-content-center gap-1 my-5 mx-5">
             <h1 class="main-heading text-dark fw-bold my-2 banner-heading">
                 Join The Community of Tutors
             </h1>

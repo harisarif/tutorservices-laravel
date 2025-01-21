@@ -14,7 +14,12 @@ const showToast = (message, type = "info") => {
     const toast = document.createElement("div");
     toast.classList.add("toast", type);
     toast.textContent = message;
-    toast.style.top = "350px";
+    
+    if (window.matchMedia("(min-width: 1360px)").matches) {
+        toast.style.top = "450px"; 
+    } else {
+        toast.style.top = "350px"; 
+    }
 
     // Append the toast to the body
     document.body.appendChild(toast);
