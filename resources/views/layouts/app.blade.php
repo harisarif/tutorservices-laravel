@@ -27,12 +27,10 @@
     <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
     <link href="css/style.css" rel="stylesheet" />
     <!-- whatsapp button css -->
-    <link rel="stylesheet" href="css/whatsApp-buttons.css" />
+    <link rel="stylesheet" href="{{ asset('css/whatsApp-buttons.css') }}" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-        
+    <link rel="stylesheet" href="{{ asset('css/fontawesome-free/css/all.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.min.css') }}">  
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom-select2.css') }}">
@@ -113,7 +111,7 @@
 
 </html>
 <script src="{{ URL::asset('js/select2.js') }}"></script>
-<script src="./js/app.js"></script>
+<script src="{{ URL::asset('js/app.js') }}"></script>
 
 <script>
     function cancel(){

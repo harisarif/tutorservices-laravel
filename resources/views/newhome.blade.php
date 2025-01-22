@@ -209,7 +209,7 @@
             <span class="visually-hidden">Loading...</span>
         </div>
     </div>
-        <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block; z-index: 9;" onclick="window.scrollTo(0, 0)"><i class="fa-solid fa-chevron-up"></i></button>
+        <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block; z-index: 9;" onclick="window.scrollTo(0, 0)"><i class="fa fa-chevron-up"></i></button>
     <div class="row mini_header m-0 p-0 container-fluid position-relative">
         <div class="col-sm-12 px-3  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0 adjustMobile" style="background:#42b979;position:fixed !important;height:12%">
             <ul class="p-1 m-0 d-sm-inline d-block text-center header-ul pt-2">
@@ -1057,7 +1057,7 @@
     
                         
     <button class="goToTop fw-20px" style="background-color:#42B979" onclick="window.scrollTo(0, 0)"><i
-            class="fa-solid fa-chevron-up"></i></button>
+            class="fa fa-chevron-up"></i></button>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" style="max-width:750px !important">
                     <div class="modal-content" style="width:700px">

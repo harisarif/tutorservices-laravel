@@ -107,7 +107,7 @@
     </script>
     <body>
              @include('whatsapp')
-             <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block;" onclick="window.scrollTo(0, 0)"><i class="fa-solid fa-chevron-up"></i></button>    
+             <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block;" onclick="window.scrollTo(0, 0)"><i class="fa fa-chevron-up"></i></button>    
             <header class="text-center bg-white m-0 p-2 d-flex  justify-content-center align-items-center">
                 
                 <a class="mx-auto" href="{{ route('newhome') }}"><img src="/images/logo.png" alt="EDEXCEL-logo" height="50px"></a>

@@ -119,7 +119,7 @@
                     @include('language')
                 </div>
         </header>
-        <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block;" onclick="window.scrollTo(0, 0)"><i class="fa-solid fa-chevron-up"></i></button>
+        <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block;" onclick="window.scrollTo(0, 0)"><i class="fa fa-chevron-up"></i></button>
  <section class="ad-heading">
     <div class="fb-ad ">
         <div class="row">

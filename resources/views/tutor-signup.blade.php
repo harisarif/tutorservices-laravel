@@ -5,17 +5,10 @@
 <meta name="keywords" content="education, online courses, learning, tutoring, e-learning, eduexceledu">
 <meta name="description"
     content="Tutor Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
-<link rel="stylesheet" href="./css/style.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<!-- Font Awesome CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<!-- Bootstrap Datepicker CSS -->
-<link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 <link rel="stylesheet" href="{{ asset('css/tutor-form.css') }}">
 @include('whatsapp')
 <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block;"
-    onclick="window.scrollTo(0, 0)"><i class="fa-solid fa-chevron-up"></i></button>
+    onclick="window.scrollTo(0, 0)"><i class="fa fa-chevron-up"></i></button>
 @if ($errors->any())
 
     <div class="alert alert-danger" id="close" style="">
@@ -123,6 +116,8 @@
                                     placeholder="Short Intro..." name="intro"
                                     style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);"></textarea>
                             </div>
+                        </div>
+                        <div class="form-row d-flex flex-column flex-md-row">
                             <div class="col-md-6 px-2 mb-2">
                                 <label for="password" class="form-label" style="color:#42b979;">
                                     <strong>Password <b
@@ -158,8 +153,8 @@
                                     </button>
                                 </div>
                             </div>
-
-
+                        </div>
+                        <div class="form-row d-flex flex-column flex-md-row">
                             <div class="col-md-6 px-2 mb-2">
                                 <label for="gender" class="form-label" style="color:#42b979;">
                                     <strong>Gender
@@ -200,7 +195,8 @@
                                     <input name="dob" type="hidden" id="dob" />
                                 </div>
                             </div>
-
+                        </div>
+                        <div class="form-row d-flex flex-column flex-md-row">
                             <div class="col-md-12 px-8 mb-4">
                                 <label for="mobile" class="form-label" style="color:#42b979;"><strong>Mobile Number
                                         <span class="text-danger fs-4"

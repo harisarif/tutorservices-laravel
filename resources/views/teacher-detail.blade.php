@@ -30,7 +30,7 @@
 </style>
 <body>
 @include('whatsapp')
-        <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block; z-index: 9;" onclick="window.scrollTo(0, 0)"><i class="fa-solid fa-chevron-up"></i></button>
+        <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block; z-index: 9;" onclick="window.scrollTo(0, 0)"><i class="fa fa-chevron-up"></i></button>
         <header class="text-center bg-white m-0 p-2 d-flex align-items-center justify-content-center">
 
             <a href="javascript:history.back()" class="back-button">

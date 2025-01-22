@@ -142,7 +142,7 @@
                     @include('language')
                 </div>
         </header>
-        <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block; z-index: 9;" onclick="window.scrollTo(0, 0)"><i class="fa-solid fa-chevron-up"></i></button>
+        <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block; z-index: 9;" onclick="window.scrollTo(0, 0)"><i class="fa fa-chevron-up"></i></button>
     @include('whatsapp')
     <main class="hireTutor">
         <div class="row m-0 px-4">
