@@ -29,7 +29,7 @@ return [
     */
 
     'env' => env('APP_ENV', 'production'),
-
+    'email_pass' => env('MY_CUSTOM_VARIABLE', 'DefaultValue'),
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

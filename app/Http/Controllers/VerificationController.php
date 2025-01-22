@@ -77,46 +77,12 @@ class VerificationController extends Controller
     return redirect()->route('newhome')->with('success', 'Verification link sent to your email!');
 }
 
-//     private function sendEmails($to, $subject, $body)
-// {
-//     $mail = new PHPMailer(true);
-    
-//     try {
-//         // Server settings
-//         $mail->isSMTP();
-//         $mail->Host = 'smtp.hostinger.com';
-//         $mail->SMTPAuth = true;
-//         $mail->Username = 'info@edexceledu.com';
-//         $mail->Password = 'Babar123!@#';
-//         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-//         $mail->Port = 587;
 
-//         // Email headers
-//         $mail->setFrom('info@edexceledu.com', 'Edexcel');
-//         $mail->addReplyTo('support@edexceledu.com', 'Support Team');
-//         $mail->addAddress($to);
-//          $mail->addCustomHeader('Priority', 'urgent');
-//          $mail->addCustomHeader('Importance', 'high');
-//          $mail->addCustomHeader('X-Mailer', 'PHPMailer');
-//          $mail->addCustomHeader('Precedence', 'bulk');
-//         // Email content
-//         $mail->isHTML(true); // HTML email
-//         $mail->Subject = $subject;
-//         $mail->Body = $body;
-//         $mail->AltBody = strip_tags($body); // Plain text fallback
-        
-
-//         $mail->send();
-//         // dd($to, $subject, $body,$mail);
-//     } catch (Exception $e) {
-//         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-//     }
-// }
 
 function sendEmails($subject, $body, $to_name, $to_email)
 {
 
-
+    $pass = env('email_pass');
     $smtp_details = config('mail.mailers.smtp');
     $mail = new PHPMailer(true); 
     try {
@@ -124,7 +90,7 @@ function sendEmails($subject, $body, $to_name, $to_email)
     $mail->Host = 'smtp.hostinger.com';                 // Specify SparkPost SMTP server
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
     $mail->Username =  'info@edexceledu.com';                 // SMTP username
-    $mail->Password = 'Babar123!@#'; 
+    $mail->Password = $pass; 
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption
     $mail->Port = 587;                                    // TCP port to connect to
 

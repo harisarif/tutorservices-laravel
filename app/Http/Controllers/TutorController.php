@@ -332,6 +332,7 @@ public function updateTutorStatus(Request $request)
     }
     private function sendEmail($to, $subject, $body)
         {
+            $pass = env('email_pass');
             $mail = new PHPMailer(true);
 
             try {
@@ -342,7 +343,7 @@ public function updateTutorStatus(Request $request)
                 $mail->Host = 'smtp.hostinger.com';
                 $mail->SMTPAuth = true;
                 $mail->Username = 'info@edexceledu.com';
-                $mail->Password = '';
+                $mail->Password = $pass;
                 $mail->SMTPSecure = 'tls';
                 $mail->Port = 587;
 
