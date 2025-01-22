@@ -61,7 +61,7 @@
                 style="padding-bottom: 20px; padding-top: 20px;border: 1px solid #ccc;border-radius: 10px; margin-top: 10px; margin-bottom: 10px; "
                 enctype="multipart/form-data">
                 <div class="step-form-heading col py-2  text-center flex-column rounded-top ">
-                    <h2 class="text-center my-2">Tutors Sign-Up Page</h2>
+                    <h2 class="text-center my-2">Tutor Sign-Up Page</h2>
                 </div>
                 <div class="col-12 d-flex justify-content-center " style="padding-bottom: 20px;">
                     <b class="theme_text_green px-2 persentage-num">Step 1/3</b>
