@@ -284,7 +284,7 @@ class StudentController extends Controller
     $mail->Host = 'smtp.hostinger.com';                 // Specify SparkPost SMTP server
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
     $mail->Username =  'info@edexceledu.com';                 // SMTP username
-    $mail->Password = 'Babar123!@#'; 
+    $mail->Password = ''; 
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption
     $mail->Port = 587;                                    // TCP port to connect to
 

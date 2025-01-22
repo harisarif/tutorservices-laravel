@@ -342,7 +342,7 @@ public function updateTutorStatus(Request $request)
                 $mail->Host = 'smtp.hostinger.com';
                 $mail->SMTPAuth = true;
                 $mail->Username = 'info@edexceledu.com';
-                $mail->Password = 'Babar123!@#';
+                $mail->Password = '';
                 $mail->SMTPSecure = 'tls';
                 $mail->Port = 587;
 
