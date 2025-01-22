@@ -333,6 +333,7 @@ public function updateTutorStatus(Request $request)
     private function sendEmail($to, $subject, $body)
         {
             $pass = env('email_pass');
+            $name = env('email_name');
             $mail = new PHPMailer(true);
 
             try {
@@ -342,13 +343,13 @@ public function updateTutorStatus(Request $request)
                 $mail->isSMTP();
                 $mail->Host = 'smtp.hostinger.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'info@edexceledu.com';
+                $mail->Username = $name;
                 $mail->Password = $pass;
                 $mail->SMTPSecure = 'tls';
                 $mail->Port = 587;
 
                 // Recipients
-                $mail->setFrom('info@edexceledu.com', 'Edexcel'); // Use direct values here
+                $mail->setFrom($name, 'Edexcel'); // Use direct values here
                 $mail->addAddress($to);
 
                 // Content

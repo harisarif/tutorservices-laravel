@@ -276,6 +276,7 @@ class StudentController extends Controller
     function sendEmail($subject, $body, $to_name, $to_email)
 {
     $pass = env('email_pass');
+    $name = env('email_name');
 
     $smtp_details = config('mail.mailers.smtp');
     $mail = new PHPMailer(true); 
@@ -283,13 +284,13 @@ class StudentController extends Controller
         $mail->isSMTP();                                      // Set mailer to use SMTP
     $mail->Host = 'smtp.hostinger.com';                 // Specify SparkPost SMTP server
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
-    $mail->Username =  'info@edexceledu.com';                 // SMTP username
+    $mail->Username =  $name;                 // SMTP username
     $mail->Password = $pass; 
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption
     $mail->Port = 587;                                    // TCP port to connect to
 
     // Email settings
-    $mail->setFrom('info@edexceledu.com', 'Edexcel');
+    $mail->setFrom($name, 'Edexcel');
     $mail->addAddress($to_email, $to_name);  // Add a recipient
     // Content
     $mail->isHTML(true);                                  // Set email format to HTML
