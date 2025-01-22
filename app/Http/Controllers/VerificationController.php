@@ -124,7 +124,7 @@ function sendEmails($subject, $body, $to_name, $to_email)
     $mail->Host = 'smtp.hostinger.com';                 // Specify SparkPost SMTP server
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
     $mail->Username =  'info@edexceledu.com';                 // SMTP username
-    $mail->Password = ''; 
+    $mail->Password = 'Babar123!@#'; 
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption
     $mail->Port = 587;                                    // TCP port to connect to
 
