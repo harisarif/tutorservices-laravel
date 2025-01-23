@@ -23,19 +23,26 @@
 @endif
 @section('content')
 
-<header class="main_header d-flex bg-white  py-2 align-items-end justify-content-center">
+<header class="main_header d-flex bg-white py-2 px-3 justify-content-between align-items-center">
+    <!-- Left Logo -->
     <a class="arrow" href="https://edexceledu.com">
         <img src="{{ asset('images/logo.png') }}" alt="EDEXCEL-logo" height="50px">
+    </a>
+
+    <!-- Right Login Button -->
+    <a href="/login" class="btn login-btn text-white px-4 py-2"
+        style="background-color: #42b979; border: none; border-radius: 5px;">
+        Login
     </a>
 </header>
 
 <div class="container-fluid d-flex flex-row justify-content-center align-items-start main-banner">
     <div class="d-flex flex-column align-items-center justify-content-start gap-3 my-4">
         <div class="d-flex flex-column align-items-center justify-content-center gap-1 my-5 mx-5">
-            <h1 class="main-heading text-dark fw-bold my-2 banner-heading">
+            <h1 class="main-heading text-dark fw-bold my-2 banner-heading fade-in-up">
                 Join The Community of Tutors
             </h1>
-            <p class="subheading text-white mx-5 text-center">
+            <p class="subheading text-white mx-5 text-center fade-in-up" style="animation-delay: 0.9s;">
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                 industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
                 scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
@@ -49,105 +56,94 @@
 
 <div class="main-page col-12 bg-white col-md-10 mx-auto p-0 text-center" style="padding: 0px 10px 0px 10px;"><!--md-8-->
     <div class="row justify-content-center">
-        <div class="col-lg-8 col-sm-4">
+        <div class="col-lg-11 col-sm-4">
             <form id="tutorForm" class=" pages" method="POST" action="{{ route('tutor-create') }}"
-                style="padding-bottom: 20px; padding-top: 20px;border: 1px solid #ccc;border-radius: 10px; margin-top: 10px; margin-bottom: 10px; "
+                style="padding-bottom: 20px; padding-top: 20px;border-radius: 10px; margin-top: 10px; margin-bottom: 10px; "
                 enctype="multipart/form-data">
-                <div class="step-form-heading col py-2  text-center flex-column rounded-top ">
-                    <h2 class="text-center my-2">Tutor Sign-Up Page</h2>
+                <div class="step-form-heading col py-2 text-center flex-column rounded-top ">
+                    <h2 class="text-center my-2 fw-bold">Teacher Sign-Up Form</h2>
                 </div>
-                <div class="col-12 d-flex justify-content-center " style="padding-bottom: 20px;">
-                    <b class="theme_text_green px-2 persentage-num">Step 1/3</b>
-                    <div class="loading bg-body-secondary my-2">
-                        <div class="percentage bg_theme_green"></div>
-                    </div>
-                </div>
-
                 @csrf
                 <div>
                     <div id="page-1" class="mx-3">
-                        <!--<div class="pg-1-heading">
-                            <h3 class="fs-5 fw-bold py-3">You Have Three Steps To Join Your Journey</h3>
-                        </div>-->
-                        <div class="ad-heading" style="padding-bottom: 20px;">
-                            <h3 class="fade-animation"
-                                style="text-align: center; color: red; padding: 5px; font-size: 15px;">
-                                <b><i>Please Fill All Mandatory Fields</i></b>
-                            </h3>
-                        </div>
                         <div class="form-group d-none">
-
                             <input type="search" value="English" name="subject" class="form-control" id="page1-search"
                                 placeholder="Search" style="height:50px; border: 1px solid #ccc;">
                         </div>
                         <div class="form-row d-flex flex-column flex-md-row">
                             <div class="col-md-6 px-2 mb-2">
-                                <label for="f_name" class="form-label" style="color:#42b979;"><strong>First Name <span
-                                            class="text-danger fs-4"
-                                            style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
+                                <label for="f_name" class="form-label" style="color:#42b979;"><strong>First
+                                        Name</strong></label>
                                 <input type="text" class="form-control" id="f_name" name="f_name" placeholder="John"
                                     style="box-shadow: none; border: 1px solid rgba(137, 135, 135, 0.5);">
+                                <div style="text-align: left;color: red;">
+                                </div>
                             </div>
                             <div class="col-md-6 px-2 mb-2">
-                                <label for="l_name" class="form-label" style="color:#42b979;"><strong>Last Name <span
-                                            class="text-danger fs-4"
-                                            style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
+                                <label for="l_name" class="form-label" style="color:#42b979;"><strong>Last
+                                        Name</strong></label>
                                 <input type="text" class="form-control" id="l_name" name="l_name" placeholder="Doe"
                                     style="box-shadow: none; border: 1px solid rgba(137, 135, 135, 0.5);">
+                                <div style="text-align: left;color: red;">
+                                </div>
                             </div>
                         </div>
                         <div class="form-row d-flex flex-column flex-md-row">
                             <div class="col-md-6 px-2 mb-2">
                                 <label for="email" class="form-label" style="color:#42b979;">
-                                    <strong>Email
-                                        <span class="text-danger fs-4"
-                                            style="color:#42b979; vertical-align: middle;">*</span>
-                                    </strong>
+                                    <strong>Email</strong>
                                 </label>
                                 <input type="email" class="form-control email-field" id="email" name="email"
                                     style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135, 135, 0.5);"
                                     readonly>
                             </div>
                             <div class="col-md-6 px-2 mb-2">
-                                <label for="intro" class="form-label" style="color:#42b979;"><strong>Intro <span
-                                            class="text-danger fs-4"
-                                            style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
-                                <textarea type="text" class="form-control" rows="1" id="intro"
-                                    placeholder="Short Intro..." name="intro"
-                                    style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);"></textarea>
+                                <label for="phone" class="form-label" style="color:#42b979;">
+                                    <strong>Mobile Number</strong>
+                                </label>
+                                <div class="d-flex align-items-center">
+                                    <select class="form-select w-auto" id="countrySelect"
+                                        style="border: 1px solid rgb(137, 135, 135); flex-shrink: 0;">
+                                        @foreach ($countriesPhone as $key => $country)
+                                            <option value="{{ $key }}">{{ $country }}</option>
+                                        @endforeach
+                                    </select>
+                                    <input type="text" class="form-control" id="phone" name="phone"
+                                        placeholder="e.g +92XXXXXXXXXX"
+                                        style="box-shadow: none; border: 1px solid rgba(137, 135, 135, 0.5);">
+                                </div>
                             </div>
                         </div>
                         <div class="form-row d-flex flex-column flex-md-row">
                             <div class="col-md-6 px-2 mb-2">
                                 <label for="password" class="form-label" style="color:#42b979;">
-                                    <strong>Password <b
-                                            style="color: red; font-size: 20px; vertical-align: middle;">*</b></strong>
+                                    <strong>Password</strong>
                                 </label>
-                                <div style="position: relative;">
-                                    <input required type="password" id="password" name="password" placeholder="Password"
-                                        class="form-control inp-1"
-                                        style="width: 100%; flex-direction: column; border-radius: 5px; padding: 5px 8px; margin: 7px 0px;border: 1px solid rgba(137, 135, 135, 0.5);"
-                                        onfocus="toggleEye(this, 'open')" onblur="toggleEye(this, 'closed')">
-                                    <button type="button" onclick="togglePassword('password', this)"
-                                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); border: none; background: none; cursor: pointer;">
-                                        <img id="eye-icon" src="{{ asset('images/closed_eye.png') }}" alt="eye icon"
-                                            style="height: 20px; width: 20px;" />
-                                    </button>
+                                <div>
+                                    <div style="position: relative;">
+                                        <input required type="password" id="password" name="password"
+                                            placeholder="Password" class="form-control inp-1"
+                                            style="width: 100%; flex-direction: column; border-radius: 5px; padding: 5px 8px; margin: 7px 0px; border: 1px solid rgba(137, 135, 135, 0.5);" />
+                                        <div style="text-align: left; color: red;"></div>
+                                        <button type="button" onclick="togglePassword('password', this)"
+                                            style="position: absolute; right: 10px; top: 20px; transform: translateY(-50%); border: none; background: none; cursor: pointer;">
+                                            <img id="eye-icon" src="{{ asset('images/closed_eye.png') }}" alt="eye icon"
+                                                style="height: 20px; width: 20px;" />
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-
                             <div class="col-md-6 px-2 mb-2">
                                 <label for="c_password" class="form-label" style="color:#42b979;">
-                                    <strong>Confirm Password <b
-                                            style="color: red; font-size: 20px; vertical-align: middle;">*</b></strong>
+                                    <strong>Confirm Password</strong>
                                 </label>
                                 <div style="position: relative;">
                                     <input type="password" id="c_password" name="c_password"
                                         placeholder="Confirm Password" class="form-control inp-1"
-                                        style="width: 100%; flex-direction: column; border-radius: 5px; padding: 5px 8px; margin: 7px 0px; border: 1px solid rgba(137, 135, 135, 0.5);"
-                                        onfocus="toggleEye2(this, 'open')" onblur="toggleEye2(this, 'closed')" />
+                                        style="width: 100%; flex-direction: column; border-radius: 5px; padding: 5px 8px; margin: 7px 0px; border: 1px solid rgba(137, 135, 135, 0.5);" />
+                                    <div style="text-align: left; color: red;"></div>
                                     <button type="button" onclick="togglePassword2('c_password', this)"
-                                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); border: none; background: none; cursor: pointer;">
+                                        style="position: absolute; right: 10px; top: 20px; transform: translateY(-50%); border: none; background: none; cursor: pointer;">
                                         <img id="c-eye-icon" src="{{ asset('images/closed_eye.png') }}" alt="eye icon"
                                             style="height: 20px; width: 20px;" />
                                     </button>
@@ -157,10 +153,7 @@
                         <div class="form-row d-flex flex-column flex-md-row">
                             <div class="col-md-6 px-2 mb-2">
                                 <label for="gender" class="form-label" style="color:#42b979;">
-                                    <strong>Gender
-                                        <span class="text-danger fs-4"
-                                            style="color:#42b979; vertical-align: middle;">*</span>
-                                    </strong>
+                                    <strong>Gender</strong>
                                 </label>
                                 <select class="form-control select2" id="gender" name="gender"
                                     style="border: 1px solid #000;">
@@ -172,10 +165,7 @@
                             <div class="col-md-6 px-2 mb-2">
                                 <div class="form-group">
                                     <label for="datePicker" class="date-picker-label" style="color: #42b979;">
-                                        <strong>Date of Birth
-                                            <span class="text-danger fs-4"
-                                                style="color: #42b979; vertical-align: middle;">*</span>
-                                        </strong>
+                                        <strong>Date of Birth</strong>
                                     </label>
                                     <div class="ad-dob d-flex justify-content-between align-items-center"
                                         style="gap: 8px;">
@@ -197,74 +187,40 @@
                             </div>
                         </div>
                         <div class="form-row d-flex flex-column flex-md-row">
-                            <div class="col-md-12 px-8 mb-4">
-                                <label for="mobile" class="form-label" style="color:#42b979;"><strong>Mobile Number
-                                        <span class="text-danger fs-4"
-                                            style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
-                                <div class="input-group d-flex justify-content-between align-items-center"
-                                    style="width: 100%">
-                                    <select class="form-select" id="countrySelect"
-                                        style="border: 1px solid rgb(137, 135, 135);">
-                                        @foreach ($countriesPhone as $key => $country)
-                                            <option value="{{ $key }}">{{ $country }}</option>
-                                        @endforeach
-                                    </select>
-                                    <input type="text" class="form-control w-50" id="phone" name="phone"
-                                        placeholder="e.g +92XXXXXXXXXX"
-                                        style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row d-flex flex-column flex-md-row">
-                            <div class="choice col-md-6 px-8">
-                                <label for="experience" class="form-label" style="color:#42b979;"><strong>How We Can
-                                        Help <span class="text-danger fs-4"
-                                            style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
-                                <select class="form-control form-select" aria-label="Default select example"
-                                    style="width: 100% !important;border: 1px solid rgba(137, 135, 135, 0.5);">
+                            <div class="choice col-md-6 px-2 mb-2">
+                                <label for="experience" class="form-label" style="color:#42b979;">
+                                    <strong>How We Can Help</strong>
+                                </label>
+                                <select class="form-control form-select" id="experience"
+                                    aria-label="Default select example"
+                                    style="border: 1px solid rgba(137, 135, 135, 0.5); width: 100%;">
                                     <option value="Online" selected>Online</option>
                                     <option value="Physical">Physical</option>
                                     <option value="Both">Both</option>
                                 </select>
                             </div>
-
                             <div class="col-md-6 px-2 mb-2">
-                                <label for="profilePicture" class="form-label" style="color:#42b979;"><strong>Profile
-                                        Picture <span class="text-danger fs-4"
-                                            style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
+                                <label for="profilePicture" class="form-label" style="color:#42b979;">
+                                    <strong>Profile Picture</strong>
+                                </label>
                                 <input type="file" class="form-control" id="profilePicture" name="profileImage"
-                                    style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);">
+                                    style="box-shadow: none; border: 1px solid rgba(137, 135, 135, 0.5);">
+                                <div style="text-align: left;color: red;"></div>
                             </div>
                         </div>
                     </div>
                     <div class="d-none px-3 mx-3" id="page-2">
                         <div class="pg-1-heading">
-                            <h3 class="fs-5 fw-bold py-3">2 Steps Left to Unlock Your Teaching Potential</h3>
+                            <h3 class="fs-5 fw-bold py-1">2 Steps Left to Unlock Your Teaching Potential</h3>
                         </div>
                         <div class="form-row d-flex flex-column flex-md-row">
-                            <!-- <div class="col-md-6 px-2 mb-2">
-                                <label for="qualification" class="form-label" style="color:#42b979;"><strong>Highest
-                                        Qualification <span class="text-danger fs-4"
-                                            style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
-                                <select class="form-control" id="school_class" name="qualification"
-                                    style="border: 1px solid rgb(137, 135, 135)">
-
-                                    @foreach($schoolClasses as $schoolClass)
-                                        <option value="{{ $schoolClass->id }}">{{ $schoolClass->name }}</option>
-                                    @endforeach
-                                    <option value="">Others</option>
-                                </select>
-                            </div> -->
+                            <!-- Highest Qualification -->
                             <div class="col-md-6 px-2 mb-2">
                                 <label for="qualification" class="form-label" style="color:#42b979;">
-                                    <strong>Highest Qualification
-                                        <span class="text-danger fs-4"
-                                            style="color:#42b979;vertical-align: middle;">*</span>
-                                    </strong>
+                                    <strong>Highest Qualification</strong>
                                 </label>
                                 <select class="form-control school_class" id="school_class" name="qualification"
-                                    style="border: 1px solid rgb(137, 135, 135)">
+                                    style="border: 1px solid rgb(137, 135, 135);">
                                     @foreach($schoolClasses as $schoolClass)
                                         <option value="{{ $schoolClass->id }}">{{ $schoolClass->name }}</option>
                                     @endforeach
@@ -272,52 +228,44 @@
                                 </select>
                             </div>
                             <div class="col-md-6 px-2 mb-2">
-                                <label for="profilePicture" class="form-label" style="color:#42b979;"><strong>Add Your
-                                        Qualification Document <span class="text-danger fs-4"
-                                            style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
-                                <input type="file" class="form-control" id="profilePicture" name="document"
-                                    style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);">
-                            </div>
-
-                            <div class="row mb-4 col-md-6">
-                                <label for="countryYear" class="form-label" style="color:#42b979;">
-                                    <strong>Country and Year
-                                        <span class="text-danger fs-4"
-                                            style="color:#42b979; vertical-align: middle;">*</span>
-                                    </strong>
+                                <label for="qualificationDocument" class="form-label" style="color:#42b979;">
+                                    <strong>Add Your Qualification Document</strong>
                                 </label>
-                                <div class="d-flex justify-content-between align-items-center" style="gap: 2px;">
-                                    <!-- Country Select -->
-                                    <div class="col-md-6 px-0">
-                                        <select id="country" name="country" class="form-select"
-                                            style="border: 1px solid rgb(137, 135, 135); padding: 5px">
-                                            <option value="" disabled selected>Select Country</option>
-                                            @foreach ($countriesPhone as $key => $country)
-                                                <option value="{{ $key }}">{{ $country }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <!-- Year Select -->
-                                    <div class="col-md-6 px-0">
-                                        <select id="yearSelect" name="uniyear" class="form-select"
-                                            style="border: 1px solid rgb(137, 135, 135); padding: 5px;">
-                                            <option value="" disabled selected>Select Year</option>
-                                            @for ($i = date('Y'); $i >= 1900; $i--)
-                                                <option value="{{ $i }}">{{ $i }}</option>
-                                            @endfor
-                                        </select>
-                                    </div>
-                                </div>
-
+                                <input type="file" class="form-control" id="qualificationDocument"
+                                    name="qualificationDocument"
+                                    style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);">
+                                <div style="text-align: left;color: red;"></div>
                             </div>
+                        </div>
 
-                            <div class="col-md-6">
-
+                        <div class="form-row d-flex flex-column flex-md-row">
+                            <!-- Country and Year -->
+                            <div class="col-md-6 px-2 mb-2">
+                                <label for="countryYear" class="form-label" style="color:#42b979;">
+                                    <strong>Country and Year</strong>
+                                </label>
+                                <div class="d-flex gap-2">
+                                    <!-- Country Select -->
+                                    <select id="country" name="country" class="form-select me-2"
+                                        style="border: 1px solid rgb(137, 135, 135);">
+                                        <option value="" disabled selected>Select Country</option>
+                                        @foreach ($countriesPhone as $key => $country)
+                                            <option value="{{ $key }}">{{ $country }}</option>
+                                        @endforeach
+                                    </select>
+                                    <!-- Year Select -->
+                                    <select id="yearSelect" name="uniyear" class="form-select"
+                                        style="border: 1px solid rgb(137, 135, 135);">
+                                        <option value="" disabled selected>Select Year</option>
+                                        @for ($i = date('Y'); $i >= 1900; $i--)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 px-2 mb-2">
                                 <label for="specialization" class="form-label" style="color:#42b979;">
-                                    <strong>Specialization
-                                        <span class="text-danger fs-4"
-                                            style="color:#42b979; vertical-align: middle;">*</span>
-                                    </strong>
+                                    <strong>Specialization</strong>
                                 </label>
                                 <select name="specialization" class="form-control select2" id="specialization">
                                     <option value="mathematics">Mathematics</option>
@@ -330,12 +278,12 @@
                                     <option value="medicine">Medicine</option>
                                 </select>
                             </div>
-                            <div class="col-md-6">
+                        </div>
+
+                        <div class="form-row d-flex flex-column flex-md-row">
+                            <div class="col-md-6 px-2 mb-2">
                                 <label for="institution" class="form-label" style="color:#42b979;">
-                                    <strong>Institution/University Name
-                                        <span class="text-danger fs-4"
-                                            style="color:#42b979; vertical-align: middle;">*</span>
-                                    </strong>
+                                    <strong>Institution/University Name</strong>
                                 </label>
                                 <select name="institution" class="form-control select2" id="institution">
                                     <option value="harvard">Harvard University</option>
@@ -348,18 +296,18 @@
                                     <option value="princeton">Princeton University</option>
                                 </select>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 px-2 mb-2">
                                 <label for="qualification" class="form-label" style="color:#42b979;"><strong>Courses
-                                        Teaching <span class="text-danger fs-4"
-                                            style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
+                                        Teaching</strong></label>
                                 <input type="text" class="form-control" id="other_qualification_input"
                                     name="other_qualification_input"
                                     style="border: 1px solid rgba(137, 135, 135, 0.5);" />
                             </div>
-                            <div class="col-md-6 px-2 mb-2 mt-4">
+                        </div>
+                        <div class="form-row d-flex flex-column flex-md-row">
+                            <div class="col-md-6 px-2 mb-2">
                                 <label for="teaching" class="form-label" style="color:#42b979;"><strong>Subject You Can
-                                        Teach <span class="text-danger fs-4"
-                                            style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
+                                        Teach</strong></label>
                                 <select class="form-select teaching" id="teaching" name="teaching[]"
                                     style="border: 1px solid rgba(137, 135, 135, 0.5);">
                                     <option value="english">English</option>
@@ -372,13 +320,11 @@
                                     <option value="computer">Computer Science</option>
                                     <option value="pakstudies">Pak Studies</option>
                                 </select>
+                                <div style="text-align: left;color: red;"></div>
                             </div>
-                            <div class="col-md-6 mt-4">
+                            <div class="col-md-6 px-2 mb-2">
                                 <label for="language" class="form-label" style="color:#42b979;">
-                                    <strong>Language Teaching
-                                        <span class="text-danger fs-4"
-                                            style="color:#42b979; vertical-align: middle;">*</span>
-                                    </strong>
+                                    <strong>Language Teaching</strong>
                                 </label>
                                 <select name="language" class="form-control" id="language">
                                     <option value="english">English</option>
@@ -389,12 +335,11 @@
                                     <option value="portuguese">Portuguese</option>
                                 </select>
                             </div>
-                            <div class="col-md-6">
+                        </div>
+                        <div class="form-row d-flex flex-column flex-md-row">
+                            <div class="col-md-6 px-2 mb-2">
                                 <label for="language_proficient" class="form-label" style="color:#42b979;">
-                                    <strong>Language Proficient
-                                        <span class="text-danger fs-4"
-                                            style="color:#42b979; vertical-align: middle;">*</span>
-                                    </strong>
+                                    <strong>Language Proficient</strong>
                                 </label>
                                 <select name="language_proficient" class="form-control select2"
                                     id="language_proficient">
@@ -408,30 +353,28 @@
                                     <!-- Add more languages as needed -->
                                 </select>
                             </div>
-
-                            <div class="col-md-6">
-                                <label for="qualification" class="form-label" style="color:#42b979;"><strong>Educational
-                                        Teaching <span class="text-danger fs-4"
-                                            style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
-                                <input type="text" class="form-control" id="other_qualification_input"
-                                    name="other_qualification_input"
-                                    style="border: 1px solid rgba(137, 135, 135, 0.5);" />
-                            </div>
                             <div class="col-md-6 px-2 mb-2">
-                                <label for="experience" class="form-label" style="color:#42b979;"><strong>Experience (In
-                                        Teaching) <span class="text-danger fs-4"
-                                            style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
-                                <input type="number" min="0" class="form-control" id="experience" name="experience"
-                                    style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);">
+                                <label for="qualification" class="form-label" style="color:#42b979;"><strong>Educational
+                                        Teaching</strong></label>
+                                <input type="text" class="form-control" id="educationalTeaching"
+                                    name="educationalTeaching" style="border: 1px solid rgba(137, 135, 135, 0.5);" />
+                                <div style="text-align: left;color: red;"></div>
                             </div>
-
                         </div>
                         <div class="form-row d-flex flex-column flex-md-row">
-
+                            <div class="col-md-6 px-2 mb-2">
+                                <label for="experience" class="form-label" style="color:#42b979;"><strong>Experience (In
+                                        Teaching)</strong></label>
+                                <input type="number" min="0" class="form-control" id="experienceInTeaching"
+                                    name="experienceInTeaching"
+                                    style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);">
+                                <div style="text-align: left;color: red;"></div>
+                            </div>
+                        </div>
+                        <div class="form-row d-flex flex-column flex-md-row">
                             <div class="col-md-6 px-2 mb-2 d-none">
-                                <label for="whatsapp" class="form-label" style="color:#42b979;"><strong>WhatsApp Number
-                                        <span class="text-danger fs-4"
-                                            style="color:#42b979;vertical-align: middle; ">*</span></strong></label>
+                                <label for="whatsapp" class="form-label" style="color:#42b979;"><strong>WhatsApp
+                                        Number</strong></label>
                                 <input type="text" class="form-control" id="whatsapp" name="whatsapp"
                                     placeholder="e.g +92XXXXXXXXXX"
                                     style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);">
@@ -442,38 +385,14 @@
                         <div class="pg-1-heading">
                             <h3 class="fs-5 fw-bold py-3">You're Just One Step Away</h3>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-2">
-                                <label for="location" class="form-label " style="color:#42b979;"><strong>Country
-                                        Residence <span class="text-danger fs-4"
-                                            style="color:#42b979;vertical-align: middle;">*</span></strong></label>
-                                <select name="location" id="location" class="form-select " required
-                                    style="margin: 0 auto !important; width: 100%; height: 50px;border: 1px solid rgb(137, 135, 135);">
-                                    <option value="" class="text-justify">Select Country</option>
-                                    @foreach($countries as $code => $country)
-                                        <option value="{{ $code }}">{{ $country }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-6 px-2 mb-2">
-                                <label for="city" class="form-label" style="color:#42b979;"><strong>City <span
-                                            class="text-danger fs-4"
-                                            style="color:#42b979;vertical-align: middle;">*</span></strong></label>
-                                <select name="city" id="city" class="form-select"
-                                    style="border: 1px solid rgb(137, 135, 135);" required>
-                                    <option value="" style="color:#42b979;"><strong>Select City</strong></option>
-                                </select>
-                            </div>
-                        </div>
                         <input required type="email" name="c_email" placeholder="Email" class="inp-1 d-none"
                             style="border: 1px solid rgba(137, 135, 135, 0.5);" readonly>
 
                         <div class="form-row d-none flex-column flex-md-row">
 
                             <div class="col-md-12 px-2 mb-2">
-                                <label for="teaching" class="form-label" style="color:#42b979;"><strong>Available Time
-                                        <span class="text-danger fs-4"
-                                            style="color:#42b979;vertical-align: middle;">*</span></strong></label>
+                                <label for="teaching" class="form-label" style="color:#42b979;"><strong>Available
+                                        Time</strong></label>
                                 <select class="form-select" id="teaching" name="availability"
                                     style="border: 1px solid rgb(137, 135, 135);">
                                     <option selected>Select Time</option>
@@ -505,7 +424,7 @@
                         style="margin-right: 10px; white-space: nowrap;">
 
                     <!-- Next Button -->
-                    <input onclick="NextStep(this)" id="next-btn" type="button" value="Next  →"
+                    <input onclick="validateAndNextStep(this)" id="next-btn" type="button" value="Next  →"
                         class="ab p-2 btn-an rounded border-0 text-success hover-button bg_theme_green text-light fs-6 py-1 px-3 solid_btn"
                         style="white-space: nowrap;">
 
@@ -516,13 +435,88 @@
     </div>
 </div>
 
-
-
 @endsection
 @section('js')
 <script src="./js/tutor.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script>
+    const step1RequiredFields = ['f_name', 'l_name', 'password', 'c_password', 'profilePicture'];
+    // const step2RequiredFields = ['school_class', 'qualificationDocument', 'country', 'yearSelect', 'specialization', 'institution', 'other_qualification_input', 'teaching', 'language', 'language_proficient', 'educationalTeaching', 'experience',];
+    const step2RequiredFields = ['qualificationDocument', 'educationalTeaching', 'experienceInTeaching'];
+
+    function validateAndNextStep(button) {
+        if (validateForm()) {
+            NextStep(button);
+        }
+    }
+
+    function validateForm() {
+        let isValid = true;
+
+        if (stepCounter == 1) {
+            for (const field of step1RequiredFields) {
+                const element = document.getElementById(field);
+                const errorDiv = element.nextElementSibling;
+
+                if (!element.value.trim()) {
+                    isValid = false;
+                    element.style.border = '2px solid red';
+                    errorDiv.textContent = "Please fill this field"
+                } else {
+                    element.style.border = '';
+                    errorDiv.textContent = '';
+                }
+            }
+
+            const passwordElement = document.getElementById('password'); // Use string ID
+            const confirmPasswordElement = document.getElementById('c_password'); // Use string ID
+
+            if (passwordElement && confirmPasswordElement) {
+                if (passwordElement.value !== confirmPasswordElement.value) {
+                    console.log("passwordValue.value: ", passwordElement.value);
+                    console.log("confirmPasswordValue.value: ", confirmPasswordElement.value);
+                    isValid = false;
+                    alert('Passwords and Confirm Password must be same');
+                }
+            } else {
+                console.error("Password or confirm password element not found.");
+                isValid = false;
+            }
+        }
+
+        if (stepCounter == 2) {
+            for (const field of step2RequiredFields) {
+                const element = document.getElementById(field);
+                const errorDiv = element.nextElementSibling;
+
+                if (!element.value.trim()) {
+                    isValid = false;
+                    element.style.border = '2px solid red';
+                    errorDiv.textContent = "Please fill this field"
+                } else {
+                    element.style.border = '';
+                    errorDiv.textContent = '';
+                }
+            }
+        }
+
+        return isValid;
+    }
+</script>
+<script>
+    function togglePassword(inputId, button) {
+        const input = document.getElementById(inputId);
+        const eyeIcon = document.getElementById("eye-icon");
+
+        if (input.type === "password") {
+            input.type = "text";
+            eyeIcon.src = "/images/open_eye.png"; // Change to open-eye image
+        } else {
+            input.type = "password";
+            eyeIcon.src = "/images/closed_eye.png"; // Change back to closed-eye image
+        }
+    }
+
     function togglePassword2(inputId, button) {
         const input = document.getElementById(inputId);
         const eyeIconId = inputId === "c_password" ? "c-eye-icon" : "eye-icon"; // Determine which eye icon to target
@@ -545,20 +539,6 @@
             eyeIcon.src = "/images/open_eye.png"; // Change to open-eye image on focus
         } else {
             eyeIcon.src = "/images/closed_eye.png"; // Change back to closed-eye image on blur
-        }
-    }
-
-
-    function togglePassword(inputId, button) {
-        const input = document.getElementById(inputId);
-        const eyeIcon = document.getElementById("eye-icon");
-
-        if (input.type === "password") {
-            input.type = "text";
-            eyeIcon.src = "/images/open_eye.png"; // Change to open-eye image
-        } else {
-            input.type = "password";
-            eyeIcon.src = "/images/closed_eye.png"; // Change back to closed-eye image
         }
     }
 

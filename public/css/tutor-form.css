@@ -335,6 +335,22 @@ input[type="password"]::placeholder {
     color: #333;
 }
 
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    opacity: 0;
+    animation: fadeInUp 1s ease-in-out forwards;
+}
+
 .select2-dropdown.gender-custom-select2-templates-lang.select2-dropdown--below {
     width: 327px !important;
 }

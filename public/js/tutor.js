@@ -38,20 +38,17 @@ const showToast = (message, type = "info") => {
     }, 5000);
 };
 
-
 const NextStep = (button) => {
-    const totalSteps = 3; // Total number of steps
+    const totalSteps = 3; 
     if (stepCounter === totalSteps) {
         localStorage.removeItem("email");
         button.type = "submit"; // Make the button a submit button only on step 3
         return;
     }
-
     if (firstPageSearch.value.trim() !== "") {
         if (stepCounter === 1) {
             backBtn.classList.remove("d-none");
         }
-
         if (stepCounter < totalSteps) {
             // Hide the current step
             const currentStep = document.getElementById("page-" + stepCounter);
