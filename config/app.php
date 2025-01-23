@@ -30,7 +30,7 @@ return [
 
     'env' => env('APP_ENV', 'production'),
     'email_pass' => env('email_pass', 'DefaultValue'),
-    'email_username' => env('email_username', 'DefaultValue'),
+    'email_name' => env('email_name', 'DefaultValue'),
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
