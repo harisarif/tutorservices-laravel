@@ -52,8 +52,9 @@ class VerificationController extends Controller
                                 Thank you for signing up! Please verify your email by clicking the button below:
                             </p>
                             <p style='text-align: center; margin: 20px 0;'>
-                                <a href='https://bit.ly/4ayyfaU' style='background-color: #4CAF50; color: #fff; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;'>Verify Your Email</a>
-                            </p>
+                                
+                             <a href='https://bit.ly/4jm3MAS' style='background-color: #4CAF50; color: #fff; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;'>Verify Your Email</a>
+                                </p>
                             <p style='margin: 10px 0; font-size: 16px;'>
                                 If you did not sign up for an account, please ignore this email.
                             </p>
