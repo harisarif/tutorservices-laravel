@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Mail;
 use PHPMailer\PHPMailer\PHPMailer;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use App\Models\User;
+
 class VerificationController extends Controller
 {
     public function sendEmail(Request $request)
@@ -50,7 +52,7 @@ class VerificationController extends Controller
                                 Thank you for signing up! Please verify your email by clicking the button below:
                             </p>
                             <p style='text-align: center; margin: 20px 0;'>
-                                <a href='https://bit.ly/4jm3MAS' style='background-color: #4CAF50; color: #fff; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;'>Verify Your Email</a>
+                                <a href='https://bit.ly/4ayyfaU' style='background-color: #4CAF50; color: #fff; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;'>Verify Your Email</a>
                             </p>
                             <p style='margin: 10px 0; font-size: 16px;'>
                                 If you did not sign up for an account, please ignore this email.
@@ -150,5 +152,28 @@ function sendEmails($subject, $body, $to_name, $to_email)
         }
 
         return redirect()->route('verification.notice')->withErrors(['Invalid verification link']);
+    }
+
+    public function checkEmail(Request $request)
+    {
+        // Validate the email input
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        // Check if the email exists in the users table
+        $emailExists = User::where('email', $request->email)->exists();
+
+        if ($emailExists) {
+            return response()->json([
+                'error' => true,
+                'message' => 'This email is already registered.'
+            ], 400); // HTTP 400 for client-side error
+        }
+
+        return response()->json([
+            'error' => false,
+            'message' => 'This email is available.'
+        ]);
     }
 }

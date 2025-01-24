@@ -120,6 +120,7 @@ Route::delete('/blog/destroy-bulk', [BlogController::class, 'destroyBulk'])->nam
 Route::get('/verify-email', [VerificationController::class, 'show'])->name('verification.notice');
 Route::post('/send-verification-link', [VerificationController::class, 'sendLink'])->name('verification.send');
 Route::get('/verify/{token}', [VerificationController::class, 'verify'])->name('verification.verify');
+Route::post('/check-email', [VerificationController::class, 'checkEmail'])->name('check.email');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])

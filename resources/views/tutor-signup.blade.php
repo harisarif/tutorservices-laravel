@@ -96,6 +96,7 @@
                                 <input type="email" class="form-control email-field" id="email" name="email"
                                     style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135, 135, 0.5);"
                                     readonly>
+                                    <small class="error-message text-danger" style="display: block; margin-top: 5px; text-align:left;">This email is already registered.</small>
                             </div>
                             <div class="col-md-6 px-2 mb-2">
                                 <label for="phone" class="form-label" style="color:#42b979;">
@@ -565,12 +566,16 @@
         // Set the value of the hidden input
         document.getElementById('dob').value = dob;
     }
+
+
     $(document).ready(function () {
         var storedEmail = localStorage.getItem('email');
         if (storedEmail) {
             // Set the email input value to the stored email
             $('#email').val(storedEmail);
         }
+
+        
         // $('#location').select2();
         // $('#city').select2();
         // $('#school_class').select2();
@@ -630,6 +635,44 @@
             }
         });
     });
+
+    $(document).ready(function () {
+        var email = $('#email').val(); // Get the value of the email input field
+
+        if (email) {
+            $.ajax({
+                url: '/check-email', // Your Laravel route
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Add CSRF token here
+                },
+                data: {
+                    email: email
+                },
+                success: function (response) {
+                    if (!response.error) {
+                        // Remove any existing error message and show success message (if needed)
+                        $('#email').siblings('.error-message').remove();
+                    }
+                },
+                error: function (xhr) {
+                    if (xhr.responseJSON && xhr.responseJSON.error) {
+                        // Remove any existing error message
+                        $('#email').siblings('.error-message').remove();
+
+                        // Append the error message below the input field
+                        $('#email').after(
+                            '<small class="error-message text-danger" style="display: block; margin-top: 5px;text-align:left">' +
+                            xhr.responseJSON.message +
+                            '</small>'
+                        );
+                    }
+                }
+            });
+        }
+    });
+
+
 
     $(document).ready(function () {
         $('#country').select2({
