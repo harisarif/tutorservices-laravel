@@ -357,20 +357,109 @@
                                 <div style="text-align: left;color: red;"></div>
                             </div>
                         </div>
-                        <div class="form-row d-flex flex-column flex-md-row">
-                            <div class="col-md-6 px-2 mb-2">
-                                <label for="language_proficient" class="form-label" style="color:#42b979;">
-                                    <strong>Language Proficient</strong>
-                                </label>
-                                <select name="language_proficient" class="form-control select2"
-                                    id="language_proficient">
-                                    @foreach ($languages as $code => $name)
-                                        <option value="{{ $code }}">{{ $name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
 
+                        <!-- <div id="languages-container">
+                            <div class="form-row d-flex flex-column flex-md-row mb-4" id="language-row-1">
+                                <div class="col-md-6 px-2">
+                                    <label for="language_proficient" class="form-label" style="color:#42b979;">
+                                        <strong>Language Proficient</strong>
+                                    </label>
+                                    <select name="language_proficient[]" class="form-control rounded-md"
+                                        id="language_proficient_1">
+                                        @foreach ($languages as $code => $name)
+                                            <option value="{{ $code }}" selected>{{ $name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-md-5 px-2">
+                                    <label for="language_level" class="form-label" style="color:#42b979;">
+                                        <strong>Level</strong>
+                                    </label>
+                                    <select name="language_level[]" class="form-control select2 rounded-md"
+                                        id="language_level_1">
+                                        <option value="">Select Level</option>
+                                        <option value="A1">A1</option>
+                                        <option value="A2">A2</option>
+                                        <option value="B1">B1</option>
+                                        <option value="B2">B2</option>
+                                        <option value="C1">C1</option>
+                                        <option value="C2">C2</option>
+                                        <option value="native">Native</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-2 px-2 mb-2 flex items-center justify-center"
+                                    id="delete-btn-container-1">
+                                </div>
+                            </div>
                         </div>
+
+                        <div class="text-left mx-2" style="text-align: left;">
+                            <button type="button"
+                                class="add-language-btn border-0 bg-transparent text-decoration-underline"
+                                onclick="addLanguageField()" style="color:#42b979;">
+                                Add Another Language
+                            </button>
+                        </div> -->
+
+                        <div id="languages-container">
+                            <div class="form-row d-flex flex-column flex-md-row mb-4" id="language-row-1">
+                                <div class="col-md-6 px-2">
+                                    <label for="language_proficient" class="form-label" style="color:#42b979;">
+                                        <strong>Language Proficient</strong>
+                                    </label>
+                                    <div class="position-relative">
+                                        <select name="language_proficient[]" class="form-control rounded-md pr-5"
+                                            id="language_proficient_1" onchange="toggleArrow(this)">
+                                            <option value="" disabled selected>Select Language</option>
+                                            @foreach ($languages as $code => $name)
+                                                <option value="{{ $code }}">{{ $name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <i class="fas fa-chevron-down position-absolute"
+                                            style="right: 10px; top: 50%; transform: translateY(-50%);"
+                                            id="arrow-1"></i>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-5 px-2">
+                                    <label for="language_level" class="form-label" style="color:#42b979;">
+                                        <strong>Level</strong>
+                                    </label>
+                                    <div class="position-relative">
+                                        <select name="language_level[]" class="form-control rounded-md pr-5"
+                                            id="language_level_1" onchange="toggleArrow(this)">
+                                            <option value="">Select Level</option>
+                                            <option value="A1">A1</option>
+                                            <option value="A2">A2</option>
+                                            <option value="B1">B1</option>
+                                            <option value="B2">B2</option>
+                                            <option value="C1">C1</option>
+                                            <option value="C2">C2</option>
+                                            <option value="native">Native</option>
+                                        </select>
+                                        <i class="fas fa-chevron-down position-absolute"
+                                            style="right: 10px; top: 50%; transform: translateY(-50%);"
+                                            id="arrow-2"></i>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2 px-2 mb-2 flex items-center justify-center"
+                                    id="delete-btn-container-1">
+                                    <!-- No delete button for the first row -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-left mx-2" style="text-align: left;">
+                            <button type="button"
+                                class="add-language-btn border-0 bg-transparent text-decoration-underline"
+                                onclick="addLanguageField()" style="color:#42b979;">
+                                Add Another Language
+                            </button>
+                        </div>
+
                         <div class="form-row d-flex flex-column flex-md-row">
                             <div class="col-md-6 px-2 mb-2 d-none">
                                 <label for="whatsapp" class="form-label" style="color:#42b979;"><strong>WhatsApp
@@ -389,7 +478,6 @@
                             style="border: 1px solid rgba(137, 135, 135, 0.5);" readonly>
 
                         <div class="form-row d-none flex-column flex-md-row">
-
                             <div class="col-md-12 px-2 mb-2">
                                 <label for="teaching" class="form-label" style="color:#42b979;"><strong>Available
                                         Time</strong></label>
@@ -438,6 +526,71 @@
 <script src="./js/tutor.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script>
+    let languageFieldCount = 1;
+
+    function addLanguageField() {
+        languageFieldCount++;
+
+        const newRow = document.createElement('div');
+        newRow.classList.add('form-row', 'd-flex', 'flex-column', 'flex-md-row', 'mb-4');
+        newRow.setAttribute('id', `language-row-${languageFieldCount}`);
+        newRow.innerHTML = `
+            <div class="col-md-6 px-2">
+                <div class="position-relative">
+                                        <select name="language_proficient[]" class="form-control rounded-md pr-5"
+                                            id="language_proficient_1" onchange="toggleArrow(this)">
+                                            <option value="" disabled selected>Select Language</option>
+                                            @foreach ($languages as $code => $name)
+                                                <option value="{{ $code }}" >{{ $name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <i class="fas fa-chevron-down position-absolute"
+                                            style="right: 10px; top: 50%; transform: translateY(-50%);"
+                                            id="arrow-1"></i>
+                                    </div>
+            </div>
+
+            <div class="col-md-5 px-2">
+                <div class="position-relative">
+                                        <select name="language_level[]" class="form-control rounded-md pr-5"
+                                            id="language_level_1" onchange="toggleArrow(this)">
+                                            <option value="">Select Level</option>
+                                            <option value="A1">A1</option>
+                                            <option value="A2">A2</option>
+                                            <option value="B1">B1</option>
+                                            <option value="B2">B2</option>
+                                            <option value="C1">C1</option>
+                                            <option value="C2">C2</option>
+                                            <option value="native">Native</option>
+                                        </select>
+                                        <i class="fas fa-chevron-down position-absolute"
+                                            style="right: 10px; top: 50%; transform: translateY(-50%);"
+                                            id="arrow-2"></i>
+                                    </div>
+            </div>
+
+            <div class="col-md-1 px-2 mb-2 flex items-center" id="delete-btn-container-${languageFieldCount}">
+                <button type="button" class="border-0 bg-transparent remove-language-btn text-red-500 px-3 py-2 rounded-full hover:bg-red-600 focus:outline-none" onclick="removeLanguageField(${languageFieldCount})" style="color:#42b979;">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        `;
+
+        // Append the new row
+        document.getElementById('languages-container').appendChild(newRow);
+
+        // Hide the delete button for the first row
+        if (languageFieldCount === 1) {
+            document.getElementById('delete-btn-container-1').style.display = 'none';
+        }
+    }
+
+    function removeLanguageField(id) {
+        const fieldToRemove = document.getElementById(`language-row-${id}`);
+        fieldToRemove.remove();
+    }
+</script>
 <script>
     const step1RequiredFields = ['f_name', 'l_name', 'password', 'c_password', 'profilePicture'];
     // const step2RequiredFields = ['school_class', 'qualificationDocument', 'country', 'yearSelect', 'specialization', 'institution', 'other_qualification_input', 'teaching', 'language', 'language_proficient', 'educationalTeaching', 'experience',];
