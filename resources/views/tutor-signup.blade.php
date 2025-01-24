@@ -23,10 +23,11 @@
 @endif
 @section('content')
 
-<header class="main_header d-flex bg-white py-2 px-3 justify-content-between align-items-center">
+<header class="main_header d-flex bg-white py-1 px-3 justify-content-between align-items-center"
+    style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
     <!-- Left Logo -->
     <a class="arrow" href="https://edexceledu.com">
-        <img src="{{ asset('images/logo.png') }}" alt="EDEXCEL-logo" height="50px">
+        <img src="{{ asset('images/logo.png') }}" alt="EDEXCEL-logo" height="40px">
     </a>
 
     <!-- Right Login Button -->
@@ -96,7 +97,9 @@
                                 <input type="email" class="form-control email-field" id="email" name="email"
                                     style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135, 135, 0.5);"
                                     readonly>
-                                    <small class="error-message text-danger" style="display: block; margin-top: 5px; text-align:left;">This email is already registered.</small>
+                                <small class="error-message text-danger"
+                                    style="display: block; margin-top: 5px; text-align:left;">This email is already
+                                    registered.</small>
                             </div>
                             <div class="col-md-6 px-2 mb-2">
                                 <label for="phone" class="form-label" style="color:#42b979;">
@@ -339,20 +342,12 @@
                         </div>
                         <div class="form-row d-flex flex-column flex-md-row">
                             <div class="col-md-6 px-2 mb-2">
-                                <label for="language_proficient" class="form-label" style="color:#42b979;">
-                                    <strong>Language Proficient</strong>
-                                </label>
-                                <select name="language_proficient" class="form-control select2"
-                                    id="language_proficient">
-                                    <option value="english">English</option>
-                                    <option value="spanish">Spanish</option>
-                                    <option value="french">French</option>
-                                    <option value="german">German</option>
-                                    <option value="chinese">Chinese</option>
-                                    <option value="italian">Italian</option>
-                                    <option value="portuguese">Portuguese</option>
-                                    <!-- Add more languages as needed -->
-                                </select>
+                                <label for="experience" class="form-label" style="color:#42b979;"><strong>Experience (In
+                                        Teaching)</strong></label>
+                                <input type="number" min="0" class="form-control" id="experienceInTeaching"
+                                    name="experienceInTeaching"
+                                    style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);">
+                                <div style="text-align: left;color: red;"></div>
                             </div>
                             <div class="col-md-6 px-2 mb-2">
                                 <label for="qualification" class="form-label" style="color:#42b979;"><strong>Educational
@@ -364,13 +359,17 @@
                         </div>
                         <div class="form-row d-flex flex-column flex-md-row">
                             <div class="col-md-6 px-2 mb-2">
-                                <label for="experience" class="form-label" style="color:#42b979;"><strong>Experience (In
-                                        Teaching)</strong></label>
-                                <input type="number" min="0" class="form-control" id="experienceInTeaching"
-                                    name="experienceInTeaching"
-                                    style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);">
-                                <div style="text-align: left;color: red;"></div>
+                                <label for="language_proficient" class="form-label" style="color:#42b979;">
+                                    <strong>Language Proficient</strong>
+                                </label>
+                                <select name="language_proficient" class="form-control select2"
+                                    id="language_proficient">
+                                    @foreach ($languages as $code => $name)
+                                        <option value="{{ $code }}">{{ $name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
+
                         </div>
                         <div class="form-row d-flex flex-column flex-md-row">
                             <div class="col-md-6 px-2 mb-2 d-none">
@@ -417,20 +416,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 my-4 d-flex justify-content-center"
-                    style="margin-bottom: 1rem !important; padding-top:20px">
+                <div class="col-12 my-4 d-flex justify-content-between align-items-center"
+                    style="padding-top: 20px; position: relative;">
                     <!-- Previous Button -->
-                    <input onclick="backStep(this)" id="back-btn" type="button" value="←  Previous"
-                        class="ab p-2 btn-an rounded border-0 text-success hover-button bg-body-secondary text-dark fs-6 py-1 px-3 d-none solid_btn"
-                        style="margin-right: 10px; white-space: nowrap;">
+                    <input onclick="backStep(this)" id="back-btn" type="button" value="← Previous"
+                        class="btn previous-btn p-2 rounded border-0 text-success bg-body-secondary text-dark fs-6 py-1 px-3 ml-5"
+                        style="display: none;margin-left:22px">
 
                     <!-- Next Button -->
-                    <input onclick="validateAndNextStep(this)" id="next-btn" type="button" value="Next  →"
-                        class="ab p-2 btn-an rounded border-0 text-success hover-button bg_theme_green text-light fs-6 py-1 px-3 solid_btn"
-                        style="white-space: nowrap;">
-
+                    <input onclick="validateAndNextStep(this)" id="next-btn" type="button" value="Next →"
+                        class="btn next-btn p-2 rounded border-0 text-light bg_theme_green fs-6 py-1 px-3"
+                        style="margin-right: 22px">
                 </div>
-
             </form>
         </div>
     </div>
@@ -439,6 +436,7 @@
 @endsection
 @section('js')
 <script src="./js/tutor.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script>
     const step1RequiredFields = ['f_name', 'l_name', 'password', 'c_password', 'profilePicture'];
@@ -454,52 +452,67 @@
     function validateForm() {
         let isValid = true;
 
-        if (stepCounter == 1) {
-            for (const field of step1RequiredFields) {
-                const element = document.getElementById(field);
-                const errorDiv = element.nextElementSibling;
+        // if (stepCounter == 1) {
+        //     for (const field of step1RequiredFields) {
+        //         const element = document.getElementById(field);
+        //         const errorDiv = element.nextElementSibling;
 
-                if (!element.value.trim()) {
-                    isValid = false;
-                    element.style.border = '2px solid red';
-                    errorDiv.textContent = "Please fill this field"
-                } else {
-                    element.style.border = '';
-                    errorDiv.textContent = '';
-                }
-            }
+        //         if (!element.value.trim()) {
+        //             isValid = false;
+        //             element.style.border = '2px solid red';
+        //             errorDiv.textContent = "Please fill this field"
+        //         } else {
+        //             element.style.border = '';
+        //             errorDiv.textContent = '';
+        //         }
+        //     }
 
-            const passwordElement = document.getElementById('password'); // Use string ID
-            const confirmPasswordElement = document.getElementById('c_password'); // Use string ID
+        //     const passwordElement = document.getElementById('password'); // Use string ID
+        //     const confirmPasswordElement = document.getElementById('c_password'); // Use string ID
 
-            if (passwordElement && confirmPasswordElement) {
-                if (passwordElement.value !== confirmPasswordElement.value) {
-                    console.log("passwordValue.value: ", passwordElement.value);
-                    console.log("confirmPasswordValue.value: ", confirmPasswordElement.value);
-                    isValid = false;
-                    alert('Passwords and Confirm Password must be same');
-                }
-            } else {
-                console.error("Password or confirm password element not found.");
-                isValid = false;
-            }
-        }
+        //     if (passwordElement && confirmPasswordElement) {
+        //         if (passwordElement.value !== confirmPasswordElement.value) {
+        //             console.log("passwordValue.value: ", passwordElement.value);
+        //             console.log("confirmPasswordValue.value: ", confirmPasswordElement.value);
+        //             isValid = false;
+        //             Swal.fire({
+        //                 toast: true,
+        //                 icon: 'error',
+        //                 title: 'Passwords and Confirm Password must match',
+        //                 position: 'top-end',
+        //                 showConfirmButton: false,
+        //                 timer: 3000,
+        //                 timerProgressBar: true,
+        //                 didOpen: (toast) => {
+        //                     const title = toast.querySelector('.swal2-title'); // Select the title
+        //                     if (title) {
+        //                         title.style.fontSize = '14px'; // Make the text smaller
+        //                         title.style.fontWeight = 'normal'; // Ensure it's not bold
+        //                     }
+        //                 }
+        //             });
+        //         }
+        //     } else {
+        //         console.error("Password or confirm password element not found.");
+        //         isValid = false;
+        //     }
+        // }
 
-        if (stepCounter == 2) {
-            for (const field of step2RequiredFields) {
-                const element = document.getElementById(field);
-                const errorDiv = element.nextElementSibling;
+        // if (stepCounter == 2) {
+        //     for (const field of step2RequiredFields) {
+        //         const element = document.getElementById(field);
+        //         const errorDiv = element.nextElementSibling;
 
-                if (!element.value.trim()) {
-                    isValid = false;
-                    element.style.border = '2px solid red';
-                    errorDiv.textContent = "Please fill this field"
-                } else {
-                    element.style.border = '';
-                    errorDiv.textContent = '';
-                }
-            }
-        }
+        //         if (!element.value.trim()) {
+        //             isValid = false;
+        //             element.style.border = '2px solid red';
+        //             errorDiv.textContent = "Please fill this field"
+        //         } else {
+        //             element.style.border = '';
+        //             errorDiv.textContent = '';
+        //         }
+        //     }
+        // }
 
         return isValid;
     }
@@ -575,7 +588,7 @@
             $('#email').val(storedEmail);
         }
 
-        
+
         // $('#location').select2();
         // $('#city').select2();
         // $('#school_class').select2();

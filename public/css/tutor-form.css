@@ -350,6 +350,24 @@ input[type="password"]::placeholder {
     opacity: 0;
     animation: fadeInUp 1s ease-in-out forwards;
 }
+.previous-btn, .next-btn {
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    position: absolute;
+    top: 0;
+}
+
+.previous-btn {
+    left: 0; /* Align Previous button to the left */
+}
+
+.next-btn {
+    right: 0; /* Align Next button to the right */
+}
+
+.previous-btn:hover, .next-btn:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow */
+}
 
 .select2-dropdown.gender-custom-select2-templates-lang.select2-dropdown--below {
     width: 327px !important;
