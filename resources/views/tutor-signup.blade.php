@@ -203,16 +203,33 @@
                                     <option value="Both">Both</option>
                                 </select>
                             </div>
-                            <div class="col-md-6 px-2 mb-2">
-                                <label for="profilePicture" class="form-label" style="color:#42b979;">
-                                    <strong>Profile Picture</strong>
-                                </label>
-                                <input type="file" class="form-control" id="profilePicture" name="profileImage"
-                                    style="box-shadow: none; border: 1px solid rgba(137, 135, 135, 0.5);">
-                                <div style="text-align: left;color: red;"></div>
-                            </div>
-                        </div>
+<div class="col-md-6 px-2 mb-2">
+    <label for="profilePicture" class="form-label" style="color:#42b979;">
+        <strong>Profile Picture</strong>
+    </label>
+    <div class="upload-area" id="uploadArea" style="cursor: pointer; border: 2px dashed #42b979; padding: 20px; text-align: center;">
+        <input type="file" class="form-control d-none" id="profilePicture" name="profileImage" accept="image/*">
+        
+        <!-- Upload Icon and Text -->
+        <div class="upload-content">
+            <div class="upload-icon">
+                <i class="fas fa-cloud-upload-alt"></i>
+            </div>
+            <div class="upload-text">
+                <p class="mb-1">Click to upload or drag and drop</p>
+                <small>PNG, JPG or JPEG (max. 5MB)</small>
+            </div>
+        </div>
+        
+        <!-- Preview Area for Selected Image -->
+        <div id="imagePreview" class="mt-2 d-none" style="position: relative;">
+            <img id="previewImg" src="" alt="Preview" style="max-width: 100%; height: auto; border: 2px solid #42b979; border-radius: 8px;">
+            <button id="removeBtn" style="position: absolute; top: 5px; right: 5px; background-color: red; color: white; border: none; border-radius: 50%; padding: 5px;">X</button>
+        </div>
+    </div>
+</div>
                     </div>
+                    
                     <div class="d-none px-3 mx-3" id="page-2">
                         <div class="pg-1-heading">
                             <h3 class="fs-5 fw-bold py-1">2 Steps Left to Unlock Your Teaching Potential</h3>
@@ -357,52 +374,6 @@
                                 <div style="text-align: left;color: red;"></div>
                             </div>
                         </div>
-
-                        <!-- <div id="languages-container">
-                            <div class="form-row d-flex flex-column flex-md-row mb-4" id="language-row-1">
-                                <div class="col-md-6 px-2">
-                                    <label for="language_proficient" class="form-label" style="color:#42b979;">
-                                        <strong>Language Proficient</strong>
-                                    </label>
-                                    <select name="language_proficient[]" class="form-control rounded-md"
-                                        id="language_proficient_1">
-                                        @foreach ($languages as $code => $name)
-                                            <option value="{{ $code }}" selected>{{ $name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="col-md-5 px-2">
-                                    <label for="language_level" class="form-label" style="color:#42b979;">
-                                        <strong>Level</strong>
-                                    </label>
-                                    <select name="language_level[]" class="form-control select2 rounded-md"
-                                        id="language_level_1">
-                                        <option value="">Select Level</option>
-                                        <option value="A1">A1</option>
-                                        <option value="A2">A2</option>
-                                        <option value="B1">B1</option>
-                                        <option value="B2">B2</option>
-                                        <option value="C1">C1</option>
-                                        <option value="C2">C2</option>
-                                        <option value="native">Native</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-md-2 px-2 mb-2 flex items-center justify-center"
-                                    id="delete-btn-container-1">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="text-left mx-2" style="text-align: left;">
-                            <button type="button"
-                                class="add-language-btn border-0 bg-transparent text-decoration-underline"
-                                onclick="addLanguageField()" style="color:#42b979;">
-                                Add Another Language
-                            </button>
-                        </div> -->
-
                         <div id="languages-container">
                             <div class="form-row d-flex flex-column flex-md-row mb-4" id="language-row-1">
                                 <div class="col-md-6 px-2">
@@ -503,6 +474,65 @@
                                 style="box-shadow: none;border: 1px solid rgb(137, 135, 135);"></textarea>
                         </div>
                     </div>
+                    <div class="d-none mx-3" id="page-4">
+                    <div class="upload-section-video">
+                        <div class="pg-1-heading">
+                            <h3 class="fs-5 fw-bold py-3">You're Just One Step Away</h3>
+                        </div>
+
+                        <!-- Video Upload Section -->
+                        <div class="mb-4">
+                            <label class="form-label" style="color:#42b979;">
+                            <strong>Upload Your Introduction Video</strong>
+                            </label>
+                            
+                            <div class="video-container">
+                            <!-- Upload Area -->
+                            <div class="upload-box">
+                                <div class="upload-area-video" id="uploadAreaVideo">
+                                <input type="file" id="videoFile" name="videoFile" accept="video/*">
+                                
+                                <!-- Upload Content -->
+                                <div class="upload-content-video" id="uploadContent">
+                                    <div class="upload-icon-video">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    </div>
+                                    <div class="upload-text">
+                                    <p class="mb-1">Click to upload or drag and drop your video</p>
+                                    <small>MP4, WebM or OGG (max. 50MB)</small>
+                                    </div>
+                                </div>
+
+                                <!-- Loading Indicator -->
+                                <div class="loading" id="loadingIndicator">
+                                    <i class="fas fa-spinner fa-2x loading-spinner"></i>
+                                </div>
+                                
+                                <!-- Preview Container -->
+                                <div class="preview-container" id="previewContainer">
+                                    <video id="previewVideo" class="preview-video" controls>
+                                    Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                </div>
+                                
+                                <div class="error-message" id="errorMessage"></div>
+                                
+                                <button class="btn btn-outline-secondary w-100 remove-btn mt-3" id="removeButton">
+                                Remove Video
+                                </button>
+                            </div>
+
+                            <!-- Demo Video -->
+                            <div class="demo-box">
+                                <video class="demo-video" controls>
+                                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-12 my-4 d-flex justify-content-between align-items-center"
                     style="padding-top: 20px; position: relative;">
@@ -526,6 +556,141 @@
 <script src="./js/tutor.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script>
+
+document.getElementById("uploadArea").addEventListener("click", function() { 
+    document.getElementById("profilePicture").click(); // Image input ka trigger
+});
+
+document.getElementById("uploadAreaVideo").addEventListener("click", function() { 
+    document.getElementById("videoFile").click(); // Video input ka trigger
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const uploadArea = document.getElementById('uploadAreaVideo');
+  const fileInput = document.getElementById('videoFile');
+  const previewVideo = document.getElementById('previewVideo');
+  const previewContainer = document.getElementById('previewContainer');
+//   const errorMessage = document.getElementById('errorMessage');
+  const removeButton = document.getElementById('removeButton');
+  const uploadContent = document.getElementById('uploadContent');
+  const loadingIndicator = document.getElementById('loadingIndicator');
+
+  // Handle click on upload area
+  uploadArea.addEventListener('click', (e) => {
+    if (!previewVideo.src) {
+      fileInput.click();
+    }
+  });
+
+  // Handle drag and drop
+  uploadArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    if (!previewVideo.src) {
+      uploadArea.style.borderColor = '#198754';
+    }
+  });
+
+  uploadArea.addEventListener('dragleave', () => {
+    uploadArea.style.borderColor = '#42b979';
+  });
+
+  uploadArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    if (!previewVideo.src) {
+      uploadArea.style.borderColor = '#42b979';
+      fileInput.files = e.dataTransfer.files;
+      handleFile(e.dataTransfer.files[0]);
+    }
+  });
+
+  // Handle file selection
+  fileInput.addEventListener('change', (e) => {
+    handleFile(e.target.files[0]);
+  });
+
+  // Remove button click handler
+  removeButton.addEventListener('click', () => {
+    resetUpload();
+  });
+
+  function handleFile(file) {
+    errorMessage.style.display = 'none';
+    
+    if (!file) {
+      resetUpload();
+      return;
+    }
+
+    // Validate file type
+    if (!file.type.startsWith('video/')) {
+      showError('Please upload a video file');
+      return;
+    }
+
+    // Validate file size (max 50MB)
+    if (file.size > 50 * 1024 * 1024) {
+      showError('Video must be less than 50MB');
+      return;
+    }
+
+    // Show loading
+    loadingIndicator.style.display = 'block';
+    uploadContent.style.display = 'none';
+
+    // Show preview
+    const videoURL = URL.createObjectURL(file);
+    previewVideo.src = videoURL;
+    
+    previewVideo.onloadeddata = () => {
+      loadingIndicator.style.display = 'none';
+      previewContainer.style.display = 'block';
+      removeButton.style.display = 'block';
+    };
+  }
+
+  function showError(message) {
+    errorMessage.textContent = message;
+    errorMessage.style.display = 'block';
+    resetUpload();
+  }
+
+  function resetUpload() {
+    fileInput.value = '';
+    previewVideo.src = '';
+    previewContainer.style.display = 'none';
+    uploadContent.style.display = 'block';
+    // removeButton.style.display = 'none';
+    loadingIndicator.style.display = 'none';
+  }
+});
+</script>
+<script>
+    // Event listener for file input change
+    document.getElementById("profilePicture").addEventListener("change", function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const previewImg = document.getElementById("previewImg");
+                const imagePreview = document.getElementById("imagePreview");
+                const removeBtn = document.getElementById("removeBtn");
+
+                // Display the image preview
+                previewImg.src = event.target.result;
+                imagePreview.classList.remove("d-none");
+
+                // Remove image preview when the remove button is clicked
+                removeBtn.addEventListener("click", function() {
+                    document.getElementById("profilePicture").value = ''; // Clear the file input
+                    imagePreview.classList.add("d-none"); // Hide preview
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
 <script>
     let languageFieldCount = 1;
 
@@ -592,7 +757,7 @@
     }
 </script>
 <script>
-    const step1RequiredFields = ['f_name', 'l_name', 'password', 'c_password', 'profilePicture'];
+    const step1RequiredFields = ['f_name', 'l_name', 'password', 'c_password'];
     // const step2RequiredFields = ['school_class', 'qualificationDocument', 'country', 'yearSelect', 'specialization', 'institution', 'other_qualification_input', 'teaching', 'language', 'language_proficient', 'educationalTeaching', 'experience',];
     const step2RequiredFields = ['qualificationDocument', 'educationalTeaching', 'experienceInTeaching'];
 
@@ -619,6 +784,28 @@
                     errorDiv.textContent = '';
                 }
             }
+
+            // Profile Image Validation
+    const profilePictureInput = document.getElementById("profilePicture");
+    if (!profilePictureInput.files.length) {
+        isValid = false;
+        Swal.fire({
+            toast: true,
+            icon: 'error',
+            title: 'Profile Image must be uploaded',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                const title = toast.querySelector('.swal2-title');
+                if (title) {
+                    title.style.fontSize = '14px';
+                    title.style.fontWeight = 'normal';
+                }
+            }
+        });
+    }
 
             const passwordElement = document.getElementById('password'); // Use string ID
             const confirmPasswordElement = document.getElementById('c_password'); // Use string ID
@@ -651,21 +838,21 @@
             }
         }
 
-        if (stepCounter == 2) {
-            for (const field of step2RequiredFields) {
-                const element = document.getElementById(field);
-                const errorDiv = element.nextElementSibling;
+        // if (stepCounter == 2) {
+        //     for (const field of step2RequiredFields) {
+        //         const element = document.getElementById(field);
+        //         const errorDiv = element.nextElementSibling;
 
-                if (!element.value.trim()) {
-                    isValid = false;
-                    element.style.border = '2px solid red';
-                    errorDiv.textContent = "Please fill this field"
-                } else {
-                    element.style.border = '';
-                    errorDiv.textContent = '';
-                }
-            }
-        }
+        //         if (!element.value.trim()) {
+        //             isValid = false;
+        //             element.style.border = '2px solid red';
+        //             errorDiv.textContent = "Please fill this field"
+        //         } else {
+        //             element.style.border = '';
+        //             errorDiv.textContent = '';
+        //         }
+        //     }
+        // }
 
         return isValid;
     }

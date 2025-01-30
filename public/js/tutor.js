@@ -39,7 +39,7 @@ const showToast = (message, type = "info") => {
 };
 
 const NextStep = (button) => {
-    const totalSteps = 3;
+    const totalSteps = 4;
 
     if (stepCounter === totalSteps) {
         localStorage.removeItem("email");
@@ -80,7 +80,7 @@ const NextStep = (button) => {
 };
 
 const backStep = (button) => {
-    const totalSteps = 3;
+    const totalSteps = 4;
 
     if (stepCounter > 1) {
         // Hide the current step
