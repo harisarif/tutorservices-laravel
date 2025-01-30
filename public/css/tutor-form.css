@@ -636,3 +636,116 @@ input[type="password"]::placeholder {
         width: 345px !important;
     }
 }
+
+.steps-container {
+    display: flex;
+    justify-content: center; /* Center align */
+    margin-top: 20px;
+    background-color: #f8f9fa;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.steps-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.step-item {
+    display: flex;
+    align-items: center;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.step-item:not(:last-child)::after {
+    content: '›';
+    margin: 0 10px;
+    color: #6c757d;
+    font-size: 16px;
+}
+
+.step-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 8px;
+    font-size: 12px;
+}
+
+.step-completed .step-icon {
+    background-color: #000;
+    color: #fff;
+}
+
+.step-current .step-icon {
+    background-color: #000;
+    color: #fff;
+}
+
+.step-upcoming .step-icon {
+    background-color: transparent;
+    border: 1px solid #6c757d;
+    color: #6c757d;
+}
+
+/* .step-space {
+    margin-right: 20px; /* Increased space */
+    margin-left: 30px;
+} */
+
+.step-completed .step-text,
+.step-current .step-text {
+    color: #000;
+    font-weight: 500;
+}
+
+/* Progress bar styling */
+.progress {
+    height: 4px;
+    margin-top: 15px;
+    background-color: #e9ecef;
+}
+
+.progress-bar {
+    background-color: #42b979;
+    transition: width 0.3s ease;
+}
+
+/* Navigation buttons */
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.btn-prev {
+    color: #198754;
+    background-color: #f8f9fa;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 4px;
+}
+
+.btn-next {
+    color: #fff;
+    background-color: #42b979;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 4px;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}

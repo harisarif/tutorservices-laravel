@@ -1,15 +1,14 @@
-let stepCounter = 1;
+
 let persentage = 100 / 3;
-const backBtn = document.getElementById("back-btn");
-const nextBtn = document.getElementById("next-btn");
 const classStartTime = document.getElementById("classStartTime");
 const classEndTime = document.getElementById("classEndTime");
-const stepPersentage = document.getElementsByClassName("percentage")[0];
-const persentage_num = document.getElementsByClassName("persentage-num")[0];
-const firstPageSearch = document.getElementById("page1-search");
 let sEmail = document.querySelectorAll('input[type="email"]');
+let stepCounter = 1;
+let totalSteps = 4;
+const backBtn = document.getElementById("back-btn");
+const nextBtn = document.getElementById("next-btn");
+const firstPageSearch = document.getElementById("page1-search");
 
-// Toast display function
 const showToast = (message, type = "info") => {
     const toast = document.createElement("div");
     toast.classList.add("toast", type);
@@ -21,93 +20,119 @@ const showToast = (message, type = "info") => {
         toast.style.top = "350px"; 
     }
 
-    // Append the toast to the body
     document.body.appendChild(toast);
-
-    // Show the toast with fade-in
     setTimeout(() => {
         toast.classList.add("show");
     }, 300);
-
-    // Hide the toast after 3 seconds
+    
     setTimeout(() => {
         toast.classList.remove("show");
         setTimeout(() => {
             toast.remove();
-        }, 500); // Wait for the fade-out transition before removing it
+        }, 500);
     }, 5000);
 };
 
-const NextStep = (button) => {
-    const totalSteps = 4;
+const NextStep = (button) => { 
+    if (stepCounter < totalSteps) {
+        const currentStep = document.getElementById("page-" + stepCounter);
+        console.log("Before change - stepCounter:", stepCounter);
+        console.log("Before change - currentStep:", currentStep);
+        
+        const nextStep = document.getElementById("page-" + (stepCounter + 1));
+        console.log("Before change - nextStep:", nextStep);
 
-    if (stepCounter === totalSteps) {
-        localStorage.removeItem("email");
-        button.type = "submit"; // Make the button a submit button only on step 3
-        return;
-    }
-
-    if (firstPageSearch.value.trim() !== "") {
-        if (stepCounter === 1) {
-            document.getElementById("back-btn").style.display = "block"; // Show Previous button
-        }
-
-        if (stepCounter < totalSteps) {
-            // Hide the current step
-            const currentStep = document.getElementById("page-" + stepCounter);
+        // Ensure elements exist before updating
+        if (currentStep && nextStep) {
+            // Hide current step
             currentStep.classList.add("d-none");
+            console.log(`Added 'd-none' to page-${stepCounter}`);
 
-            // Show the next step
-            const nextStep = document.getElementById("page-" + (stepCounter + 1));
-            nextStep.classList.remove("d-none");
+            // Delay to allow DOM to update
+            setTimeout(() => {
+                // Show next step
+                nextStep.classList.remove("d-none");
+                console.log(`Removed 'd-none' from page-${stepCounter + 1}`);
+                console.log("After change - nextStep:", nextStep);
+                
+                stepCounter++;
 
-            stepCounter++;
+                console.log("After change - stepCounter:", stepCounter);
 
-            // Update the fraction display
-            persentage_num.innerHTML = `Step ${stepCounter}/${totalSteps}`;
+                // Update progress bar
+                const progress = (stepCounter / totalSteps) * 100;
+                console.log("Updated progress:", progress);
 
-            // Adjust the progress bar width
-            const progressFraction = (stepCounter / totalSteps) * 100;
-            stepPersentage.style.width = progressFraction + "%";
+                // Update step classes
+                const steps = document.querySelectorAll('.step-item');
+                console.log("Step Items Before Update:", steps);
 
-            // Change the button to 'Submit' on the last step
-            if (stepCounter === totalSteps) {
-                button.type = "submit";
-                button.value = "Submit";
-            }
+                steps.forEach((stepItem, index) => {
+                    if (index + 1 < stepCounter) {
+                        stepItem.className = 'step-item step-completed';
+                    } else if (index + 1 === stepCounter) {
+                        stepItem.className = 'step-item step-current';
+                    } else {
+                        stepItem.className = 'step-item step-upcoming';
+                    }
+                });
+
+                console.log("Step Items After Update:", steps);
+
+                // Change button to 'Submit' on the last step
+                if (stepCounter === totalSteps) {
+                    if (button) {
+                        button.type = "submit";
+                        button.value = "Submit";
+                    } else {
+                        console.error("Button is not defined.");
+                    }
+                }
+            }, 50); // Small delay to allow DOM updates
+        } else {
+            console.error("Error: Step elements not found in the DOM.");
         }
     }
 };
 
-const backStep = (button) => {
-    const totalSteps = 4;
-
+const backStep = () => {
     if (stepCounter > 1) {
-        // Hide the current step
-        const step = document.getElementById("page-" + stepCounter);
-        step.classList.add("d-none");
+        const currentStep = document.getElementById("page-" + stepCounter);
+        const previousStep = document.getElementById("page-" + (stepCounter - 1));
 
-        // Show the previous step
-        const backPage = document.getElementById("page-" + (stepCounter - 1));
-        backPage.classList.remove("d-none");
+        if (currentStep && previousStep) {
+            currentStep.classList.add("d-none");
+            previousStep.classList.remove("d-none");
 
-        stepCounter--;
+            stepCounter--;
 
-        // Update the fraction display
-        persentage_num.innerHTML = `Step ${stepCounter}/${totalSteps}`;
+            // Update progress bar
+            const progress = (stepCounter / totalSteps) * 100;
+            const progressBar = document.querySelector('.progress-bar');
+            if (progressBar) {
+                progressBar.style.width = progress + '%';
+            }
 
-        // Adjust the progress bar width
-        const progressFraction = (stepCounter / totalSteps) * 100;
-        stepPersentage.style.width = progressFraction + "%";
+            // Update step classes
+            const steps = document.querySelectorAll('.step-item');
+            steps.forEach((stepItem, index) => {
+                if (index + 1 < stepCounter) {
+                    stepItem.className = 'step-item step-completed';
+                } else if (index + 1 === stepCounter) {
+                    stepItem.className = 'step-item step-current';
+                } else {
+                    stepItem.className = 'step-item step-upcoming';
+                }
+            });
 
-        // Hide Previous button on the first step
-        if (stepCounter === 1) {
-            button.style.display = "none";
+            // Hide the back button on the first step
+            if (stepCounter === 1) {
+                backBtn.style.display = "none";
+            }
+
+            // Reset Next button to its default state
+            nextBtn.type = "button";
+            nextBtn.value = "Next →";
         }
-
-        // Reset Next button to its default state
-        const nextBtn = document.getElementById("next-btn");
-        nextBtn.type = "button";
-        nextBtn.value = "Next →";
     }
 };

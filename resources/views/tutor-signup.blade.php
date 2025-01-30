@@ -55,6 +55,36 @@
     </div>
 </div>
 
+<div class="steps-container">
+    <ul class="steps-list">
+        <li class="step-item step-upcoming step-first">
+            <span class="step-icon">
+                <i class="fas fa-check"></i>
+            </span>
+            <span class="step-text">Step 1</span>
+        </li>
+        <li class="step-item step-upcoming">
+            <span class="step-icon">
+                <i class="fas fa-check"></i>
+            </span>
+            <span class="step-text">Step 2</span>
+        </li>
+        <li class="step-item step-upcoming">
+            <span class="step-icon">
+                <i class="fas fa-check"></i>
+            </span>
+            <span class="step-text">Step 3</span>
+        </li>
+        <li class="step-item step-upcoming">
+            <span class="step-icon">
+                <i class="fas fa-check"></i>
+            </span>
+            <span class="step-text">Step 4</span>
+        </li>
+    </ul>
+</div>
+
+
 <div class="main-page col-12 bg-white col-md-10 mx-auto p-0 text-center" style="padding: 0px 10px 0px 10px;"><!--md-8-->
     <div class="row justify-content-center">
         <div class="col-lg-11 col-sm-4">
@@ -66,7 +96,7 @@
                 </div>
                 @csrf
                 <div>
-                    <div id="page-1" class="mx-3">
+                    <div  id="page-1" class="mx-3">
                         <div class="form-group d-none">
                             <input type="search" value="English" name="subject" class="form-control" id="page1-search"
                                 placeholder="Search" style="height:50px; border: 1px solid #ccc;">
@@ -203,31 +233,32 @@
                                     <option value="Both">Both</option>
                                 </select>
                             </div>
-<div class="col-md-6 px-2 mb-2">
-    <label for="profilePicture" class="form-label" style="color:#42b979;">
-        <strong>Profile Picture</strong>
-    </label>
-    <div class="upload-area" id="uploadArea" style="cursor: pointer; border: 2px dashed #42b979; padding: 20px; text-align: center;">
-        <input type="file" class="form-control d-none" id="profilePicture" name="profileImage" accept="image/*">
-        
-        <!-- Upload Icon and Text -->
-        <div class="upload-content">
-            <div class="upload-icon">
-                <i class="fas fa-cloud-upload-alt"></i>
-            </div>
-            <div class="upload-text">
-                <p class="mb-1">Click to upload or drag and drop</p>
-                <small>PNG, JPG or JPEG (max. 5MB)</small>
-            </div>
-        </div>
-        
-        <!-- Preview Area for Selected Image -->
-        <div id="imagePreview" class="mt-2 d-none" style="position: relative;">
-            <img id="previewImg" src="" alt="Preview" style="max-width: 100%; height: auto; border: 2px solid #42b979; border-radius: 8px;">
-            <button id="removeBtn" style="position: absolute; top: 5px; right: 5px; background-color: red; color: white; border: none; border-radius: 50%; padding: 5px;">X</button>
-        </div>
-    </div>
-</div>
+                            <div class="col-md-6 px-2 mb-2">
+                                <label for="profilePicture" class="form-label" style="color:#42b979;">
+                                    <strong>Profile Picture</strong>
+                                </label>
+                                <div class="upload-area" id="uploadArea" style="cursor: pointer; border: 2px dashed #42b979; padding: 20px; text-align: center;">
+                                    <input type="file" class="form-control d-none" id="profilePicture" name="profileImage" accept="image/*">
+                                    
+                                    <!-- Upload Icon and Text -->
+                                    <div class="upload-content">
+                                        <div class="upload-icon">
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                        </div>
+                                        <div class="upload-text">
+                                            <p class="mb-1">Click to upload or drag and drop</p>
+                                            <small>PNG, JPG or JPEG (max. 5MB)</small>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Preview Area for Selected Image -->
+                                    <div id="imagePreview" class="mt-2 d-none" style="position: relative;">
+                                        <img id="previewImg" src="" alt="Preview" style="max-width: 100%; height: auto; border: 2px solid #42b979; border-radius: 8px;">
+                                        <button id="removeBtn" style="position: absolute; top: 5px; right: 5px; background-color: red; color: white; border: none; border-radius: 50%; padding: 5px;">X</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="d-none px-3 mx-3" id="page-2">
@@ -329,7 +360,7 @@
                             <div class="col-md-6 px-2 mb-2">
                                 <label for="teaching" class="form-label" style="color:#42b979;"><strong>Subject You Can
                                         Teach</strong></label>
-                                <select class="form-select teaching" id="teaching" name="teaching[]"
+                                <select class="form-select teaching" id="teachingSubjects" name="teaching[]"
                                     style="border: 1px solid rgba(137, 135, 135, 0.5);">
                                     <option value="english">English</option>
                                     <option value="maths">Mathematics</option>
@@ -558,6 +589,110 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script>
 
+let currentStep = 1;
+
+    function validateAndNextStep(button) {
+        if (validateForm()) {
+            console.log(`currentStep: page-${currentStep}`);
+            NextStep(currentStep)
+        }
+    }
+
+    const step1RequiredFields = ['f_name', 'l_name', 'password', 'c_password'];
+    const step2RequiredFields = ['qualificationDocument', 'educationalTeaching', 'experienceInTeaching'];
+
+    function validateForm() {
+        let isValid = true;
+
+    //     if (stepCounter == 1) {
+    //         for (const field of step1RequiredFields) {
+    //             const element = document.getElementById(field);
+    //             const errorDiv = element.nextElementSibling;
+
+    //             if (!element.value.trim()) {
+    //                 isValid = false;
+    //                 element.style.border = '2px solid red';
+    //                 errorDiv.textContent = "Please fill this field"
+    //             } else {
+    //                 element.style.border = '';
+    //                 errorDiv.textContent = '';
+    //             }
+    //         }
+
+    //         // Profile Image Validation
+    // const profilePictureInput = document.getElementById("profilePicture");
+    // if (!profilePictureInput.files.length) {
+    //     isValid = false;
+    //     Swal.fire({
+    //         toast: true,
+    //         icon: 'error',
+    //         title: 'Profile Image must be uploaded',
+    //         position: 'top-end',
+    //         showConfirmButton: false,
+    //         timer: 3000,
+    //         timerProgressBar: true,
+    //         didOpen: (toast) => {
+    //             const title = toast.querySelector('.swal2-title');
+    //             if (title) {
+    //                 title.style.fontSize = '14px';
+    //                 title.style.fontWeight = 'normal';
+    //             }
+    //         }
+    //     });
+    // }
+
+    //         const passwordElement = document.getElementById('password'); // Use string ID
+    //         const confirmPasswordElement = document.getElementById('c_password'); // Use string ID
+
+    //         if (passwordElement && confirmPasswordElement) {
+    //             if (passwordElement.value !== confirmPasswordElement.value) {
+    //                 console.log("passwordValue.value: ", passwordElement.value);
+    //                 console.log("confirmPasswordValue.value: ", confirmPasswordElement.value);
+    //                 isValid = false;
+    //                 Swal.fire({
+    //                     toast: true,
+    //                     icon: 'error',
+    //                     title: 'Passwords and Confirm Password must match',
+    //                     position: 'top-end',
+    //                     showConfirmButton: false,
+    //                     timer: 3000,
+    //                     timerProgressBar: true,
+    //                     didOpen: (toast) => {
+    //                         const title = toast.querySelector('.swal2-title'); // Select the title
+    //                         if (title) {
+    //                             title.style.fontSize = '14px'; // Make the text smaller
+    //                             title.style.fontWeight = 'normal'; // Ensure it's not bold
+    //                         }
+    //                     }
+    //                 });
+    //             }
+    //         } else {
+    //             console.error("Password or confirm password element not found.");
+    //             isValid = false;
+    //         }
+    //     }
+
+        // if (stepCounter == 2) {
+        //     for (const field of step2RequiredFields) {
+        //         const element = document.getElementById(field);
+        //         const errorDiv = element.nextElementSibling;
+
+        //         if (!element.value.trim()) {
+        //             isValid = false;
+        //             element.style.border = '2px solid red';
+        //             errorDiv.textContent = "Please fill this field"
+        //         } else {
+        //             element.style.border = '';
+        //             errorDiv.textContent = '';
+        //         }
+        //     }
+        // }
+
+        return isValid;
+    }
+</script>
+<script>
+
 document.getElementById("uploadArea").addEventListener("click", function() { 
     document.getElementById("profilePicture").click(); // Image input ka trigger
 });
@@ -754,107 +889,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function removeLanguageField(id) {
         const fieldToRemove = document.getElementById(`language-row-${id}`);
         fieldToRemove.remove();
-    }
-</script>
-<script>
-    const step1RequiredFields = ['f_name', 'l_name', 'password', 'c_password'];
-    // const step2RequiredFields = ['school_class', 'qualificationDocument', 'country', 'yearSelect', 'specialization', 'institution', 'other_qualification_input', 'teaching', 'language', 'language_proficient', 'educationalTeaching', 'experience',];
-    const step2RequiredFields = ['qualificationDocument', 'educationalTeaching', 'experienceInTeaching'];
-
-    function validateAndNextStep(button) {
-        if (validateForm()) {
-            NextStep(button);
-        }
-    }
-
-    function validateForm() {
-        let isValid = true;
-
-        if (stepCounter == 1) {
-            for (const field of step1RequiredFields) {
-                const element = document.getElementById(field);
-                const errorDiv = element.nextElementSibling;
-
-                if (!element.value.trim()) {
-                    isValid = false;
-                    element.style.border = '2px solid red';
-                    errorDiv.textContent = "Please fill this field"
-                } else {
-                    element.style.border = '';
-                    errorDiv.textContent = '';
-                }
-            }
-
-            // Profile Image Validation
-    const profilePictureInput = document.getElementById("profilePicture");
-    if (!profilePictureInput.files.length) {
-        isValid = false;
-        Swal.fire({
-            toast: true,
-            icon: 'error',
-            title: 'Profile Image must be uploaded',
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                const title = toast.querySelector('.swal2-title');
-                if (title) {
-                    title.style.fontSize = '14px';
-                    title.style.fontWeight = 'normal';
-                }
-            }
-        });
-    }
-
-            const passwordElement = document.getElementById('password'); // Use string ID
-            const confirmPasswordElement = document.getElementById('c_password'); // Use string ID
-
-            if (passwordElement && confirmPasswordElement) {
-                if (passwordElement.value !== confirmPasswordElement.value) {
-                    console.log("passwordValue.value: ", passwordElement.value);
-                    console.log("confirmPasswordValue.value: ", confirmPasswordElement.value);
-                    isValid = false;
-                    Swal.fire({
-                        toast: true,
-                        icon: 'error',
-                        title: 'Passwords and Confirm Password must match',
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            const title = toast.querySelector('.swal2-title'); // Select the title
-                            if (title) {
-                                title.style.fontSize = '14px'; // Make the text smaller
-                                title.style.fontWeight = 'normal'; // Ensure it's not bold
-                            }
-                        }
-                    });
-                }
-            } else {
-                console.error("Password or confirm password element not found.");
-                isValid = false;
-            }
-        }
-
-        // if (stepCounter == 2) {
-        //     for (const field of step2RequiredFields) {
-        //         const element = document.getElementById(field);
-        //         const errorDiv = element.nextElementSibling;
-
-        //         if (!element.value.trim()) {
-        //             isValid = false;
-        //             element.style.border = '2px solid red';
-        //             errorDiv.textContent = "Please fill this field"
-        //         } else {
-        //             element.style.border = '';
-        //             errorDiv.textContent = '';
-        //         }
-        //     }
-        // }
-
-        return isValid;
     }
 </script>
 <script>
