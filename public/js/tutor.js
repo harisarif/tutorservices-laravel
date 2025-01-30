@@ -57,6 +57,11 @@ const NextStep = (button) => {
                 
                 stepCounter++;
 
+                // Show Previous button for all steps except the first one
+                if (stepCounter > 1) {
+                    backBtn.style.display = "block";
+                }
+
                 console.log("After change - stepCounter:", stepCounter);
 
                 // Update progress bar
