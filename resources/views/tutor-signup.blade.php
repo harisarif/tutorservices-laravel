@@ -11,15 +11,15 @@
     onclick="window.scrollTo(0, 0)"><i class="fa fa-chevron-up"></i></button>
 @if ($errors->any())
 
-    <div class="alert alert-danger" id="close" style="">
-        <ul style="margin: 0; padding: 10px 0;">
-            @foreach ($errors->all() as $error)
-                <li style="display:flex; justify-content: space-between; align-items: center;">{{ $error }} <i
-                        class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true"></i></li>
+<div class="alert alert-danger" id="close" style="">
+    <ul style="margin: 0; padding: 10px 0;">
+        @foreach ($errors->all() as $error)
+        <li style="display:flex; justify-content: space-between; align-items: center;">{{ $error }} <i
+                class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true"></i></li>
 
-            @endforeach
-        </ul>
-    </div>
+        @endforeach
+    </ul>
+</div>
 @endif
 @section('content')
 
@@ -40,7 +40,7 @@
 <div class="container-fluid d-flex flex-row justify-content-center align-items-start main-banner">
     <div class="d-flex flex-column align-items-center justify-content-start gap-3 my-4">
         <div class="d-flex flex-column align-items-center justify-content-center gap-1 my-5 mx-5">
-            <h1 class="main-heading text-dark fw-bold my-2 banner-heading fade-in-up">
+            <h1 class="main-heading text-white fw-bold my-2 banner-heading fade-in-up">
                 Join The Community of Tutors
             </h1>
             <p class="subheading text-white mx-5 text-center fade-in-up" style="animation-delay: 0.9s;">
@@ -57,29 +57,29 @@
 
 <div class="steps-container">
     <ul class="steps-list">
-        <li class="step-item step-upcoming step-first">
+        <li class="step-item step-current step-first">
             <span class="step-icon">
                 <i class="fas fa-check"></i>
             </span>
-            <span class="step-text">Step 1</span>
+            <span class="step-text">Personalization</span>
         </li>
         <li class="step-item step-upcoming">
             <span class="step-icon">
                 <i class="fas fa-check"></i>
             </span>
-            <span class="step-text">Step 2</span>
+            <span class="step-text">Qualification</span>
         </li>
         <li class="step-item step-upcoming">
             <span class="step-icon">
                 <i class="fas fa-check"></i>
             </span>
-            <span class="step-text">Step 3</span>
+            <span class="step-text">Description</span>
         </li>
         <li class="step-item step-upcoming">
             <span class="step-icon">
                 <i class="fas fa-check"></i>
             </span>
-            <span class="step-text">Step 4</span>
+            <span class="step-text">Video</span>
         </li>
     </ul>
 </div>
@@ -96,7 +96,7 @@
                 </div>
                 @csrf
                 <div>
-                    <div  id="page-1" class="mx-3">
+                    <div id="page-1" class="mx-3">
                         <div class="form-group d-none">
                             <input type="search" value="English" name="subject" class="form-control" id="page1-search"
                                 placeholder="Search" style="height:50px; border: 1px solid #ccc;">
@@ -139,7 +139,7 @@
                                     <select class="form-select w-auto" id="countrySelect"
                                         style="border: 1px solid rgb(137, 135, 135); flex-shrink: 0;">
                                         @foreach ($countriesPhone as $key => $country)
-                                            <option value="{{ $key }}">{{ $country }}</option>
+                                        <option value="{{ $key }}">{{ $country }}</option>
                                         @endforeach
                                     </select>
                                     <input type="text" class="form-control" id="phone" name="phone"
@@ -162,7 +162,7 @@
                                         <button type="button" onclick="togglePassword('password', this)"
                                             style="position: absolute; right: 10px; top: 20px; transform: translateY(-50%); border: none; background: none; cursor: pointer;">
                                             <img id="eye-icon" src="{{ asset('images/closed_eye.png') }}" alt="eye icon"
-                                                style="height: 20px; width: 20px;" />
+                                                style="height: 20px; width: 20px;color:#42b979;" />
                                         </button>
                                     </div>
                                 </div>
@@ -221,7 +221,7 @@
                             </div>
                         </div>
                         <div class="form-row d-flex flex-column flex-md-row">
-                            <div class="choice col-md-6 px-2 mb-2">
+                            <div class="choice col-12 px-2 mb-2">
                                 <label for="experience" class="form-label" style="color:#42b979;">
                                     <strong>How We Can Help</strong>
                                 </label>
@@ -233,37 +233,44 @@
                                     <option value="Both">Both</option>
                                 </select>
                             </div>
-                            <div class="col-md-6 px-2 mb-2">
-                                <label for="profilePicture" class="form-label" style="color:#42b979;">
-                                    <strong>Profile Picture</strong>
-                                </label>
-                                <div class="upload-area" id="uploadArea" style="cursor: pointer; border: 2px dashed #42b979; padding: 20px; text-align: center;">
+                        </div>
+                        <div class="form-row d-flex flex-column flex-md-row gap-5">
+                            <!-- Upload Area (Left Side) -->
+                            <div class="px-2 mb-2 col-6 d-flex flex-column align-items-left">
+                                <label class="mb-2 fw-bold" style="color: #42b979; font-size: 18px;text-align: left;">Profile Picture</label>
+                                <div class="upload-area d-flex flex-column align-items-center justify-content-center" id="uploadArea"
+                                    style="cursor: pointer; border: 2px dashed #42b979; width: 400px; height: 400px; text-align: center;">
                                     <input type="file" class="form-control d-none" id="profilePicture" name="profileImage" accept="image/*">
-                                    
-                                    <!-- Upload Icon and Text -->
-                                    <div class="upload-content">
+                                    <div class="upload-content text-center">
                                         <div class="upload-icon">
-                                            <i class="fas fa-cloud-upload-alt"></i>
+                                            <i class="fas fa-cloud-upload-alt fa-2x"></i>
                                         </div>
                                         <div class="upload-text">
                                             <p class="mb-1">Click to upload or drag and drop</p>
                                             <small>PNG, JPG or JPEG (max. 5MB)</small>
                                         </div>
                                     </div>
-                                    
-                                    <!-- Preview Area for Selected Image -->
-                                    <div id="imagePreview" class="mt-2 d-none" style="position: relative;">
-                                        <img id="previewImg" src="" alt="Preview" style="max-width: 100%; height: auto; border: 2px solid #42b979; border-radius: 8px;">
-                                        <button id="removeBtn" style="position: absolute; top: 5px; right: 5px; background-color: red; color: white; border: none; border-radius: 50%; padding: 5px;">X</button>
-                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Preview Area (Right Side) -->
+                            <div class="px-2 mb-2 col-6 d-flex flex-column d-none" id="previewContainer">
+                                <label class="mb-2 fw-bold" style="color: #42b979; font-size: 18px;text-align: left;">Preview Picture</label>
+                                <div style="position: relative; border: 2px solid #42b979; border-radius: 8px; width: 400px; height: 400px;">
+                                    <img id="previewImg" src="" alt="Preview"
+                                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                                    <button id="removeBtn"
+                                        style="position: absolute; top: 5px; right: 5px; background-color: red; color: white; border: none; border-radius: 50%; padding: 5px;">
+                                        X
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="d-none px-3 mx-3" id="page-2">
                         <div class="pg-1-heading">
-                            <h3 class="fs-5 fw-bold py-1">2 Steps Left to Unlock Your Teaching Potential</h3>
+                            <!-- <h3 class="fs-5 fw-bold py-1">2 Steps Left to Unlock Your Teaching Potential</h3> -->
                         </div>
                         <div class="form-row d-flex flex-column flex-md-row">
                             <!-- Highest Qualification -->
@@ -274,7 +281,7 @@
                                 <select class="form-control school_class" id="school_class" name="qualification"
                                     style="border: 1px solid rgb(137, 135, 135);">
                                     @foreach($schoolClasses as $schoolClass)
-                                        <option value="{{ $schoolClass->id }}">{{ $schoolClass->name }}</option>
+                                    <option value="{{ $schoolClass->id }}">{{ $schoolClass->name }}</option>
                                     @endforeach
                                     <option value="">Others</option>
                                 </select>
@@ -302,7 +309,7 @@
                                         style="border: 1px solid rgb(137, 135, 135);">
                                         <option value="" disabled selected>Select Country</option>
                                         @foreach ($countriesPhone as $key => $country)
-                                            <option value="{{ $key }}">{{ $country }}</option>
+                                        <option value="{{ $key }}">{{ $country }}</option>
                                         @endforeach
                                     </select>
                                     <!-- Year Select -->
@@ -310,7 +317,7 @@
                                         style="border: 1px solid rgb(137, 135, 135);">
                                         <option value="" disabled selected>Select Year</option>
                                         @for ($i = date('Y'); $i >= 1900; $i--)
-                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        <option value="{{ $i }}">{{ $i }}</option>
                                         @endfor
                                     </select>
                                 </div>
@@ -416,7 +423,7 @@
                                             id="language_proficient_1" onchange="toggleArrow(this)">
                                             <option value="" disabled selected>Select Language</option>
                                             @foreach ($languages as $code => $name)
-                                                <option value="{{ $code }}">{{ $name }}</option>
+                                            <option value="{{ $code }}">{{ $name }}</option>
                                             @endforeach
                                         </select>
                                         <i class="fas fa-chevron-down position-absolute"
@@ -425,7 +432,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-5 px-2">
+                                <div class="col-md-6 px-2">
                                     <label for="language_level" class="form-label" style="color:#42b979;">
                                         <strong>Level</strong>
                                     </label>
@@ -474,7 +481,7 @@
                     </div>
                     <div class="d-none mx-3" id="page-3">
                         <div class="pg-1-heading">
-                            <h3 class="fs-5 fw-bold py-3">You're Just One Step Away</h3>
+                            <!-- <h3 class="fs-5 fw-bold py-3">You're Just One Step Away</h3> -->
                         </div>
                         <input required type="email" name="c_email" placeholder="Email" class="inp-1 d-none"
                             style="border: 1px solid rgba(137, 135, 135, 0.5);" readonly>
@@ -505,77 +512,76 @@
                                 style="box-shadow: none;border: 1px solid rgb(137, 135, 135);"></textarea>
                         </div>
                     </div>
-                    <div class="d-none mx-3" id="page-4">
-                    <div class="upload-section-video">
-                        <div class="pg-1-heading">
-                            <h3 class="fs-5 fw-bold py-3">You're Just One Step Away</h3>
-                        </div>
-
-                        <!-- Video Upload Section -->
-                        <div class="mb-4">
-                            <label class="form-label" style="color:#42b979;">
+                    <div class="d-none" id="page-4">
+                        <label class="form-label" style="color:#42b979;">
                             <strong>Upload Your Introduction Video</strong>
-                            </label>
-                            
-                            <div class="video-container">
-                            <!-- Upload Area -->
-                            <div class="upload-box">
-                                <div class="upload-area-video" id="uploadAreaVideo">
-                                <input type="file" id="videoFile" name="videoFile" accept="video/*">
-                                
-                                <!-- Upload Content -->
-                                <div class="upload-content-video" id="uploadContent">
-                                    <div class="upload-icon-video">
-                                    <i class="fas fa-cloud-upload-alt"></i>
-                                    </div>
-                                    <div class="upload-text">
-                                    <p class="mb-1">Click to upload or drag and drop your video</p>
-                                    <small>MP4, WebM or OGG (max. 50MB)</small>
-                                    </div>
-                                </div>
+                        </label>
 
-                                <!-- Loading Indicator -->
-                                <div class="loading" id="loadingIndicator">
-                                    <i class="fas fa-spinner fa-2x loading-spinner"></i>
+                        <!-- Row for Upload Section and Demo Video -->
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="upload-box mx-3">
+                                    <div class="upload-area-video" id="uploadAreaVideo">
+                                        <input type="file" id="videoFile" name="videoFile" accept="video/*">
+
+                                        <!-- Upload Content -->
+                                        <div class="upload-content-video" id="uploadVideoContent">
+                                            <div class="upload-icon-video">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                            </div>
+                                            <div class="upload-text">
+                                                <p class="mb-1">Click to upload or drag and drop your video</p>
+                                                <small>MP4, WebM or OGG (max. 50MB)</small>
+                                            </div>
+                                        </div>
+
+                                        <!-- Loading Indicator -->
+                                        <div class="loading" id="loadingVideoIndicator">
+                                            <i class="fas fa-spinner fa-2x loading-spinner"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="error-message" id="errorVideoMessage"></div>
+
+                                    <button class="btn btn-outline-secondary w-100 remove-btn mt-3" id="removeVideoButton">
+                                        Remove Video
+                                    </button>
                                 </div>
-                                
-                                <!-- Preview Container -->
-                                <div class="preview-container" id="previewContainer">
-                                    <video id="previewVideo" class="preview-video" controls>
-                                    Your browser does not support the video tag.
+                            </div>
+                            <div class="col-6">
+                                <div class="demo-box">
+                                    <video class="demo-video" controls>
+                                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
                                     </video>
                                 </div>
-                                </div>
-                                
-                                <div class="error-message" id="errorMessage"></div>
-                                
-                                <button class="btn btn-outline-secondary w-100 remove-btn mt-3" id="removeButton">
-                                Remove Video
-                                </button>
                             </div>
+                        </div>
 
-                            <!-- Demo Video -->
-                            <div class="demo-box">
-                                <video class="demo-video" controls>
-                                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                                </video>
-                            </div>
+                        <!-- Displaying the uploaded video in a row, full width (col-12) -->
+                        <div class="uploaded-video-row col-12 mt-4" id="uploadedVideoRow" style="display:none;">
+                            <div class="row">
+                                <div class="col-12">
+                                    <video class="uploaded-video" controls id="uploadedVideoPreview">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 my-4 d-flex justify-content-between align-items-center"
-                    style="padding-top: 20px; position: relative;">
-                    <!-- Previous Button -->
-                    <input onclick="backStep(this)" id="back-btn" type="button" value="← Previous"
-                        class="btn previous-btn p-2 rounded border-0 text-success bg-body-secondary text-dark fs-6 py-1 px-3 ml-5"
-                        style="display: none;margin-left:22px">
 
-                    <!-- Next Button -->
-                    <input onclick="validateAndNextStep(this)" id="next-btn" type="button" value="Next →"
-                        class="btn next-btn p-2 rounded border-0 text-light bg_theme_green fs-6 py-1 px-3"
-                        style="margin-right: 22px">
+                    <div class="col-12 my-4 d-flex justify-content-between align-items-center"
+                        style="padding-top: 20px; position: relative;">
+                        <!-- Previous Button -->
+                        <input onclick="backStep(this)" id="back-btn" type="button" value="← Previous"
+                            class="btn previous-btn p-2 rounded border-0 text-light bg_theme_green fs-6 py-1 px-3"
+                            style="display: none;margin-left:22px">
+
+                        <!-- Next Button -->
+                        <input onclick="validateAndNextStep(this)" id="next-btn" type="button" value="Next →"
+                            class="btn next-btn p-2 rounded border-0 text-light bg_theme_green fs-6 py-1 px-3"
+                            style="margin-right: 22px">
+                    </div>
                 </div>
             </form>
         </div>
@@ -588,8 +594,89 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let uploadArea = document.getElementById("uploadAreaVideo");
+        let fileInput = document.getElementById("videoFile");
+        let uploadedVideoRow = document.getElementById("uploadedVideoRow");
+        let uploadedVideoPreview = document.getElementById("uploadedVideoPreview");
+        let removeVideoButton = document.getElementById("removeVideoButton");
+        let loadingVideoIndicator = document.getElementById("loadingVideoIndicator");
+        let uploadVideoContent = document.getElementById("uploadVideoContent");
+        let errorVideoMessage = document.getElementById("errorVideoMessage");
 
-let currentStep = 1;
+        document.getElementById("uploadAreaVideo").addEventListener("click", function() {
+            document.getElementById("videoFile").click();
+        });
+
+        fileInput.addEventListener("change", (e) => {
+            handleFile(e.target.files[0]);
+        });
+
+        removeVideoButton.addEventListener("click", () => {
+            resetUpload();
+        });
+
+        function handleFile(file) {
+            errorVideoMessage.style.display = "none";
+
+            if (!file.type.startsWith("video/")) {
+                showError("Please upload a video file");
+                return;
+            }
+
+            if (file.size > 50 * 1024 * 1024) {
+                showError("Video must be less than 50MB");
+                return;
+            }
+
+            loadingVideoIndicator.style.display = "block";
+            const videoURL = URL.createObjectURL(file);
+            uploadedVideoPreview.src = videoURL;
+
+            uploadedVideoPreview.onloadeddata = () => {
+                loadingVideoIndicator.style.display = "none";
+                uploadedVideoRow.style.display = "block";
+            };
+        }
+
+        function showError(message) {
+            errorVideoMessage.textContent = message;
+            errorVideoMessage.style.display = "block";
+        }
+
+        function resetUpload() {
+            uploadedVideoPreview.src = "";
+            uploadedVideoPreview.load();
+            uploadedVideoRow.style.display = "none";
+            fileInput.value = "";
+        }
+    });
+</script>
+<script>
+    document.getElementById("uploadArea").addEventListener("click", function() {
+        document.getElementById("profilePicture").click();
+    });
+
+    document.getElementById("profilePicture").addEventListener("change", function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById("previewImg").src = e.target.result;
+                document.getElementById("previewContainer").classList.remove("d-none");
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    document.getElementById("removeBtn").addEventListener("click", function() {
+        document.getElementById("profilePicture").value = "";
+        document.getElementById("previewImg").src = "";
+        document.getElementById("previewContainer").classList.add("d-none");
+    });
+</script>
+<script>
+    let currentStep = 1;
 
     function validateAndNextStep(button) {
         if (validateForm()) {
@@ -620,26 +707,26 @@ let currentStep = 1;
             }
 
             // Profile Image Validation
-    const profilePictureInput = document.getElementById("profilePicture");
-    if (!profilePictureInput.files.length) {
-        isValid = false;
-        Swal.fire({
-            toast: true,
-            icon: 'error',
-            title: 'Profile Image must be uploaded',
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                const title = toast.querySelector('.swal2-title');
-                if (title) {
-                    title.style.fontSize = '14px';
-                    title.style.fontWeight = 'normal';
-                }
+            const profilePictureInput = document.getElementById("profilePicture");
+            if (!profilePictureInput.files.length) {
+                isValid = false;
+                Swal.fire({
+                    toast: true,
+                    icon: 'error',
+                    title: 'Profile Image must be uploaded',
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        const title = toast.querySelector('.swal2-title');
+                        if (title) {
+                            title.style.fontSize = '14px';
+                            title.style.fontWeight = 'normal';
+                        }
+                    }
+                });
             }
-        });
-    }
 
             const passwordElement = document.getElementById('password'); // Use string ID
             const confirmPasswordElement = document.getElementById('c_password'); // Use string ID
@@ -692,141 +779,6 @@ let currentStep = 1;
     }
 </script>
 <script>
-
-document.getElementById("uploadArea").addEventListener("click", function() { 
-    document.getElementById("profilePicture").click(); // Image input ka trigger
-});
-
-document.getElementById("uploadAreaVideo").addEventListener("click", function() { 
-    document.getElementById("videoFile").click(); // Video input ka trigger
-});
-
-
-document.addEventListener('DOMContentLoaded', function() {
-  const uploadArea = document.getElementById('uploadAreaVideo');
-  const fileInput = document.getElementById('videoFile');
-  const previewVideo = document.getElementById('previewVideo');
-  const previewContainer = document.getElementById('previewContainer');
-//   const errorMessage = document.getElementById('errorMessage');
-  const removeButton = document.getElementById('removeButton');
-  const uploadContent = document.getElementById('uploadContent');
-  const loadingIndicator = document.getElementById('loadingIndicator');
-
-  // Handle click on upload area
-  uploadArea.addEventListener('click', (e) => {
-    if (!previewVideo.src) {
-      fileInput.click();
-    }
-  });
-
-  // Handle drag and drop
-  uploadArea.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    if (!previewVideo.src) {
-      uploadArea.style.borderColor = '#198754';
-    }
-  });
-
-  uploadArea.addEventListener('dragleave', () => {
-    uploadArea.style.borderColor = '#42b979';
-  });
-
-  uploadArea.addEventListener('drop', (e) => {
-    e.preventDefault();
-    if (!previewVideo.src) {
-      uploadArea.style.borderColor = '#42b979';
-      fileInput.files = e.dataTransfer.files;
-      handleFile(e.dataTransfer.files[0]);
-    }
-  });
-
-  // Handle file selection
-  fileInput.addEventListener('change', (e) => {
-    handleFile(e.target.files[0]);
-  });
-
-  // Remove button click handler
-  removeButton.addEventListener('click', () => {
-    resetUpload();
-  });
-
-  function handleFile(file) {
-    errorMessage.style.display = 'none';
-    
-    if (!file) {
-      resetUpload();
-      return;
-    }
-
-    // Validate file type
-    if (!file.type.startsWith('video/')) {
-      showError('Please upload a video file');
-      return;
-    }
-
-    // Validate file size (max 50MB)
-    if (file.size > 50 * 1024 * 1024) {
-      showError('Video must be less than 50MB');
-      return;
-    }
-
-    // Show loading
-    loadingIndicator.style.display = 'block';
-    uploadContent.style.display = 'none';
-
-    // Show preview
-    const videoURL = URL.createObjectURL(file);
-    previewVideo.src = videoURL;
-    
-    previewVideo.onloadeddata = () => {
-      loadingIndicator.style.display = 'none';
-      previewContainer.style.display = 'block';
-      removeButton.style.display = 'block';
-    };
-  }
-
-  function showError(message) {
-    errorMessage.textContent = message;
-    errorMessage.style.display = 'block';
-    resetUpload();
-  }
-
-  function resetUpload() {
-    fileInput.value = '';
-    previewVideo.src = '';
-    previewContainer.style.display = 'none';
-    uploadContent.style.display = 'block';
-    // removeButton.style.display = 'none';
-    loadingIndicator.style.display = 'none';
-  }
-});
-</script>
-<script>
-    // Event listener for file input change
-    document.getElementById("profilePicture").addEventListener("change", function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const previewImg = document.getElementById("previewImg");
-                const imagePreview = document.getElementById("imagePreview");
-                const removeBtn = document.getElementById("removeBtn");
-
-                // Display the image preview
-                previewImg.src = event.target.result;
-                imagePreview.classList.remove("d-none");
-
-                // Remove image preview when the remove button is clicked
-                removeBtn.addEventListener("click", function() {
-                    document.getElementById("profilePicture").value = ''; // Clear the file input
-                    imagePreview.classList.add("d-none"); // Hide preview
-                });
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-</script>
-<script>
     let languageFieldCount = 1;
 
     function addLanguageField() {
@@ -871,9 +823,11 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <div class="col-md-1 px-2 mb-2 flex items-center" id="delete-btn-container-${languageFieldCount}">
-                <button type="button" class="border-0 bg-transparent remove-language-btn text-red-500 px-3 py-2 rounded-full hover:bg-red-600 focus:outline-none" onclick="removeLanguageField(${languageFieldCount})" style="color:#42b979;">
-                    <i class="fas fa-trash"></i>
-                </button>
+                <button type="button" class="border-0 bg-transparent remove-language-btn text-danger px-3 py-2 rounded-circle" 
+        onclick="removeLanguageField(1)" style="color:#42b979;">
+        <i class="fas fa-trash"></i>
+    </button>
+
             </div>
         `;
 
@@ -939,7 +893,6 @@ document.addEventListener('DOMContentLoaded', function() {
             eyeIcon.src = "/images/closed_eye.png"; // Change back to closed-eye image on blur
         }
     }
-
 </script>
 <script>
     function updateDob() {
@@ -955,7 +908,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         var storedEmail = localStorage.getItem('email');
         if (storedEmail) {
             // Set the email input value to the stored email
@@ -993,7 +946,7 @@ document.addEventListener('DOMContentLoaded', function() {
             multiple: true
         });
 
-        $('#location').on('change', function () {
+        $('#location').on('change', function() {
 
 
             var countryCode = $(this).val();
@@ -1003,15 +956,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 $.ajax({
                     url: '{{ route('cities') }}',
                     type: 'GET',
-                    data: { country: countryCode },
-                    success: function (data) {
+                    data: {
+                        country: countryCode
+                    },
+                    success: function(data) {
                         $citySelect.empty();
                         $citySelect.append('<option value="">Select City</option>');
-                        $.each(data, function (index, city) {
+                        $.each(data, function(index, city) {
                             $citySelect.append('<option value="' + city + '">' + city + '</option>');
                         });
                     },
-                    error: function () {
+                    error: function() {
                         $citySelect.empty();
                         $citySelect.append('<option value="">No cities available</option>');
                     }
@@ -1023,7 +978,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         var email = $('#email').val(); // Get the value of the email input field
 
         if (email) {
@@ -1036,13 +991,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 data: {
                     email: email
                 },
-                success: function (response) {
+                success: function(response) {
                     if (!response.error) {
                         // Remove any existing error message and show success message (if needed)
                         $('#email').siblings('.error-message').remove();
                     }
                 },
-                error: function (xhr) {
+                error: function(xhr) {
                     if (xhr.responseJSON && xhr.responseJSON.error) {
                         // Remove any existing error message
                         $('#email').siblings('.error-message').remove();
@@ -1061,7 +1016,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#country').select2({
             placeholder: 'Search country',
             allowClear: false,
@@ -1121,9 +1076,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 </script>
 <script>
-
-    $(document).ready(function () {
-        setTimeout(function () {
+    $(document).ready(function() {
+        setTimeout(function() {
             $(".alert").fadeOut("slow");
         }, 5000);
         $('#datepicker').datepicker({
@@ -1133,7 +1087,7 @@ document.addEventListener('DOMContentLoaded', function() {
             endDate: "0d"
         });
     });
-    $(document).ready(function () {
+    $(document).ready(function() {
         // Initialize Select2
 
         $('#countrySelect').select2({
@@ -1159,7 +1113,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Prevent users from clearing the prefix
-        userNumber.on('keydown', function (event) {
+        userNumber.on('keydown', function(event) {
             const prefix = userNumber.attr('data-prefix');
             const cursorPosition = this.selectionStart;
 
@@ -1175,7 +1129,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // Adjust input length based on the selected country
-        userNumber.on('input', function () {
+        userNumber.on('input', function() {
             const prefix = userNumber.attr('data-prefix');
             const maxLength = countriesNumberLength[countryValue];
             if (userNumber.val().length > maxLength) {
@@ -1184,7 +1138,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // Change the prefix when the country selection changes
-        country.on('change', function () {
+        country.on('change', function() {
             countryValue = country.val();
             setCountryPrefix();
         });
@@ -1193,13 +1147,14 @@ document.addEventListener('DOMContentLoaded', function() {
         country.val(defaultCountry).trigger('change');
         setCountryPrefix();
     });
+
     function cancel() {
         var close = document.getElementById("close");
         close.style.display = "none";
     }
     // date of birth\
-    var Days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];// index => month [0-11]
-    $(document).ready(function () {
+    var Days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // index => month [0-11]
+    $(document).ready(function() {
         var option = '<option value="day">day</option>';
         var selectedDay = "day";
         for (var i = 1; i <= Days[0]; i++) { //add option days
@@ -1227,12 +1182,13 @@ document.addEventListener('DOMContentLoaded', function() {
         var d = new Date();
         var option = '<option value="year">year</option>';
         selectedYear = "year";
-        for (var i = 1970; i <= (d.getFullYear() + 10); i++) {// years start i
+        for (var i = 1970; i <= (d.getFullYear() + 10); i++) { // years start i
             option += '<option value="' + i + '">' + i + '</option>';
         }
         $('#year').append(option);
         $('#year').val(selectedYear);
     });
+
     function isLeapYear(year) {
         year = parseInt(year);
         if (year % 4 != 0) {
@@ -1250,8 +1206,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (isLeapYear($(select).val())) {
             Days[1] = 29;
 
-        }
-        else {
+        } else {
             Days[1] = 28;
         }
         if ($("#month").val() == 2) {
@@ -1268,7 +1223,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             $(day).val(val);
         }
-    } 
+    }
 </script>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
