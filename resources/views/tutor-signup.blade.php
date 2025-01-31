@@ -604,89 +604,89 @@ let currentStep = 1;
     function validateForm() {
         let isValid = true;
 
-    //     if (stepCounter == 1) {
-    //         for (const field of step1RequiredFields) {
-    //             const element = document.getElementById(field);
-    //             const errorDiv = element.nextElementSibling;
+        if (stepCounter == 1) {
+            for (const field of step1RequiredFields) {
+                const element = document.getElementById(field);
+                const errorDiv = element.nextElementSibling;
 
-    //             if (!element.value.trim()) {
-    //                 isValid = false;
-    //                 element.style.border = '2px solid red';
-    //                 errorDiv.textContent = "Please fill this field"
-    //             } else {
-    //                 element.style.border = '';
-    //                 errorDiv.textContent = '';
-    //             }
-    //         }
+                if (!element.value.trim()) {
+                    isValid = false;
+                    element.style.border = '2px solid red';
+                    errorDiv.textContent = "Please fill this field"
+                } else {
+                    element.style.border = '';
+                    errorDiv.textContent = '';
+                }
+            }
 
-    //         // Profile Image Validation
-    // const profilePictureInput = document.getElementById("profilePicture");
-    // if (!profilePictureInput.files.length) {
-    //     isValid = false;
-    //     Swal.fire({
-    //         toast: true,
-    //         icon: 'error',
-    //         title: 'Profile Image must be uploaded',
-    //         position: 'top-end',
-    //         showConfirmButton: false,
-    //         timer: 3000,
-    //         timerProgressBar: true,
-    //         didOpen: (toast) => {
-    //             const title = toast.querySelector('.swal2-title');
-    //             if (title) {
-    //                 title.style.fontSize = '14px';
-    //                 title.style.fontWeight = 'normal';
-    //             }
-    //         }
-    //     });
-    // }
+            // Profile Image Validation
+    const profilePictureInput = document.getElementById("profilePicture");
+    if (!profilePictureInput.files.length) {
+        isValid = false;
+        Swal.fire({
+            toast: true,
+            icon: 'error',
+            title: 'Profile Image must be uploaded',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                const title = toast.querySelector('.swal2-title');
+                if (title) {
+                    title.style.fontSize = '14px';
+                    title.style.fontWeight = 'normal';
+                }
+            }
+        });
+    }
 
-    //         const passwordElement = document.getElementById('password'); // Use string ID
-    //         const confirmPasswordElement = document.getElementById('c_password'); // Use string ID
+            const passwordElement = document.getElementById('password'); // Use string ID
+            const confirmPasswordElement = document.getElementById('c_password'); // Use string ID
 
-    //         if (passwordElement && confirmPasswordElement) {
-    //             if (passwordElement.value !== confirmPasswordElement.value) {
-    //                 console.log("passwordValue.value: ", passwordElement.value);
-    //                 console.log("confirmPasswordValue.value: ", confirmPasswordElement.value);
-    //                 isValid = false;
-    //                 Swal.fire({
-    //                     toast: true,
-    //                     icon: 'error',
-    //                     title: 'Passwords and Confirm Password must match',
-    //                     position: 'top-end',
-    //                     showConfirmButton: false,
-    //                     timer: 3000,
-    //                     timerProgressBar: true,
-    //                     didOpen: (toast) => {
-    //                         const title = toast.querySelector('.swal2-title'); // Select the title
-    //                         if (title) {
-    //                             title.style.fontSize = '14px'; // Make the text smaller
-    //                             title.style.fontWeight = 'normal'; // Ensure it's not bold
-    //                         }
-    //                     }
-    //                 });
-    //             }
-    //         } else {
-    //             console.error("Password or confirm password element not found.");
-    //             isValid = false;
-    //         }
-    //     }
+            if (passwordElement && confirmPasswordElement) {
+                if (passwordElement.value !== confirmPasswordElement.value) {
+                    console.log("passwordValue.value: ", passwordElement.value);
+                    console.log("confirmPasswordValue.value: ", confirmPasswordElement.value);
+                    isValid = false;
+                    Swal.fire({
+                        toast: true,
+                        icon: 'error',
+                        title: 'Passwords and Confirm Password must match',
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            const title = toast.querySelector('.swal2-title'); // Select the title
+                            if (title) {
+                                title.style.fontSize = '14px'; // Make the text smaller
+                                title.style.fontWeight = 'normal'; // Ensure it's not bold
+                            }
+                        }
+                    });
+                }
+            } else {
+                console.error("Password or confirm password element not found.");
+                isValid = false;
+            }
+        }
 
-        // if (stepCounter == 2) {
-        //     for (const field of step2RequiredFields) {
-        //         const element = document.getElementById(field);
-        //         const errorDiv = element.nextElementSibling;
+        if (stepCounter == 2) {
+            for (const field of step2RequiredFields) {
+                const element = document.getElementById(field);
+                const errorDiv = element.nextElementSibling;
 
-        //         if (!element.value.trim()) {
-        //             isValid = false;
-        //             element.style.border = '2px solid red';
-        //             errorDiv.textContent = "Please fill this field"
-        //         } else {
-        //             element.style.border = '';
-        //             errorDiv.textContent = '';
-        //         }
-        //     }
-        // }
+                if (!element.value.trim()) {
+                    isValid = false;
+                    element.style.border = '2px solid red';
+                    errorDiv.textContent = "Please fill this field"
+                } else {
+                    element.style.border = '';
+                    errorDiv.textContent = '';
+                }
+            }
+        }
 
         return isValid;
     }
