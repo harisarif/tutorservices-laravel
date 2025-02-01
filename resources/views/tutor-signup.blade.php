@@ -239,7 +239,7 @@
                             <div class="px-2 mb-2 col-6 d-flex flex-column align-items-left">
                                 <label class="mb-2 fw-bold" style="color: #42b979; font-size: 18px;text-align: left;">Profile Picture</label>
                                 <div class="upload-area d-flex flex-column align-items-center justify-content-center text-center" id="uploadArea"
-                                    style="cursor: pointer; border: 2px dashed #42b979; width: 500px; height: 185px;">
+                                    style="cursor: pointer; border: 2px dashed #42b979; width: 100%; height: 185px;">
                                     <input type="file" class="form-control d-none" id="profilePicture" name="profileImage" accept="image/*">
                                     <div class="upload-content text-center">
                                         <div class="upload-icon">
@@ -256,7 +256,7 @@
                             <!-- Preview Area (Right Side) -->
                             <div class="px-2 mb-2 col-6 d-flex flex-column d-none" id="previewContainer">
                                 <label class="mb-2 fw-bold" style="color: #42b979; font-size: 18px;text-align: left;">Preview Picture</label>
-                                <div style="position: relative; border: 2px solid #42b979; border-radius: 8px; width: 440px; height: 185px;">
+                                <div style="position: relative; border: 2px solid #42b979; border-radius: 8px; width: 100%; height: 185px;">
                                     <img id="previewImg" src="" alt="Preview"
                                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
                                     <button id="removeBtn" type="button"
