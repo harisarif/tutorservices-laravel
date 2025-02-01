@@ -259,7 +259,7 @@
                                 <div style="position: relative; border: 2px solid #42b979; border-radius: 8px; width: 400px; height: 400px;">
                                     <img id="previewImg" src="" alt="Preview"
                                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-                                    <button id="removeBtn"
+                                    <button id="removeBtn" type="button"
                                         style="position: absolute; top: 5px; right: 5px; background-color: red; color: white; border: none; border-radius: 50%; padding: 5px;">
                                         X
                                     </button>
