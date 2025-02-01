@@ -573,12 +573,12 @@
                         <!-- Previous Button -->
                         <input onclick="backStep(this)" id="back-btn" type="button" value="← Previous"
                             class="btn previous-btn p-2 rounded border-0 text-light bg_theme_green fs-6 py-1 px-3"
-                            style="display: none;margin-left:22px">
+                            style="display: none;margin-left:40px">
 
                         <!-- Next Button -->
                         <input onclick="validateAndNextStep(this)" id="next-btn" type="button" value="Next →"
                             class="btn next-btn p-2 rounded border-0 text-light bg_theme_green fs-6 py-1 px-3"
-                            style="margin-right: 22px">
+                            style="margin-right: 15px">
                     </div>
                 </div>
             </form>
