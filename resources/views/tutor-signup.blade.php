@@ -238,8 +238,8 @@
                             <!-- Upload Area (Left Side) -->
                             <div class="px-2 mb-2 col-6 d-flex flex-column align-items-left">
                                 <label class="mb-2 fw-bold" style="color: #42b979; font-size: 18px;text-align: left;">Profile Picture</label>
-                                <div class="upload-area d-flex flex-column align-items-center justify-content-center" id="uploadArea"
-                                    style="cursor: pointer; border: 2px dashed #42b979; width: 400px; height: 400px; text-align: center;">
+                                <div class="upload-area d-flex flex-column align-items-center justify-content-center text-center" id="uploadArea"
+                                    style="cursor: pointer; border: 2px dashed #42b979; width: 500px; height: 185px;">
                                     <input type="file" class="form-control d-none" id="profilePicture" name="profileImage" accept="image/*">
                                     <div class="upload-content text-center">
                                         <div class="upload-icon">
@@ -256,7 +256,7 @@
                             <!-- Preview Area (Right Side) -->
                             <div class="px-2 mb-2 col-6 d-flex flex-column d-none" id="previewContainer">
                                 <label class="mb-2 fw-bold" style="color: #42b979; font-size: 18px;text-align: left;">Preview Picture</label>
-                                <div style="position: relative; border: 2px solid #42b979; border-radius: 8px; width: 400px; height: 400px;">
+                                <div style="position: relative; border: 2px solid #42b979; border-radius: 8px; width: 440px; height: 185px;">
                                     <img id="previewImg" src="" alt="Preview"
                                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
                                     <button id="removeBtn" type="button"
@@ -367,17 +367,15 @@
                             <div class="col-md-6 px-2 mb-2">
                                 <label for="teaching" class="form-label" style="color:#42b979;"><strong>Subject You Can
                                         Teach</strong></label>
+                                        
                                 <select class="form-select teaching" id="teachingSubjects" name="teaching[]"
                                     style="border: 1px solid rgba(137, 135, 135, 0.5);">
-                                    <option value="english">English</option>
-                                    <option value="maths">Mathematics</option>
-                                    <option value="physics">Physics</option>
-                                    <option value="chemistry">Chemistry</option>
-                                    <option value="islamiyat">Islamiyat</option>
-                                    <option value="urdu">Urdu</option>
-                                    <option value="biology">Biology</option>
-                                    <option value="computer">Computer Science</option>
-                                    <option value="pakstudies">Pak Studies</option>
+                                    @foreach (config('subjects.subjects') as $subject)
+                                    <option value="{{ $subject }}">
+                                        {{$subject}}
+                                    </option>
+                                        @endforeach
+                                    
                                 </select>
                                 <div style="text-align: left;color: red;"></div>
                             </div>
@@ -920,6 +918,13 @@
         // $('#city').select2();
         // $('#school_class').select2();
         $('#city').select2({
+            placeholder: 'Search country',
+            allowClear: false,
+            tags: true,
+            dropdownCssClass: 'city-custom-select2-templates-lang',
+            selectionCssClass: 'city-custom-select2-templates-lang',
+        });
+        $('#teachingSubjects').select2({
             placeholder: 'Search country',
             allowClear: false,
             tags: true,
