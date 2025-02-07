@@ -288,25 +288,25 @@ class TutorController extends Controller
                 }
             }
         }
+        // dd($request->all());
         // Now create the Tutor and associate with the User
         $tutor = new Tutor();
         $tutor->f_name = $request->input('f_name');
-        $tutor->intro = $request->input('intro');
         $tutor->description = $request->input('description');
         $tutor->l_name = $request->input('l_name');
-        $tutor->city = $request->input('city');
+        $tutor->city = $request->input('country');
         $tutor->email = $request->input('email');
         $tutor->document = 'documents/' . $fileName;
         $tutor->dob = $request->input('dob');
         $tutor->qualification = $request->input('qualification');
         $tutor->gender = $request->input('gender');
-        $tutor->location = $request->input('location');
+        $tutor->location = 'Dubai';
         $tutor->experience = $request->input('experience');
         $tutor->curriculum = serialize($request->input('curriculum'));
         $tutor->teaching = serialize($request->input('teaching'));
         $tutor->phone = $request->input('phone');
         $user->password = Hash::make($request->input('password'));
-        $tutor->video = isset($videoPath) ? 'storage/' . $videoPath : null; 
+        // $tutor->video = isset($videoPath) ? 'storage/' . $videoPath : null; 
         $tutor->specialization = $request->input('specialization'); 
         $tutor->language = json_encode($request->input('language'));
         $tutor->edu_teaching = $request->input('edu_teaching'); 

@@ -17,8 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('f_name');
             $table->string('l_name');
-            $table->string('intro');
-            $table->string('descripition')->nullable();
+            $table->string('description')->nullable();
             $table->string('document');
             $table->string('email')->unique();
             $table->string('qualification');
