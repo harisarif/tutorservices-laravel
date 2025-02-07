@@ -35,7 +35,6 @@ return new class extends Migration
                 'specialization',
                 'language_tech',
                 'edu_teaching',
-                'qualification_doc',
             ]);
         });
     }

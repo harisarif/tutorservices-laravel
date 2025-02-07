@@ -11,7 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
         Schema::create('tutors', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
@@ -42,11 +41,19 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
         Schema::table('tutors', function (Blueprint $table) {
-            $table->dropForeign(['country_id']);
-            $table->dropColumn('country_id');
-            $table->dropColumn('session_id'); 
+            // Drop foreign key first
+            if (Schema::hasColumn('tutors', 'user_id')) {
+                $table->dropForeign(['user_id']);
+            }
+
+            // Drop session_id column
+            if (Schema::hasColumn('tutors', 'session_id')) {
+                $table->dropColumn('session_id');
+            }
         });
+
+        // Drop the entire table
+        Schema::dropIfExists('tutors');
     }
 };

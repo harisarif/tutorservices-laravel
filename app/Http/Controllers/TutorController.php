@@ -255,28 +255,32 @@ class TutorController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
+        $hashedPassword = Hash::make($request->input('password'));
+        // Check if user already exists
+    $user = User::where('email', $request->input('email'))->first();
 
+    if (!$user) {
         // Create the User first
         $user = new User();
         $user->name = $request->input('f_name') . ' ' . $request->input('l_name');
         $user->email = $request->input('email');
-        $user->password = Hash::make($request->input('password')); // Ensure 'password' is in the request
+        $user->password = $hashedPassword;
         $user->role = 'tutor';
         $user->save();
+         }
         if ($request->hasFile('document')) {
             $file = $request->file('document');
             // Save the file to 'public/documents' with a unique name
             $fileName = time() . '_' . $file->getClientOriginalName();
             $file->move(public_path('documents'), $fileName); // Move the file to public/documents
         }
-        if ($request->hasFile('video')) {
-            $videoPath = $request->file('video')->store('videos', 'public');
 
-            // Save the path in the database or return the video URL
-            return response()->json([
-                'video_url' => asset('storage/' . $videoPath)
-            ]);
+        if ($request->hasFile('videoFile')) {
+            $videoPath = $request->file('videoFile')->store('videos', 'public');
+
+            
         }
+
         $language=[];
         if ($request->has('language_proficient') && $request->has('language_level')) {
             foreach ($request->input('language_proficient') as $index => $lang) {
@@ -288,7 +292,7 @@ class TutorController extends Controller
                 }
             }
         }
-        // dd($request->all());
+        
         // Now create the Tutor and associate with the User
         $tutor = new Tutor();
         $tutor->f_name = $request->input('f_name');
@@ -306,8 +310,9 @@ class TutorController extends Controller
         $tutor->teaching = serialize($request->input('teaching'));
         $tutor->phone = $request->input('phone');
         $user->password = Hash::make($request->input('password'));
-        // $tutor->video = isset($videoPath) ? 'storage/' . $videoPath : null; 
-        $tutor->specialization = $request->input('specialization'); 
+        $tutor->video = 'storage/' . $videoPath; // Save video path in database
+        $tutor->specialization = $request->input('specialization');
+        $tutor->password = $hashedPassword; 
         $tutor->language = json_encode($request->input('language'));
         $tutor->edu_teaching = $request->input('edu_teaching'); 
         $tutor->status = $request->input('status') ?? 'online'; 
