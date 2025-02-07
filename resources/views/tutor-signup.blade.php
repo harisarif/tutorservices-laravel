@@ -124,7 +124,7 @@
                                 <label for="email" class="form-label" style="color:#42b979;">
                                     <strong>Email</strong>
                                 </label>
-                                <input type="email" class="form-control email-field" id="email" name="email"
+                                <input type="email" class="form-control email-field"  id="email" name="email" value="{{ old('email', $verifiedEmail) }}"
                                     style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135, 135, 0.5);"
                                     readonly>
                                 <small class="error-message text-danger"
@@ -225,7 +225,7 @@
                                 <label for="experience" class="form-label" style="color:#42b979;">
                                     <strong>How We Can Help</strong>
                                 </label>
-                                <select class="form-control form-select" id="experience"
+                                <select class="form-control form-select" id="experience" name="experience"
                                     aria-label="Default select example"
                                     style="border: 1px solid rgba(137, 135, 135, 0.5); width: 100%;">
                                     <option value="Online" selected>Online</option>
@@ -278,7 +278,7 @@
                                 <label for="qualification" class="form-label" style="color:#42b979;">
                                     <strong>Highest Qualification</strong>
                                 </label>
-                                <select class="form-control school_class" id="school_class" name="qualification"
+                                <select class="form-control school_class" id="qualification" name="qualification"
                                     style="border: 1px solid rgb(137, 135, 135);">
                                     @foreach($schoolClasses as $schoolClass)
                                     <option value="{{ $schoolClass->id }}">{{ $schoolClass->name }}</option>
@@ -291,7 +291,7 @@
                                     <strong>Add Your Qualification Document</strong>
                                 </label>
                                 <input type="file" class="form-control" id="qualificationDocument"
-                                    name="qualificationDocument"
+                                    name="document"
                                     style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);">
                                 <div style="text-align: left;color: red;"></div>
                             </div>
@@ -601,7 +601,7 @@
         let loadingVideoIndicator = document.getElementById("loadingVideoIndicator");
         let uploadVideoContent = document.getElementById("uploadVideoContent");
         let errorVideoMessage = document.getElementById("errorVideoMessage");
-
+        let nextButton = document.getElementById("next-btn"); 
         document.getElementById("uploadAreaVideo").addEventListener("click", function() {
             document.getElementById("videoFile").click();
         });
@@ -634,6 +634,7 @@
             uploadedVideoPreview.onloadeddata = () => {
                 loadingVideoIndicator.style.display = "none";
                 uploadedVideoRow.style.display = "block";
+                nextButton.setAttribute("type", "submit"); // Change button to submit
             };
         }
 
@@ -647,6 +648,7 @@
             uploadedVideoPreview.load();
             uploadedVideoRow.style.display = "none";
             fileInput.value = "";
+            nextButton.setAttribute("type", "button"); //
         }
     });
 </script>
@@ -822,7 +824,7 @@
 
             <div class="col-md-1 px-2 mb-2 flex items-center" id="delete-btn-container-${languageFieldCount}">
                 <button type="button" class="border-0 bg-transparent remove-language-btn text-danger px-3 py-2 rounded-circle" 
-        onclick="removeLanguageField(1)" style="color:#42b979;">
+        onclick="removeLanguageField(${languageFieldCount})" style="color:#42b979;">
         <i class="fas fa-trash"></i>
     </button>
 

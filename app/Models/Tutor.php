@@ -9,9 +9,11 @@ class Tutor extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 
-        'email'// Add 'name' here
-        // Add other fillable attributes if any
+        'f_name', 'intro', 'description', 'l_name', 'city',
+        'email', 'document', 'dob', 'qualification', 'gender',
+        'location', 'experience', 'curriculum', 'teaching', 'phone',
+        'video', 'specialization', 'language', 'edu_teaching',
+        'status', 'session_id', 'profileImage', 'user_id'
     ];
     public function user()
     {
