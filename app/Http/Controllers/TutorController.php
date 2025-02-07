@@ -226,7 +226,7 @@ class TutorController extends Controller
         // Your store method logic here
     }
     public function create(Request $request)
-    {
+    { 
         // Validate form data
         $rules = [
             'f_name' => 'required|string|max:255',
@@ -306,14 +306,15 @@ class TutorController extends Controller
         $tutor->gender = $request->input('gender');
         $tutor->location = 'Dubai';
         $tutor->experience = $request->input('experience');
+        $tutor->language_tech = $request->input('language_tech');
         $tutor->curriculum = serialize($request->input('curriculum'));
         $tutor->teaching = serialize($request->input('teaching'));
-        $tutor->phone = $request->input('phone');
+        $tutor->phone = $request->input('phone'); 
         $user->password = Hash::make($request->input('password'));
         $tutor->video = 'storage/' . $videoPath; // Save video path in database
         $tutor->specialization = $request->input('specialization');
         $tutor->password = $hashedPassword; 
-        $tutor->language = json_encode($request->input('language'));
+        $tutor->language = json_encode($language);
         $tutor->edu_teaching = $request->input('edu_teaching'); 
         $tutor->status = $request->input('status') ?? 'online'; 
         $tutor->session_id = session()->getId();
