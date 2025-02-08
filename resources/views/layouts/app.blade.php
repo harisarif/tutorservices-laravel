@@ -112,6 +112,7 @@
 </html>
 <script src="{{ URL::asset('js/select2.js') }}"></script>
 <script src="{{ URL::asset('js/app.js') }}"></script>
+<script src="{{ URL::asset('js/sweetalert.js') }}"></script>
 
 <script>
     function cancel(){

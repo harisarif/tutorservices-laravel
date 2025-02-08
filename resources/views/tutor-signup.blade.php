@@ -593,9 +593,8 @@
 
 @endsection
 @section('js')
-<script src="./js/tutor.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script src=" {{ asset('js/tutor.js') }}"></script>
+<script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         let uploadArea = document.getElementById("uploadAreaVideo");
