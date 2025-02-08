@@ -124,7 +124,7 @@
                                 <label for="email" class="form-label" style="color:#42b979;">
                                     <strong>Email</strong>
                                 </label>
-                                <input type="email" class="form-control email-field"  id="email" name="email" value="{{ old('email', $verifiedEmail) }}"
+                                <input type="email" class="form-control email-field" id="email" name="email" value="{{ old('email', $verifiedEmail) }}"
                                     style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135, 135, 0.5);"
                                     readonly>
                                 <small class="error-message text-danger"
@@ -254,11 +254,11 @@
                             </div>
 
                             <!-- Preview Area (Right Side) -->
-                            <div class="px-2 mb-2 col-6 d-flex flex-column d-none" id="previewContainer">
+                            <div class="px-2 mb-2 col-4 d-flex flex-column d-none" id="previewContainer">
                                 <label class="mb-2 fw-bold" style="color: #42b979; font-size: 18px;text-align: left;">Preview Picture</label>
                                 <div style="position: relative; border: 2px solid #42b979; border-radius: 8px; width: 100%; height: 185px;">
                                     <img id="previewImg" src="" alt="Preview"
-                                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                                        style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
                                     <button id="removeBtn" type="button"
                                         style="position: absolute; top: 5px; right: 5px; background-color: red; color: white; border: none; border-radius: 50%; padding: 5px;">
                                         X
@@ -361,26 +361,26 @@
                                 <!-- <input type="text" class="form-control" id="other_qualification_input"
                                     name="other_qualification_input"
                                     style="border: 1px solid rgba(137, 135, 135, 0.5);" /> -->
-                                    <select id="other_qualification_input" name="other_qualification_input">
-                                        @foreach ($courses as $code => $name)
-                                            <option value="{{ $code }}">{{ $name }}</option>
-                                            @endforeach
-                                    </select>
+                                <select id="other_qualification_input" name="other_qualification_input">
+                                    @foreach ($courses as $code => $name)
+                                    <option value="{{ $code }}">{{ $name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="form-row d-flex flex-column flex-md-row">
                             <div class="col-md-6 px-2 mb-2">
                                 <label for="teaching" class="form-label" style="color:#42b979;"><strong>Subject You Can
                                         Teach</strong></label>
-                                        
+
                                 <select class="form-select teaching" id="teachingSubjects" name="teaching[]"
                                     style="border: 1px solid rgba(137, 135, 135, 0.5);">
                                     @foreach (config('subjects.subjects') as $subject)
                                     <option value="{{ $subject }}">
                                         {{$subject}}
                                     </option>
-                                        @endforeach
-                                    
+                                    @endforeach
+
                                 </select>
                                 <div style="text-align: left;color: red;"></div>
                             </div>
@@ -605,7 +605,7 @@
         let loadingVideoIndicator = document.getElementById("loadingVideoIndicator");
         let uploadVideoContent = document.getElementById("uploadVideoContent");
         let errorVideoMessage = document.getElementById("errorVideoMessage");
-        let nextButton = document.getElementById("next-btn"); 
+        let nextButton = document.getElementById("next-btn");
         document.getElementById("uploadAreaVideo").addEventListener("click", function() {
             document.getElementById("videoFile").click();
         });
@@ -736,6 +736,48 @@
             const confirmPasswordElement = document.getElementById('c_password'); // Use string ID
 
             if (passwordElement && confirmPasswordElement) {
+                console.log('Password length: ', passwordElement.value.length);
+                console.log('confirmPasswordElement length: ', confirmPasswordElement.value.length);
+                if (passwordElement.value.length < 8) {
+                    isValid = false;
+                    Swal.fire({
+                        toast: true,
+                        icon: 'error',
+                        title: 'Password must be at least 8 characters',
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            const title = toast.querySelector('.swal2-title');
+                            if (title) {
+                                title.style.fontSize = '14px';
+                                title.style.fontWeight = 'normal';
+                            }
+                        }
+                    });
+                }
+
+                if (confirmPasswordElement.value.length < 8) {
+                    isValid = false;
+                    Swal.fire({
+                        toast: true,
+                        icon: 'error',
+                        title: 'Confirm Password must be at least 8 characters',
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            const title = toast.querySelector('.swal2-title');
+                            if (title) {
+                                title.style.fontSize = '14px';
+                                title.style.fontWeight = 'normal';
+                            }
+                        }
+                    });
+                }
+
                 if (passwordElement.value !== confirmPasswordElement.value) {
                     console.log("passwordValue.value: ", passwordElement.value);
                     console.log("confirmPasswordValue.value: ", confirmPasswordElement.value);
@@ -951,6 +993,14 @@
             tags: true,
             dropdownCssClass: 'school_class-custom-select2-templates-lang',
             selectionCssClass: 'school_class-custom-select2-templates-lang',
+        });
+
+        $('#qualification').select2({
+            placeholder: 'Search qualification',
+            allowClear: false,
+            tags: true,
+            dropdownCssClass: 'qualification-custom-select2-templates-lang',
+            selectionCssClass: 'qualification-custom-select2-templates-lang',
         });
 
         $('#teaching').select2({

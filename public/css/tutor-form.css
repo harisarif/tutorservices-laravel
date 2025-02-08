@@ -567,6 +567,10 @@ input[type="password"]::placeholder {
     width: 310px !important;
 }
 
+.select2-dropdown.qualification-custom-select2-templates-lang.select2-dropdown--below {
+    width: 310px !important;
+}
+
 .select2-dropdown.specialization-custom-select2-templates-lang.select2-dropdown--below {
     width: 317px !important;
 }
@@ -609,6 +613,10 @@ input[type="password"]::placeholder {
     }
 
     .select2-dropdown.school_class-custom-select2-templates-lang.select2-dropdown--below {
+        width: 333px !important;
+    }
+
+    .select2-dropdown.qualification-custom-select2-templates-lang.select2-dropdown--below {
         width: 333px !important;
     }
 

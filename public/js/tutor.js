@@ -36,24 +36,24 @@ const showToast = (message, type = "info") => {
 const NextStep = (button) => { 
     if (stepCounter < totalSteps) {
         const currentStep = document.getElementById("page-" + stepCounter);
-        console.log("Before change - stepCounter:", stepCounter);
-        console.log("Before change - currentStep:", currentStep);
+        // console.log("Before change - stepCounter:", stepCounter);
+        // console.log("Before change - currentStep:", currentStep);
         
         const nextStep = document.getElementById("page-" + (stepCounter + 1));
-        console.log("Before change - nextStep:", nextStep);
+        // console.log("Before change - nextStep:", nextStep);
 
         // Ensure elements exist before updating
         if (currentStep && nextStep) {
             // Hide current step
             currentStep.classList.add("d-none");
-            console.log(`Added 'd-none' to page-${stepCounter}`);
+            // console.log(`Added 'd-none' to page-${stepCounter}`);
 
             // Delay to allow DOM to update
             setTimeout(() => {
                 // Show next step
                 nextStep.classList.remove("d-none");
-                console.log(`Removed 'd-none' from page-${stepCounter + 1}`);
-                console.log("After change - nextStep:", nextStep);
+                // console.log(`Removed 'd-none' from page-${stepCounter + 1}`);
+                // console.log("After change - nextStep:", nextStep);
                 
                 stepCounter++;
 
@@ -62,15 +62,15 @@ const NextStep = (button) => {
                     backBtn.style.display = "block";
                 }
 
-                console.log("After change - stepCounter:", stepCounter);
+                // console.log("After change - stepCounter:", stepCounter);
 
                 // Update progress bar
                 const progress = (stepCounter / totalSteps) * 100;
-                console.log("Updated progress:", progress);
+                // console.log("Updated progress:", progress);
 
                 // Update step classes
                 const steps = document.querySelectorAll('.step-item');
-                console.log("Step Items Before Update:", steps);
+                // console.log("Step Items Before Update:", steps);
 
                 steps.forEach((stepItem, index) => {
                     if (index + 1 < stepCounter) {
@@ -82,13 +82,15 @@ const NextStep = (button) => {
                     }
                 });
 
-                console.log("Step Items After Update:", steps);
+                console.log("totalSteps:", totalSteps);
+                console.log("stepCounter:", stepCounter);
 
                 // Change button to 'Submit' on the last step
                 if (stepCounter === totalSteps) {
                     if (button) {
-                        button.type = "submit";
-                        button.value = "Submit";
+                        // backBtn.style.display = "none";
+                        nextBtn.type = "submit";
+                        nextBtn.value = "Submit";
                     } else {
                         console.error("Button is not defined.");
                     }
