@@ -358,9 +358,14 @@
                             <div class="col-md-6 px-2 mb-2">
                                 <label for="qualification" class="form-label" style="color:#42b979;"><strong>Courses
                                         Teaching</strong></label>
-                                <input type="text" class="form-control" id="other_qualification_input"
+                                <!-- <input type="text" class="form-control" id="other_qualification_input"
                                     name="other_qualification_input"
-                                    style="border: 1px solid rgba(137, 135, 135, 0.5);" />
+                                    style="border: 1px solid rgba(137, 135, 135, 0.5);" /> -->
+                                    <select id="other_qualification_input" name="other_qualification_input">
+                                        @foreach ($courses as $code => $name)
+                                            <option value="{{ $code }}">{{ $name }}</option>
+                                            @endforeach
+                                    </select>
                             </div>
                         </div>
                         <div class="form-row d-flex flex-column flex-md-row">

@@ -503,11 +503,12 @@ class TutorController extends Controller
         $countries_prefix = collect(config('countries_prefix.countries'));
         $countries = collect(config('countries_assoc.countries'));
         $languages = collect(config('languages.languages'));
+        $courses = collect(config('courses.courses'));
         $subjectsTeach = collect(config('subjects.subjects')); // Fetch languages from config
 
         // Retrieve verified email from session (if exists)
         $verifiedEmail = session('verified_email', '');
-        return view('tutor-signup', compact(['countriesPhone', 'countries', 'verifiedEmail', 'schoolClasses', 'countries_number_length', 'countries_prefix', 'languages']));
+        return view('tutor-signup', compact(['courses','countriesPhone', 'countries', 'verifiedEmail', 'schoolClasses', 'countries_number_length', 'countries_prefix', 'languages']));
     }
 
     public function edit($id)
