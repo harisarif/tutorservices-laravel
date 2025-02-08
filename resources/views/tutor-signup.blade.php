@@ -551,9 +551,23 @@
                                     </button>
                                 </div>
                             </div>
+                            <!-- <div class="col-6">
+                                <div class="demo-box">
+                                    <video class="demo-video" controls id="demoVideoPreview">
+                                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            </div> -->
                             <div class="col-6">
                                 <div class="demo-box">
-                                    <video class="demo-video" controls>
+                                    <!-- Close Icon
+                                    <span class="close-video d-flex align-items-center justify-content-end top-0 end-0 m-2" id="removeVideoButton">
+                                        &times;
+                                    </span> -->
+
+                                    <!-- Demo Video -->
+                                    <video class="demo-video" controls id="demoVideoPreview">
                                         <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
@@ -561,7 +575,7 @@
                             </div>
                         </div>
 
-                        <!-- Displaying the uploaded video in a row, full width (col-12) -->
+                        <!-- Displaying the uploaded video in a row, full width (col-12)
                         <div class="uploaded-video-row col-12 mt-4" id="uploadedVideoRow" style="display:none;">
                             <div class="row">
                                 <div class="col-12">
@@ -570,7 +584,7 @@
                                     </video>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="col-12 my-4 d-flex justify-content-between align-items-center"
@@ -600,7 +614,9 @@
         let uploadArea = document.getElementById("uploadAreaVideo");
         let fileInput = document.getElementById("videoFile");
         let uploadedVideoRow = document.getElementById("uploadedVideoRow");
-        let uploadedVideoPreview = document.getElementById("uploadedVideoPreview");
+        // let uploadedVideoPreview = document.getElementById("uploadedVideoPreview");
+        let uploadedVideoPreview = document.getElementById("demoVideoPreview");
+
         let removeVideoButton = document.getElementById("removeVideoButton");
         let loadingVideoIndicator = document.getElementById("loadingVideoIndicator");
         let uploadVideoContent = document.getElementById("uploadVideoContent");
@@ -647,12 +663,29 @@
             errorVideoMessage.style.display = "block";
         }
 
+        // function resetUpload() {
+        //     uploadedVideoPreview.src = "";
+        //     uploadedVideoPreview.load();
+        //     uploadedVideoRow.style.display = "none";
+        //     fileInput.value = "";
+        //     nextButton.setAttribute("type", "button"); //
+        // }
         function resetUpload() {
-            uploadedVideoPreview.src = "";
+            uploadedVideoPreview.src = "https://www.w3schools.com/html/mov_bbb.mp4";
             uploadedVideoPreview.load();
             uploadedVideoRow.style.display = "none";
-            fileInput.value = "";
+
+            // Reset input field
+            let newFileInput = fileInput.cloneNode(true);
+            fileInput.parentNode.replaceChild(newFileInput, fileInput);
+            fileInput = newFileInput;
+
             nextButton.setAttribute("type", "button"); //
+
+            // Rebind event listener
+            fileInput.addEventListener("change", (e) => {
+                handleFile(e.target.files[0]);
+            });
         }
     });
 </script>
@@ -695,131 +728,131 @@
     function validateForm() {
         let isValid = true;
 
-        if (stepCounter == 1) {
-            for (const field of step1RequiredFields) {
-                const element = document.getElementById(field);
-                const errorDiv = element.nextElementSibling;
+        // if (stepCounter == 1) {
+        //     for (const field of step1RequiredFields) {
+        //         const element = document.getElementById(field);
+        //         const errorDiv = element.nextElementSibling;
 
-                if (!element.value.trim()) {
-                    isValid = false;
-                    element.style.border = '2px solid red';
-                    errorDiv.textContent = "Please fill this field"
-                } else {
-                    element.style.border = '';
-                    errorDiv.textContent = '';
-                }
-            }
+        //         if (!element.value.trim()) {
+        //             isValid = false;
+        //             element.style.border = '2px solid red';
+        //             errorDiv.textContent = "Please fill this field"
+        //         } else {
+        //             element.style.border = '';
+        //             errorDiv.textContent = '';
+        //         }
+        //     }
 
-            // Profile Image Validation
-            const profilePictureInput = document.getElementById("profilePicture");
-            if (!profilePictureInput.files.length) {
-                isValid = false;
-                Swal.fire({
-                    toast: true,
-                    icon: 'error',
-                    title: 'Profile Image must be uploaded',
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        const title = toast.querySelector('.swal2-title');
-                        if (title) {
-                            title.style.fontSize = '14px';
-                            title.style.fontWeight = 'normal';
-                        }
-                    }
-                });
-            }
+        //     // Profile Image Validation
+        //     const profilePictureInput = document.getElementById("profilePicture");
+        //     if (!profilePictureInput.files.length) {
+        //         isValid = false;
+        //         Swal.fire({
+        //             toast: true,
+        //             icon: 'error',
+        //             title: 'Profile Image must be uploaded',
+        //             position: 'top-end',
+        //             showConfirmButton: false,
+        //             timer: 3000,
+        //             timerProgressBar: true,
+        //             didOpen: (toast) => {
+        //                 const title = toast.querySelector('.swal2-title');
+        //                 if (title) {
+        //                     title.style.fontSize = '14px';
+        //                     title.style.fontWeight = 'normal';
+        //                 }
+        //             }
+        //         });
+        //     }
 
-            const passwordElement = document.getElementById('password'); // Use string ID
-            const confirmPasswordElement = document.getElementById('c_password'); // Use string ID
+        //     const passwordElement = document.getElementById('password'); // Use string ID
+        //     const confirmPasswordElement = document.getElementById('c_password'); // Use string ID
 
-            if (passwordElement && confirmPasswordElement) {
-                console.log('Password length: ', passwordElement.value.length);
-                console.log('confirmPasswordElement length: ', confirmPasswordElement.value.length);
-                if (passwordElement.value.length < 8) {
-                    isValid = false;
-                    Swal.fire({
-                        toast: true,
-                        icon: 'error',
-                        title: 'Password must be at least 8 characters',
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            const title = toast.querySelector('.swal2-title');
-                            if (title) {
-                                title.style.fontSize = '14px';
-                                title.style.fontWeight = 'normal';
-                            }
-                        }
-                    });
-                }
+        //     if (passwordElement && confirmPasswordElement) {
+        //         console.log('Password length: ', passwordElement.value.length);
+        //         console.log('confirmPasswordElement length: ', confirmPasswordElement.value.length);
+        //         if (passwordElement.value.length < 8) {
+        //             isValid = false;
+        //             Swal.fire({
+        //                 toast: true,
+        //                 icon: 'error',
+        //                 title: 'Password must be at least 8 characters',
+        //                 position: 'top-end',
+        //                 showConfirmButton: false,
+        //                 timer: 3000,
+        //                 timerProgressBar: true,
+        //                 didOpen: (toast) => {
+        //                     const title = toast.querySelector('.swal2-title');
+        //                     if (title) {
+        //                         title.style.fontSize = '14px';
+        //                         title.style.fontWeight = 'normal';
+        //                     }
+        //                 }
+        //             });
+        //         }
 
-                if (confirmPasswordElement.value.length < 8) {
-                    isValid = false;
-                    Swal.fire({
-                        toast: true,
-                        icon: 'error',
-                        title: 'Confirm Password must be at least 8 characters',
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            const title = toast.querySelector('.swal2-title');
-                            if (title) {
-                                title.style.fontSize = '14px';
-                                title.style.fontWeight = 'normal';
-                            }
-                        }
-                    });
-                }
+        //         if (confirmPasswordElement.value.length < 8) {
+        //             isValid = false;
+        //             Swal.fire({
+        //                 toast: true,
+        //                 icon: 'error',
+        //                 title: 'Confirm Password must be at least 8 characters',
+        //                 position: 'top-end',
+        //                 showConfirmButton: false,
+        //                 timer: 3000,
+        //                 timerProgressBar: true,
+        //                 didOpen: (toast) => {
+        //                     const title = toast.querySelector('.swal2-title');
+        //                     if (title) {
+        //                         title.style.fontSize = '14px';
+        //                         title.style.fontWeight = 'normal';
+        //                     }
+        //                 }
+        //             });
+        //         }
 
-                if (passwordElement.value !== confirmPasswordElement.value) {
-                    console.log("passwordValue.value: ", passwordElement.value);
-                    console.log("confirmPasswordValue.value: ", confirmPasswordElement.value);
-                    isValid = false;
-                    Swal.fire({
-                        toast: true,
-                        icon: 'error',
-                        title: 'Passwords and Confirm Password must match',
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            const title = toast.querySelector('.swal2-title'); // Select the title
-                            if (title) {
-                                title.style.fontSize = '14px'; // Make the text smaller
-                                title.style.fontWeight = 'normal'; // Ensure it's not bold
-                            }
-                        }
-                    });
-                }
-            } else {
-                console.error("Password or confirm password element not found.");
-                isValid = false;
-            }
-        }
+        //         if (passwordElement.value !== confirmPasswordElement.value) {
+        //             console.log("passwordValue.value: ", passwordElement.value);
+        //             console.log("confirmPasswordValue.value: ", confirmPasswordElement.value);
+        //             isValid = false;
+        //             Swal.fire({
+        //                 toast: true,
+        //                 icon: 'error',
+        //                 title: 'Passwords and Confirm Password must match',
+        //                 position: 'top-end',
+        //                 showConfirmButton: false,
+        //                 timer: 3000,
+        //                 timerProgressBar: true,
+        //                 didOpen: (toast) => {
+        //                     const title = toast.querySelector('.swal2-title'); // Select the title
+        //                     if (title) {
+        //                         title.style.fontSize = '14px'; // Make the text smaller
+        //                         title.style.fontWeight = 'normal'; // Ensure it's not bold
+        //                     }
+        //                 }
+        //             });
+        //         }
+        //     } else {
+        //         console.error("Password or confirm password element not found.");
+        //         isValid = false;
+        //     }
+        // }
 
-        if (stepCounter == 2) {
-            for (const field of step2RequiredFields) {
-                const element = document.getElementById(field);
-                const errorDiv = element.nextElementSibling;
+        // if (stepCounter == 2) {
+        //     for (const field of step2RequiredFields) {
+        //         const element = document.getElementById(field);
+        //         const errorDiv = element.nextElementSibling;
 
-                if (!element.value.trim()) {
-                    isValid = false;
-                    element.style.border = '2px solid red';
-                    errorDiv.textContent = "Please fill this field"
-                } else {
-                    element.style.border = '';
-                    errorDiv.textContent = '';
-                }
-            }
-        }
+        //         if (!element.value.trim()) {
+        //             isValid = false;
+        //             element.style.border = '2px solid red';
+        //             errorDiv.textContent = "Please fill this field"
+        //         } else {
+        //             element.style.border = '';
+        //             errorDiv.textContent = '';
+        //         }
+        //     }
+        // }
 
         return isValid;
     }

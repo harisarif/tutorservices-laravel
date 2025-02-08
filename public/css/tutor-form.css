@@ -340,6 +340,7 @@ input[type="password"]::placeholder {
         opacity: 0;
         transform: translateY(20px);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0);
@@ -350,31 +351,39 @@ input[type="password"]::placeholder {
     opacity: 0;
     animation: fadeInUp 1s ease-in-out forwards;
 }
-.previous-btn, .next-btn {
-    transition: all 0.3s ease; /* Smooth transition for hover effects */
+
+.previous-btn,
+.next-btn {
+    transition: all 0.3s ease;
+    /* Smooth transition for hover effects */
     position: absolute;
     top: 0;
 }
 
 .previous-btn {
-    left: 0; /* Align Previous button to the left */
+    left: 0;
+    /* Align Previous button to the left */
 }
 
 .next-btn {
-    right: 0; /* Align Next button to the right */
+    right: 0;
+    /* Align Next button to the right */
 }
 
-.previous-btn:hover, .next-btn:hover {
-    transform: scale(1.05); /* Slight zoom effect on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow */
+.previous-btn:hover,
+.next-btn:hover {
+    transform: scale(1.05);
+    /* Slight zoom effect on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Add shadow */
 }
 
 .upload-container {
     max-width: 500px;
     margin: 5px auto;
-  }
+}
 
-  .upload-area {
+.upload-area {
     border: 2px dashed #42b979;
     border-radius: 8px;
     padding: 5px;
@@ -383,66 +392,66 @@ input[type="password"]::placeholder {
     position: relative;
     background: white;
     transition: all 0.3s ease;
-  }
+}
 
-  .upload-area:hover {
+.upload-area:hover {
     background: #f8f9fa;
-  }
+}
 
-  .upload-area .upload-icon {
+.upload-area .upload-icon {
     font-size: 40px;
     color: #42b979;
     margin-bottom: 5px;
-  }
+}
 
-  .upload-area .preview-image {
+.upload-area .preview-image {
     max-width: 100%;
     max-height: 200px;
     display: none;
     margin: 8px auto;
-  }
+}
 
-  .upload-text {
+.upload-text {
     color: #6c757d;
     margin: 10px 0;
-  }
+}
 
-  .error-message {
+.error-message {
     color: #dc3545;
     font-size: 14px;
     margin-top: 5px;
     display: none;
-  }
+}
 
-  #profilePicture {
+#profilePicture {
     display: none;
-  }
+}
 
-  .remove-btn {
+.remove-btn {
     display: none;
     margin-top: 10px;
-  }
+}
 
-  .upload-section-video {
+.upload-section-video {
     /* max-width: 800px; */
     margin: 0 auto;
     padding: 20px;
-  }
+}
 
-  .video-container {
+.video-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     margin: 10px 0;
-  }
+}
 
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
     .video-container {
-      grid-template-columns: 1fr;
+        grid-template-columns: 1fr;
     }
-  }
+}
 
-  .upload-area-video {
+.upload-area-video {
     border: 2px dashed #42b979;
     border-radius: 8px;
     padding: 50px;
@@ -451,36 +460,37 @@ input[type="password"]::placeholder {
     background: white;
     transition: all 0.3s ease;
     height: 300px;
-    position: relative; /* Added for absolute positioning of video */
-  }
+    position: relative;
+    /* Added for absolute positioning of video */
+}
 
-  .upload-area-video:hover {
+.upload-area-video:hover {
     background: #f8f9fa;
-  }
+}
 
-  .upload-content-video {
+.upload-content-video {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
-  }
+}
 
-  .upload-icon-video {
+.upload-icon-video {
     font-size: 40px;
     color: #42b979;
     margin-bottom: 15px;
-  }
+}
 
-  .demo-video {
+.demo-video {
     border-radius: 8px;
     border: 1px solid rgba(137, 135, 135, 0.5);
     height: 300px;
     width: 100%;
     object-fit: cover;
-  }
+}
 
-  .preview-container {
+.preview-container {
     display: none;
     position: absolute;
     top: 0;
@@ -488,64 +498,92 @@ input[type="password"]::placeholder {
     width: 100%;
     height: 100%;
     padding: 10px;
-  }
+}
 
-  .preview-video {
+.preview-video {
     width: 100%;
     height: 100%;
     border-radius: 8px;
     object-fit: cover;
-  }
+}
 
-  .error-message {
+.error-message {
     color: #dc3545;
     font-size: 14px;
     margin-top: 5px;
     display: none;
-  }
+}
 
-  #videoFile {
+#videoFile {
     display: none;
-  }
+}
 
-  .remove-btn {
+.remove-btn {
     display: none;
     margin-top: 10px;
-  }
+}
 
-  .upload-text {
+.upload-text {
     color: #6c757d;
-  }
+}
 
-  .time-select {
+.time-select {
     border: 1px solid rgba(137, 135, 135, 0.5) !important;
     box-shadow: none !important;
-  }
+}
 
-  .description-area {
+.description-area {
     border: 1px solid rgba(137, 135, 135, 0.5) !important;
     box-shadow: none !important;
     resize: none;
-  }
+}
 
-  /* Added loading indicator styles */
-  .loading {
+.close-video {
+    /* position: relative !important;; */
+    top: 0px;
+    right: 5px;
+    background: red;
+    color: white;
+    font-size: 26px;
+    width: 30px !important;
+    height: 30px;
+    line-height: 24px;
+    text-align: center;
+    border-radius: 100%;
+    user-select: none;
+    cursor: pointer;
+    /* Prevent text selection */
+}
+
+/* Ensure cursor remains default (arrow) */
+.close-video:hover {
+    background: darkred;
+    cursor: pointer;
+}
+
+/* Added loading indicator styles */
+.loading {
     display: none;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #42b979;
-  }
+}
 
-  .loading-spinner {
+.loading-spinner {
     animation: spin 1s linear infinite;
-  }
+}
 
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
 
 .select2-dropdown.gender-custom-select2-templates-lang.select2-dropdown--below {
     width: 327px !important;
@@ -647,7 +685,8 @@ input[type="password"]::placeholder {
 
 .steps-container {
     display: flex;
-    justify-content: center; /* Center align */
+    justify-content: center;
+    /* Center align */
     margin-top: 20px;
     background-color: #f8f9fa;
     padding: 15px 20px;
