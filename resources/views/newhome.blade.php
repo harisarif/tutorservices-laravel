@@ -227,7 +227,7 @@
                         </button>
                         <div class="custom-select-wrapper mx-1">
                         <div class="custom-select">
-                               <i class="fa-solid fa-globe" style="color:#fff !important" aria-hidden="true" onclick="toggleDropdown()"></i>
+                               <i class="fa fa-globe" style="color:#fff !important" aria-hidden="true" onclick="toggleDropdown()"></i>
                            <div class="custom-options" id="language-select">
                               <div class="custom-option " data-value="en" onclick="changeLanguage('en')">English</div>
                               <div class="custom-option" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
@@ -310,7 +310,7 @@
                
                     <div class=" p-2 header-phone-number phone-container">
                     
-                        <i class="fa-solid fa-phone " aria-hidden="true" style="color: #fff;"></i>
+                        <i class="fa fa-phone " aria-hidden="true" style="color: #fff;"></i>
                         <a class="phone-number-header text-decoration-none " href="tel:+971566428066" style="color: #42b979;">+971 56 642 8066</a>
                     </div>
                     <div class="custom-select-wrapper">
@@ -524,7 +524,7 @@
                                                             
                                                             <span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">{{ __('messages.Subject') }} :</strong> English</span>
 
-                                                            <span><i class="fa-solid fa-globe" style="color: #42b979 !important;"></i><strong>{{ __('messages.Country') }} :</strong> {{ $item->location }}</span>
+                                                            <span><i class="fa fa-globe" style="color: #42b979 !important;"></i><strong>{{ __('messages.Country') }} :</strong> {{ $item->location }}</span>
                                                         </div>
                                                         <!-- <div class="ae-detail-child">  
                                                                 <span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">{{ __('messages.Gender') }} :</strong>{{ $item->gender }}</span>
@@ -1244,7 +1244,7 @@
                                         tutorHTML += '<span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Name :</strong>' + item.f_name + ' ' + item.l_name + '</span>';
                                         tutorHTML += '<div class="ae-detail-child">';
                                         
-                                        tutorHTML += '<span><i class="fa-solid fa-globe"></i><strong>Country :</strong> ' + item.location + '</span>';
+                                        tutorHTML += '<span><i class="fa fa-globe"></i><strong>Country :</strong> ' + item.location + '</span>';
                                         tutorHTML += '</div>';
                                         tutorHTML += '<div class="ae-detail-child">';
                                         tutorHTML += '<span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong>' + item.gender + '</span>';
@@ -1358,7 +1358,7 @@
                 //                         tutorHTML += '<div class="ae-detail-child">';
                 //                         tutorHTML += '<span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong> ' + teachingSubjects + '</span>'; // Display subjects here
                 //                         tutorHTML += '</span>';
-                //                         tutorHTML += '<span><i class="fa-solid fa-globe"></i><strong>Country :</strong> ' + item.location + '</span>';
+                //                         tutorHTML += '<span><i class="fa fa-globe"></i><strong>Country :</strong> ' + item.location + '</span>';
                 //                         tutorHTML += '</div>';
                 //                         tutorHTML += '<div class="ae-detail-child">';
                 //                         tutorHTML += '<span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong> ' + item.gender + '</span>';
@@ -1469,7 +1469,7 @@
                                     tutorHTML += '<div class="ae-detail-child">';
                                     tutorHTML += '<span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong> '+teachingSubject+'</span>'; // Display subjects here
                                     tutorHTML += '</span>';
-                                    tutorHTML += '<span><i class="fa-solid fa-globe"></i><strong>Country :</strong> ' + item.location + '</span>';
+                                    tutorHTML += '<span><i class="fa fa-globe"></i><strong>Country :</strong> ' + item.location + '</span>';
                                     tutorHTML += '</div>';
                                     tutorHTML += '<div class="ae-detail-child">';
                                     // tutorHTML += '<span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong> ' + item.gender + '</span>';
@@ -1588,7 +1588,7 @@
                                     tutorHTML += '<span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong>';
                                     tutorHTML += teachingArray.join(', '); // Join the subjects with a comma
                                     tutorHTML += '</span>';
-                                    tutorHTML += '<span><i class="fa-solid fa-globe"></i><strong>Country :</strong> ' + item.location + '</span>';
+                                    tutorHTML += '<span><i class="fa fa-globe"></i><strong>Country :</strong> ' + item.location + '</span>';
                                     tutorHTML += '</div>';
                                     tutorHTML += '<div class="ae-detail-child">';
                                     // tutorHTML += '<span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">Gender :</strong> ' + item.gender + '</span>';
@@ -1689,7 +1689,7 @@
                                                         <div class="ae-detail-div">
                                                             <span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 7px;">Name :</strong>${tutor.f_name}</span>
                                                             <span><i class="fa-solid fa-book-open"></i><strong style="margin-left: 8px;">Subject :</strong> ${teachingSubject}</span>
-                                                            <span><i class="fa-solid fa-globe" style="color: #42b979 !important;"></i><strong>Country :</strong> ${tutor.location}</span>
+                                                            <span><i class="fa fa-globe" style="color: #42b979 !important;"></i><strong>Country :</strong> ${tutor.location}</span>
                                                         </div>
                                                         <span class="d-flex align-item-center"><i class="fa-solid fa-user mt-1"></i>
                                                             <strong style="margin-left: 15px;">Intro :</strong>

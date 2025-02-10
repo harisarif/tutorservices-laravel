@@ -6,7 +6,7 @@
                 <a class="text-decoration-none text-light" href="mailto:info@eduexceledu.com">info@eduexceledu.com</a>
             </li>
             <li class="d-inline p-2">
-                <i class="fa-solid fa-phone text-light" aria-hidden="true"></i>
+                <i class="fa fa-phone text-light" aria-hidden="true"></i>
                 <a class="text-decoration-none text-light" href="tel:+971566428066">+971 56 642 8066</a>
             </li>
         </ul>

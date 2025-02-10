@@ -179,7 +179,7 @@
                 <a class="mx-auto" href="{{ route('newhome') }}"><img src="/images/logo.png" alt="EDEXCEL-logo" height="50px"></a>
                 <div class="custom-select-wrapper">
                     <div class="custom-select-web">
-                        <i class="fa-solid fa-globe" style="color:#42b979 " aria-hidden="true" onclick="toggleDropdownWeb()"></i>
+                        <i class="fa fa-globe" style="color:#42b979 " aria-hidden="true" onclick="toggleDropdownWeb()"></i>
                         <div class="custom-options-web p-0" id="language-select">
                             <div class="custom-option d-flex p-1 align-items-center" data-value="en" onclick="changeLanguageWeb('en')">
                                  <img src="/images/US.png" alt="" style="width: 20%;">

@@ -1,27 +1,12 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="">
-    <meta name="description" content="Home Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
-    <title>Edexcel Dashbord</title>
-    <link rel="stylesheet" href="{{asset('css/fontawesome-free/css/all.min.css')}}"/>
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-     <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}"/>
+@extends('layouts.app')
+    <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
-    
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-</head>
     <style>
+        footer {
+        display: none !important;
+    }
         .dropdown {
             position: relative;
             display: inline-block;
@@ -197,6 +182,7 @@
             <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
         </div>
     @endif
+    @section('content')
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -453,13 +439,13 @@
                                             <ul class="dropdown-action " id="dropdownMenu">
                                                 <li>
                                                     <a href="{{ route('view-teacher', $tutor->id) }}" class="btn btn-sm text-justify">
-                                                    <i class="fa-regular fa-pen-to-square" style="color: #4e73df;"></i>
+                                                    <i class="fa fa-eye" style="color: #4e73df;"></i>
                                                     <span class="mx-1">View</span>
                                                 </a>
                                                 </li>
                                                 <li>
                                                     <a href="{{ route('edit-teacher', $tutor->id) }}" class="btn btn-sm text-justify">
-                                                    <i class="fa-regular fa-pen-to-square" style="color: #4e73df;"></i>
+                                                    <i class="fa fa-pen-to-square" style="color: #4e73df;"></i>
                                                     <span class="mx-1">Edit</span>
                                                 </a>
                                                 </li>
@@ -468,7 +454,7 @@
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-sm d-flex align-items-center" onclick="return confirm('Are you sure?')" style="color: black; margin-left: -11%;">
-                                                            <i class="fa-solid fa-trash-can mx-1" style="color: #e74a3b;"></i>
+                                                            <i class="fa fa-trash-can mx-1" style="color: #e74a3b;"></i>
                                                             <span class="mx-1">Delete</span>
                                                         </button>
                                                     </form>
@@ -534,8 +520,8 @@
     </div>
 
 </body>
+@endsection
 
-</html>
 
     <!-- Bootstrap core JavaScript-->
 

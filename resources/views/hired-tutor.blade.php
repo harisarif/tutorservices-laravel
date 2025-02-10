@@ -204,7 +204,7 @@
                
                     <div class=" p-2 header-phone-number phone-container">
                     
-                        <i class="fa-solid fa-phone " aria-hidden="true" style="color: #fff;"></i>
+                        <i class="fa fa-phone " aria-hidden="true" style="color: #fff;"></i>
                         <a class="phone-number-header text-decoration-none " href="tel:+971566428066" style="color: #42b979;">+971 56 642 8066</a>
                     </div>
                     <div class="custom-select-wrapper">
