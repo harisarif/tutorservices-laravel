@@ -75,6 +75,10 @@ Route::get('/all-tutors', [TutorController::class, 'allTutors'])->name('all.tuto
 Route::post('/tutor/create', [TutorController::class, 'create'])->name('tutor-create');
 Route::get('/tutors', [TutorController::class, 'filterByCountry'])->name('tutors.filterByCountry');
 Route::get('/teachers-list', [TutorController::class, 'fetchTeachers'])->name('teachers.list');
+Route::get('/teachers-list/{id}/view', [TutorController::class, 'show'])->name('view-teacher');
+// document
+Route::get('/teachers-list/{id}/view/document', [TutorController::class, 'view'])->name('view_document');
+
 Route::get('/teachers-list/{id}/edit', [TutorController::class, 'edit'])->name('edit-teacher');
 Route::put('/teachers-list/{id}', [TutorController::class, 'update'])->name('teachers.update');
 Route::delete('/teachers-list/{id}', [TutorController::class, 'destroy'])->name('teachers.destroy');

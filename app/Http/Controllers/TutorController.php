@@ -226,8 +226,7 @@ class TutorController extends Controller
         // Your store method logic here
     }
     public function create(Request $request)
-    { 
-        // Validate form data
+    {         // Validate form data
         $rules = [
             'f_name' => 'required|string|max:255',
             'intro' => 'nullable|string|max:255',
@@ -298,16 +297,17 @@ class TutorController extends Controller
         $tutor->f_name = $request->input('f_name');
         $tutor->description = $request->input('description');
         $tutor->l_name = $request->input('l_name');
-        $tutor->city = $request->input('country');
+        $tutor->country = $request->input('country');
+        $tutor->year = $request->input('year');
         $tutor->email = $request->input('email');
         $tutor->document = 'documents/' . $fileName;
         $tutor->dob = $request->input('dob');
         $tutor->qualification = $request->input('qualification');
         $tutor->gender = $request->input('gender');
-        $tutor->location = 'Dubai';
+        $tutor->location = $request->input('location');
         $tutor->experience = $request->input('experience');
         $tutor->language_tech = $request->input('language_tech');
-        $tutor->curriculum = serialize($request->input('curriculum'));
+        $tutor->curriculum = serialize($request->input('courses'));
         $tutor->teaching = serialize($request->input('teaching'));
         $tutor->phone = $request->input('phone'); 
         $user->password = Hash::make($request->input('password'));
@@ -509,6 +509,27 @@ class TutorController extends Controller
         // Retrieve verified email from session (if exists)
         $verifiedEmail = session('verified_email', '');
         return view('tutor-signup', compact(['courses','countriesPhone', 'countries', 'verifiedEmail', 'schoolClasses', 'countries_number_length', 'countries_prefix', 'languages']));
+    }
+   
+    public function show($id)
+    {
+        $tutor = Tutor::findOrFail($id);
+        $tutor->teaching = unserialize($tutor->teaching);
+        $tutor->curriculum = unserialize($tutor->curriculum);
+        $countries = collect(config('phonecountries.countries'));
+        return view('view-teacher', compact(['tutor', 'countries']));
+    }
+
+    public function view($id)
+    {
+            $tutor = Tutor::findOrFail($id); // Fetch the tutor by ID
+        
+            if (!$tutor->document) {
+                return redirect()->back()->with('error', 'No document found.');
+            }
+        
+            return view('document_view', compact('tutor'));
+                
     }
 
     public function edit($id)

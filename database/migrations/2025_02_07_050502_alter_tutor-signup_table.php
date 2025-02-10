@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('specialization')->nullable()->after('video'); 
             $table->string('language_tech')->nullable()->after('specialization'); 
             $table->string('edu_teaching')->nullable()->after('language_tech'); 
+            $table->string('country')->nullable()->after('edu_teaching'); 
+            $table->string('year')->nullable()->after('country'); 
+            
         });
     }
 
@@ -34,7 +37,7 @@ return new class extends Migration
                 'video',
                 'specialization',
                 'language_tech',
-                'edu_teaching',
+                'edu_teaching','country','year',
             ]);
         });
     }

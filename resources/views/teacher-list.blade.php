@@ -452,6 +452,12 @@
                                             </button>
                                             <ul class="dropdown-action " id="dropdownMenu">
                                                 <li>
+                                                    <a href="{{ route('view-teacher', $tutor->id) }}" class="btn btn-sm text-justify">
+                                                    <i class="fa-regular fa-pen-to-square" style="color: #4e73df;"></i>
+                                                    <span class="mx-1">View</span>
+                                                </a>
+                                                </li>
+                                                <li>
                                                     <a href="{{ route('edit-teacher', $tutor->id) }}" class="btn btn-sm text-justify">
                                                     <i class="fa-regular fa-pen-to-square" style="color: #4e73df;"></i>
                                                     <span class="mx-1">Edit</span>

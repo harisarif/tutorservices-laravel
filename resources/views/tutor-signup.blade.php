@@ -225,7 +225,7 @@
                                 <label for="experience" class="form-label" style="color:#42b979;">
                                     <strong>How We Can Help</strong>
                                 </label>
-                                <select class="form-control form-select" id="experience" name="experience"
+                                <select class="form-control form-select" id="status" name="status"
                                     aria-label="Default select example"
                                     style="border: 1px solid rgba(137, 135, 135, 0.5); width: 100%;">
                                     <option value="Online" selected>Online</option>
@@ -313,7 +313,7 @@
                                         @endforeach
                                     </select>
                                     <!-- Year Select -->
-                                    <select id="yearSelect" name="uniyear" class="form-select"
+                                    <select id="yearSelect" name="year" class="form-select"
                                         style="border: 1px solid rgb(137, 135, 135);">
                                         <option value="" disabled selected>Select Year</option>
                                         @for ($i = date('Y'); $i >= 1900; $i--)
@@ -344,7 +344,7 @@
                                 <label for="institution" class="form-label" style="color:#42b979;">
                                     <strong>Institution/University Name</strong>
                                 </label>
-                                <select name="institution" class="form-control select2" id="institution">
+                                <select name="location" class="form-control select2" id="institution">
                                     <option value="harvard">Harvard University</option>
                                     <option value="mit">Massachusetts Institute of Technology</option>
                                     <option value="stanford">Stanford University</option>
@@ -361,7 +361,7 @@
                                 <!-- <input type="text" class="form-control" id="other_qualification_input"
                                     name="other_qualification_input"
                                     style="border: 1px solid rgba(137, 135, 135, 0.5);" /> -->
-                                <select id="other_qualification_input" name="other_qualification_input">
+                                <select id="other_qualification_input" name="courses">
                                     @foreach ($courses as $code => $name)
                                     <option value="{{ $code }}">{{ $name }}</option>
                                     @endforeach
@@ -388,7 +388,7 @@
                                 <label for="language" class="form-label" style="color:#42b979;">
                                     <strong>Language Teaching</strong>
                                 </label>
-                                <select name="language" class="form-control" id="language">
+                                <select name="language_tech" class="form-control" id="language">
                                     <option value="english">English</option>
                                     <option value="spanish">Spanish</option>
                                     <option value="french">French</option>
@@ -403,15 +403,15 @@
                                 <label for="experience" class="form-label" style="color:#42b979;"><strong>Experience (In
                                         Teaching)</strong></label>
                                 <input type="number" min="0" class="form-control" id="experienceInTeaching"
-                                    name="experienceInTeaching"
+                                    name="experience"
                                     style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);">
                                 <div style="text-align: left;color: red;"></div>
                             </div>
                             <div class="col-md-6 px-2 mb-2">
                                 <label for="qualification" class="form-label" style="color:#42b979;"><strong>Educational
                                         Teaching</strong></label>
-                                <input type="text" class="form-control" id="educationalTeaching"
-                                    name="educationalTeaching" style="border: 1px solid rgba(137, 135, 135, 0.5);" />
+                                <input type="text" class="form-control" id="edu_Teaching"
+                                    name="edu_teaching" style="border: 1px solid rgba(137, 135, 135, 0.5);" />
                                 <div style="text-align: left;color: red;"></div>
                             </div>
                         </div>
@@ -510,7 +510,7 @@
                         </div>
                         <div class="col-12 px-2 py-2"><label for="curriculum" class="form-label"
                                 style="color:#42b979;"><strong>Description (Optional)</strong></label>
-                            <textarea class="form-control" id="curriculum" name="curriculum[]" rows="5"
+                            <textarea class="form-control" id="curriculum" name="description" rows="5"
                                 placeholder="Enter Your Description Here..."
                                 style="box-shadow: none;border: 1px solid rgb(137, 135, 135);"></textarea>
                         </div>
