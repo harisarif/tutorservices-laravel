@@ -365,6 +365,174 @@ $languages_spoken = json_decode($tutor->language, true) ?? [];
     <label for="description" class="form-label">Description:</label>
     <textarea class="form-control" id="description" name="description" rows="3">{{ old('description', $tutor->description ?? '') }}</textarea>
 </div>
+<section style="background-color: #eee;">
+        <div class="container py-5">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="card mb-4 h-100">
+                <div class="card-body text-center">
+                  <img src="{{asset('images/ava3.webp')}}" alt="avatar"
+                    class="rounded-circle img-fluid mt-5" style="width: 150px;">
+                  <h5 class="my-3" style="color: #198754;">John Smith</h5>
+                  <p class="mb-1" style="color: #198754;">Full Stack Developer</p>
+                  <p class="mb-4" style="color: #198754;">Bay Area, San Francisco, CA</p>
+                  <div class="d-flex justify-content-center mb-2">
+                    <button  type="button"  class="btn" style="background-color: #198754;color: white;">Follow</button>
+                    <button  type="button"  class="btn ms-1" style="background-color: #198754;color: white;">Message</button>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            <div class="col-lg-8">
+              <div class="card mb-4">
+                <div class="card-body" style="height: auto;">
+                  <div class="row" style="margin-top: 100px;">
+                    <div class="col-md-6">
+                      <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
+                        <h6 class="mb-0" style="color: #198754;">Full Name</h6>
+                        <p class="mb-0" style="color: #198754;">Johnatan Smith</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
+                        <h6 class="mb-0" style="color: #198754;">Email</h6>
+                        <p class="mb-0" style="color: #198754;">example@example.com</p>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="row mt-md-4">
+                    <div class="col-md-6">
+                      <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
+                        <h6 class="mb-0" style="color: #198754;">Phone</h6>
+                        <p class="mb-0" style="color: #198754;">(097) 234-5678</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
+                        <h6 class="mb-0" style="color: #198754;">Mobile</h6>
+                        <p class="mb-0" style="color: #198754;">(097) 234-5678</p>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="row mt-md-4">
+                    <div class="col-md-6">
+                      <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
+                        <h6 class="mb-0" style="color: #198754;">Gender</h6>
+                        <p class="mb-0" style="color: #198754;">Male</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
+                        <h6 class="mb-0" style="color: #198754;">Address</h6>
+                        <p class="mb-0" style="color: #198754;">Bay Area, San Francisco, CA</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mt-md-4">
+                    <div class="col-md-6">
+                      <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
+                        <h6 class="mb-0" style="color: #198754;">High qualification</h6>
+                        <p class="mb-0" style="color: #198754;">MA</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
+                        <h6 class="mb-0" style="color: #198754;">year</h6>
+                        <p class="mb-0" style="color: #198754;">2024</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mt-md-4">
+                    <div class="col-md-6">
+                      <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
+                        <h6 class="mb-0" style="color: #198754;">Specification</h6>
+                        <p class="mb-0" style="color: #198754;">Doctor</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
+                        <h6 class="mb-0" style="color: #198754;">University</h6>
+                        <p class="mb-0" style="color: #198754;">Agri Culture University</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mt-md-4">
+                    <div class="col-md-6">
+                      <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
+                        <h6 class="mb-0" style="color: #198754;">Course teaching</h6>
+                        <p class="mb-0" style="color: #198754;">.......</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
+                        <h6 class="mb-0" style="color: #198754;">Subject you want to teach</h6>
+                        <p class="mb-0" style="color: #198754;">Biology</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row  mt-md-4">
+                    <div class="col-md-6">
+                      <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
+                        <h6 class="mb-0" style="color: #198754;">Specification</h6>
+                        <p class="mb-0" style="color: #198754;">Doctor</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
+                        <h6 class="mb-0" style="color: #198754;">University</h6>
+                        <p class="mb-0" style="color: #198754;">Agri Culture University</p>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <div class="row mt-md-4">
+                    <div class="col-md-6">
+                      <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
+                        <h6 class="mb-0" style="color: #198754;">Intro</h6>
+                        <p class="mb-0" style="color: #198754;">.....</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
+                        <h6 class="mb-0" style="color: #198754;">video</h6>
+                        <p class="mb-0" style="color: #198754;">.......</p>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="row mt-md-4">
+                    <div class="col-md-6">
+                      <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
+                        <h6 class="mb-0" style="color: #198754;">Experience teaching</h6>
+                        <p class="mb-0" style="color: #198754;">5Years</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
+                        <h6 class="mb-0" style="color: #198754;">Languge teaching</h6>
+                        <p class="mb-0" style="color: #198754;">.......</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
 <a href="{{ route('all.tutors') }}" class="btn btn-success">Back To Dashboard</a>
 

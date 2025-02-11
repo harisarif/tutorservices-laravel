@@ -2,11 +2,16 @@
     <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}"/>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/fontawesome-free/css/all.min.css')}}"/>
+
 
     <style>
+        .modalBox {
+            display: none !important;
+        }
         footer {
-        display: none !important;
-    }
+            display: none !important;
+        }
         .dropdown {
             position: relative;
             display: inline-block;
@@ -434,7 +439,7 @@
                                     <td>
                                         <div class="dropdown">
                                             <button class="dropdown-icon" id="dropdownButton">
-                                                <i class="fa-solid fa-ellipsis-vertical"></i> <!-- You can replace this with any icon -->
+                                                <i class="fa fa-ellipsis-v"></i> <!-- You can replace this with any icon -->
                                             </button>
                                             <ul class="dropdown-action " id="dropdownMenu">
                                                 <li>
@@ -445,7 +450,7 @@
                                                 </li>
                                                 <li>
                                                     <a href="{{ route('edit-teacher', $tutor->id) }}" class="btn btn-sm text-justify">
-                                                    <i class="fa fa-pen-to-square" style="color: #4e73df;"></i>
+                                                    <i class="fa fa-edit" style="color: #4e73df;"></i>
                                                     <span class="mx-1">Edit</span>
                                                 </a>
                                                 </li>
@@ -454,7 +459,7 @@
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-sm d-flex align-items-center" onclick="return confirm('Are you sure?')" style="color: black; margin-left: -11%;">
-                                                            <i class="fa fa-trash-can mx-1" style="color: #e74a3b;"></i>
+                                                            <i class="fa fa-trash mx-1" style="color: #e74a3b;"></i>
                                                             <span class="mx-1">Delete</span>
                                                         </button>
                                                     </form>
@@ -521,25 +526,22 @@
 
 </body>
 @endsection
-
+@section('js')
 
     <!-- Bootstrap core JavaScript-->
 
 
     <!-- Custom scripts for all pages-->
-    <script src="{{asset('js/js/jquery.min.js')}}"></script>
+    <!-- <script src="{{asset('js/js/jquery.min.js')}}"></script> -->
     <script src="{{asset('js/js/sb-admin-2.min.js')}}"></script>
 
     <script src="{{asset('js/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('js/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
-    integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
     <script src="{{asset('js/js/bootstrap.bundle.min.js')}}"></script>
 <script>
-        document.getElementById('dropdownButton').addEventListener('click', function() {
-            var dropdownMenu = document.getElementById('dropdownMenu');
-            dropdownMenu.classList.toggle('show');
+        document.querySelector("#dropdownButton").addEventListener("click", () => {
+            document.querySelector("#dropdownMenu").classList.toggle("show");
         });
         function updateStatus(tutorId) {
             let statusToggle = document.getElementById(`statusToggle_${tutorId}`);
@@ -671,3 +673,4 @@
                 });
     </script>
 
+@endsection
