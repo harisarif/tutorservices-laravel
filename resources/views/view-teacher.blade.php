@@ -184,7 +184,7 @@ $languages_spoken = json_decode($tutor->language, true) ?? [];
                 </nav>
                 <h2>Teacher's Profile</h2>
 
-    <form action="">
+    {{-- <form action="">
         @csrf
 
         <div class="form-group">
@@ -364,7 +364,7 @@ $languages_spoken = json_decode($tutor->language, true) ?? [];
 
     <label for="description" class="form-label">Description:</label>
     <textarea class="form-control" id="description" name="description" rows="3">{{ old('description', $tutor->description ?? '') }}</textarea>
-</div>
+</div> --}}
 <section style="background-color: #eee;">
         <div class="container py-5">
           <div class="row">
@@ -391,13 +391,13 @@ $languages_spoken = json_decode($tutor->language, true) ?? [];
                     <div class="col-md-6">
                       <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
                         <h6 class="mb-0" style="color: #198754;">Full Name</h6>
-                        <p class="mb-0" style="color: #198754;">Johnatan Smith</p>
+                        <p class="mb-0" style="color: #198754;">{{ $tutor->f_name ?? '' }} {{ $tutor->l_name ?? '' }}</p>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
                         <h6 class="mb-0" style="color: #198754;">Email</h6>
-                        <p class="mb-0" style="color: #198754;">example@example.com</p>
+                        <p class="mb-0" style="color: #198754;">{{ $tutor->email ?? '' }}</p>
                       </div>
                     </div>
                   </div>
@@ -407,13 +407,13 @@ $languages_spoken = json_decode($tutor->language, true) ?? [];
                     <div class="col-md-6">
                       <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
                         <h6 class="mb-0" style="color: #198754;">Phone</h6>
-                        <p class="mb-0" style="color: #198754;">(097) 234-5678</p>
+                        <p class="mb-0" style="color: #198754;">{{ $tutor->phone ?? '' }}</p>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
-                        <h6 class="mb-0" style="color: #198754;">Mobile</h6>
-                        <p class="mb-0" style="color: #198754;">(097) 234-5678</p>
+                        <h6 class="mb-0" style="color: #198754;">Date Of Birth</h6>
+                        <p class="mb-0" style="color: #198754;">{{ $tutor->dob ?? '' }}</p>
                       </div>
                     </div>
                   </div>
@@ -423,13 +423,13 @@ $languages_spoken = json_decode($tutor->language, true) ?? [];
                     <div class="col-md-6">
                       <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
                         <h6 class="mb-0" style="color: #198754;">Gender</h6>
-                        <p class="mb-0" style="color: #198754;">Male</p>
+                        <p class="mb-0" style="color: #198754;">{{ $tutor->gender ?? '' }}</p>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
-                        <h6 class="mb-0" style="color: #198754;">Address</h6>
-                        <p class="mb-0" style="color: #198754;">Bay Area, San Francisco, CA</p>
+                        <h6 class="mb-0" style="color: #198754;">Status</h6>
+                        <p class="mb-0" style="color: #198754;">{{ $tutor->status ?? '' }}</p>
                       </div>
                     </div>
                   </div>
@@ -438,13 +438,13 @@ $languages_spoken = json_decode($tutor->language, true) ?? [];
                     <div class="col-md-6">
                       <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
                         <h6 class="mb-0" style="color: #198754;">High qualification</h6>
-                        <p class="mb-0" style="color: #198754;">MA</p>
+                        <p class="mb-0" style="color: #198754;">{{ $qualification ?? 'Not specified' }}</p>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
                         <h6 class="mb-0" style="color: #198754;">year</h6>
-                        <p class="mb-0" style="color: #198754;">2024</p>
+                        <p class="mb-0" style="color: #198754;">{{ $tutor->year ?? '' }}</p>
                       </div>
                     </div>
                   </div>
@@ -453,13 +453,13 @@ $languages_spoken = json_decode($tutor->language, true) ?? [];
                     <div class="col-md-6">
                       <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
                         <h6 class="mb-0" style="color: #198754;">Specification</h6>
-                        <p class="mb-0" style="color: #198754;">Doctor</p>
+                        <p class="mb-0" style="color: #198754;">{{ $tutor->specialization ?? '' }}</p>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
                         <h6 class="mb-0" style="color: #198754;">University</h6>
-                        <p class="mb-0" style="color: #198754;">Agri Culture University</p>
+                        <p class="mb-0" style="color: #198754;">{{ $tutor->location ?? '' }}</p>
                       </div>
                     </div>
                   </div>
@@ -468,45 +468,54 @@ $languages_spoken = json_decode($tutor->language, true) ?? [];
                     <div class="col-md-6">
                       <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
                         <h6 class="mb-0" style="color: #198754;">Course teaching</h6>
-                        <p class="mb-0" style="color: #198754;">.......</p>
+                        <p class="mb-0" style="color: #198754;">{{ $tutor->curriculum ??''}}</p>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
                         <h6 class="mb-0" style="color: #198754;">Subject you want to teach</h6>
-                        <p class="mb-0" style="color: #198754;">Biology</p>
+                        <p class="mb-0" style="color: #198754;">{{ !empty($tutor->teaching) ? implode(', ', $tutor->teaching) : '' }}</p>
                       </div>
                     </div>
                   </div>
 
                   <div class="row  mt-md-4">
                     <div class="col-md-6">
-                      <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
-                        <h6 class="mb-0" style="color: #198754;">Specification</h6>
-                        <p class="mb-0" style="color: #198754;">Doctor</p>
+                      <div class="d-flex pb-4 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
+                        <h6 class="mb-0" style="color: #198754;">Country</h6>
+                        <p class="mb-0" style="color: #198754;">{{ $tutor->country ??''}}</p>
                       </div>
                     </div>
                     <div class="col-md-6">
-                      <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
-                        <h6 class="mb-0" style="color: #198754;">University</h6>
-                        <p class="mb-0" style="color: #198754;">Agri Culture University</p>
-                      </div>
-                    </div>
+                        <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
+                          <h6 class="mb-0" style="color: #198754;">video</h6>
+                          <p class="mb-0" style="color: #198754;">
+                              <video width="50" height="50" controls>
+                              <source src="{{ asset('storage/' . $tutor->video) }}" type="video/mp4">
+                              Your browser does not support the video tag.
+                          </video>
+                      </p>
+                        </div>
                   </div>
-
+                  </div>
 
 
                   <div class="row mt-md-4">
                     <div class="col-md-6">
                       <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
-                        <h6 class="mb-0" style="color: #198754;">Intro</h6>
-                        <p class="mb-0" style="color: #198754;">.....</p>
+                        <h6 class="mb-0" style="color: #198754;">Language Spoken</h6>
+                        <p class="mb-0" style="color: #198754;"> @foreach ($languages_spoken as $lang)
+                            {{ $lang['language'] ?? '' }}@if(!$loop->last), @endif
+                        @endforeach</p>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
-                        <h6 class="mb-0" style="color: #198754;">video</h6>
-                        <p class="mb-0" style="color: #198754;">.......</p>
+                        <h6 class="mb-0" style="color: #198754;">Language Level</h6>
+                        <p class="mb-0" style="color: #198754;">
+                            @foreach ($languages_spoken as $lang)
+                             ({{ $lang['level'] ?? '' }})@if(!$loop->last), @endif
+                        @endforeach</p>
                       </div>
                     </div>
                   </div>
@@ -516,13 +525,13 @@ $languages_spoken = json_decode($tutor->language, true) ?? [];
                     <div class="col-md-6">
                       <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
                         <h6 class="mb-0" style="color: #198754;">Experience teaching</h6>
-                        <p class="mb-0" style="color: #198754;">5Years</p>
+                        <p class="mb-0" style="color: #198754;">{{ $tutor->experience ??''}}Years</p>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
-                        <h6 class="mb-0" style="color: #198754;">Languge teaching</h6>
-                        <p class="mb-0" style="color: #198754;">.......</p>
+                        <h6 class="mb-0" style="color: #198754;">Language teaching</h6>
+                        <p class="mb-0" style="color: #198754;">{{ $tutor->language_tech ??''}}</p>
                       </div>
                     </div>
                   </div>

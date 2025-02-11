@@ -226,7 +226,7 @@ class TutorController extends Controller
         // Your store method logic here
     }
     public function create(Request $request)
-    {         // Validate form data
+    {        
         $rules = [
             'f_name' => 'required|string|max:255',
             'intro' => 'nullable|string|max:255',
@@ -512,12 +512,13 @@ class TutorController extends Controller
     }
    
     public function show($id)
-    {
+    {     
         $tutor = Tutor::findOrFail($id);
+        $qualification = SchoolClass::where('id', $tutor->qualification)->value('name') ?? 'Not specified';
         $tutor->teaching = unserialize($tutor->teaching);
         $tutor->curriculum = unserialize($tutor->curriculum);
         $countries = collect(config('phonecountries.countries'));
-        return view('view-teacher', compact(['tutor', 'countries']));
+        return view('view-teacher', compact(['tutor', 'countries','qualification']));
     }
 
     public function view($id)
