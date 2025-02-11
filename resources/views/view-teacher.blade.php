@@ -371,11 +371,11 @@ $languages_spoken = json_decode($tutor->language, true) ?? [];
             <div class="col-lg-4">
               <div class="card mb-4 h-100">
                 <div class="card-body text-center">
-                  <img src="{{asset('images/ava3.webp')}}" alt="avatar"
+                  <img src="{{ asset('storage/' . $tutor->profileImage) }}" alt="avatar"
                     class="rounded-circle img-fluid mt-5" style="width: 150px;">
-                  <h5 class="my-3" style="color: #198754;">John Smith</h5>
-                  <p class="mb-1" style="color: #198754;">Full Stack Developer</p>
-                  <p class="mb-4" style="color: #198754;">Bay Area, San Francisco, CA</p>
+                  <h5 class="my-3" style="color: #198754;">{{ $tutor->f_name ?? '' }} {{ $tutor->l_name ?? '' }}</h5>
+                  <p class="mb-1" style="color: #198754;">{{ $tutor->specialization ?? '' }}</p>
+                  <p class="mb-4" style="color: #198754;">{{ $tutor->description ?? '' }}</p>
                   <div class="d-flex justify-content-center mb-2">
                     <button  type="button"  class="btn" style="background-color: #198754;color: white;">Follow</button>
                     <button  type="button"  class="btn ms-1" style="background-color: #198754;color: white;">Message</button>
