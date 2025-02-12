@@ -80,7 +80,7 @@ Route::get('/teachers-list/{id}/view', [TutorController::class, 'show'])->name('
 Route::get('/teachers-list/{id}/view/document', [TutorController::class, 'view'])->name('view_document');
 
 Route::get('/teachers-list/{id}/edit', [TutorController::class, 'edit'])->name('edit-teacher');
-Route::put('/teachers-list/{id}', [TutorController::class, 'update'])->name('teachers.update');
+Route::put('/teachers-list/{id}', [TutorController::class, 'updateProfile'])->name('teachers.update');
 Route::delete('/teachers-list/{id}', [TutorController::class, 'destroy'])->name('teachers.destroy');
 Route::post('/fetch-data', [TutorController::class, 'fetchData'])->name('fetch-data');
 // end 

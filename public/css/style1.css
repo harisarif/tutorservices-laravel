@@ -1,0 +1,134 @@
+
+
+.upload-container {
+    text-align: center;
+}
+
+input[type="file"] {
+    display: none; /* Hide the file input */
+}
+
+/* Profile image container */
+.profile-container {
+    position: relative;
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+}
+
+/* Profile image */
+.profile-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; /* Circular image */
+    object-fit: cover;
+}
+
+/* Plus icon styling */
+.plus-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 18px;
+    width: 20px;
+    height: 20px;
+    background-color: #198754;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 24px;
+    color: white;
+    border: none;
+}
+.plus-icon span{
+    margin-bottom: 5px;
+}
+
+/* Hover effect on the plus icon */
+.plus-icon:hover {
+    background-color: #0056b3;
+}
+
+/* Make the profile image label clickable */
+.profile-image-container {
+    display: inline-block;
+    border-radius: 50%;
+    border: 2px solid #198754;
+    cursor: pointer; /* Makes the profile image clickable */
+}
+
+/* Optional text styling */
+h5, p {
+    color: #198754;
+}
+
+h5 {
+    margin-top: 20px;
+}
+/* Button styling */
+.animated-button {
+    background-color: #198754;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Transition for transform, color, and shadow */
+}
+
+/* Hover effect */
+.animated-button:hover {
+    transform: scale(1.1); /* Slightly scale up the button */
+    background-color: #155d47; /* Darker background color on hover */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* Add a subtle shadow effect */
+}
+
+/* Optional active state to give a pressed effect */
+.animated-button:active {
+    transform: scale(0.98); /* Slightly shrink the button when pressed */
+}
+/* Styling the dropdown */
+select.form-select {
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 14px;
+    background-color: #fff;
+    border: 2px solid #dee2e6;
+    transition: border-color 0.3s ease;
+}
+
+/* Hover and focus effects for the dropdown */
+select.form-select:hover, select.form-select:focus {
+    border-color: #198754; /* Change border color on hover/focus */
+    outline: none;
+}
+/* Styling the phone input */
+.phone-input {
+    border-radius: 5px;
+    padding: 12px 15px;
+    font-size: 14px;
+    background-color: #fff;
+    border: 2px solid #dee2e6;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Focus effect for the phone input */
+.phone-input:focus {
+    border-color: #198754; /* Change border color when focused */
+    box-shadow: 0 0 5px rgba(25, 135, 84, 0.5); /* Add a soft shadow to highlight the input */
+    outline: none;
+}
+
+/* Optional Placeholder Styling */
+.phone-input::placeholder {
+    color: #888; /* Light grey placeholder text */
+    font-style: italic; /* Italicize the placeholder text */
+}
+
+
+
+#videoUpload{
+    display: block;
+}
