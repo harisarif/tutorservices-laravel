@@ -436,9 +436,10 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                                       <select name="language_proficient[]" class="form-select rounded-md pr-5"
                                           id="language_proficient_{{ $index }}" onchange="toggleArrow(this)">
                                           <option value="" disabled>Select Language</option>
-                                          @foreach ($lang as $code => $name)
-                                              <option value="{{ $code }}" {{ $lang['language'] == $code ? 'selected' : '' }}>
-                                                  {{ $name }}
+                                          @foreach ($languageNames as $index => $language)
+                                              <option value="{{ $index }}" {{ old('language') == $index ? 'selected' : '' }}
+                                              >
+                                                  {{  $language }}
                                               </option>
                                           @endforeach
                                       </select>

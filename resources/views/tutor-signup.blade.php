@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 <!-- aos animation link -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -424,11 +424,11 @@
                                     <div class="position-relative">
                                         <select name="language_proficient[]" class="form-control rounded-md pr-5"
                                             id="language_proficient_1" onchange="toggleArrow(this)">
-                                            <option value="" disabled selected>Select Language</option>
-                                            @foreach ($languages as $code => $name)
-                                            <option value="{{ $code }}">{{ $name }}</option>
-                                            @endforeach
-                                        </select>
+                                            <option value="" disabled selected>Select Language</option> --}}
+                                          @php  echo $languages 
+                                            // <option value="{{ $code }}">{{ $name }}</option>
+                                            @endphp
+                                        {{-- </select>
                                         <i class="fas fa-chevron-down position-absolute"
                                             style="right: 10px; top: 50%; transform: translateY(-50%);"
                                             id="arrow-1"></i>
@@ -1322,4 +1322,4 @@
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-@endsection
+@endsection --}}

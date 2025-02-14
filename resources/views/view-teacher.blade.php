@@ -322,18 +322,21 @@ $languages_spoken = json_decode($tutor->language, true) ?? [];
                     <div class="col-md-6">
                       <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
                         <h6 class="mb-0" style="color: #198754;">Language Spoken</h6>
-                        <p class="mb-0" style="color: #198754;"> @foreach ($languages_spoken as $lang)
-                            {{ $lang['language'] ?? '' }}@if(!$loop->last), @endif
-                        @endforeach</p>
-                      </div>
-                    </div>
+                        <p class="mb-0" style="color: #198754;">
+                        @foreach ($languageNames as $index => $language)
+                            {{ $language }}</br>
+                    @endforeach 
+                   </p>
+                </div>
+              </div>
                     <div class="col-md-6">
                       <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
                         <h6 class="mb-0" style="color: #198754;">Language Level</h6>
-                        <p class="mb-0" style="color: #198754;">
-                            @foreach ($languages_spoken as $lang)
-                             ({{ $lang['level'] ?? '' }})@if(!$loop->last), @endif
-                        @endforeach</p>
+                        <p class="mb-0 me-5" style="color: #198754;">
+                        @foreach ($languages_spoken as $index => $lang)
+                            ({{ $lang['level'] ?? 'N/A' }})<br>
+                    @endforeach      
+                    </p>              
                       </div>
                     </div>
                   </div>
@@ -343,7 +346,7 @@ $languages_spoken = json_decode($tutor->language, true) ?? [];
                     <div class="col-md-6">
                       <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
                         <h6 class="mb-0" style="color: #198754;">Experience teaching</h6>
-                        <p class="mb-0" style="color: #198754;">{{ $tutor->experience ??''}}Years</p>
+                        <p class="mb-0" style="color: #198754;">{{ $tutor->experience ??''}}</p>
                       </div>
                     </div>
                     <div class="col-md-6">

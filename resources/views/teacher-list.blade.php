@@ -391,7 +391,6 @@
                                         <th>Gender</th>
                                         <th>Country</th>
                                         <th>Document</th>
-                                        <th>City</th>
                                         <th>Email</th>
                                         <th>Phone</th>
                                         <th>Status</th>
@@ -412,7 +411,7 @@
                                     <td>{{ $tutor->gender }}</td>
                                     <td>{{ $tutor->location }}</td>
                                     <td><a href="{{ url($tutor->document) }}" target="_blank">View PDF Document</a></td>
-                                    <td>{{ $tutor->city }}</td>
+                                   
                                     <td>{{ $tutor->email }}</td>
                                     <!-- <td>{{ $tutor->experience }} {{ $tutor->experience > 1 ? 'years' : 'year' }}</td> -->
 

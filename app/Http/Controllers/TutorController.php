@@ -162,7 +162,7 @@ class TutorController extends Controller
         return response()->json($serializedData);
     }
 
-   
+
     public function updateTutorStatus(Request $request)
     {
         // Validate the request
@@ -211,7 +211,7 @@ class TutorController extends Controller
         // Your store method logic here
     }
     public function create(Request $request)
-    {        
+    {
         $rules = [
             'f_name' => 'required|string|max:255',
             'intro' => 'nullable|string|max:255',
@@ -241,17 +241,17 @@ class TutorController extends Controller
         }
         $hashedPassword = Hash::make($request->input('password'));
         // Check if user already exists
-    $user = User::where('email', $request->input('email'))->first();
+        $user = User::where('email', $request->input('email'))->first();
 
-    if (!$user) {
-        // Create the User first
-        $user = new User();
-        $user->name = $request->input('f_name') . ' ' . $request->input('l_name');
-        $user->email = $request->input('email');
-        $user->password = $hashedPassword;
-        $user->role = 'tutor';
-        $user->save();
-         }
+        if (!$user) {
+            // Create the User first
+            $user = new User();
+            $user->name = $request->input('f_name') . ' ' . $request->input('l_name');
+            $user->email = $request->input('email');
+            $user->password = $hashedPassword;
+            $user->role = 'tutor';
+            $user->save();
+        }
         if ($request->hasFile('document')) {
             $file = $request->file('document');
             // Save the file to 'public/documents' with a unique name
@@ -262,10 +262,10 @@ class TutorController extends Controller
         if ($request->hasFile('videoFile')) {
             $videoPath = $request->file('videoFile')->store('videos', 'public');
 
-            
+
         }
 
-        $language=[];
+        $language = [];
         if ($request->has('language_proficient') && $request->has('language_level')) {
             foreach ($request->input('language_proficient') as $index => $lang) {
                 if (!empty($lang) && isset($request->input('language_level')[$index])) {
@@ -276,7 +276,7 @@ class TutorController extends Controller
                 }
             }
         }
-        
+
         // Now create the Tutor and associate with the User
         $tutor = new Tutor();
         $tutor->f_name = $request->input('f_name');
@@ -294,14 +294,14 @@ class TutorController extends Controller
         $tutor->language_tech = $request->input('language_tech');
         $tutor->curriculum = serialize($request->input('courses'));
         $tutor->teaching = serialize($request->input('teaching'));
-        $tutor->phone = $request->input('phone'); 
+        $tutor->phone = $request->input('phone');
         $user->password = Hash::make($request->input('password'));
         $tutor->video = 'storage/' . $videoPath; // Save video path in database
         $tutor->specialization = $request->input('specialization');
-        $tutor->password = $hashedPassword; 
+        $tutor->password = $hashedPassword;
         $tutor->language = json_encode($language);
-        $tutor->edu_teaching = $request->input('edu_teaching'); 
-        $tutor->status = $request->input('status') ?? 'online'; 
+        $tutor->edu_teaching = $request->input('edu_teaching');
+        $tutor->status = $request->input('status') ?? 'online';
         $tutor->session_id = session()->getId();
         // Upload profile image
         $imagePath = $request->file('profileImage')->store('uploads', 'public');
@@ -411,7 +411,7 @@ class TutorController extends Controller
                                 <td>' . $tutor->gender . '</td>
                                 <td>' . $tutor->location . '</td>
                                 <td><a href="' . url($tutor->document) . '" target="_blank">View PDF Document</a></td>
-                                <td>' . $tutor->city . '</td>
+                               
                                 <td>' . $tutor->email . '</td>
                                 <td>' . $tutor->phone . '</td>
                                 <td>
@@ -493,149 +493,172 @@ class TutorController extends Controller
 
         // Retrieve verified email from session (if exists)
         $verifiedEmail = session('verified_email', '');
-        return view('tutor-signup', compact(['courses','countriesPhone', 'countries', 'verifiedEmail', 'schoolClasses', 'countries_number_length', 'countries_prefix', 'languages']));
+        return view('tutor-signup', compact(['courses', 'countriesPhone', 'countries', 'verifiedEmail', 'schoolClasses', 'countries_number_length', 'countries_prefix', 'languages']));
     }
-   
+
     public function show($id)
-    {     
+    {
+
         $tutor = Tutor::findOrFail($id);
         $qualification = SchoolClass::where('id', $tutor->qualification)->value('name') ?? 'Not specified';
         $tutor->teaching = unserialize($tutor->teaching);
+        $storedLanguageCode = $tutor->language;
+
+        $languages = collect(json_decode($storedLanguageCode, true)) // Decode JSON
+            ->pluck('language') // Extract language codes
+            ->toArray(); // Convert to array
+
+        // Map each language code to its full name from the config file
+        $languageNames = array_map(function ($code) {
+            return config("languages.languages.$code", 'Unknown');
+        }, $languages);
+
         $tutor->curriculum = unserialize($tutor->curriculum);
         $countries = collect(config('phonecountries.countries'));
-        return view('view-teacher', compact(['tutor', 'countries','qualification']));
+        return view('view-teacher', compact(['tutor', 'countries', 'qualification', 'languageNames']));
     }
 
     public function view($id)
     {
-            $tutor = Tutor::findOrFail($id); // Fetch the tutor by ID
-        
-            if (!$tutor->document) {
-                return redirect()->back()->with('error', 'No document found.');
-            }
-        
-            return view('document_view', compact('tutor'));
-                
+        $tutor = Tutor::findOrFail($id); // Fetch the tutor by ID
+
+        if (!$tutor->document) {
+            return redirect()->back()->with('error', 'No document found.');
+        }
+
+        return view('document_view', compact('tutor'));
+
     }
 
     public function edit($id)
-    {       $schoolClasses = SchoolClass::all();
-            $tutor = Tutor::findOrFail($id);
-            $qualification = SchoolClass::where('id', $tutor->qualification)->value('name') ?? 'Not specified';
-            $tutor->teaching = unserialize($tutor->teaching);
-            $tutor->curriculum = unserialize($tutor->curriculum);
-            $countries = collect(config('phonecountries.countries'));
-            return view('edit-teacher', compact(['tutor', 'countries','schoolClasses','qualification']));
+    {
+        $schoolClasses = SchoolClass::all();
+        $tutor = Tutor::findOrFail($id);
+        $qualification = SchoolClass::where('id', $tutor->qualification)->value('name') ?? 'Not specified';
+        $tutor->teaching = unserialize($tutor->teaching);
+        $storedLanguageCode = $tutor->language;
+
+        $languages = collect(json_decode($storedLanguageCode, true)) // Decode JSON
+        ->pluck('language') // Extract language codes
+        ->toArray(); // Convert to array
+
+    // Map each language code to its full name from the config file
+    $languageNames = array_map(function ($code) {
+        return config("languages.languages.$code", 'Unknown');
+    }, $languages);
+        $tutor->curriculum = unserialize($tutor->curriculum);
+        $countries = collect(config('phonecountries.countries'));
+        return view('edit-teacher', compact(['tutor', 'countries', 'languageNames','schoolClasses', 'qualification']));
     }
 
     public function updateProfile(Request $request, $id)
-{          
-    $rules = [
-        'f_name' => 'required|string|max:255',
-        'l_name' => 'required|string|max:255',
-        'intro' => 'nullable|string|max:255',
-        'qualification' => 'nullable|string|max:255',
-        'profileImage' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        'email' => "required|string|email|max:255|unique:tutors,email,$id",
-        'experience' => 'required|string|max:255',
-        'dob' => 'required|string|max:255',
-        'document' => 'nullable|mimes:pdf|max:2048',
-        'videoFile' => 'nullable|mimes:mp4,webm,ogg|max:51200',
-        'specialization' => 'nullable|string|max:255',
-        'language_proficient' => 'required|array',
-        'language_proficient.*' => 'string|max:255',
-        'language_level' => 'required|array',
-        'language_level.*' => 'string|max:255',
-        'language_tech' => 'nullable|string|max:255',
-        'edu_teaching' => 'nullable|string|max:255',
-    ];
+    {
+        $rules = [
+            'f_name' => 'required|string|max:255',
+            'l_name' => 'required|string|max:255',
+            'intro' => 'nullable|string|max:255',
+            'qualification' => 'nullable|string|max:255',
+            'profileImage' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'email' => "required|string|email|max:255|unique:tutors,email,$id",
+            'experience' => 'required|string|max:255',
+            'dob' => 'required|string|max:255',
+            'document' => 'nullable|mimes:pdf|max:2048',
+            'videoFile' => 'nullable|mimes:mp4,webm,ogg|max:51200',
+            'specialization' => 'nullable|string|max:255',
+            'language_proficient' => 'required|array',
+            'language_proficient.*' => 'string|max:255',
+            'language_level' => 'required|array',
+            'language_level.*' => 'string|max:255',
+            'language_tech' => 'nullable|string|max:255',
+            'edu_teaching' => 'nullable|string|max:255',
+        ];
 
-    $validator = Validator::make($request->all(), $rules);
-    if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator)->withInput();
-    }
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
-    // Find the tutor by ID
-    $tutor = Tutor::findOrFail($id);
-    $user = User::where('id', $tutor->user_id)->firstOrFail();
+        // Find the tutor by ID
+        $tutor = Tutor::findOrFail($id);
+        $user = User::where('id', $tutor->user_id)->firstOrFail();
 
-    // Update User details
-    $user->name = $request->input('f_name') . ' ' . $request->input('l_name');
-    $user->email = $request->input('email');
+        // Update User details
+        $user->name = $request->input('f_name') . ' ' . $request->input('l_name');
+        $user->email = $request->input('email');
 
-    if ($request->filled('password')) {
-        $user->password = Hash::make($request->input('password'));
-    }
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->input('password'));
+        }
 
-    $user->save();
+        $user->save();
 
-    // Handle file uploads
-    if ($request->hasFile('document')) {
-        $file = $request->file('document');
-        $fileName = time() . '_' . $file->getClientOriginalName();
-        $file->move(public_path('documents'), $fileName);
-        $tutor->document = 'documents/' . $fileName;
-    }
+        // Handle file uploads
+        if ($request->hasFile('document')) {
+            $file = $request->file('document');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('documents'), $fileName);
+            $tutor->document = 'documents/' . $fileName;
+        }
 
-    if ($request->hasFile('videoFile')) {
-        $videoPath = $request->file('videoFile')->store('videos', 'public');
-        $tutor->video = 'storage/' . $videoPath;
-    }
+        if ($request->hasFile('videoFile')) {
+            $videoPath = $request->file('videoFile')->store('videos', 'public');
+            $tutor->video = 'storage/' . $videoPath;
+        }
 
-    if ($request->hasFile('profileImage')) {
-        $imagePath = $request->file('profileImage')->store('uploads', 'public');
-        $tutor->profileImage = $imagePath;
-    }
+        if ($request->hasFile('profileImage')) {
+            $imagePath = $request->file('profileImage')->store('uploads', 'public');
+            $tutor->profileImage = $imagePath;
+        }
 
-    // Handle language proficiency array
-    $language = [];
-    if ($request->has('language_proficient') && $request->has('language_level')) {
-        foreach ($request->input('language_proficient') as $index => $lang) {
-            if (!empty($lang) && isset($request->input('language_level')[$index])) {
-                $language[] = [
-                    'language' => $lang,
-                    'level' => $request->input('language_level')[$index],
-                ];
+        // Handle language proficiency array
+        $language = [];
+        if ($request->has('language_proficient') && $request->has('language_level')) {
+            foreach ($request->input('language_proficient') as $index => $lang) {
+                if (!empty($lang) && isset($request->input('language_level')[$index])) {
+                    $language[] = [
+                        'language' => $lang,
+                        'level' => $request->input('language_level')[$index],
+                    ];
+                }
             }
         }
+
+        // Update tutor details
+        $tutor->f_name = $request->input('f_name');
+        $tutor->l_name = $request->input('l_name');
+        $tutor->description = $request->input('description');
+        $tutor->country = $request->input('country');
+        $tutor->year = $request->input('year');
+        $tutor->email = $request->input('email');
+        $tutor->dob = $request->input('dob');
+        $tutor->qualification = $request->input('qualification');
+        $tutor->gender = $request->input('gender');
+        $tutor->location = $request->input('location');
+        $tutor->experience = $request->input('experience');
+        $tutor->language_tech = $request->input('language_tech');
+        $tutor->curriculum = serialize($request->input('courses'));
+        $tutor->teaching = serialize($request->input('teaching'));
+        $tutor->phone = $request->input('phone');
+        $tutor->specialization = $request->input('specialization');
+        $tutor->password = $user->password;
+        $tutor->language = json_encode($language);
+        $tutor->edu_teaching = $request->input('edu_teaching');
+        $tutor->status = $request->input('status') ?? 'online';
+        $tutor->session_id = session()->getId();
+        $tutor->save();
+
+        // Send update email to tutor
+        $toTutor = $tutor->email;
+        $subjectTutor = "Your Profile Has Been Updated Successfully";
+        $messageTutor = "Dear " . $tutor->f_name . ' ' . $tutor->l_name . ",\r\n" .
+            "Your profile information has been successfully updated.\r\n" .
+            "If you did not make these changes, please contact support immediately.\r\n\r\n" .
+            "Best regards,\r\n" .
+            "The Edexcel Team";
+        $this->sendEmail($toTutor, $subjectTutor, $messageTutor);
+
+        return redirect()->route('all.tutors')->with('success', 'Tutor profile updated successfully.');
     }
-
-    // Update tutor details
-    $tutor->f_name = $request->input('f_name');
-    $tutor->l_name = $request->input('l_name');
-    $tutor->description = $request->input('description');
-    $tutor->country = $request->input('country');
-    $tutor->year = $request->input('year');
-    $tutor->email = $request->input('email');
-    $tutor->dob = $request->input('dob');
-    $tutor->qualification = $request->input('qualification');
-    $tutor->gender = $request->input('gender');
-    $tutor->location = $request->input('location');
-    $tutor->experience = $request->input('experience');
-    $tutor->language_tech = $request->input('language_tech');
-    $tutor->curriculum = serialize($request->input('courses'));
-    $tutor->teaching = serialize($request->input('teaching'));
-    $tutor->phone = $request->input('phone');
-    $tutor->specialization = $request->input('specialization');
-    $tutor->password = $user->password;
-    $tutor->language = json_encode($language);
-    $tutor->edu_teaching = $request->input('edu_teaching');
-    $tutor->status = $request->input('status') ?? 'online';
-    $tutor->session_id = session()->getId();
-    $tutor->save();
-
-    // Send update email to tutor
-    $toTutor = $tutor->email;
-    $subjectTutor = "Your Profile Has Been Updated Successfully";
-    $messageTutor = "Dear " . $tutor->f_name . ' ' . $tutor->l_name . ",\r\n" .
-        "Your profile information has been successfully updated.\r\n" .
-        "If you did not make these changes, please contact support immediately.\r\n\r\n" .
-        "Best regards,\r\n" .
-        "The Edexcel Team";
-    $this->sendEmail($toTutor, $subjectTutor, $messageTutor);
-
-    return redirect()->route('all.tutors')->with('success', 'Tutor profile updated successfully.');
-}
 
 
     public function destroy($id)
