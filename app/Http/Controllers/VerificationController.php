@@ -25,7 +25,7 @@ class VerificationController extends Controller
         return view('verify-email'); // view to show modal
     }
     public function sendVerificationEmail(Request $request)
-{
+{     dd($request->all());
     $request->validate([
         'email' => 'required|email',
     ]);
@@ -83,12 +83,13 @@ class VerificationController extends Controller
 
 
 function sendEmails($subject, $body, $to_name, $to_email)
-{
+ {  
 
     $pass = env('email_pass');
     $name = env('email_name');
     $smtp_details = config('mail.mailers.smtp');
-    $mail = new PHPMailer(true); 
+    $mail = new PHPMailer(true);   
+    
     try {
         $mail->isSMTP();                                      // Set mailer to use SMTP
     $mail->Host = 'smtp.hostinger.com';                 // Specify SparkPost SMTP server

@@ -356,11 +356,11 @@ class TutorController extends Controller
         return response()->json($students);
     }
     private function sendEmail($to, $subject, $body)
-    {
+    { 
         $pass = env('email_pass');
         $name = env('email_name');
         $mail = new PHPMailer(true);
-
+         
         try {
             // Server settings
             // $mail->SMTPDebug = 2;

@@ -427,21 +427,21 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                       
                       <div id="language-container">
                         @foreach ($languages_spoken as $index => $lang)
-                          <div class="form-row d-flex flex-column flex-md-row mb-4" id="language-row-{{ $index }}">
+                          <div class="form-row d-flex flex-column flex-md-row mb-4" id="language-row">
                               <div class="col-md-6">
-                                  <label for="language_proficient_{{ $index }}" class="form-label fw-bold"  style="color: #198754;">
+                                  <label for="language_proficient" class="form-label fw-bold"  style="color: #198754;">
                                     Language Proficient
                                   </label>
                                   <div class="position-relative">
                                       <select name="language_proficient[]" class="form-select rounded-md pr-5"
-                                          id="language_proficient_{{ $index }}" onchange="toggleArrow(this)">
+                                          id="language_proficient" onchange="toggleArrow(this)">
                                           <option value="" disabled>Select Language</option>
-                                          @foreach ($languageNames as $index => $language)
-                                              <option value="{{ $index }}" {{ old('language') == $index ? 'selected' : '' }}
-                                              >
-                                                  {{  $language }}
-                                              </option>
-                                          @endforeach
+                                          @foreach ($languageNames as $key => $language)
+                                          <option value="{{ $key }}" 
+                                          {{ isset(old('language_proficient')[$key]) && old('language_proficient')[$key] == $key ? 'selected' : '' }}>
+                                          {{ $language}}
+                                      </option>
+                                      @endforeach
                                       </select>
                                   </div>
                               </div>
