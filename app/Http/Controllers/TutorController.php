@@ -368,13 +368,14 @@ class TutorController extends Controller
             $mail->isSMTP();
             $mail->Host = 'smtp.hostinger.com';
             $mail->SMTPAuth = true;
-            $mail->Username = $name;
-            $mail->Password = $pass;
+                                  // Enable SMTP authentication
+            $mail->Username =  'ceo@edexceledu.com';                 // SMTP username
+            $mail->Password = 'Babar123!@#';
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
 
             // Recipients
-            $mail->setFrom($name, 'Edexcel'); // Use direct values here
+            $mail->setFrom('ceo@edexceledu.com', 'Edexcel'); // Use direct values here
             $mail->addAddress($to);
 
             // Content
