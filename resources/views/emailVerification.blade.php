@@ -82,28 +82,30 @@
     </script>
 @endif
 <script>
-    $(document).ready(function() {// Show modal on page load
-        $('#close').on('click',function(){
-            $('#emailVerificationModal').modal('hide');
-        })
-        $('#emailForm').submit(function(e) {
-            e.preventDefault(); // Prevent the default form submission
-            var email = $('#emailInput').val();
-            localStorage.setItem('email', email);
-            $.ajax({
-                url: "{{ route('send.verification.email') }}",
-                type: "POST",
-                data: $(this).serialize(),
-                success: function(response) {
-                    alert(response.success || 'Verification link sent to your email!');
-                    $('#emailVerificationModal').modal('hide'); // Optionally hide the modal
-                    window.location.href = '/'
-                },
-                error: function(xhr) {
-                    alert(xhr.responseJSON.message || 'An error occurred. Please try again.');
-                }
-            });
+    $(document).ready(function () {
+    $('#emailForm').submit(function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        var email = $('#emailInput').val();
+        localStorage.setItem('email', email);
+
+        $.ajax({
+            url: "{{ route('send.verification.email') }}",
+            type: "POST",
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }, // Ensure CSRF token is passed
+            data: $(this).serialize(),
+            success: function (response) {
+                alert(response.success || 'Verification link sent to your email!');
+                $('#emailVerificationModal').modal('hide'); // Hide modal
+                window.location.href = '/';
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText);
+                alert(xhr.responseJSON?.message || 'An error occurred. Please try again.');
+            }
         });
     });
+});
+
 </script>
 

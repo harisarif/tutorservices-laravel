@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 use App\Models\SchoolClass;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -313,33 +314,85 @@ class TutorController extends Controller
         // Save the Tutor instance
         $tutor->save();
 
-        // Send notification emails
+        // Send notification emails with HTML content
         $toStudent = $tutor->email;
-        $subjectStudent = "Welcome to Edexcel Your Learning Journey Starts Now!";
-        $messageStudent = "Dear " . $tutor->f_name . ' ' . $tutor->l_name . "\r\n" .
-            "Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.\r\n" .
-            "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at infoo@edexceledu.com or +971566428066.\r\n" .
-            "We’re here to help you succeed!\r\n\r\n" .
-            "Best regards,\r\n" .
-            "The Edexcel Team";
-        $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
+        $subjectStudent = "Welcome to Edexcel - Verify Your Email!";
+        $bodyStudent = "
+<div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>
+    <table width='100%' cellpadding='0' cellspacing='0' border='0'>
+        <tr>
+            <td align='center'>
+                <table style='max-width: 600px; width: 100%; border: 1px solid #ddd; border-radius: 8px; background-color: #fff;' cellpadding='0' cellspacing='0'>
+                    <!-- Header -->
+                    <tr>
+                        <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 20px; font-weight: bold; color: #4CAF50; border-top-left-radius: 8px; border-top-right-radius: 8px;'>
+                            Welcome to Edexcel
+                        </td>
+                    </tr>
+                    
+                    <!-- Body -->
+                    <tr>
+                        <td style='padding: 20px; text-align: left;'>
+                            <p style='font-size: 16px; margin: 0;'>Dear {$tutor->f_name} {$tutor->l_name},</p>
+                            <p style='font-size: 16px; margin: 10px 0;'>
+                                Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.
+                            </p>
 
+                            <!-- Button (wrapped in table for Outlook compatibility) -->
+                            <table align='center' cellpadding='0' cellspacing='0' border='0'>
+                                <tr>
+                                    <td align='center' style='border-radius: 5px;' bgcolor='#e74a3b'>
+                                        <a href='" . url('checkout/' . $tutor->id) . "' target='_blank' style='display: inline-block; font-size: 16px; color: #ffffff; text-decoration: none; padding: 12px 20px; background-color: #4CAF50; border-radius: 5px; font-weight: bold;'
+                                        onclick='return confirm(\"Are you sure you want to check out? This will delete the tutor and their associated user.\");'>
+                                            Check Out
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <p style='font-size: 16px; margin: 10px 0;'>
+                                If you need any assistance, contact us at <a href='mailto:infoo@edexceledu.com' style='color: #4CAF50; text-decoration: none;'>infoo@edexceledu.com</a> or +971566428066.
+                            </p>
+
+                            <p style='font-size: 16px; margin: 10px 0;'>Best regards,</p>
+                            <p style='font-size: 16px; font-weight: bold; margin: 0;'>The Edexcel Team</p>
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 14px; color: #777; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;'>
+                            &copy; 2025 Edexcel. All rights reserved.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+";
+
+
+        // Send HTML email
+        $this->sendEmail($toStudent, $subjectStudent, $bodyStudent); // true indicates HTML format
+
+        // Notify Admin
         $toAdmin = 'info@edexceledu.com';
-        $subjectAdmin = "Edexcel Notification";
-        $messageAdmin = "Subject: New Teacher Enrollment Notification
+        $subjectAdmin = "New Teacher Enrollment Notification";
+        $bodyAdmin = "
+    <p>Dear Babar,</p>
+    <p>I am pleased to inform you that a new teacher, <strong>{$tutor->f_name} {$tutor->l_name}</strong>, has successfully enrolled through our website. Below are the details:</p>
+    <ul>
+        <li><strong>Full Name:</strong> {$tutor->f_name} {$tutor->l_name}</li>
+        <li><strong>Email:</strong> {$tutor->email}</li>
+        <li><strong>Contact:</strong> {$tutor->phone}</li>
+        <li><strong>Location:</strong> {$tutor->location}</li>
+    </ul>
+    <p>Please ensure that {$tutor->f_name} {$tutor->l_name} is added to our records and receives all necessary welcome materials.</p>
+";
 
-            Dear Babar,
-
-            I am pleased to inform you that a new teacher, {$tutor->f_name} {$tutor->l_name}, has successfully enrolled through our website. Below are the details:
-
-            - Full Name: {$tutor->f_name} {$tutor->l_name}
-            - Email: {$tutor->email}
-            - Contact: {$tutor->phone}
-            - Location: {$tutor->location}
-
-            Please ensure that {$tutor->f_name} {$tutor->l_name} is added to our records and receives all necessary welcome materials.";
-
-        $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
+        // Send HTML email to admin
+        $this->sendEmail($toAdmin, $subjectAdmin, $bodyAdmin, true);
 
         // Redirect with success message
         return redirect()->route('newhome')->with('success', 'Tutor created successfully.');
@@ -349,6 +402,29 @@ class TutorController extends Controller
     {
         return redirect('/hire-tutor');
     }
+    public function checkout($id)
+{
+    // Find the tutor by ID
+    $tutor = Tutor::find($id);
+
+    if (!$tutor) {
+        return redirect()->back()->with('error', 'Tutor not found.');
+    }
+
+    // Find the associated user
+    $user = User::find($tutor->user_id);
+
+    // Delete the tutor first
+    $tutor->delete();
+
+    // Delete the user if found
+    if ($user) {
+        $user->delete();
+    }
+
+    // Redirect with success message
+    return redirect()->back()->with('success', 'Tutor and associated user deleted successfully.');
+}
 
     public function fetchTeachers(Request $request)
     {
@@ -356,37 +432,37 @@ class TutorController extends Controller
         return response()->json($students);
     }
     private function sendEmail($to, $subject, $body)
-    { 
-        $pass = env('email_pass');
-        $name = env('email_name');
+    {
         $mail = new PHPMailer(true);
-         
-        try {
-            // Server settings
-            // $mail->SMTPDebug = 2;
-            // Enable verbose debug output
-            $mail->isSMTP();
-            $mail->Host = 'smtp.hostinger.com';
-            $mail->SMTPAuth = true;
-                                  // Enable SMTP authentication
-            $mail->Username =  'ceo@edexceledu.com';                 // SMTP username
-            $mail->Password = 'Babar123!@#';
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
 
-            // Recipients
-            $mail->setFrom('ceo@edexceledu.com', 'Edexcel'); // Use direct values here
+        try {
+            // Load SMTP settings from Laravel .env
+            $mail->isSMTP();
+            $mail->Host = env('MAIL_HOST', 'smtp.hostinger.com');
+            $mail->SMTPAuth = true;
+            $mail->Username = env('MAIL_USERNAME'); // Your SMTP username (email)
+            $mail->Password = env('MAIL_PASSWORD'); // Your SMTP password
+            $mail->SMTPSecure = env('MAIL_ENCRYPTION', 'tls'); // TLS or SSL
+            $mail->Port = env('MAIL_PORT', 587); // Default: 587 for TLS, 465 for SSL
+
+            // Set sender info
+            $mail->setFrom(env('MAIL_FROM_ADDRESS', 'no-reply@yourdomain.com'), env('MAIL_FROM_NAME', 'Edexcel'));
             $mail->addAddress($to);
 
-            // Content
-            $mail->isHTML(false); // Set email format to plain text
+            // Email content
+            $mail->isHTML(true); // Plain text email
             $mail->Subject = $subject;
             $mail->Body = $body;
 
-            $mail->send();
-            // echo "Email has been sent to $to";
+            // Send email
+            if ($mail->send()) {
+                Log::info("Email successfully sent to: $to");
+                return response()->json(['message' => 'Email sent successfully!']);
+            }
+
         } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            Log::error("Email sending failed: " . $e->getMessage());
+            return response()->json(['error' => 'Email sending failed. Please try again.'], 500);
         }
     }
 
@@ -499,7 +575,6 @@ class TutorController extends Controller
 
     public function show($id)
     {
-
         $tutor = Tutor::findOrFail($id);
         $qualification = SchoolClass::where('id', $tutor->qualification)->value('name') ?? 'Not specified';
         $tutor->teaching = unserialize($tutor->teaching);
@@ -540,16 +615,16 @@ class TutorController extends Controller
         $storedLanguageCode = $tutor->language;
 
         $languages = collect(json_decode($storedLanguageCode, true)) // Decode JSON
-        ->pluck('language') // Extract language codes
-        ->toArray(); // Convert to array
+            ->pluck('language') // Extract language codes
+            ->toArray(); // Convert to array
 
-    // Map each language code to its full name from the config file
-    $languageNames = array_map(function ($code) {
-        return config("languages.languages.$code", 'Unknown');
-    }, $languages);
+        // Map each language code to its full name from the config file
+        $languageNames = array_map(function ($code) {
+            return config("languages.languages.$code", 'Unknown');
+        }, $languages);
         $tutor->curriculum = unserialize($tutor->curriculum);
         $countries = collect(config('phonecountries.countries'));
-        return view('edit-teacher', compact(['tutor', 'countries', 'languageNames','schoolClasses', 'qualification']));
+        return view('edit-teacher', compact(['tutor', 'countries', 'languageNames', 'schoolClasses', 'qualification']));
     }
 
     public function updateProfile(Request $request, $id)
