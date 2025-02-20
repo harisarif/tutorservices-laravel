@@ -8,7 +8,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Log;
 class VerificationController extends Controller
 {
     public function sendEmail(Request $request)
@@ -25,14 +25,14 @@ class VerificationController extends Controller
         return view('verify-email'); // view to show modal
     }
     public function sendVerificationEmail(Request $request)
-{
+{    
     $request->validate([
         'email' => 'required|email',
     ]);
 
     $email = $request->input('email');
     $subject = 'Email Verification';
-
+     
     // In the email body
     $body = "
         <div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>
@@ -82,39 +82,42 @@ class VerificationController extends Controller
 
 
 
-function sendEmails($subject, $body, $to_name, $to_email)
-{
-
-    $pass = env('email_pass');
-    $name = env('email_name');
-    $smtp_details = config('mail.mailers.smtp');
-    $mail = new PHPMailer(true); 
+function sendEmails($subject, $body, $to_name, $to_email) {  
+    $mail = new PHPMailer(true);   
+    
     try {
-        $mail->isSMTP();                                      // Set mailer to use SMTP
-    $mail->Host = 'smtp.hostinger.com';                 // Specify SparkPost SMTP server
-    $mail->SMTPAuth = true;                               // Enable SMTP authentication
-    $mail->Username =  'ceo@edexceledu.com';                 // SMTP username
-    $mail->Password = 'Babar123!@#'; 
-    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption
-    $mail->Port = 587;                                    // TCP port to connect to
+        $mail->isSMTP();
+        $mail->Host = env('MAIL_HOST', 'smtp.hostinger.com');  
+        $mail->SMTPAuth = true;
+        $mail->Username = env('MAIL_USERNAME');  
+        $mail->Password = env('MAIL_PASSWORD');  
+        $mail->SMTPSecure = env('MAIL_ENCRYPTION', 'tls');  
+        $mail->Port = env('MAIL_PORT', 587);  
+        
+        // Enable debug logging
+        $mail->SMTPDebug = 3;
+        $mail->Debugoutput = function ($str, $level) {
+            Log::debug("SMTP Debug Level $level: $str");
+        };
 
-    // Email settings
-    $mail->setFrom('ceo@edexceledu.com', 'Edexcel');
-    $mail->addAddress($to_email, $to_name);  // Add a recipient
-    // Content
-    $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = $subject;
-    $mail->Body    = $body;
-    $mail->AltBody = 'This is the plain text version of the email body.';        // Plain text version (for non-HTML email clients)
+        // Email settings
+        $mail->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME', 'Edexcel'));
+        $mail->addAddress($to_email, $to_name);
+        $mail->isHTML(true);
+        $mail->Subject = $subject;
+        $mail->Body    = $body;
+        $mail->AltBody = 'This is the plain text version of the email body.';
 
-    // Send the email
-    if ($mail->send()) {
-        echo 'Email sent successfully!';
-    } else {
-        echo 'Email could not be sent.';
-    }
+        if ($mail->send()) {
+            Log::info("Email sent to $to_email successfully!");
+            return redirect()->route('newhome')->with('success', 'Email sent successfully!');
+        } else {
+            Log::error("Email sending failed to $to_email.");
+            return redirect()->back()->with('error', 'Email sending failed. Please try again.');
+        }
     } catch (Exception $e) {
-        // dd($e->getMessage());
+        Log::error("Email sending failed: " . $e->getMessage());
+        return redirect()->back()->with('error', 'Email sending failed. Please try again.');
     }
 }
     
