@@ -192,7 +192,7 @@ class StudentController extends Controller
 
 
 
-        $this->sendEmail($subjectAdmin, $messageAdmin,'admin',$toAdmin);
+        $this->sendEmail($student->email, $subjectAdmin, $messageAdmin);
         
         
         Auth::login($user);
@@ -273,41 +273,36 @@ class StudentController extends Controller
 
         return redirect()->route('newhome')->with('success', 'Inquiry created successfully.');
     }
-    function sendEmail($subject, $body, $to_name, $to_email)
-{
-    $pass = env('email_pass');
-    $name = env('email_name');
+    function sendEmail($to, $subject, $body)
+        {
+            $pass = env('email_pass');
+            $name = env('email_name');
+            $mail = new PHPMailer(true);
 
-    $smtp_details = config('mail.mailers.smtp');
-    $mail = new PHPMailer(true); 
-    try {
-        $mail->isSMTP();                                      // Set mailer to use SMTP
-    $mail->Host = 'smtp.hostinger.com';                 // Specify SparkPost SMTP server
-    $mail->SMTPAuth = true;                               // Enable SMTP authentication
-    $mail->Username =  $name;                 // SMTP username
-    $mail->Password = $pass; 
-    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption
-    $mail->Port = 587;                                    // TCP port to connect to
+            try {
+                $mail->isSMTP();
+                $mail->Host = 'smtp.hostinger.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = $name;
+                $mail->Password = $pass;
+                $mail->SMTPSecure = 'tls';
+                $mail->Port = 587;
 
-    // Email settings
-    $mail->setFrom($name, 'Edexcel');
-    $mail->addAddress($to_email, $to_name);  // Add a recipient
-    // Content
-    $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = $subject;
-    $mail->Body    = $body;
-    $mail->AltBody = 'This is the plain text version of the email body.';        // Plain text version (for non-HTML email clients)
+                // Recipients
+                $mail->setFrom('ceo@edexceledu.com', 'Edexcel'); // Use direct values here
+                $mail->addAddress($to);
 
-    // Send the email
-    if ($mail->send()) {
-        echo 'Email sent successfully!';
-    } else {
-        echo 'Email could not be sent.';
-    }
-    } catch (Exception $e) {
-        // dd($e->getMessage());
-    }
-}
+                // Content
+                $mail->isHTML(true); // Set email format to plain text
+                $mail->Subject = $subject;
+                $mail->Body = $body;
+
+                $mail->send();
+                // echo "Email has been sent to $to";
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+        }
 
     public function update(Request $request, $id) {
         $rules = [
