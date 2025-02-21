@@ -202,11 +202,6 @@ class TutorController extends Controller
         return redirect()->route('all.tutors')->with('success', 'Tutor updated successfully.');
     }
 
-
-
-
-
-
     public function store(Request $request)
     {
         // Your store method logic here
@@ -277,9 +272,10 @@ class TutorController extends Controller
                 }
             }
         }
-
+          
         // Now create the Tutor and associate with the User
         $tutor = new Tutor();
+        $tutor->teacher_id = mt_rand(1000, 9999);
         $tutor->f_name = $request->input('f_name');
         $tutor->description = $request->input('description');
         $tutor->l_name = $request->input('l_name');
@@ -318,7 +314,7 @@ class TutorController extends Controller
         $toStudent = $tutor->email;
         $subjectStudent = "Welcome to Edexcel - Verify Your Email!";
         $bodyStudent = "
-<div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>
+                        <div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>
     <table width='100%' cellpadding='0' cellspacing='0' border='0'>
         <tr>
             <td align='center'>
@@ -332,12 +328,17 @@ class TutorController extends Controller
                     
                     <!-- Body -->
                     <tr>
-                        <td style='padding: 20px; text-align: left;'>
+                     <td style='padding: 20px; text-align: left;'>
+                             <div style='text-align: center; padding-bottom: 10px;'>
+                                <img src='" . asset('images/edexcel.jpeg') . "' alt='Edexcel Logo' height='50' width='150' style='display: block; margin: 0 auto;'>
+                            </div>
                             <p style='font-size: 16px; margin: 0;'>Dear {$tutor->f_name} {$tutor->l_name},</p>
                             <p style='font-size: 16px; margin: 10px 0;'>
                                 Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.
                             </p>
-
+                             <p style='font-size: 16px; margin: 10px 0;'>
+                               To checkout by clicking the button below:
+                            </p>
                             <!-- Button (wrapped in table for Outlook compatibility) -->
                             <table align='center' cellpadding='0' cellspacing='0' border='0'>
                                 <tr>
@@ -361,7 +362,7 @@ class TutorController extends Controller
 
                     <!-- Footer -->
                     <tr>
-                        <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 14px; color: #777; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;'>
+                        <td style='background-color: #f4f4f4; color:#4CAF50; padding: 15px; text-align: center; font-size: 14px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;'>
                             &copy; 2025 Edexcel. All rights reserved.
                         </td>
                     </tr>
@@ -371,7 +372,6 @@ class TutorController extends Controller
     </table>
 </div>
 ";
-
 
         // Send HTML email
         $this->sendEmail($toStudent, $subjectStudent, $bodyStudent); // true indicates HTML format
@@ -393,9 +393,14 @@ class TutorController extends Controller
 
         // Send HTML email to admin
         $this->sendEmail($toAdmin, $subjectAdmin, $bodyAdmin, true);
-
+     
         // Redirect with success message
-        return redirect()->route('newhome')->with('success', 'Tutor created successfully.');
+        // Auto-login only if the user is a tutor
+    if ($user->role === 'tutor') {
+        Auth::login($user);
+        return redirect()->route('teacher_dashboard', ['id' => $tutor->id])
+            ->with('success', 'Tutor created successfully and logged in.');
+    }  return redirect()->back()->with('error', 'Failed to redirect.');
     }
 
     public function hiretutor(Request $request)
@@ -424,6 +429,21 @@ class TutorController extends Controller
 
     // Redirect with success message
     return redirect()->back()->with('success', 'Tutor and associated user deleted successfully.');
+}
+public function teacher_dashboard(Request $request, $id)
+{
+    $tutor = Tutor::find($id);
+
+    if (!$tutor) {
+        return redirect()->route('basicsignup')->with('error', 'Tutor not found.');
+    }
+
+    // Ensure the user exists before logging in
+    if ($tutor->user_id && Auth::loginUsingId($tutor->user_id)) {
+        return view('teacher_dashboard', compact('tutor'))->with('success', 'Welcome to your dashboard!');
+    }
+
+    return redirect()->route('basicsignup')->with('error', 'Authentication failed.');
 }
 
     public function fetchTeachers(Request $request)
@@ -761,6 +781,33 @@ class TutorController extends Controller
         return back()->with('error', 'Teacher not found');
     }
 
+    public function logoutTeacher($id)
+    {
+        // Find the tutor by ID
+        $tutor = Tutor::find($id);
+    
+        // Check if the tutor exists
+        if ($tutor) {
+            // Get the associated user
+            $user = User::find($tutor->user_id);
+    
+            // If the logged-in user is the same as the tutor, log them out
+            if (Auth::id() === optional($user)->id) {
+                Auth::logout();
+    
+                // Invalidate the session
+                request()->session()->invalidate();
+                request()->session()->regenerateToken();
+    
+                // Redirect to login page
+                return redirect()->route('newhome')->with('success', 'You have been logged out successfully.');
+            }
+        }
+    
+        // Redirect back with an error if tutor not found
+        return redirect()->back()->with('error', 'Teacher not found or unauthorized logout attempt.');
+    }
+    
 }
 
 

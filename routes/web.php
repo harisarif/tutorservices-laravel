@@ -58,7 +58,7 @@ Route::get('/notifications/mark-read', [NotificationController::class, 'markNoti
 Route::post('/send-verification-email', [VerificationController::class, 'sendVerificationEmail'])->name('send.verification.email');
 
 // Protected route for tutor signup (requires email verification)
-
+Route::post('/logout/teacher/{id}', [TutorController::class, 'logoutTeacher'])->name('logout.teacher');
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 // Tutor Controllers
 Route::middleware(['check.email.verified'])->group(function () {
@@ -78,7 +78,11 @@ Route::get('/teachers-list', [TutorController::class, 'fetchTeachers'])->name('t
 Route::get('/teachers-list/{id}/view', [TutorController::class, 'show'])->name('view-teacher');
 // document
 Route::get('/teachers-list/{id}/view/document', [TutorController::class, 'view'])->name('view_document');
+Route::get('/teacher-dashboard/{id}', [TutorController::class, 'teacher_dashboard'])
+    ->name('teacher_dashboard')
+    ->middleware('auth');
 
+    // Route::get('/teachers-dashboard/{id}', [TutorController::class, 'teachers'])->name('teachers') ->middleware('auth');   ;
 Route::get('/teachers-list/{id}/edit', [TutorController::class, 'edit'])->name('edit-teacher');
 Route::put('/teachers-list/{id}', [TutorController::class, 'updateProfile'])->name('teachers.update');
 Route::delete('/teachers-list/{id}', [TutorController::class, 'destroy'])->name('teachers.destroy');

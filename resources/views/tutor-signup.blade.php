@@ -356,7 +356,7 @@
                                 </select>
                             </div>
                             <div class="col-md-6 px-2 mb-2">
-                                <label for="qualification" class="form-label" style="color:#42b979;"><strong>Courses
+                                <label for="other_qualification_input" class="form-label" style="color:#42b979;"><strong>Courses
                                         Teaching</strong></label>
                                 <!-- <input type="text" class="form-control" id="other_qualification_input"
                                     name="other_qualification_input"
@@ -408,7 +408,7 @@
                                 <div style="text-align: left;color: red;"></div>
                             </div>
                             <div class="col-md-6 px-2 mb-2">
-                                <label for="qualification" class="form-label" style="color:#42b979;"><strong>Educational
+                                <label for="edu_teaching" class="form-label" style="color:#42b979;"><strong>Educational
                                         Teaching</strong></label>
                                 <input type="text" class="form-control" id="edu_Teaching"
                                     name="edu_teaching" style="border: 1px solid rgba(137, 135, 135, 0.5);" />
