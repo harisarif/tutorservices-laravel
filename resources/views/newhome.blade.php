@@ -442,7 +442,7 @@
                                 <div class="d-flex justify-content-between ad-border-div">
                                     <div class="mx-2">
                                         <p class="m-0 pt-1 tutors-range"> {{ $tutors->firstItem() }} to {{ $tutors->lastItem() }}
-                                            0
+                                            
                                             of <span class="total-tutors-count">{{ $totalTutorsCount }}</span> tutors</p>
                                     </div>
                                     <div class="my-2 mx-2">
@@ -702,46 +702,7 @@
                                                                 </button>
                                                             </div>
                                                         </div>
-                                                        @php
-                                                        // Assuming $item->curriculum is a serialized string
-                                                        $serializedCurriculum = $item->curriculum;
-                                                    
-                                                        // Check if the serialized string is not equal to the specific value
-                                                        $showCurriculum = $serializedCurriculum !== 'a:1:{i:0;N;}';
-                                                    
-                                                        if ($showCurriculum) {
-                                                            // Convert the serialized string to an array
-                                                            $curriculumData = unserialize($serializedCurriculum);
-                                                    
-                                                            // Initialize an empty array to hold the modified curriculum data
-                                                            $modifiedCurriculumData = [];
-                                                    
-                                                            // Loop through each element in the curriculum data
-                                                            foreach ($curriculumData as $curriculum) {
-                                                                // Split the curriculum string by commas
-                                                                $splitCurriculum = explode(',', $curriculum);
-                                                    
-                                                                // Trim each element to remove any leading or trailing spaces
-                                                                $splitCurriculum = array_map('trim', $splitCurriculum);
-                                                    
-                                                                // Merge the split curriculum into the modified array
-                                                                $modifiedCurriculumData = array_merge($modifiedCurriculumData, $splitCurriculum);
-                                                            }
-                                                        }
-                                                    @endphp
-                                                    
-                                                    @if ($showCurriculum && !empty($modifiedCurriculumData))
-                                                        <div class="col-12 d-flex m-1 align-items-center flex-column flex-sm-row " style="padding-left: 25px;">
-                                                            <h5 class="label-h m-0 m-1 font-s1 text-center text-md-left fw-bold">
-                                                                Curriculum
-                                                            </h5>
-                                                            <span class="d-none d-sm-block">:</span>
-                                                            @foreach ($modifiedCurriculumData as $curriculums)
-                                                                <span class="bg-body-secondary d-inline-block rounded font-s mx-1 p-1 bg_green_hover text-center">{{ $curriculums }}</span>
-                                                            @endforeach
-                                                        </div>
-                                                    @endif
-                                                    
+                                                      
                                                     </div>
                                                     <div class="d-flex flex-column flex-lg-row mt-5 py-1 bd_top_dashed">
                                                         <div
