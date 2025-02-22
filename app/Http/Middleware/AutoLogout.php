@@ -23,13 +23,13 @@ class AutoLogout
             
             if (Carbon::now()->timestamp - $lastActivity > $timeout) {
                 Auth::logout();
-                session()->flush();
+                session()->forget('last_activity'); // 
                 return redirect()->route('login')->with('error', 'You have been logged out due to inactivity.');
             }
 
             // Update last activity timestamp
             session()->put('last_activity', Carbon::now()->timestamp);
-            session()->save(); // Ensure session updates are saved
+            session()->save();
         }
 
         return $next($request);

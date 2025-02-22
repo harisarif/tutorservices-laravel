@@ -18,7 +18,7 @@ return [
         'AR'=>['Buenos Aires', 'Córdoba','Rosario ', 'Mendoza', 'La Plata ', 'Salta ', 'Tucumán ', 'Mar del Plata',  'Neuquén',  'Bahía Blanca',  'San Juan',  'Santa Fe ',  'Posadas',  'San Luis ',  'Formosa ',  ],
         'ZA'=>['Cape Town', 'Johannesburg','Durban', 'Pretoria', 'Port Elizabeth', 'Bloemfontein ', 'East London', 'Kimberley',  ],
         'CN'=>['Beijing', 'Shanghai','Guangzhou ', 'Shenzhen ', 'Chengdu ', 'Xian  ', 'Hangzhou ', 'Wuhan ', 'Tianjin ', 'Nanjing  ', 'Suzhou  ', 'Qingdao', ],
-        'CN'=>['Berlin ', 'Munich ','Hamburg  ', 'Frankfurt  ', 'Cologne  ', 'Stuttgart   ', 'Düsseldorf  ', 'Dortmund  ', 'Essen  ', 'Leipzig   ', 'Nuremberg   ', 'Bremen ', ],
+        'CA'=>['Berlin ', 'Munich ','Hamburg  ', 'Frankfurt  ', 'Cologne  ', 'Stuttgart   ', 'Düsseldorf  ', 'Dortmund  ', 'Essen  ', 'Leipzig   ', 'Nuremberg   ', 'Bremen ', ],
         'JP'=>['Tokyo  ', 'Yokohama  ','Osaka   ', 'Nagoya   ', 'Sapporo   ', 'Kyoto    ', 'Kobe   ', 'Fukuoka   ', 'Hiroshima   ', 'Sendai    ', 'Nagasaki    ', 'Shizuoka  ',   'Okinawa  ',],
         'KR'=>['Seoul', 'Busan ','Incheon ', 'Daegu    ', 'Daejeon    ', 'Gwangju     ', 'Suwon    ', 'Ulsan    ', 'Changwon    ', 'Pohang     ', 'Seongnam'],
         'NZ'=>['Auckland ', 'Wellington  ','Christchurch  ', 'Hamilton ', 'Tauranga ', 'Napier-Hastings ', 'Dunedin ', 'Palmerston North ', 'Rotorua ', 'Whangarei  ', 'Nelson '],
