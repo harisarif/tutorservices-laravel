@@ -51,7 +51,7 @@ Route::get('/enter-email', function() {
 })->name('enter.email');
 Route::get('/debug-session', function () {
     return session()->all(); // Display all session data
-})->middleware('auth');
+})->middleware('auth', 'auto-logout');
 Route::get('/notifications/mark-read', [NotificationController::class, 'markNotificationAsRead'])->name('mark.notifications.read');
 
 // Route to send verification email
@@ -80,7 +80,7 @@ Route::get('/teachers-list/{id}/view', [TutorController::class, 'show'])->name('
 Route::get('/teachers-list/{id}/view/document', [TutorController::class, 'view'])->name('view_document');
 Route::get('/teacher-dashboard/{id}', [TutorController::class, 'teacher_dashboard'])
     ->name('teacher_dashboard')
-    ->middleware('auth');
+    ->middleware('auth', 'auto-logout');
 
     // Route::get('/teachers-dashboard/{id}', [TutorController::class, 'teachers'])->name('teachers') ->middleware('auth');   ;
 Route::get('/teachers-list/{id}/edit', [TutorController::class, 'edit'])->name('edit-teacher');
@@ -131,11 +131,11 @@ Route::get('/verify/{token}', [VerificationController::class, 'verify'])->name('
 Route::post('/check-email', [VerificationController::class, 'checkEmail'])->name('check.email');
 
 Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'auto-logout'])
     ->name('dashboard');
 
 Route::view('profile', 'profile')
-    ->middleware(['auth'])
+    ->middleware(['auth', 'auto-logout'])
     ->name('profile');
 
     Route::get('/logout', function () {

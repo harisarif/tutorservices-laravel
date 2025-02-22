@@ -37,7 +37,7 @@ class LoginController extends Controller
             $tutor->session_id = session()->getId();
             $tutor->save();
     
-            return redirect()->route('students-listing'); // Redirect to students listing page
+            return redirect()->route('teacher_dashboard', ['id' => $tutor->id]); // Redirect to students listing page
         } else {
             // If the tutor is inactive, log them out and redirect with an error message
             Auth::logout();

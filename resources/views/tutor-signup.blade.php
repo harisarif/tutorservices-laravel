@@ -345,14 +345,11 @@
                                     <strong>Institution/University Name</strong>
                                 </label>
                                 <select name="location" class="form-control select2" id="institution">
-                                    <option value="harvard">Harvard University</option>
-                                    <option value="mit">Massachusetts Institute of Technology</option>
-                                    <option value="stanford">Stanford University</option>
-                                    <option value="oxford">University of Oxford</option>
-                                    <option value="cambridge">University of Cambridge</option>
-                                    <option value="berkeley">University of California, Berkeley</option>
-                                    <option value="yale">Yale University</option>
-                                    <option value="princeton">Princeton University</option>
+                                    @foreach (config('universities.universities') as $universities)
+                                    <option value="{{ $universities }}">
+                                        {{$universities}}
+                                    </option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-6 px-2 mb-2">

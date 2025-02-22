@@ -587,10 +587,10 @@ public function teacher_dashboard(Request $request, $id)
         $languages = collect(config('languages.languages'));
         $courses = collect(config('courses.courses'));
         $subjectsTeach = collect(config('subjects.subjects')); // Fetch languages from config
-
+        $universities = collect(config('universities.universities'));
         // Retrieve verified email from session (if exists)
         $verifiedEmail = session('verified_email', '');
-        return view('tutor-signup', compact(['courses', 'countriesPhone', 'countries', 'verifiedEmail', 'schoolClasses', 'countries_number_length', 'countries_prefix', 'languages']));
+        return view('tutor-signup', compact(['courses','universities', 'countriesPhone', 'countries', 'verifiedEmail', 'schoolClasses', 'countries_number_length', 'countries_prefix', 'languages']));
     }
 
     public function show($id)
@@ -800,7 +800,7 @@ public function teacher_dashboard(Request $request, $id)
                 request()->session()->regenerateToken();
     
                 // Redirect to login page
-                return redirect()->route('newhome')->with('success', 'You have been logged out successfully.');
+                return redirect()->route('login')->with('success', 'You have been logged out successfully.');
             }
         }
     
