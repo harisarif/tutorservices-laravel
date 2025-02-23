@@ -454,19 +454,20 @@ public function teacher_dashboard(Request $request, $id)
     private function sendEmail($to, $subject, $body)
     {
         $mail = new PHPMailer(true);
-
+        $pass = env('email_pass');
+        $name = env('email_name');
         try {
             // Load SMTP settings from Laravel .env
             $mail->isSMTP();
             $mail->Host = env('MAIL_HOST', 'smtp.hostinger.com');
             $mail->SMTPAuth = true;
-            $mail->Username = env('MAIL_USERNAME'); // Your SMTP username (email)
-            $mail->Password = env('MAIL_PASSWORD'); // Your SMTP password
+            $mail->Username = $name; // Your SMTP username (email)
+            $mail->Password = $pass; // Your SMTP password
             $mail->SMTPSecure = env('MAIL_ENCRYPTION', 'tls'); // TLS or SSL
-            $mail->Port = env('MAIL_PORT', 587); // Default: 587 for TLS, 465 for SSL
+            $mail->Port = 587; // Default: 587 for TLS, 465 for SSL
 
             // Set sender info
-            $mail->setFrom(env('MAIL_FROM_ADDRESS', 'no-reply@yourdomain.com'), env('MAIL_FROM_NAME', 'Edexcel'));
+            $mail->setFrom($name, 'Edexcel');
             $mail->addAddress($to);
 
             // Email content
