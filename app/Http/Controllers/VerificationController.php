@@ -86,24 +86,21 @@ class VerificationController extends Controller
 
 function sendEmails($subject, $body, $to_name, $to_email) {  
     $mail = new PHPMailer(true);   
-    
     try {
         $mail->isSMTP();
-        $mail->Host = env('MAIL_HOST', 'smtp.hostinger.com');  
+        $mail->Host =  'smtp.hostinger.com';  
         $mail->SMTPAuth = true;
-        $mail->Username = env('MAIL_USERNAME');  
-        $mail->Password = env('MAIL_PASSWORD');  
+        $mail->Username = env('email_name');  
+        $mail->Password = env('email_pass');  
         $mail->SMTPSecure = env('MAIL_ENCRYPTION', 'tls');  
-        $mail->Port = env('MAIL_PORT', 587);  
+        $mail->Port = 587;  
         
         // Enable debug logging
         $mail->SMTPDebug = 3;
-        $mail->Debugoutput = function ($str, $level) {
-            Log::debug("SMTP Debug Level $level: $str");
-        };
+        
 
         // Email settings
-        $mail->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME', 'Edexcel'));
+        $mail->setFrom(env('email_name'), 'Edexcel');
         $mail->addAddress($to_email, $to_name);
         $mail->isHTML(true);
         $mail->Subject = $subject;
