@@ -81,7 +81,7 @@ Route::get('/teachers-list/{id}/view/document', [TutorController::class, 'view']
 Route::get('/teacher-dashboard/{id}', [TutorController::class, 'teacher_dashboard'])
     ->name('teacher_dashboard')
     ->middleware('auth', 'auto-logout');
-
+    Route::get('/teachers-dashboard-list', [TutorController::class, 'fetchAuthTeacher'])->name('teachers.dashboard.list');
     // Route::get('/teachers-dashboard/{id}', [TutorController::class, 'teachers'])->name('teachers') ->middleware('auth');   ;
 Route::get('/teachers-list/{id}/edit', [TutorController::class, 'edit'])->name('edit-teacher');
 Route::put('/teachers-list/{id}', [TutorController::class, 'updateProfile'])->name('teachers.update');

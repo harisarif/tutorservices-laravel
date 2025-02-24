@@ -62,11 +62,11 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 offset-md-2">
                 <div class="d-flex justify-content-between align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Dashboard</h1>
-                    @if(!empty($tutor) && isset($tutor->id))
+                    @if(!empty($tutor) && isset($tutor->id)) <div style=" display: flex;"><p class="mt-2  me-3">Dear,{{$tutor->f_name}}{{$tutor->l_name}}</p>
                     <form method="POST" action="{{ route('logout.teacher', $tutor->id) }}">
                         @csrf
                         <button type="submit" class="btn" style="color: white; background-color:#4CAF50;">Logout</button>
-                    </form>
+                    </form></div>
                 @endif
                 
                 </div>

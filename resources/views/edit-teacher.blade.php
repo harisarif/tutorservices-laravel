@@ -392,8 +392,8 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                               <div class="col-md-6">
                                 <label for="location"  class="form-label fw-bold"  style="color: #198754;">Residence Country:</label><br>
                                 <select name="country" id="location" class="form-select" required>
-                                    @foreach($countries as $index => $country)
-                                        <option value="{{ $index }}" {{ $tutor->location == $index ? 'selected' : ''}}>{{ $country }}</option>
+                                    @foreach($country as $index => $countries)
+                                        <option value="{{ $index }}" {{ $tutor->location == $index ? 'selected' : ''}}>{{ $countries }}</option>
                                     @endforeach
                                 </select>
                             </div>
