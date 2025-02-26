@@ -506,7 +506,7 @@
                                                              alt="Tutor Image" class="img-thumbnail"
                                                              style="max-width: 100px; height: 100px; width: 100px; border-radius: 70px;">
                                                     @else
-                                                        <img src="{{ asset('images/default-profile.png') }}" 
+                                                        <img src="{{ asset('images/avatar.png') }}" 
                                                              alt="Default Image" class="img-thumbnail"
                                                              style="max-width: 100px; height: 100px; width: 100px; border-radius: 70px;">
                                                     @endif
