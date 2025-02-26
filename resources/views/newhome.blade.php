@@ -493,86 +493,92 @@
 
                                 <!-- Tutor profile -->
                                 @if ($tutors->count() > 0)
-
-                                        
-                                    <div id="tutorsContainer">
-                                        @foreach ($tutors as $item)
-                                        @if($item->status !='inactive')
-
-                                       
-                                        <div class="ad-form">
-                                            <div class="ad-img-card d-flex">
-                                                <div class="MD col-lg-9 col-sm-5">
-                                                    @foreach($tutors as $tutor)
- 
-                                                    @if(!empty($tutor->profileImage))
-                                                    <img src="{{ asset('storage/' . $tutor->profileImage) }}" alt="Tutor Image"
-                                                    alt="..." class="img-thumbnail" style="max-width: 100%; height: 100px; width: 100px; border-radius: 70px;">
-                                                @else
-                                                    <p>No Profile Image Available</p>
-                                                @endif
-                                            
-                                        @endforeach
-
-                                                <div class="ad-icons">
-
-                                                </div >
-                                                    <p class="mb-0 mx-1 fs-5" style="color:#42b979;">4.5 <i class="fa-solid fa-star"></i></p>
-                                                </div>
-                                                <div class="md-div col-lg-5 d-none mt-2" style="margin-left: 17px;">
-                                                        <span class="mb-div"><b>{{ __('messages.20 AED for 50 mintues') }}</b>
-                                                        </span>
-
+                                <div id="tutorsContainer">
+                                    @foreach ($tutors as $item)
+                                        @if($item->status != 'inactive')
+                                            <div class="ad-form">
+                                                <div class="ad-img-card d-flex">
+                                                    <div class="tutor-profile" style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+                                                        
+                                                        {{-- Tutor Image --}}
+                                                        @if (!empty(trim($item->profileImages)))
+                                                        <img src="{{ asset($item->profileImages) }}"
+                                                             alt="Tutor Image" class="img-thumbnail"
+                                                             style="max-width: 100px; height: 100px; width: 100px; border-radius: 70px;">
+                                                    @else
+                                                        <img src="{{ asset('images/default-profile.png') }}" 
+                                                             alt="Default Image" class="img-thumbnail"
+                                                             style="max-width: 100px; height: 100px; width: 100px; border-radius: 70px;">
+                                                    @endif
+                                                    
+                            
+                                                        {{-- Tutor Rating --}}
+                                                        <p class="mb-0 mx-1 fs-5" style="color:#42b979;">4.5 <i class="fa-solid fa-star"></i></p>
+                                                    </div>
+                            
+                                                    <div class="md-div col-lg-5 d-none mt-2" style="margin-left: 17px;">
+                                                        <span class="mb-div"><b>{{ __('messages.20 AED for 50 minutes') }}</b></span>
                                                         <div class="ae-detail">
                                                             <h4 class="fs-6 mt-1" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ __('messages.Free Trial Section') }}</h4>
                                                         </div>
                                                     </div>
-                                            </div>
-                                            <div class="ad-detail my-1 mx-4 w-100">
-                                                <div class="ae-div row">
-                                                    <div class="col-9">
-                                                        <div class="ae-detail-div">
-                                                            <span><i class="fa-solid fa-graduation-cap"></i><strong style="margin-left: 11px;">{{ __('Name') }} :</strong> {{ $item->f_name }}</span>
-                                                            <span><i class="fa fa-globe" style="color: #42b979 !important;"></i><strong>{{ __('Date') }} :</strong> {{ $tutor->dob ?? 'Nullable'}}</span>
-    
-                                                            <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
-                                                                <strong style="margin-left: 7px;">{{ __('Language') }} :</strong> 
-                                                                @if(!empty($tutor->language) && is_array($tutor->language))
-                                                                    @foreach($tutor->language as $lang)
-                                                                        {{ $lang['language'] ?? 'Unknown' }} ({{ $lang['level'] ?? 'Unknown' }})
-                                                                    @endforeach
-                                                                @else
-                                                                    Nullable
-                                                                @endif
-                                                            </span>
-                                                            
-                                                        
-                                                            <span><i class="fa fa-globe" style="color: #42b979 !important;"></i><strong>{{ __('Phone') }} :</strong> {{ $tutor->phone ?? 'Nullable'}}</span> 
-                                                            <span><i class="fa-solid fa-book-open"></i>
-                                                                <strong style="margin-left: 8px;">{{ __('messages.Subject') }} :</strong> 
-                                                                {{ $tutor->subjectString }}
-                                                            </span>
-                                                            <span><i class="fa fa-globe" style="color: #42b979 !important;"></i><strong>{{ __('Experience') }} :</strong> {{ $tutor->experience ?? 'Nullable'}}</span>
-                                                            <span><i class="fa fa-globe" style="color: #42b979 !important;"></i><strong>{{ __('messages.Country') }} :</strong> {{ $tutor->country_name  ?? 'Nullable'}}</span>
-                                                            <span><i class="fa fa-globe" style="color: #42b979 !important;"></i><strong>{{ __('University') }} :</strong> {{ $tutor->location ?? 'Nullable'}}</span>
-                                                        </div>
-                                                        <!-- <div class="ae-detail-child">  
-                                                                <span><i class="fa-solid fa-person"></i><strong style="margin-left: 15px;">{{ __('messages.Gender') }} :</strong>{{ $item->gender }}</span>
-                                                        </div> -->
-                                                    
-                                                    </div>
-                                                <div class="ad-div col-3">
-                                                        <span ><b>{{ __('messages.20 AED for 50 mintues') }} </b>
-                                                        </span>
+                                                </div>
+                            
+                                                <div class="ad-detail my-1 mx-4 w-100">
+                                                    <div class="ae-div row">
+                                                        <div class="col-9">
+                                                            <div class="ae-detail-div">
+                                                                <span><i class="fa-solid fa-graduation-cap"></i>
+                                                                    <strong style="margin-left: 11px;">{{ __('Name') }} :</strong> {{ $item->f_name }}</span>
+                            
+                                                                <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
+                                                                    <strong>{{ __('Date') }} :</strong> {{ $item->dob ?? 'Nullable' }}</span>
+                            
+                                                                <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
+                                                                    <strong style="margin-left: 7px;">{{ __('Language') }} :</strong> 
+                                                                    @if(!empty($item->language) && is_array($item->language))
+                                                                        @foreach($item->language as $lang)
+                                                                            {{ $lang['language'] ?? 'Unknown' }} ({{ $lang['level'] ?? 'Unknown' }})
+                                                                        @endforeach
+                                                                    @else
+                                                                        Nullable
+                                                                    @endif
+                                                                </span>
+                            
+                                                                <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
+                                                                    <strong>{{ __('Phone') }} :</strong> {{ $item->phone ?? 'Nullable' }}</span> 
+                            
+                                                                {{-- **Subjects Logic** --}}
+                                                                                   <span>
+    <i class="fa fa-globe" style="color: #42b979 !important;"></i>
+    <strong>{{ __('Specialization') }}:</strong> 
+    {{ $item->specialization ?? 'Not Specified' }}
+</span>
 
-                                                        <div class="ae-detail">
-                                                            <h4 class="fs-6 mt-1" style="cursor:pointer" data-bs-toggle="modal" data-bs-target="#exampleModal">{{ __('messages.Free Trial Section') }}</h4>
+                                                                <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
+                                                                    <strong>{{ __('Experience') }} :</strong> {{ $item->experience ?? 'Nullable' }} years</span>
+                            
+                                                                <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
+                                                                    <strong>{{ __('messages.Country') }} :</strong> {{ $item->country_name ?? 'Nullable' }}</span>
+                            
+                                                                <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
+                                                                    <strong>{{ __('University') }} :</strong> {{ $item->location ?? 'Nullable' }}</span>
+                                                            </div>
+                                                        </div>
+                            
+                                                        <div class="col-3 ad-div">
+                                                            <span><b>{{ __('messages.20 AED for 50 minutes') }}</b></span>
+                                                            <div class="ae-detail">
+                                                                <h4 class="fs-6 mt-1" style="cursor:pointer" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                    {{ __('messages.Free Trial Section') }}
+                                                                </h4>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                    
                                             </div>
-                                        </div>
+                                        
+                                       
                                             <div class="d-none tutor_profile rounded overflow-hidden mb-3 mt-3">
                                                 <div class="d-flex justify-content-between">
                                                     <button class="p-1 bg_theme_green text-light border border-0" style="display:none;">
@@ -710,7 +716,7 @@
 
                                                             <div class="d-flex flex-column flex-md-row flex-wrap">
 
-                                                                @php
+                                                                {{-- @php
                                                                     // Assuming $item->teaching is a JSON string
                                                                     // Serialized string
                                                                     $serializedData = $item->teaching;
@@ -721,7 +727,7 @@
                                                                 @foreach ($arrayData as $teaching)
                                                                     <span
                                                                         class="bg-body-secondary rounded font-s m-1 d-inline-block p-1 bg_green_hover text-center">{{ $teaching }}</span>
-                                                                @endforeach
+                                                                @endforeach --}}
 
 
                                                                 <button class="m-1 text-danger border-0 bg-transparent">
@@ -1251,10 +1257,10 @@
                                                         <strong>Phone :</strong> ${tutor.phone ?? 'Not Available'}
                                                     </span> 
                                                     <span><i class="fa-solid fa-book-open"></i>
-                                                        <strong style="margin-left: 8px;">Subject :</strong> ${tutor.subjectString}
+                                                        <strong style="margin-left: 8px;">Subject :</strong> ${tutor.specilaization}
                                                     </span>
                                                     <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
-                                                        <strong>Experience :</strong> ${tutor.experience ?? 'Not Available'}
+                                                        <strong>Experience :</strong> ${tutor.experience ?? 'Not Available'} years
                                                     </span>
                                                     <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
                                                         <strong>Country :</strong> ${tutor.country_name ?? 'Not Available'}
@@ -1479,11 +1485,10 @@
                                                         <strong>Phone :</strong> ${tutor.phone ?? 'Not Available'}
                                                     </span> 
                                                     <span><i class="fa-solid fa-book-open"></i>
-                                                        <strong style="margin-left: 8px;">Subject :</strong> ${tutor.subjectString}
+                                                        <strong style="margin-left: 8px;">Subject :</strong> ${tutor.specilaization}
                                                     </span>
                                                     <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
-                                                        <strong>Experience :</strong> ${tutor.experience ?? 'Not Available'}
-                                                    </span>
+                                                        <strong>Experience :</strong> ${tutor.experience ?? 'Not Availableyears                                               </span>
                                                     <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
                                                         <strong>Country :</strong> ${tutor.country_name ?? 'Not Available'}
                                                     </span>
@@ -1611,8 +1616,7 @@ $(document).ready(function () {
                                                         <strong style="margin-left: 8px;">Subject :</strong> ${tutor.subjectString ?? 'Not Available'}
                                                     </span>
                                                     <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
-                                                        <strong>Experience :</strong> ${tutor.experience ?? 'Not Available'}
-                                                    </span>
+                                                        <strong>Experience :</strong> ${tutor.experience ?? 'Not Availableyears                                               </span>
                                                     <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
                                                         <strong>Country :</strong> ${tutor.country_name ?? 'Not Available'}
                                                     </span>
@@ -1740,8 +1744,7 @@ $('#subjectsearch').val('');
                                                         <strong style="margin-left: 8px;">Subject :</strong> ${tutor.subjectString ?? 'Not Available'}
                                                     </span>
                                                     <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
-                                                        <strong>Experience :</strong> ${tutor.experience ?? 'Not Available'}
-                                                    </span>
+                                                        <strong>Experience :</strong> ${tutor.experience ?? 'Not Availableyears                                               </span>
                                                     <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
                                                         <strong>Country :</strong> ${tutor.country_name ?? 'Not Available'}
                                                     </span>

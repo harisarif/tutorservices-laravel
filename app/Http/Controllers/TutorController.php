@@ -20,22 +20,23 @@ class TutorController extends Controller
 {
     //
     public function index(Request $request)
-    {
+    {  
 
         $query = Tutor::where('status', 'active');
-
+        
         $perPage = 5; // Define the number of tutors per page
 
         // Paginate the results
         $tutors = $query->paginate($perPage);
-        $tutor = Tutor::get();
+        // $tutor = Tutor::get();
         // Fetch the total count of tutors (for all countries)
         $totalTutorsCount = Tutor::count();
-
+             
 
         // Initialize country array
         $tutors->each(function ($tutor) {
-            $storedCountryCode = $tutor->country; // Get country code
+            $storedCountryCode = trim($tutor->country); // Remove any unwanted spaces/newline
+            // Get country code
             $tutor->country_name = config("countries_assoc.countries.$storedCountryCode", 'Unknown'); // Convert to full name
             // Debug Language Decoding
             $language = json_decode($tutor->language, true);
@@ -46,11 +47,23 @@ class TutorController extends Controller
             } else {
                 $tutor->language = $language;
             }
-            $subjects = @unserialize($tutor->teaching);
-            if ($subjects === false) {
-                $subjects = is_array(json_decode($tutor->teaching, true)) ? json_decode($tutor->teaching, true) : [];
+            // Deserialize subjects safely
+           
+                // Trim extra spaces/newlines from the teaching field
+               
+                    $tutor->specialization = trim($tutor->specialization ?? 'Not Specified'); 
+              
+        // Process Profile Image (Check if exists)
+       
+            $tutor->profileImage = trim(preg_replace('/\s+/', '', $tutor->profileImage)); // Remove spaces & new lines
+        
+            if (!empty($tutor->profileImage) && file_exists(public_path('storage/' . $tutor->profileImage))) {
+                $tutor->profileImages = asset('storage/' . $tutor->profileImage);
+            } else {
+                $tutor->profileImage = asset('default-profile.png');
             }
-            $tutor->subjectString = !empty($subjects) ? implode(', ', $subjects) : 'No Subjects Available';
+
+        
             // Calculate age if DOB exists
             if ($tutor->dob) {
                 $dob = Carbon::parse($tutor->dob);
@@ -59,14 +72,14 @@ class TutorController extends Controller
             } else {
                 $tutor->age = null; // Default value
             }
-        });
+        });  
         $countries = collect(config('countries_assoc.countries'));
         $countriesPhone = collect(config('phonecountries.countries'));
         $countries_number_length = collect(config('countries_number_length.countries'));
         $countries_prefix = collect(config('countries_prefix.countries'));
         return view('newhome', [
             'tutors' => $tutors,
-            'tutor' => $tutor,
+            // 'tutor' => $tutor,
             'totalTutorsCount' => $totalTutorsCount,
             'perPage' => $perPage,
             'countries' => $countries,
@@ -106,7 +119,7 @@ class TutorController extends Controller
         return redirect()->back();
     }
     public function fetchData(Request $request)
-    {
+    { 
         // Initialize the query builder
         $query = Tutor::query();
 
@@ -157,14 +170,15 @@ class TutorController extends Controller
 
         // Calculate age for each tutor and convert to array format
         $tutorsArray = $tutors->map(function ($tutor) {
-            // Convert stored country code to full country name
+           
+            $tutor->specialization = trim($tutor->specialization ?? 'Not Specified'); 
             $tutor->country_name = config("countries_assoc.countries.{$tutor->country}", 'Unknown');
             // Convert 'teaching' field to a readable string safely
-            $subjects = @unserialize($tutor->teaching);
-            if ($subjects === false) {
-                $subjects = is_array(json_decode($tutor->teaching, true)) ? json_decode($tutor->teaching, true) : [];
-            }
-            $tutor->subjectString = !empty($subjects) ? implode(', ', $subjects) : 'No Subjects Available';
+            // $subjects = @unserialize($tutor->teaching);
+            // if ($subjects === false) {
+            //     $subjects = is_array(json_decode($tutor->teaching, true)) ? json_decode($tutor->teaching, true) : [];
+            // }
+            // $tutor->subjectString = !empty($subjects) ? implode(', ', $subjects) : 'No Subjects Available';
               // Debug Language Decoding
               $languageData = json_decode($tutor->language, true);
               if (!is_array($languageData)) {
