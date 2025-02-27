@@ -225,7 +225,7 @@
                                 <label for="experience" class="form-label" style="color:#42b979;">
                                     <strong>How We Can Help</strong>
                                 </label>
-                                <select class="form-control form-select" id="status" name="status"
+                                <select class="form-control form-select" id="status" name="availability_status"
                                     aria-label="Default select example"
                                     style="border: 1px solid rgba(137, 135, 135, 0.5); width: 100%;">
                                     <option value="Online" selected>Online</option>
@@ -327,14 +327,11 @@
                                     <strong>Specialization</strong>
                                 </label>
                                 <select name="specialization" class="form-control select2" id="specialization">
-                                    <option value="mathematics">Mathematics</option>
-                                    <option value="science">Science</option>
-                                    <option value="computer_science">Computer Science</option>
-                                    <option value="literature">Literature</option>
-                                    <option value="history">History</option>
-                                    <option value="languages">Languages</option>
-                                    <option value="engineering">Engineering</option>
-                                    <option value="medicine">Medicine</option>
+                                    @foreach (config('specialization.specialization') as $specialization)
+                                    <option value="{{ $specialization }}">
+                                        {{$specialization}}
+                                    </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

@@ -29,7 +29,11 @@ class VerificationController extends Controller
     public function sendVerificationEmail(Request $request)
 {    
     $request->validate([
-        'email' => 'required|email',
+        'email' => [
+            'required',
+            'email',
+            'regex:/^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|outlook\.com)$/i'
+        ],
     ]);
 
     $email = $request->input('email');

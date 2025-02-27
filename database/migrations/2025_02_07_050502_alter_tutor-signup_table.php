@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('edu_teaching')->nullable()->after('language_tech'); 
             $table->string('country')->nullable()->after('edu_teaching'); 
             $table->string('year')->nullable()->after('country'); 
-            
+            $table->string('availability_status')->nullable()->after('year'); 
         });
     }
 
