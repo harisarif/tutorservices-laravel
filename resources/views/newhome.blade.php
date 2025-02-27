@@ -327,7 +327,7 @@
                 </span></a> --}}
             </div>
         </div>
-        <div class="notification mb-2 w-25 p-2 bg-info-subtle position-absolute end-0 top-100 z-1">This is a demo</div>
+        <!-- <div class="notification mb-2 w-25 p-2 bg-info-subtle position-absolute end-0 top-100 z-1">This is a demo</div> -->
     </div>
     <section class="banner-section" style="background-image: url(images/group-of-kids.jpg); background-size: cover; background-blend-mode: multiply; background-color: #a5a5a5;">
                 <div class="banner-content">
