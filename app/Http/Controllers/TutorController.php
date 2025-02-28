@@ -50,10 +50,15 @@ class TutorController extends Controller
             }
             // Deserialize subjects safely
            
-                // Trim extra spaces/newlines from the teaching field
-               
-                    $tutor->specialization = trim($tutor->specialization ?? 'Not Specified'); 
-              
+            $tutor->specialization = json_decode($tutor->specialization, true);
+
+            // If it's an array, convert it into a comma-separated string
+            if (is_array($tutor->specialization)) {
+                $tutor->specialization = implode(', ', array_map('trim', $tutor->specialization));
+            } else {
+                $tutor->specialization = trim($tutor->specialization ?? 'Not Specified');
+            }
+            
         // Process Profile Image (Check if exists)
        
             $tutor->profileImage = trim(preg_replace('/\s+/', '', $tutor->profileImage)); // Remove spaces & new lines
@@ -172,7 +177,15 @@ class TutorController extends Controller
         // Calculate age for each tutor and convert to array format
         $tutorsArray = $tutors->map(function ($tutor) {
            
-            $tutor->specialization = trim($tutor->specialization ?? 'Not Specified'); 
+            $tutor->specialization = json_decode($tutor->specialization, true);
+
+            // If it's an array, convert it into a comma-separated string
+            if (is_array($tutor->specialization)) {
+                $tutor->specialization = implode(', ', array_map('trim', $tutor->specialization));
+            } else {
+                $tutor->specialization = trim($tutor->specialization ?? 'Not Specified');
+            }
+            
             $tutor->country_name = config("countries_assoc.countries.{$tutor->country}", 'Unknown');
             // Convert 'teaching' field to a readable string safely
             // $subjects = @unserialize($tutor->teaching);
@@ -277,7 +290,8 @@ class TutorController extends Controller
             'dob' => 'required|string|max:255',
             'document' => 'required|mimes:pdf|max:2048',
             'videoFile' => 'required|mimes:mp4,webm,ogg|max:51200',
-            'specilization' => 'nullable|string|max:255',
+            'specialization' => 'required|array', // Ensure it's an array
+            'specialization.*' => 'string',
             'language_proficient' => 'required|array',
             'language_proficient.*' => 'string|max:255',
             'language_level' => 'required|array',
@@ -352,7 +366,7 @@ class TutorController extends Controller
         $tutor->phone = $request->input('phone');
         $user->password = Hash::make($request->input('password'));
         $tutor->video = 'storage/' . $videoPath; // Save video path in database
-        $tutor->specialization = $request->input('specialization');
+        $tutor->specialization = json_encode($request->specialization);
         $tutor->password = $hashedPassword;
         $tutor->language = json_encode($language);
         $tutor->edu_teaching = $request->input('edu_teaching');
@@ -812,7 +826,7 @@ class TutorController extends Controller
         $tutor->curriculum = serialize($request->input('courses'));
         $tutor->teaching = serialize($request->input('teaching'));
         $tutor->phone = $request->input('phone');
-        $tutor->specialization = $request->input('specialization');
+        $tutor->specialization = json_encode($request->specialization);
         $tutor->password = $user->password;
         $tutor->language = json_encode($language);
         $tutor->edu_teaching = $request->input('edu_teaching');
