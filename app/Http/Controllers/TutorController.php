@@ -355,7 +355,8 @@ class TutorController extends Controller
         $tutor->password = $hashedPassword;
         $tutor->language = json_encode($language);
         $tutor->edu_teaching = $request->input('edu_teaching');
-        $tutor->availability_status = $request->input('availability_status') ?? 'online';
+        $tutor->availability_status = $request->input('status') ?? 'online';
+        $tutor->status ='active';
         $tutor->session_id = session()->getId();
         // Upload profile image
         $imagePath = $request->file('profileImage')->store('uploads', 'public');
@@ -451,6 +452,8 @@ class TutorController extends Controller
         // Send HTML email to admin
         $this->sendEmail($toAdmin, $subjectAdmin, $bodyAdmin, true);
 
+        // Redirect with success message
+        // Auto-login only if the user is a tutor
         if ($user->role === 'tutor') {
             Auth::login($user);
             return redirect()->route('teacher_dashboard', ['id' => $tutor->id])
@@ -521,14 +524,10 @@ class TutorController extends Controller
             $mail->Password = $pass; // Your SMTP password
             $mail->SMTPSecure = env('MAIL_ENCRYPTION', 'tls'); // TLS or SSL
             $mail->Port = 587; // Default: 587 for TLS, 465 for SSL
-            
+
             // Set sender info
             $mail->setFrom($name, 'Edexcel');
             $mail->addAddress($to);
-            $mail->SMTPDebug = 3;
-$mail->Debugoutput = function ($str, $level) {
-    Log::debug("SMTP Debug Level $level: $str");
-};
 
             // Email content
             $mail->isHTML(true); // Plain text email
@@ -646,13 +645,12 @@ $mail->Debugoutput = function ($str, $level) {
         $countries_prefix = collect(config('countries_prefix.countries'));
         $countries = collect(config('countries_assoc.countries'));
         $languages = collect(config('languages.languages'));
-        $specialization = collect(config('specialization.specialization'));
         $courses = collect(config('courses.courses'));
         $subjectsTeach = collect(config('subjects.subjects')); // Fetch languages from config
         $universities = collect(config('universities.universities'));
         // Retrieve verified email from session (if exists)
         $verifiedEmail = session('verified_email', '');
-        return view('tutor-signup', compact(['courses','specialization', 'universities', 'countriesPhone', 'countries', 'verifiedEmail', 'schoolClasses', 'countries_number_length', 'countries_prefix', 'languages']));
+        return view('tutor-signup', compact(['courses', 'universities', 'countriesPhone', 'countries', 'verifiedEmail', 'schoolClasses', 'countries_number_length', 'countries_prefix', 'languages']));
     }
 
     public function show($id)
@@ -858,12 +856,11 @@ $mail->Debugoutput = function ($str, $level) {
         if ($tutor) {
             // Get the associated user
             $user = User::find($tutor->user_id);
-       
+
             // If the logged-in user is the same as the tutor, log them out
             if (Auth::id() === optional($user)->id) {
                 Auth::logout();
-                $tutor->status = 'active';
-                $tutor->save(); // Save the change
+
                 // Invalidate the session
                 request()->session()->invalidate();
                 request()->session()->regenerateToken();
