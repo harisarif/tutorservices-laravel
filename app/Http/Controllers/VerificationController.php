@@ -33,9 +33,14 @@ class VerificationController extends Controller
             'required',
             'email',
             'regex:/^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|outlook\.com)$/i'
-        ],
+        ]
+    ], [
+        'email.required' => 'Email is required.',
+        'email.email' => 'Please enter a valid email address.',
+        'email.regex' => 'Only Gmail, Yahoo, and Outlook emails are allowed.'
     ]);
-
+   
+        
     $email = $request->input('email');
     $subject = 'Email Verification';
      

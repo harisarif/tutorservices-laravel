@@ -6,6 +6,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQKNqXr5pOFbMxuL5GpU3QK8EoB1RaOYohcB1QZ6J71/2+UM1NFOG2HIl" crossorigin="anonymous">
+
 <style>
     /* Overlay Styles */
     .overlay {
@@ -85,6 +88,41 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: add a shadow */
         z-index: 100;
     }
+    .custom-alert {
+    position: fixed;
+    top: 60px;
+    right: 10px;
+    background-color: #d4edda;
+    color: #42b979;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border-left: 5px solid#42b979;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    min-width: 250px;
+    z-index: 1050;
+    transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.custom-alert .close-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    color:#42b979;
+    cursor: pointer;
+    float: right;
+    margin-left: 10px;
+}
+
+.custom-alert .close-btn:hover {
+    color: #42b979;
+}
+
+.fade-out {
+    opacity: 0;
+    transform: translateY(-10px);
+}
 
     .phone-container:hover .phone-number-header {
         display: inline-block;
@@ -191,12 +229,17 @@
     @endif
 @section('content')
     @if (session('success'))
-        <div class="alert alert-success" style="z-index: 6;
-    padding: 14px !important;">
-            
-            {{ session('success') }}
-            <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
+   
+    <div class="custom-alert alert-success d-flex align-items-center fade show" role="alert">
+        <i class="fas fa-check-circle"></i>
+        <div>
+            <strong>Success!</strong> {{ session('success') }}
         </div>
+        <button type="button" class="close-btn" data-dismiss="alert" aria-label="Close">
+            &times;
+        </button>
+    </div>
+
     @endif
     @if (session('error'))
         <div class="alert alert-danger" style="z-index: 6;
@@ -1488,7 +1531,7 @@
                                                         <strong style="margin-left: 8px;">Subject :</strong> ${tutor.specilaization}
                                                     </span>
                                                     <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
-                                                        <strong>Experience :</strong> ${tutor.experience ?? 'Not Availableyears                                               </span>
+                                                        <strong>Experience :</strong> ${tutor.experience ?? 'Not Availableyears'}</span>                                               </span>
                                                     <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
                                                         <strong>Country :</strong> ${tutor.country_name ?? 'Not Available'}
                                                     </span>
@@ -1616,7 +1659,7 @@ $(document).ready(function () {
                                                         <strong style="margin-left: 8px;">Subject :</strong> ${tutor.subjectString ?? 'Not Available'}
                                                     </span>
                                                     <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
-                                                        <strong>Experience :</strong> ${tutor.experience ?? 'Not Availableyears                                               </span>
+                                                        <strong>Experience :</strong> ${tutor.experience ?? 'Not Availableyears'} </span>
                                                     <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
                                                         <strong>Country :</strong> ${tutor.country_name ?? 'Not Available'}
                                                     </span>
@@ -1744,7 +1787,7 @@ $('#subjectsearch').val('');
                                                         <strong style="margin-left: 8px;">Subject :</strong> ${tutor.subjectString ?? 'Not Available'}
                                                     </span>
                                                     <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
-                                                        <strong>Experience :</strong> ${tutor.experience ?? 'Not Availableyears                                               </span>
+                                                        <strong>Experience :</strong> ${tutor.experience ?? 'Not Availableyears'}</span>
                                                     <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
                                                         <strong>Country :</strong> ${tutor.country_name ?? 'Not Available'}
                                                     </span>
@@ -2007,4 +2050,15 @@ $('#subjectsearch').val('');
         }
         
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".custom-alert .close-btn").forEach((btn) => {
+            btn.addEventListener("click", function () {
+                let alertBox = this.closest(".custom-alert");
+                alertBox.classList.add("fade-out"); // Add fade-out animation
+                setTimeout(() => alertBox.remove(), 500); // Remove after animation
+            });
+        });
+    });
+    </script>
 @endsection

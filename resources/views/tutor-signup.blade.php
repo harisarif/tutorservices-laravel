@@ -598,7 +598,24 @@
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="languageModal" tabindex="-1" aria-labelledby="languageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="languageModalLabel">Language Level Required</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Please select a **language level** before proceeding.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 @section('js')
 <script src=" {{ asset('js/tutor.js') }}"></script>
@@ -705,6 +722,18 @@
         document.getElementById("previewImg").src = "";
         document.getElementById("previewContainer").classList.add("d-none");
     });
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("select[name='language_proficient[]']").forEach((select, index) => {
+        select.addEventListener("change", function () {
+            let levelSelect = document.querySelectorAll("select[name='language_level[]']")[index];
+
+            if (!levelSelect.value) {
+                // Show Bootstrap modal if level is not selected
+                $("#languageModal").modal("show");
+            }
+        });
+    });
+});
 </script>
 <script>
     let currentStep = 1;
