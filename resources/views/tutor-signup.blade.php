@@ -1,5 +1,8 @@
  @extends('layouts.app')
-<!-- aos animation link -->
+ @php
+    $emailValue = is_array($verifiedEmail) ? end($verifiedEmail) : $verifiedEmail;
+@endphp
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="keywords" content="education, online courses, learning, tutoring, e-learning, eduexceledu">
@@ -124,9 +127,11 @@
                                 <label for="email" class="form-label" style="color:#42b979;">
                                     <strong>Email</strong>
                                 </label>
-                                <input type="email" class="form-control email-field" id="email" name="email" value="{{ old('email', $verifiedEmail) }}"
-                                    style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135, 135, 0.5);"
-                                    readonly>
+                               
+<input type="email" class="form-control email-field" id="email" name="email" 
+value="{{ old('email', $emailValue) }}"
+style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135, 135, 0.5);" readonly>
+
                                 <small class="error-message text-danger"
                                     style="display: block; margin-top: 5px; text-align:left;">This email is already
                                     registered.</small>
@@ -417,7 +422,7 @@
                                     </label>
                                     <div class="position-relative">
                                         <select name="language_proficient[]" class="form-control rounded-md pr-5"
-                                            id="language_proficient_1" onchange="toggleArrow(this)">
+                                            id="language_proficient_1" onchange="handleLanguageChange(this)">
                                             <option value="" disabled selected>Select Language</option>
                                             @foreach ($languages as $code => $name)
                                             <option value="{{ $code }}">{{ $name }}</option>
@@ -599,27 +604,81 @@
     </div>
 </div>
 <div class="modal fade" id="languageModal" tabindex="-1" aria-labelledby="languageModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="languageModalLabel">Language Level Required</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span>&times;</span>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg border-0 rounded-3">
+            
+            <!-- Modal Header -->
+            <div class="modal-header bg-light border-0">
+                <h5 class="modal-title fw-bold text-dark" id="languageModalLabel">
+                    Language Proficiency Required
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body text-center">
+                <i class="fas fa-exclamation-circle text-warning fs-2 mb-3"></i>
+                <p class="text-muted mb-0">
+                    Please select a language proficiency level before proceeding.
+                </p>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer border-0 justify-content-center">
+                <button type="button" class="btn btn-success px-4 py-2" data-bs-dismiss="modal">
+                    <i class="fas fa-check-circle me-2"></i> OK
                 </button>
             </div>
-            <div class="modal-body">
-                Please select a **language level** before proceeding.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
-            </div>
+
         </div>
     </div>
 </div>
+
 @endsection
 @section('js')
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src=" {{ asset('js/tutor.js') }}"></script>
 <script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script>
+<script>
+function toggleArrow(selectElement) {
+    let arrowId = selectElement.id.replace("language_proficient_", "arrow-");
+    let arrowIcon = document.getElementById(arrowId);
+
+    if (arrowIcon) {
+        arrowIcon.classList.toggle("rotate-180"); // Example: Toggle class
+    }
+}
+
+function handleLanguageChange(selectElement) {
+    toggleArrow(selectElement);  // Call first function
+    showModal(selectElement);    // Call second function
+}
+document.addEventListener("DOMContentLoaded", function () {
+    let languageSelect = document.getElementById("language_proficient_1");
+
+    if (languageSelect) {
+        languageSelect.addEventListener("change", function () {
+            toggleArrow(this);
+            showModal(this);
+        });
+    }
+});
+
+function showModal(selectElement) {
+    let selectedLanguage = selectElement.value;
+    let modalElement = document.getElementById("languageModal");
+
+    if (selectedLanguage && modalElement) {
+        console.log("Opening modal for:", selectedLanguage); // Debugging
+        let modal = new bootstrap.Modal(modalElement);
+        modal.show();
+    } else {
+        console.error("Modal element not found or language not selected");
+    }
+}
+
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         let uploadArea = document.getElementById("uploadAreaVideo");
@@ -722,18 +781,6 @@
         document.getElementById("previewImg").src = "";
         document.getElementById("previewContainer").classList.add("d-none");
     });
-</script><script>document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll("select[name='language_proficient[]']").forEach((select, index) => {
-        select.addEventListener("change", function () {
-            let levelSelect = document.querySelectorAll("select[name='language_level[]']")[index];
-
-            if (!levelSelect.value) {
-                // Show Bootstrap modal if level is not selected
-                $("#languageModal").modal("show");
-            }
-        });
-    });
-});
 </script>
 <script>
     let currentStep = 1;
@@ -1342,6 +1389,7 @@
         }
     }
 </script>
+
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 

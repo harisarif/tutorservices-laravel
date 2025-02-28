@@ -89,6 +89,10 @@ Route::delete('/teachers-list/{id}', [TutorController::class, 'destroy'])->name(
 Route::post('/fetch-data', [TutorController::class, 'fetchData'])->name('fetch-data');
 Route::get('/checkout/{id}', [TutorController::class, 'checkout'])->name('checkout.delete');
 
+Route::post('/tutor/{tutorId}/assign-student/{studentId}', [TutorController::class, 'assignStudent']);
+Route::get('/tutor/{tutorId}/students', [TutorController::class, 'getStudents']);
+Route::get('/student/{studentId}/tutors', [TutorController::class, 'getTutors']);
+
 // Student Controller 
 Route::get('/hire-tutor', [StudentController::class, 'index'])->name('hire.tutor');
 Route::get('/faq', [StudentController::class, 'FAQ'])->name('faq.index');

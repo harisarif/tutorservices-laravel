@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Blog;
+use App\Models\Student;
 use Carbon\Carbon;
 use App\Models\Country;
 use Illuminate\Http\Request;
@@ -652,7 +653,17 @@ class TutorController extends Controller
         $verifiedEmail = session('verified_email', '');
         return view('tutor-signup', compact(['courses', 'universities', 'countriesPhone', 'countries', 'verifiedEmail', 'schoolClasses', 'countries_number_length', 'countries_prefix', 'languages']));
     }
-
+    public function assignStudent($tutorId, $studentId)
+    {
+        $tutor = Tutor::findOrFail($tutorId);
+        $student = Student::findOrFail($studentId);
+    
+        // Attach student to tutor
+        $tutor->students()->attach($studentId);
+    
+        return response()->json(['message' => 'Student assigned to tutor successfully!']);
+    }
+    
     public function show($id)
     {
         $tutor = Tutor::findOrFail($id);

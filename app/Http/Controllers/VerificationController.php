@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use PHPMailer\PHPMailer\PHPMailer;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -28,7 +29,7 @@ class VerificationController extends Controller
     }
     public function sendVerificationEmail(Request $request)
 {    
-    $request->validate([
+     $request->validate([
         'email' => [
             'required',
             'email',
@@ -39,8 +40,10 @@ class VerificationController extends Controller
         'email.email' => 'Please enter a valid email address.',
         'email.regex' => 'Only Gmail, Yahoo, and Outlook emails are allowed.'
     ]);
+    
    
-        
+    
+
     $email = $request->input('email');
     $subject = 'Email Verification';
      
@@ -104,12 +107,6 @@ function sendEmails($subject, $body, $to_name, $to_email) {
         $mail->Password = env('email_pass');  
         $mail->SMTPSecure = env('MAIL_ENCRYPTION', 'tls');  
         $mail->Port = env('MAIL_PORT', 587);  
-        
-        // Enable debug logging
-        $mail->SMTPDebug = 3;
-        $mail->Debugoutput = function ($str, $level) {
-            Log::debug("SMTP Debug Level $level: $str");
-        };
 
         // Email settings
         $mail->setFrom(env('email_name', 'Edexcel'));
