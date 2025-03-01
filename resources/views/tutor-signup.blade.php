@@ -1,5 +1,8 @@
  @extends('layouts.app')
-<!-- aos animation link -->
+ @php
+    $emailValue = is_array($verifiedEmail) ? end($verifiedEmail) : $verifiedEmail;
+@endphp
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="keywords" content="education, online courses, learning, tutoring, e-learning, eduexceledu">
@@ -124,9 +127,11 @@
                                 <label for="email" class="form-label" style="color:#42b979;">
                                     <strong>Email</strong>
                                 </label>
-                                <input type="email" class="form-control email-field" id="email" name="email" value="{{ old('email', $verifiedEmail) }}"
-                                    style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135, 135, 0.5);"
-                                    readonly>
+                               
+<input type="email" class="form-control email-field" id="email" name="email" 
+value="{{ old('email', $emailValue) }}"
+style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135, 135, 0.5);" readonly>
+
                                 <small class="error-message text-danger"
                                     style="display: block; margin-top: 5px; text-align:left;">This email is already
                                     registered.</small>
@@ -225,7 +230,7 @@
                                 <label for="experience" class="form-label" style="color:#42b979;">
                                     <strong>How We Can Help</strong>
                                 </label>
-                                <select class="form-control form-select" id="status" name="status"
+                                <select class="form-control form-select" id="status" name="availability_status"
                                     aria-label="Default select example"
                                     style="border: 1px solid rgba(137, 135, 135, 0.5); width: 100%;">
                                     <option value="Online" selected>Online</option>
@@ -326,15 +331,12 @@
                                 <label for="specialization" class="form-label" style="color:#42b979;">
                                     <strong>Specialization</strong>
                                 </label>
-                                <select name="specialization" class="form-control select2" id="specialization">
-                                    <option value="mathematics">Mathematics</option>
-                                    <option value="science">Science</option>
-                                    <option value="computer_science">Computer Science</option>
-                                    <option value="literature">Literature</option>
-                                    <option value="history">History</option>
-                                    <option value="languages">Languages</option>
-                                    <option value="engineering">Engineering</option>
-                                    <option value="medicine">Medicine</option>
+                                <select name="specialization" class="form-control select2" id="specialization" multiple>
+                                    @foreach (config('specialization.specialization') as $specialization)
+                                    <option value="{{ $specialization }}">
+                                        {{$specialization}}
+                                    </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -420,7 +422,7 @@
                                     </label>
                                     <div class="position-relative">
                                         <select name="language_proficient[]" class="form-control rounded-md pr-5"
-                                            id="language_proficient_1" onchange="toggleArrow(this)">
+                                            id="language_proficient_1" onchange="handleLanguageChange(this)">
                                             <option value="" disabled selected>Select Language</option>
                                             @foreach ($languages as $code => $name)
                                             <option value="{{ $code }}">{{ $name }}</option>
@@ -437,20 +439,15 @@
                                         <strong>Level</strong>
                                     </label>
                                     <div class="position-relative">
-                                        <select name="language_level[]" class="form-control rounded-md pr-5"
-                                            id="language_level_1" onchange="toggleArrow(this)">
-                                            <option value="">Select Level</option>
-                                            <option value="A1">A1</option>
-                                            <option value="A2">A2</option>
-                                            <option value="B1">B1</option>
-                                            <option value="B2">B2</option>
-                                            <option value="C1">C1</option>
-                                            <option value="C2">C2</option>
-                                            <option value="native">Native</option>
-                                        </select>
-                                        <i class="fas fa-chevron-down position-absolute"
-                                            style="right: 10px; top: 50%; transform: translateY(-50%);"
-                                            id="arrow-2"></i>
+                                        <input type="text" id="selected_language_level" class="form-control rounded-md pr-5 bg-white" 
+                                               placeholder="Select Level" readonly>
+                                        <button type="button" class="position-absolute border-0 bg-transparent"
+                                                style="right: 10px; top: 50%; transform: translateY(-50%);" 
+                                                data-bs-toggle="modal" data-bs-target="#languageLevelModal">
+                                            <i class="fas fa-chevron-down"></i>
+                                        </button>
+                                    </div>
+                                    
                                     </div>
                                 </div>
 
@@ -458,9 +455,8 @@
                                     id="delete-btn-container-1">
                                     <!-- No delete button for the first row -->
                                 </div>
-                            </div>
-                        </div>
-
+                            
+                   
                         <div class="text-left mx-2" style="text-align: left;">
                             <button type="button"
                                 class="add-language-btn border-0 bg-transparent text-decoration-underline"
@@ -468,7 +464,8 @@
                                 Add Another Language
                             </button>
                         </div>
-
+                    </div></div>
+                </div>
                         <div class="form-row d-flex flex-column flex-md-row">
                             <div class="col-md-6 px-2 mb-2 d-none">
                                 <label for="whatsapp" class="form-label" style="color:#42b979;"><strong>WhatsApp
@@ -601,11 +598,102 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="languageLevelModal" tabindex="-1" aria-labelledby="languageLevelModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="languageLevelModalLabel">Select Language Level</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <select id="modal_language_level" class="form-select">
+                    <option value="" disabled selected>Select Level</option>
+                    <option value="A1">A1</option>
+                    <option value="A2">A2</option>
+                    <option value="B1">B1</option>
+                    <option value="B2">B2</option>
+                    <option value="C1">C1</option>
+                    <option value="C2">C2 - Proficient</option>
+                    <option value="native">Native</option>
+                </select>
+            </div>
+            <div class="modal-footer justify-content-end">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveLanguageLevel">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @endsection
 @section('js')
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src=" {{ asset('js/tutor.js') }}"></script>
 <script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script>
+<script>
+function toggleArrow(selectElement) {
+    let arrowId = selectElement.id.replace("language_proficient_", "arrow-");
+    let arrowIcon = document.getElementById(arrowId);
+
+    if (arrowIcon) {
+        arrowIcon.classList.toggle("rotate-180"); // Example: Toggle class
+    }
+}
+document.getElementById("selected_language_level").addEventListener("click", function () {
+    let modal = new bootstrap.Modal(document.getElementById("languageLevelModal"));
+    modal.show();
+});
+document.addEventListener('shown.bs.modal', function () {
+    document.body.style.overflow = 'auto';
+});
+
+document.addEventListener('hidden.bs.modal', function () {
+    document.body.style.overflow = '';
+});
+
+function handleLanguageChange(selectElement) {
+    toggleArrow(selectElement);  // Call first function
+    showModal(selectElement);    // Call second function
+}
+document.addEventListener("DOMContentLoaded", function () {
+    let languageSelect = document.getElementById("language_proficient_1");
+
+    if (languageSelect) {
+        languageSelect.addEventListener("change", function () {
+            toggleArrow(this);
+            showModal(this);
+        });
+    }
+});
+
+function showModal(selectElement) {
+    let selectedLanguage = selectElement.value;
+    let modalElement = document.getElementById("languageLevelModal");
+
+    if (selectedLanguage && modalElement) {
+        console.log("Opening modal for:", selectedLanguage); // Debugging
+    let modal = new bootstrap.Modal(document.getElementById("languageLevelModal"));
+    modal.show();
+};
+
+    } 
+    document.getElementById("saveLanguageLevel").addEventListener("click", function () {
+    let selectedLevel = document.getElementById("modal_language_level").value;
+    let inputField = document.getElementById("selected_language_level");
+
+    if (selectedLevel) {
+        inputField.value = selectedLevel; // Set the selected level in the input field
+    }
+
+    // Close the modal
+    let modal = bootstrap.Modal.getInstance(document.getElementById("languageLevelModal"));
+    modal.hide();
+});
+
+
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         let uploadArea = document.getElementById("uploadAreaVideo");
@@ -855,71 +943,94 @@
     }
 </script>
 <script>
-    let languageFieldCount = 1;
+   let languageFieldCount = 1;
 
-    function addLanguageField() {
-        languageFieldCount++;
+function addLanguageField() {
+    languageFieldCount++;
 
-        const newRow = document.createElement('div');
-        newRow.classList.add('form-row', 'd-flex', 'flex-column', 'flex-md-row', 'mb-4');
-        newRow.setAttribute('id', `language-row-${languageFieldCount}`);
-        newRow.innerHTML = `
-            <div class="col-md-6 px-2">
-                <div class="position-relative">
-                                        <select name="language_proficient[]" class="form-control rounded-md pr-5"
-                                            id="language_proficient_1" onchange="toggleArrow(this)">
-                                            <option value="" disabled selected>Select Language</option>
-                                            @foreach ($languages as $code => $name)
-                                                <option value="{{ $code }}" >{{ $name }}</option>
-                                            @endforeach
-                                        </select>
-                                        <i class="fas fa-chevron-down position-absolute"
-                                            style="right: 10px; top: 50%; transform: translateY(-50%);"
-                                            id="arrow-1"></i>
-                                    </div>
+    const newRow = document.createElement('div');
+    newRow.classList.add('form-row', 'd-flex', 'flex-column', 'flex-md-row', 'mb-4');
+    newRow.setAttribute('id', `language-row-${languageFieldCount}`);
+    newRow.innerHTML = `
+        <div class="col-md-6 px-2">
+            <div class="position-relative">
+                <select name="language_proficient[]" class="form-control rounded-md pr-5 language-select"
+                    id="language_proficient_${languageFieldCount}">
+                    <option value="" disabled selected>Select Language</option>
+                    @foreach ($languages as $code => $name)
+                        <option value="{{ $code }}">{{ $name }}</option>
+                    @endforeach
+                </select>
+                <i class="fas fa-chevron-down position-absolute"
+                    style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
             </div>
+        </div>
 
-            <div class="col-md-5 px-2">
-                <div class="position-relative">
-                                        <select name="language_level[]" class="form-control rounded-md pr-5"
-                                            id="language_level_1" onchange="toggleArrow(this)">
-                                            <option value="">Select Level</option>
-                                            <option value="A1">A1</option>
-                                            <option value="A2">A2</option>
-                                            <option value="B1">B1</option>
-                                            <option value="B2">B2</option>
-                                            <option value="C1">C1</option>
-                                            <option value="C2">C2</option>
-                                            <option value="native">Native</option>
-                                        </select>
-                                        <i class="fas fa-chevron-down position-absolute"
-                                            style="right: 10px; top: 50%; transform: translateY(-50%);"
-                                            id="arrow-2"></i>
-                                    </div>
+        <div class="col-md-5 px-2">
+            <div class="position-relative">
+                <input type="text" id="selected_language_level_${languageFieldCount}" 
+                       class="form-control rounded-md pr-5 bg-white language-level-input" 
+                       placeholder="Select Level" readonly>
+                <button type="button" class="position-absolute border-0 bg-transparent open-modal-btn"
+                        style="right: 10px; top: 50%; transform: translateY(-50%);" 
+                        data-bs-toggle="modal" data-bs-target="#languageLevelModal">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
             </div>
+        </div>
 
-            <div class="col-md-1 px-2 mb-2 flex items-center" id="delete-btn-container-${languageFieldCount}">
-                <button type="button" class="border-0 bg-transparent remove-language-btn text-danger px-3 py-2 rounded-circle" 
-        onclick="removeLanguageField(${languageFieldCount})" style="color:#42b979;">
-        <i class="fas fa-trash"></i>
-    </button>
+        <div class="col-md-1 px-2 mb-2 flex items-center" id="delete-btn-container-${languageFieldCount}">
+            <button type="button" class="border-0 bg-transparent remove-language-btn text-danger px-3 py-2 rounded-circle" 
+                    onclick="removeLanguageField(${languageFieldCount})" style="color:#42b979;">
+                <i class="fas fa-trash"></i>
+            </button>
+        </div>
+    `;
 
-            </div>
-        `;
+    document.getElementById('languages-container').appendChild(newRow);
+    
+    attachLanguageSelectListener();
+}
 
-        // Append the new row
-        document.getElementById('languages-container').appendChild(newRow);
+// Function to handle language selection and trigger the modal
+function attachLanguageSelectListener() {
+    document.querySelectorAll('.language-select').forEach(select => {
+        select.addEventListener('change', function () {
+            const languageRow = this.closest('.form-row');
+            const levelInput = languageRow.querySelector('.language-level-input');
+            
+            // Open the modal after selecting a language
+            const modal = new bootstrap.Modal(document.getElementById('languageLevelModal'));
+            modal.show();
 
-        // Hide the delete button for the first row
-        if (languageFieldCount === 1) {
-            document.getElementById('delete-btn-container-1').style.display = 'none';
-        }
+            // Store the selected input field to update later
+            document.getElementById('saveLanguageLevel').dataset.targetInput = levelInput.id;
+        });
+    });
+}
+
+// Function to save the selected language level into the correct input field
+document.getElementById('saveLanguageLevel').addEventListener('click', function () {
+    const selectedLevel = document.getElementById('modal_language_level').value;
+    if (selectedLevel) {
+        const targetInputId = this.dataset.targetInput;
+        document.getElementById(targetInputId).value = selectedLevel;
+
+        // Close the modal after selection
+        const modal = bootstrap.Modal.getInstance(document.getElementById('languageLevelModal'));
+        modal.hide();
     }
+});
 
-    function removeLanguageField(id) {
-        const fieldToRemove = document.getElementById(`language-row-${id}`);
-        fieldToRemove.remove();
-    }
+// Function to remove language field
+function removeLanguageField(id) {
+    const fieldToRemove = document.getElementById(`language-row-${id}`);
+    if (fieldToRemove) fieldToRemove.remove();
+}
+
+// Attach event listeners on page load
+document.addEventListener("DOMContentLoaded", attachLanguageSelectListener);
+
 </script>
 <script>
     function togglePassword(inputId, button) {
@@ -1316,6 +1427,7 @@
         }
     }
 </script>
+
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 

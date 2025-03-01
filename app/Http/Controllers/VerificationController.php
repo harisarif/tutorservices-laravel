@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use PHPMailer\PHPMailer\PHPMailer;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -28,9 +29,20 @@ class VerificationController extends Controller
     }
     public function sendVerificationEmail(Request $request)
 {    
-    $request->validate([
-        'email' => 'required|email',
+     $request->validate([
+        'email' => [
+            'required',
+            'email',
+            'regex:/^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|outlook\.com)$/i'
+        ]
+    ], [
+        'email.required' => 'Email is required.',
+        'email.email' => 'Please enter a valid email address.',
+        'email.regex' => 'Only Gmail, Yahoo, and Outlook emails are allowed.'
     ]);
+    
+   
+    
 
     $email = $request->input('email');
     $subject = 'Email Verification';
@@ -55,7 +67,7 @@ class VerificationController extends Controller
                             </p>
                             <p style='text-align: center; margin: 20px 0;'>
                                 
-                             <a href='https://bit.ly/4jm3MAS' style='background-color: #4CAF50; color: #fff; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;'>Verify Your Email</a>
+                             <a href='https://edexceledu.com/tutor-signup?email_verification=true' style='background-color: #4CAF50; color: #fff; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;'>Verify Your Email</a>
                                 </p>
                             <p style='margin: 10px 0; font-size: 16px;'>
                                 If you did not sign up for an account, please ignore this email.
@@ -91,19 +103,13 @@ function sendEmails($subject, $body, $to_name, $to_email) {
         $mail->isSMTP();
         $mail->Host = env('MAIL_HOST', 'smtp.hostinger.com');  
         $mail->SMTPAuth = true;
-        $mail->Username = env('MAIL_USERNAME');  
-        $mail->Password = env('MAIL_PASSWORD');  
+        $mail->Username = env('email_name');  
+        $mail->Password = env('email_pass');  
         $mail->SMTPSecure = env('MAIL_ENCRYPTION', 'tls');  
         $mail->Port = env('MAIL_PORT', 587);  
-        
-        // Enable debug logging
-        $mail->SMTPDebug = 3;
-        $mail->Debugoutput = function ($str, $level) {
-            Log::debug("SMTP Debug Level $level: $str");
-        };
 
         // Email settings
-        $mail->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME', 'Edexcel'));
+        $mail->setFrom(env('email_name', 'Edexcel'));
         $mail->addAddress($to_email, $to_name);
         $mail->isHTML(true);
         $mail->Subject = $subject;

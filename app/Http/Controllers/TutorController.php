@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Blog;
+use App\Models\Student;
 use Carbon\Carbon;
 use App\Models\Country;
 use Illuminate\Http\Request;
@@ -20,22 +21,23 @@ class TutorController extends Controller
 {
     //
     public function index(Request $request)
-    {
+    {  
 
         $query = Tutor::where('status', 'active');
-
+        
         $perPage = 5; // Define the number of tutors per page
 
         // Paginate the results
         $tutors = $query->paginate($perPage);
-        $tutor = Tutor::get();
+        // $tutor = Tutor::get();
         // Fetch the total count of tutors (for all countries)
         $totalTutorsCount = Tutor::count();
-
+             
 
         // Initialize country array
         $tutors->each(function ($tutor) {
-            $storedCountryCode = $tutor->country; // Get country code
+            $storedCountryCode = trim($tutor->country); // Remove any unwanted spaces/newline
+            // Get country code
             $tutor->country_name = config("countries_assoc.countries.$storedCountryCode", 'Unknown'); // Convert to full name
             // Debug Language Decoding
             $language = json_decode($tutor->language, true);
@@ -46,11 +48,28 @@ class TutorController extends Controller
             } else {
                 $tutor->language = $language;
             }
-            $subjects = @unserialize($tutor->teaching);
-            if ($subjects === false) {
-                $subjects = is_array(json_decode($tutor->teaching, true)) ? json_decode($tutor->teaching, true) : [];
+            // Deserialize subjects safely
+           
+            $tutor->specialization = json_decode($tutor->specialization, true);
+
+            // If it's an array, convert it into a comma-separated string
+            if (is_array($tutor->specialization)) {
+                $tutor->specialization = implode(', ', array_map('trim', $tutor->specialization));
+            } else {
+                $tutor->specialization = trim($tutor->specialization ?? 'Not Specified');
             }
-            $tutor->subjectString = !empty($subjects) ? implode(', ', $subjects) : 'No Subjects Available';
+            
+        // Process Profile Image (Check if exists)
+       
+            $tutor->profileImage = trim(preg_replace('/\s+/', '', $tutor->profileImage)); // Remove spaces & new lines
+        
+            if (!empty($tutor->profileImage) && file_exists(public_path('storage/' . $tutor->profileImage))) {
+                $tutor->profileImages = asset('storage/' . $tutor->profileImage);
+            } else {
+                $tutor->profileImage = asset('default-profile.png');
+            }
+
+        
             // Calculate age if DOB exists
             if ($tutor->dob) {
                 $dob = Carbon::parse($tutor->dob);
@@ -59,14 +78,14 @@ class TutorController extends Controller
             } else {
                 $tutor->age = null; // Default value
             }
-        });
+        });  
         $countries = collect(config('countries_assoc.countries'));
         $countriesPhone = collect(config('phonecountries.countries'));
         $countries_number_length = collect(config('countries_number_length.countries'));
         $countries_prefix = collect(config('countries_prefix.countries'));
         return view('newhome', [
             'tutors' => $tutors,
-            'tutor' => $tutor,
+            // 'tutor' => $tutor,
             'totalTutorsCount' => $totalTutorsCount,
             'perPage' => $perPage,
             'countries' => $countries,
@@ -106,7 +125,7 @@ class TutorController extends Controller
         return redirect()->back();
     }
     public function fetchData(Request $request)
-    {
+    { 
         // Initialize the query builder
         $query = Tutor::query();
 
@@ -157,14 +176,23 @@ class TutorController extends Controller
 
         // Calculate age for each tutor and convert to array format
         $tutorsArray = $tutors->map(function ($tutor) {
-            // Convert stored country code to full country name
+           
+            $tutor->specialization = json_decode($tutor->specialization, true);
+
+            // If it's an array, convert it into a comma-separated string
+            if (is_array($tutor->specialization)) {
+                $tutor->specialization = implode(', ', array_map('trim', $tutor->specialization));
+            } else {
+                $tutor->specialization = trim($tutor->specialization ?? 'Not Specified');
+            }
+            
             $tutor->country_name = config("countries_assoc.countries.{$tutor->country}", 'Unknown');
             // Convert 'teaching' field to a readable string safely
-            $subjects = @unserialize($tutor->teaching);
-            if ($subjects === false) {
-                $subjects = is_array(json_decode($tutor->teaching, true)) ? json_decode($tutor->teaching, true) : [];
-            }
-            $tutor->subjectString = !empty($subjects) ? implode(', ', $subjects) : 'No Subjects Available';
+            // $subjects = @unserialize($tutor->teaching);
+            // if ($subjects === false) {
+            //     $subjects = is_array(json_decode($tutor->teaching, true)) ? json_decode($tutor->teaching, true) : [];
+            // }
+            // $tutor->subjectString = !empty($subjects) ? implode(', ', $subjects) : 'No Subjects Available';
               // Debug Language Decoding
               $languageData = json_decode($tutor->language, true);
               if (!is_array($languageData)) {
@@ -262,7 +290,8 @@ class TutorController extends Controller
             'dob' => 'required|string|max:255',
             'document' => 'required|mimes:pdf|max:2048',
             'videoFile' => 'required|mimes:mp4,webm,ogg|max:51200',
-            'specilization' => 'nullable|string|max:255',
+            'specialization' => 'required|array', // Ensure it's an array
+            'specialization.*' => 'string',
             'language_proficient' => 'required|array',
             'language_proficient.*' => 'string|max:255',
             'language_level' => 'required|array',
@@ -337,11 +366,12 @@ class TutorController extends Controller
         $tutor->phone = $request->input('phone');
         $user->password = Hash::make($request->input('password'));
         $tutor->video = 'storage/' . $videoPath; // Save video path in database
-        $tutor->specialization = $request->input('specialization');
+        $tutor->specialization = json_encode($request->specialization);
         $tutor->password = $hashedPassword;
         $tutor->language = json_encode($language);
         $tutor->edu_teaching = $request->input('edu_teaching');
-        $tutor->status = $request->input('status') ?? 'online';
+        $tutor->availability_status = $request->input('status') ?? 'online';
+        $tutor->status ='active';
         $tutor->session_id = session()->getId();
         // Upload profile image
         $imagePath = $request->file('profileImage')->store('uploads', 'public');
@@ -637,7 +667,17 @@ class TutorController extends Controller
         $verifiedEmail = session('verified_email', '');
         return view('tutor-signup', compact(['courses', 'universities', 'countriesPhone', 'countries', 'verifiedEmail', 'schoolClasses', 'countries_number_length', 'countries_prefix', 'languages']));
     }
-
+    public function assignStudent($tutorId, $studentId)
+    {
+        $tutor = Tutor::findOrFail($tutorId);
+        $student = Student::findOrFail($studentId);
+    
+        // Attach student to tutor
+        $tutor->students()->attach($studentId);
+    
+        return response()->json(['message' => 'Student assigned to tutor successfully!']);
+    }
+    
     public function show($id)
     {
         $tutor = Tutor::findOrFail($id);
@@ -786,7 +826,7 @@ class TutorController extends Controller
         $tutor->curriculum = serialize($request->input('courses'));
         $tutor->teaching = serialize($request->input('teaching'));
         $tutor->phone = $request->input('phone');
-        $tutor->specialization = $request->input('specialization');
+        $tutor->specialization = json_encode($request->specialization);
         $tutor->password = $user->password;
         $tutor->language = json_encode($language);
         $tutor->edu_teaching = $request->input('edu_teaching');
