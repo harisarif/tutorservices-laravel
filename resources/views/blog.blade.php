@@ -4,23 +4,81 @@
     <meta name="keywords" content="education, online courses, learning, tutoring, e-learning, eduexceledu">
     <meta name="description" content="Blog Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
 <style>
+    .card {
+  margin: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden; 
+}
+.card-header img {
+  width: 100%;
+  object-fit: cover;
+}
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.tag {
+  background: #cccccc;
+  border-radius: 50px;
+  font-size: 12px;
+  margin: 0;
+  color: #fff;
+  padding: 2px 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.tag-teal {
+  background-color:#1cc88a;
+}
+.tag-purple {
+  background-color:#1cc88a;
+}
+.tag-pink {
+  background-color:#1cc88a;
+}
+
+.card-body p {
+  font-size: 13px;
+  margin: 0 0 40px;
+}
+.user {
+  display: flex;
+  margin-top: auto;
+}
+
+.user img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+.user-info h5 {
+  margin: 0;
+}
+.user-info small {
+  color: #1cc88a;
+}
+
     .modalBox{
         display: none !important;
     }
-    .container {
+    /* .container {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
         width: 940px;
         margin: auto;
-    }
+    } */
     .card {
         background-color: #fff;
         border-radius: 10px;
         box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
         overflow: hidden;
-        width: 380px;
-        height: 98% !important;
     }
     .card-header img {
         width: 100%;
@@ -215,11 +273,11 @@
             </div>
         </div>
     </section>
-    <div class="container-fluid my-4 d-flex justify-content-center">
-        <div class="row">
+    <div class="container my-4 d-flex justify-content-center">
+        <div class="row" style="width:100%">
             @if($blogs->count() > 0)
             @foreach($blogs as $blog)
-                <div class="col-4">
+                <!-- <div class="col-4">
                     <div class="card">
                         <div class="card-header p-0">
                                         @if($blog->image)
@@ -244,14 +302,44 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                @endforeach
+                </div> -->
+                <div class="col-12 col-md-6 col-lg-4">
+                <div class="card" style="width:100%">
+                    <div class="card-header"style="width:100%">
+                                        @if($blog->image)
+                                            <img src="{{ asset('storage/' . $blog->image) }}" class="card-img-top" alt="{{ $blog->title }}">
+                                        @endif
+                        </div>
+                        <div class="card-body">
+                            <span class="tag tag-teal">Technology</span>
+                            <h4>
+                            {{ $blog->title }}
+                            </h4>
+                            <p>
+                            {{ strip_tags($blog->description) }}
+                            </p>
+                            <div class="user">
+                                <img src="https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo" alt="user">
+                            <div class="user-info">
+                                <h5>July Dec</h5>
+                                <small>2h ago</small>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                        </div>
+                    @endforeach
                 @else
                 <p>No blogs available.</p>
                 @endif
                 
+                
         </div>
     </div>
+
+
+</div>
+    <!--  -->
     
 
 @endsection
