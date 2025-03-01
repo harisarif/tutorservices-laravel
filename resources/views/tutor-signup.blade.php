@@ -331,7 +331,7 @@ style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135
                                 <label for="specialization" class="form-label" style="color:#42b979;">
                                     <strong>Specialization</strong>
                                 </label>
-                                <select name="specialization" class="form-control select2" id="specialization" multiple>
+                                <select name="specialization[]" class="form-control select2" placeholder="Add Multiple Subject" id="specialization" multiple>
                                     @foreach (config('specialization.specialization') as $specialization)
                                     <option value="{{ $specialization }}">
                                         {{$specialization}}
@@ -439,7 +439,7 @@ style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135
                                         <strong>Level</strong>
                                     </label>
                                     <div class="position-relative">
-                                        <input type="text" id="selected_language_level" class="form-control rounded-md pr-5 bg-white" 
+                                        <input type="text" id="selected_language_level" name="language_level[]"class="form-control rounded-md pr-5 bg-white" 
                                                placeholder="Select Level" readonly>
                                         <button type="button" class="position-absolute border-0 bg-transparent"
                                                 style="right: 10px; top: 50%; transform: translateY(-50%);" 
@@ -968,7 +968,7 @@ function addLanguageField() {
 
         <div class="col-md-5 px-2">
             <div class="position-relative">
-                <input type="text" id="selected_language_level_${languageFieldCount}" 
+                <input type="text" name="language_level[]" id="selected_language_level_${languageFieldCount}" 
                        class="form-control rounded-md pr-5 bg-white language-level-input" 
                        placeholder="Select Level" readonly>
                 <button type="button" class="position-absolute border-0 bg-transparent open-modal-btn"

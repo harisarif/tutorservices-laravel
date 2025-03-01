@@ -278,7 +278,7 @@ class TutorController extends Controller
         // Your store method logic here
     }
     public function create(Request $request)
-    {
+    {  
         $rules = [
             'f_name' => 'required|string|max:255',
             'intro' => 'nullable|string|max:255',
@@ -344,7 +344,7 @@ class TutorController extends Controller
                 }
             }
         }
-
+        $studentExists = Student::where('id', 2)->exists();
         // Now create the Tutor and associate with the User
         $tutor = new Tutor();
         $tutor->teacher_id = mt_rand(1000, 9999);
@@ -366,12 +366,13 @@ class TutorController extends Controller
         $tutor->phone = $request->input('phone');
         $user->password = Hash::make($request->input('password'));
         $tutor->video = 'storage/' . $videoPath; // Save video path in database
-        $tutor->specialization = json_encode($request->specialization);
+        $tutor->specialization = json_encode($request->input('specialization'));
         $tutor->password = $hashedPassword;
         $tutor->language = json_encode($language);
         $tutor->edu_teaching = $request->input('edu_teaching');
         $tutor->availability_status = $request->input('status') ?? 'online';
-        $tutor->status ='active';
+        $tutor->student_id = $studentExists ? 2 : null; 
+        $tutor->status ='inactive';
         $tutor->session_id = session()->getId();
         // Upload profile image
         $imagePath = $request->file('profileImage')->store('uploads', 'public');
@@ -885,7 +886,7 @@ class TutorController extends Controller
             // If the logged-in user is the same as the tutor, log them out
             if (Auth::id() === optional($user)->id) {
                 Auth::logout();
-
+                  $tutor->status="active";$tutor->save();
                 // Invalidate the session
                 request()->session()->invalidate();
                 request()->session()->regenerateToken();
