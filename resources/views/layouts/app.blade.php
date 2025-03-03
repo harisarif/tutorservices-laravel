@@ -25,7 +25,7 @@
     {{-- <title>{{ config('app.name', 'Edecel Academy & Educational Consultancy') }}</title> --}}
     <title>{{__('messages.academy_name')}}</title>
     <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
-    <link href="css/style.css" rel="stylesheet" />
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
     <!-- whatsapp button css -->
     <link rel="stylesheet" href="{{ asset('css/whatsApp-buttons.css') }}" />
 
@@ -66,7 +66,7 @@
     </style>
 </head>
 <div class="loader" id="lazzyLoader">
-    <img src="./images/loader.gif" alt="lazzyloader">
+    <img src="{{ asset('images/loader.gif') }}" alt="lazzyloader">
 </div>
 <div class="modalBox" id="allModal">
     <div class="boxModal-1 col-4 bg-light rounded p-2">
