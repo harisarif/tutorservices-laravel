@@ -5,10 +5,11 @@
     <meta name="keywords" content="education, online courses, learning, tutoring, e-learning, eduexceledu">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheeSt" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQKNqXr5pOFbMxuL5GpU3QK8EoB1RaOYohcB1QZ6J71/2+UM1NFOG2HIl" crossorigin="anonymous">
-
+<link rel="stylesheet" href="{{ asset('css/tutor-style.css')}}">
+<link rel="stylesheet" href="{{ asset('css/mediaquery.css')}}">
 <style>
     /* Overlay Styles */
     .overlay {
@@ -486,9 +487,14 @@
                             <div class="col-md-9">
                                 <div class="d-flex justify-content-between ad-border-div">
                                     <div class="mx-2">
-                                        <p class="m-0 pt-1 tutors-range"> {{ $tutors->firstItem() }} to {{ $tutors->lastItem() }}
-                                            
-                                            of <span class="total-tutors-count">{{ $totalTutorsCount }}</span> tutors</p>
+                                        <p class="m-0 pt-1 tutors-range">
+                                            @if($totalTutorsCount == 0 || $tutors->isEmpty())
+                                                0 of 0 tutors
+                                            @else
+                                                {{ $tutors->firstItem() }} to {{ $tutors->lastItem() }} of {{ $totalTutorsCount }} tutors
+                                            @endif
+                                        </p>
+                                        
                                     </div>
                                     <div class="my-2 mx-2">
                                         <button id="resetFilterBtn" class="ad-btn">{{ __('messages.Reset Filter') }}</button>
@@ -539,11 +545,127 @@
                                 <div id="tutorsContainer">
                                     @foreach ($tutors as $item)
                                         @if($item->status != 'inactive')
-                                            <div class="ad-form">
-                                                <div class="ad-img-card d-flex">
-                                                    <div class="tutor-profile" style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+                                          
+                                             <div class="ad-form"><div class="container pt-5">
+                                                <div class="row ">
+                                                    <div class="col-xl-8 col-lg-12">
+                                                        <div class="row py-4 border border-black">
+                                                            <div class="col-md-2">
+                                                                <div id="waste1">
+                                                                    <div class="img-wrapper">
+                                                                        @if (!empty(trim($item->profileImages)))
+                                                        <img src="{{ asset($item->profileImages) }}"
+                                                             alt="Tutor Image" class="img-thumbnail"
+                                                             style="max-width: 100px; height: 100px; width: 100px; border-radius: 70px;">
+                                                    @else
+                                                        <img src="{{ asset('images/avatar.png') }}" 
+                                                             alt="Default Image" class="img-thumbnail"
+                                                             style="max-width: 100px; height: 100px; width: 100px; border-radius: 70px;">
+                                                    @endif
+                                                                    </div>
+                                                                    <div class="col-md-4" id="waste" style="display: none;">
+                                                                        <div class="d-flex">
+                                                                            <h4 class="me-2 fw-bold">{{ $item->f_name ?? 'Nullable' }}{{ $item->l_name ?? 'Nullable' }}</h4>
+                                                                            <span class="me-3"><i class="fa-regular fa-star"></i></span>
+                                                                            <div class="img-wrapper" style="max-width: 15px;">
+                                                                                <img src="{{ asset('image/flag.svg') }}" class="img-fluid" alt="">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-flex mt-md-5 mt-2" id="for-320">
+                                                                            <div class="me-md-5 me-3" id="new">
+                                                                                <div class="d-flex text-center">
+                                                                                    <span class=""><i class="fa-regular fa-star text-warning"></i></span>
+                                                                                    <h4 class="fw-bold mb-0">5</h4>
+                                                                                </div>
+                                                                                <p class="text-secondary fs-6">5reviews</p>
+                                                                            </div>
+                                                                            <div class="me-md-5 me-2" id="dollar">
+                                                                                <h4 class="fw-bold mb-0">US$16</h4>
+                                                                                <p class="text-secondary fs-6 ">50-min lesson</p>
+                                                                            </div>
+                                                                            <div>
+                                                                                <span><i class="fa-regular fa-heart"></i></span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="d-flex" id="ff000">
+                                                                    <h4 class="me-2 fw-bold">{{ $item->f_name ?? 'Nullable' }}{{ $item->l_name ?? 'Nullable' }}</h4>
+                                                                    <span class="me-3"><i class="fa-regular fa-star "></i></span>
+                                                                    <div class="img-wrapper" style="max-width: 15px;">
+                                                                        <img src="{{ asset('image/flag.svg') }}" class="img-fluid" alt="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mt-1">
+                                                                    <span id="pro" class="p-1 bg-primary-subtle rounded fw-bold">Professional</span>
+                                                                </div>
+                                                                <div class="d-flex text-secondary py-2">
+                                                                    <span class="me-2"><i class="fa-solid fa-graduation-cap" style="font-size: 13px;"></i></span>
+                                                                    <p class="mb-0">{{ $item->specialization ?? 'Not Specified' }}</p>
+                                                                </div>
+                                                                <div class="d-flex text-secondary">
+                                                                    <span class="me-2"><i class="fa-solid fa-user" style="font-size: 13px;"></i></span>
+                                                                    <p class="mb-0">17 active students • 8 lessons</p>
+                                                                </div>
+                                                                <div class="d-flex text-secondary py-2">
+                                                                    <span class="me-2"><i class="fa-solid fa-language" style="font-size: 13px;"></i></span>
+                                                                    <p class="mb-0" id="on-1024">Speaks  @if(!empty($item->language) && is_array($item->language))
+                                                                        @foreach($item->language as $lang)
+                                                                            {{ $lang['language'] ?? 'Unknown' }} ({{ $lang['level'] ?? 'Unknown' }})
+                                                                        @endforeach
+                                                                    @else
+                                                                        Nullable
+                                                                    @endif</p>
+                                                                    {{-- <p class="mb-0" id="on-768">Speaks English (Native), Fre....</p> --}}
+                                                                </div>
+                                                                <div class="py-2">
+                                                                    <span>
+                                                                    <b>{{ $item->experience ?? 'Nullable' }}+ Years of {{ $item->specialization ?? 'Not Specified' }} Teaching Experience: Your {{ $item->specialization ?? 'Not Specified' }} Success, Guaranteed.</b> - Hello, my name is {{ $item->f_name ?? 'Not Specified' }}. I have {{ $item->experience ?? 'Nullable' }}+ years of experience as an {{ $item->specialization ?? 'Not Specified' }} Teacher & Tutor.🇬🇧
+                                                                    </span>
+                                                                    <ul class="read p-0 mt-3">
+                                                                        <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="d-flex pb-5" id="ff111">
+                                                                    <div class="me-5" id="new">
+                                                                        <h4 class="fw-bold">New</h4>
+                                                                        <p class="text-secondary fs-6">tutor</p>
+                                                                    </div>
+                                                                    <div class="me-lg-5 me-3" id="dollar">
+                                                                        <h4 class="fw-bold">US$16</h4>
+                                                                        <p class="text-secondary fs-6">50-min lesson</p>
+                                                                    </div>
+                                                                    <div id="heart-icon">
+                                                                        <span><i class="fa-regular fa-heart"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div>
+                                                                    <div class="pt-5" id="btn-container">
+                                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trail lesson</button>
+                                                                    </div>
+                                                                </div>
+                                                                <div>
+                                                                    <div class="pt-3" id="btn-container">
+                                                                        <button type="button" class="btn btn-outline-dark ">Send message....</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-3 rounded" id="snd-sec">
+                                                        <video class="w-100 h-100 rounded " controls src="{{ asset('storage/' . $item->video) }}"></video>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        
+                                                {{-- <div class="ad-img-card d-flex"> --}}
+                                                    {{-- <div class="tutor-profile" style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
                                                         
-                                                        {{-- Tutor Image --}}
+                                                               Tutor Image 
                                                         @if (!empty(trim($item->profileImages)))
                                                         <img src="{{ asset($item->profileImages) }}"
                                                              alt="Tutor Image" class="img-thumbnail"
@@ -555,7 +677,7 @@
                                                     @endif
                                                     
                             
-                                                        {{-- Tutor Rating --}}
+                                                         Tutor Rating 
                                                         <p class="mb-0 mx-1 fs-5" style="color:#42b979;">4.5 <i class="fa-solid fa-star"></i></p>
                                                     </div>
                             
@@ -566,7 +688,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                            
+                                             
                                                 <div class="ad-detail my-1 mx-4 w-100">
                                                     <div class="ae-div row">
                                                         <div class="col-9">
@@ -591,7 +713,7 @@
                                                                 <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
                                                                     <strong>{{ __('Phone') }} :</strong> {{ $item->phone ?? 'Nullable' }}</span> 
                             
-                                                                {{-- **Subjects Logic** --}}
+                                                                 **Subjects Logic** 
                                                                                    <span>
     <i class="fa fa-globe" style="color: #42b979 !important;"></i>
     <strong>{{ __('Specialization') }}:</strong> 
@@ -616,12 +738,12 @@
                                                                     {{ __('messages.Free Trial Section') }}
                                                                 </h4>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                        </div>--}}
+                                                    {{-- </div>  --}}
+                                                {{-- </div> --}}
                                             </div>
                                         
-                                       
+                                      
                                             <div class="d-none tutor_profile rounded overflow-hidden mb-3 mt-3">
                                                 <div class="d-flex justify-content-between">
                                                     <button class="p-1 bg_theme_green text-light border border-0" style="display:none;">

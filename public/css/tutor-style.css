@@ -1,0 +1,23 @@
+#pro{
+    font-size: 12px;
+}
+.read li a{
+    color: black;
+}
+.ppp{
+    font-size: 13px;
+}
+.btn{
+    padding: 12px 63px;
+}
+.btn1{
+    background-color: #42b979;
+    padding: 12px 58px;
+}
+.btn-outline-dark {
+    transition: all 1s ease;
+  }
+.btn-outline-dark:hover {
+    border-color: #343a40;
+    transform: scale(0.9);
+}
