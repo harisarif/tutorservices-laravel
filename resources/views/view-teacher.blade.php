@@ -190,7 +190,7 @@ $languages_spoken = json_decode($tutor->language, true) ?? [];
               <div class="card mb-4 h-100">
                 <div class="card-body text-center">
                   <img src="{{ asset('storage/' . $tutor->profileImage) }}" alt="avatar"
-                    class="rounded-circle img-fluid mt-5" style="width: 150px;">
+                    class="rounded-circle img-fluid mt-5" style="width: 150px;height: 150px !important;">
                   <h5 class="my-3" style="color: #198754;">{{ $tutor->f_name ?? '' }} {{ $tutor->l_name ?? '' }}</h5>
                   <p class="mb-1" style="color: #198754;">{{ $tutor->specialization ?? '' }}</p>
                   <p class="mb-4" style="color: #198754;">{{ $tutor->description ?? '' }}</p>

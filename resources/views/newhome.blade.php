@@ -11,6 +11,21 @@
 <link rel="stylesheet" href="{{ asset('css/tutor-style.css')}}">
 <link rel="stylesheet" href="{{ asset('css/mediaquery.css')}}">
 <style>
+    .read li a {
+    color: #42b979;
+}
+    .sd{
+        color: #42b979;  
+    }
+    .on{
+        color: #42b979;
+    }
+    .btn1{
+    background-color: #42b979;
+    padding: 12px 13px;
+    width: 100%;
+    border: none;
+}
     /* Overlay Styles */
     .overlay {
         position: fixed; /* Fixed positioning */
@@ -546,22 +561,22 @@
                                     @foreach ($tutors as $item)
                                         @if($item->status != 'inactive')
                                           
-                                             <div class="ad-form"><div class="container pt-5">
+                                             <div class="ad-form"><div class="container pt-2">
                                                 <div class="row ">
-                                                    <div class="col-xl-8 col-lg-12">
-                                                        <div class="row py-4 border border-black">
-                                                            <div class="col-md-2">
+                                                    <div class="col-xl-12 col-lg-12">
+                                                        <div class="row py-4">
+                                                            <div class="col-md-3">
                                                                 <div id="waste1">
                                                                     <div class="img-wrapper">
                                                                         @if (!empty(trim($item->profileImages)))
-                                                        <img src="{{ asset($item->profileImages) }}"
-                                                             alt="Tutor Image" class="img-thumbnail"
-                                                             style="max-width: 100px; height: 100px; width: 100px; border-radius: 70px;">
-                                                    @else
-                                                        <img src="{{ asset('images/avatar.png') }}" 
-                                                             alt="Default Image" class="img-thumbnail"
-                                                             style="max-width: 100px; height: 100px; width: 100px; border-radius: 70px;">
-                                                    @endif
+                                                                                <img src="{{ asset($item->profileImages) }}"
+                                                                                    alt="Tutor Image" class="img-thumbnail"
+                                                                                    style="height: 150px; width: 100%">
+                                                                            @else
+                                                                                <img src="{{ asset('images/avatar.png') }}" 
+                                                                                    alt="Default Image" class="img-thumbnail"
+                                                                                    style="height: 150px; width: 100%;">
+                                                                            @endif
                                                                     </div>
                                                                     <div class="col-md-4" id="waste" style="display: none;">
                                                                         <div class="d-flex">
@@ -592,9 +607,9 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="d-flex" id="ff000">
-                                                                    <h4 class="me-2 fw-bold">{{ $item->f_name ?? 'Nullable' }}{{ $item->l_name ?? 'Nullable' }}</h4>
+                                                                    <h4 class="me-2 fw-bold sd">{{ $item->f_name ?? 'Nullable' }}{{ $item->l_name ?? 'Nullable' }}</h4>
                                                                     <span class="me-3"><i class="fa-regular fa-star "></i></span>
-                                                                    <div class="img-wrapper" style="max-width: 15px;">
+                                                                    <div class="img-wrapper" style="max-width:15px;margin-top:5px;">
                                                                         <img src="{{ asset('image/flag.svg') }}" class="img-fluid" alt="">
                                                                     </div>
                                                                 </div>
@@ -629,14 +644,10 @@
                                                                     </ul>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-3">
                                                                 <div class="d-flex pb-5" id="ff111">
-                                                                    <div class="me-5" id="new">
-                                                                        <h4 class="fw-bold">New</h4>
-                                                                        <p class="text-secondary fs-6">tutor</p>
-                                                                    </div>
                                                                     <div class="me-lg-5 me-3" id="dollar">
-                                                                        <h4 class="fw-bold">US$16</h4>
+                                                                        <h4 class="fw-bold on">$16</h4>
                                                                         <p class="text-secondary fs-6">50-min lesson</p>
                                                                     </div>
                                                                     <div id="heart-icon">
@@ -649,16 +660,14 @@
                                                                     </div>
                                                                 </div>
                                                                 <div>
-                                                                    <div class="pt-3" id="btn-container">
-                                                                        <button type="button" class="btn btn-outline-dark ">Send message....</button>
+                                                                <div class="mt-2" id="btn-container">
+                                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Send Massage</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-xl-3 rounded" id="snd-sec">
-                                                        <video class="w-100 h-100 rounded " controls src="{{ asset('storage/' . $item->video) }}"></video>
-                                                    </div>
+                                                   
                                                 </div>
                                             </div> 
                                         
