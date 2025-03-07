@@ -5,8 +5,9 @@
     <meta name="keywords" content="education, online courses, learning, tutoring, e-learning, eduexceledu">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
-<link rel="stylesheeSt" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQKNqXr5pOFbMxuL5GpU3QK8EoB1RaOYohcB1QZ6J71/2+UM1NFOG2HIl" crossorigin="anonymous">
 <link rel="stylesheet" href="{{ asset('css/tutor-style.css')}}">
 <link rel="stylesheet" href="{{ asset('css/mediaquery.css')}}">
@@ -592,11 +593,11 @@
                                                                                     <span class=""><i class="fa-regular fa-star text-warning"></i></span>
                                                                                     <h4 class="fw-bold mb-0">5</h4>
                                                                                 </div>
-                                                                                <p class="text-secondary fs-6">5reviews</p>
+                                                                                <p class="text-secondary fs-6">{{ $item->avalibility_status ?? 'Nullable' }}</p>
                                                                             </div>
                                                                             <div class="me-md-5 me-2" id="dollar">
                                                                                 <h4 class="fw-bold mb-0">US$16</h4>
-                                                                                <p class="text-secondary fs-6 ">50-min lesson</p>
+                                                                                <p class="text-secondary fs-6 ">{{ $item->year ?? 'Nullable' }}</p>
                                                                             </div>
                                                                             <div>
                                                                                 <span><i class="fa-regular fa-heart"></i></span>
@@ -607,37 +608,50 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="d-flex" id="ff000">
-                                                                    <h4 class="me-2 fw-bold sd">{{ $item->f_name ?? 'Nullable' }}{{ $item->l_name ?? 'Nullable' }}</h4>
+                                                                    <h4 class="me-2 fw-bold sd">{{ $item->f_name ?? 'Nullable' }}  {{ $item->l_name ?? 'Nullable' }}</h4>
                                                                     <span class="me-3"><i class="fa-regular fa-star "></i></span>
                                                                     <div class="img-wrapper" style="max-width:15px;margin-top:5px;">
                                                                         <img src="{{ asset('image/flag.svg') }}" class="img-fluid" alt="">
                                                                     </div>
                                                                 </div>
                                                                 <div class="mt-1">
-                                                                    <span id="pro" class="p-1 bg-primary-subtle rounded fw-bold">Professional</span>
+                                                                    @foreach($item->specialization as $specialization)   
+                                                                        <span id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold"> 
+                                                                            <i class="fa-solid fa-briefcase me-1"></i> {{ trim($specialization) }}  
+                                                                        </span>
+                                                                    @endforeach
                                                                 </div>
-                                                                <div class="d-flex text-secondary py-2">
-                                                                    <span class="me-2"><i class="fa-solid fa-graduation-cap" style="font-size: 13px;"></i></span>
-                                                                    <p class="mb-0">{{ $item->specialization ?? 'Not Specified' }}</p>
+                                                                
+                                                                <div class="d-flex text-secondary my-1">
+                                                                    <span class="me-2"><i class="fa-solid fa-venus-mars" style="font-size: 13px;  margin-top: 5px;"></i></span>
+                                                                    <p class="mb-0">{{ $item->gender ?? 'Nullable' }}</p>
                                                                 </div>
+                                                                
                                                                 <div class="d-flex text-secondary">
-                                                                    <span class="me-2"><i class="fa-solid fa-user" style="font-size: 13px;"></i></span>
-                                                                    <p class="mb-0">17 active students • 8 lessons</p>
+                                                                    <span class="me-2"><i class="fa-solid fa-earth-americas" style="font-size: 13px;  margin-top: 5px;"></i></span>
+                                                                    <p class="mb-0">{{ $item->country_name ?? 'Nullable' }}</p>
                                                                 </div>
+                                                                
                                                                 <div class="d-flex text-secondary py-2">
-                                                                    <span class="me-2"><i class="fa-solid fa-language" style="font-size: 13px;"></i></span>
-                                                                    <p class="mb-0" id="on-1024">Speaks  @if(!empty($item->language) && is_array($item->language))
-                                                                        @foreach($item->language as $lang)
-                                                                            {{ $lang['language'] ?? 'Unknown' }} ({{ $lang['level'] ?? 'Unknown' }})
-                                                                        @endforeach
-                                                                    @else
-                                                                        Nullable
-                                                                    @endif</p>
-                                                                    {{-- <p class="mb-0" id="on-768">Speaks English (Native), Fre....</p> --}}
+                                                                    <span class="me-2"><i class="fa-solid fa-language" style="font-size: 13px; margin-top: 5px;"></i></span>
+                                                                    <p class="mb-0" id="on-1024">
+                                                                        Speaks 
+                                                                        @if(!empty($item->language) && is_array($item->language))
+                                                                            @foreach($item->language as $lang)
+                                                                                {{ $lang['language'] ?? 'Unknown' }} ({{ $lang['level'] ?? 'Unknown' }})
+                                                                            @endforeach
+                                                                        @else
+                                                                            Nullable
+                                                                        @endif
+                                                                    </p>
                                                                 </div>
+                                                                
                                                                 <div class="py-2">
                                                                     <span>
-                                                                    <b>{{ $item->experience ?? 'Nullable' }}+ Years of {{ $item->specialization ?? 'Not Specified' }} Teaching Experience: Your {{ $item->specialization ?? 'Not Specified' }} Success, Guaranteed.</b> - Hello, my name is {{ $item->f_name ?? 'Not Specified' }}. I have {{ $item->experience ?? 'Nullable' }}+ years of experience as an {{ $item->specialization ?? 'Not Specified' }} Teacher & Tutor.🇬🇧
+                                                                        <b>{{ $item->experience ?? 'Nullable' }}+ Years of {{ collect($item->specialization)->first() ?? 'Not Specified' }} Teaching Experience: Your {{ implode(', ', $item->specialization ?? ['Not Specified']) }} Success, Guaranteed.</b> 
+
+                                                                        - Hello, my name is {{ $item->f_name ?? 'Not Specified' }}. I have {{ $item->experience ?? 'Nullable' }}+ years of experience as a {{ collect($item->specialization)->first() ?? 'Not Specified' }} Teacher & Tutor. 🇬🇧
+                                                                        
                                                                     </span>
                                                                     <ul class="read p-0 mt-3">
                                                                         <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
@@ -648,7 +662,8 @@
                                                                 <div class="d-flex pb-5" id="ff111">
                                                                     <div class="me-lg-5 me-3" id="dollar">
                                                                         <h4 class="fw-bold on">$16</h4>
-                                                                        <p class="text-secondary fs-6">50-min lesson</p>
+                                                                        <p class="text-secondary fs-6"><p><i class="fa-solid fa-calendar-days me-1"></i> 
+                                                                        {{ $item->dob ?? 'Nullable' }}</p>
                                                                     </div>
                                                                     <div id="heart-icon">
                                                                         <span><i class="fa-regular fa-heart"></i></span>

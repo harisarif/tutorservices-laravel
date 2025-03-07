@@ -52,12 +52,10 @@ class TutorController extends Controller
            
             $tutor->specialization = json_decode($tutor->specialization, true);
 
-            // If it's an array, convert it into a comma-separated string
-            if (is_array($tutor->specialization)) {
-                $tutor->specialization = implode(', ', array_map('trim', $tutor->specialization));
-            } else {
-                $tutor->specialization = trim($tutor->specialization ?? 'Not Specified');
-            }
+            // Ensure it's an array
+    if (!is_array($tutor->specialization) || empty($tutor->specialization)) {
+        $tutor->specialization = ['Not Specified'];
+    }
             
         // Process Profile Image (Check if exists)
        
