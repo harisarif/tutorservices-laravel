@@ -100,7 +100,7 @@
                     <span class="fs-2 pointer foucs" data-dismiss="modal">&times;</span>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ route('send.verification.email') }}">
+                    <form method="POST" action="{{ route('send.verification.email') }}" onsubmit="storeEmail()">
                         @csrf
                         <div class="form-group">
                             <label for="email">Email address:</label>
@@ -132,6 +132,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
     <script>
+         function storeEmail() {
+            let email = document.getElementById('email').value;
+            if (email) {
+                localStorage.setItem('email', email);
+            }
+        }
         $(document).ready(function () {
             // Show modal only if the query parameter 'email_verification' is not present
             @if(!request()->query('email_verification'))
