@@ -330,7 +330,7 @@
                         </div>
                     @endforeach
                 @else
-                <p>No blogs available.</p>
+                <p> <img src="{{ asset('image/blog.jpeg') }}" class="card-img-top" alt=""></p>
                 @endif
                 
                 
