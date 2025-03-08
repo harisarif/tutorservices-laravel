@@ -104,7 +104,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="email">Email address:</label>
-                            <input type="email" name="email" class="form-control" required value="{{ old('email') }}">
+                            <input id="email" type="email" name="email" class="form-control" required value="{{ old('email') }}">
                            
                         </div>
                         <button type="submit" class="btn btn-success">Send Verification Link</button>
