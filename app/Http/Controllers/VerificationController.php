@@ -41,52 +41,51 @@ class VerificationController extends Controller
         'email.regex' => 'Only Gmail, Yahoo, and Outlook emails are allowed.'
     ]);
     
-   
-    
+   $verificationUrl = 'https://edexceledu.com/tutor-signup?email_verification=true';
 
     $email = $request->input('email');
     $subject = 'Email Verification';
      
     // In the email body
     $body = "
-        <div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>
-            <table style='max-width: 600px; margin: 0 auto; border: 1px solid #ddd; border-radius: 8px;'>
-                <thead>
-                    <tr>
-                        <th style='background-color: #f4f4f4; padding: 15px; text-align: center;'>
-                            <h2 style='margin: 0; color: #4CAF50;'>Welcome to Edexcel</h2>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style='padding: 20px; text-align: left;'>
-                            <p style='margin: 0; font-size: 16px;'>Dear User,</p>
-                            <p style='margin: 10px 0; font-size: 16px;'>
-                                Thank you for signing up! Please verify your email by clicking the button below:
-                            </p>
-                            <p style='text-align: center; margin: 20px 0;'>
-                                
-                             <a href='https://edexceledu.com/tutor-signup?email_verification=true' style='background-color: #4CAF50; color: #fff; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;'>Verify Your Email</a>
-                                </p>
-                            <p style='margin: 10px 0; font-size: 16px;'>
-                                If you did not sign up for an account, please ignore this email.
-                            </p>
-                            <p style='margin: 10px 0; font-size: 16px;'>Best regards,</p>
-                            <p style='margin: 10px 0; font-size: 16px; font-weight: bold;'>Edexcel</p>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 14px; color: #777;'>
-                            &copy; " . date('Y') . " Edexcel. All rights reserved.
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-    ";
+    <div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>
+        <table style='max-width: 600px; margin: 0 auto; border: 1px solid #ddd; border-radius: 8px;'>
+            <thead>
+                <tr>
+                    <th style='background-color: #f4f4f4; padding: 15px; text-align: center;'>
+                        <h2 style='margin: 0; color: #4CAF50;'>Welcome to Edexcel</h2>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style='padding: 20px; text-align: left;'>
+                        <p style='margin: 0; font-size: 16px;'>Dear User,</p>
+                        <p style='margin: 10px 0; font-size: 16px;'>
+                            Thank you for signing up! Please verify your email by clicking the button below:
+                        </p>
+                        <p style='text-align: center; margin: 20px 0;'>
+                            <a href='$verificationUrl' style='background-color: #4CAF50; color: #fff; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;'>Verify Your Email</a>
+                        </p>
+                        <p style='margin: 10px 0; font-size: 16px;'>
+                            If you did not sign up for an account, please ignore this email.
+                        </p>
+                        <p style='margin: 10px 0; font-size: 16px;'>Best regards,</p>
+                        <p style='margin: 10px 0; font-size: 16px; font-weight: bold;'>Edexcel</p>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 14px; color: #777;'>
+                        <p>&copy; " . date('Y') . " Edexcel. All rights reserved.</p>
+                        <p><a href='https://email.edexceledu.com/unsubscribe' style='color: #777; text-decoration: none;'>Unsubscribe</a></p>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+";
 
     // Send the email using PHPMailer
     $this->sendEmails($subject, $body, 'admin', $email, true); // true means it's sending HTML content

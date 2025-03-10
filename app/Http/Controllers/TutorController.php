@@ -888,9 +888,9 @@ class TutorController extends Controller
                 // Invalidate the session
                 request()->session()->invalidate();
                 request()->session()->regenerateToken();
-
+                    return dd( $tutor->status);
                 // Redirect to login page
-                return redirect()->route('login')->with('success', 'You have been logged out successfully.');
+                // return redirect()->route('login')->with('success', 'You have been logged out successfully.');
             }
         }
 
