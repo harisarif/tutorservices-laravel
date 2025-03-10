@@ -370,7 +370,7 @@ class TutorController extends Controller
         $tutor->edu_teaching = $request->input('edu_teaching');
         $tutor->availability_status = $request->input('status') ?? 'online';
         $tutor->student_id = $studentExists ? 2 : null; 
-        $tutor->status ='inactive';
+        $tutor->status ='active';
         $tutor->session_id = session()->getId();
         // Upload profile image
         $imagePath = $request->file('profileImage')->store('uploads', 'public');
@@ -888,9 +888,9 @@ class TutorController extends Controller
                 // Invalidate the session
                 request()->session()->invalidate();
                 request()->session()->regenerateToken();
-
+                    return dd( $tutor->status);
                 // Redirect to login page
-                return redirect()->route('login')->with('success', 'You have been logged out successfully.');
+                // return redirect()->route('login')->with('success', 'You have been logged out successfully.');
             }
         }
 

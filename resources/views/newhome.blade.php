@@ -113,11 +113,13 @@
     color: #42b979;
     padding: 15px 20px;
     border-radius: 8px;
-    border-left: 5px solid#42b979;
+    border-left: 5px solid #42b979;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
     min-width: 250px;
-    z-index: 1050;
+    z-index: 1050;display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
     transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
 }
 
@@ -139,6 +141,8 @@
 .fade-out {
     opacity: 0;
     transform: translateY(-10px);
+    transition: opacity 0.5s ease, transform 0.3s ease-in-out;
+    pointer-events: none; /* Prevent interaction when faded */
 }
 
     .phone-container:hover .phone-number-header {
@@ -218,22 +222,34 @@
             ::-webkit-scrollbar-track {
             background: #f1f1f1; /* Color of the track */
             }
+        
+    .progress-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: #42b979;
+    transition: width 5s linear;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #42b979;
+        border-radius: 6px;
+    }
 
-            /* Target the scrollbar thumb */
-            ::-webkit-scrollbar-thumb {
-            background: #42b979; /* Color of the thumb */
-            border-radius: 6px; /* Rounded corners */
-            }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #42b979;
+    }
 
-            /* Target the scrollbar thumb on hover */
-            ::-webkit-scrollbar-thumb:hover {
-            background: #42b979; /* Color when hovering */
-            }
-            .alert{
-                display: flex !important;
-                align-items: center;
-                font-size: 14px !important;
-            }
+    .alert {
+        display: flex !important;
+        align-items: center;
+        font-size: 14px !important;
+    }
+
+           
+          
     </style>
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -245,27 +261,37 @@
         </div>
     @endif
 @section('content')
-    @if (session('success'))
-   
-    <div class="custom-alert alert-success d-flex align-items-center fade show" role="alert">
-        <i class="fas fa-check-circle"></i>
-        <div>
-            <strong>Success!</strong> {{ session('success') }}
-        </div>
-        <button type="button" class="close-btn" data-dismiss="alert" aria-label="Close">
-            &times;
-        </button>
-    </div>
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 
-    @endif
-    @if (session('error'))
-        <div class="alert alert-danger" style="z-index: 6;
-    padding: 14px !important;">
-            
-            {{ session('error') }}
-            <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
-        </div>
-    @endif
+@if (session('success'))
+<div id="success" class="custom-alert alert-success d-flex align-items-center fade show" role="alert">
+    <i class="fas fa-check-circle"></i>
+    <div>
+        <strong>Success!</strong> {{ session('success') }}
+    </div>
+    <button type="button" class="close-btn" data-dismiss="alert" aria-label="Close">
+        &times;
+    </button>
+    <div class="progress-line"></div>
+</div>
+@endif
+
+@if (session('error'))
+<div id="error" class="alert alert-danger" style="z-index: 6; padding: 14px !important;">
+    {{ session('error') }}
+    <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
+    <div class="progress-line"></div>
+</div>
+@endif
+
     <div id="overlay" class="overlay" style="display: none;">
         <div class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
@@ -2197,14 +2223,52 @@ $('#subjectsearch').val('');
         
 </script>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll(".custom-alert .close-btn").forEach((btn) => {
-            btn.addEventListener("click", function () {
-                let alertBox = this.closest(".custom-alert");
-                alertBox.classList.add("fade-out"); // Add fade-out animation
-                setTimeout(() => alertBox.remove(), 500); // Remove after animation
-            });
+  document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(() => {
+        autoHideAlert("success");
+        autoHideAlert("error");
+    }, 200); // Added a delay to ensure alerts are available in the DOM
+
+    document.querySelectorAll(".custom-alert .close-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+            let alertBox = this.closest(".custom-alert");
+            if (alertBox) {
+                alertBox.classList.add("fade-out");
+                setTimeout(() => alertBox.remove(), 500);
+            }
         });
     });
+});
+
+function autoHideAlert(alertId) {
+    let alert = document.getElementById(alertId);
+    if (alert) {
+        let progressBar = alert.querySelector('.progress-line');
+        
+        if (progressBar) {
+            // Make the progress bar fill over 30 seconds
+            progressBar.style.transition = "width 20s linear"; 
+            progressBar.style.width = "100%"; 
+        }
+
+        // Hide the alert after 30 seconds
+        setTimeout(() => {
+            alert.classList.add("fade-out");
+        }, 20000); // 30 seconds visible
+
+        // Remove the alert completely after fading out
+        setTimeout(() => {
+            alert.remove();
+        }, 20500); // 30.5 seconds total
+    }
+}
+
+
+
+function cancel() {
+    let alert = document.getElementById("error");
+    if (alert) alert.remove();
+}
+
     </script>
 @endsection
