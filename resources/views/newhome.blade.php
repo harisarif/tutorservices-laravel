@@ -654,7 +654,7 @@
                                                                 
                                                                 <div class="d-flex text-secondary my-1">
                                                                     <span class="me-3"><i class="fa-solid fa-venus-mars" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
-                                                                    <p class="mb-0" style="color:black; transform: scaleY(1);">{{ $item->gender ?? 'Nullable' }}</p>
+                                                                    <p class="mb-0" style="color:black; transform: scaleY(1);text-transform:capitalize">{{ $item->gender ?? 'Nullable' }}</p>
                                                                 </div>
                                                                 
                                                                 <div class="d-flex text-secondary">
@@ -678,7 +678,7 @@
                                                                 
                                                                 <!--  -->
                                                                 <p class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-3" style="color: #1cc88a;"></i> 
-                                                                05-03-1972</p>
+                                                                {{ $item->dob ?? 'Nullable' }}</p>
                                                                 <!--  -->
                                                                 <div class="py-2">
                                                                     <span>
@@ -696,8 +696,8 @@
                                                                 <div class="d-flex pb-5" id="ff111">
                                                                     <div class="me-lg-5 me-3" id="dollar">
                                                                         <h4 class="fw-bold on">$16</h4>
-                                                                        <p class="text-secondary fs-6"><p><i class="fa-solid fa-calendar-days me-1" style="color:#1cc88a"></i> 
-                                                                        {{ $item->dob ?? 'Nullable' }}</p>
+                                                                        <!-- <p class="text-secondary fs-6"><p><i class="fa-solid fa-calendar-days me-1" style="color:#1cc88a"></i> 
+                                                                        {{ $item->dob ?? 'Nullable' }}</p> -->
                                                                     </div>
                                                                     <div id="heart-icon">
                                                                         <span><i class="fa-regular fa-heart"></i></span>
