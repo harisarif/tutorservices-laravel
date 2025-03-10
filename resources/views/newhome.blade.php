@@ -12,6 +12,10 @@
 <link rel="stylesheet" href="{{ asset('css/tutor-style.css')}}">
 <link rel="stylesheet" href="{{ asset('css/mediaquery.css')}}">
 <style>
+    .img-fluid1 {
+    max-width: 16px;
+    height: auto;
+}
     .read li a {
     color: #42b979;
 }
@@ -564,7 +568,7 @@
                                                         id="citysearch" name="citysearch" required style="border:1px solid #42b979;"> -->
                                                         <select name="gender" id="gender" class="country" >
                                                             <option value="all">{{ __('Select gender') }}</option>
-                                                            <option value="male">{{ __('Male') }}</option>
+                                                            <option value="Male">{{ __('Male') }}</option>
                                                             <option value="female">{{ __('Female') }}</option>
 
                                                     
@@ -591,7 +595,7 @@
                                              <div class="ad-form"><div class="container pt-2">
                                                 <div class="row ">
                                                     <div class="col-xl-12 col-lg-12">
-                                                        <div class="row py-4">
+                                                        <div class="row py-4" style="margin: 0 auto;">
                                                             <div class="col-md-3">
                                                                 <div id="waste1">
                                                                     <div class="img-wrapper">
@@ -605,12 +609,12 @@
                                                                                     style="height: 150px; width: 100%;">
                                                                             @endif
                                                                     </div>
-                                                                    <div class="col-md-4" id="waste" style="display: none;">
+                                                                    <div class="col-md-4" id="waste" style="display: none;margin: 0 auto;     margin-top: 20px;">
                                                                         <div class="d-flex">
                                                                             <h4 class="me-2 fw-bold">{{ $item->f_name ?? 'Nullable' }}{{ $item->l_name ?? 'Nullable' }}</h4>
                                                                             <span class="me-3"><i class="fa-regular fa-star"></i></span>
-                                                                            <div class="img-wrapper" style="max-width: 15px;">
-                                                                                <img src="{{ asset('image/flag.svg') }}" class="img-fluid" alt="">
+                                                                            <div class="img-wrapper1"  style="max-width: 15px;     margin-top: 3px;">
+                                                                                <img src="{{ asset('image/flag.svg') }}" class="img-fluid1" alt="">
                                                                             </div>
                                                                         </div>
                                                                         <div class="d-flex mt-md-5 mt-2" id="for-320">
@@ -623,7 +627,7 @@
                                                                             </div>
                                                                             <div class="me-md-5 me-2" id="dollar">
                                                                                 <h4 class="fw-bold mb-0">US$16</h4>
-                                                                                <p class="text-secondary fs-6 ">{{ $item->year ?? 'Nullable' }}</p>
+                                                                                <p class="text-secondary fs-6 " style="text-align: center;">{{ $item->year ?? 'Nullable' }}</p>
                                                                             </div>
                                                                             <div>
                                                                                 <span><i class="fa-regular fa-heart"></i></span>
@@ -640,7 +644,7 @@
                                                                         <img src="{{ asset('image/flag.svg') }}" class="img-fluid" alt="">
                                                                     </div>
                                                                 </div>
-                                                                <div class="mt-1">
+                                                                <div class="mt-1 cm">
                                                                     @foreach($item->specialization as $specialization)   
                                                                         <span id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold"> 
                                                                             <i class="fa-solid fa-briefcase me-1"></i> {{ trim($specialization) }}  
@@ -649,18 +653,18 @@
                                                                 </div>
                                                                 
                                                                 <div class="d-flex text-secondary my-1">
-                                                                    <span class="me-2"><i class="fa-solid fa-venus-mars" style="font-size: 13px;  margin-top: 5px;"></i></span>
-                                                                    <p class="mb-0">{{ $item->gender ?? 'Nullable' }}</p>
+                                                                    <span class="me-3"><i class="fa-solid fa-venus-mars" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
+                                                                    <p class="mb-0" style="color:black; transform: scaleY(1);">{{ $item->gender ?? 'Nullable' }}</p>
                                                                 </div>
                                                                 
                                                                 <div class="d-flex text-secondary">
-                                                                    <span class="me-2"><i class="fa-solid fa-earth-americas" style="font-size: 13px;  margin-top: 5px;"></i></span>
-                                                                    <p class="mb-0">{{ $item->country_name ?? 'Nullable' }}</p>
+                                                                    <span class="me-3"><i class="fa-solid fa-earth-americas" style="font-size: 13px;  margin-top: 5px;    color: #1cc88a;"></i></span>
+                                                                    <p class="mb-0 ms-1" style="color:black; transform: scaleY(1);">{{ $item->country_name ?? 'Nullable' }}</p>
                                                                 </div>
                                                                 
                                                                 <div class="d-flex text-secondary py-2">
-                                                                    <span class="me-2"><i class="fa-solid fa-language" style="font-size: 13px; margin-top: 5px;"></i></span>
-                                                                    <p class="mb-0" id="on-1024">
+                                                                    <span class="me-3"><i class="fa-solid fa-language" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
+                                                                    <p class="mb-0" style="color:black; transform: scaleY(1);" id="on-1024">
                                                                         Speaks 
                                                                         @if(!empty($item->language) && is_array($item->language))
                                                                             @foreach($item->language as $lang)
@@ -672,6 +676,10 @@
                                                                     </p>
                                                                 </div>
                                                                 
+                                                                <!--  -->
+                                                                <p class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-3" style="color: #1cc88a;"></i> 
+                                                                05-03-1972</p>
+                                                                <!--  -->
                                                                 <div class="py-2">
                                                                     <span>
                                                                         <b>{{ $item->experience ?? 'Nullable' }}+ Years of {{ collect($item->specialization)->first() ?? 'Not Specified' }} Teaching Experience: Your {{ implode(', ', $item->specialization ?? ['Not Specified']) }} Success, Guaranteed.</b> 
@@ -688,7 +696,7 @@
                                                                 <div class="d-flex pb-5" id="ff111">
                                                                     <div class="me-lg-5 me-3" id="dollar">
                                                                         <h4 class="fw-bold on">$16</h4>
-                                                                        <p class="text-secondary fs-6"><p><i class="fa-solid fa-calendar-days me-1"></i> 
+                                                                        <p class="text-secondary fs-6"><p><i class="fa-solid fa-calendar-days me-1" style="color:#1cc88a"></i> 
                                                                         {{ $item->dob ?? 'Nullable' }}</p>
                                                                     </div>
                                                                     <div id="heart-icon">
@@ -696,7 +704,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div>
-                                                                    <div class="pt-5" id="btn-container">
+                                                                    <div id="btn-container">
                                                                         <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trail lesson</button>
                                                                     </div>
                                                                 </div>
