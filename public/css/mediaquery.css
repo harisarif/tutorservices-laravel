@@ -191,14 +191,17 @@
  }
 
  @media(max-width:320px){
+    .cm{
+        text-align: center !important;
+    }
     .img-wrapper{
-        width: 34%;
+        width: 100%;
     }
     #ff000{
         display: none !important;
     }
     #waste1{
-        display: flex;
+        display:block;
     }
     #waste{
         display: block !important;
