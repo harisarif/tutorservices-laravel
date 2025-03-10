@@ -548,7 +548,7 @@
                                     </div>
                                     
                                 </div>
-                                <div class="ad-border" >
+                                <div class="ad-border-filters" >
                                     
                                         <div class="row  country-row">
                                             <div class="col-lg-3 country-drop-down" >
