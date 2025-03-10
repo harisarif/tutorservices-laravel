@@ -592,7 +592,7 @@
                                     @foreach ($tutors as $item)
                                         @if($item->status != 'inactive')
                                           
-                                             <div class="ad-form"><div class="container pt-2">
+                                             <div class="ad-form"><div class="container-fluid pt-2">
                                                 <div class="row ">
                                                     <div class="col-xl-12 col-lg-12">
                                                         <div class="row py-4" style="margin: 0 auto;">
