@@ -543,7 +543,7 @@
                                         
                                     </div>
                                     <div class="my-2 mx-2">
-                                        <button id="resetFilterBtn" class="ad-btn">{{ __('messages.Reset Filter') }}</button>
+                                        <button id="resetFilterBtn" class="ad-btn-reset">{{ __('messages.Reset Filter') }}</button>
             
                                     </div>
                                     
