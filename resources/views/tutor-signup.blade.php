@@ -198,7 +198,7 @@ style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135
                                     style="border: 1px solid #000;">
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
-                                    <option value="others">Others</option>
+                                    <!-- <option value="others">Others</option> -->
                                 </select>
                             </div>
                             <div class="col-md-6 px-2 mb-2">
