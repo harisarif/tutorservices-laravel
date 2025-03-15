@@ -1467,7 +1467,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="ad-detail my-1 mx-2 w-100">
+                                    <div class="my-1 mx-2 w-100">
                                         <div class="ae-div row" style="margin-top: 20px;">
                                             <div class="col-8">
                                                 <div class="ae-detail-div">
@@ -1635,7 +1635,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="ad-detail my-4 mx-4 w-100">
+                                                        <div class="my-4 mx-4 w-100">
                                                             <div class="ae-div row">
                                                                 <div class="col-8">
                                                                     <div class="ae-detail-div">
