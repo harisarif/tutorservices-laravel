@@ -543,12 +543,12 @@
                                         
                                     </div>
                                     <div class="my-2 mx-2">
-                                        <button id="resetFilterBtn" class="ad-btn">{{ __('messages.Reset Filter') }}</button>
+                                        <button id="resetFilterBtn" class="ad-btn-reset">{{ __('messages.Reset Filter') }}</button>
             
                                     </div>
                                     
                                 </div>
-                                <div class="ad-border" >
+                                <div class="ad-border-filters" >
                                     
                                         <div class="row  country-row">
                                             <div class="col-lg-3 country-drop-down" >
@@ -592,7 +592,7 @@
                                     @foreach ($tutors as $item)
                                         @if($item->status != 'inactive')
                                           
-                                             <div class="ad-form"><div class="container pt-2">
+                                             <div class="ad-form"><div class="container-fluid pt-2">
                                                 <div class="row ">
                                                     <div class="col-xl-12 col-lg-12">
                                                         <div class="row py-4" style="margin: 0 auto;">

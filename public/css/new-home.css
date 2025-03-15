@@ -1477,12 +1477,12 @@ footer{
  .tutors-range{
     color:  var(--primary-color);
  }
- .ad-border{
+ .ad-border-filters{
     background:#f4f4f6;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
  }
- .ad-btn{
+ .ad-btn-reset{
     border: 1px solid  var(--primary-color);
     padding: 3px;
     color:  var(--primary-color);
