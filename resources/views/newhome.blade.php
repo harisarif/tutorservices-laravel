@@ -677,7 +677,7 @@
                                                                 </div>
                                                                 
                                                                 <!--  -->
-                                                                <p class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-3" style="color: #1cc88a;"></i> 
+                                                                <p class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-2" style="color: #1cc88a;"></i> 
                                                                 {{ $item->dob ?? 'Nullable' }}</p>
                                                                 <!--  -->
                                                                 <div class="py-2">
@@ -1506,7 +1506,7 @@
 
 
 
-                                                                <p class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-1 ms-1" style="color: #1cc88a;"></i> 
+                                                                <p class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-1" style="color: #1cc88a;"></i> 
                                                                 ${tutor.dob}</p>
 
                                                     
@@ -1670,7 +1670,7 @@
                                                                                             ${languages ?? 'Not Available'}</p>
                                                                                     </div>
                                                                         
-                                                                                    <p class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-2 ms-2" style="color: #1cc88a;"></i> 
+                                                                                    <p class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-1" style="color: #1cc88a;"></i> 
                                                                                     ${tutor.dob}</p>                              
                                                                         
                                                                         <div class="py-2">
