@@ -1798,7 +1798,7 @@ $(document).ready(function () {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="ad-detail my-1 mx-4 w-100">
+                                    <div class="my-1 mx-4 w-100">
                                         <div class="ae-div row">
                                             <div class="col-9">
                                                 <div class="ae-detail-div">
