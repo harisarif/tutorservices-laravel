@@ -1437,7 +1437,8 @@
                 if (response && response.tutors && response.tutors.length > 0) {
                     response.tutors.forEach(function (tutor) {
                         let specializations = tutor.specialization.split(','); // Split by comma
-            
+                        let specialization = tutor.specialization.split(',')[0];
+
             // Build specialization spans
             let specializationHTML = specializations.map(spec => `
                 <span class="p-1 me-2 bg-primary-subtle rounded fw-bold">
@@ -1513,9 +1514,9 @@
                                                 </div>
                                                 <div class="py-2">
                                                                     <span>
-                                                                        <b>2+ Years of Chemistry Teaching Experience: Your Chemistry Success, Guaranteed.</b> 
+                                                                         <b> ${tutor.experience}+ Years of  ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.</b> 
 
-                                                                        - Hello, my name is Haris. I have 2+ years of experience as a Chemistry Teacher &amp; Tutor. 🇬🇧
+                                                                        - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
                                                                         
                                                                     </span>
                                                                     <ul class="read p-0 mt-3">
@@ -1606,7 +1607,7 @@
                                     if (response && response.tutors && response.tutors.length > 0) {
                                         response.tutors.forEach(function (tutor) {
                                             let specializations = tutor.specialization.split(','); // Split by comma
-                                            
+                                            let specialization = tutor.specialization.split(',')[0];
                                             // Build specialization spans
                                             let specializationHTML = specializations.map(spec => `
                                                 <span class="p-1 me-2 bg-primary-subtle rounded fw-bold">
@@ -1675,11 +1676,11 @@
                                                                         
                                                                         <div class="py-2">
                                                                                         <span>
-                                                                                            <b>2+ Years of Chemistry Teaching Experience: Your Chemistry Success, Guaranteed.</b> 
+                                                                                           <b> ${tutor.experience}+ Years of  ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.</b> 
 
-                                                                                            - Hello, my name is Haris. I have 2+ years of experience as a Chemistry Teacher &amp; Tutor. 🇬🇧
-                                                                                            
-                                                                                        </span>
+                                                                        - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
+                                                                        
+                                                                    </span>
                                                                                         <ul class="read p-0 mt-3">
                                                                                             <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
                                                                                         </ul>
@@ -1775,7 +1776,7 @@ $(document).ready(function () {
                 if (response && response.tutors && response.tutors.length > 0) {
                     response.tutors.forEach(function (tutor) {
                         let specializations = tutor.specialization.split(','); // Split by comma
-                                            
+                        let specialization = tutor.specialization.split(',')[0]; 
                                             // Build specialization spans
                                             let specializationHTML = specializations.map(spec => `
                                                 <span class="p-1 me-2 bg-primary-subtle rounded fw-bold">
@@ -1844,11 +1845,11 @@ $(document).ready(function () {
                                                                         
                                                                         <div class="py-2">
                                                                                         <span>
-                                                                                            <b>2+ Years of Chemistry Teaching Experience: Your Chemistry Success, Guaranteed.</b> 
+                                                                                           <b> ${tutor.experience}+ Years of  ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.</b> 
 
-                                                                                            - Hello, my name is Haris. I have 2+ years of experience as a Chemistry Teacher &amp; Tutor. 🇬🇧
-                                                                                            
-                                                                                        </span>
+                                                                        - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
+                                                                        
+                                                                    </span>
                                                                                         <ul class="read p-0 mt-3">
                                                                                             <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
                                                                                         </ul>
