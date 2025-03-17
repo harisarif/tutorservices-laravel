@@ -653,17 +653,17 @@
                                                                 </div>
                                                                 
                                                                 <div class="d-flex text-secondary my-1">
-                                                                    <span class="me-3"><i class="fa-solid fa-venus-mars" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
+                                                                    <span class="me-1"><i class="fa-solid fa-venus-mars" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
                                                                     <p class="mb-0" style="color:black; transform: scaleY(1);text-transform:capitalize">{{ $item->gender ?? 'Nullable' }}</p>
                                                                 </div>
                                                                 
                                                                 <div class="d-flex text-secondary">
-                                                                    <span class="me-3"><i class="fa-solid fa-earth-americas" style="font-size: 13px;  margin-top: 5px;    color: #1cc88a;"></i></span>
+                                                                    <span class="me-1"><i class="fa-solid fa-earth-americas" style="font-size: 13px;  margin-top: 5px;    color: #1cc88a;"></i></span>
                                                                     <p class="mb-0 ms-1" style="color:black; transform: scaleY(1);">{{ $item->country_name ?? 'Nullable' }}</p>
                                                                 </div>
                                                                 
                                                                 <div class="d-flex text-secondary py-2">
-                                                                    <span class="me-3"><i class="fa-solid fa-language" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
+                                                                    <span class="me-1"><i class="fa-solid fa-language" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
                                                                     <p class="mb-0" style="color:black; transform: scaleY(1);" id="on-1024">
                                                                         Speaks 
                                                                         @if(!empty($item->language) && is_array($item->language))
@@ -677,8 +677,8 @@
                                                                 </div>
                                                                 
                                                                 <!--  -->
-                                                                <p class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-2" style="color: #1cc88a;"></i> 
-                                                                {{ $item->dob ?? 'Nullable' }}</p>
+                                                                <span class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-1" style="color: #1cc88a;"></i> 
+                                                                {{ $item->dob ?? 'Nullable' }}</span>
                                                                 <!--  -->
                                                                 <div class="py-2">
                                                                     <span>
@@ -1656,23 +1656,23 @@
                                                                                                                                                         </div>
 
                                                                                         <div class="d-flex text-secondary my-1">
-                                                                                        <span class="me-2"><i class="fa-solid fa-venus-mars" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
+                                                                                        <span class="me-1"><i class="fa-solid fa-venus-mars" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
                                                                                         <p class="mb-0" style="color:black; transform: scaleY(1);text-transform:capitalize">${tutor.gender ?? 'Others'}</p>
                                                                                         </div>
 
                                                                                         <div class="d-flex text-secondary">
-                                                                                        <span class="me-2"><i class="fa-solid fa-earth-americas" style="font-size: 13px;  margin-top: 5px;    color: #1cc88a;"></i></span>
+                                                                                        <span class="me-1"><i class="fa-solid fa-earth-americas" style="font-size: 13px;  margin-top: 5px;    color: #1cc88a;"></i></span>
                                                                                         <p class="mb-0 ms-1" style="color:black; transform: scaleY(1);">${tutor.country_name ?? 'Not Available'}</p>
                                                                                     </div>
                                                                                 
                                                                                     <div class="d-flex text-secondary py-2">
-                                                                                        <span class="me-2"><i class="fa-solid fa-language" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
+                                                                                        <span class="me-1"><i class="fa-solid fa-language" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
                                                                                         <p class="mb-0" style="color:black; transform: scaleY(1);" id="on-1024">
                                                                                             ${languages ?? 'Not Available'}</p>
                                                                                     </div>
                                                                         
-                                                                                    <p class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-1" style="color: #1cc88a;"></i> 
-                                                                                    ${tutor.dob}</p>                              
+                                                                                    <span class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-1" style="color: #1cc88a;"></i> 
+                                                                                    ${tutor.dob}</span>                              
                                                                         
                                                                         <div class="py-2">
                                                                                         <span>
@@ -1840,8 +1840,8 @@ $(document).ready(function () {
                                                                                             ${languages ?? 'Not Available'}</p>
                                                                                     </div>
                                                                         
-                                                                                    <p class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-1" style="color: #1cc88a;"></i> 
-                                                                                    ${tutor.dob}</p>                              
+                                                                                    <span class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-1" style="color: #1cc88a;"></i> 
+                                                                                    ${tutor.dob}</span>                              
                                                                         
                                                                         <div class="py-2">
                                                                                         <span>
