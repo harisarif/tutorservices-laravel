@@ -1779,7 +1779,7 @@ $(document).ready(function () {
                         let specialization = tutor.specialization.split(',')[0]; 
                                             // Build specialization spans
                                             let specializationHTML = specializations.map(spec => `
-                                                <span class="p-1 me-2 bg-primary-subtle rounded fw-bold">
+                                                <span id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold">
                                                     <i class="fa-solid fa-briefcase me-1"></i> ${spec.trim()}
                                                 </span>
                                             `).join('');
