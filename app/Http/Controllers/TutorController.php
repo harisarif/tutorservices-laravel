@@ -148,10 +148,11 @@ class TutorController extends Controller
         // Filter tutors by search query for subject
         if ($request->has('subjectsearch') && $request->filled('subjectsearch')) {
             $subject = $request->subjectsearch;
-
-            // Filter tutors who teach the specified subject
-            $query->where('teaching', 'LIKE', '%"' . $subject . '"%');
+            
+            // Use JSON search function for exact matches
+            $query->whereJsonContains('specialization', $subject);
         }
+        
 
         // Paginate the filtered tutors
         $tutors = $query->paginate($perPage);
