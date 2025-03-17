@@ -646,7 +646,7 @@
                                                                 </div>
                                                                 <div class="mt-1 cm">
                                                                     @foreach($item->specialization as $specialization)   
-                                                                        <span id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold"> 
+                                                                        <span id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-1"> 
                                                                             <i class="fa-solid fa-briefcase me-1"></i> {{ trim($specialization) }}  
                                                                         </span>
                                                                     @endforeach
@@ -1440,7 +1440,7 @@
             
             // Build specialization spans
             let specializationHTML = specializations.map(spec => `
-                <span class="p-1 me-2 bg-primary-subtle rounded fw-bold">
+                <span class="p-1 me-2 bg-primary-subtle rounded fw-1">
                     <i class="fa-solid fa-briefcase me-1"></i> ${spec.trim()}
                 </span>
             `).join(''); // Join without extra commas
@@ -1609,7 +1609,7 @@
                                             
                                             // Build specialization spans
                                             let specializationHTML = specializations.map(spec => `
-                                                <span class="p-1 me-2 bg-primary-subtle rounded fw-bold">
+                                                <span class="p-1 me-2 bg-primary-subtle rounded fw-1">
                                                     <i class="fa-solid fa-briefcase me-1"></i> ${spec.trim()}
                                                 </span>
                                             `).join('');
