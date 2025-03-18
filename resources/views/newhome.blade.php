@@ -579,6 +579,20 @@
                                                     <input placeholder="{{ __('messages.Search Subject') }}" type="text" class="form-control" style="border:1px solid #42b979;"
                                                         id="subjectsearch" name="subjectsearch" required/>
                                                 </div>
+                                                <div class="col-md-6 px-2 col-lg-4">
+                                                    {{-- <label for="citysearch" class="form-label">City</label> --}}
+                                                        <select name="prize-Range" id="prize-Range" class="country" >
+                                                            <option value="all">{{ __('Price Range') }}</option>
+                                                            <option value="$1">{{ __('$1') }}</option>
+                                                            <option value="$2">{{ __('$2') }}</option>
+
+                                                    
+                                                        </select>
+                                                </div>
+                                                
+
+                                                
+
                                             </div>
                                             
                                             

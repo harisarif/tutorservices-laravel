@@ -382,6 +382,8 @@ $languages_spoken = json_decode($tutor->language, true) ?? [];
 @endsection
 
 @section('js')
+<script src="{{asset('js/js/sb-admin-2.min.js')}}"></script>
+<script src="{{asset('js/js/bootstrap.bundle.min.js')}}"></script>
 <script>
 $(document).ready(function($) {
 setTimeout(function() {
