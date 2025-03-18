@@ -76,14 +76,14 @@ class TutorController extends Controller
             } else {
                 $tutor->age = null; // Default value
             }
-        });  
+        });   $subjectsTeach = collect(config('subjects.subjects'));
         $countries = collect(config('countries_assoc.countries'));
         $countriesPhone = collect(config('phonecountries.countries'));
         $countries_number_length = collect(config('countries_number_length.countries'));
         $countries_prefix = collect(config('countries_prefix.countries'));
         return view('newhome', [
             'tutors' => $tutors,
-            // 'tutor' => $tutor,
+             'subjectsTeach' =>  $subjectsTeach,
             'totalTutorsCount' => $totalTutorsCount,
             'perPage' => $perPage,
             'countries' => $countries,
@@ -287,7 +287,7 @@ class TutorController extends Controller
             'email' => 'required|string|email|max:255|unique:tutors,email',
             'experience' => 'required|string|max:255',
             'dob' => 'required|string|max:255',
-            'document' => 'required|mimes:pdf|max:2048',
+            'document' => 'required|mimes:pdf,xlsx,docx|max:2048',
             'videoFile' => 'required|mimes:mp4,webm,ogg|max:51200',
             'specialization' => 'required|array', // Ensure it's an array
             'specialization.*' => 'string',
