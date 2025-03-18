@@ -110,7 +110,7 @@
                                         Name</strong></label>
                                 <input type="text" class="form-control" id="f_name" name="f_name" placeholder="John"
                                     style="box-shadow: none; border: 1px solid rgba(137, 135, 135, 0.5);">
-                                <div style="text-align: left;color: red;">
+                                <div style="text-align: left;font-size: 14px; color: #e74c3c;">
                                 </div>
                             </div>
                             <div class="col-md-6 px-2 mb-2">
@@ -118,7 +118,7 @@
                                         Name</strong></label>
                                 <input type="text" class="form-control" id="l_name" name="l_name" placeholder="Doe"
                                     style="box-shadow: none; border: 1px solid rgba(137, 135, 135, 0.5);">
-                                <div style="text-align: left;color: red;">
+                                <div style="text-align: left;font-size: 14px; color: #e74c3c;">
                                 </div>
                             </div>
                         </div>
@@ -163,7 +163,7 @@ style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135
                                         <input required type="password" id="password" name="password"
                                             placeholder="Password" class="form-control inp-1"
                                             style="width: 100%; flex-direction: column; border-radius: 5px; padding: 5px 8px; margin: 7px 0px; border: 1px solid rgba(137, 135, 135, 0.5);" />
-                                        <div style="text-align: left; color: red;"></div>
+                                        <div style="text-align: left; font-size: 14px; color: #e74c3c;"></div>
                                         <button type="button" onclick="togglePassword('password', this)"
                                             style="position: absolute; right: 10px; top: 20px; transform: translateY(-50%); border: none; background: none; cursor: pointer;">
                                             <img id="eye-icon" src="{{ asset('images/closed_eye.png') }}" alt="eye icon"
@@ -180,7 +180,7 @@ style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135
                                     <input type="password" id="c_password" name="c_password"
                                         placeholder="Confirm Password" class="form-control inp-1"
                                         style="width: 100%; flex-direction: column; border-radius: 5px; padding: 5px 8px; margin: 7px 0px; border: 1px solid rgba(137, 135, 135, 0.5);" />
-                                    <div style="text-align: left; color: red;"></div>
+                                    <div style="text-align: left; font-size: 14px; color: #e74c3c;"></div>
                                     <button type="button" onclick="togglePassword2('c_password', this)"
                                         style="position: absolute; right: 10px; top: 20px; transform: translateY(-50%); border: none; background: none; cursor: pointer;">
                                         <img id="c-eye-icon" src="{{ asset('images/closed_eye.png') }}" alt="eye icon"
@@ -298,7 +298,7 @@ style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135
                                 <input type="file" class="form-control" id="qualificationDocument"
                                     name="document"
                                     style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);">
-                                <div style="text-align: left;color: red;"></div>
+                                <div class="doc" style="text-align: left;font-size: 14px; color: #e74c3c;"></div>
                             </div>
                         </div>
 
@@ -381,19 +381,17 @@ style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135
                                     @endforeach
 
                                 </select>
-                                <div style="text-align: left;color: red;"></div>
+                                
                             </div>
                             <div class="col-md-6 px-2 mb-2">
                                 <label for="language" class="form-label" style="color:#42b979;">
                                     <strong>Language Teaching</strong>
                                 </label>
                                 <select name="language_tech" class="form-control" id="language">
-                                    <option value="english">English</option>
-                                    <option value="spanish">Spanish</option>
-                                    <option value="french">French</option>
-                                    <option value="german">German</option>
-                                    <option value="italian">Italian</option>
-                                    <option value="portuguese">Portuguese</option>
+                                     <option value="" disabled selected>Select Language</option>
+                                            @foreach ($languages as $code => $name)
+                                            <option value="{{ $code }}">{{ $name }}</option>
+                                            @endforeach
                                 </select>
                             </div>
                         </div>
@@ -404,14 +402,14 @@ style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135
                                 <input type="number" min="0" class="form-control" id="experienceInTeaching"
                                     name="experience"
                                     style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);">
-                                <div style="text-align: left;color: red;"></div>
+                                <div style="text-align: left;font-size: 14px; color: #e74c3c;"></div>
                             </div>
                             <div class="col-md-6 px-2 mb-2">
                                 <label for="edu_teaching" class="form-label" style="color:#42b979;"><strong>Educational
                                         Teaching</strong></label>
                                 <input type="text" class="form-control" id="edu_Teaching"
                                     name="edu_teaching" style="border: 1px solid rgba(137, 135, 135, 0.5);" />
-                                <div style="text-align: left;color: red;"></div>
+                                
                             </div>
                         </div>
                         <div id="languages-container">
@@ -772,7 +770,86 @@ function showModal(selectElement) {
                 handleFile(e.target.files[0]);
             });
         }
+    });script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let uploadArea = document.getElementById("uploadAreaVideo");
+        let fileInput = document.getElementById("videoFile");
+        let uploadedVideoRow = document.getElementById("uploadedVideoRow");
+        // let uploadedVideoPreview = document.getElementById("uploadedVideoPreview");
+        let uploadedVideoPreview = document.getElementById("demoVideoPreview");
+
+        let removeVideoButton = document.getElementById("removeVideoButton");
+        let loadingVideoIndicator = document.getElementById("loadingVideoIndicator");
+        let uploadVideoContent = document.getElementById("uploadVideoContent");
+        let errorVideoMessage = document.getElementById("errorVideoMessage");
+        let nextButton = document.getElementById("next-btn");
+        document.getElementById("uploadAreaVideo").addEventListener("click", function() {
+            document.getElementById("videoFile").click();
+        });
+
+        fileInput.addEventListener("change", (e) => {
+            handleFile(e.target.files[0]);
+        });
+
+        removeVideoButton.addEventListener("click", () => {
+            resetUpload();
+        });
+
+        function handleFile(file) {
+            errorVideoMessage.style.display = "none";
+
+            if (!file.type.startsWith("video/")) {
+                showError("Please upload a video file");
+                return;
+            }
+
+            if (file.size > 50 * 1024 * 1024) {
+                showError("Video must be less than 50MB");
+                return;
+            }
+
+            loadingVideoIndicator.style.display = "block";
+            const videoURL = URL.createObjectURL(file);
+            uploadedVideoPreview.src = videoURL;
+
+            uploadedVideoPreview.onloadeddata = () => {
+                loadingVideoIndicator.style.display = "none";
+                uploadedVideoRow.style.display = "block";
+                nextButton.setAttribute("type", "submit"); // Change button to submit
+            };
+        }
+
+        function showError(message) {
+            errorVideoMessage.textContent = message;
+            errorVideoMessage.style.display = "block";
+        }
+
+        // function resetUpload() {
+        //     uploadedVideoPreview.src = "";
+        //     uploadedVideoPreview.load();
+        //     uploadedVideoRow.style.display = "none";
+        //     fileInput.value = "";
+        //     nextButton.setAttribute("type", "button"); //
+        // }
+        function resetUpload() {
+            uploadedVideoPreview.src = "https://www.w3schools.com/html/mov_bbb.mp4";
+            uploadedVideoPreview.load();
+            uploadedVideoRow.style.display = "none";
+
+            // Reset input field
+            let newFileInput = fileInput.cloneNode(true);
+            fileInput.parentNode.replaceChild(newFileInput, fileInput);
+            fileInput = newFileInput;
+
+            nextButton.setAttribute("type", "button"); //
+
+            // Rebind event listener
+            fileInput.addEventListener("change", (e) => {
+                handleFile(e.target.files[0]);
+            });
+        }
     });
+
 </script>
 <script>
     document.getElementById("uploadArea").addEventListener("click", function() {
@@ -799,7 +876,7 @@ function showModal(selectElement) {
 </script>
 <script>
     let currentStep = 1;
-
+   let  errorMessage='';
     function validateAndNextStep(button) {
         if (validateForm()) {
             console.log(`currentStep: page-${currentStep}`);
@@ -808,137 +885,285 @@ function showModal(selectElement) {
     }
 
     const step1RequiredFields = ['f_name', 'l_name', 'password', 'c_password'];
-    const step2RequiredFields = ['qualificationDocument', 'educationalTeaching', 'experienceInTeaching'];
-
+    const step2RequiredFields = ['qualificationDocument','experienceInTeaching'];
+   
     function validateForm() {
         let isValid = true;
 
-        // if (stepCounter == 1) {
-        //     for (const field of step1RequiredFields) {
-        //         const element = document.getElementById(field);
-        //         const errorDiv = element.nextElementSibling;
+         if (stepCounter == 1) {
+             for (const field of step1RequiredFields) {
+                 const element = document.getElementById(field);
+                 const errorDiv = element.nextElementSibling;
 
-        //         if (!element.value.trim()) {
-        //             isValid = false;
-        //             element.style.border = '2px solid red';
-        //             errorDiv.textContent = "Please fill this field"
-        //         } else {
-        //             element.style.border = '';
-        //             errorDiv.textContent = '';
-        //         }
-        //     }
+                 if (!element.value.trim()) {
+                     isValid = false;
+                     element.style.border = '2px solid #e74c3c';
+                     errorDiv.textContent = "Please fill this field"
+                   
+                 } else {
+                     element.style.border = '';
+                     errorDiv.textContent = '';
+                 }  
+                 
+                 element.addEventListener('input', function () {
+                if (element.value.trim()) {
+                    element.style.border = '1px solid rgb(137, 135, 135)';
+                    errorDiv.textContent = "";
+                } else {
+                    element.style.border = '2px solid #e74c3c';
+                    errorDiv.textContent = "Please fill this field";
+                }
+            });  
+             }
+             const date = document.getElementById("dob");
+             if (!date.value) {
+                 isValid = false;
+                 Swal.fire({
+                     toast: true,
+                     icon: 'error',
+                     title: 'Date must be added',
+                     position: 'top-end',
+                     showConfirmButton: false,
+                     timer: 3000,
+                     timerProgressBar: true,
+                     didOpen: (toast) => {
+                         const title = toast.querySelector('.swal2-title');
+                         if (title) {
+                             title.style.fontSize = '14px';
+                             title.style.fontWeight = 'normal';
+                         }
+                     }
+                 });
+             }
+             
+             const profilePictureInput = document.getElementById("profilePicture");
+             if (!profilePictureInput.files.length) {
+                 isValid = false;
+                 Swal.fire({
+                     toast: true,
+                     icon: 'error',
+                     title: 'Profile Image must be uploaded',
+                     position: 'top-end',
+                     showConfirmButton: false,
+                     timer: 3000,
+                     timerProgressBar: true,
+                     didOpen: (toast) => {
+                         const title = toast.querySelector('.swal2-title');
+                         if (title) {
+                             title.style.fontSize = '14px';
+                             title.style.fontWeight = 'normal';
+                         }
+                     }
+                 });
+             }
+        
+             const passwordElement = document.getElementById('password');  
+             const confirmPasswordElement = document.getElementById('c_password');
 
-        //     // Profile Image Validation
-        //     const profilePictureInput = document.getElementById("profilePicture");
-        //     if (!profilePictureInput.files.length) {
-        //         isValid = false;
-        //         Swal.fire({
-        //             toast: true,
-        //             icon: 'error',
-        //             title: 'Profile Image must be uploaded',
-        //             position: 'top-end',
-        //             showConfirmButton: false,
-        //             timer: 3000,
-        //             timerProgressBar: true,
-        //             didOpen: (toast) => {
-        //                 const title = toast.querySelector('.swal2-title');
-        //                 if (title) {
-        //                     title.style.fontSize = '14px';
-        //                     title.style.fontWeight = 'normal';
-        //                 }
-        //             }
-        //         });
-        //     }
+             if (passwordElement && confirmPasswordElement) {
+                 console.log('Password length: ', passwordElement.value.length);
+                 console.log('confirmPasswordElement length: ', confirmPasswordElement.value.length);
+                 if (passwordElement.value.length < 8) {
+                     isValid = false;
+                     Swal.fire({
+                         toast: true,
+                         icon: 'error',
+                         title: 'Password must be at least 8 characters',
+                         position: 'top-end',
+                         showConfirmButton: false,
+                         timer: 3000,
+                         timerProgressBar: true,
+                         didOpen: (toast) => {
+                             const title = toast.querySelector('.swal2-title');
+                             if (title) {
+                                 title.style.fontSize = '14px';
+                                 title.style.fontWeight = 'normal';
+                             }
+                         }
+                     });
+                 }
 
-        //     const passwordElement = document.getElementById('password'); // Use string ID
-        //     const confirmPasswordElement = document.getElementById('c_password'); // Use string ID
+                 if (confirmPasswordElement.value.length < 8) {
+                     isValid = false;
+                     Swal.fire({
+                         toast: true,
+                         icon: 'error',
+                         title: 'Confirm Password must be at least 8 characters',
+                         position: 'top-end',
+                         showConfirmButton: false,
+                         timer: 3000,
+                         timerProgressBar: true,
+                         didOpen: (toast) => {
+                             const title = toast.querySelector('.swal2-title');
+                             if (title) {
+                                 title.style.fontSize = '14px';
+                                 title.style.fontWeight = 'normal';
+                             }
+                         }
+                     });
+                 }
 
-        //     if (passwordElement && confirmPasswordElement) {
-        //         console.log('Password length: ', passwordElement.value.length);
-        //         console.log('confirmPasswordElement length: ', confirmPasswordElement.value.length);
-        //         if (passwordElement.value.length < 8) {
-        //             isValid = false;
-        //             Swal.fire({
-        //                 toast: true,
-        //                 icon: 'error',
-        //                 title: 'Password must be at least 8 characters',
-        //                 position: 'top-end',
-        //                 showConfirmButton: false,
-        //                 timer: 3000,
-        //                 timerProgressBar: true,
-        //                 didOpen: (toast) => {
-        //                     const title = toast.querySelector('.swal2-title');
-        //                     if (title) {
-        //                         title.style.fontSize = '14px';
-        //                         title.style.fontWeight = 'normal';
-        //                     }
-        //                 }
-        //             });
-        //         }
+                 if (passwordElement.value !== confirmPasswordElement.value) {
+                     console.log("passwordValue.value: ", passwordElement.value);
+                     console.log("confirmPasswordValue.value: ", confirmPasswordElement.value);
+                     isValid = false;
+                     Swal.fire({
+                         toast: true,
+                         icon: 'error',
+                         title: 'Passwords and Confirm Password must match',
+                         position: 'top-end',
+                         showConfirmButton: false,
+                         timer: 3000,
+                         timerProgressBar: true,
+                         didOpen: (toast) => {
+                             const title = toast.querySelector('.swal2-title');  
+                             if (title) {
+                                 title.style.fontSize = '14px';  
+                                 title.style.fontWeight = 'normal'; 
+                             }
+                         }
+                     });
+                 }
+             } else {
+                 console.error("Password or confirm password element not found.");
+                 isValid = false;
+             }
+         }
 
-        //         if (confirmPasswordElement.value.length < 8) {
-        //             isValid = false;
-        //             Swal.fire({
-        //                 toast: true,
-        //                 icon: 'error',
-        //                 title: 'Confirm Password must be at least 8 characters',
-        //                 position: 'top-end',
-        //                 showConfirmButton: false,
-        //                 timer: 3000,
-        //                 timerProgressBar: true,
-        //                 didOpen: (toast) => {
-        //                     const title = toast.querySelector('.swal2-title');
-        //                     if (title) {
-        //                         title.style.fontSize = '14px';
-        //                         title.style.fontWeight = 'normal';
-        //                     }
-        //                 }
-        //             });
-        //         }
+         if (stepCounter == 2) {
+             for (const field of step2RequiredFields) {
+                 const element = document.getElementById(field);
+                 const errorDiv = element.nextElementSibling;
+                     
+                 if (!element.value.trim()) {
+                     isValid = false;
+                     element.style.border = '2px solid #e74c3c';
+                     errorDiv.textContent = "Please fill this field"
+                 } else {
+                     element.style.border = '';
+                     errorDiv.textContent = '';
+                 };
+                
+                 element.addEventListener('input', function () {
+                if (element.value.trim()) {
+                    element.style.border = '1px solid rgb(137, 135, 135)';
+                    errorDiv.textContent = "";
+                } else {
+                    element.style.border = '2px solid #e74c3c';
+                    errorDiv.textContent = "Please fill this field";
+                }})}
+                const allowedExtensions = ['pdf', 'xlsx', 'docx'];
 
-        //         if (passwordElement.value !== confirmPasswordElement.value) {
-        //             console.log("passwordValue.value: ", passwordElement.value);
-        //             console.log("confirmPasswordValue.value: ", confirmPasswordElement.value);
-        //             isValid = false;
-        //             Swal.fire({
-        //                 toast: true,
-        //                 icon: 'error',
-        //                 title: 'Passwords and Confirm Password must match',
-        //                 position: 'top-end',
-        //                 showConfirmButton: false,
-        //                 timer: 3000,
-        //                 timerProgressBar: true,
-        //                 didOpen: (toast) => {
-        //                     const title = toast.querySelector('.swal2-title'); // Select the title
-        //                     if (title) {
-        //                         title.style.fontSize = '14px'; // Make the text smaller
-        //                         title.style.fontWeight = 'normal'; // Ensure it's not bold
-        //                     }
-        //                 }
-        //             });
-        //         }
-        //     } else {
-        //         console.error("Password or confirm password element not found.");
-        //         isValid = false;
-        //     }
-        // }
+const fileInput = document.getElementById('qualificationDocument'); // Replace with your input field ID
+const fileName = fileInput.value;
 
-        // if (stepCounter == 2) {
-        //     for (const field of step2RequiredFields) {
-        //         const element = document.getElementById(field);
-        //         const errorDiv = element.nextElementSibling;
+// Extract the file extension
+const fileExtension = fileName.split('.').pop().toLowerCase();
+const doc=document.querySelector('.doc');
+if (!allowedExtensions.includes(fileExtension)) {
+    isValid = false;
+    fileInput.style.border = '2px solid #e74c3c';
+    doc.textContent = "Please fill & add only PDF, XLSX, and DOCX files";
+} else {
+    fileInput.style.border = '';
+    doc.textContent = '';
+} 
+        
+const language_proficient_1 = document.getElementById("language_proficient_1");
+             if (!language_proficient_1.value  || language_proficient_1.value === "") {
+                 isValid = false;
+                 Swal.fire({
+                     toast: true,
+                     icon: 'error',
+                     title: 'Must fill language proficient & its level',
+                     position: 'top-end',
+                     showConfirmButton: false,
+                     timer: 3000,
+                     timerProgressBar: true,
+                     didOpen: (toast) => {
+                         const title = toast.querySelector('.swal2-title');
+                         if (title) {
+                             title.style.fontSize = '14px';
+                             title.style.fontWeight = 'normal';
+                         }
+                     }
+                 });
+             }
 
-        //         if (!element.value.trim()) {
-        //             isValid = false;
-        //             element.style.border = '2px solid red';
-        //             errorDiv.textContent = "Please fill this field"
-        //         } else {
-        //             element.style.border = '';
-        //             errorDiv.textContent = '';
-        //         }
-        //     }
-        // }
+            // Qualification validation
+    const qualification = document.getElementById("qualification");
+    if (!qualification.value) {
+        isValid = false;
+        errorMessage += "Must select a qualification.<br>";
+    }
 
+
+    // Country validation
+    const country = document.getElementById("country");
+    if (!country.value) {
+        isValid = false;
+        errorMessage += "Must select a country.<br>";
+    }
+
+    // Year validation
+    const yearSelect = document.getElementById("yearSelect");
+    if (!yearSelect.value) {
+        isValid = false;
+        errorMessage += "Must select a year.<br>";
+    }
+
+    // Specialization validation
+    const specialization = document.getElementById("specialization");
+    if (!specialization.value) {
+        isValid = false;
+        errorMessage += "Must select at least one specialization.<br>";
+    }
+
+    // Institution validation
+    const institution = document.getElementById("institution");
+    if (!institution.value) {
+        isValid = false;
+        errorMessage += "Must select an institution/university.<br>";
+    }
+
+    // Courses Teaching validation
+    const courses = document.getElementById("other_qualification_input");
+    if (!courses.value) {
+        isValid = false;
+        errorMessage += "Must select at least one course.<br>";
+    }
+
+    // Teaching Subjects validation
+    const teachingSubjects = document.getElementById("teachingSubjects");
+    if (!teachingSubjects.value) {
+        isValid = false;
+        errorMessage += "Must select at least one subject to teach.<br>";
+    }
+
+    // Language Teaching validation
+    const language = document.getElementById("language");
+    if (!language.value) {
+        isValid = false;
+        errorMessage += "Must select a language.<br>";
+    }
+
+    // Show Swal alert if form is invalid
+    if (!isValid) {
+        Swal.fire({
+            icon: "error",
+            title: "Form Incomplete!",
+            html: errorMessage, // Supports HTML formatting
+            position: "top-end",
+            toast: true,
+            showConfirmButton: false,
+            timer: 4000,
+            timerProgressBar: true,
+        });
+    }
+   
+        
+}
+      
         return isValid;
     }
 </script>
