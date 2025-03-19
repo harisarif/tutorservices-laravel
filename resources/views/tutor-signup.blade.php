@@ -1473,6 +1473,13 @@ document.addEventListener("DOMContentLoaded", attachLanguageSelectListener);
             dropdownCssClass: 'language_proficient-custom-select2-templates-lang',
             selectionCssClass: 'language_proficient-custom-select2-templates-lang',
         });
+        $('#language').select2({
+            placeholder: 'Select a language',
+            allowClear: false,
+            tags: true,
+            dropdownCssClass: 'language-custom-select2-templates-lang',
+            selectionCssClass: 'language-custom-select2-templates-lang',
+        });
     });
 </script>
 <script>

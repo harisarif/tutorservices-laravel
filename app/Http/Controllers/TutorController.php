@@ -410,7 +410,7 @@ class TutorController extends Controller
                             
 
                             <p style='font-size: 16px; margin: 10px 0;'>
-                                If you need any assistance, contact us at <a href='mailto:info@edexceledu.com' style='color: #4CAF50; text-decoration: none;'>infoo@edexceledu.com</a> or +971566428066.
+                                If you need any assistance, contact us at <a href='mailto:info@edexceledu.com' style='color: #4CAF50; text-decoration: none;'>info@edexceledu.com</a> or +971566428066.
                             </p>
 
                             <p style='font-size: 16px; margin: 10px 0;'>Best regards,</p>
@@ -520,13 +520,13 @@ class TutorController extends Controller
             $mail->isSMTP();
             $mail->Host ='smtp.hostinger.com';  
             $mail->SMTPAuth = true;
-            $mail->Username = 'info@edexceledu.com';  // Your email
-            $mail->Password = 'y937?2kU';  // Your password
+            $mail->Username = $name;  // Your email
+            $mail->Password = $pass;  // Your password
             $mail->SMTPSecure = 'tls';  // Encryption method
             $mail->Port = 587;  // SMTP port
     
             // Email settings
-            $mail->setFrom('info@edexceledu.com', 'Edexcel');
+            $mail->setFrom($name, 'Edexcel');
             $mail->addAddress($to);
 
             // Email content
