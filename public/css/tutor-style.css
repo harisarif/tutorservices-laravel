@@ -21,3 +21,13 @@
     border-color: #343a40;
     transform: scale(0.9);
 }
+.recomended-badge {
+    margin-top: -9px;
+}
+.recomended-badge span {
+    color: #1cc88a;
+    border-left: 2px solid;
+    border-bottom: 2px solid;
+    border-radius: 2px;
+    cursor: pointer;
+}
