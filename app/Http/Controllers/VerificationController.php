@@ -41,7 +41,7 @@ class VerificationController extends Controller
         'email.regex' => 'Only Gmail, Yahoo, and Outlook emails are allowed.'
     ]);
     
-   $verificationUrl = 'https://edexceledu.com/tutor-signup?email_verification=true';
+   $verificationUrl = 'https://tinyurl.com/yvubhmpy';
 
     $email = $request->input('email');
     $subject = 'Email Verification';
@@ -65,7 +65,7 @@ class VerificationController extends Controller
                             Thank you for signing up! Please verify your email by clicking the button below:
                         </p>
                         <p style='text-align: center; margin: 20px 0;'>
-                            <a href='$verificationUrl' style='background-color: #4CAF50; color: #fff; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;'>Verify Your Email</a>
+                            <a href='https://bit.ly/3XZ0tpY' style='background-color: #4CAF50; color: #fff; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;'>Verify Your Email</a>
                         </p>
                         <p style='margin: 10px 0; font-size: 16px;'>
                             If you did not sign up for an account, please ignore this email.
@@ -79,7 +79,7 @@ class VerificationController extends Controller
                 <tr>
                     <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 14px; color: #777;'>
                         <p>&copy; " . date('Y') . " Edexcel. All rights reserved.</p>
-                        <p><a href='https://email.edexceledu.com/unsubscribe' style='color: #777; text-decoration: none;'>Unsubscribe</a></p>
+                        
                     </td>
                 </tr>
             </tfoot>
@@ -96,7 +96,9 @@ class VerificationController extends Controller
 
 
 function sendEmails($subject, $body, $to_name, $to_email) {  
-  $mail = new PHPMailer(true);   
+  $mail = new PHPMailer(true);  
+  $pass = env('email_pass');
+  $name = env('email_name'); 
     
     try {
         $mail->isSMTP();

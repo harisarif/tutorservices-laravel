@@ -615,7 +615,7 @@
                                           
                                              <div class="ad-form"><div class="container-fluid pt-2 px-0">
                                                 
-                                             <div class="recomended-badge mb-3" data-toggle="tooltip" data-placement="top" title="{{ $item->f_name ?? 'Nullable' }}  {{ $item->l_name ?? 'Nullable' }}" style="float: right;">
+                                             <div class="recomended-badge mb-1" data-toggle="tooltip" data-placement="top" title="{{ $item->f_name ?? 'Nullable' }}  {{ $item->l_name ?? 'Nullable' }}" style="float: right;">
                                                     <span class="badge badge-primary">Recomended</span>
                                             </div>
                                                 <div class="row ">
@@ -745,9 +745,9 @@
                                                                         <!-- <p class="text-secondary fs-6"><p><i class="fa-solid fa-calendar-days me-1" style="color:#1cc88a"></i> 
                                                                         {{ $item->dob ?? 'Nullable' }}</p> -->
                                                                     </div>
-                                                                    <div id="heart-icon">
+                                                                    <!-- <div id="heart-icon">
                                                                         <span><i class="fa-regular fa-heart"></i></span>
-                                                                    </div>
+                                                                    </div> -->
                                                                 </div>
                                                                 <div>
                                                                     <div id="btn-container">

@@ -30,7 +30,7 @@
 <header class="main_header d-flex bg-white py-1 px-3 justify-content-between align-items-center"
     style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
     <!-- Left Logo -->
-    <a class="arrow" href="https://edexceledu.com">
+    <a class="arrow" href="{{ route('newhome') }}">
         <img src="{{ asset('images/logo.png') }}" alt="EDEXCEL-logo" height="40px">
     </a>
 
