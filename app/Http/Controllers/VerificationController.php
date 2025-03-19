@@ -28,7 +28,7 @@ class VerificationController extends Controller
         return view('verify-email'); // view to show modal
     }
     public function sendVerificationEmail(Request $request)
-{    
+{   
      $request->validate([
         'email' => [
             'required',
@@ -96,24 +96,24 @@ class VerificationController extends Controller
 
 
 function sendEmails($subject, $body, $to_name, $to_email) {  
-    $mail = new PHPMailer(true);   
+  $mail = new PHPMailer(true);   
     
     try {
         $mail->isSMTP();
-        $mail->Host = env('MAIL_HOST', 'smtp.hostinger.com');  
+        $mail->Host ='smtp.hostinger.com';  
         $mail->SMTPAuth = true;
-        $mail->Username = env('email_name');  
-        $mail->Password = env('email_pass');  
-        $mail->SMTPSecure = env('MAIL_ENCRYPTION', 'tls');  
-        $mail->Port = env('MAIL_PORT', 587);  
+        $mail->Username = 'info@edexceledu.com';  // Your email
+        $mail->Password = 'y937?2kU';  // Your password
+        $mail->SMTPSecure = 'tls';  // Encryption method
+        $mail->Port = 587;  // SMTP port
 
         // Email settings
-        $mail->setFrom(env('email_name', 'Edexcel'));
+        $mail->setFrom('info@edexceledu.com', 'Edexcel');
         $mail->addAddress($to_email, $to_name);
         $mail->isHTML(true);
         $mail->Subject = $subject;
         $mail->Body    = $body;
-        $mail->AltBody = 'This is the plain text version of the email body.';
+        $mail->AltBody = 'This is the plain text version  of the email body.';
 
         if ($mail->send()) {
             Log::info("Email sent to $to_email successfully!");

@@ -14,7 +14,8 @@ return new class extends Migration
 
         Schema::table('tutors', function (Blueprint $table) {
             $table->integer('teacher_id')->after('id')->unique(); 
-            $table->json('language')->after('experience'); 
+            $table->json('language')->after('experience');
+            $table->string('price')->after('dob');  
             $table->string('password')->after('language'); 
             $table->string('video')->after('password'); 
             $table->json('specialization')->nullable()->after('video'); 

@@ -226,7 +226,7 @@ style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135
                             </div>
                         </div>
                         <div class="form-row d-flex flex-column flex-md-row">
-                            <div class="choice col-12 px-2 mb-2">
+                            <div class="choice col-6 px-2 mb-2">
                                 <label for="experience" class="form-label" style="color:#42b979;">
                                     <strong>How We Can Help</strong>
                                 </label>
@@ -237,7 +237,30 @@ style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135
                                     <option value="Physical">Physical</option>
                                     <option value="Both">Both</option>
                                 </select>
+                            </div> <div class="col-md-6 px-2 mb-2">
+                                <label for="currency_price" class="form-label" style="color:#42b979;">
+                                    <strong>Currencies</strong>
+                                </label>
+                                <div class="row align-items-center">
+                                    <div class="col-2">
+                                        <select class="form-select" id="currency" name="currency" required>
+                                            @foreach ($symbols as $key => $symbol)
+                                                @if(is_string($symbol))
+                                                    <option value="{{ $symbol }}">{{ $symbol }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-10">
+                                        <input type="text" class="form-control" id="price" name="price" 
+                                            placeholder="e.g 65" required>
+                                    </div>
+                                </div>
                             </div>
+                        
+                            <!-- Hidden input to combine values -->
+                            <input type="hidden" name="currency_price" id="currency_price">
+                       
                         </div>
                         <div class="form-row d-flex flex-column flex-md-row gap-5">
                             <!-- Upload Area (Left Side) -->
@@ -537,7 +560,7 @@ style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135
                                     </div>
 
                                     <div class="error-message" id="errorVideoMessage"></div>
-
+                                    
                                     <button class="btn btn-outline-secondary w-100 remove-btn mt-3" id="removeVideoButton">
                                         Remove Video
                                     </button>
@@ -564,7 +587,7 @@ style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>
-                            </div>
+                            <div id="live" class="d-flex"></div></div> 
                         </div>
 
                         <!-- Displaying the uploaded video in a row, full width (col-12)
@@ -691,164 +714,114 @@ function showModal(selectElement) {
 });
 
 
+</script><script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const currencySelect = document.getElementById('currency');
+        const priceInput = document.getElementById('price');
+        const currencyPriceInput = document.getElementById('currency_price');
+
+        function updateHiddenField() {
+            currencyPriceInput.value = currencySelect.value + ' ' + priceInput.value;
+        }
+
+        currencySelect.addEventListener('change', updateHiddenField);
+        priceInput.addEventListener('input', updateHiddenField);
+    });
 </script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        let uploadArea = document.getElementById("uploadAreaVideo");
-        let fileInput = document.getElementById("videoFile");
-        let uploadedVideoRow = document.getElementById("uploadedVideoRow");
-        // let uploadedVideoPreview = document.getElementById("uploadedVideoPreview");
-        let uploadedVideoPreview = document.getElementById("demoVideoPreview");
+   document.addEventListener("DOMContentLoaded", function() {
+    let uploadArea = document.getElementById("uploadAreaVideo");
+    let fileInput = document.getElementById("videoFile");
+    let uploadedVideoPreview = document.getElementById("demoVideoPreview");
+    let removeVideoButton = document.getElementById("removeVideoButton");
+    let loadingVideoIndicator = document.getElementById("loadingVideoIndicator");
+    let errorVideoMessage = document.getElementById("errorVideoMessage");
+    let nextButton = document.getElementById("next-btn");
+    let liveVideoButton = document.createElement("button");
+    let live = document.getElementById("live");
+    // Create Live Video Button
+    liveVideoButton.textContent = "Record Live Video";
+    liveVideoButton.classList.add("btn", "btn-outline-secondary", "w-100", "mt-3");
+    live.appendChild(liveVideoButton);
 
-        let removeVideoButton = document.getElementById("removeVideoButton");
-        let loadingVideoIndicator = document.getElementById("loadingVideoIndicator");
-        let uploadVideoContent = document.getElementById("uploadVideoContent");
-        let errorVideoMessage = document.getElementById("errorVideoMessage");
-        let nextButton = document.getElementById("next-btn");
-        document.getElementById("uploadAreaVideo").addEventListener("click", function() {
-            document.getElementById("videoFile").click();
-        });
+    document.getElementById("uploadAreaVideo").addEventListener("click", function() {
+        document.getElementById("videoFile").click();
+    });
 
-        fileInput.addEventListener("change", (e) => {
-            handleFile(e.target.files[0]);
-        });
+    fileInput.addEventListener("change", (e) => {
+        handleFile(e.target.files[0]);
+    });
 
-        removeVideoButton.addEventListener("click", () => {
-            resetUpload();
-        });
+    removeVideoButton.addEventListener("click", () => {
+        resetUpload();
+    });
 
-        function handleFile(file) {
-            errorVideoMessage.style.display = "none";
+    function handleFile(file) {
+        errorVideoMessage.style.display = "none";
 
-            if (!file.type.startsWith("video/")) {
-                showError("Please upload a video file");
-                return;
-            }
+        if (!file.type.startsWith("video/")) {
+            showError("Please upload a video file");
+            return;
+        }
 
-            if (file.size > 50 * 1024 * 1024) {
-                showError("Video must be less than 50MB");
-                return;
-            }
+        if (file.size > 50 * 1024 * 1024) {
+            showError("Video must be less than 50MB");
+            return;
+        }
 
-            loadingVideoIndicator.style.display = "block";
-            const videoURL = URL.createObjectURL(file);
-            uploadedVideoPreview.src = videoURL;
+        loadingVideoIndicator.style.display = "block";
+        const videoURL = URL.createObjectURL(file);
+        uploadedVideoPreview.src = videoURL;
 
-            uploadedVideoPreview.onloadeddata = () => {
-                loadingVideoIndicator.style.display = "none";
-                uploadedVideoRow.style.display = "block";
-                nextButton.setAttribute("type", "submit"); // Change button to submit
+        uploadedVideoPreview.onloadeddata = () => {
+            loadingVideoIndicator.style.display = "none";
+            nextButton.setAttribute("type", "submit");
+        };
+    }
+
+    function showError(message) {
+        errorVideoMessage.textContent = message;
+        errorVideoMessage.style.display = "block";
+    }
+
+    function resetUpload() {
+        uploadedVideoPreview.src = "https://www.w3schools.com/html/mov_bbb.mp4";
+        uploadedVideoPreview.load();
+        fileInput.value = "";
+        nextButton.setAttribute("type", "button");
+    }
+
+    // Live Video Recording Feature
+    liveVideoButton.addEventListener("click", async () => {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+            const mediaRecorder = new MediaRecorder(stream);
+            let chunks = [];
+
+            mediaRecorder.ondataavailable = (event) => {
+                if (event.data.size > 0) {
+                    chunks.push(event.data);
+                }
             };
-        }
 
-        function showError(message) {
-            errorVideoMessage.textContent = message;
-            errorVideoMessage.style.display = "block";
-        }
-
-        // function resetUpload() {
-        //     uploadedVideoPreview.src = "";
-        //     uploadedVideoPreview.load();
-        //     uploadedVideoRow.style.display = "none";
-        //     fileInput.value = "";
-        //     nextButton.setAttribute("type", "button"); //
-        // }
-        function resetUpload() {
-            uploadedVideoPreview.src = "https://www.w3schools.com/html/mov_bbb.mp4";
-            uploadedVideoPreview.load();
-            uploadedVideoRow.style.display = "none";
-
-            // Reset input field
-            let newFileInput = fileInput.cloneNode(true);
-            fileInput.parentNode.replaceChild(newFileInput, fileInput);
-            fileInput = newFileInput;
-
-            nextButton.setAttribute("type", "button"); //
-
-            // Rebind event listener
-            fileInput.addEventListener("change", (e) => {
-                handleFile(e.target.files[0]);
-            });
-        }
-    });script>
-    document.addEventListener("DOMContentLoaded", function() {
-        let uploadArea = document.getElementById("uploadAreaVideo");
-        let fileInput = document.getElementById("videoFile");
-        let uploadedVideoRow = document.getElementById("uploadedVideoRow");
-        // let uploadedVideoPreview = document.getElementById("uploadedVideoPreview");
-        let uploadedVideoPreview = document.getElementById("demoVideoPreview");
-
-        let removeVideoButton = document.getElementById("removeVideoButton");
-        let loadingVideoIndicator = document.getElementById("loadingVideoIndicator");
-        let uploadVideoContent = document.getElementById("uploadVideoContent");
-        let errorVideoMessage = document.getElementById("errorVideoMessage");
-        let nextButton = document.getElementById("next-btn");
-        document.getElementById("uploadAreaVideo").addEventListener("click", function() {
-            document.getElementById("videoFile").click();
-        });
-
-        fileInput.addEventListener("change", (e) => {
-            handleFile(e.target.files[0]);
-        });
-
-        removeVideoButton.addEventListener("click", () => {
-            resetUpload();
-        });
-
-        function handleFile(file) {
-            errorVideoMessage.style.display = "none";
-
-            if (!file.type.startsWith("video/")) {
-                showError("Please upload a video file");
-                return;
-            }
-
-            if (file.size > 50 * 1024 * 1024) {
-                showError("Video must be less than 50MB");
-                return;
-            }
-
-            loadingVideoIndicator.style.display = "block";
-            const videoURL = URL.createObjectURL(file);
-            uploadedVideoPreview.src = videoURL;
-
-            uploadedVideoPreview.onloadeddata = () => {
-                loadingVideoIndicator.style.display = "none";
-                uploadedVideoRow.style.display = "block";
-                nextButton.setAttribute("type", "submit"); // Change button to submit
+            mediaRecorder.onstop = () => {
+                const blob = new Blob(chunks, { type: "video/mp4" });
+                const videoURL = URL.createObjectURL(blob);
+                uploadedVideoPreview.src = videoURL;
+                nextButton.setAttribute("type", "submit");
             };
-        }
 
-        function showError(message) {
-            errorVideoMessage.textContent = message;
-            errorVideoMessage.style.display = "block";
-        }
+            mediaRecorder.start();
 
-        // function resetUpload() {
-        //     uploadedVideoPreview.src = "";
-        //     uploadedVideoPreview.load();
-        //     uploadedVideoRow.style.display = "none";
-        //     fileInput.value = "";
-        //     nextButton.setAttribute("type", "button"); //
-        // }
-        function resetUpload() {
-            uploadedVideoPreview.src = "https://www.w3schools.com/html/mov_bbb.mp4";
-            uploadedVideoPreview.load();
-            uploadedVideoRow.style.display = "none";
-
-            // Reset input field
-            let newFileInput = fileInput.cloneNode(true);
-            fileInput.parentNode.replaceChild(newFileInput, fileInput);
-            fileInput = newFileInput;
-
-            nextButton.setAttribute("type", "button"); //
-
-            // Rebind event listener
-            fileInput.addEventListener("change", (e) => {
-                handleFile(e.target.files[0]);
-            });
+            setTimeout(() => {
+                mediaRecorder.stop();
+                stream.getTracks().forEach(track => track.stop());
+            }, 5000); // Record for 5 seconds
+        } catch (error) {
+            showError("Could not access camera. Please allow permissions.");
         }
     });
+});
 
 </script>
 <script>

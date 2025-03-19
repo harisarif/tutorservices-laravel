@@ -570,8 +570,6 @@
                                                             <option value="all">{{ __('Select gender') }}</option>
                                                             <option value="Male">{{ __('Male') }}</option>
                                                             <option value="female">{{ __('Female') }}</option>
-
-                                                    
                                                         </select>
                                                 </div>
                                                 <div class="col-md-6 px-2 col-lg-4">
@@ -601,13 +599,17 @@
                                                                     <div class="img-wrapper">
                                                                         @if (!empty(trim($item->profileImages)))
                                                                                 <img src="{{ asset($item->profileImages) }}"
-                                                                                    alt="Tutor Image" class="img-thumbnail"
+                                                                                    alt="Tutor Image" class="img-thumbnail" id="profileImages"
                                                                                     style="height: 150px; width: 100%">
                                                                             @else
                                                                                 <img src="{{ asset('images/avatar.png') }}" 
                                                                                     alt="Default Image" class="img-thumbnail"
                                                                                     style="height: 150px; width: 100%;">
                                                                             @endif
+                                                                            <!-- Hidden Video (Will be shown on hover) -->
+                                                                            <video class="profile-video" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;" muted loop>
+                                                                                <source src="{{ asset('storage/' . $item->profileVideo) }}" type="video/mp4">
+                                                                            </video>
                                                                     </div>
                                                                     <div class="col-md-4" id="waste" style="display: none;margin: 0 auto;     margin-top: 20px;">
                                                                         <div class="d-flex">
@@ -695,7 +697,7 @@
                                                             <div class="col-md-3">
                                                                 <div class="d-flex pb-5" id="ff111">
                                                                     <div class="me-lg-5 me-3" id="dollar">
-                                                                        <h4 class="fw-bold on">$16</h4>
+                                                                        <h4 class="fw-bold on">{{ $item->price ?? 'Nullable' }}</h4>
                                                                         <!-- <p class="text-secondary fs-6"><p><i class="fa-solid fa-calendar-days me-1" style="color:#1cc88a"></i> 
                                                                         {{ $item->dob ?? 'Nullable' }}</p> -->
                                                                     </div>
@@ -1403,7 +1405,32 @@
 		            }
 		        });
         	});
-     </script>    
+     </script> 
+     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".img-wrapper").forEach(wrapper => {
+                const img = wrapper.querySelector(".profile-image");
+                const video = wrapper.querySelector(".profile-video");
+        
+                if (video) {
+                    // Show video on hover
+                    wrapper.addEventListener("mouseenter", function () {
+                        img.style.display = "none"; // Hide image
+                        video.style.display = "block"; // Show video
+                        video.play(); // Start playing
+                    });
+        
+                    // Hide video when mouse leaves
+                    wrapper.addEventListener("mouseleave", function () {
+                        video.style.display = "none"; // Hide video
+                        img.style.display = "block"; // Show image
+                        video.pause(); // Pause video
+                        video.currentTime = 0; // Reset video
+                    });
+                }
+            });
+        });
+        </script>   
     <script>
     $(document).ready(function () {
     $.ajaxSetup({
@@ -1527,7 +1554,7 @@
                                             <div class="ad-div col-4">
                                                 <div class="d-flex pb-5" id="ff111">
                                                                     <div class="me-lg-5 me-3" id="dollar">
-                                                                        <h4 class="fw-bold on">$16</h4>
+                                                                        <h4 class="fw-bold on">${tutor.price ?? 'Not Available'}</h4>
                                                                         <!-- <p class="text-secondary fs-6"><p><i class="fa-solid fa-calendar-days me-1" style="color:#1cc88a"></i> 
                                                                         14-09-1982</p> -->
                                                                     </div>
@@ -1690,7 +1717,7 @@
                                                                 <div class="col-md-4">
                                                                                     <div class="d-flex pb-5" id="ff111">
                                                                                         <div class="me-lg-5 me-3" id="dollar">
-                                                                                            <h4 class="fw-bold on">$16</h4>
+                                                                                            <h4 class="fw-bold on">${tutor.price ?? 'Not Available'}</h4>
                                                                                             <!-- <p class="text-secondary fs-6"><p><i class="fa-solid fa-calendar-days me-1" style="color:#1cc88a"></i> 
                                                                                             05-03-1972</p> -->
                                                                                         </div>
@@ -1859,7 +1886,7 @@ $(document).ready(function () {
                                                                 <div class="col-md-4">
                                                                                     <div class="d-flex pb-5" id="ff111">
                                                                                         <div class="me-lg-5 me-3" id="dollar">
-                                                                                            <h4 class="fw-bold on">$16</h4>
+                                                                                            <h4 class="fw-bold on">${tutor.price ?? 'Not Available'}</h4>
                                                                                             <!-- <p class="text-secondary fs-6"><p><i class="fa-solid fa-calendar-days me-1" style="color:#1cc88a"></i> 
                                                                                             05-03-1972</p> -->
                                                                                         </div>

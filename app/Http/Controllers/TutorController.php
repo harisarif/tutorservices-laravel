@@ -22,7 +22,7 @@ class TutorController extends Controller
     //
     public function index(Request $request)
     {  
-
+          
         $query = Tutor::where('status', 'active');
         
         $perPage = 5; // Define the number of tutors per page
@@ -296,7 +296,7 @@ class TutorController extends Controller
             'language_level' => 'required|array',
             'language_level.*' => 'string|max:255',
             'language_tech' => 'nullable|string|max:255',
-            'edu_teaching' => 'nullable|string|max:255',
+            'edu_teaching' => 'nullable|string|max:255','currency_price' => 'required|string',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -354,7 +354,7 @@ class TutorController extends Controller
         $tutor->year = $request->input('year');
         $tutor->email = $request->input('email');
         $tutor->document = 'documents/' . $fileName;
-        $tutor->dob = $request->input('dob');
+        $tutor->dob = $request->input('dob');$tutor->price = $request->input('currency_price');
         $tutor->qualification = $request->input('qualification');
         $tutor->gender = $request->input('gender');
         $tutor->location = $request->input('location');
@@ -409,20 +409,7 @@ class TutorController extends Controller
                             <p style='font-size: 16px; margin: 10px 0;'>
                                 Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.
                             </p>
-                             <p style='font-size: 16px; margin: 10px 0;'>
-                               To checkout by clicking the button below:
-                            </p>
-                            <!-- Button (wrapped in table for Outlook compatibility) -->
-                            <table align='center' cellpadding='0' cellspacing='0' border='0'>
-                                <tr>
-                                    <td align='center' style='border-radius: 5px;' bgcolor='#e74a3b'>
-                                        <a href='" . url('checkout/' . $tutor->id) . "' target='_blank' style='display: inline-block; font-size: 16px; color: #ffffff; text-decoration: none; padding: 12px 20px; background-color: #4CAF50; border-radius: 5px; font-weight: bold;'
-                                        onclick='return confirm(\"Are you sure you want to check out? This will delete the tutor and their associated user.\");'>
-                                            Check Out
-                                        </a>
-                                    </td>
-                                </tr>
-                            </table>
+                            
 
                             <p style='font-size: 16px; margin: 10px 0;'>
                                 If you need any assistance, contact us at <a href='mailto:infoo@edexceledu.com' style='color: #4CAF50; text-decoration: none;'>infoo@edexceledu.com</a> or +971566428066.
@@ -533,15 +520,15 @@ class TutorController extends Controller
         try {
             // Load SMTP settings from Laravel .env
             $mail->isSMTP();
-            $mail->Host = env('MAIL_HOST', 'smtp.hostinger.com');
+            $mail->Host ='smtp.hostinger.com';  
             $mail->SMTPAuth = true;
-            $mail->Username = $name; // Your SMTP username (email)
-            $mail->Password = $pass; // Your SMTP password
-            $mail->SMTPSecure = env('MAIL_ENCRYPTION', 'tls'); // TLS or SSL
-            $mail->Port = 587; // Default: 587 for TLS, 465 for SSL
-
-            // Set sender info
-            $mail->setFrom($name, 'Edexcel');
+            $mail->Username = 'info@edexceledu.com';  // Your email
+            $mail->Password = 'y937?2kU';  // Your password
+            $mail->SMTPSecure = 'tls';  // Encryption method
+            $mail->Port = 587;  // SMTP port
+    
+            // Email settings
+            $mail->setFrom('info@edexceledu.com', 'Edexcel');
             $mail->addAddress($to);
 
             // Email content
@@ -660,12 +647,13 @@ class TutorController extends Controller
         $countries_prefix = collect(config('countries_prefix.countries'));
         $countries = collect(config('countries_assoc.countries'));
         $languages = collect(config('languages.languages'));
-        $courses = collect(config('courses.courses'));
+         $courses = collect(config('courses.courses'));
+        $symbols = collect(config('symbols.symbols'));  // Will show all contents of config/symbols.php
         $subjectsTeach = collect(config('subjects.subjects')); // Fetch languages from config
         $universities = collect(config('universities.universities'));
         // Retrieve verified email from session (if exists)
         $verifiedEmail = session('verified_email', '');
-        return view('tutor-signup', compact(['courses', 'universities', 'countriesPhone', 'countries', 'verifiedEmail', 'schoolClasses', 'countries_number_length', 'countries_prefix', 'languages']));
+        return view('tutor-signup', compact(['courses', 'universities','symbols', 'countriesPhone', 'countries', 'verifiedEmail', 'schoolClasses', 'countries_number_length', 'countries_prefix', 'languages']));
     }
     public function assignStudent($tutorId, $studentId)
     {
