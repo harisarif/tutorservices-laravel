@@ -613,7 +613,11 @@
                                     @foreach ($tutors as $item)
                                         @if($item->status != 'inactive')
                                           
-                                             <div class="ad-form"><div class="container-fluid pt-2">
+                                             <div class="ad-form"><div class="container-fluid pt-2 px-0">
+                                                
+                                             <div class="recomended-badge mb-3" data-toggle="tooltip" data-placement="top" title="{{ $item->f_name ?? 'Nullable' }}  {{ $item->l_name ?? 'Nullable' }}" style="float: right;">
+                                                    <span class="badge badge-primary">Recomended</span>
+                                            </div>
                                                 <div class="row ">
                                                     <div class="col-xl-12 col-lg-12">
                                                         <div class="row py-4" style="margin: 0 auto;">
@@ -635,11 +639,10 @@
                                                                             </video> -->
                                                                     </div>
                                                                     <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-                                                                        <div class="modal-dialog modal-lg">
+                                                                        <div class="modal-dialog modal-lg modal-dialog-centered"style="max-width:500px;">
                                                                             <div class="modal-content">
-                                                                                <div class="modal-header">
-                                                                                    <h5 class="modal-title" id="videoModalLabel">Video Title</h5>
-                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                <div class="modal-header"style="background-color: #1cc88a;">
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(2);"></button>
                                                                                 </div>
                                                                                 <div class="modal-body">
                                                                                     <!-- Video Embed -->
@@ -681,7 +684,7 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="d-flex" id="ff000">
-                                                                    <h4 class="me-2 fw-bold sd">{{ $item->f_name ?? 'Nullable' }}  {{ $item->l_name ?? 'Nullable' }}</h4>
+                                                                    <h4 class="me-2 fw-bold sd">{{ $item->f_name ?? 'Nullable' }}</h4>
                                                                     <span class="me-3"><i class="fa-regular fa-star "></i></span>
                                                                     <div class="img-wrapper" style="max-width:15px;margin-top:5px;">
                                                                         <img src="{{ asset('image/flag.svg') }}" class="img-fluid" alt="">
