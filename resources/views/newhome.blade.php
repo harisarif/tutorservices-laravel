@@ -619,7 +619,7 @@
                                                         <div class="row py-4" style="margin: 0 auto;">
                                                             <div class="col-md-3">
                                                                 <div id="waste1">
-                                                                    <div class="img-wrapper">
+                                                                    <div class="img-wrapper trigger-modal" id="triggerImage">
                                                                         @if (!empty(trim($item->profileImages)))
                                                                                 <img src="{{ asset($item->profileImages) }}"
                                                                                     alt="Tutor Image" class="img-thumbnail" id="profileImages"
@@ -630,10 +630,28 @@
                                                                                     style="height: 150px; width: 100%;">
                                                                             @endif
                                                                             <!-- Hidden Video (Will be shown on hover) -->
-                                                                            <video class="profile-video" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;" muted loop>
+                                                                            <!-- <video class="profile-video" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;" muted loop>
                                                                                 <source src="{{ asset('storage/' . $item->profileVideo) }}" type="video/mp4">
-                                                                            </video>
+                                                                            </video> -->
                                                                     </div>
+                                                                    <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-lg">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="videoModalLabel">Video Title</h5>
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <!-- Video Embed -->
+                                                                                    <video controls height="250px" width="100%">
+                                                                                        <source src="{{ asset('/' . $item->video) }}" type="video/mp4">
+                                                                                        Your browser does not support the video tag.
+                                                                                    </video>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                
                                                                     <div class="col-md-4" id="waste" style="display: none;margin: 0 auto;     margin-top: 20px;">
                                                                         <div class="d-flex">
                                                                             <h4 class="me-2 fw-bold">{{ $item->f_name ?? 'Nullable' }}{{ $item->l_name ?? 'Nullable' }}</h4>
@@ -1391,7 +1409,12 @@
     <script src="script.js"></script>
     <!-- Your custom script -->
     <script>
-        
+           document.querySelectorAll('.trigger-modal').forEach(function (element) {
+        element.addEventListener('mouseenter', function () {
+            var modal = new bootstrap.Modal(document.getElementById('videoModal'));
+            modal.show();
+        });
+    });
         $(document).on('select2:open', function(e) {
             let scrollPos = $(window).scrollTop();
             setTimeout(function() {
