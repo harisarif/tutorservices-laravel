@@ -239,7 +239,7 @@ style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135
                                 </select>
                             </div> <div class="col-md-6 px-2 mb-2">
                                 <label for="currency_price" class="form-label" style="color:#42b979;">
-                                    <strong>Currencies</strong>
+                                    <strong>Price</strong>
                                 </label>
                                 <div class="row align-items-center">
                                     <div class="col-2">
@@ -253,7 +253,7 @@ style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135
                                     </div>
                                     <div class="col-10">
                                         <input type="text" class="form-control" id="price" name="price" 
-                                            placeholder="e.g 65" required>
+                                            placeholder="e.g $65" required>
                                     </div>
                                 </div>
                             </div>

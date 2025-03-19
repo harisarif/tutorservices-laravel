@@ -572,10 +572,19 @@
                                                             <option value="female">{{ __('Female') }}</option>
                                                         </select>
                                                 </div>
-                                                <div class="col-md-6 px-2 col-lg-4">
+                                                <!-- <div class="col-md-6 px-2 col-lg-4">
                                                     {{-- <label for="citysearch" class="form-label">City</label> --}}
                                                     <input placeholder="{{ __('messages.Search Subject') }}" type="text" class="form-control" style="border:1px solid #42b979;"
                                                         id="subjectsearch" name="subjectsearch" required/>
+                                                </div> -->
+                                                <div class="col-md-6 px-2 col-lg-4">
+                                                    {{-- <label for="citysearch" class="form-label">City</label> --}}
+                                                    <!-- <input placeholder="{{ __('messages.Search city') }}" type="text" class="form-control"
+                                                        id="citysearch" name="citysearch" required style="border:1px solid #42b979;"> -->
+                                                        <select name="subjectSearch" id="subjectSearch" class="country" >
+                                                            <option value="all">{{ __('Select Subject') }}</option>
+                                                            <option value="Male">{{ __('Maths') }}</option>
+                                                        </select>
                                                 </div>
                                                 <div class="col-md-6 px-2 col-lg-4">
                                                     {{-- <label for="citysearch" class="form-label">City</label> --}}

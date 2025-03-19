@@ -402,9 +402,7 @@ class TutorController extends Controller
                     <!-- Body -->
                     <tr>
                      <td style='padding: 20px; text-align: left;'>
-                             <div style='text-align: center; padding-bottom: 10px;'>
-                                <img src='" . asset('images/edexcel.jpeg') . "' alt='Edexcel Logo' height='50' width='150' style='display: block; margin: 0 auto;'>
-                            </div>
+                             
                             <p style='font-size: 16px; margin: 0;'>Dear {$tutor->f_name} {$tutor->l_name},</p>
                             <p style='font-size: 16px; margin: 10px 0;'>
                                 Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.
@@ -412,7 +410,7 @@ class TutorController extends Controller
                             
 
                             <p style='font-size: 16px; margin: 10px 0;'>
-                                If you need any assistance, contact us at <a href='mailto:infoo@edexceledu.com' style='color: #4CAF50; text-decoration: none;'>infoo@edexceledu.com</a> or +971566428066.
+                                If you need any assistance, contact us at <a href='mailto:info@edexceledu.com' style='color: #4CAF50; text-decoration: none;'>infoo@edexceledu.com</a> or +971566428066.
                             </p>
 
                             <p style='font-size: 16px; margin: 10px 0;'>Best regards,</p>
