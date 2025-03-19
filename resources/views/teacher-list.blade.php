@@ -437,10 +437,10 @@
 
                                     <td>
                                         <div class="dropdown">
-                                            <button class="dropdown-icon" id="dropdownButton">
+                                            <button class="dropdown-icon dropdownButton">
                                                 <i class="fa fa-ellipsis-v"></i> <!-- You can replace this with any icon -->
                                             </button>
-                                            <ul class="dropdown-action " id="dropdownMenu">
+                                            <ul class="dropdown-action dropdownMenu">
                                                 <li>
                                                     <a href="{{ route('view-teacher', $tutor->id) }}" class="btn btn-sm text-justify">
                                                     <i class="fa fa-eye" style="color: #4e73df;"></i>
@@ -539,9 +539,17 @@
     
     <script src="{{asset('js/js/bootstrap.bundle.min.js')}}"></script>
 <script>
-        document.querySelector("#dropdownButton").addEventListener("click", () => {
-            document.querySelector("#dropdownMenu").classList.toggle("show");
+        document.querySelectorAll(".dropdownButton").forEach((button) => {
+            button.addEventListener("click", (event) => {
+                // Find the nearest dropdown menu relative to the clicked button
+                const dropdownMenu = event.target.nextElementSibling;
+
+                if (dropdownMenu && dropdownMenu.classList.contains("dropdownMenu")) {
+                    dropdownMenu.classList.toggle("show");
+                }
+            });
         });
+
         function updateStatus(tutorId) {
             let statusToggle = document.getElementById(`statusToggle_${tutorId}`);
             let statusInput = document.getElementById(`statusInput_${tutorId}`);
