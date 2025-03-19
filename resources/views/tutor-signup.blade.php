@@ -9,6 +9,7 @@
 <meta name="description"
     content="Tutor Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
 <link rel="stylesheet" href="{{ asset('css/tutor-form.css') }}">
+<link rel="shortcut icon" href="images/favicon.png" type="image/png" />
 @include('whatsapp')
 <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block;"
     onclick="window.scrollTo(0, 0)"><i class="fa fa-chevron-up"></i></button>
@@ -166,7 +167,7 @@ style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135
                                         <div style="text-align: left; font-size: 14px; color: #e74c3c;"></div>
                                         <button type="button" onclick="togglePassword('password', this)"
                                             style="position: absolute; right: 10px; top: 20px; transform: translateY(-50%); border: none; background: none; cursor: pointer;">
-                                            <img id="eye-icon" src="{{ asset('images/closed_eye.png') }}" alt="eye icon"
+                                            <img id="eye-icon" src="{{ asset('images/close_eye.png') }}" alt="eye icon"
                                                 style="height: 20px; width: 20px;color:#42b979;" />
                                         </button>
                                     </div>
@@ -183,7 +184,7 @@ style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135
                                     <div style="text-align: left; font-size: 14px; color: #e74c3c;"></div>
                                     <button type="button" onclick="togglePassword2('c_password', this)"
                                         style="position: absolute; right: 10px; top: 20px; transform: translateY(-50%); border: none; background: none; cursor: pointer;">
-                                        <img id="c-eye-icon" src="{{ asset('images/closed_eye.png') }}" alt="eye icon"
+                                        <img id="c-eye-icon" src="{{ asset('images/close_eye.png') }}" alt="eye icon"
                                             style="height: 20px; width: 20px;" />
                                     </button>
                                 </div>
@@ -640,7 +641,7 @@ style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135
             </div>
             <div class="modal-footer justify-content-end">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveLanguageLevel">Save</button>
+                <button type="button" class="btn btn-success" id="saveLanguageLevel">Save</button>
             </div>
         </div>
     </div>
@@ -1237,10 +1238,10 @@ document.addEventListener("DOMContentLoaded", attachLanguageSelectListener);
 
         if (input.type === "password") {
             input.type = "text";
-            eyeIcon.src = "/images/open_eye.png"; // Change to open-eye image
+            eyeIcon.src = "/images/opened_eye.png"; // Change to open-eye image
         } else {
             input.type = "password";
-            eyeIcon.src = "/images/closed_eye.png"; // Change back to closed-eye image
+            eyeIcon.src = "/images/close_eye.png"; // Change back to closed-eye image
         }
     }
 
@@ -1251,10 +1252,10 @@ document.addEventListener("DOMContentLoaded", attachLanguageSelectListener);
 
         if (input.type === "password") {
             input.type = "text";
-            eyeIcon.src = "/images/open_eye.png"; // Change to open-eye image
+            eyeIcon.src = "/images/opened_eye.png"; // Change to open-eye image
         } else {
             input.type = "password";
-            eyeIcon.src = "/images/closed_eye.png"; // Change back to closed-eye image
+            eyeIcon.src = "/images/close_eye.png"; // Change back to closed-eye image
         }
     }
 
