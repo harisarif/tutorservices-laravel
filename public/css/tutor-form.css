@@ -3,6 +3,14 @@
     color: #fff;
     margin-top: 0px !important;
 }
+#currency {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+#price {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
 
 .main-footer {
     display: none;
@@ -94,14 +102,6 @@
     }
 }
 
-@media(min-width: 322px) and (max-width: 766px) {
-    .select2-container {
-        .select2-dropdown {
-            width: 330px !important;
-
-        }
-    }
-}
 
 @media (max-width: 425px) {
     .select2-container {
@@ -121,6 +121,27 @@
 }
 
 @media(min-width: 767px) and (max-width: 1441px) {
+    .select2-dropdown.gender-custom-select2-templates-lang.select2-dropdown--below {
+        width: 472px !important;
+    }
+    .select2-dropdown.qualification-custom-select2-templates-lang.select2-dropdown--below {
+        width: 472px !important;
+    }
+    .select2-dropdown.institution-custom-select2-templates-lang.select2-dropdown--below {
+        width: 472px !important;
+    }
+    .select2-dropdown.other_qualification_input-custom-select2-templates-lang.select2-dropdown--below {
+        width: 472px !important;
+    }
+    .select2-dropdown.language-custom-select2-templates-lang.select2-dropdown--below {
+        width: 472px !important;
+    }
+    .select2-dropdown.city-custom-select2-templates-lang.select2-dropdown--below {
+        width: 472px !important;
+    }
+    .select2-dropdown.specialization-custom-select2-templates-lang.select2-dropdown--below {
+        width: 472px !important;
+    }
     .select2-container {
         .select2-dropdown {
             width: 269px !important;
@@ -586,7 +607,7 @@ input[type="password"]::placeholder {
 }
 
 .select2-dropdown.gender-custom-select2-templates-lang.select2-dropdown--below {
-    width: 327px !important;
+    width: 327px;
 }
 
 .select2-dropdown.countrySelect-custom-select2-templates-lang.select2-dropdown--below {
@@ -606,19 +627,19 @@ input[type="password"]::placeholder {
 }
 
 .select2-dropdown.qualification-custom-select2-templates-lang.select2-dropdown--below {
-    width: 310px !important;
+    width: 310px;
 }
 
 .select2-dropdown.specialization-custom-select2-templates-lang.select2-dropdown--below {
-    width: 317px !important;
+    width: 317px;
 }
 
 .select2-dropdown.institution-custom-select2-templates-lang.select2-dropdown--below {
-    width: 316px !important;
+    width: 316px;
 }
 
 .select2-dropdown.other_qualification_input-custom-select2-templates-lang.select2-dropdown--below {
-    width: 317px !important;
+    width: 317px;
 }
 
 .select2-dropdown.language_proficient-custom-select2-templates-lang.select2-dropdown--below {
@@ -630,10 +651,10 @@ input[type="password"]::placeholder {
 }
 
 .select2-dropdown.city-custom-select2-templates-lang.select2-dropdown--below {
-    width: 322px !important
+    width: 322px;
 }
 
-@media (min-width: 1360px) {
+/* @media (min-width: 1360px) {
     .select2-dropdown.gender-custom-select2-templates-lang.select2-dropdown--below {
         width: 350px !important;
     }
@@ -659,7 +680,7 @@ input[type="password"]::placeholder {
     }
 
     .select2-dropdown.specialization-custom-select2-templates-lang.select2-dropdown--below {
-        width: 340px !important;
+        width: 684px;
     }
 
     .select2-dropdown.institution-custom-select2-templates-lang.select2-dropdown--below {
@@ -681,7 +702,7 @@ input[type="password"]::placeholder {
     .select2-dropdown.city-custom-select2-templates-lang.select2-dropdown--below {
         width: 345px !important;
     }
-}
+} */
 
 .steps-container {
     display: flex;

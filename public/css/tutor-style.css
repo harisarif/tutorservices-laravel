@@ -25,7 +25,8 @@
     margin-top: -9px;
 }
 .recomended-badge span {
-    color: #1cc88a;
+    color: #fff;
+    background-color: #42B979;
     border-left: 2px solid;
     border-bottom: 2px solid;
     border-radius: 2px;
@@ -37,4 +38,5 @@
     margin-top: 90px;
     text-align: center;
     margin-left:22% !important;
+    padding: 10px;
 }

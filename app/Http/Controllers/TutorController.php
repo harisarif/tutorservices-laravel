@@ -67,7 +67,7 @@ class TutorController extends Controller
                 $tutor->profileImage = asset('default-profile.png');
             }
 
-        
+             
             // Calculate age if DOB exists
             if ($tutor->dob) {
                 $dob = Carbon::parse($tutor->dob);
@@ -130,11 +130,52 @@ class TutorController extends Controller
         // Define the number of tutors per page
         $perPage = 5;
 
-        //subject 
-        if ($request->has('teaching') && !empty($request->teaching)) {
-            $subjects = $request->teaching;
-            $query->where('teaching', 'LIKE', "%$subjects%"); // Assuming 'subjects' column stores subjects
+        // //subject 
+        // if ($request->has('teaching') && !empty($request->teaching)) {
+        //     $subject = $request->teaching; // Get the selected subject (string)
+            
+        //     // Fetch all records and unserialize the "teaching" column for comparison
+        //     $query->where(function ($query) use ($subject) {
+        //         $query->whereRaw("teaching LIKE ?", ['%' . serialize($subject) . '%'])
+        //               ->orWhereRaw("teaching LIKE ?", ['%' . $subject . '%']); // Handle plain text cases
+        //     });
+        // }        
+        
+        if ($request->has('price') && $request->price !== 'all') {
+            $priceValue = trim($request->price);
+        
+            // Extract numeric value from stored price (e.g., "$ 100" -> "100")
+            $query->whereRaw("CAST(REGEXP_REPLACE(price, '[^0-9]', '') AS UNSIGNED) IS NOT NULL");
+        
+            if (preg_match('/^(\d+)-(\d+)$/', $priceValue, $matches)) {
+                // Case: Price Range (e.g., "200-500")
+                $minPrice = (int) $matches[1];
+                $maxPrice = (int) $matches[2];
+        
+                Log::info("Filtering tutors between $minPrice and $maxPrice");
+        
+                $query->whereRaw("CAST(REGEXP_REPLACE(price, '[^0-9]', '') AS UNSIGNED) BETWEEN ? AND ?", [$minPrice, $maxPrice]);
+        
+            } elseif (preg_match('/(\d+)\+/', $priceValue, $matches)) {
+                // Case: "5000+" (minimum price)
+                $minPrice = (int) $matches[1];
+        
+                Log::info("Filtering tutors with price >= $minPrice");
+        
+                $query->whereRaw("CAST(REGEXP_REPLACE(price, '[^0-9]', '') AS UNSIGNED) >= ?", [$minPrice]);
+        
+            } else {
+                // Case: Exact Price (e.g., "100")
+                if (is_numeric($priceValue)) {
+                    $exactPrice = (int) $priceValue;
+        
+                    Log::info("Filtering tutors with exact price = $exactPrice");
+        
+                    $query->whereRaw("CAST(REGEXP_REPLACE(price, '[^0-9]', '') AS UNSIGNED) = ?", [$exactPrice]);
+                }
+            }
         }
+        
 
         //gender
         if ($request->has('gender') && $request->gender !== 'all') {
@@ -146,14 +187,20 @@ class TutorController extends Controller
         }
 
         // Filter tutors by search query for subject
-        if ($request->has('subjectsearch') && $request->filled('subjectsearch')) {
-            $subject = $request->subjectsearch;
-            
-            // Use JSON search function for exact matches
-            $query->whereJsonContains('specialization', $subject);
+        if ($request->has('specialization') && !empty($request->specialization)) {
+            $specialization = $request->specialization;
+        
+            if (is_array($specialization)) {
+                $query->where(function ($q) use ($specialization) {
+                    foreach ($specialization as $spec) {
+                        $q->orWhereJsonContains('specialization', $spec);
+                    }
+                });
+            } else {
+                $query->whereJsonContains('specialization', $specialization);
+            }
         }
         
-
         // Paginate the filtered tutors
         $tutors = $query->paginate($perPage);
 
@@ -410,7 +457,7 @@ class TutorController extends Controller
                             
 
                             <p style='font-size: 16px; margin: 10px 0;'>
-                                If you need any assistance, contact us at <a href='mailto:info@edexceledu.com' style='color: #4CAF50; text-decoration: none;'>infoo@edexceledu.com</a> or +971566428066.
+                                If you need any assistance, contact us at <a href='mailto:info@edexceledu.com' style='color: #4CAF50; text-decoration: none;'>info@edexceledu.com</a> or +971566428066.
                             </p>
 
                             <p style='font-size: 16px; margin: 10px 0;'>Best regards,</p>
@@ -520,13 +567,13 @@ class TutorController extends Controller
             $mail->isSMTP();
             $mail->Host ='smtp.hostinger.com';  
             $mail->SMTPAuth = true;
-            $mail->Username = 'info@edexceledu.com';  // Your email
-            $mail->Password = 'y937?2kU';  // Your password
+            $mail->Username = $name;  // Your email
+            $mail->Password = $pass;  // Your password
             $mail->SMTPSecure = 'tls';  // Encryption method
             $mail->Port = 587;  // SMTP port
     
             // Email settings
-            $mail->setFrom('info@edexceledu.com', 'Edexcel');
+            $mail->setFrom($name, 'Edexcel');
             $mail->addAddress($to);
 
             // Email content

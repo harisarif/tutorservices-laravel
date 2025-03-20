@@ -1708,7 +1708,7 @@ display: inline-block;
     transition: 0.5s;
 }
 .hover-button :hover{
-    background-color: #826cf6;
+    /* background-color: #826cf6; */
     color: #fff;
     transform: scale(1.1);
 }
