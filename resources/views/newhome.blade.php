@@ -563,48 +563,30 @@
                                             </div>
                                             <div class="col-lg-9 adjust-filters-wrap ">
                                                 <div class="col-md-6 px-2 col-lg-4">
-                                                    {{-- <label for="citysearch" class="form-label">City</label> --}}
-                                                    <!-- <input placeholder="{{ __('messages.Search city') }}" type="text" class="form-control"
-                                                        id="citysearch" name="citysearch" required style="border:1px solid #42b979;"> -->
                                                         <select name="gender" id="gender" class="country" >
                                                             <option value="all">{{ __('Select gender') }}</option>
                                                             <option value="Male">{{ __('Male') }}</option>
                                                             <option value="female">{{ __('Female') }}</option>
                                                         </select>
                                                 </div>
-                                                <!-- <div class="col-md-6 px-2 col-lg-4">
-                                                    {{-- <label for="citysearch" class="form-label">City</label> --}}
-                                                    <input placeholder="{{ __('messages.Search Subject') }}" type="text" class="form-control" style="border:1px solid #42b979;"
-                                                        id="subjectsearch" name="subjectsearch" required/>
-                                                </div> -->
                                                 <div class="col-md-6 px-2 col-lg-4">
-                                                    {{-- <label for="citysearch" class="form-label">City</label> --}}
-                                                    <!-- <input placeholder="{{ __('messages.Search city') }}" type="text" class="form-control"
-                                                        id="citysearch" name="citysearch" required style="border:1px solid #42b979;"> -->
                                                         <select name="subjectSearch" id="subjectSearch" class="country" >
                                                             <option value="all">{{ __('Select Subject') }}</option>
-                                                            <option value="Male">{{ __('Maths') }}</option>
+                                                           
+                                                    @foreach($subjectsTeach as $subjectsCode => $subjects)
+                                                        <option value="{{ $subjectsCode }}">{{ $subjects }}</option>
+                                                    @endforeach
                                                         </select>
                                                 </div>
                                                 <div class="col-md-6 px-2 col-lg-4">
                                                     {{-- <label for="citysearch" class="form-label">City</label> --}}
                                                         <select name="prize-Range" id="prize-Range" class="country" >
                                                             <option value="all">{{ __('Price Range') }}</option>
-                                                            <option value="$1">{{ __('$1') }}</option>
-                                                            <option value="$2">{{ __('$2') }}</option>
-
-                                                    
+                                                            
                                                         </select>
                                                 </div>
-                                                
-
-                                                
-
-                                            </div>
-                                            
-                                            
+                                            </div>  
                                         </div>
-                                    
                                     </div>
 
                                 <!-- Tutor profile -->
@@ -633,10 +615,7 @@
                                                                                     alt="Default Image" class="img-thumbnail"
                                                                                     style="height: 150px; width: 100%;">
                                                                             @endif
-                                                                            <!-- Hidden Video (Will be shown on hover) -->
-                                                                            <!-- <video class="profile-video" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;" muted loop>
-                                                                                <source src="{{ asset('storage/' . $item->profileVideo) }}" type="video/mp4">
-                                                                            </video> -->
+                                                                           
                                                                     </div>
                                                                     <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
                                                                         <div class="modal-dialog modal-lg modal-dialog-centered"style="max-width:500px;">
@@ -1479,7 +1458,389 @@
                 }
             });
         });
-        </script>   
+        </script> <script>
+const priceRanges = [
+    "0-50", "50-100", "100-200", "200-500", "500-1000", "1000-5000", "5000+"
+];
+
+const select = document.getElementById("prize-Range");
+
+// Generate options dynamically
+priceRanges.forEach(range => {
+    let option = document.createElement("option");
+    option.value = range;
+    option.textContent = `$${range.replace("-", " - $")}`;
+    select.appendChild(option);
+});
+$(document).ready(function () {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $('#prize-Range').change(function (e) {
+        e.preventDefault();
+
+        var selectedPrice = $(this).val();
+        console.log("Price selected:", selectedPrice);
+
+        var locationData = {     
+    price: selectedPrice !== "all" ? selectedPrice : "all" // Use "price" instead of "price_range"
+        };
+        console.log("AJAX Data Sent:", locationData);
+
+        $('#overlay').show(); // Show loading overlay
+
+        $.ajax({
+            type: 'POST',
+            url: '{{ route('fetch-data') }}',
+            data: locationData,
+            dataType: 'json',
+            success: function (response) {
+                console.log("AJAX Success: ", response);
+                $('#tutorsContainer').empty();
+                $('#overlay').hide(); // Hide loading overlay
+
+                if (response && response.tutors && response.tutors.length > 0) {
+                    response.tutors.forEach(function (tutor) {
+                        let specializations = tutor.specialization.split(','); // Split by comma
+                        let specialization = tutor.specialization.split(',')[0];
+
+            // Build specialization spans
+            let specializationHTML = specializations.map(spec => `
+                <span id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold">
+                    <i class="fa-solid fa-briefcase me-1"></i> ${spec.trim()}
+                </span>
+            `).join(''); // Join without extra commas
+
+
+                        if (tutor.status !== 'inactive') {
+                            var languages = tutor.languages && tutor.languages.length > 0 
+            ? tutor.languages.map(lang => `${lang.language} (${lang.level})`).join(', ') 
+            : 'Not Available';
+
+                            var tutorHTML = `
+                                <div class="ad-form">
+                                    <div class="ad-img-card d-flex" style="margin-top: 20px;">
+                                        <div class="MD col-lg-12 col-sm-5">
+                                            <img src="storage/${tutor.profileImage}" alt="Tutor Image" class="img-thumbnail" 
+                                                 style="width: 100%; height: 140px;">
+                                        </div>
+                                        <div class="md-div col-lg-5 d-none mt-2" style="margin-left: 17px;">
+                                            <span class="mb-div"><b>20 AED for 50 minutes</b></span>
+                                            <div class="ae-detail">
+                                                <h4 class="fs-6 mt-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                    Free Trial Section
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="my-1 mx-2 w-100">
+                                        <div class="ae-div row" style="margin-top: 20px;">
+                                            <div class="col-8">
+                                                <div class="ae-detail-div">
+                                                
+                                                  <div class="d-flex" id="ff000">
+                                                                    <h4 class="me-2 fw-bold sd"> ${tutor.f_name} ${tutor.l_name}</h4>
+                                                                    <span class="me-3"><i class="fa-regular fa-star"  style="margin-top: 6px;"></i></span>
+                                                                    <div class="img-wrapper" style="max-width:22px;margin-top:5px;">
+                                                                        <img src="/image/flag.svg" class="img-fluid" alt="">
+                                                                    </div>
+                                                                </div>
+
+                                                     <div class="mt-1 cm d-flex">
+                                                        ${specializationHTML}
+                                                                                                           
+                                                                        </div>
+                                                    
+                                                                    <div class="d-flex text-secondary my-1">
+                                                                    <span class="me-2"><i class="fa-solid fa-venus-mars" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
+                                                                    <p class="mb-0" style="color:black; transform: scaleY(1);text-transform:capitalize">${tutor.gender ?? 'Others'}</p>
+                                                                    </div>
+
+                                                                      
+                                                                      <div class="d-flex text-secondary">
+                                                                    <span class="me-2"><i class="fa-solid fa-earth-americas" style="font-size: 13px;  margin-top: 5px;    color: #1cc88a;"></i></span>
+                                                                    <p class="mb-0 ms-1" style="color:black; transform: scaleY(1);">${tutor.country_name ?? 'Not Available'}</p>
+                                                                </div>
+
+
+                                                                   <div class="d-flex text-secondary py-2">
+                                                                    <span class="me-2"><i class="fa-solid fa-language" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
+                                                                    <p class="mb-0" style="color:black; transform: scaleY(1);" id="on-1024">
+                                                                    ${languages ?? 'Not Available'}
+                                                                    </p>
+                                                                </div>
+
+
+
+                                                                <p class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-1" style="color: #1cc88a;"></i> 
+                                                                ${tutor.dob}</p>
+
+                                                    
+                                                </div>
+                                                <div class="py-2">
+                                                                    <span>
+                                                                         <b> ${tutor.experience}+ Years of  ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.</b> 
+
+                                                                        - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
+                                                                        
+                                                                    </span>
+                                                                    <ul class="read p-0 mt-3">
+                                                                        <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
+                                                                    </ul>
+                                                                </div>
+                                            </div>
+                                            <div class="ad-div col-4">
+                                                <div class="d-flex pb-5" id="ff111">
+                                                                    <div class="me-lg-5 me-3" id="dollar">
+                                                                        <h4 class="fw-bold on">${tutor.price ?? 'Not Available'}</h4>
+                                                                        <!-- <p class="text-secondary fs-6"><p><i class="fa-solid fa-calendar-days me-1" style="color:#1cc88a"></i> 
+                                                                        14-09-1982</p> -->
+                                                                    </div>
+                                                                    <div id="heart-icon" style="margin-top: 6px;">
+                                                                        <span><i class="fa-regular fa-heart"></i></span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div>
+                                                                    <div id="btn-container">
+                                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trail lesson</button>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div>
+                                                                    <div id="btn-container" style=" margin-top: 5px;">
+                                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trail lesson</button>
+                                                                    </div>
+                                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+
+                            $('#tutorsContainer').append(tutorHTML);
+                        }
+                    });
+
+                    // Update Pagination Info
+                    var totalTutorsCount = response.pagination.total;
+                    var perPage = response.pagination.perPage;
+                    var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
+                    var lastItem = Math.min(response.pagination.currentPage * perPage, totalTutorsCount);
+
+                    $('.total-tutors-count').text(totalTutorsCount);
+                    $('.tutors-range').text(`${firstItem} to ${lastItem} of ${totalTutorsCount} tutors`);
+
+                    // Hide pagination if only one page of results
+                    if (totalTutorsCount <= perPage) {
+                        $('#paginationContainer').hide();
+                    } else {
+                        $('#paginationContainer').show();
+                    }
+                } else {
+                    $('#tutorsContainer').html('<p>No tutors found for the selected Price.</p>');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log('AJAX Error:', xhr.responseText);
+                $('#overlay').hide();
+            }
+        });
+    });
+});
+$(document).ready(function () {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $('#subjectSearch').change(function (e) {
+    e.preventDefault();
+
+    // Get the selected value
+    var selectedValue = $(this).val();
+    
+    // Get the selected text (subject name)
+    var selectedText = $('#subjectSearch option:selected').text(); 
+
+    // Ensure it's an array
+    var selectedsubject = Array.isArray(selectedText) ? selectedText : [selectedText];
+
+    console.log("Subject selected:", selectedsubject);
+
+    var locationData = {         
+        specialization: selectedsubject
+    };
+
+    console.log("AJAX:", locationData);
+
+    $('#overlay').show(); // Show loading overlay
+
+    $.ajax({
+        type: 'POST',
+        url: '{{ route('fetch-data') }}',
+        data: JSON.stringify(locationData),
+        contentType: 'application/json',
+        dataType: 'json', // Corrected syntax (no extra comma or misplaced characters)
+        success: function (response) {
+            console.log("AJAX Success: ", response);
+            $('#tutorsContainer').empty();
+            $('#overlay').hide();// Hide loading overlay
+
+                if (response && response.tutors && response.tutors.length > 0) {
+                    response.tutors.forEach(function (tutor) {
+                        let specializations = tutor.specialization.split(','); // Split by comma
+                        let specialization = tutor.specialization.split(',')[0];
+
+            // Build specialization spans
+            let specializationHTML = specializations.map(spec => `
+                <span id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold">
+                    <i class="fa-solid fa-briefcase me-1"></i> ${spec.trim()}
+                </span>
+            `).join(''); // Join without extra commas
+
+
+                        if (tutor.status !== 'inactive') {
+                            var languages = tutor.languages && tutor.languages.length > 0 
+            ? tutor.languages.map(lang => `${lang.language} (${lang.level})`).join(', ') 
+            : 'Not Available';
+
+                            var tutorHTML = `
+                                <div class="ad-form">
+                                    <div class="ad-img-card d-flex" style="margin-top: 20px;">
+                                        <div class="MD col-lg-12 col-sm-5">
+                                            <img src="storage/${tutor.profileImage}" alt="Tutor Image" class="img-thumbnail" 
+                                                 style="width: 100%; height: 140px;">
+                                        </div>
+                                        <div class="md-div col-lg-5 d-none mt-2" style="margin-left: 17px;">
+                                            <span class="mb-div"><b>20 AED for 50 minutes</b></span>
+                                            <div class="ae-detail">
+                                                <h4 class="fs-6 mt-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                    Free Trial Section
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="my-1 mx-2 w-100">
+                                        <div class="ae-div row" style="margin-top: 20px;">
+                                            <div class="col-8">
+                                                <div class="ae-detail-div">
+                                                
+                                                  <div class="d-flex" id="ff000">
+                                                                    <h4 class="me-2 fw-bold sd"> ${tutor.f_name} ${tutor.l_name}</h4>
+                                                                    <span class="me-3"><i class="fa-regular fa-star"  style="margin-top: 6px;"></i></span>
+                                                                    <div class="img-wrapper" style="max-width:22px;margin-top:5px;">
+                                                                        <img src="/image/flag.svg" class="img-fluid" alt="">
+                                                                    </div>
+                                                                </div>
+
+                                                     <div class="mt-1 cm d-flex">
+                                                        ${specializationHTML}
+                                                                                                           
+                                                                        </div>
+                                                    
+                                                                    <div class="d-flex text-secondary my-1">
+                                                                    <span class="me-2"><i class="fa-solid fa-venus-mars" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
+                                                                    <p class="mb-0" style="color:black; transform: scaleY(1);text-transform:capitalize">${tutor.gender ?? 'Others'}</p>
+                                                                    </div>
+
+                                                                      
+                                                                      <div class="d-flex text-secondary">
+                                                                    <span class="me-2"><i class="fa-solid fa-earth-americas" style="font-size: 13px;  margin-top: 5px;    color: #1cc88a;"></i></span>
+                                                                    <p class="mb-0 ms-1" style="color:black; transform: scaleY(1);">${tutor.country_name ?? 'Not Available'}</p>
+                                                                </div>
+
+
+                                                                   <div class="d-flex text-secondary py-2">
+                                                                    <span class="me-2"><i class="fa-solid fa-language" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
+                                                                    <p class="mb-0" style="color:black; transform: scaleY(1);" id="on-1024">
+                                                                    ${languages ?? 'Not Available'}
+                                                                    </p>
+                                                                </div>
+
+
+
+                                                                <p class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-1" style="color: #1cc88a;"></i> 
+                                                                ${tutor.dob}</p>
+
+                                                    
+                                                </div>
+                                                <div class="py-2">
+                                                                    <span>
+                                                                         <b> ${tutor.experience}+ Years of  ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.</b> 
+
+                                                                        - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
+                                                                        
+                                                                    </span>
+                                                                    <ul class="read p-0 mt-3">
+                                                                        <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
+                                                                    </ul>
+                                                                </div>
+                                            </div>
+                                            <div class="ad-div col-4">
+                                                <div class="d-flex pb-5" id="ff111">
+                                                                    <div class="me-lg-5 me-3" id="dollar">
+                                                                        <h4 class="fw-bold on">${tutor.price ?? 'Not Available'}</h4>
+                                                                        <!-- <p class="text-secondary fs-6"><p><i class="fa-solid fa-calendar-days me-1" style="color:#1cc88a"></i> 
+                                                                        14-09-1982</p> -->
+                                                                    </div>
+                                                                    <div id="heart-icon" style="margin-top: 6px;">
+                                                                        <span><i class="fa-regular fa-heart"></i></span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div>
+                                                                    <div id="btn-container">
+                                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trail lesson</button>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div>
+                                                                    <div id="btn-container" style=" margin-top: 5px;">
+                                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trail lesson</button>
+                                                                    </div>
+                                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+
+                            $('#tutorsContainer').append(tutorHTML);
+                        }
+                    });
+
+                    // Update Pagination Info
+                    var totalTutorsCount = response.pagination.total;
+                    var perPage = response.pagination.perPage;
+                    var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
+                    var lastItem = Math.min(response.pagination.currentPage * perPage, totalTutorsCount);
+
+                    $('.total-tutors-count').text(totalTutorsCount);
+                    $('.tutors-range').text(`${firstItem} to ${lastItem} of ${totalTutorsCount} tutors`);
+
+                    // Hide pagination if only one page of results
+                    if (totalTutorsCount <= perPage) {
+                        $('#paginationContainer').hide();
+                    } else {
+                        $('#paginationContainer').show();
+                    }
+                } else {
+                    $('#tutorsContainer').html('<p>No tutors found for the selected Price.</p>');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log('AJAX Error:', xhr.responseText);
+                $('#overlay').hide();
+            }
+        });
+    });
+});
+</script>  
     <script>
     $(document).ready(function () {
     $.ajaxSetup({
