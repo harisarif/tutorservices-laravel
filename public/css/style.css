@@ -452,13 +452,13 @@ main {
 }
 
 /* sign up for tutor */
-button[type="submit"]:hover{
+/* button[type="submit"]:hover{
     background-color: rgba(var(--green), 1) !important;
-  }
+  } */
 
-  button[type="submit"]:active{
+  /* button[type="submit"]:active{
     background-color: rgba(var(--green), .8) !important;
-  }
+  } */
 
   /*scroll button */
   .goToTop {
@@ -625,4 +625,18 @@ ul.social-network li {
     .carouselExampleCaptions {
         width: 80%;
     }
+}
+
+
+
+/*  */
+#content{
+    background-color: white;
+}
+
+/*  */
+
+
+#drop{
+    cursor: pointer;
 }
