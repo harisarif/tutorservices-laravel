@@ -24,7 +24,51 @@
         @endforeach
     </ul>
 </div>
-@endif
+@endif    
+<div id="otpModal" class="modal fade show d-block" tabindex="-1" aria-labelledby="otpModalLabel" aria-hidden="true"
+    data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-3">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title fw-bold" id="otpModalLabel">🔐 Secure OTP Verification</h5>
+            </div>
+            <div class="modal-body p-4">
+                <p class="text-muted text-center">
+                    We've sent a One-Time Password (OTP) to your email: <br>
+                    <strong class="text-dark">{{ session('verifiedEmail') }}</strong>
+                </p>
+
+                <form id="otpForm">
+                    @csrf
+                    <input type="hidden" name="email" value="{{ session('verifiedEmail') }}">
+
+                    <div class="mb-3">
+                        <label for="otpInput" class="form-label fw-semibold">Enter OTP</label>
+                        <input type="text" id="otpInput" name="otp"
+                            class="form-control text-center fs-5 rounded-pill border-success shadow-sm"
+                            placeholder="🔢 6-digit code" maxlength="6" required>
+                        <div id="otpError" class="text-danger mt-2 text-center fw-bold" style="display: none;">
+                            ❌ Invalid OTP. Please try again.
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-success fw-bold shadow-sm rounded-pill"
+                            onclick="verifyOTP()">✔ Verify OTP</button>
+                    </div>
+
+                    <p class="text-center mt-3">
+                        Didn't receive the OTP? 
+                        <a href="javascript:void(0);" class="text-success fw-semibold" onclick="resendOTP()">Resend</a>
+                        <span id="resendMessage" class="text-muted ms-2" style="display: none;">Sending...</span>
+                    </p>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section('content')
 
 <header class="main_header d-flex bg-white py-1 px-3 justify-content-between align-items-center"
@@ -650,6 +694,14 @@ style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135
 
 @endsection
 @section('js')
+@if (session('verifiedEmail'))
+    <script>
+        console.log('Session verifiedEmail:', "{{ session('verifiedEmail') }}");
+        $(document).ready(function() {
+            $('#otpModal').modal('show');
+        });
+    </script>
+@endif
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src=" {{ asset('js/tutor.js') }}"></script>
@@ -715,6 +767,78 @@ function showModal(selectElement) {
 });
 
 
+</script><script>
+    function resendOTP() {
+        let email = "{{ session('verifiedEmail') }}"; // Get the user's email
+        let csrfToken = "{{ csrf_token() }}"; // CSRF token for security
+    
+        document.getElementById('resendMessage').style.display = 'inline'; // Show loading text
+
+        fetch("{{ route('send.verification.email') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": csrfToken
+            },
+            body: JSON.stringify({ email: email }) // Send email in JSON format
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('resendMessage').innerText = "OTP sent successfully! ✅";
+                setTimeout(() => { 
+                    document.getElementById('resendMessage').style.display = 'none'; 
+                }, 3000);
+            } else {
+                document.getElementById('resendMessage').innerText = "Failed to resend OTP. ❌";
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            document.getElementById('resendMessage').innerText = "Something went wrong. 😞";
+        });
+    }
+</script>
+
+<script>
+    function verifyOTP() {
+        let otp = document.getElementById('otpInput').value;
+        let email = "{{ session('verifiedEmail') }}";
+        let csrfToken = "{{ csrf_token() }}";
+
+        // Disable button to prevent multiple clicks
+        let verifyButton = document.querySelector("button[onclick='verifyOTP()']");
+        verifyButton.innerHTML = "⏳ Verifying...";
+        verifyButton.disabled = true;
+
+        fetch("{{ route('verify-otp') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": csrfToken
+            },
+            body: JSON.stringify({ otp, email })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+             $('#otpModal').modal('hide'); // Redirect on success
+            } else {
+                document.getElementById('otpError').style.display = 'block'; // Show error message
+                verifyButton.innerHTML = "✔ Verify OTP"; // Reset button
+                verifyButton.disabled = false;
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            verifyButton.innerHTML = "✔ Verify OTP"; // Reset button
+            verifyButton.disabled = false;
+        });
+    }
+
+    function resendOTP() {
+        alert("OTP has been resent to your email!"); // Placeholder for OTP resend functionality
+    }
 </script><script>
     document.addEventListener('DOMContentLoaded', function () {
         const currencySelect = document.getElementById('currency');

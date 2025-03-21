@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SchoolClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -40,8 +41,8 @@ class VerificationController extends Controller
         'email.email' => 'Please enter a valid email address.',
         'email.regex' => 'Only Gmail, Yahoo, and Outlook emails are allowed.'
     ]);
-    
-   $verificationUrl = 'https://tinyurl.com/yvubhmpy';
+    $otp = rand(100000, 999999); 
+    session(['otp' => $otp, 'otp_expiry' => now()->addMinutes(10)]);
 
     $email = $request->input('email');
     $subject = 'Email Verification';
@@ -62,10 +63,16 @@ class VerificationController extends Controller
                     <td style='padding: 20px; text-align: left;'>
                         <p style='margin: 0; font-size: 16px;'>Dear User,</p>
                         <p style='margin: 10px 0; font-size: 16px;'>
-                            Thank you for signing up! Please verify your email by clicking the button below:
+                            Thank you for signing up!
                         </p>
-                        <p style='text-align: center; margin: 20px 0;'>
-                            <a href='https://bit.ly/3XZ0tpY' style='background-color: #4CAF50; color: #fff; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;'>Verify Your Email</a>
+                         <p style='margin: 10px 0; font-size: 16px;'>
+                            Your One-Time Password (OTP) for verification is:
+                        </p>
+                        <p style='text-align: center; font-size: 20px; font-weight: bold; color: #4CAF50;'>
+                            $otp
+                        </p>
+                        <p style='margin: 10px 0; font-size: 16px;'>
+                            This OTP is valid for 10 minutes. Do not share it with anyone.
                         </p>
                         <p style='margin: 10px 0; font-size: 16px;'>
                             If you did not sign up for an account, please ignore this email.
@@ -90,10 +97,54 @@ class VerificationController extends Controller
     // Send the email using PHPMailer
     $this->sendEmails($subject, $body, 'admin', $email, true); // true means it's sending HTML content
 
-    return redirect()->route('newhome')->with('success', 'Verification link sent to your email!');
+    return redirect()->route('tutor-signup')->with([
+        'success' => 'Verification link sent to your email!',
+        'verifiedEmail' => $email
+    ]);
+    
 }
-
-
+public function signup()
+    {
+        $schoolClasses = SchoolClass::all();
+        $countriesPhone = collect(config('phonecountries.countries'));
+        $countries_number_length = collect(config('countries_number_length.countries'));
+        $countries_prefix = collect(config('countries_prefix.countries'));
+        $countries = collect(config('countries_assoc.countries'));
+        $languages = collect(config('languages.languages'));
+         $courses = collect(config('courses.courses'));
+        $symbols = collect(config('symbols.symbols'));  // Will show all contents of config/symbols.php
+        $subjectsTeach = collect(config('subjects.subjects')); // Fetch languages from config
+        $universities = collect(config('universities.universities'));
+        // Retrieve verified email from session (if exists)
+        $verifiedEmail = session('verified_email', '');
+        return view('tutor-signup', compact(['courses', 'universities','symbols', 'countriesPhone', 'countries', 'verifiedEmail', 'schoolClasses', 'countries_number_length', 'countries_prefix', 'languages'])
+        )->with([
+            'success' => 'Verification link sent to your email!',
+            'verifiedEmail' => $verifiedEmail // Corrected key usage
+        ]);
+    }
+        public function verifyOtp(Request $request)
+        {
+            $request->validate(['otp' => 'required|numeric']);
+    
+            // Retrieve OTP from session
+            $sessionOtp = session('otp');
+            $otpExpiry = session('otp_expiry');
+    
+            if ($sessionOtp && $otpExpiry && now()->lt($otpExpiry)) {
+                if ((string) $request->otp === (string) $sessionOtp) {
+                    // OTP is correct, remove from session and proceed
+                    session()->forget(['otp', 'otp_expiry']);
+                    return response()->json(['success' => true, 'message' => 'OTP verified!']);
+                } else {
+                    return response()->json(['success' => false, 'message' => 'Invalid OTP.']);
+                }
+            } else {
+                return response()->json(['success' => false, 'message' => 'OTP expired. Please request a new one.']);
+            }
+        }
+    
+    
 
 function sendEmails($subject, $body, $to_name, $to_email) {  
   $mail = new PHPMailer(true);  
