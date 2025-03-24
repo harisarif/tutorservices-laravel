@@ -224,7 +224,7 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
             <!-- Personal Information & Education -->
             <div class="row mt-4">
                 <div class="col-md-6 d-flex">
-                    <div class="card h-100 w-100">
+                    <div class="card h-100 w-100 ms-3">
                         <div class="card-body">
                             <h5 class="section-title"><i class="fas fa-user icon"></i> Personal Information</h5>
                         
@@ -270,7 +270,7 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                 </div>
     
                 <div class="col-md-6 d-flex">
-                    <div class="card h-100 w-100">
+                    <div class="card h-100 w-100 mx-3">
                         <div class="card-body">
                             <h5 class="section-title">
                                 <i class="fas fa-graduation-cap icon"></i> Education & Qualifications
@@ -364,7 +364,7 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
             <!-- Teaching Preferences & Languages -->
             <div class="row">
                 <div class="col-md-6 mt-4 mb-3 d-flex">
-                    <div class="card h-100 w-100">
+                    <div class="card h-100 w-100 ms-3">
                         <div class="card-body">
                             <h5 class="section-title"><i class="fas fa-chalkboard-teacher icon"></i> Teaching Preferences</h5>
     
@@ -392,7 +392,7 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                         <div class="mb-2">
                         <label for="document" class="form-label fw-bold" style="color: #1cc88a;">Upload Qualification Document</label>
                         <div class="input-group">
-                            <input type="file" class="form-control fw-bold  d-block" id="document" name="document"  accept=".pdf,.doc,.docx,.jpg,.png " >
+                            <input type="file" class="form-control  d-block" id="document" name="document"  accept=".pdf,.doc,.docx,.jpg,.png" style="border: 2px solid #dee2e6;" >
                         </div>
                     </div>
 
@@ -408,7 +408,7 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                 </div>
     
                 <div class="col-md-6 mt-4 mb-3 d-flex">
-                    <div class="card h-100 w-100">
+                    <div class="card h-100 w-100 mx-3">
                         <div class="card-body">
                             <h5 class="section-title"><i class="fas fa-language icon"></i> Languages</h5>
                         
@@ -479,7 +479,7 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
             </div>
     <!--  -->
             <div class="d-flex justify-content-end mt-4 mb-3">
-            <button type="submit" class="btn mt-2 mb-2 animated-button" style="background-color: #198754;color: white;">Submit</button>      
+            <button type="submit" class="btn mt-2 mb-2 animated-button" style="background-color: #198754;color: white;margin-right: 25px;">Submit</button>      
             </div>
             
 
