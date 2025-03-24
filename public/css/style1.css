@@ -132,3 +132,96 @@ select.form-select:hover, select.form-select:focus {
 #videoUpload{
     display: block;
 }
+
+.profile-pic-container {
+    position: relative;
+    display: inline-block;
+    width: 150px;
+}
+.avatar {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #fff;
+}
+.upload-icon {
+    position: absolute;
+    bottom: 4px;
+    right: 11px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+}
+.profile-header {
+    background-color: #1cc88a;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+.avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid white;
+}
+.section-title {
+    font-size: 1.5rem;
+    color: #4a90e2;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    height: 100%; /* Ensures all cards are the same height */
+}
+.card:hover {
+    transform: translateY(-10px);
+}
+.card-body {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distributes content evenly */
+}
+.card-body h5{
+    color: #1cc88a;
+}
+.section-title i{
+    color: #1cc88a;
+}
+.icon {
+    margin-right: 10px;
+    color: #4a90e2;
+}
+button.submit-btn{
+    background-color: #1cc88a;
+    color: #fff;
+}
+
+ /*  */
+
+
+   /* Ensure styles apply by increasing specificity */
+   button.submit-btn {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover Effect: Slight zoom and shadow */
+button.submit-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Stronger shadow for visibility */
+    color:white;
+}
+
+/* Click Effect: Slight shrink */
+button.submit-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 5px (0, 0, 0, 0.2);
+    color: white;
+}

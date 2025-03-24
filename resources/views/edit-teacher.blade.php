@@ -125,7 +125,7 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
             <div id="contents">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-0 static-top shadow">
                     <div class="button-div">
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3 bg-success text-white">
                             <i class="fa fa-bars"></i>
@@ -201,107 +201,114 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                     </ul>
 
                 </nav>
-                <h2>Update Teacher's Profile</h2>
+                
           
-            <section style="background-color: #fff;">
-                <div class="container py-5">
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="card mb-4 h-100">
-                        <div class="card-body text-center">
-                          <div class="upload-container">
-                            <form action="{{route('teachers.update', $tutor->id) }}" method="POST" enctype="multipart/form-data">
+<section>
+<form action="{{route('teachers.update', $tutor->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
+                                <div class="profile-header text-center">
+                <div class="profile-pic-container">
+                    <label for="imageUpload">
+                        <img src="img/kids.jpg" alt="Avatar" class="avatar img-thumbnail" id="profileImage">
+                        <div class="upload-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                    </label>
+                </div>
+                <input type="file" id="imageUpload" class="form-control d-none" accept="image/*">
+                
+                
+            </div>
+    
+            <!-- Personal Information & Education -->
+            <div class="row mt-4">
+                <div class="col-md-6 d-flex">
+                    <div class="card h-100 w-100">
+                        <div class="card-body">
+                            <h5 class="section-title"><i class="fas fa-user icon"></i> Personal Information</h5>
+                        
+                            <div class="mb-2">
+                                <label class="form-label"><strong style="color: #1cc88a;">First name:</strong></label>
+                                <input type="text" class="form-control" id="fullName" name="f_name"  value="{{ $tutor->f_name}}">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label"><strong style="color: #1cc88a;">Last name:</strong></label>
+                                <input type="text" class="form-control"  id="fullName" name="l_name"  value="{{ $tutor->l_name}}">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label"><strong style="color: #1cc88a;">Email:</strong></label>
+                                <input type="email" class="form-control"  name="email"id="email" value="{{ $tutor->email}}">
+                            </div>
 
-                                <!-- Hidden file input -->
-                                <input type="file" id="file-upload" name="file-upload" accept="image/*">
-                                
-                                <!-- Profile image container with plus icon -->
-                                <div class="profile-container">
-                                    <!-- Label with a plus icon that triggers file input -->
-                                    <label for="file-upload" class="plus-icon">
-                                        <span class="plus-sign">+</span>
-                                    </label>
-                                    
-                                    <!-- Profile image placeholder that also triggers the file input -->
-                                    <label for="file-upload" class="profile-image-container">
-                                        <img src="{{ asset('storage/' . $tutor->profileImage) }}
-                                " alt="avatar" class="profile-image">
-                                    </label>
-                                </div>
-                        
-                              <h5 class="my-3" style="color: #198754;">{{ $tutor->f_name ?? '' }} {{ $tutor->l_name ?? '' }}</h5>
-                              <p class="mb-1" style="color: #198754;">{{ $tutor->specialization ?? '' }}</p>
-                              <p class="mb-4" style="color: #198754;">{{ $tutor->description ?? '' }}</p>
-                           
-                        </div>
-                        </div>
-                      </div>
-                      
-                    </div>
-                    <div class="col-lg-8">
-                      <div class="row g-1" style="background-color: white;">
-                              
-                        <div class="col-md-6">
-                          <label for="fullName" class="form-label fw-bold"  style="color: #198754;">First Name</label>
-                          <input type="text" class="form-control" id="fullName" name="f_name"  value="{{ $tutor->f_name}}" style="border: 2px solid #dee2e6;">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="fullName" class="form-label fw-bold"  style="color: #198754;">Last Name</label>
-                            <input type="text" class="form-control" id="fullName" name="l_name"  value="{{ $tutor->l_name}}" style="border: 2px solid #dee2e6;">
-                          </div>
-                        <div class="col-md-6">
-                          <label for="email" class="form-label fw-bold"  style="color: #198754;">Email</label>
-                          <input type="email" class="form-control"   name="email"id="email" value="{{ $tutor->email}}" style="border: 2px solid #dee2e6;">
-                        </div>
-                        <div class="col-md-6">
-                          <label for="phone" class="form-label fw-bold" style="color: #198754;">Phone</label>
-                          <input type="tel" class="form-control phone-input"  name="phone" id="phone"  value="{{ $tutor->phone ?? '' }}" placeholder="(XXX) XXX-XXXX" style="border: 2px solid #dee2e6;">
-                        </div>
-                      
-                        <div class="col-md-6">
-                            <label for="address" class="form-label fw-bold" style="color: #198754;">Date of Birth</label>
-                            <div class="ad-dob d-flex justify-content-between align-items-center" style="gap: 8px;">
-                                <!-- Year Select -->
-                                <select id="year" name="year" class="form-select" style="padding: 5px;" onchange="updateDob()">
-                                    <option value="">Year</option>
-                                    @for ($i = $currentYear; $i >= 1900; $i--)
-                                        <option value="{{ $i }}" {{ $i == $selectedYear ? 'selected' : '' }}>{{ $i }}</option>
-                                    @endfor
-                                </select>
-                        
-                                <!-- Month Select -->
-                                <select id="month" name="month" class="form-select" style="padding: 5px;" onchange="updateDob()">
-                                    <option value="">Month</option>
-                                    @for ($i = 1; $i <= 12; $i++)
-                                        <option value="{{ $i }}" {{ $i == (int)$selectedMonth ? 'selected' : '' }}>{{ $i }}</option>
-                                    @endfor
-                                </select>
-                        
-                                <!-- Day Select -->
-                                <select id="day" name="day" class="form-select" style=" padding: 5px;" onchange="updateDob()">
-                                    <option value="">Day</option>
-                                    @for ($i = 1; $i <= 31; $i++)
-                                        <option value="{{ $i }}" {{ $i == (int)$selectedDay ? 'selected' : '' }}>{{ $i }}</option>
-                                    @endfor
-                                </select>
+                            <div class="mb-2">
+                                <label class="form-label"><strong style="color: #1cc88a;">Price:</strong></label>
+                                <input type="text" class="form-control" id="price" name="price"  value="{{ $tutor->price}}">
                             </div>
                         
-                            <input name="dob" type="hidden" id="dob" value="{{ $tutor->dob ?? '' }}" />
-                        </div>
-                        <div class="col-md-6">
-                          <label for="gender" class="form-label fw-bold" style="color: #198754;">Gender</label>
-                          <select name="gender" id="gender" class="form-select" required> 
+                            <div class="mb-2">
+                                <label class="form-label"><strong style="color: #1cc88a;">Phone:</strong></label>
+                                <input type="tel" class="form-control"  name="phone" id="phone"  value="{{ $tutor->phone ?? '' }}">
+                            </div>
+                        
+                            <div class="mb-2">
+                                <label class="form-label"><strong style="color: #1cc88a;">Date of Birth:</strong></label>
+                                <input type="date" class="form-control" value="">
+                            </div>
+                        
+                            <div class="mb-2">
+                            <label for="gender" class="form-label fw-bold" style="color: #1cc88a;">Gender</label>
+                            <select name="gender" id="gender" class="form-select" required> 
                             <option value="male" {{ $tutor->gender == 'male' ? 'selected' : '' }}>Male</option>
                             <option value="female" {{ $tutor->gender == 'female' ? 'selected' : '' }}>Female</option>
                             <option value="other" {{ $tutor->gender == 'other' ? 'selected' : '' }}>Other</option>
                         </select>
-                      </div>
-                      
-                        <div class="col-md-6">
-                                <label for="qualification" class="form-label" style="color:#42b979;">
-                                    <strong>Highest Qualification</strong>
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-md-6 d-flex">
+                    <div class="card h-100 w-100">
+                        <div class="card-body">
+                            <h5 class="section-title">
+                                <i class="fas fa-graduation-cap icon"></i> Education & Qualifications
+                            </h5>
+
+                            <div class="mb-2">
+                          <label for="address" class="form-label fw-bold" style="color: #1cc88a;">Experience Teaching</label>
+                          <input type="text" class="form-control"  name="experience" id="address" value="{{ $tutor->experience ?? '' }}" style="border: 2px solid #dee2e6;">
+                        </div>
+                            
+                            <div class="mb-2">
+                            <label for="address" class="form-label fw-bold" style="color: #1cc88a;">Institution/University Name</label>
+                          <select name="location" class="form-select select2" id="institution">
+                            @if(isset($tutor->location) && !in_array($tutor->location, ['harvard', 'mit', 'stanford', 'oxford', 'cambridge', 'berkeley', 'yale', 'princeton']))
+                                <option value="{{ $tutor->location }}" selected>{{ ucfirst(str_replace('_', ' ', $tutor->location)) }}</option>
+                            @endif
+                        
+                            <option value="harvard" {{ $tutor->location == 'harvard' ? 'selected' : '' }}>Harvard University</option>
+                            <option value="mit" {{ $tutor->location == 'mit' ? 'selected' : '' }}>Massachusetts Institute of Technology</option>
+                            <option value="stanford" {{ $tutor->location == 'stanford' ? 'selected' : '' }}>Stanford University</option>
+                            <option value="oxford" {{ $tutor->location == 'oxford' ? 'selected' : '' }}>University of Oxford</option>
+                            <option value="cambridge" {{ $tutor->location == 'cambridge' ? 'selected' : '' }}>University of Cambridge</option>
+                            <option value="berkeley" {{ $tutor->location == 'berkeley' ? 'selected' : '' }}>University of California, Berkeley</option>
+                            <option value="yale" {{ $tutor->location == 'yale' ? 'selected' : '' }}>Yale University</option>
+                            <option value="princeton" {{ $tutor->location == 'princeton' ? 'selected' : '' }}>Princeton University</option>
+                        </select>
+                        
+          
+                            </div>
+                        
+                            <div class="mb-2">
+                          <label for="address" class="form-label fw-bold" style="color: #1cc88a;">Course teaching</label>
+                          <input type="text" class="form-control"  name="courses" id="address" value="{{ $tutor->curriculum ?? '' }}" style="border: 2px solid #dee2e6;">
+                            </div>
+                        
+                            <div class="mb-2">
+                            <label for="qualification" class="form-label">
+                                    <strong style="color: #1cc88a;">Highest Qualification</strong>
                                 </label>
                                 <select class="form-select school_class" id="qualification" name="qualification"
                                    >
@@ -318,8 +325,8 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                                     <option value="">Others</option>
                                 </select>
                             </div>
-                            <div class="col-md-6">
-                                <label for="specialization" class="form-label fw-bold" style="color: #198754;">
+    
+                            <label for="specialization" class="form-label fw-bold" style="color: #1cc88a;">
                                     Specialization
                                 </label>
                                 <select name="specialization" class="form-select select2"  id="specialization">
@@ -336,10 +343,9 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                                     <option value="engineering" {{ $tutor->specialization == 'engineering' ? 'selected' : '' }}>Engineering</option>
                                     <option value="medicine" {{ $tutor->specialization == 'medicine' ? 'selected' : '' }}>Medicine</option>
                                 </select>
-                            </div>
-                        
-                        <div class="col-md-6">
-                          <label for="address" class="form-label fw-bold"  style="color: #198754;">year</label>
+
+                          <div class="mb-2">
+                          <label for="address" class="form-label fw-bold" style="color: #1cc88a;">year</label>
                           <select id="yearSelect" name="year" class="form-select"
                                         >
                                         @if(isset($tutor->year))
@@ -350,68 +356,69 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                                         @endfor
                                     </select>
                         </div>
-                        <div class="col-md-6">
-                          <label for="address" class="form-label fw-bold"  style="color: #198754;">Experience Teaching</label>
-                          <input type="text" class="form-control"  name="experience" id="address" value="{{ $tutor->experience ?? '' }}" style="border: 2px solid #dee2e6;">
                         </div>
-                        <div class="col-md-6">
-                          <label for="address" class="form-label fw-bold"  style="color: #198754;">Institution/University Name</label>
-                          <select name="location" class="form-select select2" id="institution">
-                            @if(isset($tutor->location) && !in_array($tutor->location, ['harvard', 'mit', 'stanford', 'oxford', 'cambridge', 'berkeley', 'yale', 'princeton']))
-                                <option value="{{ $tutor->location }}" selected>{{ ucfirst(str_replace('_', ' ', $tutor->location)) }}</option>
-                            @endif
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Teaching Preferences & Languages -->
+            <div class="row">
+                <div class="col-md-6 mt-4 mb-3 d-flex">
+                    <div class="card h-100 w-100">
+                        <div class="card-body">
+                            <h5 class="section-title"><i class="fas fa-chalkboard-teacher icon"></i> Teaching Preferences</h5>
+    
+                            <div class="mb-2">
+                            <label for="address" class="form-label fw-bold" style="color: #1cc88a;">Status</label>
+                            <input type="text" class="form-control" id="address" name="status" value="{{$tutor->status}}" style="border: 2px solid #dee2e6;">
+                            </div>
                         
-                            <option value="harvard" {{ $tutor->location == 'harvard' ? 'selected' : '' }}>Harvard University</option>
-                            <option value="mit" {{ $tutor->location == 'mit' ? 'selected' : '' }}>Massachusetts Institute of Technology</option>
-                            <option value="stanford" {{ $tutor->location == 'stanford' ? 'selected' : '' }}>Stanford University</option>
-                            <option value="oxford" {{ $tutor->location == 'oxford' ? 'selected' : '' }}>University of Oxford</option>
-                            <option value="cambridge" {{ $tutor->location == 'cambridge' ? 'selected' : '' }}>University of Cambridge</option>
-                            <option value="berkeley" {{ $tutor->location == 'berkeley' ? 'selected' : '' }}>University of California, Berkeley</option>
-                            <option value="yale" {{ $tutor->location == 'yale' ? 'selected' : '' }}>Yale University</option>
-                            <option value="princeton" {{ $tutor->location == 'princeton' ? 'selected' : '' }}>Princeton University</option>
-                        </select>
-                        
-                        </div>
-                        <div class="col-md-6">
-                          <label for="address" class="form-label fw-bold"  style="color: #198754;">Course teaching</label>
-                          <input type="text" class="form-control"  name="courses" id="address" value="{{ $tutor->curriculum ?? '' }}" style="border: 2px solid #dee2e6;">
-                        </div>
-                        <div class="col-md-6">
-                          <label for="address" class="form-label fw-bold"  style="color: #198754;">Subject you want to teach</label>
-                          <select class="form-select teaching" id="teachingSubjects" name="teaching[]"
-                          >
+                            <div class="mb-2">
+                          <label for="address" class="form-label fw-bold"  style="color: #1cc88a;">Subject you want to teach</label>
+                          <select class="form-select teaching" id="teachingSubjects" name="teaching[]">
                           @foreach (config('subjects.subjects') as $subject)
                           <option value="{{ $subject }}" {{ in_array($subject, $selectedSubjects) ? 'selected' : '' }}>
                             {{ ucfirst(str_replace('_', ' ', $subject)) }}
                           </option>
                           @endforeach
-                      </select>
+                         </select>
                         </div>
                         
-                           
-                              <div class="col-md-6">
-                                <label for="location"  class="form-label fw-bold"  style="color: #198754;">Residence Country:</label><br>
-                                <select name="country" id="location" class="form-select" required>
-                                    @foreach($country as $index => $countries)
-                                        <option value="{{ $index }}" {{ $tutor->location == $index ? 'selected' : ''}}>{{ $countries }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                        <div class="col-md-6">
-                            <label for="address" class="form-label fw-bold"  style="color: #198754;">Status</label>
-                        <input type="text" class="form-control" id="address" name="status" value="{{$tutor->status}}" style="border: 2px solid #dee2e6;">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="address" class="form-label fw-bold"  style="color: #198754;">Description</label>
+                         <div class="mb-2">
+                            <label for="address" class="form-label fw-bold"  style="color: #1cc88a;">Description</label>
                         <input type="text" class="form-control" id="address" name="description" value="{{$tutor->description}}" style="border: 2px solid #dee2e6;">
                         </div>
-                       <div class="col-md-6">
-                        <label for="address" class="form-label fw-bold"  style="color: #198754;">Educational teaching</label>
+
+                        <div class="mb-2">
+                        <label for="document" class="form-label fw-bold" style="color: #1cc88a;">Upload Qualification Document</label>
+                        <div class="input-group">
+                            <input type="file" class="form-control fw-bold  d-block" id="document" name="document"  accept=".pdf,.doc,.docx,.jpg,.png " >
+                        </div>
+                    </div>
+
+                        <div class="mb-2">
+                        <label for="video" class="form-label fw-bold"  style="color: #1cc88a;">Video</label>
+                        <div class="input-group">
+                          <!-- <input type="text" class="form-control" id="video" placeholder="Video URL or Name"> -->
+                          <input type="file" class="form-control" id="videoUpload" accept="video/*" style="border: 2px solid #dee2e6;">
+                        </div>
+                      </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-md-6 mt-4 mb-3 d-flex">
+                    <div class="card h-100 w-100">
+                        <div class="card-body">
+                            <h5 class="section-title"><i class="fas fa-language icon"></i> Languages</h5>
+                        
+                            <div class="mb-2">
+                        <label for="address" class="form-label fw-bold"  style="color: #1cc88a;">Educational teaching</label>
                         <input type="text" class="form-control" name="edu_teaching" id="address" value="{{$tutor->edu_teaching}}" style="border: 2px solid #dee2e6;">
                       </div>
-                      <div class="col-md-6">
-                        <label for="address" class="form-label fw-bold"  style="color: #198754;">Languge teaching</label>
+                        
+                      <div class="md-2">
+                        <label for="address" class="form-label fw-bold"  style="color: #1cc88a;">Languge teaching</label>
                         @if($selectedLanguage && !in_array($selectedLanguage, ['english', 'spanish', 'french', 'german', 'italian', 'portuguese']))
                         <option value="{{ $selectedLanguage }}" selected>{{ ucfirst($selectedLanguage) }}</option>
                     @endif
@@ -423,13 +430,13 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                     <option value="italian" {{ $selectedLanguage == 'italian' ? 'selected' : '' }}>Italian</option>
                     <option value="portuguese" {{ $selectedLanguage == 'portuguese' ? 'selected' : '' }}>Portuguese</option>
                 </select>
-                      </div>
-                      
-                      <div id="language-container">
+                </div>    
+                
+                <div id="language-container">
                         @foreach ($languages_spoken as $index => $lang)
                           <div class="form-row d-flex flex-column flex-md-row mb-4" id="language-row">
-                              <div class="col-md-6">
-                                  <label for="language_proficient" class="form-label fw-bold"  style="color: #198754;">
+                              <div class="col-md-12 col-lg-12">
+                                  <label for="language_proficient" class="form-label fw-bold"  style="color: #1cc88a;">
                                     Language Proficient
                                   </label>
                                   <div class="position-relative">
@@ -447,8 +454,8 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                               </div>
                                
 
-                              <div class="col-md-6">
-                                  <label for="language_level_{{ $index }}"  class="form-label fw-bold"  style="color: #198754;">
+                              <div class="col-md-12 col-lg-12">
+                                  <label for="language_level_{{ $index }}"  class="form-label fw-bold"  style="color: #1cc88a;">
                                       Level
                                   </label>
                                   <div class="position-relative">
@@ -469,31 +476,20 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                           </div>
                           @endforeach
                       </div>
-                      <div class="col-md-6">
-                        <label for="video" class="form-label fw-bold"  style="color: #198754;">Video</label>
-                        <div class="input-group">
-                          <!-- <input type="text" class="form-control" id="video" placeholder="Video URL or Name"> -->
-                          <input type="file" class="form-control" id="videoUpload" accept="video/*" style="border: 2px solid #dee2e6;">
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <label for="document" class="form-label fw-bold" style="color: #198754;">Upload Qualification Document</label>
-                        <div class="input-group">
-                            <input type="file" class="form-control" id="document" name="document" 
-                                   style="border: 2px solid #dee2e6;" accept=".pdf,.doc,.docx,.jpg,.png">
-                        </div>
-                    </div>
-                    
-                        <div class="col-12 d-flex justify-content-end">
-                          <button type="submit" class="btn mt-2 mb-2 animated-button" style="background-color: #198754;color: white;">Submit</button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </section>
-        
-    </div>
+            </div>
+    <!--  -->
+            <div class="d-flex justify-content-end mt-4 mb-3">
+            <button type="submit" class="btn mt-2 mb-2 animated-button" style="background-color: #198754;color: white;">Submit</button>      
+            </div>
+            
+
+</form>
+</section>
+                         
+            
+            </div>
+
+
     <div class="sticky-footer  bg-gradient-success" style="padding:2rem 0">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto text-white">
