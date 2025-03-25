@@ -277,7 +277,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4">
                     <div class="button-div">
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3 bg-success text-white">
                             <i class="fa fa-bars"></i>
@@ -342,7 +342,7 @@
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in md"
                                 aria-labelledby="userDropdown" style="left: -95px !important; width: 0;">
 
-                                <a class="dropdown-item text-success" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >
+                                <a class="dropdown-item text-success" id="drop" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-success" ></i>
                                     {{ __('messages.Logout') }}
                                 </a>
@@ -364,7 +364,7 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4 SB">
                                 <h1 class="h3 mb-0 text-gray-800">{{ __('messages.Teacher') }}</h1>
                                 <div class="del-button d-flex">
-                                    <div>
+                                    <div class="mt-3">
                                     <button type="button" class="btn btn-danger" id="delete-selected">Multiple Delete</button>
                                     </div>
                                     <div style="display:grid;margin-left:10px;margin-top:-7px;">

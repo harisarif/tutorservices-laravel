@@ -56,15 +56,19 @@ Route::get('/notifications/mark-read', [NotificationController::class, 'markNoti
 
 // Route to send verification email
 Route::post('/send-verification-email', [VerificationController::class, 'sendVerificationEmail'])->name('send.verification.email');
+Route::post('/verify-otp', [VerificationController::class, 'verifyOtp'])->name('verify-otp');
 
 // Protected route for tutor signup (requires email verification)
 Route::post('/logout/teacher/{id}', [TutorController::class, 'logoutTeacher'])->name('logout.teacher');
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 // Tutor Controllers
-Route::middleware(['check.email.verified'])->group(function () {
-    Route::get('/tutor-signup', [TutorController::class, 'signup'])->name('tutor');
-});
+// Route::middleware(['check.email.verified'])->group(function () {
+    Route::get('/tutor-signup',  function() {
+        return view('emailVerification');
+    })->name('tutor');
+// });
 Route::get('/', [TutorController::class, 'index'])->name('newhome');
+Route::get('/tutor-signup/email-verified', [VerificationController::class, 'signup'])->name('tutor-signup');
 Route::get('/all-blogs', [TutorController::class, 'allBlogs'])->name('all.blogs');
 Route::post('/update-tutor-status', [TutorController::class, 'updateTutorStatus'])->name('update.tutor.status');
 Route::delete('/teachers/destroy-bulk', [TutorController::class, 'destroyBulk'])->name('teachers.destroy.bulk');
