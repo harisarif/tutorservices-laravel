@@ -342,25 +342,32 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                           <input type="text" class="form-control"  name="courses" id="address" value="{{ $tutor->curriculum ?? '' }}" style="border: 2px solid #dee2e6;">
                             </div>
                         
-                            <div class="mb-2">
                             <label for="qualification" class="form-label">
-                                    <strong style="color: #1cc88a;">Highest Qualification</strong>
-                                </label>
-                                <select class="form-select school_class" id="qualification" name="qualification"
-                                   >
-                                    @if($qualification && !in_array($qualification, $schoolClasses->pluck('id')->toArray()))
-                                    <option value="{{ $qualification }}" selected>{{ $qualification }}</option>
+                                <strong style="color: #1cc88a;">Highest Qualification</strong>
+                            </label>
+                            
+                                <select class="form-control school_class" id="qualification" name="qualification">
+                                    {{-- If a qualification ID exists, show the corresponding name --}}
+                                    @if($tutor->qualification && $schoolClasses->contains('id', $tutor->qualification))
+                                        @php
+                                            $existingQualification = $schoolClasses->where('id', $tutor->qualification)->first();
+                                        @endphp
+                                        <option value="{{ $existingQualification->id }}" selected>
+                                            {{ $existingQualification->name }}
+                                        </option>
                                     @endif
-
+                                
+                                    {{-- Loop through available qualifications --}}
                                     @foreach($schoolClasses as $schoolClass)
                                         <option value="{{ $schoolClass->id }}" 
                                             {{ ($qualification == $schoolClass->id) ? 'selected' : '' }}>
                                             {{ $schoolClass->name }}
                                         </option>
                                     @endforeach
+                                
+                                    {{-- Option for custom/other qualification --}}
                                     <option value="">Others</option>
                                 </select>
-                            </div>
     
                             <label for="specialization" class="form-label fw-bold" style="color: #1cc88a;">
                                     Specialization
@@ -560,7 +567,7 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
 <!-- Select2 JS -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 <script>
-   document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {
     const currencySelect = document.getElementById('currency');
     const priceInput = document.getElementById('price');
     const currencyPriceInput = document.getElementById('currency_price'); // Hidden field
