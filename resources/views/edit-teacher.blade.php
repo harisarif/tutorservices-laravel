@@ -478,12 +478,16 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                       </div>
                       <div class="mb-2">
                         <label for="address" class="form-label fw-bold"  style="color: #1cc88a;">Langauge teaching</label>
-                        <select name="language_tech" class="form-select" id="language"> @if($selectedLanguage && !in_array($selectedLanguage, ['english', 'spanish', 'french', 'german', 'italian', 'portuguese']))
-                        <option value="{{ $selectedLanguage }}" selected>{{ ucfirst($selectedLanguage) }}</option>
-                                   @foreach (config('languages.languages') as $code => $name)
-                                   <option value="{{ $code }}">{{ $name }}</option>
-                                   @endforeach
-                       </select> @endif
+                        <select name="language_tech" class="form-select" id="language">
+                            @if($selectedLanguage && !in_array($selectedLanguage, ['english', 'spanish', 'french', 'german', 'italian', 'portuguese']))
+                                <option value="{{ $selectedLanguage }}" selected>{{ ucfirst($selectedLanguage) }}</option>
+                            @endif
+
+                            @foreach (config('languages.languages') as $code => $name)
+                                <option value="{{ $code }}">{{ $name }}</option>
+                            @endforeach
+                        </select>
+
                    
                 </div>    
                 
