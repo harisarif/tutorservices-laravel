@@ -4,6 +4,9 @@ $languages_spoken = json_decode($tutor->language, true) ?? [];
 $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
     $selectedMonth = isset($tutor->dob) ? date("m", strtotime($tutor->dob)) : "";
     $selectedDay = isset($tutor->dob) ? date("d", strtotime($tutor->dob)) : "";
+   
+        // Convert specialization into an array if stored as a comma-separated string
+        $specializations = is_array($tutor->specialization) ? $tutor->specialization : explode(',', $tutor->specialization);
   
     $currentYear = date("Y");
     $selectedSubjects = is_array($tutor->teaching) ? $tutor->teaching : explode(',', $tutor->teaching ?? '');
@@ -21,28 +24,34 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
     footer {
         display: none !important;
     }
- </style>
- @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
+    .alert-danger {
+        position: fixed; /* Keeps it on top of everything */
+        top: 10px; /* Adjust as needed */
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1050; /* Bootstrap modal z-index is 1040, so this ensures it's on top */
+        width: 50%;
+        text-align: center;
+    }.select2-container .select2-selection--single {
+    height: 38px !important; /* Adjust height as needed */
+    line-height: 38px !important;
+}
+
+</style>
+
+@if ($errors->any())
+    <div class="alert alert-danger opacity-100" id="close">
+        <ul style="margin: 0; padding: 10px 0;">
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+                <li style="display:flex; justify-content: space-between; align-items: center;">
+                    {{ $error }}
+                    <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true"></i>
+                </li>
             @endforeach
         </ul>
     </div>
 @endif
-@if ($errors->any())
 
-<div class="alert alert-danger" id="close" style="">
-    <ul style="margin: 0; padding: 10px 0;">
-        @foreach ($errors->all() as $error)
-        <li style="display:flex; justify-content: space-between; align-items: center;">{{ $error }} <i
-                class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true"></i></li>
-
-        @endforeach
-    </ul>
-</div>
-@endif
 @section('content')
 <div id="wrapper">
 <ul class="nav nav-tabs navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -210,7 +219,7 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                                 <div class="profile-header text-center">
                 <div class="profile-pic-container">
                     <label for="imageUpload">
-                        <img src="img/kids.jpg" alt="Avatar" class="avatar img-thumbnail" id="profileImage">
+                        <img src="{{asset('storage/' . $tutor->profileImage)}}" alt="Avatar" class="avatar img-thumbnail" id="profileImage">
                         <div class="upload-icon">
                             <i class="fas fa-camera"></i>
                         </div>
@@ -243,17 +252,44 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
 
                             <div class="mb-2">
                                 <label class="form-label"><strong style="color: #1cc88a;">Price:</strong></label>
-                                <input type="text" class="form-control" id="price" name="price"  value="{{ $tutor->price}}">
+                                <div class="d-flex align-items-center"> 
+                                    <select class="form-select w-auto col-3" style="height:38px;" id="currency" name="currency" required>
+                                        @foreach (config('symbols.symbols') as $key => $symbol)
+                                            @if(is_string($symbol))
+                                                <option value="{{ $symbol }}" 
+                                                    {{ isset($data) && $data->currency == $symbol ? 'selected' : '' }}>
+                                                    {{ $symbol }}
+                                                </option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                        <input type="text" class="form-control" id="price" name="price" 
+                                            placeholder="e.g 833" required 
+                                            value="{{ isset($tutor) ? preg_replace('/[^0-9.]/', '', $tutor->price) : '' }}">
+                                </div> 
+                                <input type="hidden" name="currency_price" id="currency_price">
                             </div>
+                            
                         
                             <div class="mb-2">
                                 <label class="form-label"><strong style="color: #1cc88a;">Phone:</strong></label>
-                                <input type="tel" class="form-control"  name="phone" id="phone"  value="{{ $tutor->phone ?? '' }}">
+                                <div class="d-flex align-items-center">
+                                    <select class="form-select w-auto" id="countrySelect"
+    style="border: 1px solid rgb(137, 135, 135); flex-shrink: 0; ">
+
+                                                @foreach ($countriesPhone as $key => $country)
+                                                <option value="{{ $key }}">{{ $country }}</option>
+                                                @endforeach
+                                            </select>
+                                            <input type="text" class="form-control" id="phone" name="phone"
+                                                placeholder="e.g +92XXXXXXXXXX" value="{{ isset($tutor) ? $tutor->phone : '' }}"
+                                                style="box-shadow: none; border: 1px solid rgba(137, 135, 135, 0.5);">
+                                        </div>
                             </div>
                         
                             <div class="mb-2">
                                 <label class="form-label"><strong style="color: #1cc88a;">Date of Birth:</strong></label>
-                                <input type="date" class="form-control" value="">
+                                <input type="date" class="form-control" name="dob" value="{{ $tutor->dob}}">
                             </div>
                         
                             <div class="mb-2">
@@ -329,21 +365,24 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                             <label for="specialization" class="form-label fw-bold" style="color: #1cc88a;">
                                     Specialization
                                 </label>
-                                <select name="specialization" class="form-select select2"  id="specialization">
-                                    @if(isset($tutor->specialization) && !in_array($tutor->specialization, ['mathematics', 'science', 'computer_science', 'literature', 'history', 'languages', 'engineering', 'medicine']))
-                                        <option value="{{ $tutor->specialization }}" selected>{{ ucfirst(str_replace('_', ' ', $tutor->specialization)) }}</option>
+                                <select name="specialization[]" class="form-control select2" id="specialization" multiple>
+                                    @php
+                                        // Ensure specialization is an array
+                                        $selectedSpecializations = is_array($tutor->specialization) ? 
+                                            $tutor->specialization : 
+                                            json_decode($tutor->specialization, true) ?? explode(',', $tutor->specialization);
+                                    @endphp
+                                     
+                                    @foreach($selectedSpecializations as $specialization)
+                                        <option value="{{ $specialization }}" selected>{{ ucfirst(str_replace('_', ' ', $specialization)) }}</option>
+                                    @endforeach   @foreach (config('specialization.specialization') as $specialization)
+                                    @if(!in_array($specialization, $selectedSpecializations)) 
+                                        <option value="{{ $specialization }}">{{ ucfirst(str_replace('_', ' ', $specialization)) }}</option>
                                     @endif
-                            
-                                    <option value="mathematics" {{ $tutor->specialization == 'mathematics' ? 'selected' : '' }}>Mathematics</option>
-                                    <option value="science" {{ $tutor->specialization == 'science' ? 'selected' : '' }}>Science</option>
-                                    <option value="computer_science" {{ $tutor->specialization == 'computer_science' ? 'selected' : '' }}>Computer Science</option>
-                                    <option value="literature" {{ $tutor->specialization == 'literature' ? 'selected' : '' }}>Literature</option>
-                                    <option value="history" {{ $tutor->specialization == 'history' ? 'selected' : '' }}>History</option>
-                                    <option value="languages" {{ $tutor->specialization == 'languages' ? 'selected' : '' }}>Languages</option>
-                                    <option value="engineering" {{ $tutor->specialization == 'engineering' ? 'selected' : '' }}>Engineering</option>
-                                    <option value="medicine" {{ $tutor->specialization == 'medicine' ? 'selected' : '' }}>Medicine</option>
+                                @endforeach
                                 </select>
-
+                                
+                                
                           <div class="mb-2">
                           <label for="address" class="form-label fw-bold" style="color: #1cc88a;">year</label>
                           <select id="yearSelect" name="year" class="form-select"
@@ -370,7 +409,20 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
     
                             <div class="mb-2">
                             <label for="address" class="form-label fw-bold" style="color: #1cc88a;">Status</label>
-                            <input type="text" class="form-control" id="address" name="status" value="{{$tutor->status}}" style="border: 2px solid #dee2e6;">
+                            <select class="form-select school_class" id="qualification" name="availability_status">
+                                @php
+                                    $selectedStatus = $tutor->availability_status ?? ''; // Ensure it's defined
+                                @endphp
+                            
+                                @if($selectedStatus && !in_array($selectedStatus, ['Online', 'Physical', 'Both']))
+                                    <option value="{{ $selectedStatus }}" selected>{{ ucfirst($selectedStatus) }}</option>
+                                @endif
+                            
+                                <option value="Physical" @if($selectedStatus === 'Physical') selected @endif>Physical</option>
+                                <option value="Both" @if($selectedStatus === 'Both') selected @endif>Both</option>
+                                <option value="">Others</option>
+                            </select>
+                            
                             </div>
                         
                             <div class="mb-2">
@@ -390,10 +442,11 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                         </div>
 
                         <div class="mb-2">
-                        <label for="document" class="form-label fw-bold" style="color: #1cc88a;">Upload Qualification Document</label>
-                        <div class="input-group">
-                            <input type="file" class="form-control  d-block" id="document" name="document"  accept=".pdf,.doc,.docx,.jpg,.png" style="border: 2px solid #dee2e6;" >
-                        </div>
+                            <label for="document" class="form-label fw-bold" style="color: #1cc88a;">Upload Qualification Document</label>
+                            <div class="input-group">
+                                <input type="file" class="form-control d-block" id="document" name="document" accept=".pdf,.doc,.docx,.jpg,.png" style="border: 2px solid #dee2e6;">
+                            </div>
+                            
                     </div>
 
                         <div class="mb-2">
@@ -416,20 +469,15 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                         <label for="address" class="form-label fw-bold"  style="color: #1cc88a;">Educational teaching</label>
                         <input type="text" class="form-control" name="edu_teaching" id="address" value="{{$tutor->edu_teaching}}" style="border: 2px solid #dee2e6;">
                       </div>
-                        
-                      <div class="md-2">
-                        <label for="address" class="form-label fw-bold"  style="color: #1cc88a;">Languge teaching</label>
-                        @if($selectedLanguage && !in_array($selectedLanguage, ['english', 'spanish', 'french', 'german', 'italian', 'portuguese']))
+                      <div class="mb-2">
+                        <label for="address" class="form-label fw-bold"  style="color: #1cc88a;">Langauge teaching</label>
+                        <select name="language_tech" class="form-select" id="language"> @if($selectedLanguage && !in_array($selectedLanguage, ['english', 'spanish', 'french', 'german', 'italian', 'portuguese']))
                         <option value="{{ $selectedLanguage }}" selected>{{ ucfirst($selectedLanguage) }}</option>
-                    @endif
-                    <select name="language_tech" class="form-select" id="language">
-                    <option value="english" {{ $selectedLanguage == 'english' ? 'selected' : '' }}>English</option>
-                    <option value="spanish" {{ $selectedLanguage == 'spanish' ? 'selected' : '' }}>Spanish</option>
-                    <option value="french" {{ $selectedLanguage == 'french' ? 'selected' : '' }}>French</option>
-                    <option value="german" {{ $selectedLanguage == 'german' ? 'selected' : '' }}>German</option>
-                    <option value="italian" {{ $selectedLanguage == 'italian' ? 'selected' : '' }}>Italian</option>
-                    <option value="portuguese" {{ $selectedLanguage == 'portuguese' ? 'selected' : '' }}>Portuguese</option>
-                </select>
+                                   @foreach (config('languages.languages') as $code => $name)
+                                   <option value="{{ $code }}">{{ $name }}</option>
+                                   @endforeach
+                       </select> @endif
+                   
                 </div>    
                 
                 <div id="language-container">
@@ -448,7 +496,10 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                                           {{ isset(old('language_proficient')[$key]) && old('language_proficient')[$key] == $key ? 'selected' : '' }}>
                                           {{ $language}}
                                       </option>
+                                      @endforeach    @foreach (config('languages.languages') as $code => $name)
+                                      <option value="{{ $code }}">{{ $name }}</option>
                                       @endforeach
+                          </select>
                                       </select>
                                   </div>
                               </div>
@@ -503,7 +554,96 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
 </div>
 @endsection
 
-@section('js')
+@section('js')<!-- Select2 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+
+<!-- Select2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+<script>
+   document.addEventListener('DOMContentLoaded', function () {
+    const currencySelect = document.getElementById('currency');
+    const priceInput = document.getElementById('price');
+    const currencyPriceInput = document.getElementById('currency_price'); // Hidden field
+
+    function updateHiddenField() {
+        currencyPriceInput.value = currencySelect.value + ' ' + priceInput.value;
+    }
+
+    // Update hidden field on change/input
+    currencySelect.addEventListener('change', updateHiddenField);
+    priceInput.addEventListener('input', updateHiddenField);
+
+    // Initialize the field with default values
+    updateHiddenField();
+});
+
+</script>
+<script>
+    $(document).ready(function() {
+        $('#specialization').select2({
+            tags: true, // Allows adding new values
+            tokenSeparators: [','], // Use comma to separate values
+            placeholder: "Select or add specialization", 
+            allowClear: true
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        // Initialize Select2 for better UI
+        $('#countrySelect').select2({
+            placeholder: 'Select a country',
+            allowClear: false
+        });
+        $('#countrySelect').on('select2:open', function() {
+    $('.select2-container .select2-selection--single').css('height', '38px');
+});
+
+        // Country prefix & phone number length mappings
+        const countriesPrefix = @json($countries_prefix);
+        const countriesNumberLength = @json($countries_number_length);
+        let countryValue = $('#countrySelect').val();
+        const userNumber = $('#phone');
+
+        // Function to set country prefix
+        function setCountryPrefix() {
+            const prefix = countriesPrefix[countryValue] || '+';
+            userNumber.val(prefix);
+            userNumber.attr('data-prefix', prefix); // Store prefix in data attribute
+        }
+
+        // Prevent deletion of prefix
+        userNumber.on('keydown', function(event) {
+            const prefix = userNumber.attr('data-prefix');
+            const cursorPosition = this.selectionStart;
+
+            if (cursorPosition <= prefix.length && (event.key === 'Backspace' || event.key === 'Delete')) {
+                event.preventDefault();
+            }
+            if (cursorPosition < prefix.length && !['ArrowLeft', 'ArrowRight'].includes(event.key)) {
+                event.preventDefault();
+            }
+        });
+
+        // Limit input length based on selected country
+        userNumber.on('input', function() {
+            const prefix = userNumber.attr('data-prefix');
+            const maxLength = countriesNumberLength[countryValue] || 15;
+            if (userNumber.val().length > maxLength) {
+                userNumber.val(userNumber.val().slice(0, maxLength)); 
+            }
+        });
+
+        // Change country prefix when selection changes
+        $('#countrySelect').on('change', function() {
+            countryValue = $(this).val();
+            setCountryPrefix();
+        });
+
+        // Set default country prefix on page load
+        setCountryPrefix();
+    });
+</script>
 <script>
     document.getElementById('document').disabled = false;
 document.getElementById('document').style.display = 'block';

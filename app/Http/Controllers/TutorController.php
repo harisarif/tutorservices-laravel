@@ -762,17 +762,20 @@ class TutorController extends Controller
         }, $languages);
 
         //country
-
+         
         $storedCountryCode = $tutor->country; // Get country code
         $country = config("countries_assoc.countries.$storedCountryCode", 'Unknown'); // Convert to full name
 
         $tutor->curriculum = unserialize($tutor->curriculum);
-        $countries = collect(config('phonecountries.countries'));
-        return view('edit-teacher', compact(['tutor', 'country', 'countries', 'languageNames', 'schoolClasses', 'qualification']));
+        $countriesPhone = collect(config('phonecountries.countries'));
+        $countries_number_length = collect(config('countries_number_length.countries'));
+        $countries_prefix = collect(config('countries_prefix.countries'));
+        $countries = collect(config('countries_assoc.countries'));
+        return view('edit-teacher', compact(['tutor', 'country', 'countriesPhone', 'countries', 'countries_number_length', 'countries_prefix', 'languageNames', 'schoolClasses', 'qualification']));
     }
 
     public function updateProfile(Request $request, $id)
-    {
+    { 
         $rules = [
             'f_name' => 'required|string|max:255',
             'l_name' => 'required|string|max:255',
@@ -782,54 +785,106 @@ class TutorController extends Controller
             'email' => "required|string|email|max:255|unique:tutors,email,$id",
             'experience' => 'required|string|max:255',
             'dob' => 'required|string|max:255',
-            'document' => 'nullable|mimes:pdf|max:2048',
+            'document' => 'nullable|mimes:pdf,xlsx,docx|max:2048',
             'videoFile' => 'nullable|mimes:mp4,webm,ogg|max:51200',
-            'specialization' => 'nullable|string|max:255',
+            'specialization' => 'required|array',
+            'specialization.*' => 'string',
             'language_proficient' => 'required|array',
             'language_proficient.*' => 'string|max:255',
             'language_level' => 'required|array',
             'language_level.*' => 'string|max:255',
             'language_tech' => 'nullable|string|max:255',
             'edu_teaching' => 'nullable|string|max:255',
+            'currency_price' => 'required|string',
         ];
-
+    
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
+    
         // Find the tutor by ID
         $tutor = Tutor::findOrFail($id);
         $user = User::where('id', $tutor->user_id)->firstOrFail();
-
+    
         // Update User details
         $user->name = $request->input('f_name') . ' ' . $request->input('l_name');
         $user->email = $request->input('email');
-
+    
         if ($request->filled('password')) {
             $user->password = Hash::make($request->input('password'));
         }
-
         $user->save();
-
+    
         // Handle file uploads
         if ($request->hasFile('document')) {
-            $file = $request->file('document');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('documents'), $fileName);
-            $tutor->document = 'documents/' . $fileName;
-        }
-
-        if ($request->hasFile('videoFile')) {
-            $videoPath = $request->file('videoFile')->store('videos', 'public');
-            $tutor->video = 'storage/' . $videoPath;
-        }
-
-        if ($request->hasFile('profileImage')) {
-            $imagePath = $request->file('profileImage')->store('uploads', 'public');
-            $tutor->profileImage = $imagePath;
-        }
-
+            // Delete old document
+            if ($tutor->document) {
+                $oldFilePath = public_path('uploads/documents/' . $tutor->document);
+                if (file_exists($oldFilePath)) {
+                    unlink($oldFilePath);
+                }
+            }
+    
+            if ($request->hasFile('document')) {
+                // Delete old document if it exists
+                if (!empty($tutor->document)) {
+                    $oldFilePath = public_path('uploads/documents/' . $tutor->document);
+                    if (file_exists($oldFilePath)) {
+                        unlink($oldFilePath); // Remove previous document
+                    }
+                }
+            
+                // Upload new document
+                $documentFile = $request->file('document');
+                $documentName = time() . '_' . $documentFile->getClientOriginalName();
+                $documentFile->move(public_path('uploads/documents/'), $documentName);
+                $tutor->document = $documentName;
+            } else {
+                // Keep the existing document if no new file is uploaded
+                $tutor->document = $tutor->getOriginal('document');
+            }
+            }
+    
+            if ($request->hasFile('videoFile')) {
+                // Delete old video if it exists
+                if (!empty($tutor->video)) {
+                    $oldVideoPath = public_path($tutor->video);
+                    if (file_exists($oldVideoPath)) {
+                        unlink($oldVideoPath); // Remove previous video
+                    }
+                }
+            
+                // Upload new video
+                $videoFile = $request->file('videoFile');
+                $videoName = time() . '_' . $videoFile->getClientOriginalName();
+                $videoFile->move(public_path('uploads/videos/'), $videoName);
+                $tutor->video = 'uploads/videos/' . $videoName;
+            } else {
+                // Keep the existing video if no new file is uploaded
+                $tutor->video = $tutor->getOriginal('video');
+            }
+            
+            if ($request->hasFile('profileImage')) {
+                // Delete old image if it exists
+                if (!empty($tutor->profileImage)) {
+                    $oldImagePath = public_path('storage/' . $tutor->profileImage);
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath); // Remove previous image
+                    }
+                }
+            
+                // Upload new image
+                $imageFile = $request->file('profileImage');
+                $imageName = time() . '_' . $imageFile->getClientOriginalName();
+                $imageFile->storeAs('uploads', $imageName, 'public');
+                $tutor->profileImage = 'uploads/' . $imageName;
+            } else {
+                // Keep the existing image if no new file is uploaded
+                $tutor->profileImage = $tutor->getOriginal('profileImage');
+            }
+            
+    
         // Handle language proficiency array
         $language = [];
         if ($request->has('language_proficient') && $request->has('language_level')) {
@@ -842,31 +897,25 @@ class TutorController extends Controller
                 }
             }
         }
-
-        // Update tutor details
+    
+        // Update tutor details (NO NEW OBJECT CREATION)
         $tutor->f_name = $request->input('f_name');
         $tutor->l_name = $request->input('l_name');
-        $tutor->description = $request->input('description');
-        $tutor->country = $request->input('country');
-        $tutor->year = $request->input('year');
         $tutor->email = $request->input('email');
         $tutor->dob = $request->input('dob');
         $tutor->qualification = $request->input('qualification');
-        $tutor->gender = $request->input('gender');
-        $tutor->location = $request->input('location');
         $tutor->experience = $request->input('experience');
         $tutor->language_tech = $request->input('language_tech');
-        $tutor->curriculum = serialize($request->input('courses'));
-        $tutor->teaching = serialize($request->input('teaching'));
-        $tutor->phone = $request->input('phone');
-        $tutor->specialization = json_encode($request->specialization);
-        $tutor->password = $user->password;
-        $tutor->language = json_encode($language);
         $tutor->edu_teaching = $request->input('edu_teaching');
-        $tutor->status = $request->input('status') ?? 'online';
-        $tutor->session_id = session()->getId();
+        $tutor->location = $request->input('location');
+        $tutor->gender = $request->input('gender');
+        $tutor->price = $request->input('currency_price');
+        $tutor->specialization = json_encode($request->input('specialization'));
+        $tutor->language = json_encode($language);
+        $tutor->availability_status = $request->input('availability_status') ?? 'online';
+    
         $tutor->save();
-
+    
         // Send update email to tutor
         $toTutor = $tutor->email;
         $subjectTutor = "Your Profile Has Been Updated Successfully";
@@ -876,7 +925,7 @@ class TutorController extends Controller
             "Best regards,\r\n" .
             "The Edexcel Team";
         $this->sendEmail($toTutor, $subjectTutor, $messageTutor);
-
+    
         return redirect()->route('all.tutors')->with('success', 'Tutor profile updated successfully.');
     }
 
