@@ -874,7 +874,7 @@ class TutorController extends Controller
                 ];
             }
         }
-    }  dd($request->input('language_level'));
+    }  
 
     // Update other fields
     $tutor->f_name = $request->input('f_name');
