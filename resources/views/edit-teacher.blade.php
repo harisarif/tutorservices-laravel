@@ -225,7 +225,7 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                         </div>
                     </label>
                 </div>
-                <input type="file" id="imageUpload" class="form-control d-none" accept="image/*">
+                <input type="file" name="profileImage" id="imageUpload" class="form-control d-none" accept="image/*">
                 
                 
             </div>
@@ -275,14 +275,13 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                                 <label class="form-label"><strong style="color: #1cc88a;">Phone:</strong></label>
                                 <div class="d-flex align-items-center">
                                     <select class="form-select w-auto" id="countrySelect"
-    style="border: 1px solid rgb(137, 135, 135); flex-shrink: 0; ">
-
+                                    style="border: 1px solid rgb(137, 135, 135); flex-shrink: 0; ">
                                                 @foreach ($countriesPhone as $key => $country)
                                                 <option value="{{ $key }}">{{ $country }}</option>
                                                 @endforeach
                                             </select>
                                             <input type="text" class="form-control" id="phone" name="phone"
-                                                placeholder="e.g +92XXXXXXXXXX" value="{{ isset($tutor) ? $tutor->phone : '' }}"
+                                                placeholder="e.g +92XXXXXXXXXX" value="{{ $tutor->phone }}"
                                                 style="box-shadow: none; border: 1px solid rgba(137, 135, 135, 0.5);">
                                         </div>
                             </div>
@@ -453,15 +452,24 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
                             <div class="input-group">
                                 <input type="file" class="form-control d-block" id="document" name="document" accept=".pdf,.doc,.docx,.jpg,.png" style="border: 2px solid #dee2e6;">
                             </div>
-                            
+                            {{-- Show previously uploaded file --}}
+                            @if(isset($tutor->document))
+                            <p class="mt-2">Previously uploaded: 
+                                <a href="{{ asset( $tutor->document) }}" target="_blank" id="documents" style="background-color: #198754;color: white;margin-right: 25px;" class="btn">Watch Document</a>
+                            </p>
+                            @endif
                     </div>
 
                         <div class="mb-2">
                         <label for="video" class="form-label fw-bold"  style="color: #1cc88a;">Video</label>
                         <div class="input-group">
                           <!-- <input type="text" class="form-control" id="video" placeholder="Video URL or Name"> -->
-                          <input type="file" class="form-control" id="videoUpload" accept="video/*" style="border: 2px solid #dee2e6;">
-                        </div>
+                          <input type="file" class="form-control" name="videoFile" id="videoUpload" accept="video/*" style="border: 2px solid #dee2e6;">
+                        </div>@if(isset($tutor->video))
+                        <p class="mt-2">Previously uploaded: 
+                            <a href="{{ asset($tutor->video) }}" target="_blank" id="video" style="background-color: #198754;color: white;margin-right: 25px;" class="btn">Watch Video</a>
+                        </p>
+                        @endif
                       </div>
                         </div>
                     </div>
@@ -597,63 +605,90 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
             placeholder: "Select or add specialization", 
             allowClear: true
         });
+    });$(document).ready(function() {
+    $('#videoUpload').on('change', function() {
+        if ($(this).val()) {
+            $('#video').parent().hide(); // Hide the previous video link
+        }
     });
-</script>
-<script>
-    $(document).ready(function() {
-        // Initialize Select2 for better UI
-        $('#countrySelect').select2({
-            placeholder: 'Select a country',
-            allowClear: false
-        });
-        $('#countrySelect').on('select2:open', function() {
-    $('.select2-container .select2-selection--single').css('height', '38px');
+});
+$(document).ready(function() {
+    $('#document').on('change', function() {
+        if ($(this).val()) {
+            $('#documents').parent().hide(); // Hide the previous video link
+        }
+    });
 });
 
-        // Country prefix & phone number length mappings
-        const countriesPrefix = @json($countries_prefix);
-        const countriesNumberLength = @json($countries_number_length);
-        let countryValue = $('#countrySelect').val();
-        const userNumber = $('#phone');
+</script>
+<script>
+   $(document).ready(function () {
+    // Initialize Select2 for better UI
+    $('#countrySelect').select2({
+        placeholder: 'Select a country',
+        allowClear: false
+    });
 
-        // Function to set country prefix
-        function setCountryPrefix() {
-            const prefix = countriesPrefix[countryValue] || '+';
-            userNumber.val(prefix);
-            userNumber.attr('data-prefix', prefix); // Store prefix in data attribute
+    $('#countrySelect').on('select2:open', function () {
+        $('.select2-container .select2-selection--single').css('height', '38px');
+    });
+
+    // Country prefix & phone number length mappings
+    const countriesPrefix = @json($countries_prefix);
+    const countriesNumberLength = @json($countries_number_length);
+
+    let countryValue = $('#countrySelect').val(); // Get selected country value
+    const userNumber = $('#phone');
+
+    // Get previously saved phone number from the tutor table
+    let savedPhoneNumber = @json($tutor->phone); 
+
+    // Function to set country prefix
+    function setCountryPrefix(resetNumber = false) {
+        const prefix = countriesPrefix[countryValue] || '+';
+
+        if (resetNumber || !savedPhoneNumber) {
+            userNumber.val(prefix); // Show only the prefix when changing country
+        } else {
+            userNumber.val(savedPhoneNumber); // Show saved phone number
         }
 
-        // Prevent deletion of prefix
-        userNumber.on('keydown', function(event) {
-            const prefix = userNumber.attr('data-prefix');
-            const cursorPosition = this.selectionStart;
+        userNumber.attr('data-prefix', prefix); // Store prefix in data attribute
+    }
 
-            if (cursorPosition <= prefix.length && (event.key === 'Backspace' || event.key === 'Delete')) {
-                event.preventDefault();
-            }
-            if (cursorPosition < prefix.length && !['ArrowLeft', 'ArrowRight'].includes(event.key)) {
-                event.preventDefault();
-            }
-        });
-
-        // Limit input length based on selected country
-        userNumber.on('input', function() {
-            const prefix = userNumber.attr('data-prefix');
-            const maxLength = countriesNumberLength[countryValue] || 15;
-            if (userNumber.val().length > maxLength) {
-                userNumber.val(userNumber.val().slice(0, maxLength)); 
-            }
-        });
-
-        // Change country prefix when selection changes
-        $('#countrySelect').on('change', function() {
-            countryValue = $(this).val();
-            setCountryPrefix();
-        });
-
-        // Set default country prefix on page load
-        setCountryPrefix();
+    // Change country prefix and reset phone number when selection changes
+    $('#countrySelect').on('change', function () {
+        countryValue = $(this).val();
+        setCountryPrefix(true); // Reset phone number on country change
     });
+
+    // Prevent deletion of prefix
+    userNumber.on('keydown', function (event) {
+        const prefix = userNumber.attr('data-prefix');
+        const cursorPosition = this.selectionStart;
+
+        if (cursorPosition <= prefix.length && (event.key === 'Backspace' || event.key === 'Delete')) {
+            event.preventDefault();
+        }
+        if (cursorPosition < prefix.length && !['ArrowLeft', 'ArrowRight'].includes(event.key)) {
+            event.preventDefault();
+        }
+    });
+
+    // Limit input length based on selected country
+    userNumber.on('input', function () {
+        const prefix = userNumber.attr('data-prefix');
+        const maxLength = countriesNumberLength[countryValue] || 15;
+
+        if (userNumber.val().length > maxLength) {
+            userNumber.val(userNumber.val().slice(0, maxLength));
+        }
+    });
+
+    // Set default country prefix on page load
+    setCountryPrefix();
+});
+
 </script>
 <script>
     document.getElementById('document').disabled = false;
