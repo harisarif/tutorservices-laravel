@@ -596,7 +596,18 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
     updateHiddenField();
 });
 
-</script>
+</script><script>
+    document.getElementById('imageUpload').addEventListener('change', function(event) {
+        let file = event.target.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('profileImage').src = e.target.result; // Update the image preview
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+    </script>
 <script>
     $(document).ready(function() {
         $('#specialization').select2({

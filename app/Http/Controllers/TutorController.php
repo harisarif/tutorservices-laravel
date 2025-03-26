@@ -863,45 +863,31 @@ class TutorController extends Controller
         $tutor->profileImage = 'uploads/' . $imageName;
     }
 
-    $existingLanguages = json_decode($tutor->language, true) ?? [];
-$existingLanguagesAssoc = [];
+    $existingLanguages = json_decode($tutor->language, true) ?? []; // Decode existing languages
 
-// Convert existing array to an associative array (language => level)
-foreach ($existingLanguages as $entry) {
-    if (!empty($entry['language'])) { // ✅ Ensure no empty languages are added
-        $existingLanguagesAssoc[$entry['language']] = $entry['level'];
-    }
-}
-
-// Check if new values exist
-if ($request->filled('language_proficient') && $request->filled('language_level')) {
-    $proficientLanguages = array_values($request->input('language_proficient'));
-    $languageLevels = array_values($request->input('language_level'));
-
-    foreach ($proficientLanguages as $index => $lang) {
-        if (!empty($lang) && isset($languageLevels[$index])) { 
-            $newLevel = $languageLevels[$index];
-
-            // ✅ Ensure 'language' is valid (no 0 or null)
-            if (!is_numeric($lang) || $lang > 0) {
-                $existingLanguagesAssoc[$lang] = $newLevel;
+    $updatedLanguages = [];
+    
+    if ($request->filled('language_proficient') && $request->filled('language_level')) {
+        foreach ($request->input('language_proficient') as $index => $lang) {
+            if (!empty($lang) && isset($request->input('language_level')[$index])) {
+                $updatedLanguages[] = [
+                    'language' => $lang,
+                    'level' => $request->input('language_level')[$index],
+                ];
             }
         }
     }
-}
-
-// Convert back to array format
-$updatedLanguages = [];
-foreach ($existingLanguagesAssoc as $lang => $lvl) {
-    if (!empty($lang)) { // ✅ Prevent saving invalid entries
-        $updatedLanguages[] = ['language' => $lang, 'level' => $lvl];
+    
+    // If no new values are provided, keep the existing languages
+    if (empty($updatedLanguages)) {
+        $updatedLanguages = $existingLanguages;
     }
-}
-
-// Save updated language proficiency data
-$tutor->language = json_encode($updatedLanguages);
-
-
+    
+    // Save the final result
+    $tutor->language = json_encode($updatedLanguages);
+   
+    
+      
     // Update other fields
     $tutor->f_name = $request->input('f_name');
     $tutor->l_name = $request->input('l_name');
