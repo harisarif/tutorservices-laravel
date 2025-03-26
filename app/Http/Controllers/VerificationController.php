@@ -156,7 +156,7 @@ function sendEmails($subject, $body, $to_name, $to_email) {
         $mail->Host ='smtp.hostinger.com';  
         $mail->SMTPAuth = true;
         $mail->Username = 'info@edexceledu.com';  // Your email
-        $mail->Password = 'y937?2kU';  // Your password
+        $mail->Password = 'Haris1122@@';  // Your password
         $mail->SMTPSecure = 'tls';  // Encryption method
         $mail->Port = 587;  // SMTP port
 
