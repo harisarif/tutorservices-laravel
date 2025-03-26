@@ -822,7 +822,10 @@ function showModal(selectElement) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-             $('#otpModal').modal('hide'); // Redirect on success
+             $('#otpModal').modal('hide');
+             $('#otpModal').addClass('d-none');
+             
+              // Redirect on success
             } else {
                 document.getElementById('otpError').style.display = 'block'; // Show error message
                 verifyButton.innerHTML = "✔ Verify OTP"; // Reset button
