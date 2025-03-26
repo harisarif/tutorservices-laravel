@@ -797,7 +797,7 @@ class TutorController extends Controller
             'edu_teaching' => 'nullable|string|max:255',
             'currency_price' => 'required|string',
         ];
-    
+         
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -834,7 +834,7 @@ class TutorController extends Controller
         $documentFile->move(public_path('uploads/documents/'), $documentName);
         $tutor->document = 'uploads/documents/' . $documentName;
     }
-
+      
     // Handle Video Upload (Retain Previous Value if No New File)
     if ($request->hasFile('videoFile')) {
         if (!empty($tutor->video)) {
@@ -848,7 +848,7 @@ class TutorController extends Controller
         $videoFile->move(public_path('uploads/videos/'), $videoName);
         $tutor->video = 'uploads/videos/' . $videoName;
     }
-
+    
     // Handle Profile Image Upload (Retain Previous Value if No New File)
     if ($request->hasFile('profileImage')) {
         if (!empty($tutor->profileImage)) {
@@ -864,17 +864,43 @@ class TutorController extends Controller
     }
 
     $existingLanguages = json_decode($tutor->language, true) ?? [];
+$existingLanguagesAssoc = [];
 
-    if ($request->filled('language_proficient') && $request->filled('language_level')) {
-        foreach ($request->input('language_proficient') as $index => $lang) {
-            if (!empty($lang) && isset($request->input('language_level')[$index])) {
-                $existingLanguages[] = [  // Append instead of replace
-                    'language' => $lang,
-                    'level' => $request->input('language_level')[$index],
-                ];
+// Convert existing array to an associative array (language => level)
+foreach ($existingLanguages as $entry) {
+    if (!empty($entry['language'])) { // ✅ Ensure no empty languages are added
+        $existingLanguagesAssoc[$entry['language']] = $entry['level'];
+    }
+}
+
+// Check if new values exist
+if ($request->filled('language_proficient') && $request->filled('language_level')) {
+    $proficientLanguages = array_values($request->input('language_proficient'));
+    $languageLevels = array_values($request->input('language_level'));
+
+    foreach ($proficientLanguages as $index => $lang) {
+        if (!empty($lang) && isset($languageLevels[$index])) { 
+            $newLevel = $languageLevels[$index];
+
+            // ✅ Ensure 'language' is valid (no 0 or null)
+            if (!is_numeric($lang) || $lang > 0) {
+                $existingLanguagesAssoc[$lang] = $newLevel;
             }
         }
-    }  
+    }
+}
+
+// Convert back to array format
+$updatedLanguages = [];
+foreach ($existingLanguagesAssoc as $lang => $lvl) {
+    if (!empty($lang)) { // ✅ Prevent saving invalid entries
+        $updatedLanguages[] = ['language' => $lang, 'level' => $lvl];
+    }
+}
+
+// Save updated language proficiency data
+$tutor->language = json_encode($updatedLanguages);
+
 
     // Update other fields
     $tutor->f_name = $request->input('f_name');
@@ -900,17 +926,17 @@ class TutorController extends Controller
 
     // Save the updated tutor
     $tutor->save();
-
+   
     
-        // Send update email to tuto
-        $toTutor = $tutor->email;
-        $subjectTutor = "Your Profile Has Been Updated Successfully";
-        $messageTutor = "Dear " . $tutor->f_name . ' ' . $tutor->l_name . ",\r\n" .
-            "Your profile information has been successfully updated.\r\n" .
-            "If you did not make these changes, please contact support immediately.\r\n\r\n" .
-            "Best regards,\r\n" .
-            "The Edexcel Team";
-        $this->sendEmail($toTutor, $subjectTutor, $messageTutor);
+        // // Send update email to tuto
+        // $toTutor = $tutor->email;
+        // $subjectTutor = "Your Profile Has Been Updated Successfully";
+        // $messageTutor = "Dear " . $tutor->f_name . ' ' . $tutor->l_name . ",\r\n" .
+        //     "Your profile information has been successfully updated.\r\n" .
+        //     "If you did not make these changes, please contact support immediately.\r\n\r\n" .
+        //     "Best regards,\r\n" .
+        //     "The Edexcel Team";
+        // $this->sendEmail($toTutor, $subjectTutor, $messageTutor);
     
         return redirect()->route('all.tutors')->with('success', 'Tutor profile updated successfully.');
     }
