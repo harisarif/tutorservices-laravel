@@ -915,14 +915,14 @@ class TutorController extends Controller
    
     
         // Send update email to tuto
-        $toTutor = $tutor->email;
-        $subjectTutor = "Your Profile Has Been Updated Successfully";
-        $messageTutor = "Dear " . $tutor->f_name . ' ' . $tutor->l_name . ",\r\n" .
-            "Your profile information has been successfully updated.\r\n" .
-            "If you did not make these changes, please contact support immediately.\r\n\r\n" .
-            "Best regards,\r\n" .
-            "The Edexcel Team";
-        $this->sendEmail($toTutor, $subjectTutor, $messageTutor);
+        // $toTutor = $tutor->email;
+        // $subjectTutor = "Your Profile Has Been Updated Successfully";
+        // $messageTutor = "Dear " . $tutor->f_name . ' ' . $tutor->l_name . ",\r\n" .
+        //     "Your profile information has been successfully updated.\r\n" .
+        //     "If you did not make these changes, please contact support immediately.\r\n\r\n" .
+        //     "Best regards,\r\n" .
+        //     "The Edexcel Team";
+        // $this->sendEmail($toTutor, $subjectTutor, $messageTutor);
     
         return redirect()->route('all.tutors')->with('success', 'Tutor profile updated successfully.');
     }
