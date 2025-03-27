@@ -383,8 +383,8 @@
                             <table class="table teachers-table border">
                                 <thead>
                                     <tr>
-                                        <th class="border"> <input class="form-check-input" type="checkbox" id="select-all">
-                                        <label class="form-check-label" for="select-all"></label></th>
+                                        <th class="border"> <input class="form-check-input" type="checkbox" id="select-all" style="margin-left: -1px;">
+                                        <label class="form-check-label" for="select-all" style="margin-bottom:1.5rem !important;margin-left:10px;"></label></th>
                                         <th class="border">ID</th>
                                         <th class="border">Name</th>
                                         <th class="border">Degree</th>
@@ -401,7 +401,7 @@
                                 @foreach ($tutors as $tutor)
                                     <tr>
                                     <td class="border">
-                                        <input style="margin-left:-5px;" class="form-check-input tutor-checkbox" type="checkbox" value="{{ $tutor->id }}" id="flexCheckChecked-{{ $tutor->id }}">
+                                        <input style="margin-left:-1px;" class="form-check-input tutor-checkbox" type="checkbox" value="{{ $tutor->id }}" id="flexCheckChecked-{{ $tutor->id }}">
                                         <label class="form-check-label" for="flexCheckChecked-{{ $tutor->id }}"></label>
                                     </td>
 
