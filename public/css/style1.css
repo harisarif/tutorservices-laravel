@@ -156,7 +156,7 @@ select.form-select:hover, select.form-select:focus {
     cursor: pointer;
 }
 .profile-header {
-    background-color: #1cc88a;
+    background-color: #fff;
     color: white;
     padding: 40px 20px;
     text-align: center;

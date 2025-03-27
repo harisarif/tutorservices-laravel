@@ -277,7 +277,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-1">
                     <div class="button-div">
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3 bg-success text-white">
                             <i class="fa fa-bars"></i>
