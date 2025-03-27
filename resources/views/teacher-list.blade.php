@@ -401,7 +401,7 @@
                                 @foreach ($tutors as $tutor)
                                     <tr>
                                     <td class="border">
-                                        <input class="form-check-input tutor-checkbox" type="checkbox" value="{{ $tutor->id }}" id="flexCheckChecked-{{ $tutor->id }}">
+                                        <input style="margin-left:-5px;" class="form-check-input tutor-checkbox" type="checkbox" value="{{ $tutor->id }}" id="flexCheckChecked-{{ $tutor->id }}">
                                         <label class="form-check-label" for="flexCheckChecked-{{ $tutor->id }}"></label>
                                     </td>
 
