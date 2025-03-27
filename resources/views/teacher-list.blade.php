@@ -1,6 +1,6 @@
 @extends('layouts.app')
     <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}"/>
-    <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}"/>
+    <link rel="stylesheet" href="{{asset('css/sb-admin-2.css')}}"/>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/fontawesome-free/css/all.min.css')}}"/>
 
