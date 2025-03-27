@@ -409,7 +409,7 @@
                                     <td class="border">{{ $tutor->f_name }} {{ $tutor->l_name }}</td>
                                     <td class="border">{{ $tutor->qualification }}</td>
                                     <td class="border">{{ $tutor->gender }}</td>
-                                    <td class="border">{{ $tutor->location }}</td>
+                                    <td class="border">{{ $tutor->country }}</td>
                                     <td class="border"><a href="{{ url($tutor->document) }}" target="_blank">View PDF Document</a></td>
                                    
                                     <td class="border">{{ $tutor->email }}</td>
