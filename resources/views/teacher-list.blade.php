@@ -360,9 +360,9 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid" >
-                    <div class="tab-content" id="myTabContent">
+                    <div class="tab-content mt-4" id="myTabContent">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4 SB">
-                                <h1 class="h3 mb-0 text-gray-800">{{ __('messages.Teacher') }}</h1>
+                                <h1 class="h3 mb-0 text-gray-800">{{ __('Teachers List') }}</h1>
                                 <div class="del-button d-flex">
                                     <div class="mt-3">
                                     <button type="button" class="btn btn-danger" id="delete-selected">Multiple Delete</button>
