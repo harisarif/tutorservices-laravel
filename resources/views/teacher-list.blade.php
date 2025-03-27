@@ -400,24 +400,24 @@
                                 <tbody>
                                 @foreach ($tutors as $tutor)
                                     <tr>
-                                    <td>
+                                    <td class="border">
                                         <input class="form-check-input tutor-checkbox" type="checkbox" value="{{ $tutor->id }}" id="flexCheckChecked-{{ $tutor->id }}">
                                         <label class="form-check-label" for="flexCheckChecked-{{ $tutor->id }}"></label>
                                     </td>
 
-                                    <td>{{ $tutor->id }}</td>
-                                    <td>{{ $tutor->f_name }} {{ $tutor->l_name }}</td>
-                                    <td>{{ $tutor->qualification }}</td>
-                                    <td>{{ $tutor->gender }}</td>
-                                    <td>{{ $tutor->location }}</td>
-                                    <td><a href="{{ url($tutor->document) }}" target="_blank">View PDF Document</a></td>
+                                    <td class="border">{{ $tutor->id }}</td>
+                                    <td class="border">{{ $tutor->f_name }} {{ $tutor->l_name }}</td>
+                                    <td class="border">{{ $tutor->qualification }}</td>
+                                    <td class="border">{{ $tutor->gender }}</td>
+                                    <td class="border">{{ $tutor->location }}</td>
+                                    <td class="border"><a href="{{ url($tutor->document) }}" target="_blank">View PDF Document</a></td>
                                    
-                                    <td>{{ $tutor->email }}</td>
+                                    <td class="border">{{ $tutor->email }}</td>
                                     <!-- <td>{{ $tutor->experience }} {{ $tutor->experience > 1 ? 'years' : 'year' }}</td> -->
 
-                                    <td>{{ $tutor->phone }}</td>
+                                    <td class="border">{{ $tutor->phone }}</td>
                                     <!-- Toggle Switch -->
-                                    <td>
+                                    <td class="border">
                                     <form action="{{ route('update.tutor.status') }}" method="POST" id="statusForm_{{ $tutor->id }}">
                                         @csrf
                                         <input type="hidden" name="id" value="{{ $tutor->id }}">
@@ -435,7 +435,7 @@
                                     </form>
                                     </td>
 
-                                    <td>
+                                    <td class="border">
                                         <div class="dropdown">
                                             <button class="dropdown-icon dropdownButton">
                                                 <i class="fa fa-ellipsis-v"></i> <!-- You can replace this with any icon -->
