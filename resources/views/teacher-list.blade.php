@@ -380,21 +380,21 @@
                     <div id="statusMessage" style="display:none;" class="alert alert-success"></div>
                         <div class=" AB-sb">
 
-                            <table class="table teachers-table">
+                            <table class="table teachers-table border">
                                 <thead>
                                     <tr>
-                                        <th> <input class="form-check-input" type="checkbox" id="select-all">
+                                        <th class="border"> <input class="form-check-input" type="checkbox" id="select-all">
                                         <label class="form-check-label" for="select-all"></label></th>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Degree</th>
-                                        <th>Gender</th>
-                                        <th>Country</th>
-                                        <th>Document</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Status</th>
-                                        <th>Actions</th>
+                                        <th class="border">ID</th>
+                                        <th class="border">Name</th>
+                                        <th class="border">Degree</th>
+                                        <th class="border">Gender</th>
+                                        <th class="border">Country</th>
+                                        <th class="border">Document</th>
+                                        <th class="border">Email</th>
+                                        <th class="border">Phone</th>
+                                        <th class="border">Status</th>
+                                        <th class="border">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
