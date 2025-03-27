@@ -59,13 +59,13 @@ class TutorController extends Controller
             
         // Process Profile Image (Check if exists)
        
-            $tutor->profileImage = trim(preg_replace('/\s+/', '', $tutor->profileImage)); // Remove spaces & new lines
+            // $tutor->profileImage = trim(preg_replace('/\s+/', '', $tutor->profileImage)); // Remove spaces & new lines
         
-            if (!empty($tutor->profileImage) && file_exists(public_path('storage/' . $tutor->profileImage))) {
-                $tutor->profileImages = asset('storage/' . $tutor->profileImage);
-            } else {
-                $tutor->profileImage = asset('default-profile.png');
-            }
+            // if (!empty($tutor->profileImage) && file_exists(public_path('storage/' . $tutor->profileImage))) {
+            //     $tutor->profileImages = asset('storage/' . $tutor->profileImage);
+            // } else {
+            //     $tutor->profileImage = asset('default-profile.png');
+            // }
 
              
             // Calculate age if DOB exists
@@ -915,14 +915,14 @@ class TutorController extends Controller
    
     
         // Send update email to tuto
-        // $toTutor = $tutor->email;
-        // $subjectTutor = "Your Profile Has Been Updated Successfully";
-        // $messageTutor = "Dear " . $tutor->f_name . ' ' . $tutor->l_name . ",\r\n" .
-        //     "Your profile information has been successfully updated.\r\n" .
-        //     "If you did not make these changes, please contact support immediately.\r\n\r\n" .
-        //     "Best regards,\r\n" .
-        //     "The Edexcel Team";
-        // $this->sendEmail($toTutor, $subjectTutor, $messageTutor);
+        $toTutor = $tutor->email;
+        $subjectTutor = "Your Profile Has Been Updated Successfully";
+        $messageTutor = "Dear " . $tutor->f_name . ' ' . $tutor->l_name . ",\r\n" .
+            "Your profile information has been successfully updated.\r\n" .
+            "If you did not make these changes, please contact support immediately.\r\n\r\n" .
+            "Best regards,\r\n" .
+            "The Edexcel Team";
+        $this->sendEmail($toTutor, $subjectTutor, $messageTutor);
     
         return redirect()->route('all.tutors')->with('success', 'Tutor profile updated successfully.');
     }

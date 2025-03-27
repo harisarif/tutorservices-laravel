@@ -606,8 +606,8 @@
                                                             <div class="col-md-3">
                                                                 <div id="waste1">
                                                                     <div class="img-wrapper trigger-modal" id="triggerImage">
-                                                                        @if (!empty(trim($item->profileImages)))
-                                                                                <img src="{{ asset($item->profileImages) }}"
+                                                                        @if (  $item->profileImage) 
+                                                                                <img src="{{ asset('storage/' . $item->profileImage) }}"
                                                                                     alt="Tutor Image" class="img-thumbnail" id="profileImages"
                                                                                     style="height: 150px; width: 100%">
                                                                             @else
