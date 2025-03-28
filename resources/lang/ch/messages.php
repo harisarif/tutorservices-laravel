@@ -26,6 +26,7 @@ return [
     'Gender Selection'=>'性别选择',
     'Which Subject Interests You?'=>'您对哪一科目感兴趣？',
     'Price Selection'=>'价格选择',
+    'Discover Your Tutor'=>'发现你的导师',
     'Search city'=>'搜索城市',
     'Search Subject'=>'搜索科目',
     'Name'=>'姓名',

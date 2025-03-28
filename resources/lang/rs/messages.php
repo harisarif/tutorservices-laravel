@@ -26,6 +26,7 @@ return [
     'Gender Selection'=>'Выбор пола',
     'Which Subject Interests You?'=>'Какая тема вас интересует?',
     'Price Selection'=>'اВыбор цены',
+    'Discover Your Tutor'=>'Найдите своего репетитора',
     'Search city' => 'Поиск города',
     'Search Subject' => 'Поиск предмета',
     'Name' => 'Имя',

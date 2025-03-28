@@ -24,6 +24,7 @@ return [
     'Gender Selection'=>'اختيار الجنس',
     'Which Subject Interests You?'=>'ما هو الموضوع الذي يثير اهتمامك؟',
     'Price Selection'=>'اختيار السعر',
+    'Discover Your Tutor'=>'اكتشف معلمك',
     'Subjects'=>'المواضيع',
     'Find A Tutor'=>'ابحث عن مدرس',
     'Reset Filter'=>'إعادة تعيين عامل التصفية',

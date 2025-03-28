@@ -525,7 +525,7 @@
                     </section>
                     <section class="AD-teacher" style="overflow-x:hidden;">
                         <div class="ae-heading my-4">
-                            <h2 class="text-center fw-bold ">{{ __('messages.Find A Tutor') }}</h2>
+                            <h2 class="text-center fw-bold ">{{ __('messages.Discover Your Tutor') }}</h2>
                         </div>
                         <div class="row justify-content-center px-0 mx-0">
                         

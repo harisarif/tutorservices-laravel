@@ -24,6 +24,7 @@ return [
     'Gender Selection'=>'Gender Selection',
     'Which Subject Interests You?'=>'Which Subject Interests You?',
     'Price Selection'=>'Price Selection',
+    'Discover Your Tutor'=>'Discover Your Tutor',
     'Reset Filter'=>'Reset Filter',
     'All Countries'=>'All Countries',
     'Please select a country'=>'Please select a country',
