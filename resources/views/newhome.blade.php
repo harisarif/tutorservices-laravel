@@ -554,7 +554,7 @@
                                             <div class="col-lg-3 country-drop-down" >
 
                                                 <select name="country" id="country" class="country" >
-                                                    <option value="all">{{ __('messages.All Countries') }}</option>
+                                                    <option value="all">{{ __('messages.Please select a country') }}</option>
 
                                                     @foreach($countries as $countryCode => $countryName)
                                                         <option value="{{ $countryCode }}">{{ $countryName }}</option>
@@ -564,14 +564,14 @@
                                             <div class="col-lg-9 adjust-filters-wrap ">
                                                 <div class="col-md-6 px-2 col-lg-4">
                                                         <select name="gender" id="gender" class="country" >
-                                                            <option value="all">{{ __('Select gender') }}</option>
+                                                            <option value="all">{{ __('messages.Gender Selection') }}</option>
                                                             <option value="Male">{{ __('Male') }}</option>
                                                             <option value="female">{{ __('Female') }}</option>
                                                         </select>
                                                 </div>
                                                 <div class="col-md-6 px-2 col-lg-4">
                                                         <select name="subjectSearch" id="subjectSearch" class="country" >
-                                                            <option value="all">{{ __('Select Subject') }}</option>
+                                                            <option value="all">{{ __('messages.Which Subject Interests You?') }}</option>
                                                            
                                                     @foreach($subjectsTeach as $subjectsCode => $subjects)
                                                         <option value="{{ $subjectsCode }}">{{ $subjects }}</option>
@@ -581,7 +581,7 @@
                                                 <div class="col-md-6 px-2 col-lg-4">
                                                     {{-- <label for="citysearch" class="form-label">City</label> --}}
                                                         <select name="prize-Range" id="prize-Range" class="country" >
-                                                            <option value="all">{{ __('Price Range') }}</option>
+                                                            <option value="all">{{ __('messages.Price Selection') }}</option>
                                                             
                                                         </select>
                                                 </div>
