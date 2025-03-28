@@ -70,7 +70,7 @@
                             </li>
                             <li class="ad-footer d-block py-1">
                             <i class="fa fa-phone text-white" aria-hidden="true" ></i>
-                            <a class=" text-decoration-none text-white" href="tel:+971566428066" >{{ __('messages.+971 58 800 2216') }}</a>
+                            <a class=" text-decoration-none text-white" href="tel:+971566428066" >{{ __('+971 58 800 2216') }}</a>
                             </li>
                         
                         </ul>
