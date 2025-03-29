@@ -69,7 +69,7 @@
                                 <a class=" text-decoration-none text-white mx-1" href="mailto:info@edexceledu.com" >{{ __('messages.info@edexceledu.com') }}</a>
                             </li>
                             <li class="ad-footer d-block py-1">
-                            <i class="fa fa-phone text-white" aria-hidden="true" ></i>
+                            <!-- <i class="fa fa-phone text-white" aria-hidden="true" ></i> -->
                             <!-- <a class=" text-decoration-none text-white" href="tel:+971566428066" >{{ __('+971 58 800 2216') }}</a> -->
                             </li>
                         
