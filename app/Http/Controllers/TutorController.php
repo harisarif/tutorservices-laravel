@@ -21,10 +21,10 @@ class TutorController extends Controller
 {
     //
     public function index(Request $request)
-    {  
-          
+    {
+
         $query = Tutor::where('status', 'active');
-        
+
         $perPage = 5; // Define the number of tutors per page
 
         // Paginate the results
@@ -32,7 +32,7 @@ class TutorController extends Controller
         // $tutor = Tutor::get();
         // Fetch the total count of tutors (for all countries)
         $totalTutorsCount = Tutor::count();
-             
+
 
         // Initialize country array
         $tutors->each(function ($tutor) {
@@ -49,25 +49,25 @@ class TutorController extends Controller
                 $tutor->language = $language;
             }
             // Deserialize subjects safely
-           
+
             $tutor->specialization = json_decode($tutor->specialization, true);
 
             // Ensure it's an array
-    if (!is_array($tutor->specialization) || empty($tutor->specialization)) {
-        $tutor->specialization = ['Not Specified'];
-    }
-            
-        // Process Profile Image (Check if exists)
-       
+            if (!is_array($tutor->specialization) || empty($tutor->specialization)) {
+                $tutor->specialization = ['Not Specified'];
+            }
+
+            // Process Profile Image (Check if exists)
+
             // $tutor->profileImage = trim(preg_replace('/\s+/', '', $tutor->profileImage)); // Remove spaces & new lines
-        
+
             // if (!empty($tutor->profileImage) && file_exists(public_path('storage/' . $tutor->profileImage))) {
             //     $tutor->profileImages = asset('storage/' . $tutor->profileImage);
             // } else {
             //     $tutor->profileImage = asset('default-profile.png');
             // }
 
-             
+
             // Calculate age if DOB exists
             if ($tutor->dob) {
                 $dob = Carbon::parse($tutor->dob);
@@ -76,14 +76,15 @@ class TutorController extends Controller
             } else {
                 $tutor->age = null; // Default value
             }
-        });   $subjectsTeach = collect(config('subjects.subjects'));
+        });
+        $subjectsTeach = collect(config('subjects.subjects'));
         $countries = collect(config('countries_assoc.countries'));
         $countriesPhone = collect(config('phonecountries.countries'));
         $countries_number_length = collect(config('countries_number_length.countries'));
         $countries_prefix = collect(config('countries_prefix.countries'));
         return view('newhome', [
             'tutors' => $tutors,
-             'subjectsTeach' =>  $subjectsTeach,
+            'subjectsTeach' => $subjectsTeach,
             'totalTutorsCount' => $totalTutorsCount,
             'perPage' => $perPage,
             'countries' => $countries,
@@ -123,7 +124,7 @@ class TutorController extends Controller
         return redirect()->back();
     }
     public function fetchData(Request $request)
-    { 
+    {
         // Initialize the query builder
         $query = Tutor::query();
 
@@ -133,49 +134,49 @@ class TutorController extends Controller
         // //subject 
         // if ($request->has('teaching') && !empty($request->teaching)) {
         //     $subject = $request->teaching; // Get the selected subject (string)
-            
+
         //     // Fetch all records and unserialize the "teaching" column for comparison
         //     $query->where(function ($query) use ($subject) {
         //         $query->whereRaw("teaching LIKE ?", ['%' . serialize($subject) . '%'])
         //               ->orWhereRaw("teaching LIKE ?", ['%' . $subject . '%']); // Handle plain text cases
         //     });
         // }        
-        
+
         if ($request->has('price') && $request->price !== 'all') {
             $priceValue = trim($request->price);
-        
+
             // Extract numeric value from stored price (e.g., "$ 100" -> "100")
             $query->whereRaw("CAST(REGEXP_REPLACE(price, '[^0-9]', '') AS UNSIGNED) IS NOT NULL");
-        
+
             if (preg_match('/^(\d+)-(\d+)$/', $priceValue, $matches)) {
                 // Case: Price Range (e.g., "200-500")
                 $minPrice = (int) $matches[1];
                 $maxPrice = (int) $matches[2];
-        
+
                 Log::info("Filtering tutors between $minPrice and $maxPrice");
-        
+
                 $query->whereRaw("CAST(REGEXP_REPLACE(price, '[^0-9]', '') AS UNSIGNED) BETWEEN ? AND ?", [$minPrice, $maxPrice]);
-        
+
             } elseif (preg_match('/(\d+)\+/', $priceValue, $matches)) {
                 // Case: "5000+" (minimum price)
                 $minPrice = (int) $matches[1];
-        
+
                 Log::info("Filtering tutors with price >= $minPrice");
-        
+
                 $query->whereRaw("CAST(REGEXP_REPLACE(price, '[^0-9]', '') AS UNSIGNED) >= ?", [$minPrice]);
-        
+
             } else {
                 // Case: Exact Price (e.g., "100")
                 if (is_numeric($priceValue)) {
                     $exactPrice = (int) $priceValue;
-        
+
                     Log::info("Filtering tutors with exact price = $exactPrice");
-        
+
                     $query->whereRaw("CAST(REGEXP_REPLACE(price, '[^0-9]', '') AS UNSIGNED) = ?", [$exactPrice]);
                 }
             }
         }
-        
+
 
         //gender
         if ($request->has('gender') && $request->gender !== 'all') {
@@ -189,7 +190,7 @@ class TutorController extends Controller
         // Filter tutors by search query for subject
         if ($request->has('specialization') && !empty($request->specialization)) {
             $specialization = $request->specialization;
-        
+
             if (is_array($specialization)) {
                 $query->where(function ($q) use ($specialization) {
                     foreach ($specialization as $spec) {
@@ -200,7 +201,7 @@ class TutorController extends Controller
                 $query->whereJsonContains('specialization', $specialization);
             }
         }
-        
+
         // Paginate the filtered tutors
         $tutors = $query->paginate($perPage);
 
@@ -222,7 +223,7 @@ class TutorController extends Controller
 
         // Calculate age for each tutor and convert to array format
         $tutorsArray = $tutors->map(function ($tutor) {
-           
+
             $tutor->specialization = json_decode($tutor->specialization, true);
 
             // If it's an array, convert it into a comma-separated string
@@ -231,7 +232,7 @@ class TutorController extends Controller
             } else {
                 $tutor->specialization = trim($tutor->specialization ?? 'Not Specified');
             }
-            
+
             $tutor->country_name = config("countries_assoc.countries.{$tutor->country}", 'Unknown');
             // Convert 'teaching' field to a readable string safely
             // $subjects = @unserialize($tutor->teaching);
@@ -239,13 +240,13 @@ class TutorController extends Controller
             //     $subjects = is_array(json_decode($tutor->teaching, true)) ? json_decode($tutor->teaching, true) : [];
             // }
             // $tutor->subjectString = !empty($subjects) ? implode(', ', $subjects) : 'No Subjects Available';
-              // Debug Language Decoding
-              $languageData = json_decode($tutor->language, true);
-              if (!is_array($languageData)) {
-                  \Log::error("Language decoding failed for Tutor ID: {$tutor->id}, Raw Data: " . $tutor->language);
-                  $languageData = []; // Fallback to empty array
-              }
-              $tutor->languages = $languageData; 
+            // Debug Language Decoding
+            $languageData = json_decode($tutor->language, true);
+            if (!is_array($languageData)) {
+                \Log::error("Language decoding failed for Tutor ID: {$tutor->id}, Raw Data: " . $tutor->language);
+                $languageData = []; // Fallback to empty array
+            }
+            $tutor->languages = $languageData;
             // Calculate age and format DOB correctly
             if ($tutor->dob) {
                 $dob = Carbon::parse($tutor->dob);
@@ -324,7 +325,7 @@ class TutorController extends Controller
         // Your store method logic here
     }
     public function create(Request $request)
-    {  
+    {
         $rules = [
             'f_name' => 'required|string|max:255',
             'intro' => 'nullable|string|max:255',
@@ -343,7 +344,8 @@ class TutorController extends Controller
             'language_level' => 'required|array',
             'language_level.*' => 'string|max:255',
             'language_tech' => 'nullable|string|max:255',
-            'edu_teaching' => 'nullable|string|max:255','currency_price' => 'required|string',
+            'edu_teaching' => 'nullable|string|max:255',
+            'currency_price' => 'required|string',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -401,7 +403,8 @@ class TutorController extends Controller
         $tutor->year = $request->input('year');
         $tutor->email = $request->input('email');
         $tutor->document = 'documents/' . $fileName;
-        $tutor->dob = $request->input('dob');$tutor->price = $request->input('currency_price');
+        $tutor->dob = $request->input('dob');
+        $tutor->price = $request->input('currency_price');
         $tutor->qualification = $request->input('qualification');
         $tutor->gender = $request->input('gender');
         $tutor->location = $request->input('location');
@@ -417,8 +420,8 @@ class TutorController extends Controller
         $tutor->language = json_encode($language);
         $tutor->edu_teaching = $request->input('edu_teaching');
         $tutor->availability_status = $request->input('status') ?? 'online';
-        $tutor->student_id = $studentExists ? 2 : null; 
-        $tutor->status ='active';
+        $tutor->student_id = $studentExists ? 2 : null;
+        $tutor->status = 'active';
         $tutor->session_id = session()->getId();
         // Upload profile image
         $imagePath = $request->file('profileImage')->store('uploads', 'public');
@@ -564,14 +567,13 @@ class TutorController extends Controller
         $name = env('email_name');
         try {
             // Load SMTP settings from Laravel .env
-            $mail->isSMTP();
-            $mail->Host ='smtp.hostinger.com';  
+            $mail->Host = 'smtp.hostinger.com';
             $mail->SMTPAuth = true;
             $mail->Username = $name;  // Your email
             $mail->Password = $pass;  // Your password
             $mail->SMTPSecure = 'tls';  // Encryption method
             $mail->Port = 587;  // SMTP port
-    
+
             // Email settings
             $mail->setFrom($name, 'Edexcel');
             $mail->addAddress($to);
@@ -692,25 +694,25 @@ class TutorController extends Controller
         $countries_prefix = collect(config('countries_prefix.countries'));
         $countries = collect(config('countries_assoc.countries'));
         $languages = collect(config('languages.languages'));
-         $courses = collect(config('courses.courses'));
+        $courses = collect(config('courses.courses'));
         $symbols = collect(config('symbols.symbols'));  // Will show all contents of config/symbols.php
         $subjectsTeach = collect(config('subjects.subjects')); // Fetch languages from config
         $universities = collect(config('universities.universities'));
         // Retrieve verified email from session (if exists)
         $verifiedEmail = session('verified_email', '');
-        return view('tutor-signup', compact(['courses', 'universities','symbols', 'countriesPhone', 'countries', 'verifiedEmail', 'schoolClasses', 'countries_number_length', 'countries_prefix', 'languages']));
+        return view('tutor-signup', compact(['courses', 'universities', 'symbols', 'countriesPhone', 'countries', 'verifiedEmail', 'schoolClasses', 'countries_number_length', 'countries_prefix', 'languages']));
     }
     public function assignStudent($tutorId, $studentId)
     {
         $tutor = Tutor::findOrFail($tutorId);
         $student = Student::findOrFail($studentId);
-    
+
         // Attach student to tutor
         $tutor->students()->attach($studentId);
-    
+
         return response()->json(['message' => 'Student assigned to tutor successfully!']);
     }
-    
+
     public function show($id)
     {
         $tutor = Tutor::findOrFail($id);
@@ -762,7 +764,7 @@ class TutorController extends Controller
         }, $languages);
 
         //country
-         
+
         $storedCountryCode = $tutor->country; // Get country code
         $country = config("countries_assoc.countries.$storedCountryCode", 'Unknown'); // Convert to full name
 
@@ -775,7 +777,7 @@ class TutorController extends Controller
     }
 
     public function updateProfile(Request $request, $id)
-    {  
+    {
         $rules = [
             'f_name' => 'required|string|max:255',
             'l_name' => 'required|string|max:255',
@@ -797,123 +799,123 @@ class TutorController extends Controller
             'edu_teaching' => 'nullable|string|max:255',
             'currency_price' => 'required|string',
         ];
-         
+
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-     // Get the mapping of school class names to IDs
-     $schoolClass = SchoolClass::where('name', $request->qualification)->first();
+        // Get the mapping of school class names to IDs
+        $schoolClass = SchoolClass::where('name', $request->qualification)->first();
 
-     // If the qualification is a name (e.g., "A Level"), convert it to its ID
-     $qualificationId = $schoolClass ? $schoolClass->id : $request->qualification;
-       
+        // If the qualification is a name (e.g., "A Level"), convert it to its ID
+        $qualificationId = $schoolClass ? $schoolClass->id : $request->qualification;
+
         $tutor = Tutor::findOrFail($id);
         $user = User::where('id', $tutor->user_id)->firstOrFail();
-    
+
         // Update User details
         $user->name = $request->input('f_name') . ' ' . $request->input('l_name');
         $user->email = $request->input('email');
-    
+
         if ($request->filled('password')) {
             $user->password = Hash::make($request->input('password'));
         }
         $user->save();
-    
-    
-    // Handle Document Upload (Retain Previous Value if No New File)
-    if ($request->hasFile('document')) {
-        if (!empty($tutor->document)) {
-            $oldFilePath = public_path('uploads/documents/' . $tutor->document);
-            if (file_exists($oldFilePath)) {
-                unlink($oldFilePath);
+
+
+        // Handle Document Upload (Retain Previous Value if No New File)
+        if ($request->hasFile('document')) {
+            if (!empty($tutor->document)) {
+                $oldFilePath = public_path('uploads/documents/' . $tutor->document);
+                if (file_exists($oldFilePath)) {
+                    unlink($oldFilePath);
+                }
+            }
+            $documentFile = $request->file('document');
+            $documentName = time() . '_' . $documentFile->getClientOriginalName();
+            $documentFile->move(public_path('uploads/documents/'), $documentName);
+            $tutor->document = 'uploads/documents/' . $documentName;
+        }
+
+        // Handle Video Upload (Retain Previous Value if No New File)
+        if ($request->hasFile('videoFile')) {
+            if (!empty($tutor->video)) {
+                $oldVideoPath = public_path($tutor->video);
+                if (file_exists($oldVideoPath)) {
+                    unlink($oldVideoPath);
+                }
+            }
+            $videoFile = $request->file('videoFile');
+            $videoName = time() . '_' . $videoFile->getClientOriginalName();
+            $videoFile->move(public_path('uploads/videos/'), $videoName);
+            $tutor->video = 'uploads/videos/' . $videoName;
+        }
+
+        // Handle Profile Image Upload (Retain Previous Value if No New File)
+        if ($request->hasFile('profileImage')) {
+            if (!empty($tutor->profileImage)) {
+                $oldImagePath = public_path('storage/' . $tutor->profileImage);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+            $imageFile = $request->file('profileImage');
+            $imageName = time() . '_' . $imageFile->getClientOriginalName();
+            $imageFile->storeAs('uploads', $imageName, 'public');
+            $tutor->profileImage = 'uploads/' . $imageName;
+        }
+
+        $existingLanguages = json_decode($tutor->language, true) ?? []; // Decode existing languages
+
+        $updatedLanguages = [];
+
+        if ($request->filled('language_proficient') && $request->filled('language_level')) {
+            foreach ($request->input('language_proficient') as $index => $lang) {
+                if (!empty($lang) && isset($request->input('language_level')[$index])) {
+                    $updatedLanguages[] = [
+                        'language' => $lang,
+                        'level' => $request->input('language_level')[$index],
+                    ];
+                }
             }
         }
-        $documentFile = $request->file('document');
-        $documentName = time() . '_' . $documentFile->getClientOriginalName();
-        $documentFile->move(public_path('uploads/documents/'), $documentName);
-        $tutor->document = 'uploads/documents/' . $documentName;
-    }
-      
-    // Handle Video Upload (Retain Previous Value if No New File)
-    if ($request->hasFile('videoFile')) {
-        if (!empty($tutor->video)) {
-            $oldVideoPath = public_path($tutor->video);
-            if (file_exists($oldVideoPath)) {
-                unlink($oldVideoPath);
-            }
+
+        // If no new values are provided, keep the existing languages
+        if (empty($updatedLanguages)) {
+            $updatedLanguages = $existingLanguages;
         }
-        $videoFile = $request->file('videoFile');
-        $videoName = time() . '_' . $videoFile->getClientOriginalName();
-        $videoFile->move(public_path('uploads/videos/'), $videoName);
-        $tutor->video = 'uploads/videos/' . $videoName;
-    }
-    
-    // Handle Profile Image Upload (Retain Previous Value if No New File)
-    if ($request->hasFile('profileImage')) {
-        if (!empty($tutor->profileImage)) {
-            $oldImagePath = public_path('storage/' . $tutor->profileImage);
-            if (file_exists($oldImagePath)) {
-                unlink($oldImagePath);
-            }
-        }
-        $imageFile = $request->file('profileImage');
-        $imageName = time() . '_' . $imageFile->getClientOriginalName();
-        $imageFile->storeAs('uploads', $imageName, 'public');
-        $tutor->profileImage = 'uploads/' . $imageName;
-    }
 
-    $existingLanguages = json_decode($tutor->language, true) ?? []; // Decode existing languages
+        // Save the final result
+        $tutor->language = json_encode($updatedLanguages);
 
-    $updatedLanguages = [];
-    
-    if ($request->filled('language_proficient') && $request->filled('language_level')) {
-        foreach ($request->input('language_proficient') as $index => $lang) {
-            if (!empty($lang) && isset($request->input('language_level')[$index])) {
-                $updatedLanguages[] = [
-                    'language' => $lang,
-                    'level' => $request->input('language_level')[$index],
-                ];
-            }
-        }
-    }
-    
-    // If no new values are provided, keep the existing languages
-    if (empty($updatedLanguages)) {
-        $updatedLanguages = $existingLanguages;
-    }
-    
-    // Save the final result
-    $tutor->language = json_encode($updatedLanguages);
-   
-    
-      
-    // Update other fields
-    $tutor->f_name = $request->input('f_name');
-    $tutor->l_name = $request->input('l_name');
-    $tutor->email = $request->input('email');
-    $tutor->dob = $request->input('dob');
-    $tutor->price = $request->input('currency_price');
-    $tutor->qualification = $qualificationId;
-    $tutor->gender = $request->input('gender');
-    $tutor->location = $request->input('location');
-    $tutor->experience = $request->input('experience');
-    $tutor->language_tech = $request->input('language_tech');
-    $tutor->curriculum = serialize($request->input('courses'));
-    $tutor->teaching = serialize($request->input('teaching'));
-    $tutor->phone = $request->input('phone');
-    $tutor->specialization = json_encode($request->input('specialization'));
-    $tutor->edu_teaching = $request->input('edu_teaching');
-    $tutor->availability_status = $request->input('status') ?? 'online';
-    $tutor->status = 'active';
 
-    // Assign the user_id to the tutor
-    $tutor->user_id = $user->id;
 
-    // Save the updated tutor
-    $tutor->save();
-   
-    
+        // Update other fields
+        $tutor->f_name = $request->input('f_name');
+        $tutor->l_name = $request->input('l_name');
+        $tutor->email = $request->input('email');
+        $tutor->dob = $request->input('dob');
+        $tutor->price = $request->input('currency_price');
+        $tutor->qualification = $qualificationId;
+        $tutor->gender = $request->input('gender');
+        $tutor->location = $request->input('location');
+        $tutor->experience = $request->input('experience');
+        $tutor->language_tech = $request->input('language_tech');
+        $tutor->curriculum = serialize($request->input('courses'));
+        $tutor->teaching = serialize($request->input('teaching'));
+        $tutor->phone = $request->input('phone');
+        $tutor->specialization = json_encode($request->input('specialization'));
+        $tutor->edu_teaching = $request->input('edu_teaching');
+        $tutor->availability_status = $request->input('status') ?? 'online';
+        $tutor->status = 'active';
+
+        // Assign the user_id to the tutor
+        $tutor->user_id = $user->id;
+
+        // Save the updated tutor
+        $tutor->save();
+
+
         // Send update email to tuto
         $toTutor = $tutor->email;
         $subjectTutor = "Your Profile Has Been Updated Successfully";
@@ -923,7 +925,7 @@ class TutorController extends Controller
             "Best regards,\r\n" .
             "The Edexcel Team";
         $this->sendEmail($toTutor, $subjectTutor, $messageTutor);
-    
+
         return redirect()->route('all.tutors')->with('success', 'Tutor profile updated successfully.');
     }
 
@@ -965,11 +967,12 @@ class TutorController extends Controller
             // If the logged-in user is the same as the tutor, log them out
             if (Auth::id() === optional($user)->id) {
                 Auth::logout();
-                  $tutor->status="active";$tutor->save();
+                $tutor->status = "active";
+                $tutor->save();
                 // Invalidate the session
                 request()->session()->invalidate();
                 request()->session()->regenerateToken();
-                    return dd( $tutor->status);
+                return dd($tutor->status);
                 // Redirect to login page
                 // return redirect()->route('login')->with('success', 'You have been logged out successfully.');
             }
