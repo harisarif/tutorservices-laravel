@@ -2,7 +2,7 @@
 
 return [
     'welcome' => 'Welcome to our application!',
-    'academy_name' => 'Edexcel Academy & Educational Consultancy',
+    'academy_name' => 'Edexcel Academy',
     'about_us' => "Edexcel Academy is more than just a school; it's a vibrant community where students, parents, teachers, and staff come together in a spirit of collaboration and mutual respect. We encourage active involvement in extracurricular activities.",
     // Add more key-value pairs as needed
     'hire_tutor' => 'Hire Tutor',

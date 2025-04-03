@@ -9,7 +9,6 @@
 <meta name="description"
     content="Tutor Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
 <link rel="stylesheet" href="{{ asset('css/tutor-form.css') }}">
-<link rel="shortcut icon" href="images/favicon.png" type="image/png" />
 @include('whatsapp')
 <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block;"
     onclick="window.scrollTo(0, 0)"><i class="fa fa-chevron-up"></i></button>
@@ -46,7 +45,7 @@
                         <label for="otpInput" class="form-label fw-semibold">Enter OTP</label>
                         <input type="text" id="otpInput" name="otp"
                             class="form-control text-center fs-5 rounded-pill border-success shadow-sm"
-                            placeholder="🔢 6-digit code" maxlength="6" required>
+                            placeholder="6-digit code" maxlength="6" required>
                         <div id="otpError" class="text-danger mt-2 text-center fw-bold" style="display: none;">
                             ❌ Invalid OTP. Please try again.
                         </div>
@@ -1432,6 +1431,13 @@ document.addEventListener("DOMContentLoaded", attachLanguageSelectListener);
         // $('#location').select2();
         // $('#city').select2();
         // $('#school_class').select2();
+        $('#language_proficient_1').select2({
+            placeholder: 'Search country',
+            allowClear: false,
+            tags: true,
+            dropdownCssClass: 'profiecient-custom-select2-templates-lang',
+            selectionCssClass: 'profiecient-custom-select2-templates-lang',
+        });
         $('#city').select2({
             placeholder: 'Search country',
             allowClear: false,

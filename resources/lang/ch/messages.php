@@ -2,7 +2,7 @@
 
 return [
     'welcome' => '欢迎使用我们的应用程序！',
-    'academy_name' => 'Edexcel学院与教育咨询',
+    'academy_name' => '爱德思学院',
     'about_us' => "Edexcel学院不仅仅是一所学校；它是一个充满活力的社区，学生、家长、教师和员工齐心协力，互相尊重。我们鼓励积极参与课外活动。",
     'hire_tutor' => '雇用导师',
     'welcome_message' => '欢迎来到Edexcel。我们通过一流的教育助力成功。留下您的信息，今天就开始您的Edexcel之旅！',

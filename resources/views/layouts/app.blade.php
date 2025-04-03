@@ -8,18 +8,18 @@
     <meta name="keywords" content="sign up, registration, create account, easy steps, join now, membership, online signup, fast registration, user registration, quick sign up">
     <meta name="description" content="Sign up for your account in just 3 simple steps. Quick, easy, and secure registration process to join our community.">
         <!-- Meta Author -->
-        <meta name="author" content="Edexcel">
+    <meta name="author" content="Edexcel">
 <style>
     .alert{
-    position: fixed !important;
-    right: 0px;
-    width: 26%;
-    padding: 0px 16px;
-    margin: 10px;
-    border-radius: 4px;
-    border-style: solid;
-    border-width: 1px;
-    font-size: 16px;
+        position: fixed !important;
+        right: 0px;
+        width: 26%;
+        padding: 0px 16px;
+        margin: 10px;
+        border-radius: 4px;
+        border-style: solid;
+        border-width: 1px;
+        font-size: 16px;
     }
 </style>
     {{-- <title>{{ config('app.name', 'Edecel Academy & Educational Consultancy') }}</title> --}}
@@ -48,20 +48,24 @@
             border-color: #42B979 !important;
         }
         .foucs{
-        color: #ffff;
-        width: 30px;
-        transition: 0.5s;
-        display: flex;
-        justify-content: center;
-        height: 30px;
-        border-radius: 24px;
-         align-items: center;
-         background-color: #42b979;
-         margin-bottom:25px ;
+            color: #ffff;
+            width: 30px;
+            transition: 0.5s;
+            display: flex;
+            justify-content: center;
+            height: 30px;
+            border-radius: 24px;
+            align-items: center;
+            background-color: #42b979;
+            margin-bottom:25px ;
         }
         .foucs:hover{
             cursor: pointer;
             transform: scale(1.3);
+        }
+        .hiring-btn:hover {
+            transform: translateY(-0.25em);
+            box-shadow: 0 3px 0 0 #ddd;
         }
     </style>
 </head>
@@ -81,8 +85,8 @@
         <hr />
         <div class="d-flex justify-content-end gap-2">
             <a href="{{ route('hire.tutor') }}" 
-                class="btn bg-body-secondary hiring-btn">{{__('messages.student')}}</a>
-            <a href="{{ route('tutor') }}"  class="btn btn-success bg_theme_green border-0 hiring-btn">{{__('messages.tutor')}}</a>
+                class="btn bg_theme_green hiring-btn">{{__('messages.student')}}</a>
+            <a href="{{ route('tutor') }}"  class="btn bg-body-secondary   border-0 hiring-btn">{{__('messages.tutor')}}</a>
         </div>
     </div>
 </div>
