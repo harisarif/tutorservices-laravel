@@ -46,7 +46,7 @@
                         <label for="otpInput" class="form-label fw-semibold">Enter OTP</label>
                         <input type="text" id="otpInput" name="otp"
                             class="form-control text-center fs-5 rounded-pill border-success shadow-sm"
-                            placeholder="🔢 6-digit code" maxlength="6" required>
+                            placeholder="6-digit code" maxlength="6" required>
                         <div id="otpError" class="text-danger mt-2 text-center fw-bold" style="display: none;">
                             ❌ Invalid OTP. Please try again.
                         </div>
