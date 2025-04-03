@@ -9,7 +9,6 @@
 <meta name="description"
     content="Tutor Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
 <link rel="stylesheet" href="{{ asset('css/tutor-form.css') }}">
-<link rel="shortcut icon" href="images/favicon.png" type="image/png" />
 @include('whatsapp')
 <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block;"
     onclick="window.scrollTo(0, 0)"><i class="fa fa-chevron-up"></i></button>
