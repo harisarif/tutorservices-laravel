@@ -81,7 +81,7 @@
         <hr />
         <div class="d-flex justify-content-end gap-2">
             <a href="{{ route('hire.tutor') }}" 
-                class="btn btn-success bg_theme_green hiring-btn">{{__('messages.student')}}</a>
+                class="btn bg_theme_green hiring-btn">{{__('messages.student')}}</a>
             <a href="{{ route('tutor') }}"  class="btn bg-body-secondary   border-0 hiring-btn">{{__('messages.tutor')}}</a>
         </div>
     </div>
