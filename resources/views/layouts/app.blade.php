@@ -8,7 +8,7 @@
     <meta name="keywords" content="sign up, registration, create account, easy steps, join now, membership, online signup, fast registration, user registration, quick sign up">
     <meta name="description" content="Sign up for your account in just 3 simple steps. Quick, easy, and secure registration process to join our community.">
         <!-- Meta Author -->
-        <meta name="author" content="Edexcel">
+    <meta name="author" content="Edexcel">
 <style>
     .alert{
         position: fixed !important;
