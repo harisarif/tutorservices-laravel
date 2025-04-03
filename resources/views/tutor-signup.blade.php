@@ -1432,6 +1432,13 @@ document.addEventListener("DOMContentLoaded", attachLanguageSelectListener);
         // $('#location').select2();
         // $('#city').select2();
         // $('#school_class').select2();
+        $('#language_proficient_1').select2({
+            placeholder: 'Search country',
+            allowClear: false,
+            tags: true,
+            dropdownCssClass: 'profiecient-custom-select2-templates-lang',
+            selectionCssClass: 'profiecient-custom-select2-templates-lang',
+        });
         $('#city').select2({
             placeholder: 'Search country',
             allowClear: false,
