@@ -9,19 +9,19 @@
     <meta name="description" content="Sign up for your account in just 3 simple steps. Quick, easy, and secure registration process to join our community.">
         <!-- Meta Author -->
     <meta name="author" content="Edexcel">
-<style>
-    .alert{
-        position: fixed !important;
-        right: 0px;
-        width: 26%;
-        padding: 0px 16px;
-        margin: 10px;
-        border-radius: 4px;
-        border-style: solid;
-        border-width: 1px;
-        font-size: 16px;
-    }
-</style>
+    <style>
+        .alert{
+            position: fixed !important;
+            right: 0px;
+            width: 26%;
+            padding: 0px 16px;
+            margin: 10px;
+            border-radius: 4px;
+            border-style: solid;
+            border-width: 1px;
+            font-size: 16px;
+        }
+    </style>
     {{-- <title>{{ config('app.name', 'Edecel Academy & Educational Consultancy') }}</title> --}}
     <title>{{__('messages.academy_name')}}</title>
     <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
