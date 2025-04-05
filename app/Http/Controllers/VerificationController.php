@@ -155,13 +155,13 @@ function sendEmails($subject, $body, $to_name, $to_email) {
         $mail->isSMTP();
         $mail->Host ='smtp.hostinger.com';  
         $mail->SMTPAuth = true;
-        $mail->Username = 'info@edexceledu.com';  // Your email
-        $mail->Password = 'Haris1122@@';  // Your password
+        $mail->Username =  $name;  // Your email
+        $mail->Password =  $pass ;  // Your password
         $mail->SMTPSecure = 'tls';  // Encryption method
         $mail->Port = 587;  // SMTP port
 
         // Email settings
-        $mail->setFrom('info@edexceledu.com', 'Edexcel');
+        $mail->setFrom( $name, 'Edexcel');
         $mail->addAddress($to_email, $to_name);
         $mail->isHTML(true);
         $mail->Subject = $subject;
