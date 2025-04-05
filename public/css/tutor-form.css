@@ -12,6 +12,7 @@
     border-bottom-left-radius: 0px;
 }
 
+  
 .main-footer {
     display: none;
 }
@@ -345,7 +346,8 @@ input[type="password"]::placeholder {
 
 .main-banner {
     height: 350px;
-    background-color: #42b979;
+    /* Remove the background color */
+    background-color: transparent; /* No background */
 }
 
 .banner-size {
@@ -355,6 +357,31 @@ input[type="password"]::placeholder {
 .banner-heading {
     color: #333;
 }
+
+.slider {
+    position: relative;
+    width: 100%;
+    height: 100%; /* Ensure the slider fills the container */
+}
+
+.slides {
+    display: flex;
+    width: 100%;
+    height: 100%; /* Ensure the slides fill the container */
+}
+
+.slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%; /* Ensure each slide fills the container */
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; padding-top:20px;/* Make the image cover the area */
+}
+
 
 @keyframes fadeInUp {
     0% {

@@ -1,6 +1,8 @@
  @extends('layouts.app')
  @php
     $emailValue = is_array($verifiedEmail) ? end($verifiedEmail) : $verifiedEmail;
+    use App\Models\Tutor;
+    $tutors = Tutor::whereNotNull('profileImage')->take(10)->get();
 @endphp
 
 <meta charset="UTF-8">
@@ -70,67 +72,43 @@
 
 @section('content')
 
-<header class="main_header d-flex bg-white py-1 px-3 justify-content-between align-items-center"
-    style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
-    <!-- Left Logo -->
-    <a class="arrow" href="{{ route('newhome') }}">
-        <img src="{{ asset('images/logo.png') }}" alt="EDEXCEL-logo" height="40px">
-    </a>
-
-    <!-- Right Login Button -->
-    <a href="/login" class="btn login-btn text-white px-4 py-2"
-        style="background-color: #42b979; border: none; border-radius: 5px;">
-        Login
-    </a>
-</header>
-
-<div class="container-fluid d-flex flex-row justify-content-center align-items-start main-banner">
-    <div class="d-flex flex-column align-items-center justify-content-start gap-3 my-4">
-        <div class="d-flex flex-column align-items-center justify-content-center gap-1 my-5 mx-5">
-            <h1 class="main-heading text-white fw-bold my-2 banner-heading fade-in-up">
-                Join The Community of Tutors
-            </h1>
-            <p class="subheading text-white mx-5 text-center fade-in-up" style="animation-delay: 0.9s;">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
-                into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
-                release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
-                software like Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
+<div class="row">
+    <header class="main_header d-flex bg-white py-1 px-3 justify-content-between align-items-center"
+        style="position: fixed; height: ~60px; top: 0; left: 0; width: 100%; z-index: 1000; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+        <!-- Left Logo -->
+        <a class="arrow" href="{{ route('newhome') }}">
+            <img src="{{ asset('images/logo.png') }}" alt="EDEXCEL-logo" height="40px">
+        </a>
+    
+        <!-- Right Login Button -->
+        <a href="/login" class="btn login-btn text-white px-4 py-2"
+            style="background-color: #42b979; border: none; border-radius: 5px;">
+            Login
+        </a>
+    </header>
+    </div>
+    <div class="row">
+        <div class="container-fluid main-banner d-flex justify-content-center align-items-center m-0 p-0 mt-4">
+            <!-- Tutor Image Slider -->
+            <div class="slider position-relative w-100 overflow-hidden" style="position: relative; width: 100%; height: 100%; overflow: hidden;">
+                <div class="slides d-flex w-100" id="slides" style="height: calc(100vh - 60px); transition: transform 0.5s ease;">
+                    @foreach($tutors as $tutor)
+                        <div class="slide flex-shrink-0 w-100 h-100" style="flex-shrink: 0; width: 100%; height: 100%;">
+                            <img src="{{ asset('storage/' . $tutor->profileImage) }}" class="w-100 h-100 object-fit-cover" alt="Tutor Image" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                    @endforeach
+                </div>
+    
+                <!-- Arrows -->
+                <div class="arrow left position-absolute top-50 start-0 translate-middle-y px-3 text-white fs-2" onclick="prevSlide()" style="position: absolute; top: 50%; transform: translateY(-50%); left: 10px; font-size: 2rem; color: white; padding: 10px; cursor: pointer; z-index: 10;">
+                    ❮
+                </div>
+                <div class="arrow right position-absolute top-50 end-0 translate-middle-y px-3 text-white fs-2" onclick="nextSlide()" style="position: absolute; top: 50%; transform: translateY(-50%); right: 10px; font-size: 2rem; color: white; padding: 10px; cursor: pointer; z-index: 10;">
+                    ❯
+                </div>
+            </div>
         </div>
     </div>
-</div>
-
-<div class="steps-container">
-    <ul class="steps-list">
-        <li class="step-item step-current step-first">
-            <span class="step-icon">
-                <i class="fas fa-check"></i>
-            </span>
-            <span class="step-text">Personalization</span>
-        </li>
-        <li class="step-item step-upcoming">
-            <span class="step-icon">
-                <i class="fas fa-check"></i>
-            </span>
-            <span class="step-text">Qualification</span>
-        </li>
-        <li class="step-item step-upcoming">
-            <span class="step-icon">
-                <i class="fas fa-check"></i>
-            </span>
-            <span class="step-text">Description</span>
-        </li>
-        <li class="step-item step-upcoming">
-            <span class="step-icon">
-                <i class="fas fa-check"></i>
-            </span>
-            <span class="step-text">Video</span>
-        </li>
-    </ul>
-</div>
-
 
 <div class="main-page col-12 bg-white col-md-10 mx-auto p-0 text-center" style="padding: 0px 10px 0px 10px;"><!--md-8-->
     <div class="row justify-content-center">
@@ -1808,6 +1786,31 @@ document.addEventListener("DOMContentLoaded", attachLanguageSelectListener);
             }
         });
     })();  </script>
+        <script>
+            let currentIndex = 0;
+            const slides = document.getElementById("slides");
+            const totalSlides = slides.children.length;
+        
+            function showSlide(index) {
+                if (index >= totalSlides) currentIndex = 0; // Loop to first slide
+                else if (index < 0) currentIndex = totalSlides - 1; // Loop to last slide
+                else currentIndex = index;
+        
+                // Use translateX to move the slides based on current index
+                slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+        
+            function nextSlide() {
+                showSlide(currentIndex + 1);
+            }
+        
+            function prevSlide() {
+                showSlide(currentIndex - 1);
+            }
+        
+            setInterval(nextSlide, 3000); // Auto-slide
+        </script>
+
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
