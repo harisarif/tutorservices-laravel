@@ -116,6 +116,14 @@
 </body>
 
 </html>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T7J1VV3190"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-T7J1VV3190');
+</script>
 <script src="{{ URL::asset('js/select2.js') }}"></script>
 <script src="{{ URL::asset('js/app.js') }}"></script>
 <script src="{{ URL::asset('js/sweetalert.js') }}"></script>
