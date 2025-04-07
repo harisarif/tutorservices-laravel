@@ -66,7 +66,7 @@
                             </li>
                             <li class="ad-footer d-block py-1 d-flex" style="align-items: center;">
                                 <i class="fa fa-envelope-square text-white" aria-hidden="true" ></i>
-                                <a class=" text-decoration-none text-white mx-1" href="mailto:info@edexceledu.com" >{{ __('messages.info@edexceledu.com') }}</a>
+                                <a class=" text-decoration-none text-white mx-1" href="mailto:info@edexceledu.com" >{{ __('info@edexceledu.com') }}</a>
                             </li>
                             <li class="ad-footer d-block py-1">
                             <!-- <i class="fa fa-phone text-white" aria-hidden="true" ></i> -->

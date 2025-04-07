@@ -217,7 +217,7 @@
                         <br>
                         <a class="text-decoration-none" href="mailto:info@eduexceledu.com">info@eduexceledu.com</a>
                         <br>
-                        <a class="text-decoration-none text-light" href="tel:+971566428066">+971 56 642 8066</a>
+                        <a class="text-decoration-none text-light" href="#"></a>
                         <br>
                         Dubai , UAE
                     </p>

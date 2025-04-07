@@ -7,7 +7,7 @@
             </li>
             <li class="d-inline p-2">
                 <i class="fa fa-phone text-light" aria-hidden="true"></i>
-                <a class="text-decoration-none text-light" href="tel:+971566428066">+971 56 642 8066</a>
+                <!-- <a class="text-decoration-none text-light" href="tel:+971566428066">+971 56 642 8066</a> -->
             </li>
         </ul>
         <div class="icons d-flex p-2 m-0 justify-content-center align-items-center">

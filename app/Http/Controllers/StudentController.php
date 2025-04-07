@@ -161,7 +161,7 @@ class StudentController extends Controller
         $subjectStudent = "Welcome to Edexcel Your Learning Journey Starts Now!";
         $messageStudent = "Dear " . $student->name . "\r\n" .
             "Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.\r\n" .
-            "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at info@edexceledu.com or +971566428066.\r\n" .
+            "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at info@edexceledu.com.\r\n" .
             "We’re here to help you succeed!\r\n\r\n" .
             "Best regards,\r\n" .
             "The Edexcel Team";
@@ -246,7 +246,7 @@ class StudentController extends Controller
         $subjectStudent = "Welcome to Edexcel!";
         $messageStudent = "Dear " . $inquiry->name . "\r\n" .
         "Welcome to Edexcel! 🎉 We’re excited to to got your inquiry soon you will notified.\r\n" .
-        "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at info@edexceledu.com or +971566428066.\r\n" .
+        "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at info@edexceledu.com\r\n" .
         "We’re here to help you succeed!\r\n\r\n" .
         "Best regards,\r\n" .
         "The Edexcel Team";

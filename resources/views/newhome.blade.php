@@ -362,8 +362,8 @@
                                         </div>
                                         <div class="d-flex alig header-phone-number phone-container mx-0" style="align-items: center;">
                                             <i class="fa-solid fa-phone" aria-hidden="true" style="color: #42b979;"></i>
-                                            <a class="phone-number-header text-decoration-none mx-2" href="tel:+971566428066" style="color: #42b979;">
-                                                +971 56 642 8066
+                                            <a class="phone-number-header text-decoration-none mx-2" href="#" style="color: #42b979;">
+                                                
                                             </a>
                                         </div>
                                     </div>
@@ -403,7 +403,7 @@
                     <div class=" p-2 header-phone-number phone-container">
                     
                         <i class="fa fa-phone " aria-hidden="true" style="color: #fff;"></i>
-                        <a class="phone-number-header text-decoration-none " href="tel:+971566428066" style="color: #42b979;">+971 56 642 8066</a>
+                        <a class="phone-number-header text-decoration-none " href="#" style="color: #42b979;"></a>
                     </div>
                     <div class="custom-select-wrapper">
                     @include('language')

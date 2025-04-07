@@ -115,7 +115,7 @@ return [
     'For Edexcel Academy &amp; Educational Consultancy'=>'لأكاديمية إدكسل &amp; الاستشارات التعليمية',
 
     'herein referred to as Spires. We have created this privacy statement ("Statement"™) in order to  demonstrate our firm commitment to the privacy of the details that you provide to us when using this website.'=>'يشار إليها هنا باسم أبراج. لقد قمنا بإنشاء بيان الخصوصية هذا ("البيان"™) لإثبات التزامنا الراسخ بخصوصية التفاصيل التي تقدمها لنا عند استخدام هذا الموقع.',
-    'Edexcel Academy & Educational Consultancy, a company registered in Pakistan and Wales (No. +971566428066),'=>'أكاديمية إدكسل والاستشارات التعليمية، شركة مسجلة في باكستان وويلز (رقم 971566428066+)،',
+    'Edexcel Academy & Educational Consultancy, a company registered in Pakistan and Wales (No. +971566428066),'=>'أكاديمية إدكسل والاستشارات التعليمية، شركة مسجلة في باكستان وويلز (+)،',
     'This policy applies where we are acting as a data controller with respect to the personal data of our'=>'تنطبق هذه السياسة عندما نعمل كمراقب للبيانات فيما يتعلق بالبيانات الشخصية الخاصة بنا',
     'website visitors and service users; in other words, where we determine the purposes and means of the'=>'زوار الموقع ومستخدمي الخدمة؛ بمعنى آخر، حيث نحدد أغراض ووسائل',
 

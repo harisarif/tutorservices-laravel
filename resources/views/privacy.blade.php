@@ -140,7 +140,7 @@
                 <span>{{ __('messages.Effective Date: 26.7.2024') }}</span>
             </div>
         <div data-aos="fade-left" class="ad-detail-child">
-            <p>{{ __('messages.Edexcel Academy & Educational Consultancy, a company registered in Pakistan and Wales (No. +971566428066),') }}
+            <p>{{ __('messages.Edexcel Academy & Educational Consultancy, a company registered in Pakistan and Wales ,') }}
             {{ __('messages.herein referred to as Spires. We have created this privacy statement ("Statement"™) in order to  demonstrate our firm commitment to the privacy of the details that you provide to us when using this website.') }}</p>
 
             <p>{{ __('messages.This policy applies where we are acting as a data controller with respect to the personal data of our') }}
