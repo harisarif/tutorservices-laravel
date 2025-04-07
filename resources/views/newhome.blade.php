@@ -5,10 +5,10 @@
     <meta name="keywords" content="education, online courses, learning, tutoring, e-learning, eduexceledu">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{asset('css/ow.carousel.min.css')}}" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQKNqXr5pOFbMxuL5GpU3QK8EoB1RaOYohcB1QZ6J71/2+UM1NFOG2HIl" crossorigin="anonymous">
+    <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet" integrity="sha384-rbsA2VBKQKNqXr5pOFbMxuL5GpU3QK8EoB1RaOYohcB1QZ6J71/2+UM1NFOG2HIl" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/tutor-style.css')}}">
     <link rel="stylesheet" href="{{ asset('css/mediaquery.css')}}">
 <style>

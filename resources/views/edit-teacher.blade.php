@@ -14,6 +14,8 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
 @endphp
 <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}"/>
 <link rel="stylesheet" href="{{asset('css/style1.css')}}"/>
+<!-- Select2 CSS -->
+<link href="{{asset('js/select2.css')}}" rel="stylesheet" />
 <style>
     .modalBox {
      display:none !important;
@@ -573,11 +575,10 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
 </div>
 @endsection
 
-@section('js')<!-- Select2 CSS -->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+@section('js')
 
 <!-- Select2 JS -->
-<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+<script src="{{asset('js/select2.min.js')}}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
     const currencySelect = document.getElementById('currency');
