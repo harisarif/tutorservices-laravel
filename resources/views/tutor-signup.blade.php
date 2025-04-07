@@ -149,9 +149,9 @@
                                     <strong>Email</strong>
                                 </label>
                                
-<input type="email" class="form-control email-field" id="email" name="email" 
-value="{{ old('email', $emailValue) }}"
-style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135, 135, 0.5);" readonly>
+                                    <input type="email" class="form-control email-field" id="email" name="email" 
+                                    value="{{ old('email', $emailValue) }}"
+                                    style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135, 135, 0.5);" readonly>
 
                                 <small class="error-message text-danger"
                                     style="display: block; margin-top: 5px; text-align:left;">This email is already
@@ -342,6 +342,7 @@ style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135
                                 <input type="file" class="form-control" id="qualificationDocument"
                                     name="document"
                                     style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);">
+                                    <p style="text-align: justify;color: #42b979;font-weight: bold;font-size: 12px;">PDF OR DOC Files Are Allowed</p>
                                 <div class="doc" style="text-align: left;font-size: 14px; color: #e74c3c;"></div>
                             </div>
                         </div>
