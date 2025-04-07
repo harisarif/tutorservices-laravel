@@ -29,7 +29,7 @@
     </ul>
 </div>
 @endif    
-<div id="otpModal" class="modal fade show d-none" tabindex="-1" aria-labelledby="otpModalLabel" aria-hidden="true"
+<div id="otpModal" class="modal fade show d-block" tabindex="-1" aria-labelledby="otpModalLabel" aria-hidden="true"
     data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow-lg rounded-3">
