@@ -24,7 +24,7 @@
     </style>
     {{-- <title>{{ config('app.name', 'Edecel Academy & Educational Consultancy') }}</title> --}}
     <title>{{__('messages.academy_name')}}</title>
-    <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
+    <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" type="image/png" />
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
     <!-- whatsapp button css -->
     <link rel="stylesheet" href="{{ asset('css/whatsApp-buttons.css') }}" />

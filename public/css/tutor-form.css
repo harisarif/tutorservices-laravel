@@ -347,7 +347,7 @@ input[type="password"]::placeholder {
 .main-banner {
     height: 350px;
     /* Remove the background color */
-    background-color: transparent; /* No background */
+    background-color: #42B979; /* No background */
 }
 
 .banner-size {

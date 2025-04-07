@@ -10,7 +10,10 @@
 <meta name="keywords" content="education, online courses, learning, tutoring, e-learning, eduexceledu">
 <meta name="description"
     content="Tutor Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
-<link rel="stylesheet" href="{{ asset('css/tutor-form.css') }}">
+    <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" type="image/png" />
+    <link rel="stylesheet" href="{{ asset('css/tutor-form.css') }}">
+<link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
 @include('whatsapp')
 <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block;"
     onclick="window.scrollTo(0, 0)"><i class="fa fa-chevron-up"></i></button>
@@ -26,7 +29,7 @@
     </ul>
 </div>
 @endif    
-<div id="otpModal" class="modal fade show d-block" tabindex="-1" aria-labelledby="otpModalLabel" aria-hidden="true"
+<div id="otpModal" class="modal fade show d-none" tabindex="-1" aria-labelledby="otpModalLabel" aria-hidden="true"
     data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow-lg rounded-3">
@@ -87,25 +90,21 @@
         </a>
     </header>
     </div>
-    <div class="row">
-        <div class="container-fluid main-banner d-flex justify-content-center align-items-center m-0 p-0 mt-4">
+    <div class="row mt-4">
+        <div class="container-fluid main-banner mt-4">
             <!-- Tutor Image Slider -->
-            <div class="slider position-relative w-100 overflow-hidden" style="position: relative; width: 100%; height: 100%; overflow: hidden;">
-                <div class="slides d-flex w-100" id="slides" style="height: calc(100vh - 60px); transition: transform 0.5s ease;">
+                <div class="d-flex text-center justify-content-center"> 
+                    <h4 class="text-white mt-2" style="font-size:30px;font-weight:bold">
+                        Join The Community Of Tutors
+                    </h4>
+                </div>
+                <div class="owl-carousel owl-theme container">
                     @foreach($tutors as $tutor)
-                        <div class="slide flex-shrink-0 w-100 h-100" style="flex-shrink: 0; width: 100%; height: 100%;">
-                            <img src="{{ asset('storage/' . $tutor->profileImage) }}" class="w-100 h-100 object-fit-cover" alt="Tutor Image" style="width: 100%; height: 100%; object-fit: cover;">
+                        <div class="item" style="border:1px solid #fff;border-radius:10px;">
+                            <img src="{{ asset('storage/' . $tutor->profileImage) }}" style="height:200px;border-top-left-radius:10px;border-top-right-radius:10px;" class="" alt="Tutor Image">
+                            <h6 class="mt-2">Slide Title 1</h6>
                         </div>
                     @endforeach
-                </div>
-    
-                <!-- Arrows -->
-                <div class="arrow left position-absolute top-50 start-0 translate-middle-y px-3 text-white fs-2" onclick="prevSlide()" style="position: absolute; top: 50%; transform: translateY(-50%); left: 10px; font-size: 2rem; color: white; padding: 10px; cursor: pointer; z-index: 10;">
-                    ❮
-                </div>
-                <div class="arrow right position-absolute top-50 end-0 translate-middle-y px-3 text-white fs-2" onclick="nextSlide()" style="position: absolute; top: 50%; transform: translateY(-50%); right: 10px; font-size: 2rem; color: white; padding: 10px; cursor: pointer; z-index: 10;">
-                    ❯
-                </div>
             </div>
         </div>
     </div>
@@ -679,6 +678,25 @@ style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135
         });
     </script>
 @endif
+<script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+<script>
+$(document).ready(function(){
+  $(".owl-carousel").owlCarousel({
+    nav:true,
+    items: 3,               // Show 3 slides at a time
+    loop: true,
+    margin: 10,
+    autoplay: true,
+    autoplayTimeout: 3000,
+    autoplayHoverPause: true,
+    responsive:{
+        0:{ items:1 },
+        600:{ items:2 },
+        1000:{ items:3 }
+    }
+  });
+});
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src=" {{ asset('js/tutor.js') }}"></script>
@@ -1744,7 +1762,7 @@ document.addEventListener("DOMContentLoaded", attachLanguageSelectListener);
         }
     }
 </script>
-<script>// Disable Right Click
+<!-- <script>// Disable Right Click
     document.addEventListener("contextmenu", (event) => event.preventDefault());
     
     // Disable Keyboard Shortcuts
@@ -1809,7 +1827,7 @@ document.addEventListener("DOMContentLoaded", attachLanguageSelectListener);
             }
         
             setInterval(nextSlide, 3000); // Auto-slide
-        </script>
+        </script> -->
 
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
