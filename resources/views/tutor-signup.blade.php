@@ -679,6 +679,8 @@ style="box-shadow: none; background-color: white;border: 1px solid rgba(137, 135
     </script>
 @endif
 <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+<script src=" {{ asset('js/tutor.js') }}"></script>
+<script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script>
 <script>
 $(document).ready(function(){
   $(".owl-carousel").owlCarousel({
@@ -698,9 +700,8 @@ $(document).ready(function(){
 });
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src=" {{ asset('js/tutor.js') }}"></script>
-<script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script>
+<script src="{{ asset('js/bootstrap.bundle.min.js')}}"></script>
+
 <script>
 function toggleArrow(selectElement) {
     let arrowId = selectElement.id.replace("language_proficient_", "arrow-");
@@ -762,7 +763,8 @@ function showModal(selectElement) {
 });
 
 
-</script><script>
+</script>
+<script>
     function resendOTP() {
         let email = "{{ session('verifiedEmail') }}"; // Get the user's email
         let csrfToken = "{{ csrf_token() }}"; // CSRF token for security

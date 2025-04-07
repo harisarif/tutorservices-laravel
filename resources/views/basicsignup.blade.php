@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Edexcel Academy</title>
-    <link rel="shortcut icon" href="images/favicon.png" type="image/png"/>
+    <link rel="shortcut icon" href="{{asset('images/favicon.pn')}" type="image/png"/>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet"/>
@@ -107,45 +107,4 @@
                 goToTopBtn.style.display = "none";
             }
         };
-</script><script>// Disable Right Click
-    document.addEventListener("contextmenu", (event) => event.preventDefault());
-    
-    // Disable Keyboard Shortcuts
-    document.addEventListener("keydown", function (event) {
-        if (
-            event.ctrlKey && 
-            (event.key === "u" || event.key === "U" ||  // View Source
-             event.key === "s" || event.key === "S" ||  // Save Page
-             event.key === "i" || event.key === "I" ||  // DevTools
-             event.key === "j" || event.key === "J" ||  // Console
-             event.key === "c" || event.key === "C")    // Copy
-        ) {
-            event.preventDefault();
-        }
-    
-        // Disable F12
-        if (event.key === "F12") {
-            event.preventDefault();
-        }
-    });
-    
-    // Block Developer Console (Anti Debugging)
-    (function() {
-        let openConsole = false;
-        setInterval(() => {
-            console.profile();
-            console.profileEnd();
-            if (console.clear) console.clear();
-            if (openConsole) {
-                document.body.innerHTML = "";
-                alert("Developer tools are disabled!");
-                window.location.reload();
-            }
-        }, 1000);
-        Object.defineProperty(console, 'profile', {
-            get: function() {
-                openConsole = true;
-                throw new Error("Console is disabled!");
-            }
-        });
-    })();  </script>
+</script>

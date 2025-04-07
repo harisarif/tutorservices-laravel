@@ -14,7 +14,7 @@
      <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
+    <link rel="shortcut icon" href="{{asset('images/favicon.pn')}" type="image/png" />
     
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -208,7 +208,7 @@
                    <img src=" {{asset('images/white-logo.jpeg')}}" class="d-lg-block d-none" id="toggleImage" height="50px" alt="logo" style="height: 50px; border-radius: 10px; width: 100%;">
                </a>
                <a href="{{ route('home') }}">
-                    <img src=" {{asset('images/favicon.png')}}" id="toggleImage" class="d-lg-none d-sm-block AB-img" alt="Image" style="width:70%;">
+                    <img src=" {{asset('{{asset('images/favicon.pn')}')}}" id="toggleImage" class="d-lg-none d-sm-block AB-img" alt="Image" style="width:70%;">
                </a>
                 <div class="text-center d-none d-md-inline position-relative">
                  <button class="rounded-circle border-0" id="sidebarToggle">
@@ -621,45 +621,3 @@
                 });
                 
     </script>
-<script>// Disable Right Click
-    document.addEventListener("contextmenu", (event) => event.preventDefault());
-    
-    // Disable Keyboard Shortcuts
-    document.addEventListener("keydown", function (event) {
-        if (
-            event.ctrlKey && 
-            (event.key === "u" || event.key === "U" ||  // View Source
-             event.key === "s" || event.key === "S" ||  // Save Page
-             event.key === "i" || event.key === "I" ||  // DevTools
-             event.key === "j" || event.key === "J" ||  // Console
-             event.key === "c" || event.key === "C")    // Copy
-        ) {
-            event.preventDefault();
-        }
-    
-        // Disable F12
-        if (event.key === "F12") {
-            event.preventDefault();
-        }
-    });
-    
-    // Block Developer Console (Anti Debugging)
-    (function() {
-        let openConsole = false;
-        setInterval(() => {
-            console.profile();
-            console.profileEnd();
-            if (console.clear) console.clear();
-            if (openConsole) {
-                document.body.innerHTML = "";
-                alert("Developer tools are disabled!");
-                window.location.reload();
-            }
-        }, 1000);
-        Object.defineProperty(console, 'profile', {
-            get: function() {
-                openConsole = true;
-                throw new Error("Console is disabled!");
-            }
-        });
-    })();  </script>

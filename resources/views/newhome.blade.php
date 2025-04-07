@@ -403,7 +403,7 @@
                     <div class=" p-2 header-phone-number phone-container">
                     
                         <i class="fa fa-phone " aria-hidden="true" style="color: #fff;"></i>
-                        <a class="phone-number-header text-decoration-none " href="#" style="color: #42b979;"></a>
+                        <!-- <a class="phone-number-header text-decoration-none " href="#" style="color: #42b979;">+971 56 642 8066</a> -->
                     </div>
                     <div class="custom-select-wrapper">
                     @include('language')
@@ -1383,12 +1383,11 @@
 @endsection
 
 @section('js')
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="{{ asset('js/popper.min.js')}}"></script>
+    <script src="{{ asset('js/bootstrap.min.js')}}"></script>
     <!-- testiomial -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="script.js"></script>
+    <script src="{{ asset('js/owl.carousel.min.js')}}"></script>
+    
     <!-- Your custom script -->
     <script>
            document.querySelectorAll('.trigger-modal').forEach(function (element) {
@@ -2688,48 +2687,8 @@ $('#subjectsearch').val('');
             }
         }
         
-</script><script>// Disable Right Click
-    document.addEventListener("contextmenu", (event) => event.preventDefault());
-    
-    // Disable Keyboard Shortcuts
-    document.addEventListener("keydown", function (event) {
-        if (
-            event.ctrlKey && 
-            (event.key === "u" || event.key === "U" ||  // View Source
-             event.key === "s" || event.key === "S" ||  // Save Page
-             event.key === "i" || event.key === "I" ||  // DevTools
-             event.key === "j" || event.key === "J" ||  // Console
-             event.key === "c" || event.key === "C")    // Copy
-        ) {
-            event.preventDefault();
-        }
-    
-        // Disable F12
-        if (event.key === "F12") {
-            event.preventDefault();
-        }
-    });
-    
-    // Block Developer Console (Anti Debugging)
-    (function() {
-        let openConsole = false;
-        setInterval(() => {
-            console.profile();
-            console.profileEnd();
-            if (console.clear) console.clear();
-            if (openConsole) {
-                document.body.innerHTML = "";
-                alert("Developer tools are disabled!");
-                window.location.reload();
-            }
-        }, 1000);
-        Object.defineProperty(console, 'profile', {
-            get: function() {
-                openConsole = true;
-                throw new Error("Console is disabled!");
-            }
-        });
-    })();  </script>
+</script>
+
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => {

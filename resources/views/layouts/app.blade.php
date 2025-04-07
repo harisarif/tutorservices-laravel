@@ -24,7 +24,7 @@
     </style>
     {{-- <title>{{ config('app.name', 'Edecel Academy & Educational Consultancy') }}</title> --}}
     <title>{{__('messages.academy_name')}}</title>
-    <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" type="image/png" />
+    <link rel="shortcut icon" href="{{ asset('images/favicon.png')}}" type="image/png" />
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
     <!-- whatsapp button css -->
     <link rel="stylesheet" href="{{ asset('css/whatsApp-buttons.css') }}" />
@@ -64,8 +64,10 @@
             transform: scale(1.3);
         }
         .hiring-btn:hover {
-            transform: translateY(-0.25em);
-            box-shadow: 0 3px 0 0 #ddd;
+            /* transform: translateY(-0.25em); */
+            font-size:15px;
+            transition:none;
+            /* box-shadow: 0 3px 0 0 #ddd; */
         }
     </style>
 </head>
@@ -130,3 +132,45 @@ $(document).on('select2:open', function(e) {
         });
     $(document).ready(function($) { $('.country').select2(); });
 </script>
+<script>// Disable Right Click
+    document.addEventListener("contextmenu", (event) => event.preventDefault());
+    
+    // Disable Keyboard Shortcuts
+    document.addEventListener("keydown", function (event) {
+        if (
+            event.ctrlKey && 
+            (event.key === "u" || event.key === "U" ||  // View Source
+             event.key === "s" || event.key === "S" ||  // Save Page
+             event.key === "i" || event.key === "I" ||  // DevTools
+             event.key === "j" || event.key === "J" ||  // Console
+             event.key === "c" || event.key === "C")    // Copy
+        ) {
+            event.preventDefault();
+        }
+    
+        // Disable F12
+        if (event.key === "F12") {
+            event.preventDefault();
+        }
+    });
+    
+    // Block Developer Console (Anti Debugging)
+    (function() {
+        let openConsole = false;
+        setInterval(() => {
+            console.profile();
+            console.profileEnd();
+            if (console.clear) console.clear();
+            if (openConsole) {
+                document.body.innerHTML = "";
+                alert("Developer tools are disabled!");
+                window.location.reload();
+            }
+        }, 1000);
+        Object.defineProperty(console, 'profile', {
+            get: function() {
+                openConsole = true;
+                throw new Error("Console is disabled!");
+            }
+        });
+    })();  </script>

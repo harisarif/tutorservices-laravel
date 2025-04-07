@@ -61,7 +61,7 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
        <img src=" {{asset('images/white-logo.jpeg')}}" class="d-lg-block d-none" id="toggleImage" height="50px" alt="logo" style="height: 50px; border-radius: 10px; width: 100%;">
    </a>
    <a href="{{ route('home') }}">
-        <img src=" {{asset('images/favicon.png')}}" id="toggleImage" class="d-lg-none d-sm-block AB-img" alt="Image" style="width:70%;">
+        <img src=" {{asset('{{asset('images/favicon.pn')}')}}" id="toggleImage" class="d-lg-none d-sm-block AB-img" alt="Image" style="width:70%;">
    </a>
     <div class="text-center d-none d-md-inline position-relative">
      <button class="rounded-circle border-0" id="sidebarToggle">
@@ -596,59 +596,7 @@ $selectedYear = isset($tutor->dob) ? date("Y", strtotime($tutor->dob)) : "";
     updateHiddenField();
 });
 
-</script><script>
-    document.getElementById('imageUpload').addEventListener('change', function(event) {
-        let file = event.target.files[0];
-        if (file) {
-            let reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('profileImage').src = e.target.result; // Update the image preview
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-    </script><script>// Disable Right Click
-    document.addEventListener("contextmenu", (event) => event.preventDefault());
-    
-    // Disable Keyboard Shortcuts
-    document.addEventListener("keydown", function (event) {
-        if (
-            event.ctrlKey && 
-            (event.key === "u" || event.key === "U" ||  // View Source
-             event.key === "s" || event.key === "S" ||  // Save Page
-             event.key === "i" || event.key === "I" ||  // DevTools
-             event.key === "j" || event.key === "J" ||  // Console
-             event.key === "c" || event.key === "C")    // Copy
-        ) {
-            event.preventDefault();
-        }
-    
-        // Disable F12
-        if (event.key === "F12") {
-            event.preventDefault();
-        }
-    });
-    
-    // Block Developer Console (Anti Debugging)
-    (function() {
-        let openConsole = false;
-        setInterval(() => {
-            console.profile();
-            console.profileEnd();
-            if (console.clear) console.clear();
-            if (openConsole) {
-                document.body.innerHTML = "";
-                alert("Developer tools are disabled!");
-                window.location.reload();
-            }
-        }, 1000);
-        Object.defineProperty(console, 'profile', {
-            get: function() {
-                openConsole = true;
-                throw new Error("Console is disabled!");
-            }
-        });
-    })();  </script>
+</script>
 <script>
     $(document).ready(function() {
         $('#specialization').select2({
