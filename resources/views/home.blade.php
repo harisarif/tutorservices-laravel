@@ -15,7 +15,7 @@
      <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/all.min.css')}}" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" href="{{asset('images/favicon.pn')}" type="image/png" />
+    <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" type="image/png" />
     <link rel="stylesheet" href="{{asset('css/sweetalert2.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/select2.css')}}" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="{{asset('js/select2.min.js')}}"
@@ -341,7 +341,7 @@
                    <img src=" {{asset('images/white-logo.jpeg')}}" class="d-lg-block d-none" id="toggleImage" height="50px" alt="logo" style="height: 50px; border-radius: 10px; width: 100%;">
                </a>
                <a href="{{ route('home') }}">
-                    <img src=" {{asset('{{asset('images/favicon.pn')}')}}" id="toggleImage" class="d-lg-none d-sm-block AB-img" alt="Image" style="width:70%;">
+                    <img src=" {{asset('{{asset('images/favicon.png')}}')}}" id="toggleImage" class="d-lg-none d-sm-block AB-img" alt="Image" style="width:70%;">
                </a>
                 <div class="text-center d-none d-md-inline position-relative">
                  <button class="rounded-circle border-0" id="sidebarToggle">
