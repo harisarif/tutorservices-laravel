@@ -341,7 +341,7 @@
                    <img src=" {{asset('images/white-logo.jpeg')}}" class="d-lg-block d-none" id="toggleImage" height="50px" alt="logo" style="height: 50px; border-radius: 10px; width: 100%;">
                </a>
                <a href="{{ route('home') }}">
-                    <img src=" {{asset('{{asset('images/favicon.png')}}')}}" id="toggleImage" class="d-lg-none d-sm-block AB-img" alt="Image" style="width:70%;">
+                    <img src=" {{asset('images/favicon.png')}}" id="toggleImage" class="d-lg-none d-sm-block AB-img" alt="Image" style="width:70%;">
                </a>
                 <div class="text-center d-none d-md-inline position-relative">
                  <button class="rounded-circle border-0" id="sidebarToggle">
