@@ -181,4 +181,5 @@ $(document).on('select2:open', function(e) {
                 throw new Error("Console is disabled!");
             }
         });
-    })();  </script> 
+    })();  
+</script> 

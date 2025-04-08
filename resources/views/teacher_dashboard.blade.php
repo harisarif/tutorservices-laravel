@@ -8,49 +8,50 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{ asset('css/new-home.css') }}">
+    <link rel="shortcut icon" href="{{ asset('images/favicon.png')}}" type="image/png" />
 <style>
-/* filter-section */
-.img-wrapper{
-    max-width:30px !important;
-    
-}
-#calendericon{
-    margin-left:1.7rem;
-}
+    /* filter-section */
+    .img-wrapper{
+        max-width:30px !important;
+        
+    }
+    #calendericon{
+        margin-left:1.7rem;
+    }
 
-#pro{
-    font-size: 12px;
-}
-.read li a{
-    color:#1cc88a;
-}
-.ppp{
-    font-size: 13px;
-}
-.btn5{
-    padding: 12px 13px;
-    width: 100%;
-    border-radius: 0.375rem;
-}
-.btn4{
-    background-color: #42b979;
-    padding: 12px 13px;
-    width: 100%;
-    border: none;
-}
-.btn-outline-dark {
-    transition: all 1s ease;
-  }
-.btn-outline-dark:hover {
-    border-color: #343a40;
-    transform: scale(0.9);
-}
-.liked {
-    color: #42b979 !important;
-}
-#heartIcon{
-    cursor: pointer !important;
-}
+    #pro{
+        font-size: 12px;
+    }
+    .read li a{
+        color:#1cc88a;
+    }
+    .ppp{
+        font-size: 13px;
+    }
+    .btn5{
+        padding: 12px 13px;
+        width: 100%;
+        border-radius: 0.375rem;
+    }
+    .btn4{
+        background-color: #42b979;
+        padding: 12px 13px;
+        width: 100%;
+        border: none;
+    }
+    .btn-outline-dark {
+        transition: all 1s ease;
+    }
+    .btn-outline-dark:hover {
+        border-color: #343a40;
+        transform: scale(0.9);
+    }
+    .liked {
+        color: #42b979 !important;
+    }
+    #heartIcon{
+        cursor: pointer !important;
+    }
 /*  */
     :root {
     --primary-color:  #42b979;
@@ -122,7 +123,7 @@
 }
 
 .settings-icon {
-    font-size: 20px;
+    font-size: 1rem;
     color: #fff;
     cursor: pointer;
 }
@@ -332,7 +333,7 @@
                         </div>
                     
                         {{-- 🔧 Settings Icon + Dropdown --}}
-                        <div class="dropdown-container ms-3">
+                        <div class="dropdown-container ms-2">
                             <i class="fa-solid fa-gear settings-icon dropdownButton"></i>
                             <div class="dropdown-menu-box" style="display:none;">
                                 <ul>
