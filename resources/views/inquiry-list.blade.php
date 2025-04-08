@@ -16,7 +16,7 @@
      <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/all.min.css')}}" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" href="{{asset('images/favicon.png')}" type="image/png" />
+    <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" type="image/png" />
     
     <link href="{{asset('css/sweetalert2.min.css')}}" rel="stylesheet">
     <script src="{{asset('js/sweetalert.min.js')}}"></script>
@@ -638,3 +638,5 @@
                     }, 0);
                 });
     </script>
+<!-- Select2 JS -->
+<script src="{{asset('js/inspect.js')}}"></script>

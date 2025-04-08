@@ -138,3 +138,5 @@
         </div>
     </body>
 </html>
+<!-- Select2 JS -->
+<script src="{{asset('js/inspect.js')}}"></script>

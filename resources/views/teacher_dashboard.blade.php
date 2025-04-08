@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<link rel="stylesheet" href="{{ asset('css/new-home.css') }}">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="education, online courses, learning, tutoring, e-learning, eduexceledu">
@@ -7,7 +7,7 @@
     <script src="https://kit.fontawesome.com/YOUR-FONT-AWESOME-KIT.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
-    
+    <link rel="stylesheet" href="{{ asset('css/new-home.css') }}">
 <style>
 /* filter-section */
 .img-wrapper{
@@ -51,11 +51,6 @@
 #heartIcon{
     cursor: pointer !important;
 }
-
-/*  */
-
-
-
 /*  */
     :root {
     --primary-color:  #42b979;
@@ -121,7 +116,71 @@
         /* display: flex;
         align-items: center; */
     }
+    .dropdown-container {
+    position: relative;
+    display: inline-block;
+}
 
+.settings-icon {
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.dropdown-menu-box {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    min-width: 140px;
+    z-index: 999;
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;  outline: none;
+    border: none;
+}
+
+.dropdown-menu-box li {
+    margin-bottom: 10px; outline: none;
+    border: none; list-style: none;  
+}
+
+.dropdown-menu-box li:last-child {
+    margin-bottom: 0;   outline: none;
+    border: none; list-style: none; 
+   
+}
+
+.dropdown-menu-box a {
+    text-decoration: none;list-style: none;  outline: none;
+    border: none;
+    color: #333;
+    display: block;
+    padding: 5px 10px;
+}
+.dropdown-menu-box li:hover {
+    color: #42b979;  text-decoration: none; list-style: none;  outline: none;
+    border: none;
+}
+.dropdown-menu-box i:hover {
+    color: #42b979;  text-decoration: none; list-style: none;  outline: none;
+    border: none;
+}
+.dropdown-menu-box a:hover {
+    color: #42b979;  text-decoration: none; list-style: none;  outline: none;
+    border: none;
+}
+.dropdown-menu-box {
+    z-index: 9999;
+}
+ 
     .custom-select i {
         font-size: 15px; /* Adjust icon size as needed */
         margin-right:-22px;
@@ -257,21 +316,37 @@
                         </div>
                        
                     </div>
-                <div class="d-flex align-items-center">
-                    <div class="email-container">
-                        <i class="fa fa-envelope-square" aria-hidden="true" style="color: #fff;"></i>
-                        <a class="email text-decoration-none" href="mailto:info@eduexceledu.com" style="color: #42b979;">info@eduexceledu.com</a>
-                    </div>
-               
-                    <div class=" p-2 header-phone-number phone-container">
+                    <div class="d-flex align-items-center">
+                        <div class="email-container">
+                            <i class="fa fa-envelope-square" aria-hidden="true" style="color: #fff;"></i>
+                            <a class="email text-decoration-none" href="mailto:info@eduexceledu.com" style="color: #42b979;">info@eduexceledu.com</a>
+                        </div>
                     
-                        <i class="fa fa-phone " aria-hidden="true" style="color: #fff;"></i>
-                        <a class="phone-number-header text-decoration-none " href="#" style="color: #42b979;"></a>
+                        <div class="p-2 header-phone-number phone-container">
+                            <i class="fa fa-phone" aria-hidden="true" style="color: #fff;"></i>
+                            <a class="phone-number-header text-decoration-none" href="#" style="color: #42b979;"></a>
+                        </div>
+                    
+                        <div class="custom-select-wrapper">
+                            @include('language')
+                        </div>
+                    
+                        {{-- 🔧 Settings Icon + Dropdown --}}
+                        <div class="dropdown-container ms-3">
+                            <i class="fa-solid fa-gear settings-icon dropdownButton"></i>
+                            <div class="dropdown-menu-box" style="display:none;">
+                                <ul>
+                                    <li>
+                                        <a href="{{ route('front-edit-teacher', $tutor->id) }}" class="btn text-justify">
+                                        <i class="fa fa-edit" style="color: #4e73df;"></i>
+                                        <span class="mx-1">Edit</span>
+                                    </a>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="custom-select-wrapper">
-                        @include('language')
-                    </div>
-                </div>
                     
                 
                 </ul>
@@ -455,7 +530,32 @@
 
      </div>
 
-    @endsection
+    @endsection <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".dropdownButton").forEach((button) => {
+                button.addEventListener("click", (event) => {
+                    document.querySelectorAll(".dropdown-menu-box").forEach((menu) => {
+                        if (menu !== button.nextElementSibling) {
+                            menu.style.display = "none";
+                        }
+                    });
+    
+                    const dropdownMenu = button.nextElementSibling;
+                    dropdownMenu.style.display =
+                        dropdownMenu.style.display === "block" ? "none" : "block";
+    
+                    event.stopPropagation();
+                });
+            });
+    
+            document.addEventListener("click", () => {
+                document.querySelectorAll(".dropdown-menu-box").forEach((menu) => {
+                    menu.style.display = "none";
+                });
+            });
+        });
+    </script>
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
   
@@ -469,6 +569,7 @@
         });
     </script>
 
+
   <script>
         setTimeout(function() {
             let alerts = document.querySelectorAll('.alert');
@@ -479,48 +580,7 @@
             });
         }, 3000);
     </script>
-    <script>// Disable Right Click
-        document.addEventListener("contextmenu", (event) => event.preventDefault());
-        
-        // Disable Keyboard Shortcuts
-        document.addEventListener("keydown", function (event) {
-            if (
-                event.ctrlKey && 
-                (event.key === "u" || event.key === "U" ||  // View Source
-                 event.key === "s" || event.key === "S" ||  // Save Page
-                 event.key === "i" || event.key === "I" ||  // DevTools
-                 event.key === "j" || event.key === "J" ||  // Console
-                 event.key === "c" || event.key === "C")    // Copy
-            ) {
-                event.preventDefault();
-            }
-        
-            // Disable F12
-            if (event.key === "F12") {
-                event.preventDefault();
-            }
-        });
-        
-        // Block Developer Console (Anti Debugging)
-        (function() {
-            let openConsole = false;
-            setInterval(() => {
-                console.profile();
-                console.profileEnd();
-                if (console.clear) console.clear();
-                if (openConsole) {
-                    document.body.innerHTML = "";
-                    alert("Developer tools are disabled!");
-                    window.location.reload();
-                }
-            }, 1000);
-            Object.defineProperty(console, 'profile', {
-                get: function() {
-                    openConsole = true;
-                    throw new Error("Console is disabled!");
-                }
-            });
-        })();  </script>
+   
     <script>
         const ctx1 = document.getElementById('overviewChart').getContext('2d');
         new Chart(ctx1, {

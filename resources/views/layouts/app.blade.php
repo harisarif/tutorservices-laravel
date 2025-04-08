@@ -140,7 +140,7 @@ $(document).on('select2:open', function(e) {
         });
     $(document).ready(function($) { $('.country').select2(); });
 </script>
-<!-- <script>
+ <script>
     document.addEventListener("contextmenu", (event) => event.preventDefault());
     
     // Disable Keyboard Shortcuts
@@ -181,4 +181,4 @@ $(document).on('select2:open', function(e) {
                 throw new Error("Console is disabled!");
             }
         });
-    })();  </script> -->
+    })();  </script> 

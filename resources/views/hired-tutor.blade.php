@@ -461,4 +461,5 @@
         var url = "{{ url('lang') }}/" + locale;
         window.location.href = url;
     }
-</script>
+</script> <!-- Select2 JS -->
+<script src="{{asset('js/inspect.js')}}"></script>

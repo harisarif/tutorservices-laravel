@@ -86,8 +86,9 @@ Route::get('/teacher-dashboard/{id}', [TutorController::class, 'teacher_dashboar
     ->name('teacher_dashboard')
     ->middleware('auth', 'auto-logout');
     Route::get('/teachers-dashboard-list', [TutorController::class, 'fetchAuthTeacher'])->name('teachers.dashboard.list');
-    // Route::get('/teachers-dashboard/{id}', [TutorController::class, 'teachers'])->name('teachers') ->middleware('auth');   ;
+    Route::get('/teachers-list-edit/{id}', [TutorController::class, 'frontEdit'])->name('front-edit-teacher');
 Route::get('/teachers-list/{id}/edit', [TutorController::class, 'edit'])->name('edit-teacher');
+Route::put('/teachers-list-update/{id}', [TutorController::class, 'updateTeacherProfile'])->name('teacher.update');
 Route::put('/teachers-list/{id}', [TutorController::class, 'updateProfile'])->name('teachers.update');
 Route::delete('/teachers-list/{id}', [TutorController::class, 'destroy'])->name('teachers.destroy');
 Route::post('/fetch-data', [TutorController::class, 'fetchData'])->name('fetch-data');

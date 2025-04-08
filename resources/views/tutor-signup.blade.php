@@ -2,7 +2,7 @@
  @php
     $emailValue = is_array($verifiedEmail) ? end($verifiedEmail) : $verifiedEmail;
     use App\Models\Tutor;
-    $tutors = Tutor::whereNotNull('profileImage')->take(10)->get();
+    $tutors = Tutor::whereNotNull('profileImage')->take(10)->get(); 
 @endphp
 
 <meta charset="UTF-8">
@@ -99,11 +99,24 @@
                     </h4>
                 </div>
                 <div class="owl-carousel owl-theme container">
-                    @foreach($tutors as $tutor)
-                        <div class="item" style="border:1px solid #fff;border-radius:10px;">
-                            <img src="{{ asset('storage/' . $tutor->profileImage) }}" style="height:200px;border-top-left-radius:10px;border-top-right-radius:10px;" class="" alt="Tutor Image">
-                            <h6 class="mt-2">Slide Title 1</h6>
-                        </div>
+                    @foreach($tutors as $tutor)     @php
+                    $subjects = @unserialize($tutor->teaching);
+                    if ($subjects === false) {
+                        $subjects = is_array(json_decode($tutor->teaching, true)) ? json_decode($tutor->teaching, true) : [];
+                    }
+                    $subjectString = !empty($subjects) ? implode(', ', $subjects) : 'No Subjects Available';
+                @endphp
+                        <div class="item text-white" style="border:1px solid #fff; border-radius:10px; background-color: rgba(0,0,0,0.5); overflow: hidden;">
+                            <img src="{{ asset('storage/' . $tutor->profileImage) }}" style="height:180px;border-top-left-radius:10px;border-top-right-radius:10px;" class="" alt="Tutor Image">
+                            <div class="ps-2 text-start">
+                                <h6 class="mb-1 pt-2 text-white">📚 <strong>Subject:</strong></h6>
+                                <p class="mb-2 text-white" style="font-size: 14px;">{{ $subjectString }}</p>
+        
+                                <h6 class="mb-1 text-white">👨‍🏫 <strong>Experience:</strong></h6>
+                                <p class="mb-1 text-white" style="font-size: 14px;">
+                                    {{ $tutor->experience }} {{ $tutor->experience > 1 ? 'years' : 'year' }} of teaching experience
+                                </p>
+                            </div></div>
                     @endforeach
             </div>
         </div>

@@ -565,7 +565,8 @@ class TutorController extends Controller
         $mail = new PHPMailer(true);
         $pass = env('email_pass');
         $name = env('email_name');
-        try {
+        try { $mail->isSMTP(); // Add this line!
+
             // Load SMTP settings from Laravel .env
             $mail->Host = 'smtp.hostinger.com';
             $mail->SMTPAuth = true;
@@ -928,8 +929,189 @@ class TutorController extends Controller
 
         return redirect()->route('all.tutors')->with('success', 'Tutor profile updated successfully.');
     }
+    public function frontEdit($id)
+    {
+        $schoolClasses = SchoolClass::all();
+        $tutor = Tutor::findOrFail($id);
+        $qualification = SchoolClass::where('id', $tutor->qualification)->value('name') ?? 'Not specified';
+        $tutor->teaching = unserialize($tutor->teaching);
+        $storedLanguageCode = $tutor->language;
+
+        $languages = collect(json_decode($storedLanguageCode, true)) // Decode JSON
+            ->pluck('language') // Extract language codes
+            ->toArray(); // Convert to array
+
+        // Map each language code to its full name from the config file
+        $languageNames = array_map(function ($code) {
+            return config("languages.languages.$code", 'Unknown');
+        }, $languages);
+
+        //country
+
+        $storedCountryCode = $tutor->country; // Get country code
+        $country = config("countries_assoc.countries.$storedCountryCode", 'Unknown'); // Convert to full name
+
+        $tutor->curriculum = unserialize($tutor->curriculum);
+        $countriesPhone = collect(config('phonecountries.countries'));
+        $countries_number_length = collect(config('countries_number_length.countries'));
+        $countries_prefix = collect(config('countries_prefix.countries'));
+        $countries = collect(config('countries_assoc.countries'));
+        return view('teacher_update', compact(['tutor', 'country', 'countriesPhone', 'countries', 'countries_number_length', 'countries_prefix', 'languageNames', 'schoolClasses', 'qualification']));
+    }
+    public function updateTeacherProfile(Request $request, $id)
+    {
+        $rules = [
+            'f_name' => 'required|string|max:255',
+            'l_name' => 'required|string|max:255',
+            'intro' => 'nullable|string|max:255',
+            'qualification' => 'nullable|string|max:255',
+            'profileImage' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'email' => "required|string|email|max:255|unique:tutors,email,$id",
+            'experience' => 'required|string|max:255',
+            'dob' => 'required|string|max:255',
+            'document' => 'nullable|mimes:pdf,xlsx,docx|max:2048',
+            'videoFile' => 'nullable|mimes:mp4,webm,ogg|max:51200',
+            'specialization' => 'required|array',
+            'specialization.*' => 'string',
+            'language_proficient' => 'required|array',
+            'language_proficient.*' => 'string|max:255',
+            'language_level' => 'required|array',
+            'language_level.*' => 'string|max:255',
+            'language_tech' => 'nullable|string|max:255',
+            'edu_teaching' => 'nullable|string|max:255',
+            'currency_price' => 'required|string',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        // Get the mapping of school class names to IDs
+        $schoolClass = SchoolClass::where('name', $request->qualification)->first();
+
+        // If the qualification is a name (e.g., "A Level"), convert it to its ID
+        $qualificationId = $schoolClass ? $schoolClass->id : $request->qualification;
+
+        $tutor = Tutor::findOrFail($id);
+        $user = User::where('id', $tutor->user_id)->firstOrFail();
+
+        // Update User details
+        $user->name = $request->input('f_name') . ' ' . $request->input('l_name');
+        $user->email = $request->input('email');
+
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->input('password'));
+        }
+        $user->save();
 
 
+        // Handle Document Upload (Retain Previous Value if No New File)
+        if ($request->hasFile('document')) {
+            if (!empty($tutor->document)) {
+                $oldFilePath = public_path('uploads/documents/' . $tutor->document);
+                if (file_exists($oldFilePath)) {
+                    unlink($oldFilePath);
+                }
+            }
+            $documentFile = $request->file('document');
+            $documentName = time() . '_' . $documentFile->getClientOriginalName();
+            $documentFile->move(public_path('uploads/documents/'), $documentName);
+            $tutor->document = 'uploads/documents/' . $documentName;
+        }
+
+        // Handle Video Upload (Retain Previous Value if No New File)
+        if ($request->hasFile('videoFile')) {
+            if (!empty($tutor->video)) {
+                $oldVideoPath = public_path($tutor->video);
+                if (file_exists($oldVideoPath)) {
+                    unlink($oldVideoPath);
+                }
+            }
+            $videoFile = $request->file('videoFile');
+            $videoName = time() . '_' . $videoFile->getClientOriginalName();
+            $videoFile->move(public_path('uploads/videos/'), $videoName);
+            $tutor->video = 'uploads/videos/' . $videoName;
+        }
+
+        // Handle Profile Image Upload (Retain Previous Value if No New File)
+        if ($request->hasFile('profileImage')) {
+            if (!empty($tutor->profileImage)) {
+                $oldImagePath = public_path('storage/' . $tutor->profileImage);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+            $imageFile = $request->file('profileImage');
+            $imageName = time() . '_' . $imageFile->getClientOriginalName();
+            $imageFile->storeAs('uploads', $imageName, 'public');
+            $tutor->profileImage = 'uploads/' . $imageName;
+        }
+
+        $existingLanguages = json_decode($tutor->language, true) ?? []; // Decode existing languages
+
+        $updatedLanguages = [];
+
+        if ($request->filled('language_proficient') && $request->filled('language_level')) {
+            foreach ($request->input('language_proficient') as $index => $lang) {
+                if (!empty($lang) && isset($request->input('language_level')[$index])) {
+                    $updatedLanguages[] = [
+                        'language' => $lang,
+                        'level' => $request->input('language_level')[$index],
+                    ];
+                }
+            }
+        }
+
+        // If no new values are provided, keep the existing languages
+        if (empty($updatedLanguages)) {
+            $updatedLanguages = $existingLanguages;
+        }
+
+        // Save the final result
+        $tutor->language = json_encode($updatedLanguages);
+
+
+
+        // Update other fields
+        $tutor->f_name = $request->input('f_name');
+        $tutor->l_name = $request->input('l_name');
+        $tutor->email = $request->input('email');
+        $tutor->dob = $request->input('dob');
+        $tutor->price = $request->input('currency_price');
+        $tutor->qualification = $qualificationId;
+        $tutor->gender = $request->input('gender');
+        $tutor->location = $request->input('location');
+        $tutor->experience = $request->input('experience');
+        $tutor->language_tech = $request->input('language_tech');
+        $tutor->curriculum = serialize($request->input('courses'));
+        $tutor->teaching = serialize($request->input('teaching'));
+        $tutor->phone = $request->input('phone');
+        $tutor->specialization = json_encode($request->input('specialization'));
+        $tutor->edu_teaching = $request->input('edu_teaching');
+        $tutor->availability_status = $request->input('status') ?? 'online';
+        $tutor->status = 'active';
+
+        // Assign the user_id to the tutor
+        $tutor->user_id = $user->id;
+
+        // Save the updated tutor
+        $tutor->save();
+
+
+        // Send update email to tuto
+        $toTutor = $tutor->email;
+        $subjectTutor = "Your Profile Has Been Updated Successfully";
+        $messageTutor = "Dear " . $tutor->f_name . ' ' . $tutor->l_name . ",\r\n" .
+            "Your profile information has been successfully updated.\r\n" .
+            "If you did not make these changes, please contact support immediately.\r\n\r\n" .
+            "Best regards,\r\n" .
+            "The Edexcel Team";
+        $this->sendEmail($toTutor, $subjectTutor, $messageTutor);
+
+        return redirect()->route('teacher_dashboard', ['id' => $tutor->id])
+                ->with('success', 'Tutor created successfully and logged in.');
+    }
+    
     public function destroy($id)
     {
         // Find the tutor by ID
