@@ -95,7 +95,7 @@
     <div class="modal fade" id="emailVerificationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header d-flex justify-content-between">
                     <h5 class="modal-title text-success" id="exampleModalLabel">Enter your email</h5>
                     <span class="fs-2 pointer foucs" data-dismiss="modal">&times;</span>
                 </div>
@@ -107,7 +107,7 @@
                             <input id="email" type="email" name="email" class="form-control" required value="{{ old('email') }}">
                            
                         </div>
-                        <button type="submit" class="btn btn-success">Send Verification Link</button>
+                        <button type="submit" class="btn btn-success mt-2">Send Verification Link</button>
                     </form>
                 </div>
             </div>
