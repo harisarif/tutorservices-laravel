@@ -568,7 +568,8 @@
 </html>
 
     <!-- Bootstrap core JavaScript-->
-
+     <!-- Select2 JS -->
+<script src="{{asset('js/inspect.js')}}"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="{{asset('js/js/jquery.min.js')}}"></script>

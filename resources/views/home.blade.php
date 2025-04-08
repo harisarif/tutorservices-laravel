@@ -752,7 +752,8 @@
     <!-- Bootstrap core JavaScript-->
     <script src="{{asset('js/js/jquery.min.js')}}"></script>
     <script src="{{asset('js/js/bootstrap.bundle.min.js')}}"></script>
-
+    <!-- Select2 JS -->
+<script src="{{asset('js/inspect.js')}}"></script>
     <!-- Core plugin JavaScript-->
     <script src="{{asset('js/js/jquery.easing.min.js')}}"></script>
 

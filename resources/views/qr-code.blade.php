@@ -93,7 +93,8 @@
 
         // Generate the QR code
         new QRCode(document.getElementById('qrcode'), encodedData);
-    </script>
+    </script> <!-- Select2 JS -->
+<script src="{{asset('js/inspect.js')}}"></script>
   </body>
   </html>
-@endsection
+@endsection     

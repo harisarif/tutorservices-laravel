@@ -489,15 +489,15 @@
 
 
 <!-- Custom scripts for all pages-->
-<script src="{{asset('js/js/jquery.min.js')}}"></script>
-<script src="{{asset('js/js/sb-admin-2.min.js')}}"></script>
+<script src="{{asset('js/jquery.min.js')}}"></script>
+<script src="{{asset('js/sb-admin-2.min.js')}}"></script>
 
-<script src="{{asset('js/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('js/js/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{asset('js/js/select2.min.js}}"
+<script src="{{asset('js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('js/select2.min.js')}}"
         integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="{{asset('js/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
 <script>
     function toggleDropdown(id) {
         const dropdownMenu = document.getElementById(`dropdownMenu-${id}`);
@@ -640,4 +640,5 @@
             $(window).scrollTop(scrollPos);
         }, 0);
     });
-</script>
+</script> <!-- Select2 JS -->
+<script src="{{asset('js/inspect.js')}}"></script>

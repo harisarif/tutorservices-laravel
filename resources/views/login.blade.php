@@ -72,4 +72,5 @@
      {{-- @include('layouts.footer') --}}
      </footer>
 <script  src="js/app.js">
+<script src="{{asset('js/inspect.js')}}"></script>
 </html>
