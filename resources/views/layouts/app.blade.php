@@ -171,7 +171,7 @@ $(document).on('select2:open', function(e) {
             if (console.clear) console.clear();
             if (openConsole) {
                 document.body.innerHTML = "";
-                alert("Developer tools are disabled!");
+                // alert("Developer tools are disabled!");
                 window.location.reload();
             }
         }, 1000);

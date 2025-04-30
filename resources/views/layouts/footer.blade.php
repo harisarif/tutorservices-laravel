@@ -41,7 +41,7 @@
                                 </li>
 
                                 <li class="ad-footer d-block py-1">
-                                    <a target="_blank" href="https://www.linkedin.com/in/edexcel-edu-130983310/" class="text-decoration-none">
+                                    <a target="_blank" href="https://www.linkedin.com/company/edexcel-academy/" class="text-decoration-none">
                                         <i class="fa-brands fa-linkedin text-light" aria-hidden="true"></i>
 
                                     <span class="text-light ">{{ __('messages.LinkedIn') }}</span>
@@ -49,7 +49,7 @@
                                 </li>
 
                                 <li class="ad-footer d-block py-1">
-                                    <a target="-blank" href="#" class="text-decoration-none">
+                                    <a target="_blank" href="https://youtube.com/@edexcelonline01?si=EuQwX0tL3zk4J-2p" class="text-decoration-none">
                                     <i class="fa-brands fa-youtube text-white" aria-hidden="true"></i>
                                     <span class="text-light ">{{ __('messages.Youtube') }}</span>
                                     </a>

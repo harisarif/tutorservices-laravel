@@ -12,13 +12,13 @@
     <link rel="stylesheet" href="{{ asset('css/tutor-style.css')}}">
     <link rel="stylesheet" href="{{ asset('css/mediaquery.css')}}">
 <style>
-    .img-fluid1 {
-    max-width: 16px;
-    height: auto;
-}
-    .read li a {
-    color: #42b979;
-}
+        .img-fluid1 {
+        max-width: 16px;
+        height: auto;
+    }
+        .read li a {
+        color: #42b979;
+    }
     .sd{
         color: #42b979;  
     }
