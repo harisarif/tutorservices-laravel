@@ -127,6 +127,7 @@
 <script src="{{ URL::asset('js/select2.js') }}"></script>
 <script src="{{ URL::asset('js/app.js') }}"></script>
 <script src="{{ URL::asset('js/sweetalert.js') }}"></script>
+<script src="{{ URL::asset('js/inspect.js') }}"></script>
 
 <script>
     function cancel(){
@@ -140,7 +141,7 @@ $(document).on('select2:open', function(e) {
         });
     $(document).ready(function($) { $('.country').select2(); });
 </script>
- <script>
+ <!-- <script>
     document.addEventListener("contextmenu", (event) => event.preventDefault());
     
     // Disable Keyboard Shortcuts
@@ -182,4 +183,4 @@ $(document).on('select2:open', function(e) {
             }
         });
     })();  
-</script> 
+</script>  -->
