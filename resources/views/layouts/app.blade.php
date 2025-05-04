@@ -43,6 +43,23 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     
     <style>
+        ::-webkit-scrollbar {
+                width: 4px; /* Adjust the width */
+        }
+
+            /* Target the scrollbar track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; /* Color of the track */
+        }
+         ::-webkit-scrollbar-thumb {
+                background: #42b979;
+                border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+                background: #42b979;
+        }
+
         .pagination li.active span {
             background-color: #42B979 !important; 
             border-color: #42B979 !important;
