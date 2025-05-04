@@ -27,7 +27,7 @@
                             <li class="AB-footer text-white fs-5 d-block fw-bold">{{ __('messages.Edexcel Socials') }}</li>
                             <li class="ad-footer d-block py-1">
                                 <a target="_blank"
-                                    href="https://www.facebook.com/share/4TeUP95tKrtC9fUa/?mibextid=LQQJ4d"class="text-decoration-none">
+                                    href="https://www.facebook.com/EdexcelAcademyOfficial/"class="text-decoration-none">
                                     <i class="fa-brands fa-facebook text-light" aria-hidden="true"></i>
                                     <span class="text-light ">{{ __('messages.Facebook') }}</span>
                                 </a>  
