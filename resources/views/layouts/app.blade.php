@@ -28,7 +28,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
     <!-- whatsapp button css -->
     <link rel="stylesheet" href="{{ asset('css/whatsApp-buttons.css') }}" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/fontawesome-free/css/all.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.min.css') }}">  
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">

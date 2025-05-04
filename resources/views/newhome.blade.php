@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
     <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}"  referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> -->
 
     <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/tutor-style.css')}}">
