@@ -12,7 +12,10 @@
     <link rel="stylesheet" href="{{ asset('css/tutor-style.css')}}">
     <link rel="stylesheet" href="{{ asset('css/mediaquery.css')}}">
 <style>
-        .img-fluid1 {
+    .faq-heading {
+        color: var(--primary-color);
+    }
+    .img-fluid1 {
         max-width: 16px;
         height: auto;
     }
@@ -1173,7 +1176,7 @@
                             </div>
                         </section>
 
-                        <section class="Ed-max">
+                        <section class="Ed-max d-none">
                                  <div class="mx-heading-div py-4">
                                     <h2>{{ __('messages.Recomendation') }}</h2>
                                 </div>
@@ -1203,6 +1206,111 @@
                                         </div>
                                     </div>
                                 </div>
+                        </section>
+                        <section class="fb-ad ">
+                            <div class="ad-line"></div>
+                            <div class="im-heading">
+                                <h2 class="mx-heading-div py-3">Frequently Asked  Questions</h2>
+                            </div>
+                        </section>
+                    <section class="w-75 mx-auto">
+                            <div>
+                                        <div class="list-group-item border rounded my-2 px-2">
+                                            <div class="d-flex justify-content-between align-items-center"
+                                                onclick="toggle('para','toggle-arrow')">
+                                                <h6 class="fw-bold py-3 faq-heading">
+                                                {{ __('messages.How can students improve their knowledge?') }}
+                                                </h6>
+                                                <i class="fa fa-chevron-down" id="toggle-arrow"></i>
+                                            </div>
+                                            <div id="para" style="height:auto;">
+                                                <p>
+                                                {{ __('messages.Students can improve their knowledge and skills in a number of ways like:') }}
+                                                </p>
+                                                <ul>
+                                                    <li> {{ __('messages.Practicing solutions regularly.') }}</li>
+                                                    <li>
+                                                    {{ __('messages.Understand the underlying concepts/formulas clearly.') }}
+                                                    </li>
+                                                    <li>{{ __('messages.Solving additional exercises.') }}</li>
+                                                    <li>{{ __('messages.Sharing a positive attitude about the subject.') }}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="list-group-item border rounded my-2 px-2">
+                                            <div class="d-flex justify-content-between align-items-center"
+                                                onclick="toggle('para1','toggle-arrow1')">
+                                                <h6 class="fw-bold py-3 faq-heading">
+                                                {{ __('messages.How can tutors help students improve their score and skills?') }}
+                                                </h6>
+                                                <i class="fa fa-chevron-down" id="toggle-arrow1"></i>
+                                            </div>
+                                            <div id="para1">
+                                                <p>
+                                                {{ __('messages.There are many ways students can improve their skills. But experienced tutors in Dubai can help to:') }}
+                                                </p>
+                                                <ul>
+                                                    <li>{{ __('messages.Build confidence in the student.') }}</li>
+                                                    <li>{{ __('messages.Encourage questioning and make space for curiosity.') }}</li>
+                                                    <li>{{ __('messages.Emphasize conceptual understanding over procedure.') }}</li>
+                                                    <li>
+                                                    {{ __('messages. Provide authentic problems that increase students’ drive to engage with the subject.') }}
+                                                    </li>
+                                                    <li>{{ __('messages.Share a positive attitude about the subject.') }}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="list-group-item border rounded my-2 px-2">
+                                            <div class="d-flex justify-content-between align-items-center"
+                                                onclick="toggle('para2','toggle-arrow2')">
+                                                <h6 class="fw-bold py-3 faq-heading">
+                                                {{ __('messages.Want to know what we can offer?') }}
+                                                </h6>
+                                                <i class="fa fa-chevron-down" id="toggle-arrow1"></i>
+                                            </div>
+                                            <div id="para2">
+                                                <p>
+                                                {{ __('messages.There are many ways students can improve their skills. But experienced tutors in Dubai can help to:') }}
+                                                </p>
+                                                <ul>
+                                                    <li>{{ __('messages.Build confidence in the student.') }}</li>
+                                                    <li>{{ __('messages.Encourage questioning and make space for curiosity.') }}</li>
+                                                    <li>{{ __('messages.Emphasize conceptual understanding over procedure.') }}</li>
+                                                    <li>{{ __('messages.EProvide authentic problems that increase students’ drive to engage with the subject.') }}
+                                                        
+                                                    </li>
+                                                    <li>{{ __('messages.Share a positive attitude about the subject.') }}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="list-group-item border rounded my-2 px-2">
+                                            <div class="d-flex justify-content-between align-items-center"
+                                                onclick="toggle('para3','toggle-arrow3')">
+                                                <h6 class="fw-bold py-3 faq-heading">
+                                                {{ __('messages.If you have tried all means and yet looking for a tutor❓') }}
+                                                </h6>
+                                                <i class="fa fa-chevron-down" id="toggle-arrow1"></i>
+                                            </div>
+                                            <div id="para3">
+                                                <p>{{ __('messages.There are many ways students can improve their skills. But experienced tutors in Dubai can help to:') }}
+                                                    
+                                                </p>
+                                                <ul>
+                                                    <li>{{ __('messages.Build confidence in the student.') }}</li>
+                                                    <li>{{ __('messages.Encourage questioning and make space for curiosity.') }}</li>
+                                                    <li>{{ __('messages.Emphasize conceptual understanding over procedure.') }}</li>
+                                                    <li>{{ __('messages.Provide authentic problems that increase students’ drive
+                                                        to engage with the subject.') }}
+                                                    </li>
+                                                    <li>>{{ __('messages.Share a positive attitude about the subject.') }}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                         
                     </section>
                     <section>
                         <div class="keys-heading">
