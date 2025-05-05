@@ -12,6 +12,87 @@
     <link rel="stylesheet" href="{{ asset('css/tutor-style.css')}}">
     <link rel="stylesheet" href="{{ asset('css/mediaquery.css')}}">
 <style>
+    .service-card {
+      background-color: #fff;
+      border-radius: 20px;
+      padding: 30px 25px;
+      position: relative;
+      text-align: left;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-icon {
+      background-color: #42b979;
+      padding: 15px;
+      border-radius: 15px;
+      display: inline-block;
+      margin-bottom: 20px;
+      box-shadow: 10px 6px 6px #42b97947;
+    }
+
+    .service-icon img {
+      width: 35px;
+      height: 35px;
+    }
+
+    .service-number {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 50px;
+      color: rgba(0, 0, 0, 0.05);
+      font-weight: 700;
+    }
+
+    .service-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #42b979;
+    }
+
+    .service-text {
+      color: #6c757d;
+      font-size: 0.95rem;
+      margin: 15px 0;
+    }
+
+    .learn-more {
+      color: #42b979;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .learn-more:hover {
+      text-decoration: underline;
+    }
+
+    .btn-view-all {
+      background-color: #42b979;
+      color: white;
+      border-radius: 30px;
+      padding: 10px 30px;
+      font-weight: 500;
+      margin-top: 40px;
+    }
+
+    .btn-view-all:hover {
+      background-color: #42b979;
+    }
+
+    /* this is for cokies section styling */
+    .cookies-privacy {
+      background-color: #42b979;
+      color: #fff;
+    }
+
+    
     .faq-heading {
         color: var(--primary-color);
     }
@@ -29,11 +110,11 @@
         color: #42b979;
     }
     .btn1{
-    background-color: #42b979;
-    padding: 12px 13px;
-    width: 100%;
-    border: none;
-}
+        background-color: #42b979;
+        padding: 12px 13px;
+        width: 100%;
+        border: none;
+    }
     /* Overlay Styles */
     .overlay {
         position: fixed; /* Fixed positioning */
@@ -801,10 +882,10 @@
                             
                                                                  **Subjects Logic** 
                                                                                    <span>
-    <i class="fa fa-globe" style="color: #42b979 !important;"></i>
-    <strong>{{ __('Specialization') }}:</strong> 
-    {{ $item->specialization ?? 'Not Specified' }}
-</span>
+                                                <i class="fa fa-globe" style="color: #42b979 !important;"></i>
+                                                <strong>{{ __('Specialization') }}:</strong> 
+                                                {{ $item->specialization ?? 'Not Specified' }}
+                                            </span>
 
                                                                 <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
                                                                     <strong>{{ __('Experience') }} :</strong> {{ $item->experience ?? 'Nullable' }} years</span>
@@ -1052,19 +1133,19 @@
                             </div>
                             @if (App::getLocale() === 'en') 
                                 <div class="col col-lg-3 my-0 p-0">
-                                    <video src="{{ asset('images/video.mp4') }}" class="object-fit-cover mt-2" autoplay muted loop width="100%"></video>
+                                    <video src="{{ asset('images/video.mp4') }}" class="object-fit-cover mt-0" autoplay muted loop width="100%"></video>
                                 </div>
                             @elseif (App::getLocale() === 'ar')
                                 <div class="col col-lg-3 my-0 p-0">
-                                    <video src="{{ asset('videos/arabic.mp4') }}" class="object-fit-cover mt-2" autoplay muted loop width="100%"></video>
+                                    <video src="{{ asset('videos/arabic.mp4') }}" class="object-fit-cover mt-0" autoplay muted loop width="100%"></video>
                                 </div>
                             @elseif (App::getLocale() === 'rs')
                                 <div class="col col-lg-3 my-0 p-0">
-                                    <video src="{{ asset('videos/russian.mp4') }}" class="object-fit-cover mt-2" autoplay muted loop width="100%"></video>
+                                    <video src="{{ asset('videos/russian.mp4') }}" class="object-fit-cover mt-0" autoplay muted loop width="100%"></video>
                                 </div>
                             @elseif (App::getLocale() === 'zh')
                                 <div class="col col-lg-3 my-0 p-0">
-                                    <video src="{{ asset('videos/chinese.mp4') }}" class="object-fit-cover mt-2" autoplay muted loop width="100%"></video>
+                                    <video src="{{ asset('videos/chinese.mp4') }}" class="object-fit-cover mt-0" autoplay muted loop width="100%"></video>
                                 </div>
                             @else
                                 <!-- Default or fallback video in case no matching locale is found -->
@@ -1312,35 +1393,45 @@
                                 
                          
                     </section>
-                    <section>
+                    <section class="w-75 mx-auto">
                         <div class="keys-heading">
                             <h2 class="text-center my-4 fw-bold">Our key services</h2>
                         </div>
                         <div class="row justify-content-center">
-                            <div class="col-lg-3">
-                                <div class="ad-cards border m-3 p-1 ">
-                                    <span><i class="fa-regular fa-clock fs-1 text-center mx-1 mt-2"></i></span>
-                                    <h4 class="py-2 fs-5 mx-3 text-center">24/7</h4>
-                                    <p class="mx-3 text-center">{{ __('messages.Our expert engineering team is available 24/7, providing specialized services including customized monitoring solutions, performance enhancements, comprehensive training programs, and continuous technical support.') }}</p>
+                      
+                        <!-- Card 1 -->
+                            <div class="col-md-4">
+                            <div class="service-card h-100">
+                                <div class="service-icon">
+                                <img src="https://img.icons8.com/ios-filled/50/ffffff/classroom.png" alt="Online Tutors">
                                 </div>
+                                <h5 class="service-title">Online Tutors</h5>
+                                <p class="service-text">"Get personalized, one-on-one tutoring from certified educators—anytime, anywhere. We help learners of all ages master subjects with clarity and confidence."</p>
+                            </div>
                             </div>
 
-                            <div class="col-lg-3">
-                                <div class="ad-cards border m-3 p-1 ">
-                                    <span><i class="fa-solid fa-users fs-1 text-center mx-1 mt-2"></i>
-                                    </span>
-                                    <h4 class="py-2 fs-5 mx-3 text-center ">{{ __('messages.Why chose Edexcel') }}</h4>
-                                    <p class="mx-3 text-center ">{{ __('messages.Choosing Edexcel means opting for a globally recognized and respected qualification provider known for its high academic standards and practical approach to learning.  By choosing Edexcel, you’re investing quality education') }} </p>
+                            <!-- Card 2 -->
+                            <div class="col-md-4">
+                            <div class="service-card h-100">
+                                <div class="service-icon">
+                                <img src="https://img.icons8.com/ios-filled/50/ffffff/laptop.png" alt="Online Classes">
                                 </div>
+                                <h5 class="service-title">Online Classes</h5>
+                                <p class="service-text">"Interactive, expert-led online classes designed to fit your schedule. Learn new skills, upgrade your knowledge, and achieve your goals from the comfort of your home."</p>
+                            </div>
                             </div>
 
-                            <div class="col-lg-3">
-                                <div class="ad-cards border m-3 p-1 ">
-                                    <span><i class="fa-regular fa-clock fs-1 text-center mx-1 mt-2"></i></span>
-                                    <h4 class="py-2 fs-5 mx-3 text-center ">24/7</h4>
-                                    <p class="mx-3 text-center ">{{ __('messages.Our expert engineering team is available 24/7, providing specialized services including customized monitoring solutions, performance enhancements, comprehensive training programs, and continuous technical support.') }}</p>
+                            <!-- Card 3 -->
+                            <div class="col-md-4">
+                            <div class="service-card h-100">
+                                <div class="service-icon">
+                                <img src="https://img.icons8.com/ios-filled/50/ffffff/customer-support.png" alt="Support">
                                 </div>
+                                <h5 class="service-title">Support</h5>
+                                <p class="service-text">"24/7 dedicated support to ensure your experience is smooth and stress-free. We're here to solve problems, answer questions, and keep you moving forward."</p>
                             </div>
+                            </div>
+                       
                         </div>
                     </section>
                         <section class="testimonials">

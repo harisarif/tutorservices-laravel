@@ -25,6 +25,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\NotificationController;
+use Illuminate\Support\Facades\Cookie;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +36,10 @@ use App\Http\Controllers\NotificationController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::post('/cookie-consent', function (Request $request) {
+    $consent = $request->input('consent');
+    return response('OK')->cookie('cookie_consent', $consent, 60 * 24 * 365); // 1 year
+});
 Route::get('lang/{locale}', function ($locale) {
     if (in_array($locale, ['en', 'ar','rs','ch'])) { // Only 'en' and 'ar' for English and Arabic
         session(['locale' => $locale]);

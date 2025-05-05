@@ -34,6 +34,61 @@ main {
     margin: 0;
 
 }
+
+.accpt-btn {
+    border:1px solid #fff !important;
+    border-radius:8px;
+}
+.fixed-cookies {
+    position: fixed;
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+    z-index: 9;
+    width: 100%;
+}
+::-webkit-scrollbar {
+        width: 4px; /* Adjust the width */
+}
+
+    /* Target the scrollbar track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color of the track */
+}
+ ::-webkit-scrollbar-thumb {
+        background: #42b979;
+        border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+        background: #42b979;
+}
+
+.pagination li.active span {
+    background-color: #42B979 !important; 
+    border-color: #42B979 !important;
+}
+.foucs{
+    color: #ffff;
+    width: 30px;
+    transition: 0.5s;
+    display: flex;
+    justify-content: center;
+    height: 30px;
+    border-radius: 24px;
+    align-items: center;
+    background-color: #42b979;
+    margin-bottom:25px ;
+}
+.foucs:hover{
+    cursor: pointer;
+    transform: scale(1.3);
+}
+.hiring-btn:hover {
+    /* transform: translateY(-0.25em); */
+    font-size:15px;
+    transition:none;
+    /* box-shadow: 0 3px 0 0 #ddd; */
+}
 .icons .fa-brands:hover{
     transform: translatey(-0.25em);
     

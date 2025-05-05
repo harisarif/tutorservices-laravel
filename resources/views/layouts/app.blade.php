@@ -42,51 +42,6 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     
-    <style>
-        ::-webkit-scrollbar {
-                width: 4px; /* Adjust the width */
-        }
-
-            /* Target the scrollbar track */
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1; /* Color of the track */
-        }
-         ::-webkit-scrollbar-thumb {
-                background: #42b979;
-                border-radius: 6px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-                background: #42b979;
-        }
-
-        .pagination li.active span {
-            background-color: #42B979 !important; 
-            border-color: #42B979 !important;
-        }
-        .foucs{
-            color: #ffff;
-            width: 30px;
-            transition: 0.5s;
-            display: flex;
-            justify-content: center;
-            height: 30px;
-            border-radius: 24px;
-            align-items: center;
-            background-color: #42b979;
-            margin-bottom:25px ;
-        }
-        .foucs:hover{
-            cursor: pointer;
-            transform: scale(1.3);
-        }
-        .hiring-btn:hover {
-            /* transform: translateY(-0.25em); */
-            font-size:15px;
-            transition:none;
-            /* box-shadow: 0 3px 0 0 #ddd; */
-        }
-    </style>
 </head>
 <div class="loader" id="lazzyLoader">
     <img src="{{ asset('images/loader.gif') }}" alt="lazzyloader">
@@ -129,12 +84,44 @@
             
             @yield('js')
         </main>
+        @if(!request()->cookie('cookie_consent'))
+        <div id="cookie-banner" class="fixed-cookies bottom-0 left-0 w-full bg-gray-800 text-white z-50">
+            <section class="cookies-privacy w-100">
+                <div class="container-fluid p-2 ms-4">
+                <h5>Cookies & Privacy</h5>
+                <p style="font-size:12px;">
+                    We use cookies to ensure that we give you the best experience on our website. By clicking Accept or continuing to use our site, you consent to our use of cookies and our privacy policy. For more information, please read our privacy policy.. <a href="#" class="text-light">More information</a>
+                </p>
+                <div class=" button-contanier p-0 mb-4">
+                    <button class="btn me-2 mr-2 accpt-btn text-white" onclick="setCookieConsent('accepted')">
+                    Accept cookies
+                    </button>
+                    <button class="btn accpt-btn text-white" onclick="setCookieConsent('rejected')">
+                    Reject cookies
+                    </button>
+                </div>
+                </div>
+            </section>
+        </div>
+        @endif
         @include('layouts.footer')
 </body>
 
 </html>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T7J1VV3190"></script>
 <script>
+    function setCookieConsent(value) {
+    fetch('/cookie-consent', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({ consent: value })
+    }).then(() => {
+        document.getElementById('cookie-banner').remove();
+    });
+}
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
