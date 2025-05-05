@@ -87,10 +87,7 @@
     }
 
     /* this is for cokies section styling */
-    .cookies-privacy {
-      background-color: #42b979;
-      color: #fff;
-    }
+    
 
     
     .faq-heading {
