@@ -47,7 +47,7 @@ main {
     width: 100%;
 }
 ::-webkit-scrollbar {
-        width: 4px; /* Adjust the width */
+        width: 6px; /* Adjust the width */
 }
 
     /* Target the scrollbar track */
