@@ -1604,7 +1604,7 @@
 		        $('#customers-testimonials').owlCarousel({
 		            loop: true,
 		            center: true,
-		            items: 3,
+		            items: 6,
 		            margin: 0,
 		            autoplay: true,
 		            dots:true,
