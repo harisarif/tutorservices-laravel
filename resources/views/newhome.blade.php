@@ -1285,41 +1285,58 @@
                                     </div>
                                 </div>
                         </section>
-                        <section class="testimonials">
-                            <div class="AH container">
+                        <section class="w-100 mx-auto">
+                            
                                      <div class="ad-heading-div-child">
                                         <h2 class="text-center mt-3 fw-bold">{{ __('Expert Educators') }}</h2>
                                      </div>
-                                <div class="row">
-                                    <div class="col-sm-12 sm-div ms-lg-0 ms-3">
-                                    <div id="customers-testimonials" class="owl-carousel">
-                                    @foreach ($sliderTutors as $sliderTutor)
-                                        <!--TESTIMONIAL 1 -->
-                                        <div class="item">
-                                            <div class="shadow-effect">
-                                            @if (  $item->profileImage) 
-                                                <img class="img-circle" src="{{ asset('storage/' . $sliderTutor->profileImage) }}" alt="" style="width:30px;">
+                                    <div class="row justify-content-cemter">
+                                        <div class="col-sm-12 sm-div ms-lg-0 ms-3">
+                                        <div id="customers-testimonials" class="owl-carousel">
+                                        @foreach ($sliderTutors as $sliderTutor)
+                                            <!--TESTIMONIAL 1 -->
+                                            <div class="profile-card mt-5 mb-3">
+                                            <div class="card-header tutor-slider-card">
+                                            @if (  $item->profileImage)
+                                                <img src="{{ asset('storage/' . $sliderTutor->profileImage) }}" alt="Profile" class="profile-img-slider">
                                             @else
                                                 <img src="{{ asset('images/avatar.png') }}" alt="Default Image" class="img-thumbnail" style="height: 150px; width: 100%;">
                                             @endif
-
-                                                <span>
-                                                @php
-                                                    $specializations = json_decode($sliderTutor->specialization, true);
-                                                @endphp
-                                                 Hello, my name is {{ $sliderTutor->f_name ?? 'Not Specified' }}. I have <b>{{ $sliderTutor->experience ?? 'Nullable' }}</b>+ years of experience as a {{ is_array($specializations) && count($specializations) ? implode(', ', $specializations) : 'Not Specified' }} Teacher & Tutor</span>
                                             </div>
-                                            <div class="testimonial-name">{{ $sliderTutor->f_name ?? 'Nullable' }} {{ $sliderTutor->l_name ?? 'Nullable' }}</div>
+                                            <div class="card-body slider-body">
+                                                <h5 class="card-title slider-title">{{ $sliderTutor->f_name ?? 'Nullable' }} {{ $sliderTutor->l_name ?? 'Nullable' }}</h5>
+                                                <p class="card-text slider-text">
+                                                @php
+                                                        $specializations = json_decode($sliderTutor->specialization, true);
+                                                @endphp    
+                                                Hello, my name is {{ $sliderTutor->f_name ?? 'Not Specified' }}. I have <b>{{ $sliderTutor->experience ?? 'Nullable' }}</b>+ years of experience as a {{ is_array($specializations) && count($specializations) ? implode(', ', $specializations) : 'Not Specified' }} Teacher & Tutor</p>
+                                                <!-- <button class="view-more-btn">View More</button> -->
+                                            </div>
+                                            </div>
+                                            <!-- <div class="item">
+                                                <div class="shadow-effect">
+                                                @if (  $item->profileImage) 
+                                                    <img class="img-circle" src="{{ asset('storage/' . $sliderTutor->profileImage) }}" alt="" style="width:30px;">
+                                                @else
+                                                    <img src="{{ asset('images/avatar.png') }}" alt="Default Image" class="img-thumbnail" style="height: 150px; width: 100%;">
+                                                @endif
+
+                                                    <span>
+                                                    @php
+                                                        $specializations = json_decode($sliderTutor->specialization, true);
+                                                    @endphp
+                                                    Hello, my name is {{ $sliderTutor->f_name ?? 'Not Specified' }}. I have <b>{{ $sliderTutor->experience ?? 'Nullable' }}</b>+ years of experience as a {{ is_array($specializations) && count($specializations) ? implode(', ', $specializations) : 'Not Specified' }} Teacher & Tutor</span>
+                                                </div>
+                                                <div class="testimonial-name">{{ $sliderTutor->f_name ?? 'Nullable' }} {{ $sliderTutor->l_name ?? 'Nullable' }}</div>
+                                            </div> -->
+                                        @endforeach
+                                            <!--END OF TESTIMONIAL 1 -->
+                                            <!--TESTIMONIAL 2 -->
+                                            
+                                            <!--END OF TESTIMONIAL 5 -->
                                         </div>
-                                    @endforeach
-                                        <!--END OF TESTIMONIAL 1 -->
-                                        <!--TESTIMONIAL 2 -->
-                                        
-                                        <!--END OF TESTIMONIAL 5 -->
+                                        </div>
                                     </div>
-                                    </div>
-                                </div>
-                            </div>
                     </section>
                         <section class="w-75 mx-auto">
                         <div class="keys-heading">
