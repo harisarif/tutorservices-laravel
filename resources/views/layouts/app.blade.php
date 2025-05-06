@@ -44,7 +44,11 @@
     
 </head>
 <div class="loader" id="lazzyLoader">
-    <img src="{{ asset('images/loader.gif') }}" alt="lazzyloader">
+    <!-- <img src="{{ asset('images/loader.gif') }}" alt="lazzyloader"> -->
+    <video autoplay loop muted playsinline>
+        <source src="{{ asset('images/loader.webm') }}" type="video/webm">
+        Your browser does not support the video tag.
+    </video>
 </div>
 <div class="modalBox" id="allModal">
     <div class="boxModal-1 col-4 bg-light rounded p-2">
