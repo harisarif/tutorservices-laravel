@@ -30,24 +30,24 @@
 </div>
 @endif    
 <div id="otpModal" class="modal fade show d-block" tabindex="-1" aria-labelledby="otpModalLabel" aria-hidden="true"
-    data-bs-backdrop="static" data-bs-keyboard="false">
+    data-bs-backdrop="static" data-bs-keyboard="false" style="background-color: rgba(0,0,0,0.6);">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow-lg rounded-3">
             <div class="modal-header bg-success text-white">
-                <h5 class="modal-title fw-bold" id="otpModalLabel">🔐 Secure OTP Verification</h5>
+                <h5 class="modal-title fw-bold" id="otpModalLabel">Enter OTP</h5>
             </div>
             <div class="modal-body p-4">
-                <p class="text-muted text-center">
+                <!-- <p class="text-muted text-center">
                     We've sent a One-Time Password (OTP) to your email: <br>
                     <strong class="text-dark">{{ session('verifiedEmail') }}</strong>
-                </p>
+                </p> -->
 
                 <form id="otpForm">
                     @csrf
                     <input type="hidden" name="email" value="{{ session('verifiedEmail') }}">
 
                     <div class="mb-3">
-                        <label for="otpInput" class="form-label fw-semibold">Enter OTP</label>
+                        <!-- <label for="otpInput" class="form-label fw-semibold">Enter OTP</label> -->
                         <input type="text" id="otpInput" name="otp"
                             class="form-control text-center fs-5 rounded-pill border-success shadow-sm"
                             placeholder="6-digit code" maxlength="6" required>
