@@ -1298,7 +1298,7 @@
                                         <div class="item">
                                             <div class="shadow-effect">
                                             @if (  $item->profileImage) 
-                                                <img class="img-circle" src="{{ asset('storage/' . $sliderTutor->profileImage) }}" alt="">
+                                                <img class="img-circle" src="{{ asset('storage/' . $sliderTutor->profileImage) }}" alt="" style="width:30px;">
                                             @else
                                                 <img src="{{ asset('images/avatar.png') }}" alt="Default Image" class="img-thumbnail" style="height: 150px; width: 100%;">
                                             @endif
