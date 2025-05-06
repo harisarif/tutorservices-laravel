@@ -1,5 +1,8 @@
 @extends('layouts.app')
 <style>
+    #cookie-banner {
+        display:none;
+    }
     footer {
         /* display: none !important; */
         position: fixed;
@@ -25,7 +28,7 @@
     }
     .card-header{
         background: #42b979 !important;
-    color: white !important;
+        color: white !important;
     }
     .login-button{
         background: #42b979 !important;

@@ -790,7 +790,7 @@
                                                                     <span>
                                                                         <b>{{ $item->experience ?? 'Nullable' }}+ Years of {{ collect($item->specialization)->first() ?? 'Not Specified' }} Teaching Experience: Your {{ implode(', ', $item->specialization ?? ['Not Specified']) }} Success, Guaranteed.</b> 
 
-                                                                        - Hello, my name is {{ $item->f_name ?? 'Not Specified' }}. I have {{ $item->experience ?? 'Nullable' }}+ years of experience as a {{ collect($item->specialization)->first() ?? 'Not Specified' }} Teacher & Tutor. 🇬🇧
+                                                                        - Hello, my name is {{ $item->f_name ?? 'Not Specified' }}. I have {{ $item->experience ?? 'Nullable' }}+ years of experience as a {{ collect($item->specialization)->first() ?? 'Not Specified' }} Teacher & Tutor
                                                                         
                                                                     </span>
                                                                     <ul class="read p-0 mt-3">
@@ -1285,6 +1285,84 @@
                                     </div>
                                 </div>
                         </section>
+                        <section class="testimonials">
+                            <div class="AH container">
+                                     <div class="ad-heading-div-child">
+                                        <h2 class="text-center mt-3 fw-bold">{{ __('Expert Educators') }}</h2>
+                                     </div>
+                                <div class="row">
+                                    <div class="col-sm-12 sm-div ms-lg-0 ms-3">
+                                    <div id="customers-testimonials" class="owl-carousel">
+                                    @foreach ($sliderTutors as $sliderTutor)
+                                        <!--TESTIMONIAL 1 -->
+                                        <div class="item">
+                                            <div class="shadow-effect">
+                                            @if (  $item->profileImage) 
+                                                <img class="img-circle" src="{{ asset('storage/' . $sliderTutor->profileImage) }}" alt="">
+                                            @else
+                                                <img src="{{ asset('images/avatar.png') }}" alt="Default Image" class="img-thumbnail" style="height: 150px; width: 100%;">
+                                            @endif
+
+                                                <span>
+                                                @php
+                                                    $specializations = json_decode($sliderTutor->specialization, true);
+                                                @endphp
+                                                 Hello, my name is {{ $sliderTutor->f_name ?? 'Not Specified' }}. I have <b>{{ $sliderTutor->experience ?? 'Nullable' }}</b>+ years of experience as a {{ is_array($specializations) && count($specializations) ? implode(', ', $specializations) : 'Not Specified' }} Teacher & Tutor</span>
+                                            </div>
+                                            <div class="testimonial-name">{{ $sliderTutor->f_name ?? 'Nullable' }} {{ $sliderTutor->l_name ?? 'Nullable' }}</div>
+                                        </div>
+                                    @endforeach
+                                        <!--END OF TESTIMONIAL 1 -->
+                                        <!--TESTIMONIAL 2 -->
+                                        
+                                        <!--END OF TESTIMONIAL 5 -->
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </section>
+                        <section class="w-75 mx-auto">
+                        <div class="keys-heading">
+                            <h2 class="text-center my-4 fw-bold">Our Services</h2>
+                        </div>
+                        <div class="row justify-content-center">
+                      
+                        <!-- Card 1 -->
+                            <div class="col-md-4">
+                            <div class="service-card h-100">
+                                <div class="service-icon">
+                                <img src="https://img.icons8.com/ios-filled/50/ffffff/classroom.png" alt="Online Tutors">
+                                </div>
+                                <h5 class="service-title">Online Tutors</h5>
+                                <p class="service-text">"Get personalized, one-on-one tutoring from certified educators—anytime, anywhere. We help learners of all ages master subjects with clarity and confidence."</p>
+                            </div>
+                            </div>
+
+                            <!-- Card 2 -->
+                            <div class="col-md-4">
+                            <div class="service-card h-100">
+                                <div class="service-icon">
+                                <img src="https://img.icons8.com/ios-filled/50/ffffff/laptop.png" alt="Online Classes">
+                                </div>
+                                <h5 class="service-title">Online Classes</h5>
+                                <p class="service-text">"Interactive, expert-led online classes designed to fit your schedule. Learn new skills, upgrade your knowledge, and achieve your goals from the comfort of your home."</p>
+                            </div>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div class="col-md-4">
+                            <div class="service-card h-100">
+                                <div class="service-icon">
+                                <img src="https://img.icons8.com/ios-filled/50/ffffff/customer-support.png" alt="Support">
+                                </div>
+                                <h5 class="service-title">Support</h5>
+                                <p class="service-text">"24/7 dedicated support to ensure your experience is smooth and stress-free. We're here to solve problems, answer questions, and keep you moving forward."</p>
+                            </div>
+                            </div>
+                       
+                        </div>
+                    </section>
+                    
                         <section class="fb-ad ">
                             <div class="ad-line"></div>
                             <div class="im-heading">
@@ -1390,106 +1468,7 @@
                                 
                          
                     </section>
-                    <section class="w-75 mx-auto">
-                        <div class="keys-heading">
-                            <h2 class="text-center my-4 fw-bold">Our key services</h2>
-                        </div>
-                        <div class="row justify-content-center">
-                      
-                        <!-- Card 1 -->
-                            <div class="col-md-4">
-                            <div class="service-card h-100">
-                                <div class="service-icon">
-                                <img src="https://img.icons8.com/ios-filled/50/ffffff/classroom.png" alt="Online Tutors">
-                                </div>
-                                <h5 class="service-title">Online Tutors</h5>
-                                <p class="service-text">"Get personalized, one-on-one tutoring from certified educators—anytime, anywhere. We help learners of all ages master subjects with clarity and confidence."</p>
-                            </div>
-                            </div>
-
-                            <!-- Card 2 -->
-                            <div class="col-md-4">
-                            <div class="service-card h-100">
-                                <div class="service-icon">
-                                <img src="https://img.icons8.com/ios-filled/50/ffffff/laptop.png" alt="Online Classes">
-                                </div>
-                                <h5 class="service-title">Online Classes</h5>
-                                <p class="service-text">"Interactive, expert-led online classes designed to fit your schedule. Learn new skills, upgrade your knowledge, and achieve your goals from the comfort of your home."</p>
-                            </div>
-                            </div>
-
-                            <!-- Card 3 -->
-                            <div class="col-md-4">
-                            <div class="service-card h-100">
-                                <div class="service-icon">
-                                <img src="https://img.icons8.com/ios-filled/50/ffffff/customer-support.png" alt="Support">
-                                </div>
-                                <h5 class="service-title">Support</h5>
-                                <p class="service-text">"24/7 dedicated support to ensure your experience is smooth and stress-free. We're here to solve problems, answer questions, and keep you moving forward."</p>
-                            </div>
-                            </div>
-                       
-                        </div>
-                    </section>
-                        <section class="testimonials">
-                            <div class="AH container">
-                                     <div class="ad-heading-div-child">
-                                        <h2 class="text-center mt-3 fw-bold">{{ __('messages.Testimonials') }}</h2>
-                                     </div>
-                                <div class="row">
-                                    <div class="col-sm-12 sm-div ms-lg-0 ms-3">
-                                    <div id="customers-testimonials" class="owl-carousel">
-
-                                        <!--TESTIMONIAL 1 -->
-                                        <div class="item">
-                                        <div class="shadow-effect">
-                                            <img class="img-circle" src="images/profile_dp.png" alt="">
-                                            <p>{{ __('messages.Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.') }}</p>
-                                        </div>
-                                        <div class="testimonial-name">EMILIANO AQUILANI</div>
-                                        </div>
-                                        <!--END OF TESTIMONIAL 1 -->
-                                        <!--TESTIMONIAL 2 -->
-                                        <div class="item">
-                                        <div class="shadow-effect">
-                                            <img class="img-circle" src="images/profile_dp.png" alt="">
-                                            <p>{{ __('messages.Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.') }}</p>
-                                        </div>
-                                        <div class="testimonial-name">ANNA ITURBE</div>
-                                        </div>
-                                        <!--END OF TESTIMONIAL 2 -->
-                                        <!--TESTIMONIAL 3 -->
-                                        <div class="item">
-                                        <div class="shadow-effect">
-                                            <img class="img-circle" src="images/profile_dp.png" alt="">
-                                            <p>{{ __('messages.Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.') }}</p>
-                                        </div>
-                                        <div class="testimonial-name">LARA ATKINSON</div>
-                                        </div>
-                                        <!--END OF TESTIMONIAL 3 -->
-                                        <!--TESTIMONIAL 4 -->
-                                        <div class="item">
-                                        <div class="shadow-effect">
-                                            <img class="img-circle" src="images/profile_dp.png" alt="">
-                                            <p>{{ __('messages.Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.') }}</p>
-                                        </div>
-                                        <div class="testimonial-name">IAN OWEN</div>
-                                        </div>
-                                        <!--END OF TESTIMONIAL 4 -->
-                                        <!--TESTIMONIAL 5 -->
-                                        <div class="item">
-                                        <div class="shadow-effect">
-                                            <img class="img-circle" src="images/profile_dp.png" alt="">
-                                            <p>{{ __('messages.Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate.') }}</p>
-                                        </div>
-                                        <div class="testimonial-name">{{ __('messages.MICHAEL TEDDY') }}</div>
-                                        </div>
-                                        <!--END OF TESTIMONIAL 5 -->
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </section>
+                    
                 </div>
     
     
