@@ -84,8 +84,8 @@ class TutorController extends Controller
         $countries_number_length = collect(config('countries_number_length.countries'));
         $countries_prefix = collect(config('countries_prefix.countries'));
         return view('newhome', [
-            'blogs'=>$blogs,
-            'sliderTutors'=>$sliderTutors,
+            'blogs' => $blogs,
+            'sliderTutors' => $sliderTutors,
             'tutors' => $tutors,
             'subjectsTeach' => $subjectsTeach,
             'totalTutorsCount' => $totalTutorsCount,
@@ -543,20 +543,51 @@ class TutorController extends Controller
         return redirect()->back()->with('success', 'Tutor and associated user deleted successfully.');
     }
     public function teacher_dashboard(Request $request, $id)
-    {
-        $tutor = Tutor::find($id);
+{
+    $tutor = Tutor::find($id);
 
-        if (!$tutor) {
-            return redirect()->route('basicsignup')->with('error', 'Tutor not found.');
-        }
-
-        // Ensure the user exists before logging in
-        if ($tutor->user_id && Auth::loginUsingId($tutor->user_id)) {
-            return view('teacher_dashboard', compact('tutor'))->with('success', 'Welcome to your dashboard!');
-        }
-
-        return redirect()->route('basicsignup')->with('error', 'Authentication failed.');
+    if (!$tutor) {
+        return redirect()->route('basicsignup')->with('error', 'Tutor not found.');
     }
+
+    $tutorSubjects = unserialize($tutor->teaching);
+
+    // Clean and decode data
+    $storedCountryCode = trim($tutor->country);
+    $tutor->country_name = config("countries_assoc.countries.$storedCountryCode", 'Unknown');
+
+    $language = json_decode($tutor->language, true);
+    $tutor->language = is_array($language) ? $language : [];
+
+    $specialization = json_decode($tutor->specialization, true);
+    $tutor->specialization = is_array($specialization) && !empty($specialization) ? $specialization : ['Not Specified'];
+
+    if ($tutor->dob) {
+        $dob = Carbon::parse($tutor->dob);
+        $tutor->dob = $dob->format('d-m-Y');
+        $tutor->age = $dob->age;
+    } else {
+        $tutor->age = null;
+    }
+
+    // Find matching students
+    $students = Student::where(function ($query) use ($tutorSubjects) {
+        foreach ($tutorSubjects as $subject) {
+            $query->orWhere('subject', 'LIKE', "%$subject%");
+        }
+    })->get();
+
+    // Authenticate and show dashboard
+    if ($tutor->user_id && Auth::loginUsingId($tutor->user_id)) {
+        return view('teacher_dashboard', [
+            'tutor' => $tutor,
+            'students' => $students
+        ])->with('success', 'Welcome to your dashboard!');
+    }
+
+    return redirect()->route('basicsignup')->with('error', 'Authentication failed.');
+}
+
 
     public function fetchTeachers(Request $request)
     {
@@ -568,7 +599,8 @@ class TutorController extends Controller
         $mail = new PHPMailer(true);
         $pass = env('email_pass');
         $name = env('email_name');
-        try { $mail->isSMTP(); // Add this line!
+        try {
+            $mail->isSMTP(); // Add this line!
 
             // Load SMTP settings from Laravel .env
             $mail->Host = 'smtp.hostinger.com';
@@ -1112,9 +1144,9 @@ class TutorController extends Controller
         $this->sendEmail($toTutor, $subjectTutor, $messageTutor);
 
         return redirect()->route('teacher_dashboard', ['id' => $tutor->id])
-                ->with('success', 'Tutor created successfully and logged in.');
+            ->with('success', 'Tutor created successfully and logged in.');
     }
-    
+
     public function destroy($id)
     {
         // Find the tutor by ID

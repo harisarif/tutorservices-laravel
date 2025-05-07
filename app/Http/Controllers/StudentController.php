@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Tutor;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Student;
@@ -54,8 +55,7 @@ class StudentController extends Controller
 
                 return response()->json(['success' => 'Inquires deleted successfully.']);
             }
-            
-    public function getCities(Request $request)
+        public function getCities(Request $request)
     {
         $countryCode = $request->query('country');
         $cities = config('cities.cities')[$countryCode] ?? [];
@@ -123,8 +123,14 @@ class StudentController extends Controller
         $rules = [
             'email' => 'required|string|email|max:255|unique:student,email',
             'password' => 'required|min:8',
-            'c_password' => 'required|min:8|same:password',
-        ];
+            'c_password' => 'required|min:8|same:password',  
+            'phone' => 'nullable|string|max:20',// checks c_password too
+            'subjects' => 'nullable|string|max:255',
+            'country' => 'nullable|string|max:100',
+            'city' => 'nullable|string|max:100',
+            'subject' => 'required|string|max:255',
+            ];
+        
     
         $validator = Validator::make($request->all(), $rules);
 
@@ -195,17 +201,99 @@ class StudentController extends Controller
         $this->sendEmail($student->email, $subjectAdmin, $messageAdmin);
         
         
-        Auth::login($user);
+        if ($user->role === 'user') {
+            Auth::login($user);
+            return redirect()->route('student_dashboard', ['id' => $student->id])
+                ->with('success', 'Tutor created successfully and logged in.');
+        }
 
         // Redirect to the "hire us" page
-        return redirect()->route('hiring-tutor')->with(compact('user'));
+        return redirect()->route('newhome')->with(compact('user'));
 
         // Optionally, you can redirect the user or return a response
         // return redirect()->route('newhome')->with('success', 'Student created successfully.');
     }
-    public function viewHire(){
-        return redirect()->route('hiring-tutor');
+    public function student_dashboard(Request $request, $id)
+    {
+        $user = Auth::user();
+    
+        if ($user && $user->role === 'user') {
+            $student = Student::find($id);
+    
+            if (!$student) {
+                return redirect()->route('basicsignup')->with('error', 'Student not found.');
+            }
+    
+            // Get all tutors
+            $tutors = Tutor::all();
+    
+            // Match tutors based on student subject
+            $matchedTutors = $tutors->filter(function ($tutor) use ($student) {
+                $subjects = @unserialize($tutor->teaching);
+                if (!is_array($subjects)) return false;
+    
+                foreach ($subjects as $subject) {
+                    if (stripos($student->subject, $subject) !== false) {
+                        return true;
+                    }
+                }
+    
+                return false;
+            });
+    
+            $tutors->each(function ($tutor) {
+                $storedCountryCode = trim($tutor->country); // Remove any unwanted spaces/newline
+                // Get country code
+                $tutor->country_name = config("countries_assoc.countries.$storedCountryCode", 'Unknown'); // Convert to full name
+                // Debug Language Decoding
+                $language = json_decode($tutor->language, true);
+    
+                if (!is_array($language)) {
+                    \Log::error("Language decoding failed for Tutor ID: {$tutor->id}, Raw Data: " . $tutor->language);
+                    $tutor->language = []; // Fallback to empty array
+                } else {
+                    $tutor->language = $language;
+                }
+                // Deserialize subjects safely
+    
+                $tutor->specialization = json_decode($tutor->specialization, true);
+    
+                // Ensure it's an array
+                if (!is_array($tutor->specialization) || empty($tutor->specialization)) {
+                    $tutor->specialization = ['Not Specified'];
+                }
+    
+                // Process Profile Image (Check if exists)
+    
+                // $tutor->profileImage = trim(preg_replace('/\s+/', '', $tutor->profileImage)); // Remove spaces & new lines
+    
+                // if (!empty($tutor->profileImage) && file_exists(public_path('storage/' . $tutor->profileImage))) {
+                //     $tutor->profileImages = asset('storage/' . $tutor->profileImage);
+                // } else {
+                //     $tutor->profileImage = asset('default-profile.png');
+                // }
+    
+    
+                // Calculate age if DOB exists
+                if ($tutor->dob) {
+                    $dob = Carbon::parse($tutor->dob);
+                    $tutor->dob = $dob->format('d-m-Y'); // Convert DOB to "DD-MM-YYYY"
+                    $tutor->age = $dob->age;
+                } else {
+                    $tutor->age = null; // Default value
+                }
+            });
+    
+            return view('hired-tutor', [
+                'student' => $student,
+                'tutors' => $matchedTutors,
+            ])->with('success', 'Welcome to your dashboard.');
+        }
+    
+        return redirect()->route('newhome')->with('error', 'Unauthorized access.');
     }
+    
+
     public function newcreate(Request $request) {
             $rules = [
                         'email' => 'required|string|email|max:255|unique:student,email',
@@ -289,7 +377,7 @@ class StudentController extends Controller
                 $mail->Port = 587;
 
                 // Recipients
-                $mail->setFrom('ceo@edexceledu.com', 'Edexcel'); // Use direct values here
+               $mail->setFrom($name, 'Edexcel'); // Use direct values here
                 $mail->addAddress($to);
 
                 // Content

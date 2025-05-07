@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@php
+                        $languages = is_array($tutor->language) ? $tutor->language : json_decode($tutor->language, true);
+                    @endphp
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="education, online courses, learning, tutoring, e-learning, eduexceledu">
@@ -115,7 +117,7 @@
     .custom-select {
         cursor: pointer;
         /* display: flex;
-        align-items: center; */
+        align-tutors: center; */
     }
     .dropdown-container {
     position: relative;
@@ -392,11 +394,40 @@
                     <div class="col-md-2">
                         <div id="waste1">
                             <div class="img-wrapper1">
-                                <img src="{{ asset('images/kids.jpg') }}" class="img-fluid" alt="no img">
+                                <div>
+                                    <div class="img-wrapper">
+                                        @if($tutor->profileImage)
+                                            <img src="{{ asset('storage/' . $tutor->profileImage) }}" alt="Tutor Image"
+                                                 class="img-thumbnail" style="height: 150px; width: 100%;">
+                                        @else
+                                            <img src="{{ asset('images/avatar.png') }}" alt="Default Image"
+                                                 class="img-thumbnail" style="height: 150px; width: 100%;">
+                                        @endif
+                                    </div>
+                                    @if($tutor->video)
+                                        <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header" style="background-color: #1cc88a;">
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(2);"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <video controls height="250px" width="100%">
+                                                            <source src="{{ asset('/' . $tutor->video) }}" type="video/mp4">
+                                                            Your browser does not support the video tag.
+                                                        </video>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                             <div class="col-md-4" id="waste" style="display: none;">
-                                <div class="d-flex">
-                                    <h4 class="me-2 fw-bold">Elouise v.</h4>
+                    
+                                    <div class="d-flex align-items-center">
+                                        <h4 class="me-2 fw-bold">{{ $tutor->f_name }} {{ $tutor->l_name }}</h4>
+                            
                                     <span class="me-3"><i class="fa-regular fa-star"></i></span>
                                     <div class="img-wrapper" style="max-width: 30px !important;">
                                         <img src="{{ asset('images/flag.svg') }}" class="img-fluid" alt="no img">
@@ -423,7 +454,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="d-flex" id="ff000">
-                            <h4 class="me-2 fw-bold">Elouise v.</h4>
+                            <!-- Tutor Name -->
+<h4 class="me-2 fw-bold">{{ $tutor->f_name }} {{ $tutor->l_name }}</h4>
                             <span class="me-3"><i class="fa-regular fa-star "></i></span>
                             <div class="img-wrapper">
                                 <img src="{{ asset('images/flag.svg') }}"   class="img-fluid" alt="no img">
@@ -433,30 +465,39 @@
                             <span id="pro" class="p-1 bg-primary-subtle rounded fw-bold">Professional</span>
                         </div> -->
                         <div class="d-flex text-secondary py-1">
-                        <span id="pro" class="p-1 bg-primary-subtle rounded fw-bold text-dark">English</span>
-                           
-                            <div class="d-flex text-secondary pb-1 ms-5">
-                                <span class="me-2"><i class="fas fa-briefcase icon-colored" style="font-size: 13px;color: #1cc88a;margin-top: 5px;"></i></i></span>
-                                <p class="mb-0">3 years experience</p>
-                            </div>
+                        <span id="pro" class="p-1 bg-primary-subtle rounded fw-bold text-dark">{{ collect($tutor->specialization)->first() ?? 'Not Specified' }}</span>
+        
                         </div>
                         <div class="d-flex text-secondary pb-1">
-                            <div class="d-flex text-secondary pb-1">
+                            
                                 <span class="me-2"><i class="fa-solid fa-user-graduate" style="font-size: 13px;color: #1cc88a;margin-top: 5px;"></i></span>
-                                <p class="mb-0">physics</p>
-                                <div class="d-flex" id="calendericon">
-                                    <span class="me-1"><i class="fa-solid fa-calendar-days" style="font-size: 13px;color: #1cc88a;margin-top: 5px;"></i></span>
-                                    <p class="mb-0">19-02-1984</p>
-                                </div>
-                            </div>
-                        </div>
+                               <!-- Phone -->
+                        <p class="mb-0">{{ $tutor->phone ?? 'Not Provided' }}</p>
+                        </div> 
+                    
+                    <div class="d-flex text-secondary pb-1">
+                        <span class="me-2">
+                            <i class="fa-solid fa-language me-1" style="font-size: 13px; color: #1cc88a; margin-top: 5px;"></i>
+                        </span>
+                        @if(!empty($languages))
+                            @foreach($languages as $index => $lang)
+                                {{ $lang['language'] ?? 'Unknown' }} ({{ $lang['level'] ?? 'Unknown' }})@if(!$loop->last), @endif
+                            @endforeach
+                        @else
+                            Nullable
+                        @endif
+                    </div>
+                    
                         <div class="d-flex text-secondary pb-1">
                             <span class="me-2"><i class="fa-solid fa-phone-volume" style="font-size: 13px;color: #1cc88a;margin-top: 5px;"></i></span>
-                            <p class="mb-0">097-123-456-789</p>
+                           <!-- DOB -->
+                       <p class="mb-0">{{ $tutor->dob ?? 'Not Provided' }}</p>
+
                         </div>
                         <div class="d-flex text-secondary">
                             <span class="me-2"><i class="fa-solid fa-user" style="font-size: 13px;color: #1cc88a;margin-top: 5px;"></i></span>
-                            <p class="mb-0">17 active students • 8 lessons</p>
+                            <!-- Experience -->
+<p class="mb-0">{{ $tutor->experience ?? 'N/A' }} years experience</p>
                         </div>
                         <!-- <div class="d-flex text-secondary py-2">
                             <span class="me-2"><i class="fa-solid fa-language" style="font-size: 13px;"></i></span>
@@ -469,7 +510,12 @@
 
                         <div class="py-2">
                             <span class="text-secondary">
-                                I am <b>Haris</b>, with <b>two years of experience</b> in the field of <b>Physics</b>. I have a basic proficiency <b>(A2 level)</b> in <b>English</b>.and completed my education at the <b>National University of Sciences and Technology</b>.
+                                I am <b>{{ $tutor->f_name }}</b>, with <b>{{ $tutor->experience ?? 'N/A' }} years of experience</b> 
+                                in the field of <b>{{ collect($tutor->specialization)->first() ?? 'Not Specified' }}</b>.
+                                I have a basic proficiency <b>(A2 level)</b> in 
+                                <b>{{ $tutor->language[0]['language'] ?? 'English' }}</b>.
+                                and completed my education at the 
+                                <b>{{ $tutor->university ?? 'Not Specified' }}</b>.
                             </span>
                             <ul class="read p-0 mt-3">
                                 <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
@@ -514,9 +560,30 @@
                     <video src="{{asset('images/video.mp4')}}" class="object-fit-cover m-0" autoplay muted loop width="100%"></video>
                 </div>
         </div>
-    </div>
+    </div>   
 </section>
-        <!--  -->
+<div class="row ms-4">
+    <div class="col-xl-8 col-lg-10">
+        <div class="p-4" style="border:3px solid #1cc88a;">
+            <h5 class="fw-bold text-success mb-3"><i class="fa-solid fa-user me-2"></i>Student Information</h5>
+
+            <div class="row">
+                <div class="col-md-6">@foreach($students as $student)
+                    <p class="mb-1"><strong>Name:</strong> {{ $student->name ?? 'N/A' }}</p>
+                    <p class="mb-1"><strong>Contact Email:</strong> {{ $student->c_email ?? 'N/A' }}</p>
+                    <p class="mb-1"><strong>Subject:</strong> {{ $student->subject ?? 'N/A' }}</p>
+                    <p class="mb-1"><strong>Phone:</strong> {{ $student->phone ?? 'N/A' }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="mb-1"><strong>Country:</strong> {{ $student->country ?? 'N/A' }}</p>
+                    <p class="mb-1"><strong>City:</strong> {{ $student->city ?? 'N/A' }}</p>
+                    <p class="mb-1"><strong>Teach By:</strong> {{ $student->subjects ?? 'N/A' }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
 
         <!-- <section>
             <div class="row g-3">
