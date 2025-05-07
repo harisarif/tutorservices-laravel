@@ -1,0 +1,103 @@
+.blog-description {
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+
+
+.modalBox{
+    display: none !important;
+}
+
+@media (max-width: 940px) {
+.container {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+}
+@media (max-width: 425px) {
+    .links-footer{
+        text-align: justify;
+        width: 100% !important;
+    }
+    .cards-div{
+        margin: 7% 0;
+    }
+    .ad-heading-div{
+        border-radius: 0 !important;
+    }
+}
+.links-footer{
+    width: 1100px;
+}
+.custom-select-wrapper {
+    position: relative;
+    display: flex;
+    cursor: pointer;
+    text-align: justify;
+  }
+  [dir="rtl"] .custom-select-web  {
+    margin-left: 25px;
+    }
+#language-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: var(--primary-color) !important;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 12px;
+    color: #333;
+    width: 95px;
+    max-width: 95px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.custom-options-web {
+    display: none;
+    position: absolute;
+    top: 30px;
+    left: -109px;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+[dir="rtl"] .ad-heading-div{
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 170px;
+}
+[dir="rtl"] .custom-options-web {
+    left: 10px;
+}
+.custom-options.open {
+    display: block;
+}
+.custom-options-web.open {
+    display: block;
+}
+.fa-globe{
+    margin-left: -50px;
+}
+[dir="rtl"] .main-footer  {
+    text-align: justify;
+}
+.ad-heading-div {
+    background-color: #fafafa;
+    border-bottom-right-radius: 170px;
+}
+.fb-ad {
+    margin: 0 5%;
+}
+.ad-line-child {
+    border: 5px solid #42b979;
+    width: 60px;
+    margin: 10px 0;
+}

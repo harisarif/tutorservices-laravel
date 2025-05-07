@@ -222,7 +222,15 @@
 .custom-alert .close-btn:hover {
     color: #42b979;
 }
-
+.blog-text {
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
 .fade-out {
     opacity: 0;
     transform: translateY(-10px);
@@ -1222,70 +1230,7 @@
                                     </div>
                         </div>
                     </div>
-                    
-                    <section class="ad-Tutor " >
-                            <div class="im-heading py-3">
-                                <h2>{{ __('messages.Become A Tutor') }}</h2>
-                            </div>
-                            <div class="AE row border mx-0" >
-                                <div class="col-lg-6 col-sm-6 im-div p-0">
-                                    <div class="im-img">
-                                        <img src="images/group.png" alt="">
-                                    </div>
-                                </div>
-
-                                <div class="col-6 ad-div-child">
-                                    <div class="im-heading-div text-white mt-4">
-                                        <h1 class="text-white fw-bold ">{{ __('messages.Guide and Inspire Learners') }}</h1>
-                                        <p class="mx-md-2 mx-sm-0">{{ __('messages.Earn while you teach—share your expertise with students on Edexcel. Sign up to start tutoring online.') }}</p>
-
-                                        <div class="im-detail">
-                                            <ul class="mt-lg-5 mt-md-3 mt-sm-0">
-                                                <li class="AH fs-5 mx-3">{{ __('messages.Expand Your Student Base') }}</li>
-                                                <li class="AH fs-5 mx-3">{{ __('messages.Boost Your Business') }}</li>
-                                                <li class="AH fs-5 mx-3">{{ __('messages.Guaranteed Payment Security') }}</li>
-                                            </ul>
-                                        </div>
-                                        <div class="im-button d-flex mx-3 mb-lg-0 mb-2">
-                                        <a href="{{route('tutor')}}" class="btn btn-light bg-white my-lg-5 my-sm-3  fs-lg-6 fs-sm-3" style="color : #42b979;">{{ __('messages.Register yourself as a professional teacher') }} <i class="fa-solid fa-arrow-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        <section class="Ed-max d-none">
-                                 <div class="mx-heading-div py-4">
-                                    <h2>{{ __('messages.Recomendation') }}</h2>
-                                </div>
-                                <div class="mx-cont row">
-                                    <div class="ed col-lg-6 col-sm-3 mx-2">
-                                        <div class="Ab-img my-3 mx-2">
-                                            <img src="images/group-of-kids.jpg" alt="">
-                                        </div>
-                                        <div class="mx-detail">
-                                            <p class="fs-5">{{ __('messages.Edexcels operating system is exceptionally robust and holds the collective knowledge of Selectra entire business operations') }}</p>
-                                            <div class="video-div">
-                                                <div class="zwc-testimonial-video">
-                                                    <img data-lazy="" src="images/profile_dp.png" alt="" class="data-loaded"> <span><i class="fa-brands fa-youtube" aria-hidden="true" style="color: red;font-size: 20px;"></i>Watch video</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="ed-div col-lg-5 col-sm-3">
-                                        <div class="mx-div">
-                                            <h3 class="text-white fs-1 ny-3">{{ __('messages.Edexcel for Study') }}</h3>
-                                        </div>
-                                        <div class="mx-para">
-                                            <p class="text-white my-4">{{ __('messages.Edexcel for Study offers a diverse range of qualifications, including GCSEs and A-levels, designed to support students academic and professional aspirations. With a focus on critical thinking and practical skills, Edexcel provides high-quality education that prepares learners for further studies or careers, empowering them to excel in their chosen paths.') }}</p>
-                                        </div>
-                                        <div class="mx-button">
-                                            <button type="button" class="btn ">{{ __('messages.Get in Touch') }} <i class="fa-solid fa-angle-right" aria-hidden="true"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                        </section>
-                        <section class="w-100 mx-auto">
+                    <section class="w-100 mx-auto">
                             
                                      <div class="ad-heading-div-child">
                                         <h2 class="text-center mt-3 fw-bold">{{ __('Expert Educators') }}</h2>
@@ -1337,48 +1282,68 @@
                                         </div>
                                         </div>
                                     </div>
-                    </section>
+                        </section>
+                        
+                        <section class="ad-Tutor " >
+                            <div class="im-heading py-3">
+                                <h2>{{ __('messages.Become A Tutor') }}</h2>
+                            </div>
+                            <div class="AE row border mx-0" >
+                                <div class="col-lg-6 col-sm-6 im-div p-0">
+                                    <div class="im-img">
+                                        <img src="images/group.png" alt="">
+                                    </div>
+                                </div>
+
+                                <div class="col-6 ad-div-child">
+                                    <div class="im-heading-div text-white mt-4">
+                                        <h1 class="text-white fw-bold ">{{ __('messages.Guide and Inspire Learners') }}</h1>
+                                        <p class="mx-md-2 mx-sm-0">{{ __('messages.Earn while you teach—share your expertise with students on Edexcel. Sign up to start tutoring online.') }}</p>
+
+                                        <div class="im-detail">
+                                            <ul class="mt-lg-5 mt-md-3 mt-sm-0">
+                                                <li class="AH fs-5 mx-3">{{ __('messages.Expand Your Student Base') }}</li>
+                                                <li class="AH fs-5 mx-3">{{ __('messages.Boost Your Business') }}</li>
+                                                <li class="AH fs-5 mx-3">{{ __('messages.Guaranteed Payment Security') }}</li>
+                                            </ul>
+                                        </div>
+                                        <div class="im-button d-flex mx-3 mb-lg-0 mb-2">
+                                        <a href="{{route('tutor')}}" class="btn btn-light bg-white my-lg-5 my-sm-3  fs-lg-6 fs-sm-3" style="color : #42b979;">{{ __('messages.Register yourself as a professional teacher') }} <i class="fa-solid fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        @if($blogs->count() > 0)
                         <section class="w-75 mx-auto">
-                        <div class="keys-heading">
-                            <h2 class="text-center my-4 fw-bold">Our Services</h2>
-                        </div>
-                        <div class="row justify-content-center">
-                      
-                        <!-- Card 1 -->
-                            <div class="col-md-4">
-                            <div class="service-card h-100">
-                                <div class="service-icon">
-                                <img src="https://img.icons8.com/ios-filled/50/ffffff/classroom.png" alt="Online Tutors">
-                                </div>
-                                <h5 class="service-title">Online Tutors</h5>
-                                <p class="service-text">"Get personalized, one-on-one tutoring from certified educators—anytime, anywhere. We help learners of all ages master subjects with clarity and confidence."</p>
-                            </div>
-                            </div>
-
-                            <!-- Card 2 -->
-                            <div class="col-md-4">
-                            <div class="service-card h-100">
-                                <div class="service-icon">
-                                <img src="https://img.icons8.com/ios-filled/50/ffffff/laptop.png" alt="Online Classes">
-                                </div>
-                                <h5 class="service-title">Online Classes</h5>
-                                <p class="service-text">"Interactive, expert-led online classes designed to fit your schedule. Learn new skills, upgrade your knowledge, and achieve your goals from the comfort of your home."</p>
-                            </div>
-                            </div>
-
-                            <!-- Card 3 -->
-                            <div class="col-md-4">
-                            <div class="service-card h-100">
-                                <div class="service-icon">
-                                <img src="https://img.icons8.com/ios-filled/50/ffffff/customer-support.png" alt="Support">
-                                </div>
-                                <h5 class="service-title">Support</h5>
-                                <p class="service-text">"24/7 dedicated support to ensure your experience is smooth and stress-free. We're here to solve problems, answer questions, and keep you moving forward."</p>
-                            </div>
-                            </div>
-                       
-                        </div>
-                    </section>
+                            
+                                     <div class="ad-heading-div-child">
+                                        <h2 class="text-center mt-3 fw-bold">{{ __('Trending Posts') }}</h2>
+                                     </div>
+                                     <div class="row g-4">
+                                        <!-- Card 1 -->
+                                        @foreach ($blogs as $blog)
+                                        <div class="col-md-4">
+                                            <div class="blog-card">
+                                                <!-- <div class="blog-number">01</div> -->
+                                                <div class="blog-title">{{ $blog->title }}</div>
+                                                @if($blog->image)
+                                                <div class="blog-image">
+                                                <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}">
+                                                </div>
+                                                @endif
+                                                <p class="blog-text">{{ strip_tags($blog->description) }}</p>
+                                                <div class="d-flex">
+                                                    <small class="text-start">{{ $blog->created_at->diffForHumans() }}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                        </section>
+                        @endif
+                        
+                        
                     
                         <section class="fb-ad ">
                             <div class="ad-line"></div>
@@ -1386,105 +1351,146 @@
                                 <h2 class="mx-heading-div py-3">Frequently Asked  Questions</h2>
                             </div>
                         </section>
-                    <section class="w-75 mx-auto">
-                            <div>
-                                        <div class="list-group-item border rounded my-2 px-2">
-                                            <div class="d-flex justify-content-between align-items-center"
-                                                onclick="toggle('para','toggle-arrow')">
-                                                <h6 class="fw-bold py-3 faq-heading">
-                                                {{ __('messages.How can students improve their knowledge?') }}
-                                                </h6>
-                                                <i class="fa fa-chevron-down" id="toggle-arrow"></i>
+                        <section class="w-75 mx-auto">
+                                <div>
+                                            <div class="list-group-item border rounded my-2 px-2">
+                                                <div class="d-flex justify-content-between align-items-center"
+                                                    onclick="toggle('para','toggle-arrow')">
+                                                    <h6 class="fw-bold py-3 faq-heading">
+                                                    {{ __('messages.How can students improve their knowledge?') }}
+                                                    </h6>
+                                                    <i class="fa fa-chevron-down" id="toggle-arrow"></i>
+                                                </div>
+                                                <div id="para" style="height:auto;">
+                                                    <p>
+                                                    {{ __('messages.Students can improve their knowledge and skills in a number of ways like:') }}
+                                                    </p>
+                                                    <ul>
+                                                        <li> {{ __('messages.Practicing solutions regularly.') }}</li>
+                                                        <li>
+                                                        {{ __('messages.Understand the underlying concepts/formulas clearly.') }}
+                                                        </li>
+                                                        <li>{{ __('messages.Solving additional exercises.') }}</li>
+                                                        <li>{{ __('messages.Sharing a positive attitude about the subject.') }}</li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                            <div id="para" style="height:auto;">
-                                                <p>
-                                                {{ __('messages.Students can improve their knowledge and skills in a number of ways like:') }}
-                                                </p>
-                                                <ul>
-                                                    <li> {{ __('messages.Practicing solutions regularly.') }}</li>
-                                                    <li>
-                                                    {{ __('messages.Understand the underlying concepts/formulas clearly.') }}
-                                                    </li>
-                                                    <li>{{ __('messages.Solving additional exercises.') }}</li>
-                                                    <li>{{ __('messages.Sharing a positive attitude about the subject.') }}</li>
-                                                </ul>
+                                            <div class="list-group-item border rounded my-2 px-2">
+                                                <div class="d-flex justify-content-between align-items-center"
+                                                    onclick="toggle('para1','toggle-arrow1')">
+                                                    <h6 class="fw-bold py-3 faq-heading">
+                                                    {{ __('messages.How can tutors help students improve their score and skills?') }}
+                                                    </h6>
+                                                    <i class="fa fa-chevron-down" id="toggle-arrow1"></i>
+                                                </div>
+                                                <div id="para1">
+                                                    <p>
+                                                    {{ __('messages.There are many ways students can improve their skills. But experienced tutors in Dubai can help to:') }}
+                                                    </p>
+                                                    <ul>
+                                                        <li>{{ __('messages.Build confidence in the student.') }}</li>
+                                                        <li>{{ __('messages.Encourage questioning and make space for curiosity.') }}</li>
+                                                        <li>{{ __('messages.Emphasize conceptual understanding over procedure.') }}</li>
+                                                        <li>
+                                                        {{ __('messages. Provide authentic problems that increase students’ drive to engage with the subject.') }}
+                                                        </li>
+                                                        <li>{{ __('messages.Share a positive attitude about the subject.') }}</li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="list-group-item border rounded my-2 px-2">
-                                            <div class="d-flex justify-content-between align-items-center"
-                                                onclick="toggle('para1','toggle-arrow1')">
-                                                <h6 class="fw-bold py-3 faq-heading">
-                                                {{ __('messages.How can tutors help students improve their score and skills?') }}
-                                                </h6>
-                                                <i class="fa fa-chevron-down" id="toggle-arrow1"></i>
-                                            </div>
-                                            <div id="para1">
-                                                <p>
-                                                {{ __('messages.There are many ways students can improve their skills. But experienced tutors in Dubai can help to:') }}
-                                                </p>
-                                                <ul>
-                                                    <li>{{ __('messages.Build confidence in the student.') }}</li>
-                                                    <li>{{ __('messages.Encourage questioning and make space for curiosity.') }}</li>
-                                                    <li>{{ __('messages.Emphasize conceptual understanding over procedure.') }}</li>
-                                                    <li>
-                                                    {{ __('messages. Provide authentic problems that increase students’ drive to engage with the subject.') }}
-                                                    </li>
-                                                    <li>{{ __('messages.Share a positive attitude about the subject.') }}</li>
-                                                </ul>
-                                            </div>
-                                        </div>
 
-                                        <div class="list-group-item border rounded my-2 px-2">
-                                            <div class="d-flex justify-content-between align-items-center"
-                                                onclick="toggle('para2','toggle-arrow2')">
-                                                <h6 class="fw-bold py-3 faq-heading">
-                                                {{ __('messages.Want to know what we can offer?') }}
-                                                </h6>
-                                                <i class="fa fa-chevron-down" id="toggle-arrow1"></i>
+                                            <div class="list-group-item border rounded my-2 px-2">
+                                                <div class="d-flex justify-content-between align-items-center"
+                                                    onclick="toggle('para2','toggle-arrow2')">
+                                                    <h6 class="fw-bold py-3 faq-heading">
+                                                    {{ __('messages.Want to know what we can offer?') }}
+                                                    </h6>
+                                                    <i class="fa fa-chevron-down" id="toggle-arrow1"></i>
+                                                </div>
+                                                <div id="para2">
+                                                    <p>
+                                                    {{ __('messages.There are many ways students can improve their skills. But experienced tutors in Dubai can help to:') }}
+                                                    </p>
+                                                    <ul>
+                                                        <li>{{ __('messages.Build confidence in the student.') }}</li>
+                                                        <li>{{ __('messages.Encourage questioning and make space for curiosity.') }}</li>
+                                                        <li>{{ __('messages.Emphasize conceptual understanding over procedure.') }}</li>
+                                                        <li>{{ __('messages.EProvide authentic problems that increase students’ drive to engage with the subject.') }}
+                                                            
+                                                        </li>
+                                                        <li>{{ __('messages.Share a positive attitude about the subject.') }}</li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                            <div id="para2">
-                                                <p>
-                                                {{ __('messages.There are many ways students can improve their skills. But experienced tutors in Dubai can help to:') }}
-                                                </p>
-                                                <ul>
-                                                    <li>{{ __('messages.Build confidence in the student.') }}</li>
-                                                    <li>{{ __('messages.Encourage questioning and make space for curiosity.') }}</li>
-                                                    <li>{{ __('messages.Emphasize conceptual understanding over procedure.') }}</li>
-                                                    <li>{{ __('messages.EProvide authentic problems that increase students’ drive to engage with the subject.') }}
+
+                                            <div class="list-group-item border rounded my-2 px-2">
+                                                <div class="d-flex justify-content-between align-items-center"
+                                                    onclick="toggle('para3','toggle-arrow3')">
+                                                    <h6 class="fw-bold py-3 faq-heading">
+                                                    {{ __('messages.If you have tried all means and yet looking for a tutor❓') }}
+                                                    </h6>
+                                                    <i class="fa fa-chevron-down" id="toggle-arrow1"></i>
+                                                </div>
+                                                <div id="para3">
+                                                    <p>{{ __('messages.There are many ways students can improve their skills. But experienced tutors in Dubai can help to:') }}
                                                         
-                                                    </li>
-                                                    <li>{{ __('messages.Share a positive attitude about the subject.') }}</li>
-                                                </ul>
+                                                    </p>
+                                                    <ul>
+                                                        <li>{{ __('messages.Build confidence in the student.') }}</li>
+                                                        <li>{{ __('messages.Encourage questioning and make space for curiosity.') }}</li>
+                                                        <li>{{ __('messages.Emphasize conceptual understanding over procedure.') }}</li>
+                                                        <li>{{ __('messages.Provide authentic problems that increase students’ drive
+                                                            to engage with the subject.') }}
+                                                        </li>
+                                                        <li>>{{ __('messages.Share a positive attitude about the subject.') }}</li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
-
-                                        <div class="list-group-item border rounded my-2 px-2">
-                                            <div class="d-flex justify-content-between align-items-center"
-                                                onclick="toggle('para3','toggle-arrow3')">
-                                                <h6 class="fw-bold py-3 faq-heading">
-                                                {{ __('messages.If you have tried all means and yet looking for a tutor❓') }}
-                                                </h6>
-                                                <i class="fa fa-chevron-down" id="toggle-arrow1"></i>
-                                            </div>
-                                            <div id="para3">
-                                                <p>{{ __('messages.There are many ways students can improve their skills. But experienced tutors in Dubai can help to:') }}
-                                                    
-                                                </p>
-                                                <ul>
-                                                    <li>{{ __('messages.Build confidence in the student.') }}</li>
-                                                    <li>{{ __('messages.Encourage questioning and make space for curiosity.') }}</li>
-                                                    <li>{{ __('messages.Emphasize conceptual understanding over procedure.') }}</li>
-                                                    <li>{{ __('messages.Provide authentic problems that increase students’ drive
-                                                        to engage with the subject.') }}
-                                                    </li>
-                                                    <li>>{{ __('messages.Share a positive attitude about the subject.') }}</li>
-                                                </ul>
-                                            </div>
-                                        </div>
+                                    
+                            
+                        </section>
+                        <section class="w-75 mx-auto">
+                            <div class="keys-heading">
+                                <h2 class="text-center my-4 fw-bold">Our Services</h2>
+                            </div>
+                            <div class="row justify-content-center">
+                        
+                            <!-- Card 1 -->
+                                <div class="col-md-4">
+                                <div class="service-card h-100">
+                                    <div class="service-icon">
+                                    <img src="https://img.icons8.com/ios-filled/50/ffffff/classroom.png" alt="Online Tutors">
                                     </div>
-                                
-                         
-                    </section>
+                                    <h5 class="service-title">Online Tutors</h5>
+                                    <p class="service-text">"Get personalized, one-on-one tutoring from certified educators—anytime, anywhere. We help learners of all ages master subjects with clarity and confidence."</p>
+                                </div>
+                                </div>
+
+                                <!-- Card 2 -->
+                                <div class="col-md-4">
+                                <div class="service-card h-100">
+                                    <div class="service-icon">
+                                    <img src="https://img.icons8.com/ios-filled/50/ffffff/laptop.png" alt="Online Classes">
+                                    </div>
+                                    <h5 class="service-title">Online Classes</h5>
+                                    <p class="service-text">"Interactive, expert-led online classes designed to fit your schedule. Learn new skills, upgrade your knowledge, and achieve your goals from the comfort of your home."</p>
+                                </div>
+                                </div>
+
+                                <!-- Card 3 -->
+                                <div class="col-md-4">
+                                <div class="service-card h-100">
+                                    <div class="service-icon">
+                                    <img src="https://img.icons8.com/ios-filled/50/ffffff/customer-support.png" alt="Support">
+                                    </div>
+                                    <h5 class="service-title">Support</h5>
+                                    <p class="service-text">"24/7 dedicated support to ensure your experience is smooth and stress-free. We're here to solve problems, answer questions, and keep you moving forward."</p>
+                                </div>
+                                </div>
+                        
+                            </div>
+                        </section>
                     
                 </div>
     

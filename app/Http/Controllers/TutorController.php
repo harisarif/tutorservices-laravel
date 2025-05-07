@@ -26,6 +26,7 @@ class TutorController extends Controller
         $query = Tutor::where('status', 'active');
         $sliderTutors = Tutor::where('status', 'active')->take(6)->get();
         $perPage = 5; // Define the number of tutors per page
+        $blogs = Blog::orderBy('created_at', 'desc')->take(3)->get();
 
         // Paginate the results
         $tutors = $query->paginate($perPage);
@@ -83,6 +84,7 @@ class TutorController extends Controller
         $countries_number_length = collect(config('countries_number_length.countries'));
         $countries_prefix = collect(config('countries_prefix.countries'));
         return view('newhome', [
+            'blogs'=>$blogs,
             'sliderTutors'=>$sliderTutors,
             'tutors' => $tutors,
             'subjectsTeach' => $subjectsTeach,
