@@ -197,7 +197,7 @@
                                         <strong style="color:#42b979;">{{ __('messages.Select your Grade') }} <b style="color: red;
                                          font-size: 20px;">*</b></strong>
                                    </label>
-                                <select class="form-control" id="school_class" name="school_class" style="height:50px;">>
+                                <select class="form-control" id="school_class" name="grade" style="height:50px;">>
                                     @foreach($schoolClasses as $schoolClass)
                                     <option value="{{ $schoolClass->id }}">{{ $schoolClass->name }}</option>
                                     @endforeach
@@ -217,14 +217,24 @@
                                 <li onclick="page1List(this)" class="list-group-item text-start">Urdu</li>
                             </ul>
                             
-                            <div class="mx-4" style="text-align: left; width:90%; ">
-                                <!-- <select id="subject" name="subject" class="select form-control">
-                                    <option value="">Select Subject</option>
-                                </select> -->
-                                <label  class="mini-heading" for="" style="padding: 5px; color:42b979;"><strong>{{ __('messages.Subject') }}<b style="color: red;
-                                    font-size: 20px;">*</b></strong></label>
-                                   <input type="text" placeholder="{{ __('messages.Subject') }}" id="inputPassword4" class="form-control py-3" style="height: 53px;">
+                            <div class="form-group mx-4" style="text-align: left; width: 90%;">
+                                <label class="mini-heading" for="subject" style="padding: 5px; color: #42b979;">
+                                    <strong>{{ __('messages.Subject') }}
+                                        <b style="color: red; font-size: 20px;">*</b>
+                                    </strong>
+                                </label>
+                            
+                                <input
+                                    type="text"
+                                    name="subject"
+                                    id="subject"
+                                    class="form-control py-3"
+                                    placeholder="{{ __('messages.Subject') }}"
+                                    style="height: 53px;"
+                                    required
+                                >
                             </div>
+                            
                         </div>
 
                         <!-- page-2 -->
@@ -300,7 +310,7 @@
                             
                             <div class="col-12 px-2 py-2">
                                 <label class="mini-heading" for="curriculum" class="form-label" style="color:#42b979;"><strong>{{ __('messages.Description (Optional)') }}</strong></label>
-                                <textarea class="form-control" id="curriculum" name="reviews" rows="2" placeholder="{{ __('messages.Description') }}" style="box-shadow: none;border: 1px solid #aaa;"></textarea>
+                                <textarea class="form-control" id="curriculum" name="description" rows="2" placeholder="{{ __('messages.Description') }}" style="box-shadow: none;border: 1px solid #aaa;"></textarea>
                             </div>  
                         </div>
 

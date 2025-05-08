@@ -1,5 +1,9 @@
 
-@extends('layouts.app')
+@extends('layouts.app') @php
+$subjects = @unserialize($tutor->teaching);
+$subjectsString = is_array($subjects) ? implode(", ", $subjects) : "No subjects available";
+@endphp
+
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="education, online courses, learning, tutoring, e-learning, eduexceledu">
@@ -411,7 +415,7 @@
             </section>
             
         </section>
-        <div class="row ms-4">
+        <div class="row ms-4 mt-2">
             <div class="col-xl-8 col-lg-10">
                 <div class="p-4" style="border:3px solid #1cc88a;">
                     <h5 class="fw-bold text-success mb-3"><i class="fa-solid fa-user me-2"></i>Student Information</h5>
@@ -419,7 +423,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <p class="mb-1"><strong>Name:</strong> {{ $student->name ?? 'N/A' }}</p>
-                            <p class="mb-1"><strong>Contact Email:</strong> {{ $student->c_email ?? 'N/A' }}</p>
+                            <p class="mb-1"><strong>Contact Email:</strong> {{ $student->email ?? 'N/A' }}</p>
                             <p class="mb-1"><strong>Subject:</strong> {{ $student->subject ?? 'N/A' }}</p>
                             <p class="mb-1"><strong>Phone:</strong> {{ $student->phone ?? 'N/A' }}</p>
                         </div>
@@ -432,181 +436,139 @@
                 </div>
             </div>
         </div>
-        @foreach($tutors as $tutor)<div class="container pt-5">
-            <div class="row ">
-                <div class="col-xl-8 col-lg-12">
-                    <div class="row py-4" style="border:3px solid #1cc88a;">
-                        <div class="col-md-2">
-                            <div id="waste1">
-                                <div class="img-wrapper1">
-                                    <div>
-                                        <div class="img-wrapper">
-                                            @if($tutor->profileImage)
-                                                <img src="{{ asset('storage/' . $tutor->profileImage) }}" alt="Tutor Image"
-                                                     class="img-thumbnail" style="height: 150px; width: 100%;">
-                                            @else
-                                                <img src="{{ asset('images/avatar.png') }}" alt="Default Image"
-                                                     class="img-thumbnail" style="height: 150px; width: 100%;">
-                                            @endif
+        @foreach($matchedTutors as $tutor)<div class="container pt-5">
+            <div class="container mt-2">
+                <div class="row">
+                    <!-- Main Tutor Information Section -->
+                    <div class="col-xl-9 col-lg-12">
+                        <div class="row py-3" style="border:3px solid #1cc88a;">
+                            <!-- Left Column: Tutor Profile Image and Video -->
+                            <div class="col-md-2">
+                                <div id="waste1">
+                                    <div class="img-wrapper1">
+                                        <div>
+                                            <div class="img-wrapper">
+                                                <!-- Tutor Profile Image -->
+                                                @if($tutor->profileImage)
+                                                    <img src="{{ asset('storage/' . $tutor->profileImage) }}" alt="Tutor Image"
+                                                         class="img-thumbnail" style="height: 150px; width: 100%;">
+                                                @else
+                                                    <img src="{{ asset('images/avatar.png') }}" alt="Default Image"
+                                                         class="img-thumbnail" style="height: 150px; width: 100%;">
+                                                @endif
+                                            </div>
                                         </div>
-                                        @if($tutor->video)
-                                            <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header" style="background-color: #1cc88a;">
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(2);"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <video controls height="250px" width="100%">
-                                                                <source src="{{ asset('/' . $tutor->video) }}" type="video/mp4">
-                                                                Your browser does not support the video tag.
-                                                            </video>
-                                                        </div>
+                                    </div>
+            
+                                    <!-- Tutor Video Modal -->
+                                    @if($tutor->video)
+                                        <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header" style="background-color: #1cc88a;">
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(2);"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <video controls height="250px" width="100%">
+                                                            <source src="{{ asset('/' . $tutor->video) }}" type="video/mp4">
+                                                            Your browser does not support the video tag.
+                                                        </video>
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="col-md-4" id="waste" style="display: none;">
-                        
-                                        <div class="d-flex align-items-center">
-                                            <h4 class="me-2 fw-bold">{{ $tutor->f_name }} {{ $tutor->l_name }}</h4>
-                                
-                                        <span class="me-3"><i class="fa-regular fa-star"></i></span>
-                                        <div class="img-wrapper" style="max-width: 30px !important;">
-                                            <img src="{{ asset('images/flag.svg') }}" class="img-fluid" alt="no img">
                                         </div>
-                                    </div>
-                                    <div class="d-flex mt-md-5 mt-2" id="for-320">
-                                        <div class="me-md-5 me-3" id="new">
-                                            <div class="d-flex text-center">
-                                                <span class=""><i class="fa-regular fa-star text-warning"></i></span>
-                                                <h4 class="fw-bold mb-0">5</h4>
-                                            </div>
-                                            <p class="text-secondary fs-6">5reviews</p>
-                                        </div>
-                                        <div class="me-md-5 me-2" id="dollar">
-                                            <h4 class="fw-bold mb-0">US$16</h4>
-                                            <p class="text-secondary fs-6 ">50-min lesson</p>
-                                        </div>
-                                        <div>
-                                            <span><i class="fa-regular fa-heart"></i></span>
-                                        </div>
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="d-flex" id="ff000">
-                                <!-- Tutor Name -->
-    <h4 class="me-2 fw-bold">{{ $tutor->f_name }} {{ $tutor->l_name }}</h4>
-                                <span class="me-3"><i class="fa-regular fa-star "></i></span>
-                                <div class="img-wrapper">
-                                    <img src="{{ asset('images/flag.svg') }}"   class="img-fluid" alt="no img">
-                                </div>
-                            </div>
-                            <!-- <div class="mt-1">
-                                <span id="pro" class="p-1 bg-primary-subtle rounded fw-bold">Professional</span>
-                            </div> -->
-                            <div class="d-flex text-secondary py-1">
-                            <span id="pro" class="p-1 bg-primary-subtle rounded fw-bold text-dark">{{ collect($tutor->specialization)->first() ?? 'Not Specified' }}</span>
             
-                            </div>
-                            <div class="d-flex text-secondary pb-1">
-                                
+                            <!-- Middle Column: Tutor Info and Pricing -->
+                            <div class="col-md-6">
+                                <div class="d-flex" id="ff000">
+                                    <!-- Tutor Name and Country Flag -->
+                                    <h4 class="me-2 fw-bold">{{ $tutor->f_name }} {{ $tutor->l_name }}</h4>
+                                    <span class="me-3"><i class="fa-regular fa-star"></i></span>
+                                    <div class="img-wrapper">
+                                        <img src="{{ asset('images/flag.svg') }}" class="img-fluid" width=30 alt="Country Flag">
+                                    </div>
+                                </div>
+            
+                                <!-- Tutor Specialization -->
+                                <div class="d-flex text-secondary py-1">
+                                    <span id="pro" class="p-1 bg-primary-subtle rounded fw-bold text-dark">
+                                        {{ collect($tutor->specialization)->first() ?? 'Not Specified' }}
+                                    </span>
+                                </div>
+            
+                                <!-- Tutor Contact and Info -->
+                                <div class="d-flex text-secondary pb-1">
                                     <span class="me-2"><i class="fa-solid fa-user-graduate" style="font-size: 13px;color: #1cc88a;margin-top: 5px;"></i></span>
-                                   <!-- Phone -->
-                            <p class="mb-0">{{ $tutor->phone ?? 'Not Provided' }}</p>
-                            </div> 
-                        
-                        <div class="d-flex text-secondary pb-1">
-                            <span class="me-2">
-                                <i class="fa-solid fa-language me-1" style="font-size: 13px; color: #1cc88a; margin-top: 5px;"></i>
-                            </span>
-                            @if(!empty($languages))
-                                @foreach($languages as $index => $lang)
-                                    {{ $lang['language'] ?? 'Unknown' }} ({{ $lang['level'] ?? 'Unknown' }})@if(!$loop->last), @endif
-                                @endforeach
-                            @else
-                                Nullable
-                            @endif
+                                    <p class="mb-0">{{ $tutor->phone ?? 'Not Provided' }}</p>
+                                </div>
+            
+                                <!-- Tutor Languages -->
+                                <div class="d-flex text-secondary pb-1">
+                                    <span class="me-2">
+                                        <i class="fa-solid fa-language me-1" style="font-size: 13px; color: #1cc88a; margin-top: 5px;"></i>
+                                    </span>
+                                <p class="mb-0">{{ $subjectsString }}</p>
+                                </div>
+            
+                                <!-- Tutor DOB -->
+                                <div class="d-flex text-secondary pb-1">
+                                    <span class="me-2">
+                                        <i class="fa-solid fa-phone-volume" style="font-size: 13px;color: #1cc88a;margin-top: 5px;"></i>
+                                    </span>
+                                    <p class="mb-0">{{ $tutor->dob ?? 'Not Provided' }}</p>
+                                </div>
+            
+                                <!-- Tutor Experience -->
+                                <div class="d-flex text-secondary">
+                                    <span class="me-2"><i class="fa-solid fa-user" style="font-size: 13px;color: #1cc88a;margin-top: 5px;"></i></span>
+                                    <p class="mb-0">{{ $tutor->experience ?? 'N/A' }} years experience</p>
+                                </div>
+            
+                                <!-- Short Bio -->
+                                <div class="py-2">
+                                    <span class="text-secondary">
+                                        I am <b>{{ $tutor->f_name }}</b>, with <b>{{ $tutor->experience ?? 'N/A' }} years of experience</b> in the field of <b>{{ collect($tutor->specialization)->first() ?? 'Not Specified' }}</b>.
+                                        I have a basic proficiency <b>(A2 level)</b> in <b>{{ $tutor->language[0]['language'] ?? 'English' }}</b> and completed my education at the <b>{{ $tutor->university ?? 'Not Specified' }}</b>.
+                                    </span>
+                                    <ul class="read p-0 mt-3">
+                                        <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+            
+                            <!-- Right Column: Pricing and Actions -->
+                            <div class="col-md-4">
+                                <div class="d-flex pb-5" id="ff111">
+                                    <div class="me-lg-5" id="dollar">
+                                        <h4 class="fw-bold" style="color: #1cc88a;">$16</h4>
+                                        <p class="text-secondary fs-6">50-min lesson</p>
+                                    </div>
+                                    <span id="heartIcon ms-">
+                                        <i class="fa-regular fa-heart"></i>
+                                    </span>
+                                </div>
+            
+                                <!-- Action Buttons -->
+                                <div class="pt-5" id="btn-container">
+                                    <button type="button" style="background-color: #1cc88a;" class="btn4 btn-outline-light rounded fw-bold text-light p-2">Book Trial Lesson</button>
+                                </div>
+            
+                                <div class="pt-3" id="btn-container">
+                                    <button type="button" style="background-color: #1cc88a;" class="btn4 btn-outline-light rounded fw-bold text-light p-2">Send Message</button>
+                                </div>
+                            </div>
                         </div>
-                        
-                            <div class="d-flex text-secondary pb-1">
-                                <span class="me-2"><i class="fa-solid fa-phone-volume" style="font-size: 13px;color: #1cc88a;margin-top: 5px;"></i></span>
-                               <!-- DOB -->
-                           <p class="mb-0">{{ $tutor->dob ?? 'Not Provided' }}</p>
-    
-                            </div>
-                            <div class="d-flex text-secondary">
-                                <span class="me-2"><i class="fa-solid fa-user" style="font-size: 13px;color: #1cc88a;margin-top: 5px;"></i></span>
-                                <!-- Experience -->
-    <p class="mb-0">{{ $tutor->experience ?? 'N/A' }} years experience</p>
-                            </div>
-                            <!-- <div class="d-flex text-secondary py-2">
-                                <span class="me-2"><i class="fa-solid fa-language" style="font-size: 13px;"></i></span>
-                                <p class="mb-0" id="on-1024">Speaks English (Native), French (Pre-Intermediate)</p>
-                                <p class="mb-0" id="on-768">Speaks English (Native), Fre....</p>
-                            </div> -->
-    
-                            <!-- experience or read more -->
-    
-    
-                            <div class="py-2">
-                                <span class="text-secondary">
-                                    I am <b>{{ $tutor->f_name }}</b>, with <b>{{ $tutor->experience ?? 'N/A' }} years of experience</b> 
-                                    in the field of <b>{{ collect($tutor->specialization)->first() ?? 'Not Specified' }}</b>.
-                                    I have a basic proficiency <b>(A2 level)</b> in 
-                                    <b>{{ $tutor->language[0]['language'] ?? 'English' }}</b>.
-                                    and completed my education at the 
-                                    <b>{{ $tutor->university ?? 'Not Specified' }}</b>.
-                                </span>
-                                <ul class="read p-0 mt-3">
-                                    <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
-                                </ul>
-                            </div>
-    
-    
-    
+                    </div>
+            
+                </div>
+            </div>
+          
                             <!-- end -->
     
                             @endforeach
-
-    
-                        </div>
-                        <div class="col-md-4">
-                            <div class="d-flex pb-5" id="ff111">
-                                <!-- <div class="me-5" id="new">
-                                    <h4 class="fw-bold" style="color: #1cc88a;">New</h4>
-                                    <p class="text-secondary fs-6">Tutor</p>
-                                </div> -->
-                                <div class="me-lg-5" id="dollar" >
-                                    <h4 class="fw-bold" style="color: #1cc88a;">$16</h4>
-                                    <p class="text-secondary fs-6">50-min lesson</p>
-                                </div>
-                                <span id="heartIcon ms-">
-                                    <i class="fa-regular fa-heart"></i>
-                                </span>
-                            </div>
-                            <div>
-                                <div class="pt-5" id="btn-container">
-                                    <button type="button" class="btn4 btn-outline-dark rounded fw-bold text-light">Book Trail Lesson</button>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="pt-3" id="btn-container">
-                                    <button type="button" class="btn4 btn-outline-dark rounded fw-bold text-light">Send Message</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div  class="col col-lg-3  mb-3 p-0">
-                        <video src="{{asset('images/video.mp4')}}" class="object-fit-cover m-0" autoplay muted loop width="100%"></video>
-                    </div>
-            </div>
-        </div>   
 
          </div>
     @endsection

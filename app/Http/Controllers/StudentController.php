@@ -19,13 +19,13 @@ use App\Notifications\InquirySuccessNotification;
 class StudentController extends Controller
 {
     public function index() {
-        // $countries = collect(config('countries.countries'))->prepend("Select your country", "");
+        $subjects = collect(config('subjects.subjects'));
         $schoolClasses = SchoolClass::all();
         $countries = collect(config('countries_assoc.countries'));
         $countriesPhone = collect(config('phonecountries.countries'));
         $countries_number_length = collect(config('countries_number_length.countries'));
         $countries_prefix = collect(config('countries_prefix.countries'));
-        return view('hire-tutor', compact('countriesPhone','countries','schoolClasses','countries_prefix','countries_number_length'));
+        return view('hire-tutor', compact('countriesPhone','subjects','countries','schoolClasses','countries_prefix','countries_number_length'));
     }
     public function allStudents(Request $request)
         {
@@ -119,11 +119,10 @@ class StudentController extends Controller
     
 
     public function create(Request $request) {
-
+          
         $rules = [
             'email' => 'required|string|email|max:255|unique:student,email',
-            'password' => 'required|min:8',
-            'c_password' => 'required|min:8|same:password',  
+            'password' => 'required|min:8', 
             'phone' => 'nullable|string|max:20',// checks c_password too
             'subjects' => 'nullable|string|max:255',
             'country' => 'nullable|string|max:100',
@@ -154,9 +153,9 @@ class StudentController extends Controller
         $student->country = $request->input('country');
         $student->city = $request->input('city');
         $student->subject = $request->input('subject');
-        $student->c_email = $request->input('email');
-        $student->password = $request->input('password');
-        $student->c_password = $request->input('c_password');
+        $student->grade = $request->input('grade');
+        $student->password = Hash::make($request->input('password'));
+        $student->description = $request->input('description');
         $student->user_id = $user->id;
         // Save the student instance to the database
         $student->save();
@@ -224,69 +223,47 @@ class StudentController extends Controller
                 return redirect()->route('basicsignup')->with('error', 'Student not found.');
             }
     
-            // Get all tutors
+            $storedCountry= trim($student->country);
+            $student->country = config("countries_assoc.countries.$storedCountry", 'Unknown');
+    
             $tutors = Tutor::all();
+     // Match tutors by student subject
+     $matchedTutors = $tutors->filter(function ($tutor) use ($student) {
+        $subjects = @unserialize($tutor->teaching);
+        if (!is_array($subjects)) return false;
+
+        foreach ($subjects as $subject) {
+            if (stripos($student->subject, $subject) !== false) {
+                return true;
+            }
+        }
+        return false;
+    });
+    $matchedTutors->each(function ($tutor) {
+                $storedCountryCode = trim($tutor->country);
+                $tutor->country_name = config("countries_assoc.countries.$storedCountryCode", 'Unknown');
     
-            // Match tutors based on student subject
-            $matchedTutors = $tutors->filter(function ($tutor) use ($student) {
-                $subjects = @unserialize($tutor->teaching);
-                if (!is_array($subjects)) return false;
-    
-                foreach ($subjects as $subject) {
-                    if (stripos($student->subject, $subject) !== false) {
-                        return true;
-                    }
-                }
-    
-                return false;
-            });
-    
-            $tutors->each(function ($tutor) {
-                $storedCountryCode = trim($tutor->country); // Remove any unwanted spaces/newline
-                // Get country code
-                $tutor->country_name = config("countries_assoc.countries.$storedCountryCode", 'Unknown'); // Convert to full name
-                // Debug Language Decoding
                 $language = json_decode($tutor->language, true);
+                $tutor->language = is_array($language) ? $language : [];
+               
+                  // This will dump the teaching property for each tutor
+                
+                $specialization = json_decode($tutor->specialization, true);
+                $tutor->specialization = is_array($specialization) && !empty($specialization)
+                    ? $specialization : ['Not Specified'];
     
-                if (!is_array($language)) {
-                    \Log::error("Language decoding failed for Tutor ID: {$tutor->id}, Raw Data: " . $tutor->language);
-                    $tutor->language = []; // Fallback to empty array
-                } else {
-                    $tutor->language = $language;
-                }
-                // Deserialize subjects safely
-    
-                $tutor->specialization = json_decode($tutor->specialization, true);
-    
-                // Ensure it's an array
-                if (!is_array($tutor->specialization) || empty($tutor->specialization)) {
-                    $tutor->specialization = ['Not Specified'];
-                }
-    
-                // Process Profile Image (Check if exists)
-    
-                // $tutor->profileImage = trim(preg_replace('/\s+/', '', $tutor->profileImage)); // Remove spaces & new lines
-    
-                // if (!empty($tutor->profileImage) && file_exists(public_path('storage/' . $tutor->profileImage))) {
-                //     $tutor->profileImages = asset('storage/' . $tutor->profileImage);
-                // } else {
-                //     $tutor->profileImage = asset('default-profile.png');
-                // }
-    
-    
-                // Calculate age if DOB exists
                 if ($tutor->dob) {
                     $dob = Carbon::parse($tutor->dob);
-                    $tutor->dob = $dob->format('d-m-Y'); // Convert DOB to "DD-MM-YYYY"
+                    $tutor->dob = $dob->format('d-m-Y');
                     $tutor->age = $dob->age;
                 } else {
-                    $tutor->age = null; // Default value
+                    $tutor->age = null;
                 }
             });
     
             return view('hired-tutor', [
                 'student' => $student,
-                'tutors' => $matchedTutors,
+                'matchedTutors' => $matchedTutors,
             ])->with('success', 'Welcome to your dashboard.');
         }
     

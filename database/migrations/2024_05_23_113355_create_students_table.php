@@ -24,9 +24,8 @@ return new class extends Migration
             $table->string('country');
             $table->string('city');
             $table->string('subject');
-            $table->string('c_email');
+            $table->string('grade');
             $table->string('password');
-            $table->string('c_password');
             $table->timestamps();
         });
     }
