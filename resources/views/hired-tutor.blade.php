@@ -415,27 +415,6 @@ $subjectsString = is_array($subjects) ? implode(", ", $subjects) : "No subjects 
             </section>
             
         </section>
-        <div class="row ms-4 mt-2">
-            <div class="col-xl-8 col-lg-10">
-                <div class="p-4" style="border:3px solid #1cc88a;">
-                    <h5 class="fw-bold text-success mb-3"><i class="fa-solid fa-user me-2"></i>Student Information</h5>
-        
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p class="mb-1"><strong>Name:</strong> {{ $student->name ?? 'N/A' }}</p>
-                            <p class="mb-1"><strong>Contact Email:</strong> {{ $student->email ?? 'N/A' }}</p>
-                            <p class="mb-1"><strong>Subject:</strong> {{ $student->subject ?? 'N/A' }}</p>
-                            <p class="mb-1"><strong>Phone:</strong> {{ $student->phone ?? 'N/A' }}</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="mb-1"><strong>Country:</strong> {{ $student->country ?? 'N/A' }}</p>
-                            <p class="mb-1"><strong>City:</strong> {{ $student->city ?? 'N/A' }}</p>
-                            <p class="mb-1"><strong>Teach By:</strong> {{ $student->subjects ?? 'N/A' }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         @foreach($matchedTutors as $tutor)<div class="container pt-5">
             <div class="container mt-2">
                 <div class="row">

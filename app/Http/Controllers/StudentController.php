@@ -18,72 +18,82 @@ use Illuminate\Support\Facades\Auth;
 use App\Notifications\InquirySuccessNotification;
 class StudentController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $subjects = collect(config('subjects.subjects'));
         $schoolClasses = SchoolClass::all();
         $countries = collect(config('countries_assoc.countries'));
         $countriesPhone = collect(config('phonecountries.countries'));
         $countries_number_length = collect(config('countries_number_length.countries'));
         $countries_prefix = collect(config('countries_prefix.countries'));
-        return view('hire-tutor', compact('countriesPhone','subjects','countries','schoolClasses','countries_prefix','countries_number_length'));
+        return view('hire-tutor', compact('countriesPhone', 'subjects', 'countries', 'schoolClasses', 'countries_prefix', 'countries_number_length'));
     }
     public function allStudents(Request $request)
-        {
-            $students = Student::all();
-            $countries = collect(config('countries_assoc.countries'));
-            return view('student-list', compact('students','countries'));
-        }
-    public function destroystudentBulk(Request $request){
-                $request->validate([
-                    'ids' => 'required|array',
-                    'ids.*' => 'exists:student,id', // Assuming 'tutors' is your table name
-                ]);
+    {
+        $students = Student::all();
+        $countries = collect(config('countries_assoc.countries'));
+        return view('student-list', compact('students', 'countries'));
+    }
+    public function destroystudentBulk(Request $request)
+    {
+        $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'exists:student,id', // Assuming 'tutors' is your table name
+        ]);
 
-                // Delete the selected tutors
-                Student::destroy($request->ids);
+        // Delete the selected tutors
+        Student::destroy($request->ids);
 
-                return response()->json(['success' => 'Students deleted successfully.']);
-            }
-            public function destroyinquiryBulk(Request $request){
-                $request->validate([
-                    'ids' => 'required|array',
-                    'ids.*' => 'exists:inquiries,id', // Assuming 'tutors' is your table name
-                ]);
+        return response()->json(['success' => 'Students deleted successfully.']);
+    }
+    public function destroyinquiryBulk(Request $request)
+    {
+        $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'exists:inquiries,id', // Assuming 'tutors' is your table name
+        ]);
 
-                // Delete the selected tutors
-                Inquiry::destroy($request->ids);
+        // Delete the selected tutors
+        Inquiry::destroy($request->ids);
 
-                return response()->json(['success' => 'Inquires deleted successfully.']);
-            }
-        public function getCities(Request $request)
+        return response()->json(['success' => 'Inquires deleted successfully.']);
+    }
+    public function getCities(Request $request)
     {
         $countryCode = $request->query('country');
         $cities = config('cities.cities')[$countryCode] ?? [];
         return response()->json($cities);
         // dd($countryCode, $cities);
     }
-    public function hiring() {
+    public function hiring()
+    {
         return view('hired-tutor');
     }
-    public function FAQ(){
+    public function FAQ()
+    {
         return view('faq');
     }
-    public function privacyPolicy(){
+    public function privacyPolicy()
+    {
         return view('privacy');
     }
-    public function termsCondition() {
+    public function termsCondition()
+    {
         return view('terms-condition');
     }
-    public function qrcode() {
+    public function qrcode()
+    {
         return view('qr-code');
     }
-    public function showStudentsList() {
-        
+    public function showStudentsList()
+    {
+
         $students = Student::all();
         return view('student-list', compact('students'));
     }
-    public function inquiriesList() {
-        
+    public function inquiriesList()
+    {
+
         $inquiries = Inquiry::all();
         return view('inquiry-list', compact('inquiries'));
     }
@@ -97,47 +107,51 @@ class StudentController extends Controller
         $subjects = SchoolClass::find($schoolClassId)->subjects;
         return response()->json($subjects);
     }
-    public function studentsPDF() {
+    public function studentsPDF()
+    {
         $data = Student::all();
         // $dompdf = new Dompdf();
-    
+
         // // Load HTML content into Dompdf
         // $html = view('student-list', ['data' => $data])->render(); // Pass $data as an associative array
         // $dompdf->loadHtml($html);
-    
+
         // // (Optional) Set paper size and orientation
         // $options = new Options();
         // $options->set('isHtml5ParserEnabled', true);
         // $dompdf->setOptions($options);
         // $dompdf->setPaper('A4', 'portrait');
-    
+
         // // Render the PDF
         // $dompdf->render();
         // return $dompdf->stream('students.pdf'); // Change the filename if needed
         return view('student-list', compact('data'));
     }
-    
 
-    public function create(Request $request) {
-          
+
+    public function create(Request $request)
+    {
+
         $rules = [
             'email' => 'required|string|email|max:255|unique:student,email',
-            'password' => 'required|min:8', 
+            'password' => 'required|min:8',
             'phone' => 'nullable|string|max:20',// checks c_password too
             'subjects' => 'nullable|string|max:255',
             'country' => 'nullable|string|max:100',
             'city' => 'nullable|string|max:100',
-            'subject' => 'required|string|max:255',
-            ];
-        
-    
+            'subject' => 'required|array',
+            'subject.*' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ];
+
+
         $validator = Validator::make($request->all(), $rules);
 
         // Check if validation fails
         if ($validator->fails()) {
             return redirect()->back()
-                             ->withErrors($validator)
-                             ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         }
         $student = new Student();
         $student->subjects = $request->input('subjects');
@@ -152,15 +166,17 @@ class StudentController extends Controller
         $user->save();
         $student->country = $request->input('country');
         $student->city = $request->input('city');
-        $student->subject = $request->input('subject');
+        $student->subject = implode(',', $request->input('subject'));
         $student->grade = $request->input('grade');
         $student->password = Hash::make($request->input('password'));
         $student->description = $request->input('description');
         $student->user_id = $user->id;
-        // Save the student instance to the database
+        $imagePath = $request->file('image')->store('students/images', 'public');
+        $student->Image = $imagePath;
+        $student->session_id = session()->getId();
         $student->save();
 
-        
+
 
         $toStudent = $student->email;
         $subjectStudent = "Welcome to Edexcel Your Learning Journey Starts Now!";
@@ -198,8 +214,8 @@ class StudentController extends Controller
 
 
         $this->sendEmail($student->email, $subjectAdmin, $messageAdmin);
-        
-        
+
+
         if ($user->role === 'user') {
             Auth::login($user);
             return redirect()->route('student_dashboard', ['id' => $student->id])
@@ -215,43 +231,50 @@ class StudentController extends Controller
     public function student_dashboard(Request $request, $id)
     {
         $user = Auth::user();
-    
+
         if ($user && $user->role === 'user') {
             $student = Student::find($id);
-    
+
             if (!$student) {
                 return redirect()->route('basicsignup')->with('error', 'Student not found.');
             }
-    
-            $storedCountry= trim($student->country);
-            $student->country = config("countries_assoc.countries.$storedCountry", 'Unknown');
-    
-            $tutors = Tutor::all();
-     // Match tutors by student subject
-     $matchedTutors = $tutors->filter(function ($tutor) use ($student) {
-        $subjects = @unserialize($tutor->teaching);
-        if (!is_array($subjects)) return false;
 
-        foreach ($subjects as $subject) {
-            if (stripos($student->subject, $subject) !== false) {
-                return true;
-            }
-        }
-        return false;
-    });
-    $matchedTutors->each(function ($tutor) {
+            $storedCountry = trim($student->country);
+            $student->country = config("countries_assoc.countries.$storedCountry", 'Unknown');
+
+             $tutors = Tutor::all();
+
+            
+             $matchedTutors = $tutors->filter(function ($tutor) use ($student) {
+                $tutorSubjects = @unserialize($tutor->teaching);
+                if (!is_array($tutorSubjects)) return false;
+            
+                // Convert student subject string to lowercase array
+                $studentSubjects = array_map(fn($s) => strtolower(trim($s)), explode(',', $student->subject));
+            
+                foreach ($tutorSubjects as $subject) {
+                    if (in_array(strtolower($subject), $studentSubjects)) {
+                        return true;
+                    }
+                }
+                return false;
+            });
+            
+            dd($matchedTutors);
+
+            $matchedTutors->each(function ($tutor) {
                 $storedCountryCode = trim($tutor->country);
                 $tutor->country_name = config("countries_assoc.countries.$storedCountryCode", 'Unknown');
-    
+
                 $language = json_decode($tutor->language, true);
                 $tutor->language = is_array($language) ? $language : [];
-               
-                  // This will dump the teaching property for each tutor
-                
+
+                // This will dump the teaching property for each tutor
+
                 $specialization = json_decode($tutor->specialization, true);
                 $tutor->specialization = is_array($specialization) && !empty($specialization)
                     ? $specialization : ['Not Specified'];
-    
+
                 if ($tutor->dob) {
                     $dob = Carbon::parse($tutor->dob);
                     $tutor->dob = $dob->format('d-m-Y');
@@ -260,30 +283,31 @@ class StudentController extends Controller
                     $tutor->age = null;
                 }
             });
-    
+                
             return view('hired-tutor', [
                 'student' => $student,
                 'matchedTutors' => $matchedTutors,
             ])->with('success', 'Welcome to your dashboard.');
         }
-    
+
         return redirect()->route('newhome')->with('error', 'Unauthorized access.');
     }
-    
 
-    public function newcreate(Request $request) {
-            $rules = [
-                        'email' => 'required|string|email|max:255|unique:student,email',
-                        'password' => 'required|min:8',
-                        'c_password' => 'required|min:8|same:password',
-                    ];
-            $user = new User();
-                $user->name = $request->name;
-                $user->email = $request->email;
-                $user->password = Hash::make($request->input('password'));
-                $user->role = 'user';
-                $user->save();
-                return redirect()->route('newhome')->with('success', 'Student created successfully.');
+
+    public function newcreate(Request $request)
+    {
+        $rules = [
+            'email' => 'required|string|email|max:255|unique:student,email',
+            'password' => 'required|min:8',
+            'c_password' => 'required|min:8|same:password',
+        ];
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->input('password'));
+        $user->role = 'user';
+        $user->save();
+        return redirect()->route('newhome')->with('success', 'Student created successfully.');
     }
     public function inquiry(Request $request)
     {
@@ -295,8 +319,8 @@ class StudentController extends Controller
 
         if ($validator->fails()) {
             return redirect()->back()
-                            ->withErrors($validator)
-                            ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         }
 
         $inquiry = new Inquiry();
@@ -310,11 +334,11 @@ class StudentController extends Controller
         $toStudent = $inquiry->email;
         $subjectStudent = "Welcome to Edexcel!";
         $messageStudent = "Dear " . $inquiry->name . "\r\n" .
-        "Welcome to Edexcel! 🎉 We’re excited to to got your inquiry soon you will notified.\r\n" .
-        "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at info@edexceledu.com\r\n" .
-        "We’re here to help you succeed!\r\n\r\n" .
-        "Best regards,\r\n" .
-        "The Edexcel Team";
+            "Welcome to Edexcel! 🎉 We’re excited to to got your inquiry soon you will notified.\r\n" .
+            "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at info@edexceledu.com\r\n" .
+            "We’re here to help you succeed!\r\n\r\n" .
+            "Best regards,\r\n" .
+            "The Edexcel Team";
 
         $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
 
@@ -339,52 +363,53 @@ class StudentController extends Controller
         return redirect()->route('newhome')->with('success', 'Inquiry created successfully.');
     }
     function sendEmail($to, $subject, $body)
-        {
-            $pass = env('email_pass');
-            $name = env('email_name');
-            $mail = new PHPMailer(true);
+    {
+        $pass = env('email_pass');
+        $name = env('email_name');
+        $mail = new PHPMailer(true);
 
-            try {
-                $mail->isSMTP();
-                $mail->Host = 'smtp.hostinger.com';
-                $mail->SMTPAuth = true;
-                $mail->Username = $name;
-                $mail->Password = $pass;
-                $mail->SMTPSecure = 'tls';
-                $mail->Port = 587;
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.hostinger.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = $name;
+            $mail->Password = $pass;
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
 
-                // Recipients
-               $mail->setFrom($name, 'Edexcel'); // Use direct values here
-                $mail->addAddress($to);
+            // Recipients
+            $mail->setFrom($name, 'Edexcel'); // Use direct values here
+            $mail->addAddress($to);
 
-                // Content
-                $mail->isHTML(true); // Set email format to plain text
-                $mail->Subject = $subject;
-                $mail->Body = $body;
+            // Content
+            $mail->isHTML(true); // Set email format to plain text
+            $mail->Subject = $subject;
+            $mail->Body = $body;
 
-                $mail->send();
-                // echo "Email has been sent to $to";
-            } catch (Exception $e) {
-                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            }
+            $mail->send();
+            // echo "Email has been sent to $to";
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
+    }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         $rules = [
             'email' => 'required|string|email|max:255',
             'class_start_time' => 'required|date_format:H:i',
             'class_end_time' => 'required|date_format:H:i',
         ];
-    
+
         $validator = Validator::make($request->all(), $rules);
 
         // Check if validation fails
         if ($validator->fails()) {
             return redirect()->back()
-                             ->withErrors($validator)
-                             ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         }
-    
+
         $student = Student::findOrFail($id);
         $student->name = $request->input('name');
         $student->email = $request->input('email');
@@ -399,7 +424,7 @@ class StudentController extends Controller
         // Store the times in 12-hour format with AM/PM
         $student->class_start_time = $classStartTime;
         $student->class_end_time = $classEndTime;
-        
+
         $student->whatsapp_number = $request->input('whatsapp_number');
         $student->country = $request->input('country');
         $student->city = $request->input('city');
@@ -414,24 +439,25 @@ class StudentController extends Controller
         return redirect('home')->with('message', 'Student updated successfully');
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         // Find the student by ID
         $student = Student::find($id);
-        
+
         // Check if the student exists
         if ($student) {
             $userId = $student->user_id;
-    
+
             // Delete the student
             $student->delete();
-    
+
             User::destroy($userId);
-    
+
             return redirect()->route('all.students')->with('success', 'Student and associated user deleted successfully.');
         }
-    
+
         // If student not found, return with an error message
         return redirect()->route('all.students')->with('error', 'Student not found');
     }
-    
+
 }

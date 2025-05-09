@@ -20,7 +20,9 @@ return new class extends Migration
             $table->string('phone', 20);
             $table->string('description')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('profileImage');
             
+            $table->string('session_id')->nullable();
             $table->string('country');
             $table->string('city');
             $table->string('subject');

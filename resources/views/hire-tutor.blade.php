@@ -3,7 +3,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="education, online courses, learning, tutoring, e-learning, eduexceledu">
     <meta name="description" content="Hired tutor Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
-<style>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
    #allModal {
             display: none !important;
         }
@@ -162,7 +163,7 @@
                         <div class="percentage bg_theme_green"></div>
                     </div>
                 </div>
-                <form action="{{ route('student-create') }}" method="POST" class="pages">
+                <form action="{{ route('student-create') }}" method="POST" class="pages"enctype="multipart/form-data">
                     @csrf
                     <div style="min-height: 325px;">
 
@@ -193,29 +194,20 @@
 
                             
                             <div class="form-group mx-4" style="text-align:left; width:90%;" >
-                                    <label for="dropdown1" class="mini-heading pb-1">
+                                    <label for="school_class" class="mini-heading pb-1">
                                         <strong style="color:#42b979;">{{ __('messages.Select your Grade') }} <b style="color: red;
                                          font-size: 20px;">*</b></strong>
                                    </label>
-                                <select class="form-control" id="school_class" name="grade" style="height:50px;">>
+                                   <select class="form-control" id="school_class" name="grade" style="height:50px;">
+                                    <option value="">Select your grade</option>
                                     @foreach($schoolClasses as $schoolClass)
-                                    <option value="{{ $schoolClass->id }}">{{ $schoolClass->name }}</option>
+                                        <option value="{{ $schoolClass->id }}">{{ $schoolClass->name }}</option>
                                     @endforeach
-                    
                                 </select>
+                                
                             </div>
                             
-                            <div class="form-group d-none" >
-                           
-                                <input type="search" value="English" name="subject" class="form-control" id="page1-search" placeholder="Search" style="height:50px;">
-                            </div>
-                            <ul class="list-group d-none" id="searchList">
-                                <li onclick="page1List(this)" class="list-group-item text-start">English</li>
-                                <li onclick="page1List(this)" class="list-group-item text-start">Mathematics</li>
-                                <li onclick="page1List(this)" class="list-group-item text-start">Physics</li>
-                                <li onclick="page1List(this)" class="list-group-item text-start">Chemistry</li>
-                                <li onclick="page1List(this)" class="list-group-item text-start">Urdu</li>
-                            </ul>
+                    
                             
                             <div class="form-group mx-4" style="text-align: left; width: 90%;">
                                 <label class="mini-heading" for="subject" style="padding: 5px; color: #42b979;">
@@ -224,15 +216,13 @@
                                     </strong>
                                 </label>
                             
-                                <input
-                                    type="text"
-                                    name="subject"
-                                    id="subject"
-                                    class="form-control py-3"
-                                    placeholder="{{ __('messages.Subject') }}"
-                                    style="height: 53px;"
-                                    required
-                                >
+                                <select name="subject[]"  class="form-control h-40 select2" placeholder="Add Multiple Subject" id="subject" multiple>
+                                    @foreach (config('subjects.subjects') as $subject)
+                                    <option value="{{ $subject }}">
+                                        {{$subject}}
+                                    </option>
+                                    @endforeach
+                                </select>
                             </div>
                             
                         </div>
@@ -280,7 +270,7 @@
                                         <div class="input-group d-flex justify-content-between align-items-center" style="width: 100%;">
                                         
                                             <select name="countrySelect" id="countrySelect" class="form-select country-select w-50" required>
-                                                @foreach ($countriesPhone as $key => $country)
+                                                <option value="">Select your Phone</option>@foreach ($countriesPhone as $key => $country)
                                                     <option value="{{ $key }}">{{ $country }}</option>
                                                 @endforeach
                                             </select>
@@ -311,6 +301,9 @@
                             <div class="col-12 px-2 py-2">
                                 <label class="mini-heading" for="curriculum" class="form-label" style="color:#42b979;"><strong>{{ __('messages.Description (Optional)') }}</strong></label>
                                 <textarea class="form-control" id="curriculum" name="description" rows="2" placeholder="{{ __('messages.Description') }}" style="box-shadow: none;border: 1px solid #aaa;"></textarea>
+                            </div> <div class="col-12 px-2 py-2">
+                                <label class="mini-heading" for="image" class="form-label" style="color:#42b979;"><strong>Image</strong></label>
+                               <br> <input type="file" name="image" id="image" accept="image/*" class="mt-2 mb-2">
                             </div>  
                         </div>
 
@@ -336,8 +329,151 @@
     <script src="./js/hire_tutor.js"></script>
 </body>
 @endsection
-@section('js')
+@section('js')<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
+    let currentStep = 1;
+
+    // Handle Next Button Click
+    document.getElementById('next-btn').addEventListener('click', function () {
+        if (validateForm(currentStep)) {
+            showNextStep();
+        }
+    });
+
+    // Handle Back Button Click
+    document.getElementById('back-btn').addEventListener('click', function () {
+        showPreviousStep();
+    });
+
+    // Show next page
+    function showNextStep() {
+        document.getElementById(`page-${currentStep}`).classList.add('d-none');
+        currentStep++;
+        document.getElementById(`page-${currentStep}`).classList.remove('d-none');
+        updateButtons();
+    }
+
+    // Show previous page
+    function showPreviousStep() {
+        document.getElementById(`page-${currentStep}`).classList.add('d-none');
+        currentStep--;
+        document.getElementById(`page-${currentStep}`).classList.remove('d-none');
+        updateButtons();
+    }
+
+    // Show/hide buttons based on current step
+    function updateButtons() {
+        const backBtn = document.getElementById('back-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        backBtn.classList.toggle('d-none', currentStep === 1);
+        nextBtn.value = currentStep === 3 ? 'Submit' : 'Next';
+
+        if (currentStep === 3) {
+            nextBtn.addEventListener('click', () => {
+                document.querySelector('.pages').submit();
+            }, { once: true });
+        }
+    }
+
+    // Validate based on current step
+    function validateForm(step) {
+        let isValid = true;
+        let missingFields = [];
+        if (step === 1) {
+    const fieldConfigs = [
+        { id: 'school_class', label: 'School Class' },
+        { id: 'subject', label: 'Subject' }
+    ];
+
+    fieldConfigs.forEach(({ id, label }) => {
+        const el = document.getElementById(id);
+        if (!el || !el.value.trim()) {
+            el.style.border = '2px solid #e74c3c';
+            isValid = false;
+            missingFields.push(label);
+        } else {
+            el.style.border = '1px solid rgb(137, 135, 135)';
+        }
+    });
+
+    // Check if any tutor type (radio) is selected
+    const subjectRadios = document.querySelectorAll('input[name="subjects"]');
+    if (![...subjectRadios].some(r => r.checked)) {
+        isValid = false;
+        Swal.fire({
+            icon: 'error',
+            title: 'Please select a tutor type',
+            toast: true,
+            position: 'top-end',
+            timer: 3000,
+            showConfirmButton: false,
+        });
+    }
+
+    if (missingFields.length > 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Please fill all required fields',
+            text: `Missing: ${missingFields.join(', ')}`,
+            toast: true,
+            position: 'top-end',
+            timer: 3000,
+            showConfirmButton: false,
+        });
+    }
+}
+
+        if (step === 2) {
+            const fieldIds = ['name', 'email', 'country', 'city', 'countrySelect', 'phone', 'password', 'c_password'];
+            fieldIds.forEach(id => {
+                const el = document.querySelector(`[name="${id}"]`);
+                if (!el || !el.value.trim()) {
+                    el.style.border = '2px solid #e74c3c';
+                    isValid = false;
+                    missingFields.push(id);
+                } else {
+                    el.style.border = '1px solid rgb(137, 135, 135)';
+                }
+            });
+
+            const pwd = document.querySelector('[name="password"]');
+            const cpwd = document.querySelector('[name="c_password"]');
+            if (pwd && cpwd && pwd.value !== cpwd.value) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Passwords do not match!',
+                    toast: true,
+                    position: 'top-end',
+                    timer: 3000,
+                    showConfirmButton: false,
+                });
+                isValid = false;
+            }
+
+            if (missingFields.length > 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Please fill all required fields',
+                    text: `Missing: ${missingFields.join(', ')}`,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 3000,
+                    showConfirmButton: false,
+                });
+            }
+        }
+
+        return isValid;
+    }
+
+    // Initialize button state on page load
+    document.addEventListener('DOMContentLoaded', updateButtons);
+</script>
+
+
+    <script>
         $(document).ready(function() {
             $('#country').select2();
             $('#city').select2();
@@ -362,19 +498,26 @@
                             });
                         },
                         error: function() {
-                            $citySelect.empty();
+                            
                             $citySelect.append('<option value="">No cities available</option>');
                         }
                     });
                 } else {
-                    $citySelect.empty();
+                    
                     $citySelect.append('<option value="">Select City</option>');
                 }
             });
         });
     </script>
 <script>
+$('#subject').select2({
+            placeholder: "Select a subject",
+            allowClear: false,
+            tags: true,
+            dropdownCssClass: 'subject-custom-select2-templates-lang',
+            selectionCssClass: 'subject-custom-select2-templates-lang',
 
+        }); 
      $(document).ready(function($) {
             setTimeout(function() {
                 $(".alert").fadeOut("slow");
@@ -389,7 +532,7 @@
                         type: "GET",
                         dataType: "json",
                         success: function(data) {
-                            $('#subject').empty();
+                           
                             $('#subject').append('<option value="">Select Subject</option>');
                             $.each(data, function(key, value) {
                                 $('#subject').append('<option value="'+ value.id +'">'+ value.name +'</option>');
@@ -397,7 +540,6 @@
                         }
                     });
                 } else {
-                    $('#subject').empty();
                     $('#subject').append('<option value="">Select Subject</option>');
                 }
             });
