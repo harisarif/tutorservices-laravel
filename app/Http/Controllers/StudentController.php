@@ -172,7 +172,7 @@ class StudentController extends Controller
         $student->description = $request->input('description');
         $student->user_id = $user->id;
         $imagePath = $request->file('image')->store('students/images', 'public');
-        $student->Image = $imagePath;
+        $student->profileImage = $imagePath;
         $student->session_id = session()->getId();
         $student->save();
 
@@ -234,7 +234,7 @@ class StudentController extends Controller
 
         if ($user && $user->role === 'user') {
             $student = Student::find($id);
-
+            
             if (!$student) {
                 return redirect()->route('basicsignup')->with('error', 'Student not found.');
             }
@@ -242,25 +242,21 @@ class StudentController extends Controller
             $storedCountry = trim($student->country);
             $student->country = config("countries_assoc.countries.$storedCountry", 'Unknown');
 
-             $tutors = Tutor::all();
+            $tutors = Tutor::all();
 
+            // dd($tutors);
+            $matchedTutors = $tutors->filter(function ($tutor) use ($student) {
+                $studentSubjects = array_map(
+                    fn($s) => strtolower(trim($s)),
+                    explode(',', $student->subject)
+                );
             
-             $matchedTutors = $tutors->filter(function ($tutor) use ($student) {
-                $tutorSubjects = @unserialize($tutor->teaching);
-                if (!is_array($tutorSubjects)) return false;
+                $tutorSubject = strtolower(trim($tutor->edu_teaching));
             
-                // Convert student subject string to lowercase array
-                $studentSubjects = array_map(fn($s) => strtolower(trim($s)), explode(',', $student->subject));
-            
-                foreach ($tutorSubjects as $subject) {
-                    if (in_array(strtolower($subject), $studentSubjects)) {
-                        return true;
-                    }
-                }
-                return false;
+                return in_array($tutorSubject, $studentSubjects);
             });
             
-            dd($matchedTutors);
+            // dd($matchedTutors);
 
             $matchedTutors->each(function ($tutor) {
                 $storedCountryCode = trim($tutor->country);

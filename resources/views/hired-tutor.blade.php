@@ -162,7 +162,7 @@ $subjectsString = is_array($subjects) ? implode(", ", $subjects) : "No subjects 
             <ul class="p-1 m-0 d-sm-inline d-block text-center header-ul pt-2">
                 <li class=" p-0">
                      <a class="navbar-brand" href="{{ route('newhome') }}">
-                        <img src="images/white-logo.jpeg" height="50px" alt="logo" style="height: 50px; border-radius: 10px; margin-top: 14px;">
+                        <img src="{{ asset('images/white-logo.jpeg') }}" height="50px" alt="logo" style="height: 50px; border-radius: 10px; margin-top: 14px;">
                     </a>
                 </li>
                 <nav class="navbar navbar-expand-lg adjust-header-mobile">
@@ -176,7 +176,7 @@ $subjectsString = is_array($subjects) ? implode(", ", $subjects) : "No subjects 
                         <div class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" style="width:100%;">
                             <div class="offcanvas-header p-1" style="width:96%;">
                                 <a class="navbar-brand" href="{{ route('newhome') }}">
-                                 <img src="images/white-logo.jpeg" height="50px" alt="logo" style="height: 50px; border-radius: 10px;">
+                                 <img src="{{ asset('images/white-logo.jpeg') }}" height="50px" alt="logo" style="height: 50px; border-radius: 10px;">
                                 </a>
                                
                             </div>

@@ -44,6 +44,18 @@ class LoginController extends Controller
             return redirect()->route('login')->with('error', 'Your account is inactive. Please contact support.');
         }
     }
+    if ($user->role === 'user') {
+        $student = $user->student; // Retrieve the associated tutor
+    
+        // Check if the tutor exists and if the status is active
+        if ($student) {
+            // Store the session ID
+            $student->session_id = session()->getId();
+            $student->save();
+    
+            return redirect()->route('student_dashboard', ['id' => $student->id]); // Redirect to students listing page
+        }
+    }
 
     if ($user->role === 'admin') {
         return redirect()->route('home');
