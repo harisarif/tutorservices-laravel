@@ -136,7 +136,7 @@ class StudentController extends Controller
             'email' => 'required|string|email|max:255|unique:student,email',
             'password' => 'required|min:8',
             'phone' => 'nullable|string|max:20',// checks c_password too
-            'subjects' => 'nullable|string|max:255',
+            'availability_status' => 'nullable|string|max:255',
             'country' => 'nullable|string|max:100',
             'city' => 'nullable|string|max:100',
             'subject' => 'required|array',
@@ -154,7 +154,7 @@ class StudentController extends Controller
                 ->withInput();
         }
         $student = new Student();
-        $student->subjects = $request->input('subjects');
+        $student->availability_status = $request->input('subjects');
         $student->name = $request->input('name');
         $student->email = $request->input('email');
         $student->phone = $request->input('phone');
@@ -245,6 +245,16 @@ class StudentController extends Controller
             $tutors = Tutor::all();
 
             // dd($tutors);
+            // $matchedTutors = $tutors->filter(function ($tutor) use ($student) {
+            //     $studentSubjects = array_map(
+            //         fn($s) => strtolower(trim($s)),
+            //         explode(',', $student->subject)
+            //     );
+            
+            //     $tutorSubject = strtolower(trim($tutor->edu_teaching));
+            
+            //     return in_array($tutorSubject, $studentSubjects);
+            // });
             $matchedTutors = $tutors->filter(function ($tutor) use ($student) {
                 $studentSubjects = array_map(
                     fn($s) => strtolower(trim($s)),
@@ -252,9 +262,12 @@ class StudentController extends Controller
                 );
             
                 $tutorSubject = strtolower(trim($tutor->edu_teaching));
+                $tutorAvailability = strtolower(trim($tutor->availability_status));
+                $studentAvailability = strtolower(trim($student->availability_status));
             
-                return in_array($tutorSubject, $studentSubjects);
+                return in_array($tutorSubject, $studentSubjects) && $tutorAvailability === $studentAvailability;
             });
+            
             
             // dd($matchedTutors);
 

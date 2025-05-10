@@ -89,7 +89,7 @@
             @yield('js')
         </main>
         @if(!request()->cookie('cookie_consent'))
-        <div id="cookie-banner" class="fixed-cookies bottom-0 left-0 w-full bg-gray-800 text-white z-50">
+        <!-- <div id="cookie-banner" class="fixed-cookies bottom-0 left-0 w-full bg-gray-800 text-white z-50">
             <section class="cookies-privacy w-100">
                 <div class="container-fluid p-2 ms-4">
                 <h5>Cookies & Privacy</h5>
@@ -106,7 +106,7 @@
                 </div>
                 </div>
             </section>
-        </div>
+        </div> -->
         @endif
         @include('layouts.footer')
 </body>

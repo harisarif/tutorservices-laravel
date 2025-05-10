@@ -422,7 +422,7 @@ class TutorController extends Controller
         $tutor->password = $hashedPassword;
         $tutor->language = json_encode($language);
         $tutor->edu_teaching = $request->input('edu_teaching');
-        $tutor->availability_status = $request->input('status') ?? 'online';
+        $tutor->availability_status = $request->input('availability_status');
         $tutor->student_id = $studentExists ? 2 : null;
         $tutor->status = 'active';
         $tutor->session_id = session()->getId();

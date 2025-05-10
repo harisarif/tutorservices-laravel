@@ -267,9 +267,9 @@
                                 <select class="form-control form-select" id="status" name="availability_status"
                                     aria-label="Default select example"
                                     style="border: 1px solid rgba(137, 135, 135, 0.5); width: 100%;">
-                                    <option value="Online" selected>Online</option>
-                                    <option value="Physical">Physical</option>
-                                    <option value="Both">Both</option>
+                                    <option value="online" selected>Online</option>
+                                    <option value="physical">Physical</option>
+                                    <option value="both">Both</option>
                                 </select>
                             </div> <div class="col-md-6 px-2 mb-2">
                                 <label for="currency_price" class="form-label" style="color:#42b979;">

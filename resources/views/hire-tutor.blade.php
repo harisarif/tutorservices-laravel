@@ -175,12 +175,12 @@
 
                                 <ul class="p-0 ">
                                     <li class="d-flex align-items-center fs-5 py-1">
-                                        <input class="m-2 d-none chose-subject" type="radio" value="Online Tutor" name="subjects"
+                                        <input class="m-2 d-none chose-subject" type="radio" value="Online" name="subjects"
                                             id="option-1">
                                         <label for="option-1" style="font-size:15px;">{{ __('messages.Online Tutor ') }}</label>
                                     </li>
                                     <li class="d-flex align-items-center fs-5 py-1">
-                                        <input class="m-2 d-none chose-subject" type="radio" value="Tutor for home" name="subjects"
+                                        <input class="m-2 d-none chose-subject" type="radio" value="Physical" name="subjects"
                                             id="option-2">
                                         <label for="option-2" style="font-size:15px;">{{ __('messages.Tutor for Home') }}</label>
                                     </li>

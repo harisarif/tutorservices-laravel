@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('student', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id'); // Add the user_id column first
-            $table->enum('subjects', ['online tutor', 'tutor for home', 'both']);
+            $table->enum('availability_status', ['online', 'physical', 'both']);
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone', 20);
