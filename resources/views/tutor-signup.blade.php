@@ -13,7 +13,20 @@
     <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" type="image/png" />
     <link rel="stylesheet" href="{{ asset('css/tutor-form.css') }}">
 <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
-<link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}"><link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<style>
+ .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            background-color: #42B979 !important;
+            color: #fff;
+            margin-top: 6px !important;
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__display {
+            padding-left:18px !important
+        }
+        .select2-selection__choice__remove span {
+            color:#fff;
+        }
+</style>
 @include('whatsapp')
 <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block;"
     onclick="window.scrollTo(0, 0)"><i class="fa fa-chevron-up"></i></button>
@@ -465,9 +478,15 @@
                             <div class="col-md-6 px-2 mb-2">
                                 <label for="edu_teaching" class="form-label" style="color:#42b979;"><strong>Educational
                                         Teaching</strong></label>
-                                <input type="text" class="form-control" id="edu_Teaching"
-                                    name="edu_teaching" style="border: 1px solid rgba(137, 135, 135, 0.5);" />
-                                
+                                {{-- <input type="text" class="form-control" id="edu_Teaching"
+                                    name="edu_teaching" style="border: 1px solid rgba(137, 135, 135, 0.5);" /> --}}
+                                <select  name="edu_teaching[]"  class="form-control h-40 select2" placeholder="Add Multiple Subject" id="edu_Teaching" multiple>
+                                    @foreach (config('subjects.subjects') as $subject)
+                                    <option value="{{ $subject }}">
+                                        {{$subject}}
+                                    </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div id="languages-container">
@@ -711,12 +730,22 @@ $(document).ready(function(){
         1000:{ items:3 }
     }
   });
-});
+});        
 </script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="{{ asset('js/bootstrap.bundle.min.js')}}"></script>
 
-<script>
+<script> $(document).ready(function() {
+    $('#edu_Teaching').select2({
+        placeholder: "Select an educational teaching",
+        allowClear: false,
+        tags: true,
+        dropdownCssClass: 'edu_teaching-custom-select2-templates-lang',
+        selectionCssClass: 'edu_teaching-custom-select2-templates-lang',
+    });
+});
+
 function toggleArrow(selectElement) {
     let arrowId = selectElement.id.replace("language_proficient_", "arrow-");
     let arrowIcon = document.getElementById(arrowId);

@@ -16,7 +16,8 @@ use Illuminate\Validation\ValidationException;
 use App\Models\SchoolClass;
 use App\Models\Subject;
 use Illuminate\Support\Facades\Auth;
-use App\Notifications\InquirySuccessNotification;use Illuminate\Pagination\LengthAwarePaginator;
+use App\Notifications\InquirySuccessNotification;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class StudentController extends Controller
 {
@@ -240,35 +241,40 @@ class StudentController extends Controller
             if (!$student) {
                 return redirect()->route('basicsignup')->with('error', 'Student not found.');
             }
-               $query = Tutor::where('status', 'active');
-        $sliderTutors = Tutor::where('status', 'active')->take(6)->get();
-        $perPage = 5; // Define the number of tutors per page
-        $blogs = Blog::orderBy('created_at', 'desc')->take(3)->get();
+            $query = Tutor::where('status', 'active');
+            $sliderTutors = Tutor::where('status', 'active')->take(6)->get();
+            $perPage = 5; // Define the number of tutors per page
+            $blogs = Blog::orderBy('created_at', 'desc')->take(3)->get();
 
-        // Paginate the results
-        $tutors = $query->paginate($perPage);
-       
-        $totalTutorsCount = Tutor::count();
+            // Paginate the results
+            $tutors = $query->paginate($perPage);
+
+            $totalTutorsCount = Tutor::count();
             $storedCountry = trim($student->country);
             $student->country = config("countries_assoc.countries.$storedCountry", 'Unknown');
             $teacher = Tutor::all();
 
-            $tutorSubjects = [];
+           $tutorSubjects = [];
 
-            foreach ($teacher as $tutor) {
-                $serialized = $tutor->teaching; // stored as serialized array
+foreach ($teacher as $tutor) {
+    $json = $tutor->edu_teaching; // stored as JSON array
 
-                if ($serialized) {
-                    $subjects = unserialize($serialized); // now an array like ['Accounting']
+    if ($json) {
+        $subjects = json_decode($json, true); // now array like ['Accounting', 'Aerospace Engineering']
 
-                    // Clean and lower-case
-                    $cleaned = array_map(fn($s) => strtolower(trim($s)), $subjects);
-                    $tutorSubjects[$tutor->id] = $cleaned;
-                } else {
-                    $tutorSubjects[$tutor->id] = [];
-                }
-            }
+        if (is_array($subjects)) {
+            // Clean each subject: trim + lowercase
+            $cleaned = array_map(fn($s) => strtolower(trim($s)), $subjects);
+            $tutorSubjects[$tutor->id] = $cleaned;
+        } else {
+            $tutorSubjects[$tutor->id] = [];
+        }
+    } else {
+        $tutorSubjects[$tutor->id] = [];
+    }
+}
 
+               
             $matchedTutors = $teacher->filter(function ($tutor) use ($student, $tutorSubjects) {
                 $studentSubjects = array_map(
                     fn($s) => strtolower(trim($s)),
@@ -284,7 +290,7 @@ class StudentController extends Controller
                 $hasCommonSubjects = !empty(array_intersect($studentSubjects, $tutorSubjectsList));
 
                 return $hasCommonSubjects && $tutorAvailability === $studentAvailability;
-               
+
             });
 
 
@@ -309,34 +315,37 @@ class StudentController extends Controller
                 } else {
                     $tutor->age = null;
                 }
-            });$currentPage = LengthAwarePaginator::resolveCurrentPage();
-$matchedTutorsPerPage = 5;
+            });
+            $currentPage = LengthAwarePaginator::resolveCurrentPage();
+            $matchedTutorsPerPage = 5;
 
-$paginatedMatchedTutors = new LengthAwarePaginator(
-    $matchedTutors->slice(($currentPage - 1) * $matchedTutorsPerPage, $matchedTutorsPerPage)->values(),
-    $matchedTutors->count(),
-    $matchedTutorsPerPage,
-    $currentPage,
-    ['path' => request()->url(), 'query' => request()->query()]
-);
+            $paginatedMatchedTutors = new LengthAwarePaginator(
+                $matchedTutors->slice(($currentPage - 1) * $matchedTutorsPerPage, $matchedTutorsPerPage)->values(),
+                $matchedTutors->count(),
+                $matchedTutorsPerPage,
+                $currentPage,
+                ['path' => request()->url(), 'query' => request()->query()]
+            );
 
             $subjectsTeach = collect(config('subjects.subjects'));
-        $countries = collect(config('countries_assoc.countries'));
-        $countriesPhone = collect(config('phonecountries.countries'));
-        $countries_number_length = collect(config('countries_number_length.countries'));
-        $countries_prefix = collect(config('countries_prefix.countries'));
+            $countries = collect(config('countries_assoc.countries'));
+            $countriesPhone = collect(config('phonecountries.countries'));
+            $countries_number_length = collect(config('countries_number_length.countries'));
+            $countries_prefix = collect(config('countries_prefix.countries'));
             return view('hired-tutor', [
                 'student' => $student,
-                'matchedTutors' => $matchedTutors, 'paginatedMatchedTutors' => $paginatedMatchedTutors, 'blogs' => $blogs,
-            'sliderTutors' => $sliderTutors,
-            'tutors' => $tutors,
-            'subjectsTeach' => $subjectsTeach,
-            'totalTutorsCount' => $totalTutorsCount,
-            'perPage' => $perPage,
-            'countries' => $countries,
-            'countriesPhone' => $countriesPhone,
-            'countries_number_length' => $countries_number_length,
-            'countries_prefix' => $countries_prefix
+                'matchedTutors' => $matchedTutors,
+                'paginatedMatchedTutors' => $paginatedMatchedTutors,
+                'blogs' => $blogs,
+                'sliderTutors' => $sliderTutors,
+                'tutors' => $tutors,
+                'subjectsTeach' => $subjectsTeach,
+                'totalTutorsCount' => $totalTutorsCount,
+                'perPage' => $perPage,
+                'countries' => $countries,
+                'countriesPhone' => $countriesPhone,
+                'countries_number_length' => $countries_number_length,
+                'countries_prefix' => $countries_prefix
             ])->with('success', 'Welcome to your dashboard.');
         }
 

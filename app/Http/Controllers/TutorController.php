@@ -347,7 +347,8 @@ class TutorController extends Controller
             'language_level' => 'required|array',
             'language_level.*' => 'string|max:255',
             'language_tech' => 'nullable|string|max:255',
-            'edu_teaching' => 'nullable|string|max:255',
+            'edu_teaching' => 'nullable|array',
+            'edu_teaching.*' => 'string|max:255',
             'currency_price' => 'required|string',
         ];
 
@@ -421,7 +422,7 @@ class TutorController extends Controller
         $tutor->specialization = json_encode($request->input('specialization'));
         $tutor->password = $hashedPassword;
         $tutor->language = json_encode($language);
-        $tutor->edu_teaching = $request->input('edu_teaching');
+        $tutor->edu_teaching = json_encode($request->input('edu_teaching'));
         $tutor->availability_status = $request->input('availability_status');
         $tutor->student_id = $studentExists ? 2 : null;
         $tutor->status = 'active';

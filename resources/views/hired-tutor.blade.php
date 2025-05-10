@@ -1,20 +1,5 @@
 
 @extends('layouts.app')
-@php
- foreach ($matchedTutors as $tutor) {
-                $serialized = $tutor->teaching; // stored as serialized array
-
-                if ($serialized) {
-                    $subjects = unserialize($serialized); // now an array like ['Accounting']
-
-                    // Clean and lower-case
-                    $cleaned = array_map(fn($s) => strtolower(trim($s)), $subjects);
-                    $tutorSubjects[$tutor->id] = $cleaned;
-                } else {
-                    $tutorSubjects[$tutor->id] = [];
-                }
-            }
-@endphp
 
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -343,7 +328,12 @@
                                                                     
                                                                     
                                                                     <span class="me-2"><i class="fa-solid fa-language" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
-                                                                    <p class="mb-0" style="color:black; transform: scaleY(1);text-transform:capitalize">{{ $item->edu_teaching }}</p>
+                                                                    @foreach($tutors as $tutor)
+    <p class="mb-0" style="color:black; transform: scaleY(1); text-transform: capitalize;">
+        {{ implode(', ', json_decode($tutor->edu_teaching ?? '[]', true)) }}
+    </p>
+@endforeach
+
                                                                 </div>
 
                                                                 <div class="d-flex text-secondary my-1">
