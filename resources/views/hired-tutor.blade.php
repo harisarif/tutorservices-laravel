@@ -1,8 +1,19 @@
 
 @extends('layouts.app')
 @php
-$subjects = @unserialize($tutor->edu_teaching);
-$subjectsString = is_array($subjects) ? implode(", ", $subjects) : "No subjects available";
+ foreach ($matchedTutors as $tutor) {
+                $serialized = $tutor->teaching; // stored as serialized array
+
+                if ($serialized) {
+                    $subjects = unserialize($serialized); // now an array like ['Accounting']
+
+                    // Clean and lower-case
+                    $cleaned = array_map(fn($s) => strtolower(trim($s)), $subjects);
+                    $tutorSubjects[$tutor->id] = $cleaned;
+                } else {
+                    $tutorSubjects[$tutor->id] = [];
+                }
+            }
 @endphp
 
 <meta charset="UTF-8">
@@ -153,7 +164,7 @@ $subjectsString = is_array($subjects) ? implode(", ", $subjects) : "No subjects 
                         <!-- Off-canvas component -->
                         <div class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" style="width:100%;">
                             <div class="offcanvas-header p-1" style="width:96%;">
-                                <a class="navbar-brand" href="{{ route('newhome') }}">
+                                <a class="navbar-brand" href="{{ route('hire.tutor') }}">
                                  <img src="{{ asset('images/white-logo.jpeg') }}" height="50px" alt="logo" style="height: 50px; border-radius: 10px;">
                                 </a>
                                
@@ -235,7 +246,7 @@ $subjectsString = is_array($subjects) ? implode(", ", $subjects) : "No subjects 
     <div class="wrapper mx-5">
 
         @include('whatsapp')
-        @if($matchedTutors->count() > 0)    
+        {{-- @if($matchedTutors->count() > 0)    
             @foreach($matchedTutors as $tutor)
                 <div class="container-fluid mt-2">
                     <div class="row mx-1">
@@ -306,12 +317,15 @@ $subjectsString = is_array($subjects) ? implode(", ", $subjects) : "No subjects 
                                     </div>
                 
                                     <!-- Tutor Languages -->
-                                    <div class="d-flex text-secondary pb-1">
-                                        <span class="me-2">
-                                            <i class="fa-solid fa-language me-1" style="font-size: 13px; color: #1cc88a; margin-top: 5px;"></i>
-                                        </span>
-                                        <p class="mb-0">{{ $subjectsString }}</p>
-                                    </div>
+                                   <div class="d-flex text-secondary pb-1">
+    <span class="me-2">
+        <i class="fa-solid fa-language me-1" style="font-size: 13px; color: #1cc88a; margin-top: 5px;"></i>
+    </span>
+    <p class="mb-0">
+        {{ implode(', ', $tutorSubjects[$tutor->id] ?? []) }}
+    </p>
+</div>
+
                                     <div class="d-flex text-secondary pb-1">
                                         <span class="me-2">
                                             <i class="fa-solid fa-signal me-1" style="font-size: 13px; color: #1cc88a; margin-top: 5px;"></i>
@@ -379,8 +393,249 @@ $subjectsString = is_array($subjects) ? implode(", ", $subjects) : "No subjects 
                     No matching tutors found for your selected subject and availability.
                 </div>
             </div>
-        @endif
+        @endif --}}
+             <div class="col-md-9">
+                                <div class="d-flex justify-content-between ad-border-div">
+                                    <div class="mx-2">
+                                        <p class="m-0 pt-1 tutors-range">
+                                            @if($totalTutorsCount == 0 || $tutors->isEmpty())
+                                                0 of 0 tutors
+                                            @else
+                                                {{ $tutors->firstItem() }} to {{ $tutors->lastItem() }} of {{ $totalTutorsCount }} tutors
+                                            @endif
+                                        </p>
+                                        
+                                    </div>
+                                    <div class="my-2 mx-2">
+                                        <button id="resetFilterBtn" class="ad-btn-reset">{{ __('messages.Reset Filter') }}</button>
             
+                                    </div>
+                                    
+                                </div>
+                                <div class="ad-border-filters" >
+                                    
+                                        <div class="row  country-row">
+                                            <div class="col-lg-3 country-drop-down" >
+
+                                                <select name="country" id="country" class="country" >
+                                                    <option value="all">{{ __('messages.Please select a country') }}</option>
+
+                                                    @foreach($countries as $countryCode => $countryName)
+                                                        <option value="{{ $countryCode }}">{{ $countryName }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-9 adjust-filters-wrap ">
+                                                <div class="col-md-6 px-2 col-lg-4">
+                                                        <select name="gender" id="gender" class="country" >
+                                                            <option value="all">{{ __('messages.Gender Selection') }}</option>
+                                                            <option value="Male">{{ __('Male') }}</option>
+                                                            <option value="female">{{ __('Female') }}</option>
+                                                        </select>
+                                                </div>
+                                                <div class="col-md-6 px-2 col-lg-4">
+                                                        <select name="subjectSearch" id="subjectSearch" class="country" >
+                                                            <option value="all">{{ __('messages.Which Subject Interests You?') }}</option>
+                                                           
+                                                    @foreach($subjectsTeach as $subjectsCode => $subjects)
+                                                        <option value="{{ $subjectsCode }}">{{ $subjects }}</option>
+                                                    @endforeach
+                                                        </select>
+                                                </div>
+                                                <div class="col-md-6 px-2 col-lg-4">
+                                                    {{-- <label for="citysearch" class="form-label">City</label> --}}
+                                                        <select name="prize-Range" id="prize-Range" class="country" >
+                                                            <option value="all">{{ __('messages.Price Selection') }}</option>
+                                                            
+                                                        </select>
+                                                </div>
+                                            </div>  
+                                        </div>
+                                    </div>
+
+                                <!-- Tutor profile -->
+                               @if($matchedTutors->count() > 0)    
+                                <div id="tutorsContainer">
+                                     @foreach($matchedTutors as $item)
+                                        @if($item->status != 'inactive')
+                                          
+                                             <div class="ad-form"><div class="container-fluid pt-2 px-0">
+                                                
+                                             <div class="recomended-badge mb-1" data-toggle="tooltip" data-placement="top" title="{{ $item->f_name ?? 'Nullable' }}  {{ $item->l_name ?? 'Nullable' }}" style="float: right;">
+                                                    <span class="badge badge-primary">Recomended</span>
+                                            </div>
+                                                <div class="row ">
+                                                    <div class="col-xl-12 col-lg-12">
+                                                        <div class="row py-4" style="margin: 0 auto;">
+                                                            <div class="col-md-3">
+                                                                <div id="waste1">
+                                                                    <div class="img-wrapper trigger-modal" id="triggerImage">
+                                                                        @if (  $item->profileImage) 
+                                                                                <img src="{{ asset('storage/' . $item->profileImage) }}"
+                                                                                    alt="Tutor Image" class="img-thumbnail" id="profileImages"
+                                                                                    style="height: 150px; width: 100%">
+                                                                            @else
+                                                                                <img src="{{ asset('images/avatar.png') }}" 
+                                                                                    alt="Default Image" class="img-thumbnail"
+                                                                                    style="height: 150px; width: 100%;">
+                                                                            @endif
+                                                                           
+                                                                    </div>
+                                                                    <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-lg" id="pro1">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header"style="background-color: #1cc88a;">
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(2);"></button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <!-- Video Embed -->
+                                                                                    <video controls height="250px" width="100%">
+                                                                                        <source src="{{ asset('/' . $item->video) }}" type="video/mp4">
+                                                                                        Your browser does not support the video tag.
+                                                                                    </video>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                
+                                                                    <div class="col-md-4" id="waste" style="display: none;margin: 0 auto;     margin-top: 20px;">
+                                                                        <div class="d-flex">
+                                                                            <h4 class="me-2 fw-bold">{{ $item->f_name ?? 'Nullable' }}{{ $item->l_name ?? 'Nullable' }}</h4>
+                                                                            <span class="me-3"><i class="fa-regular fa-star"></i></span>
+                                                                            <div class="img-wrapper1"  style="max-width: 15px;     margin-top: 3px;">
+                                                                                <img src="{{ asset('image/flag.svg') }}" class="img-fluid1" alt="">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-flex mt-md-5 mt-2" id="for-320">
+                                                                            <div class="me-md-5 me-3" id="new">
+                                                                                <div class="d-flex text-center">
+                                                                                    <span class=""><i class="fa-regular fa-star text-warning"></i></span>
+                                                                                    <h4 class="fw-bold mb-0">5</h4>
+                                                                                </div>
+                                                                                <p class="text-secondary fs-6">{{ $item->avalibility_status ?? 'Nullable' }}</p>
+                                                                            </div>
+                                                                            <div class="me-md-5 me-2" id="dollar">
+                                                                                <h4 class="fw-bold mb-0">US$16</h4>
+                                                                                <p class="text-secondary fs-6 " style="text-align: center;">{{ $item->year ?? 'Nullable' }}</p>
+                                                                            </div>
+                                                                            <div>
+                                                                                <span><i class="fa-regular fa-heart"></i></span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="d-flex" id="ff000">
+                                                                    <h4 class="me-2 fw-bold sd">{{ $item->f_name ?? 'Nullable' }}</h4>
+                                                                    <span class="me-3"><i class="fa-regular fa-star "></i></span>
+                                                                    <div class="img-wrapper" style="max-width:15px;margin-top:5px;">
+                                                                        <img src="{{ asset('image/flag.svg') }}" class="img-fluid" alt="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mt-1 cm">
+                                                                    @foreach($item->specialization as $specialization)   
+                                                                        <span id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold"> 
+                                                                            <i class="fa-solid fa-briefcase me-1"></i> {{ trim($specialization) }}  
+                                                                        </span>
+                                                                    @endforeach
+                                                                </div>
+                                                                
+                                                                <div class="d-flex text-secondary my-1">
+                                                                    <span class="me-2"><i class="fa-solid fa-venus-mars" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
+                                                                    <p class="mb-0" style="color:black; transform: scaleY(1);text-transform:capitalize">{{ $item->gender ?? 'Nullable' }}</p>
+                                                                </div>
+                                                                
+                                                                <div class="d-flex text-secondary">
+                                                                    <span class="me-2"><i class="fa-solid fa-earth-americas" style="font-size: 13px;  margin-top: 5px;    color: #1cc88a;"></i></span>
+                                                                    <p class="mb-0 ms-1" style="color:black; transform: scaleY(1);">{{ $item->country_name ?? 'Nullable' }}</p>
+                                                                </div>
+                                                                
+                                                                <div class="d-flex text-secondary py-2">
+                                                                    <span class="me-2"><i class="fa-solid fa-language" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
+                                                                    <p class="mb-0" style="color:black; transform: scaleY(1);" id="on-1024">
+                                                                        Speaks 
+                                                                        @if(!empty($item->language) && is_array($item->language))
+                                                                            @foreach($item->language as $lang)
+                                                                                {{ $lang['language'] ?? 'Unknown' }} ({{ $lang['level'] ?? 'Unknown' }})
+                                                                            @endforeach
+                                                                        @else
+                                                                            Nullable
+                                                                        @endif
+                                                                    </p>
+                                                                </div>
+                                                                
+                                                                <!--  -->
+                                                                <span class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-1" style="color: #1cc88a;"></i> 
+                                                                {{ $item->dob ?? 'Nullable' }}</span>
+                                                                <!--  -->
+                                                                <div class="py-2">
+                                                                    <span>
+                                                                        <b>{{ $item->experience ?? 'Nullable' }}+ Years of {{ collect($item->specialization)->first() ?? 'Not Specified' }} Teaching Experience: Your {{ implode(', ', $item->specialization ?? ['Not Specified']) }} Success, Guaranteed.</b> 
+
+                                                                        - Hello, my name is {{ $item->f_name ?? 'Not Specified' }}. I have {{ $item->experience ?? 'Nullable' }}+ years of experience as a {{ collect($item->specialization)->first() ?? 'Not Specified' }} Teacher & Tutor
+                                                                        
+                                                                    </span>
+                                                                    <ul class="read p-0 mt-3">
+                                                                        <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="d-flex pb-5" id="ff111">
+                                                                    <div class="me-lg-5 me-3" id="dollar">
+                                                                        <h4 class="fw-bold on">{{ $item->price ?? 'Nullable' }}</h4>
+                                                                        <!-- <p class="text-secondary fs-6"><p><i class="fa-solid fa-calendar-days me-1" style="color:#1cc88a"></i> 
+                                                                        {{ $item->dob ?? 'Nullable' }}</p> -->
+                                                                    </div>
+                                                                    <!-- <div id="heart-icon">
+                                                                        <span><i class="fa-regular fa-heart"></i></span>
+                                                                    </div> -->
+                                                                </div>
+                                                                <div>
+                                                                    <div id="btn-container">
+                                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trail lesson</button>
+                                                                    </div>
+                                                                </div>
+                                                                <div>
+                                                                <div class="mt-2" id="btn-container">
+                                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Send Massage</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                   
+                                                </div>
+                                            </div> 
+                                                                                    </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                @else
+                    <p>No tutors available matching your search criteria.</p>
+                @endif
+            </div>
+        </div>
+
+        <!-- Pagination for Tutors -->
+        <div class="row justify-content-center mt-3">
+           @foreach ($paginatedMatchedTutors as $tutor)
+    {{-- Show tutor info --}}
+@endforeach
+
+<!-- Pagination links -->
+<div class="d-flex justify-content-center mt-4">
+    {{ $paginatedMatchedTutors->links() }}
+</div>
+
+        </div>
+    </div>
+</div>
+
             <section>
                 <div class="row g-3">
                         <div class="ae-heading my-4">

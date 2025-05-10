@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Blog;
 use App\Models\Tutor;
 use Carbon\Carbon;
 use App\Models\User;
@@ -15,7 +16,8 @@ use Illuminate\Validation\ValidationException;
 use App\Models\SchoolClass;
 use App\Models\Subject;
 use Illuminate\Support\Facades\Auth;
-use App\Notifications\InquirySuccessNotification;
+use App\Notifications\InquirySuccessNotification;use Illuminate\Pagination\LengthAwarePaginator;
+
 class StudentController extends Controller
 {
     public function index()
@@ -234,42 +236,57 @@ class StudentController extends Controller
 
         if ($user && $user->role === 'user') {
             $student = Student::find($id);
-            
+
             if (!$student) {
                 return redirect()->route('basicsignup')->with('error', 'Student not found.');
             }
+               $query = Tutor::where('status', 'active');
+        $sliderTutors = Tutor::where('status', 'active')->take(6)->get();
+        $perPage = 5; // Define the number of tutors per page
+        $blogs = Blog::orderBy('created_at', 'desc')->take(3)->get();
 
+        // Paginate the results
+        $tutors = $query->paginate($perPage);
+       
+        $totalTutorsCount = Tutor::count();
             $storedCountry = trim($student->country);
             $student->country = config("countries_assoc.countries.$storedCountry", 'Unknown');
+            $teacher = Tutor::all();
 
-            $tutors = Tutor::all();
+            $tutorSubjects = [];
 
-            // dd($tutors);
-            // $matchedTutors = $tutors->filter(function ($tutor) use ($student) {
-            //     $studentSubjects = array_map(
-            //         fn($s) => strtolower(trim($s)),
-            //         explode(',', $student->subject)
-            //     );
-            
-            //     $tutorSubject = strtolower(trim($tutor->edu_teaching));
-            
-            //     return in_array($tutorSubject, $studentSubjects);
-            // });
-            $matchedTutors = $tutors->filter(function ($tutor) use ($student) {
+            foreach ($teacher as $tutor) {
+                $serialized = $tutor->teaching; // stored as serialized array
+
+                if ($serialized) {
+                    $subjects = unserialize($serialized); // now an array like ['Accounting']
+
+                    // Clean and lower-case
+                    $cleaned = array_map(fn($s) => strtolower(trim($s)), $subjects);
+                    $tutorSubjects[$tutor->id] = $cleaned;
+                } else {
+                    $tutorSubjects[$tutor->id] = [];
+                }
+            }
+
+            $matchedTutors = $teacher->filter(function ($tutor) use ($student, $tutorSubjects) {
                 $studentSubjects = array_map(
                     fn($s) => strtolower(trim($s)),
                     explode(',', $student->subject)
                 );
-            
-                $tutorSubject = strtolower(trim($tutor->edu_teaching));
+
+                // Use already processed and cleaned subjects from earlier
+                $tutorSubjectsList = $tutorSubjects[$tutor->id] ?? [];
+
                 $tutorAvailability = strtolower(trim($tutor->availability_status));
                 $studentAvailability = strtolower(trim($student->availability_status));
-            
-                return in_array($tutorSubject, $studentSubjects) && $tutorAvailability === $studentAvailability;
+
+                $hasCommonSubjects = !empty(array_intersect($studentSubjects, $tutorSubjectsList));
+
+                return $hasCommonSubjects && $tutorAvailability === $studentAvailability;
             });
-            
-            
-            // dd($matchedTutors);
+
+
 
             $matchedTutors->each(function ($tutor) {
                 $storedCountryCode = trim($tutor->country);
@@ -291,11 +308,34 @@ class StudentController extends Controller
                 } else {
                     $tutor->age = null;
                 }
-            });
-                
+            });$currentPage = LengthAwarePaginator::resolveCurrentPage();
+$matchedTutorsPerPage = 5;
+
+$paginatedMatchedTutors = new LengthAwarePaginator(
+    $matchedTutors->slice(($currentPage - 1) * $matchedTutorsPerPage, $matchedTutorsPerPage)->values(),
+    $matchedTutors->count(),
+    $matchedTutorsPerPage,
+    $currentPage,
+    ['path' => request()->url(), 'query' => request()->query()]
+);
+
+            $subjectsTeach = collect(config('subjects.subjects'));
+        $countries = collect(config('countries_assoc.countries'));
+        $countriesPhone = collect(config('phonecountries.countries'));
+        $countries_number_length = collect(config('countries_number_length.countries'));
+        $countries_prefix = collect(config('countries_prefix.countries'));
             return view('hired-tutor', [
                 'student' => $student,
-                'matchedTutors' => $matchedTutors,
+                'matchedTutors' => $matchedTutors, 'paginatedMatchedTutors' => $paginatedMatchedTutors, 'blogs' => $blogs,
+            'sliderTutors' => $sliderTutors,
+            'tutors' => $tutors,
+            'subjectsTeach' => $subjectsTeach,
+            'totalTutorsCount' => $totalTutorsCount,
+            'perPage' => $perPage,
+            'countries' => $countries,
+            'countriesPhone' => $countriesPhone,
+            'countries_number_length' => $countries_number_length,
+            'countries_prefix' => $countries_prefix
             ])->with('success', 'Welcome to your dashboard.');
         }
 
