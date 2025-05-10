@@ -5,6 +5,17 @@
     <meta name="description" content="Hired tutor Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            background-color: #42B979 !important;
+            color: #fff;
+            margin-top: 6px !important;
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__display {
+            padding-left:18px !important
+        }
+        .select2-selection__choice__remove span {
+            color:#fff;
+        }
         .upload-area {
             cursor: pointer; 
             border: 2px dashed #42b979; 
@@ -375,10 +386,10 @@
         let isValid = true;
         let missingFields = [];
         if (step === 1) {
-    const fieldConfigs = [
-        { id: 'school_class', label: 'School Class' },
-        { id: 'subject', label: 'Subject' }
-    ];
+        const fieldConfigs = [
+            { id: 'school_class', label: 'Status' },
+            { id: 'subject', label: 'Subject' }
+        ];
 
     fieldConfigs.forEach(({ id, label }) => {
         const el = document.getElementById(id);
