@@ -246,224 +246,23 @@
     <div class="wrapper mx-5">
 
         @include('whatsapp')
-        {{-- @if($matchedTutors->count() > 0)    
-            @foreach($matchedTutors as $tutor)
-                <div class="container-fluid mt-2">
-                    <div class="row mx-1">
-                        <!-- Main Tutor Information Section -->
-                        <div class="col-xl-9 col-lg-12 tutorslist-card">
-                            <div class="row py-3 tutorlist-wrapper">
-                                <!-- Left Column: Tutor Profile Image and Video -->
-                                <div class="col-md-2">
-                                    <div id="waste1">
-                                        <div class="img-wrapper1">
-                                            <div>
-                                                <div class="img-wrapper">
-                                                    <!-- Tutor Profile Image -->
-                                                    @if($tutor->profileImage)
-                                                        <img src="{{ asset('storage/' . $tutor->profileImage) }}" alt="Tutor Image"
-                                                            class="img-thumbnail" style="height: 150px; width: 100%;">
-                                                    @else
-                                                        <img src="{{ asset('images/avatar.png') }}" alt="Default Image"
-                                                            class="img-thumbnail" style="height: 150px; width: 100%;">
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                
-                                        <!-- Tutor Video Modal -->
-                                        @if($tutor->video)
-                                            <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header" style="background-color: #1cc88a;">
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(2);"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <video controls height="250px" width="100%">
-                                                                <source src="{{ asset('/' . $tutor->video) }}" type="video/mp4">
-                                                                Your browser does not support the video tag.
-                                                            </video>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-                
-                                <!-- Middle Column: Tutor Info and Pricing -->
-                                <div class="col-md-6">
-                                    <div class="d-flex" id="ff000">
-                                        <!-- Tutor Name and Country Flag -->
-                                        <h4 class="me-2 fw-bold">{{ $tutor->f_name }} {{ $tutor->l_name }}</h4>
-                                        <span class="me-3"><i class="fa-regular fa-star"></i></span>
-                                        <div class="img-wrapper">
-                                            <img src="{{ asset('images/flag.svg') }}" class="img-fluid" width=30 alt="Country Flag">
-                                        </div>
-                                    </div>
-                
-                                    <!-- Tutor Specialization -->
-                                    <div class="d-flex text-secondary py-1">
-                                        <span id="pro" class="p-1 bg-primary-subtle rounded fw-bold text-dark">
-                                            {{ collect($tutor->specialization)->first() ?? 'Not Specified' }}
-                                        </span>
-                                    </div>
-                
-                                    <!-- Tutor Contact and Info -->
-                                    <div class="d-flex text-secondary pb-1">
-                                        <span class="me-2"><i class="fa-solid fa-user-graduate" style="font-size: 13px;color: #1cc88a;margin-top: 5px;"></i></span>
-                                        <p class="mb-0">{{ $tutor->phone ?? 'Not Provided' }}</p>
-                                    </div>
-                
-                                    <!-- Tutor Languages -->
-                                   <div class="d-flex text-secondary pb-1">
-    <span class="me-2">
-        <i class="fa-solid fa-language me-1" style="font-size: 13px; color: #1cc88a; margin-top: 5px;"></i>
-    </span>
-    <p class="mb-0">
-        {{ implode(', ', $tutorSubjects[$tutor->id] ?? []) }}
-    </p>
-</div>
-
-                                    <div class="d-flex text-secondary pb-1">
-                                        <span class="me-2">
-                                            <i class="fa-solid fa-signal me-1" style="font-size: 13px; color: #1cc88a; margin-top: 5px;"></i>
-                                        </span>
-                                        <p class="mb-0">{{ $tutor->availability_status ?? 'Not Provided' }}</p>
-                                    </div>
-                
-                                    <!-- Tutor DOB -->
-                                    <div class="d-flex text-secondary pb-1">
-                                        <span class="me-2">
-                                            <i class="fa-solid fa-phone-volume" style="font-size: 13px;color: #1cc88a;margin-top: 5px;"></i>
-                                        </span>
-                                        <p class="mb-0">{{ $tutor->dob ?? 'Not Provided' }}</p>
-                                    </div>
-                
-                                    <!-- Tutor Experience -->
-                                    <div class="d-flex text-secondary">
-                                        <span class="me-2"><i class="fa-solid fa-user" style="font-size: 13px;color: #1cc88a;margin-top: 5px;"></i></span>
-                                        <p class="mb-0">{{ $tutor->experience ?? 'N/A' }} years experience</p>
-                                    </div>
-                
-                                    <!-- Short Bio -->
-                                    <div class="py-2">
-                                        <span class="text-secondary">
-                                            I am <b>{{ $tutor->f_name }}</b>, with <b>{{ $tutor->experience ?? 'N/A' }} years of experience</b> in the field of <b>{{ collect($tutor->specialization)->first() ?? 'Not Specified' }}</b>.
-                                            I have a basic proficiency <b>(A2 level)</b> in <b>{{ $tutor->language[0]['language'] ?? 'English' }}</b> and completed my education at the <b>{{ $tutor->university ?? 'Not Specified' }}</b>.
-                                        </span>
-                                        <ul class="read p-0 mt-3">
-                                            <li style="list-style: none;"><a class="fw-bold d-none" href="">Read More</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                
-                                <!-- Right Column: Pricing and Actions -->
-                                <div class="col-md-4">
-                                    <div class="d-flex pb-5" id="ff111">
-                                        <div class="me-lg-5" id="dollar">
-                                            <h4 class="fw-bold" style="color: #1cc88a;">$16</h4>
-                                            <p class="text-secondary fs-6">50-min lesson</p>
-                                        </div>
-                                        <span id="heartIcon ms-">
-                                            <i class="fa-regular fa-heart"></i>
-                                        </span>
-                                    </div>
-                
-                                    <!-- Action Buttons -->
-                                    <div class="" id="btn-container">
-                                        <button type="button" style="background-color: #1cc88a;" class="btn4 btn-outline-light rounded fw-bold text-light p-2 w-100">Book Trial Lesson</button>
-                                    </div>
-                
-                                    <div class="pt-1" id="btn-container">
-                                        <button type="button" style="background-color: #1cc88a;" class="btn4 btn-outline-light rounded fw-bold text-light p-2 w-100">Send Message</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                
-                    </div>
-                </div>
-        
-            @endforeach
-        @else
-            <div class="container mt-4">
-                <div class="alert alert-warning text-center">
-                    No matching tutors found for your selected subject and availability.
-                </div>
-            </div>
-        @endif --}}
-             <div class="col-md-9">
-                                <div class="d-flex justify-content-between ad-border-div">
-                                    <div class="mx-2">
-                                        <p class="m-0 pt-1 tutors-range">
-                                            @if($totalTutorsCount == 0 || $tutors->isEmpty())
-                                                0 of 0 tutors
-                                            @else
-                                                {{ $tutors->firstItem() }} to {{ $tutors->lastItem() }} of {{ $totalTutorsCount }} tutors
-                                            @endif
-                                        </p>
-                                        
-                                    </div>
-                                    <div class="my-2 mx-2">
-                                        <button id="resetFilterBtn" class="ad-btn-reset">{{ __('messages.Reset Filter') }}</button>
-            
-                                    </div>
-                                    
-                                </div>
-                                <div class="ad-border-filters" >
-                                    
-                                        <div class="row  country-row">
-                                            <div class="col-lg-3 country-drop-down" >
-
-                                                <select name="country" id="country" class="country" >
-                                                    <option value="all">{{ __('messages.Please select a country') }}</option>
-
-                                                    @foreach($countries as $countryCode => $countryName)
-                                                        <option value="{{ $countryCode }}">{{ $countryName }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col-lg-9 adjust-filters-wrap ">
-                                                <div class="col-md-6 px-2 col-lg-4">
-                                                        <select name="gender" id="gender" class="country" >
-                                                            <option value="all">{{ __('messages.Gender Selection') }}</option>
-                                                            <option value="Male">{{ __('Male') }}</option>
-                                                            <option value="female">{{ __('Female') }}</option>
-                                                        </select>
-                                                </div>
-                                                <div class="col-md-6 px-2 col-lg-4">
-                                                        <select name="subjectSearch" id="subjectSearch" class="country" >
-                                                            <option value="all">{{ __('messages.Which Subject Interests You?') }}</option>
-                                                           
-                                                    @foreach($subjectsTeach as $subjectsCode => $subjects)
-                                                        <option value="{{ $subjectsCode }}">{{ $subjects }}</option>
-                                                    @endforeach
-                                                        </select>
-                                                </div>
-                                                <div class="col-md-6 px-2 col-lg-4">
-                                                    {{-- <label for="citysearch" class="form-label">City</label> --}}
-                                                        <select name="prize-Range" id="prize-Range" class="country" >
-                                                            <option value="all">{{ __('messages.Price Selection') }}</option>
-                                                            
-                                                        </select>
-                                                </div>
-                                            </div>  
-                                        </div>
-                                    </div>
+        <div class="container-fluid mt-2 ">
+            <div class="row mx-1">
+              <div class="col-md-9">
+                                
 
                                 <!-- Tutor profile -->
                                @if($matchedTutors->count() > 0)    
-                                <div id="tutorsContainer">
+                                <div id="">
                                      @foreach($matchedTutors as $item)
                                         @if($item->status != 'inactive')
                                           
-                                             <div class="ad-form"><div class="container-fluid pt-2 px-0">
+                                             <div class="ad-form">
+                                                <div class="container-fluid pt-2 px-0">
                                                 
-                                             <div class="recomended-badge mb-1" data-toggle="tooltip" data-placement="top" title="{{ $item->f_name ?? 'Nullable' }}  {{ $item->l_name ?? 'Nullable' }}" style="float: right;">
-                                                    <span class="badge badge-primary">Recomended</span>
-                                            </div>
+                                                <div class="recomended-badge mb-1" data-toggle="tooltip" data-placement="top" title="{{ $item->f_name ?? 'Nullable' }}  {{ $item->l_name ?? 'Nullable' }}" style="float: right;">
+                                                        <span class="badge badge-primary">Recomended</span>
+                                                </div>
                                                 <div class="row ">
                                                     <div class="col-xl-12 col-lg-12">
                                                         <div class="row py-4" style="margin: 0 auto;">
@@ -540,7 +339,13 @@
                                                                         </span>
                                                                     @endforeach
                                                                 </div>
-                                                                
+                                                                <div class="d-flex text-secondary pb-1">
+                                                                    
+                                                                    
+                                                                    <span class="me-2"><i class="fa-solid fa-language" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
+                                                                    <p class="mb-0" style="color:black; transform: scaleY(1);text-transform:capitalize">{{ $item->edu_teaching }}</p>
+                                                                </div>
+
                                                                 <div class="d-flex text-secondary my-1">
                                                                     <span class="me-2"><i class="fa-solid fa-venus-mars" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
                                                                     <p class="mb-0" style="color:black; transform: scaleY(1);text-transform:capitalize">{{ $item->gender ?? 'Nullable' }}</p>
@@ -554,7 +359,7 @@
                                                                 <div class="d-flex text-secondary py-2">
                                                                     <span class="me-2"><i class="fa-solid fa-language" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
                                                                     <p class="mb-0" style="color:black; transform: scaleY(1);" id="on-1024">
-                                                                        Speaks 
+                                                                         
                                                                         @if(!empty($item->language) && is_array($item->language))
                                                                             @foreach($item->language as $lang)
                                                                                 {{ $lang['language'] ?? 'Unknown' }} ({{ $lang['level'] ?? 'Unknown' }})
@@ -576,9 +381,7 @@
                                                                         - Hello, my name is {{ $item->f_name ?? 'Not Specified' }}. I have {{ $item->experience ?? 'Nullable' }}+ years of experience as a {{ collect($item->specialization)->first() ?? 'Not Specified' }} Teacher & Tutor
                                                                         
                                                                     </span>
-                                                                    <ul class="read p-0 mt-3">
-                                                                        <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
-                                                                    </ul>
+                                                                    
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3">
@@ -594,12 +397,12 @@
                                                                 </div>
                                                                 <div>
                                                                     <div id="btn-container">
-                                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trail lesson</button>
+                                                                        <button type="button" style="background-color: #1cc88a;" class="btn4 btn-outline-light rounded fw-bold text-light p-2 w-100">Book trail lesson</button>
                                                                     </div>
                                                                 </div>
                                                                 <div>
                                                                 <div class="mt-2" id="btn-container">
-                                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Send Massage</button>
+                                                                        <button type="button" style="background-color: #1cc88a;" class="btn4 btn-outline-light rounded fw-bold text-light p-2 w-100">Send Massage</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -608,9 +411,7 @@
                                                    
                                                 </div>
                                             </div> 
-                                                                                    </div>
-                                        </div>
-                                    </div>
+                                        
                                 </div>
                             @endif
                         @endforeach
@@ -620,17 +421,19 @@
                 @endif
             </div>
         </div>
+        </div>
+        </div>
 
         <!-- Pagination for Tutors -->
         <div class="row justify-content-center mt-3">
            @foreach ($paginatedMatchedTutors as $tutor)
-    {{-- Show tutor info --}}
-@endforeach
+                {{-- Show tutor info --}}
+            @endforeach
 
 <!-- Pagination links -->
-<div class="d-flex justify-content-center mt-4">
-    {{ $paginatedMatchedTutors->links() }}
-</div>
+        <div class="d-flex justify-content-center mt-4">
+            {{ $paginatedMatchedTutors->links() }}
+        </div>
 
         </div>
     </div>

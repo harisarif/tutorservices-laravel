@@ -284,6 +284,7 @@ class StudentController extends Controller
                 $hasCommonSubjects = !empty(array_intersect($studentSubjects, $tutorSubjectsList));
 
                 return $hasCommonSubjects && $tutorAvailability === $studentAvailability;
+               
             });
 
 
