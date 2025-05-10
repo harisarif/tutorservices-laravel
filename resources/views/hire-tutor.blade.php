@@ -5,124 +5,104 @@
     <meta name="description" content="Hired tutor Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
-   #allModal {
+        .upload-area {
+            cursor: pointer; 
+            border: 2px dashed #42b979; 
+            width: 100%; 
+            height: 100px;
+        }
+        #allModal {
             display: none !important;
         }
         #page-2 {
             height:300px;
             overflow-y:scroll;
         }
-        /* Target the entire scrollbar */
-            ::-webkit-scrollbar {
-            width: 4px; /* Adjust the width */
-            }
-
-            /* Target the scrollbar track */
-            ::-webkit-scrollbar-track {
-            background: #f1f1f1; /* Color of the track */
-            }
-
-            /* Target the scrollbar thumb */
-            ::-webkit-scrollbar-thumb {
-            background: #42b979; /* Color of the thumb */
-            border-radius: 6px; /* Rounded corners */
-            }
-
-            /* Target the scrollbar thumb on hover */
-            ::-webkit-scrollbar-thumb:hover {
-            background: #42b979; /* Color when hovering */
-            }
-
-    /* .select2-container--default .select2-selection--single {
-            height:35px !important;
-        } */
+        
         main{
-    background: url(./images/bg_image_1.png), #f1f1f1a0;
-    background-blend-mode: screen;
-}
-    footer{
-        background-color: #42b979;
-    }
-    .select2-container .select2-selection--single{
-        height: 45px !important;
-    }
-    .custom-select-wrapper {
-        position: relative;
-        display: flex;
-        cursor: pointer;
-        text-align: justify;
-      }
-      [dir="rtl"] .custom-select-web  {
-        margin-left: 50px;
+            background: url(./images/bg_image_1.png), #f1f1f1a0;
+            background-blend-mode: screen;
         }
-    #language-select {
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        color: var(--primary-color) !important;
-        border-radius: 4px;
-        padding: 5px;
-        font-size: 12px;
-        color: #333;
-        width: 95px;
-        max-width: 95px;
-        outline: none;
-        cursor: pointer;
-        transition: border-color 0.3s, box-shadow 0.3s;
-    }
-    .custom-options-web {
-        display: none;
-        position: absolute;
-        top: 30px;
-        left: -109px;
-        background: white;
-        border: 1px solid #ccc;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        z-index: 10;
-    }
-    [dir="rtl"] .custom-options-web  {
-        left: -5px;
-    }
-    [dir="rtl"] .ad-heading  {
-        border-bottom-right-radius: 0px;
-        border-bottom-left-radius: 170px;
-    }
-    [dir="rtl"] .whatsApp_button_Warpper12  {
-        right: 94%;
-    }
-    [dir="rtl"] .whatsapp-help  {
-        right: -115px;
-        white-space: nowrap;
-        width: 111px;
-    }
-    [dir="rtl"] .mini-heading  {
-        text-align: justify;
-        display: flex;
-    }
-    [dir="rtl"] .goToTop  {
-        right: 94%;
-    }
-    [dir="rtl"] .main-footer{
-        text-align: justify;
-    }
-    [dir="rtl"] .heading-box{
-        text-align: justify !important;
-    }
-    [dir="rtl"] .form-group {
-        text-align: justify !important;
-        width: 0;
-    }
-    .custom-options.open {
-        display: block;
-    }
-    .custom-options-web.open {
-        display: block;
-    }
-    .fa-globe{
-        margin-left: -50px;
-    }
+        .select2-container .select2-selection--single{
+            height: 45px !important;
+        }
+        .custom-select-wrapper {
+            position: relative;
+            display: flex;
+            cursor: pointer;
+            text-align: justify;
+        }
+        [dir="rtl"] .custom-select-web  {
+            margin-left: 50px;
+            }
+        #language-select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            color: var(--primary-color) !important;
+            border-radius: 4px;
+            padding: 5px;
+            font-size: 12px;
+            color: #333;
+            width: 95px;
+            max-width: 95px;
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .custom-options-web {
+            display: none;
+            position: absolute;
+            top: 30px;
+            left: -109px;
+            background: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        [dir="rtl"] .custom-options-web  {
+            left: -5px;
+        }
+        [dir="rtl"] .ad-heading  {
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 170px;
+        }
+        [dir="rtl"] .whatsApp_button_Warpper12  {
+            right: 94%;
+        }
+        [dir="rtl"] .whatsapp-help  {
+            right: -115px;
+            white-space: nowrap;
+            width: 111px;
+        }
+        [dir="rtl"] .mini-heading  {
+            text-align: justify;
+            display: flex;
+        }
+        [dir="rtl"] .goToTop  {
+            right: 94%;
+        }
+        [dir="rtl"] .main-footer{
+            text-align: justify;
+        }
+        [dir="rtl"] .heading-box{
+            text-align: justify !important;
+        }
+        [dir="rtl"] .form-group {
+            text-align: justify !important;
+            width: 0;
+        }
+        .custom-options.open {
+            display: block;
+        }
+        .custom-options-web.open {
+            display: block;
+        }
+        .fa-globe{
+            margin-left: -50px;
+        }
 </style>
 @if ($errors->any())
         <div class="alert alert-danger">
@@ -257,12 +237,27 @@
                                 <h3 style="font-size: 18px; text-align: center; margin-top: 15px;    margin-bottom: -9px; color: #42b979;"><b>{{ __('messages.Please Enter your Details') }}</b></h3>
                                 <label class="mini-heading" for="" style="color:#42b979;"><strong>{{ __('messages.Name') }} <b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
-                                <input required name="name" type="text" placeholder="{{ __('messages.Name') }}"  class="inp-1" style="width:100%;">
+                                <input required name="name" type="text" placeholder="{{ __('messages.Name') }}"  class="inp-1 w-100">
 
                                 <label class="mini-heading" for="" style="color:#42b979;"><strong>{{ __('messages.Email') }}<b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
-                                <input required name="email" type="email" placeholder="{{ __('messages.Email') }}"  class="inp-1" style="width:100%;">
-
+                                <input required name="email" type="email" placeholder="{{ __('messages.Email') }}"  class="inp-1 w-100">
+                                <div class="px-2 mb-2 col-12 d-flex flex-column align-items-left">
+                                    <label class="mb-2 fw-bold" style="color: #42b979; font-size: 18px;text-align: left;">{{ __('messages.Picture') }}</label>
+                                    <div class="upload-area d-flex flex-column align-items-center justify-content-center text-center" id="uploadArea"
+                                        >
+                                        <input type="file" class="form-control d-none" id="profilePicture" name="image" accept="image/*">
+                                        <div class="upload-content text-center">
+                                            <div class="upload-icon">
+                                                <i class="fas fa-cloud-upload-alt fa-2x"></i>
+                                            </div>
+                                            <div class="upload-text">
+                                                <p class="mb-1">Click to upload or drag and drop</p>
+                                                <small>PNG, JPG or JPEG (max. 5MB)</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <!-- <div class="row"> -->
                                 <label class="mini-heading" for="" style="color:#42b979;"><strong>{{ __('messages.Mobile Number') }} <b style="color: red;
                                     font-size: 20px;">*</b></strong></label>
@@ -301,15 +296,13 @@
                             <div class="col-12 px-2 py-2">
                                 <label class="mini-heading" for="curriculum" class="form-label" style="color:#42b979;"><strong>{{ __('messages.Description (Optional)') }}</strong></label>
                                 <textarea class="form-control" id="curriculum" name="description" rows="2" placeholder="{{ __('messages.Description') }}" style="box-shadow: none;border: 1px solid #aaa;"></textarea>
-                            </div> <div class="col-12 px-2 py-2">
-                                <label class="mini-heading" for="image" class="form-label" style="color:#42b979;"><strong>Image</strong></label>
-                               <br> <input type="file" name="image" id="image" accept="image/*" class="mt-2 mb-2">
-                            </div>  
+                            </div> 
+                              
                         </div>
 
                     </div>
 
-                    <div class="col-12 my-5 d-flex justify-content-center px-5 " style="margin-bottom: 1rem !important;">
+                    <div class="col-12 my-5 d-flex justify-content-between px-5 mb-1">
 
                         <input onclick="backStep(this)" id="back-btn" type="button" value="{{ __('messages.Previous') }}"
                             class="border-0 bg-body-secondary text-dark fs-6 py-1 px-4 rounded d-none">
@@ -326,7 +319,7 @@
             </div>
         </div>
     </main>
-    <script src="./js/hire_tutor.js"></script>
+    <script src="{{ asset('js/hire_tutor.js') }}"></script>
 </body>
 @endsection
 @section('js')<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -510,7 +503,7 @@
         });
     </script>
 <script>
-$('#subject').select2({
+    $('#subject').select2({
             placeholder: "Select a subject",
             allowClear: false,
             tags: true,

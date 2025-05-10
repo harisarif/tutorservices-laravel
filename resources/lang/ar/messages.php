@@ -154,6 +154,8 @@ return [
     'Online Tutor '=>'مدرس عبر الإنترنت',
     'Tutor for Home'=>'مدرس للمنزل',
     'Click here'=>'انقر هنا',
+    'Image'=>'صورة',
+    'Picture'=>'صورة الملف الشخصي',
     'Both'=>'كلاهما',
     'Select your Grade'=>'اختر درجتك',
     'Subject'=>'موضوع',
