@@ -336,6 +336,99 @@
 @section('js')<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let uploadArea = document.getElementById("uploadAreaVideo");
+        let fileInput = document.getElementById("videoFile");
+        let uploadedVideoPreview = document.getElementById("demoVideoPreview");
+        let removeVideoButton = document.getElementById("removeVideoButton");
+        let loadingVideoIndicator = document.getElementById("loadingVideoIndicator");
+        let errorVideoMessage = document.getElementById("errorVideoMessage");
+        let nextButton = document.getElementById("next-btn");
+        let liveVideoButton = document.createElement("button");
+        let live = document.getElementById("live");
+        // Create Live Video Button
+        liveVideoButton.textContent = "Record Live Video";
+        liveVideoButton.classList.add("btn", "btn-outline-secondary", "w-100", "mt-3");
+        live.appendChild(liveVideoButton);
+
+        document.getElementById("uploadAreaVideo").addEventListener("click", function() {
+            document.getElementById("videoFile").click();
+        });
+
+        fileInput.addEventListener("change", (e) => {
+            handleFile(e.target.files[0]);
+        });
+
+        removeVideoButton.addEventListener("click", () => {
+            resetUpload();
+        });
+
+        function handleFile(file) {
+            errorVideoMessage.style.display = "none";
+
+            if (!file.type.startsWith("video/")) {
+                showError("Please upload a video file");
+                return;
+            }
+
+            if (file.size > 50 * 1024 * 1024) {
+                showError("Video must be less than 50MB");
+                return;
+            }
+
+            loadingVideoIndicator.style.display = "block";
+            const videoURL = URL.createObjectURL(file);
+            uploadedVideoPreview.src = videoURL;
+
+            uploadedVideoPreview.onloadeddata = () => {
+                loadingVideoIndicator.style.display = "none";
+                nextButton.setAttribute("type", "submit");
+            };
+        }
+
+        function showError(message) {
+            errorVideoMessage.textContent = message;
+            errorVideoMessage.style.display = "block";
+        }
+
+        function resetUpload() {
+            uploadedVideoPreview.src = "https://www.w3schools.com/html/mov_bbb.mp4";
+            uploadedVideoPreview.load();
+            fileInput.value = "";
+            nextButton.setAttribute("type", "button");
+        }
+
+        // Live Video Recording Feature
+        liveVideoButton.addEventListener("click", async () => {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                const mediaRecorder = new MediaRecorder(stream);
+                let chunks = [];
+
+                mediaRecorder.ondataavailable = (event) => {
+                    if (event.data.size > 0) {
+                        chunks.push(event.data);
+                    }
+                };
+
+                mediaRecorder.onstop = () => {
+                    const blob = new Blob(chunks, { type: "video/mp4" });
+                    const videoURL = URL.createObjectURL(blob);
+                    uploadedVideoPreview.src = videoURL;
+                    nextButton.setAttribute("type", "submit");
+                };
+
+                mediaRecorder.start();
+
+                setTimeout(() => {
+                    mediaRecorder.stop();
+                    stream.getTracks().forEach(track => track.stop());
+                }, 5000); // Record for 5 seconds
+            } catch (error) {
+                showError("Could not access camera. Please allow permissions.");
+            }
+        });
+    });
     let currentStep = 1;
 
     // Handle Next Button Click
@@ -476,7 +569,29 @@
     document.addEventListener('DOMContentLoaded', updateButtons);
 </script>
 
+<script>
+    document.getElementById("uploadArea").addEventListener("click", function() {
+        document.getElementById("profilePicture").click();
+    });
 
+    document.getElementById("profilePicture").addEventListener("change", function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById("previewImg").src = e.target.result;
+                document.getElementById("previewContainer").classList.remove("d-none");
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    document.getElementById("removeBtn").addEventListener("click", function() {
+        document.getElementById("profilePicture").value = "";
+        document.getElementById("previewImg").src = "";
+        document.getElementById("previewContainer").classList.add("d-none");
+    });
+</script>
     <script>
         $(document).ready(function() {
             $('#country').select2();
