@@ -112,7 +112,15 @@
 </body>
 
 </html>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-T7J1VV3190"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CPBJT0ZYB1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CPBJT0ZYB1');
+</script>
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-T7J1VV3190"></script> -->
 <script>
     function setCookieConsent(value) {
     fetch('/cookie-consent', {
@@ -126,11 +134,11 @@
         document.getElementById('cookie-banner').remove();
     });
 }
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+//   window.dataLayer = window.dataLayer || [];
+//   function gtag(){dataLayer.push(arguments);}
+//   gtag('js', new Date());
 
-  gtag('config', 'G-T7J1VV3190');
+//   gtag('config', 'G-T7J1VV3190');
 </script>
 <script src="{{ URL::asset('js/select2.js') }}"></script>
 <script src="{{ URL::asset('js/app.js') }}"></script>
