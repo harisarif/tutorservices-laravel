@@ -676,7 +676,7 @@
                                                 </div>
                                             </div>  
                                         </div>
-                                    </div>
+                                </div>
 
                                 <!-- Tutor profile -->
                                 @if ($tutors->count() > 0)

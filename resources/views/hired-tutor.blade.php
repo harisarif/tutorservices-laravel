@@ -235,7 +235,63 @@
             <div class="row mx-1">
               <div class="col-md-9">
                                 
+              <div class="d-flex justify-content-between ad-border-div">
+                                    <div class="mx-2">
+                                        <p class="m-0 pt-1 tutors-range">
+                                            @if($totalTutorsCount == 0 || $tutors->isEmpty())
+                                                0 of 0 tutors
+                                            @else
+                                                {{ $tutors->firstItem() }} to {{ $tutors->lastItem() }} of {{ $totalTutorsCount }} tutors
+                                            @endif
+                                        </p>
+                                        
+                                    </div>
+                                    <div class="my-2 mx-2">
+                                        <button id="resetFilterBtn" class="ad-btn-reset">{{ __('messages.Reset Filter') }}</button>
+            
+                                    </div>
+                                    
+                                </div>
+                                <div class="ad-border-filters" >
+                                    
+                                        <div class="row  country-row">
+                                            <div class="col-lg-3 country-drop-down" >
 
+                                                <select name="country" id="country" class="country" >
+                                                    <option value="all">{{ __('messages.Please select a country') }}</option>
+
+                                                    @foreach($countries as $countryCode => $countryName)
+                                                        <option value="{{ $countryCode }}">{{ $countryName }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-9 adjust-filters-wrap ">
+                                                <div class="col-md-6 px-2 col-lg-4">
+                                                        <select name="gender" id="gender" class="country" >
+                                                            <option value="all">{{ __('messages.Gender Selection') }}</option>
+                                                            <option value="Male">{{ __('Male') }}</option>
+                                                            <option value="female">{{ __('Female') }}</option>
+                                                        </select>
+                                                </div>
+                                                <!-- <div class="col-md-6 px-2 col-lg-4">
+                                                        <select name="subjectSearch" id="subjectSearch" class="country" >
+                                                            <option value="all">{{ __('messages.Which Subject Interests You?') }}</option>
+                                                           
+                                                    @foreach($subjectsTeach as $subjectsCode => $subjects)
+                                                        <option value="{{ $subjectsCode }}">{{ $subjects }}</option>
+                                                    @endforeach
+                                                        </select>
+                                                </div> -->
+                                                <div class="col-md-6 px-2 col-lg-4">
+                                                    {{-- <label for="citysearch" class="form-label">City</label> --}}
+                                                        <select name="prize-Range" id="prize-Range" class="country" >
+                                                            <option value="all">{{ __('messages.Price Selection') }}</option>
+                                                            
+                                                        </select>
+                                                </div>
+                                            </div>  
+                                        </div>
+                                </div>
                                 <!-- Tutor profile -->
                                @if($matchedTutors->count() > 0)    
                                 <div id="">

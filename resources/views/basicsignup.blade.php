@@ -1,29 +1,13 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.app')
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Edexcel Academy</title>
-    <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" type="image/png"/>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet"/>
+    <style>
+        .modalBox{
+        display: none !important;
+    }
+    </style>
     <link rel="stylesheet" href="{{asset('css/sign-up.css')}}">
-   
-    <!-- whatsapp button css -->
-    <link rel="stylesheet" href="{{asset('css/whatsApp-buttons.css')}}"/>
-
-    <link rel="stylesheet" href="{{asset('css/all.min.css')}}"
-          integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <!-- bootstrap css -->
-    <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}"/>
-
-    <!-- bootstrap js -->
-  
 </head>
-
+@section('content')
 <body>
 <main>
             <button id="goToTop" class="goToTop fw-20px" onclick="window.scrollTo(0, 0)">
@@ -76,7 +60,7 @@
         </div>
     </section>
     
-    <footer class="row text-center text-lg-start justify-content-center m-0 p-0">
+    <footer class="d-none row text-center text-lg-start justify-content-center m-0 p-0">
         
         <div class="col-12 footer-bottom border-top">
             <ul class="p-3 text-center">
@@ -93,9 +77,9 @@
         </div>
     </footer>
 </main>
-<script src="./js/app.js"></script>
 </body>
 </html>
+@endsection
 <script>
     window.onscroll = function() {
             const goToTopBtn = document.getElementById("goToTop");

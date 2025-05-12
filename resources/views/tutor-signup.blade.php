@@ -18,7 +18,7 @@
  .select2-container--default .select2-selection--multiple .select2-selection__choice {
             background-color: #42B979 !important;
             color: #fff;
-            margin-top: 6px !important;
+            margin-top: 0px !important;
         }
         .select2-container--default .select2-selection--multiple .select2-selection__choice__display {
             padding-left:18px !important
