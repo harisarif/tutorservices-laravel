@@ -12,13 +12,17 @@
     <link rel="stylesheet" href="{{ asset('css/tutor-style.css')}}">
     <link rel="stylesheet" href="{{ asset('css/mediaquery.css')}}">
 <style>
+    .filter-heading {
+        color:var(--primary-color);
+        font-size:12px;
+    }
     .service-card {
       background-color: #fff;
       border-radius: 20px;
       padding: 30px 25px;
       position: relative;
       text-align: left;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
       transition: all 0.3s ease;
       height: 100%;
     }
@@ -641,9 +645,11 @@
                                     
                                         <div class="row  country-row">
                                             <div class="col-lg-3 country-drop-down" >
-
+                                                <label class="form-label filter-heading">
+                                                {{ __('messages.Please select a country') }}
+                                                </label>
                                                 <select name="country" id="country" class="country" >
-                                                    <option value="all">{{ __('messages.Please select a country') }}</option>
+                                                    
 
                                                     @foreach($countries as $countryCode => $countryName)
                                                         <option value="{{ $countryCode }}">{{ $countryName }}</option>
@@ -652,15 +658,19 @@
                                             </div>
                                             <div class="col-lg-9 adjust-filters-wrap ">
                                                 <div class="col-md-6 px-2 col-lg-4">
-                                                        <select name="gender" id="gender" class="country" >
-                                                            <option value="all">{{ __('messages.Gender Selection') }}</option>
+                                                    <label class="form-label filter-heading">
+                                                    {{ __('messages.Gender Selection') }}
+                                                    </label>
+                                                        <select name="gender" id="gender" class="country">
                                                             <option value="Male">{{ __('Male') }}</option>
                                                             <option value="female">{{ __('Female') }}</option>
                                                         </select>
                                                 </div>
                                                 <div class="col-md-6 px-2 col-lg-4">
-                                                        <select name="subjectSearch" id="subjectSearch" class="country" >
-                                                            <option value="all">{{ __('messages.Which Subject Interests You?') }}</option>
+                                                    <label class="form-label filter-heading">
+                                                        {{ __('messages.Which Subject Interests You?') }}
+                                                    </label>
+                                                        <select name="subjectSearch" id="subjectSearch" class="country">
                                                            
                                                     @foreach($subjectsTeach as $subjectsCode => $subjects)
                                                         <option value="{{ $subjectsCode }}">{{ $subjects }}</option>
@@ -668,7 +678,9 @@
                                                         </select>
                                                 </div>
                                                 <div class="col-md-6 px-2 col-lg-4">
-                                                    {{-- <label for="citysearch" class="form-label">City</label> --}}
+                                                    <label class="form-label filter-heading">
+                                                        {{ __('messages.Price Selection') }}
+                                                    </label>
                                                         <select name="prize-Range" id="prize-Range" class="country" >
                                                             <option value="all">{{ __('messages.Price Selection') }}</option>
                                                             
@@ -1450,7 +1462,7 @@
                                     
                             
                         </section>
-                        <section class="w-75 mx-auto">
+                        <section class="w-75 mx-auto mb-4">
                             <div class="keys-heading">
                                 <h2 class="text-center my-4 fw-bold">Our Services</h2>
                             </div>
@@ -1463,7 +1475,7 @@
                                     <img src="https://img.icons8.com/ios-filled/50/ffffff/classroom.png" alt="Online Tutors">
                                     </div>
                                     <h5 class="service-title">Online Tutors</h5>
-                                    <p class="service-text">"Get personalized, one-on-one tutoring from certified educators—anytime, anywhere. We help learners of all ages master subjects with clarity and confidence."</p>
+                                    <p class="service-text">Get personalized, one-on-one tutoring from certified educators—anytime, anywhere. We help learners of all ages master subjects with clarity and confidence.</p>
                                 </div>
                                 </div>
 
@@ -1474,7 +1486,7 @@
                                     <img src="https://img.icons8.com/ios-filled/50/ffffff/laptop.png" alt="Online Classes">
                                     </div>
                                     <h5 class="service-title">Online Classes</h5>
-                                    <p class="service-text">"Interactive, expert-led online classes designed to fit your schedule. Learn new skills, upgrade your knowledge, and achieve your goals from the comfort of your home."</p>
+                                    <p class="service-text">Interactive, expert-led online classes designed to fit your schedule. Learn new skills, upgrade your knowledge, and achieve your goals.</p>
                                 </div>
                                 </div>
 
@@ -1485,7 +1497,7 @@
                                     <img src="https://img.icons8.com/ios-filled/50/ffffff/customer-support.png" alt="Support">
                                     </div>
                                     <h5 class="service-title">Support</h5>
-                                    <p class="service-text">"24/7 dedicated support to ensure your experience is smooth and stress-free. We're here to solve problems, answer questions, and keep you moving forward."</p>
+                                    <p class="service-text">24/7 dedicated support to ensure your experience is smooth and stress-free. We're here to solve problems, answer questions, and keep you moving forward.</p>
                                 </div>
                                 </div>
                         
