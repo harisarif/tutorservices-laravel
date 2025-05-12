@@ -265,9 +265,10 @@
                                     
                                         <div class="row  country-row">
                                             <div class="col-lg-3 country-drop-down" >
-
+                                                <label class="form-label filter-heading">
+                                                {{ __('messages.Please select a country') }}
+                                                </label>
                                                 <select name="country" id="country" class="country" >
-                                                    <option value="all">{{ __('messages.Please select a country') }}</option>
 
                                                     @foreach($countries as $countryCode => $countryName)
                                                         <option value="{{ $countryCode }}">{{ $countryName }}</option>
@@ -276,8 +277,10 @@
                                             </div>
                                             <div class="col-lg-9 adjust-filters-wrap ">
                                                 <div class="col-md-6 px-2 col-lg-4">
+                                                    <label class="form-label filter-heading">
+                                                    {{ __('messages.Gender Selection') }}
+                                                    </label>
                                                         <select name="gender" id="gender" class="country" >
-                                                            <option value="all">{{ __('messages.Gender Selection') }}</option>
                                                             <option value="Male">{{ __('Male') }}</option>
                                                             <option value="female">{{ __('Female') }}</option>
                                                         </select>
@@ -292,17 +295,20 @@
                                                         </select>
                                                 </div> -->
                                                 <div class="col-md-6 px-2 col-lg-4">
-    <select name="prize-Range" id="prize-Range" class="country">
-        <option value="all">{{ __('messages.Price Selection') }}</option>
-    </select>
-</div>
+                                                    <label class="form-label filter-heading">
+                                                        {{ __('messages.Price Selection') }}
+                                                    </label>
+                                                    <select name="prize-Range" id="prize-Range" class="country">
+                                                        <!-- <option value="all">{{ __('messages.Price Selection') }}</option> -->
+                                                    </select>
+                                                </div>
 
                                             </div>  
                                         </div>
                                 </div>
                                 <!-- Tutor profile -->
                                @if($matchedTutors->count() > 0)    
-                                <div id="">
+                                <div id="tutorsContainer">
                                      @foreach($matchedTutors as $item)
                                         @if($item->status != 'inactive')
                                           
@@ -663,7 +669,7 @@ $(document).ready(function () {
     console.log("Document ready - populating price ranges");
 
     const priceRanges = [
-        "0-50", "50-100", "100-200", "200-500", "500-1000", "1000-5000", "5000+"
+        "0-50", "50-100", "100-200"
     ];
 
     const select = document.getElementById("prize-Range");
@@ -711,7 +717,9 @@ $(document).ready(function () {
                 $('#overlay').hide();
 
                 if (response && response.tutors && response.tutors.length > 0) {
+                    
                     response.tutors.forEach(function (tutor) {
+                        console.log('res======',tutor)
                         if (tutor.status !== 'inactive') {
                             let specializations = tutor.specialization.split(',');
                             let specialization = specializations[0];
@@ -730,7 +738,7 @@ $(document).ready(function () {
                                 <div class="ad-form">
                                     <div class="ad-img-card d-flex" style="margin-top: 20px;">
                                         <div class="MD col-lg-12 col-sm-5">
-                                            <img src="storage/${tutor.profileImage}" alt="Tutor Image" class="img-thumbnail" 
+                                            <img src="/storage/${tutor.profileImage}" alt="Tutor Image" class="img-thumbnail" 
                                                  style="width: 100%; height: 140px;">
                                         </div>
                                         <div class="md-div col-lg-5 d-none mt-2" style="margin-left: 17px;">
