@@ -71,11 +71,11 @@
     </div>
         <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block; z-index: 9;" onclick="window.scrollTo(0, 0)"><i class="fa fa-chevron-up"></i></button>
     <div class="row mini_header m-0 p-0 container-fluid position-relative">
-        <div class="col-sm-12 px-3  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0 adjustMobile" style="background:#42b979;position:fixed !important;height:12%">
+        <div class="col-sm-12 px-3  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0 adjustMobile" style="background:#42b979;position:fixed !important;height:25%">
             <ul class="p-1 m-0 d-sm-inline d-block text-center header-ul pt-2">
                 <li class=" p-0">
                      <a class="navbar-brand" href="{{ route('newhome') }}">
-                        <img src="images/white-logo.jpeg" height="50px" alt="logo" style="height: 50px; border-radius: 10px;">
+                        <img src="images/white-logo.jpeg"  alt="logo" style="height: 100px; border-radius: 60px;width:100px;margin-top:40px;">
                     </a>
                 </li>
                 <nav class="navbar navbar-expand-lg adjust-header-mobile">
@@ -142,14 +142,14 @@
                 </nav>
 
                 </ul>
-                <a href="{{ route('hire.tutor') }}" class="hiring-button">
+                <a href="{{ route('hire.tutor') }}" class="hiring-button mt-4">
                     {{ __('messages.Book a free demo for your child') }}
                 </a>
             <div>
             <!-- <h1>{{ __('messages.welcome') }}</h1> -->
             
 
-                <ul  class="icons d-flex p-2 m-0  align-items-center gap-3" style="list-style:none;">   
+                <ul  class="icons d-flex p-2 m-0  align-items-center gap-3 mt-4" style="list-style:none;">   
                 <div class="d-flex  align-items: center;" style="justify-content: center;">
                         <div class="col-6 ">    
                             <li class="nav-item m-1 btn-an text-center bg-white rounded w-1 py-1">

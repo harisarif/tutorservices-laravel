@@ -46,8 +46,8 @@
     data-bs-backdrop="static" data-bs-keyboard="false" style="background-color: rgba(0,0,0,0.6);">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow-lg rounded-3">
-            <div class="modal-header bg-success text-white">
-                <h5 class="modal-title fw-bold" id="otpModalLabel">Enter OTP</h5>
+            <div class="modal-header text-white" style="background:lightgreen;">
+                <h5 class="modal-title fw-bold" id="otpModalLabel">Welcome to Edexcel Academy</h5>
             </div>
             <div class="modal-body p-4">
                 <!-- <p class="text-muted text-center">
@@ -63,7 +63,7 @@
                         <!-- <label for="otpInput" class="form-label fw-semibold">Enter OTP</label> -->
                         <input type="text" id="otpInput" name="otp"
                             class="form-control text-center fs-5 rounded-pill border-success shadow-sm"
-                            placeholder="6-digit code" maxlength="6" required>
+                            placeholder="Please enter 6 digit OTP" maxlength="6" required>
                         <div id="otpError" class="text-danger mt-2 text-center fw-bold" style="display: none;">
                             ❌ Invalid OTP. Please try again.
                         </div>
@@ -71,7 +71,7 @@
 
                     <div class="d-grid gap-2">
                         <button type="button" class="btn btn-success fw-bold shadow-sm rounded-pill"
-                            onclick="verifyOTP()">✔ Verify OTP</button>
+                            onclick="verifyOTP()">Verify OTP</button>
                     </div>
 
                     <p class="text-center mt-3">
