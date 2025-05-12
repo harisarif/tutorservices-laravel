@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="education, online courses, learning, tutoring, e-learning, eduexceledu">
     <meta name="description" content="Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
-<link rel="stylesheet" href="{{ asset('css/new-home.css') }}">
+ <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}"  referrerpolicy="no-referrer" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> -->
+
+    <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet" crossorigin="anonymous">
+   <link rel="stylesheet" href="{{ asset('css/new-home.css') }}">
 <style>
     .tutorlist-wrapper {
         border-radius:10px;
@@ -129,7 +134,11 @@
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
-    @endif
+    @endif    <div id="overlay" class="overlay" style="display: none;">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
      <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block; z-index: 9;" onclick="window.scrollTo(0, 0)"><i class="fa fa-chevron-up"></i></button>
     <div class="row mini_header m-0 p-0 container-fluid position-relative">
         <div class="col-sm-12 px-3  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0 adjustMobile" style="background:#42b979;position:fixed !important;height:12%">
@@ -283,12 +292,11 @@
                                                         </select>
                                                 </div> -->
                                                 <div class="col-md-6 px-2 col-lg-4">
-                                                    {{-- <label for="citysearch" class="form-label">City</label> --}}
-                                                        <select name="prize-Range" id="prize-Range" class="country" >
-                                                            <option value="all">{{ __('messages.Price Selection') }}</option>
-                                                            
-                                                        </select>
-                                                </div>
+    <select name="prize-Range" id="prize-Range" class="country">
+        <option value="all">{{ __('messages.Price Selection') }}</option>
+    </select>
+</div>
+
                                             </div>  
                                         </div>
                                 </div>
@@ -640,7 +648,204 @@
         
          </div>
     @endsection
-    <script>
+  <!-- jQuery first -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Then Bootstrap JS -->
+<script src="{{ asset('js/popper.min.js')}}"></script>
+<script src="{{ asset('js/bootstrap.min.js')}}"></script>
+
+<!-- Your custom JS after that -->
+<script src="{{ asset('js/custom.js') }}"></script>
+
+ <script>
+$(document).ready(function () {
+    console.log("Document ready - populating price ranges");
+
+    const priceRanges = [
+        "0-50", "50-100", "100-200", "200-500", "500-1000", "1000-5000", "5000+"
+    ];
+
+    const select = document.getElementById("prize-Range");
+
+    if (select) {
+        priceRanges.forEach(range => {
+            let option = document.createElement("option");
+            option.value = range;
+            option.textContent = `$${range.replace("-", " - $")}`;
+            select.appendChild(option);
+        });
+    } else {
+        console.error("prize-Range element not found.");
+    }
+
+    // CSRF setup for AJAX
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $('#prize-Range').change(function (e) {
+        e.preventDefault();
+        var selectedPrice = $(this).val();
+        console.log("Price selected:", selectedPrice);
+
+        var locationData = {
+            price: selectedPrice !== "all" ? selectedPrice : "all"
+        };
+        console.log("AJAX Data Sent:", locationData);
+
+        $('#overlay').show();
+
+        $.ajax({
+            type: 'POST',
+            url: '{{ route("fetch-student") }}',
+            data: locationData,
+            dataType: 'json',
+            success: function (response) {
+                console.log("AJAX Success: ", response);
+                $('#tutorsContainer').empty();
+
+                // Always hide overlay regardless of success or no tutors found
+                $('#overlay').hide();
+
+                if (response && response.tutors && response.tutors.length > 0) {
+                    response.tutors.forEach(function (tutor) {
+                        if (tutor.status !== 'inactive') {
+                            let specializations = tutor.specialization.split(',');
+                            let specialization = specializations[0];
+
+                            let specializationHTML = specializations.map(spec => `
+                                <span id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold">
+                                    <i class="fa-solid fa-briefcase me-1"></i> ${spec.trim()}
+                                </span>
+                            `).join('');
+
+                            let languages = tutor.languages && tutor.languages.length > 0
+                                ? tutor.languages.map(lang => `${lang.language} (${lang.level})`).join(', ')
+                                : 'Not Available';
+
+                            let tutorHTML = `
+                                <div class="ad-form">
+                                    <div class="ad-img-card d-flex" style="margin-top: 20px;">
+                                        <div class="MD col-lg-12 col-sm-5">
+                                            <img src="storage/${tutor.profileImage}" alt="Tutor Image" class="img-thumbnail" 
+                                                 style="width: 100%; height: 140px;">
+                                        </div>
+                                        <div class="md-div col-lg-5 d-none mt-2" style="margin-left: 17px;">
+                                            <span class="mb-div"><b>20 AED for 50 minutes</b></span>
+                                            <div class="ae-detail">
+                                                <h4 class="fs-6 mt-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                    Free Trial Section
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="my-1 mx-2 w-100">
+                                        <div class="ae-div row" style="margin-top: 20px;">
+                                            <div class="col-8">
+                                                <div class="ae-detail-div">
+                                                    <div class="d-flex" id="ff000">
+                                                        <h4 class="me-2 fw-bold sd">${tutor.f_name} ${tutor.l_name}</h4>
+                                                        <span class="me-3"><i class="fa-regular fa-star" style="margin-top: 6px;"></i></span>
+                                                        <div class="img-wrapper" style="max-width:22px;margin-top:5px;">
+                                                            <img src="/image/flag.svg" class="img-fluid" alt="">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mt-1 cm d-flex">
+                                                        ${specializationHTML}
+                                                    </div>
+
+                                                    <div class="d-flex text-secondary my-1">
+                                                        <span class="me-2"><i class="fa-solid fa-venus-mars" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
+                                                        <p class="mb-0" style="color:black; text-transform:capitalize">${tutor.gender ?? 'Others'}</p>
+                                                    </div>
+
+                                                    <div class="d-flex text-secondary">
+                                                        <span class="me-2"><i class="fa-solid fa-earth-americas" style="font-size: 13px;  margin-top: 5px; color: #1cc88a;"></i></span>
+                                                        <p class="mb-0 ms-1" style="color:black;">${tutor.country_name ?? 'Not Available'}</p>
+                                                    </div>
+
+                                                    <div class="d-flex text-secondary py-2">
+                                                        <span class="me-2"><i class="fa-solid fa-language" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
+                                                        <p class="mb-0" style="color:black;">${languages}</p>
+                                                    </div>
+
+                                                    <p class="cv" style="color:black;"><i class="fa-solid fa-calendar-days me-1" style="color: #1cc88a;"></i> 
+                                                        ${tutor.dob}
+                                                    </p>
+                                                </div>
+                                                <div class="py-2">
+                                                    <span>
+                                                        <b>${tutor.experience}+ Years of ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.</b>
+                                                        - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
+                                                    </span>
+                                                    <ul class="read p-0 mt-3">
+                                                        <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="ad-div col-4">
+                                                <div class="d-flex pb-5" id="ff111">
+                                                    <div class="me-lg-5 me-3" id="dollar">
+                                                        <h4 class="fw-bold on">${tutor.price ?? 'Not Available'}</h4>
+                                                    </div>
+                                                    <div id="heart-icon" style="margin-top: 6px;">
+                                                        <span><i class="fa-regular fa-heart"></i></span>
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <div id="btn-container">
+                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trial lesson</button>
+                                                    </div>
+                                                </div>
+
+                                                <div style="margin-top: 5px;">
+                                                    <div id="btn-container">
+                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trial lesson</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+
+                            $('#tutorsContainer').append(tutorHTML);
+                        }
+                    });
+
+                    // Update Pagination Info
+                    var totalTutorsCount = response.pagination.total;
+                    var perPage = response.pagination.perPage;
+                    var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
+                    var lastItem = Math.min(response.pagination.currentPage * perPage, totalTutorsCount);
+
+                    $('.total-tutors-count').text(totalTutorsCount);
+                    $('.tutors-range').text(`${firstItem} to ${lastItem} of ${totalTutorsCount} tutors`);
+
+                    if (totalTutorsCount <= perPage) {
+                        $('#paginationContainer').hide();
+                    } else {
+                        $('#paginationContainer').show();
+                    }
+                } else {
+                    $('#tutorsContainer').html('<p>No tutors found for the selected Price.</p>');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log('AJAX Error:', xhr.responseText);
+                $('#overlay').hide();
+            }
+        });
+    });
+});
+</script>
+
+ <script>
     function toggleDropdownWeb() {
         document.querySelector('.custom-options-web').classList.toggle('open');
     }

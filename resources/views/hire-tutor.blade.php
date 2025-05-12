@@ -154,7 +154,7 @@
                         <div class="percentage bg_theme_green"></div>
                     </div>
                 </div>
-                <form action="{{ route('student-create') }}" method="POST" class="pages"enctype="multipart/form-data">
+                <form action="{{ route('student-create') }}" method="POST" class="pages" enctype="multipart/form-data">
                     @csrf
                     <div style="min-height: 325px;">
 

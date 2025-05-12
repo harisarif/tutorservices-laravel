@@ -18,6 +18,7 @@ use App\Models\Subject;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\InquirySuccessNotification;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Log;
 
 class StudentController extends Controller
 {
@@ -352,6 +353,150 @@ foreach ($teacher as $tutor) {
         return redirect()->route('newhome')->with('error', 'Unauthorized access.');
     }
 
+     public function fetchData(Request $request)
+    {     // Debugging block: Check numeric extraction from price
+
+
+        // Initialize the query builder
+        $query = Tutor::query();
+
+        // Define the number of tutors per page
+        $perPage = 5;
+
+       
+
+        if ($request->has('price') && $request->price !== 'all') {
+            $priceValue = trim($request->price);
+
+            // Extract numeric value from stored price (e.g., "$ 100" -> "100")
+            $query->whereRaw("CAST(REGEXP_REPLACE(price, '[^0-9]', '') AS UNSIGNED) IS NOT NULL");
+
+            if (preg_match('/^(\d+)-(\d+)$/', $priceValue, $matches)) {
+                // Case: Price Range (e.g., "200-500")
+                $minPrice = (int) $matches[1];
+                $maxPrice = (int) $matches[2];
+
+                Log::info("Filtering tutors between $minPrice and $maxPrice");
+
+                $query->whereRaw("CAST(REGEXP_REPLACE(price, '[^0-9]', '') AS UNSIGNED) BETWEEN ? AND ?", [$minPrice, $maxPrice]);
+
+            } elseif (preg_match('/(\d+)\+/', $priceValue, $matches)) {
+                // Case: "5000+" (minimum price)
+                $minPrice = (int) $matches[1];
+
+                Log::info("Filtering tutors with price >= $minPrice");
+
+                $query->whereRaw("CAST(REGEXP_REPLACE(price, '[^0-9]', '') AS UNSIGNED) >= ?", [$minPrice]);
+
+            } else {
+                // Case: Exact Price (e.g., "100")
+                if (is_numeric($priceValue)) {
+                    $exactPrice = (int) $priceValue;
+
+                    Log::info("Filtering tutors with exact price = $exactPrice");
+
+                    $query->whereRaw("CAST(REGEXP_REPLACE(price, '[^0-9]', '') AS UNSIGNED) = ?", [$exactPrice]);
+                }
+            }
+        }
+
+
+        //gender
+        if ($request->has('gender') && $request->gender !== 'all') {
+            $query->where('gender', $request->gender);
+        }
+        //country
+        if ($request->has('country') && $request->country !== 'all') {
+            $query->where('country', $request->country);
+        }
+
+        // Filter tutors by search query for subject
+        if ($request->has('specialization') && !empty($request->specialization)) {
+            $specialization = $request->specialization;
+
+            if (is_array($specialization)) {
+                $query->where(function ($q) use ($specialization) {
+                    foreach ($specialization as $spec) {
+                        $q->orWhereJsonContains('specialization', $spec);
+                    }
+                });
+            } else {
+                $query->whereJsonContains('specialization', $specialization);
+            }
+        }
+
+        // Paginate the filtered tutors
+        $tutors = $query->paginate($perPage);
+
+        // Check if there are no tutors
+        if ($tutors->isEmpty()) {
+            return response()->json([
+                'message' => 'No tutors found.',
+                'totalTutorsCount' => 0,
+                'perPage' => $perPage,
+                'pagination' => [
+                    'total' => 0,
+                    'count' => 0,
+                    'perPage' => $perPage,
+                    'currentPage' => 1,
+                    'lastPage' => 1,
+                ],
+            ]);
+        }
+
+        // Calculate age for each tutor and convert to array format
+        $tutorsArray = $tutors->map(function ($tutor) {
+
+            $tutor->specialization = json_decode($tutor->specialization, true);
+
+            // If it's an array, convert it into a comma-separated string
+            if (is_array($tutor->specialization)) {
+                $tutor->specialization = implode(', ', array_map('trim', $tutor->specialization));
+            } else {
+                $tutor->specialization = trim($tutor->specialization ?? 'Not Specified');
+            }
+
+            $tutor->country_name = config("countries_assoc.countries.{$tutor->country}", 'Unknown');
+            
+            $languageData = json_decode($tutor->language, true);
+            if (!is_array($languageData)) {
+                \Log::error("Language decoding failed for Tutor ID: {$tutor->id}, Raw Data: " . $tutor->language);
+                $languageData = []; // Fallback to empty array
+            }
+            $tutor->languages = $languageData;
+            // Calculate age and format DOB correctly
+            if ($tutor->dob) {
+                $dob = Carbon::parse($tutor->dob);
+                $tutor->dob = $dob->format('d-m-Y'); // Convert DOB to "DD-MM-YYYY"
+                $tutor->age = $dob->age; // Correct way to get age
+            } else {
+                $tutor->dob = 'Unknown';
+                $tutor->age = 'Unknown';
+            }
+
+            return $tutor->toArray(); // Convert each tutor to an array
+        })->toArray();
+
+        // Fetch the total count of tutors after applying filters
+        $totalTutorsCount = (clone $query)->count();
+
+        // Manually serialize the paginated data
+        $serializedData = [
+            'tutors' => $tutorsArray, // Tutors as array
+            'totalTutorsCount' => $totalTutorsCount,
+            'perPage' => $perPage,
+            'pagination' => [
+                'total' => $tutors->total(),
+                'count' => $tutors->count(),
+                'perPage' => $tutors->perPage(),
+                'currentPage' => $tutors->currentPage(),
+                'lastPage' => $tutors->lastPage(),
+            ],
+        ];
+
+        // Return the serialized data as JSON response
+        return response()->json($serializedData);
+    }
 
     public function newcreate(Request $request)
     {

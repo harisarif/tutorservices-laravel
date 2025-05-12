@@ -98,7 +98,7 @@ Route::put('/teachers-list/{id}', [TutorController::class, 'updateProfile'])->na
 Route::delete('/teachers-list/{id}', [TutorController::class, 'destroy'])->name('teachers.destroy');
 Route::post('/fetch-data', [TutorController::class, 'fetchData'])->name('fetch-data');
 Route::get('/checkout/{id}', [TutorController::class, 'checkout'])->name('checkout.delete');
-
+Route::post('/fetch-data/student', [StudentController::class, 'fetchData'])->name('fetch-student');
 Route::post('/tutor/{tutorId}/assign-student/{studentId}', [TutorController::class, 'assignStudent']);
 Route::get('/tutor/{tutorId}/students', [TutorController::class, 'getStudents']);
 Route::get('/student/{studentId}/tutors', [TutorController::class, 'getTutors']);
