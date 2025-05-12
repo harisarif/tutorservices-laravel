@@ -54,7 +54,7 @@ class VerificationController extends Controller
             <thead>
                 <tr>
                     <th style='background-color: #f4f4f4; padding: 15px; text-align: center;'>
-                        <h2 style='margin: 0; color: #4CAF50;'>Welcome to Edexcel</h2>
+                        <h2 style='margin: 0; color: #4CAF50;'>Welcome to Edexcel Academy</h2>
                     </th>
                 </tr>
             </thead>
@@ -78,14 +78,14 @@ class VerificationController extends Controller
                             If you did not sign up for an account, please ignore this email.
                         </p>
                         <p style='margin: 10px 0; font-size: 16px;'>Best regards,</p>
-                        <p style='margin: 10px 0; font-size: 16px; font-weight: bold;'>Edexcel</p>
+                        <p style='margin: 10px 0; font-size: 16px; font-weight: bold;'>Edexcel Academy</p>
                     </td>
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
                     <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 14px; color: #777;'>
-                        <p>&copy; " . date('Y') . " Edexcel. All rights reserved.</p>
+                        <p>&copy; " . date('Y') . " Edexcel Academy. All rights reserved.</p>
                         
                     </td>
                 </tr>

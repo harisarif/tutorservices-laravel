@@ -391,13 +391,13 @@ foreach ($teacher as $tutor) {
 
         // Send email to the student
         $toStudent = $inquiry->email;
-        $subjectStudent = "Welcome to Edexcel!";
+        $subjectStudent = "Welcome to Edexcel Academy!";
         $messageStudent = "Dear " . $inquiry->name . "\r\n" .
-            "Welcome to Edexcel! 🎉 We’re excited to to got your inquiry soon you will notified.\r\n" .
+            "Welcome to Edexcel Academy! 🎉 We’re excited to to got your inquiry soon you will notified.\r\n" .
             "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at info@edexceledu.com\r\n" .
             "We’re here to help you succeed!\r\n\r\n" .
             "Best regards,\r\n" .
-            "The Edexcel Team";
+            "The Edexcel Academy Team";
 
         $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
 
@@ -411,7 +411,7 @@ foreach ($teacher as $tutor) {
             "- Email: {$inquiry->email}\n" .
             "- Phone: {$inquiry->phone}\n\n" .
             "Best regards,\n" .
-            "The Edexcel Team";
+            "The Edexcel Academy Team";
 
         $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
 

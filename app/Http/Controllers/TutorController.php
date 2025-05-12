@@ -439,7 +439,7 @@ class TutorController extends Controller
 
         // Send notification emails with HTML content
         $toStudent = $tutor->email;
-        $subjectStudent = "Welcome to Edexcel - Verify Your Email!";
+        $subjectStudent = "Welcome to Edexcel Academy - Verify Your Email!";
         $bodyStudent = "
                         <div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>
     <table width='100%' cellpadding='0' cellspacing='0' border='0'>
@@ -449,7 +449,7 @@ class TutorController extends Controller
                     <!-- Header -->
                     <tr>
                         <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 20px; font-weight: bold; color: #4CAF50; border-top-left-radius: 8px; border-top-right-radius: 8px;'>
-                            Welcome to Edexcel
+                            Welcome to Edexcel Academy
                         </td>
                     </tr>
                     
@@ -459,7 +459,7 @@ class TutorController extends Controller
                              
                             <p style='font-size: 16px; margin: 0;'>Dear {$tutor->f_name} {$tutor->l_name},</p>
                             <p style='font-size: 16px; margin: 10px 0;'>
-                                Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.
+                                Welcome to Edexcel Academy! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.
                             </p>
                             
 
@@ -475,7 +475,7 @@ class TutorController extends Controller
                     <!-- Footer -->
                     <tr>
                         <td style='background-color: #f4f4f4; color:#4CAF50; padding: 15px; text-align: center; font-size: 14px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;'>
-                            &copy; 2025 Edexcel. All rights reserved.
+                            &copy; 2025 Edexcel Academy. All rights reserved.
                         </td>
                     </tr>
                 </table>
