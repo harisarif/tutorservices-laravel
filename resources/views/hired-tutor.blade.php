@@ -276,7 +276,7 @@
                                                 {{ __('messages.Please select a country') }}
                                                 </label>
                                                 <select name="country" id="country" class="country" >
-                                                       <option value="United Arab Emirates" selected>Arab Emirates</option>
+                                                       <option value="United Arab Emirates" selected>United Arab Emirates</option>
                                                     @foreach($countries as $countryCode => $countryName)
                                                         <option value="{{ $countryCode }}">{{ $countryName }}</option>
                                                     @endforeach
