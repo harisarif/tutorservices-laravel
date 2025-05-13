@@ -276,7 +276,7 @@
                                                 {{ __('messages.Please select a country') }}
                                                 </label>
                                                 <select name="country" id="country" class="country" >
-
+                                                       <option value="United Arab Emirates" selected>Arab Emirates</option>
                                                     @foreach($countries as $countryCode => $countryName)
                                                         <option value="{{ $countryCode }}">{{ $countryName }}</option>
                                                     @endforeach
@@ -1209,7 +1209,7 @@ $(document).ready(function () {
                 console.log("AJAX Success: ", response);
                 $('#gender').val('Male').trigger('change');
                 $('#prize-Range').val('0-50').trigger('change');
-                $('#country').val('AL').trigger('change');
+                $('#country').val('AE').trigger('change');
                 $('#tutorsContainer').empty();
 
                 // Always hide overlay regardless of success or no tutors found

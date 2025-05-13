@@ -134,8 +134,8 @@ class StudentController extends Controller
 
 
     public function create(Request $request)
-    {
-
+    {  dd($request->all());
+         
         $rules = [
             'email' => 'required|string|email|max:255|unique:student,email',
             'password' => 'required|min:8',
