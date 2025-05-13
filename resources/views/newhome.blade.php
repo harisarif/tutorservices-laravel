@@ -2258,9 +2258,9 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (response) {
                 $('#gender').val('all').trigger('change');
-$('#country').val('all').trigger('change');
-$('#subjectsearch').val('');
- // Clear input fields
+                $('#country').val('all').trigger('change');
+                $('#subjectsearch').val('');
+                // Clear input fields
                 $('#tutorsContainer').empty(); // Clear tutor list
                 console.log("Filters reset successfully:", response);
 

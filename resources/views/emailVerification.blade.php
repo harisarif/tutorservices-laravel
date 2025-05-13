@@ -10,6 +10,9 @@
     <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet">
 
     <style>
+        .list-inline-item:not(:last-child) {
+            margin-right:unset !important;
+        }
         .modal-open .modal { margin-top: 10rem; }
         .footer-bottom { background: #42b979; position: fixed; bottom: 0; width: 100%; }
         
@@ -97,7 +100,7 @@
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between">
                     <h5 class="modal-title text-success" id="exampleModalLabel">Enter your email</h5>
-                    <span class="fs-2 pointer foucs" data-dismiss="modal">&times;</span>
+                    <span class="fs-1 pointer foucs" data-dismiss="modal">&times;</span>
                 </div>
                 <div class="modal-body">
                     <form method="POST" action="{{ route('send.verification.email') }}" onsubmit="storeEmail()">
