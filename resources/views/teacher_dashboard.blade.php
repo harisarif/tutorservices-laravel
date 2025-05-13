@@ -391,8 +391,14 @@
             <div class="col-lg-9">
                 <!-- Filter header -->
                 <div class="d-flex justify-content-between align-items-center mb-3 border p-2 rounded">
-                    <p class="m-0">
-                        {{-- Pagination summary (optional) --}}
+                   
+                                        <p class="m-0 pt-1 tutors-range">
+                                            @if($totalstudentCount == 0 || $student->isEmpty())
+                                                0 of 0 tutors
+                                            @else
+                                                {{ $student->firstItem() }} to {{ $student->lastItem() }} of {{ $totalstudentCount }} tutors
+                                            @endif
+                                       
                     </p>
                     <button id="resetFilter" class="btn btn-outline-secondary">
                         {{ __('messages.Reset Filter') }}
