@@ -102,7 +102,7 @@ Route::post('/fetch-data/student', [StudentController::class, 'fetchData'])->nam
 Route::post('/tutor/{tutorId}/assign-student/{studentId}', [TutorController::class, 'assignStudent']);
 Route::get('/tutor/{tutorId}/students', [TutorController::class, 'getStudents']);
 Route::get('/student/{studentId}/tutors', [TutorController::class, 'getTutors']);
-
+Route::post('/fetch/student', [TutorController::class, 'fetchStudentData'])->name('fetch-stduent-data');
 // Student Controller 
 Route::get('/hire-tutor', [StudentController::class, 'index'])->name('hire.tutor');
 Route::get('/faq', [StudentController::class, 'FAQ'])->name('faq.index');

@@ -308,7 +308,17 @@
                                 <label class="mini-heading" for="curriculum" class="form-label" style="color:#42b979;"><strong>{{ __('messages.Description (Optional)') }}</strong></label>
                                 <textarea class="form-control" id="curriculum" name="description" rows="2" placeholder="{{ __('messages.Description') }}" style="box-shadow: none;border: 1px solid #aaa;"></textarea>
                             </div> 
-                              
+                              <div class="col-12 px-2 mb-2">
+                                <label for="gender" class="form-label" style="color:#42b979;">
+                                    <strong>Gender</strong>
+                                </label>
+                                <select class="form-control select2" id="gender" name="gender"
+                                    style="border: 1px solid #000;">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                   <option value="others">Others</option> 
+                                </select>
+                            </div> 
                         </div>
 
                     </div>

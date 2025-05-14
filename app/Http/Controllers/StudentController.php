@@ -167,7 +167,7 @@ class StudentController extends Controller
         $user->email = $student->email;
         $user->password = Hash::make($request->input('password'));
         $user->role = 'user';
-        $user->save();
+        $user->save();   $student->gender = $request->input('gender');
         $student->country = $request->input('country');
         $student->city = $request->input('city');
         $student->subject = implode(',', $request->input('subject'));

@@ -128,23 +128,13 @@ class TutorController extends Controller
         return redirect()->back();
     }
     public function fetchData(Request $request)
-    {
+    {     
         // Initialize the query builder
         $query = Tutor::query();
 
         // Define the number of tutors per page
         $perPage = 5;
-
-        // //subject 
-        // if ($request->has('teaching') && !empty($request->teaching)) {
-        //     $subject = $request->teaching; // Get the selected subject (string)
-
-        //     // Fetch all records and unserialize the "teaching" column for comparison
-        //     $query->where(function ($query) use ($subject) {
-        //         $query->whereRaw("teaching LIKE ?", ['%' . serialize($subject) . '%'])
-        //               ->orWhereRaw("teaching LIKE ?", ['%' . $subject . '%']); // Handle plain text cases
-        //     });
-        // }        
+  
 
         if ($request->has('price') && $request->price !== 'all') {
             $priceValue = trim($request->price);
@@ -183,9 +173,12 @@ class TutorController extends Controller
 
 
         //gender
-        if ($request->has('gender') && $request->gender !== 'all') {
-            $query->where('gender', $request->gender);
-        }
+       if ($request->has('gender') && $request->gender !== 'all') {
+    $gender = $request->gender;
+    Log::info("Filtering tutors with gender: $gender");
+    $query->where('gender', $gender);
+}
+
         //country
         if ($request->has('country') && $request->country !== 'all') {
             $query->where('country', $request->country);
@@ -285,6 +278,69 @@ class TutorController extends Controller
         return response()->json($serializedData);
     }
 
+      public function fetchStudentData(Request $request)
+{
+    // Initialize the query builder
+    $query = Student::query();
+
+    // Define the number of students per page
+    $perPage = 5;
+
+    // Gender
+    if ($request->has('gender') && $request->gender !== 'all') {
+        $gender = $request->gender;
+        Log::info("Filtering students with gender: $gender");
+        $query->where('gender', $gender);
+    }
+
+    // Country
+    if ($request->has('country') && $request->country !== 'all') {
+        $query->where('country', $request->country);
+    }
+
+    // Paginate the filtered students
+    $students = $query->paginate($perPage);
+
+    if ($students->isEmpty()) {
+        return response()->json([
+            'message' => 'No students found.',
+            'totalStudentsCount' => 0,
+            'perPage' => $perPage,
+            'pagination' => [
+                'total' => 0,
+                'count' => 0,
+                'perPage' => $perPage,
+                'currentPage' => 1,
+                'lastPage' => 1,
+            ],
+        ]);
+    }
+
+    // Transform students
+    $studentsArray = $students->map(function ($student) {
+        $student->country_name = config("countries_assoc.countries.{$student->country}", 'Unknown');
+
+    
+        return $student->toArray();
+    })->toArray();
+
+    // Total after filters
+    $totalStudentsCount = (clone $query)->count();
+
+    // Final response
+    return response()->json([
+        'students' => $studentsArray,
+        'totalStudentsCount' => $totalStudentsCount,
+        'perPage' => $perPage,
+        'pagination' => [
+            'total' => $students->total(),
+            'count' => $students->count(),
+            'perPage' => $students->perPage(),
+            'currentPage' => $students->currentPage(),
+            'lastPage' => $students->lastPage(),
+        ],
+    ]);
+}
 
     public function updateTutorStatus(Request $request)
     {
@@ -560,7 +616,7 @@ class TutorController extends Controller
             $tutors = $query->paginate($perPage);
             $totalstudentCount = Student::count();
             $student=Student::all();
-            // Format tutor data
+              
             $storedCountry = trim($tutor->country);
             $tutor->country_name = config("countries_assoc.countries.$storedCountry", 'Unknown');
 

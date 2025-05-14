@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('country');
             $table->string('city');
             $table->string('subject');
+            $table->string('gender');
             $table->string('grade');
             $table->string('password');
             $table->timestamps();
