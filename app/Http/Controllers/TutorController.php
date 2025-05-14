@@ -544,105 +544,105 @@ class TutorController extends Controller
         // Redirect with success message
         return redirect()->back()->with('success', 'Tutor and associated user deleted successfully.');
     }
-  public function teacher_dashboard(Request $request, $id)
-{
-    $tutor = Tutor::find($id);
+    public function teacher_dashboard(Request $request, $id)
+        {
+            $tutor = Tutor::find($id);
 
-    if (!$tutor) {
-        return redirect()->route('basicsignup')->with('error', 'Tutor not found.');
-    }
+            if (!$tutor) {
+                return redirect()->route('basicsignup')->with('error', 'Tutor not found.');
+            }
 
-    // Extra data for UI (like in student_dashboard)
-    $query = Tutor::where('status', 'active');
-    $sliderTutors = Tutor::where('status', 'active')->take(6)->get();
-    $perPage = 5;
-    $blogs = Blog::orderBy('created_at', 'desc')->take(3)->get();
-    $tutors = $query->paginate($perPage);
-    $totalstudentCount = Student::count(); // this was incorrectly using Tutor::count()
-     $student=Student::all();
-    // Format tutor data
-    $storedCountry = trim($tutor->country);
-    $tutor->country_name = config("countries_assoc.countries.$storedCountry", 'Unknown');
+            // Extra data for UI (like in student_dashboard)
+            $query = Tutor::where('status', 'active');
+            $sliderTutors = Tutor::where('status', 'active')->take(6)->get();
+            $perPage = 5;
+            $blogs = Blog::orderBy('created_at', 'desc')->take(3)->get();
+            $tutors = $query->paginate($perPage);
+            $totalstudentCount = Student::count();
+            $student=Student::all();
+            // Format tutor data
+            $storedCountry = trim($tutor->country);
+            $tutor->country_name = config("countries_assoc.countries.$storedCountry", 'Unknown');
 
-    $tutor->language = json_decode($tutor->language, true) ?? [];
-    $tutor->specialization = json_decode($tutor->specialization, true) ?? ['Not Specified'];
+            $tutor->language = json_decode($tutor->language, true) ?? [];
+            $tutor->specialization = json_decode($tutor->specialization, true) ?? ['Not Specified'];
 
-    if ($tutor->dob) {
-        $dob = Carbon::parse($tutor->dob);
-        $tutor->dob = $dob->format('d-m-Y');
-        $tutor->age = $dob->age;
-    } else {
-        $tutor->age = null;
-    }
+            if ($tutor->dob) {
+                $dob = Carbon::parse($tutor->dob);
+                $tutor->dob = $dob->format('d-m-Y');
+                $tutor->age = $dob->age;
+            } else {
+                $tutor->age = null;
+            }
 
-    // Clean tutor subjects
-    $tutorSubjects = json_decode($tutor->edu_teaching, true);
-    $tutorSubjects = is_array($tutorSubjects) ? array_map(fn($s) => strtolower(trim($s)), $tutorSubjects) : [];
+            // Clean tutor subjects
+            $tutorSubjects = json_decode($tutor->edu_teaching, true);
+            $tutorSubjects = is_array($tutorSubjects) ? array_map(fn($s) => strtolower(trim($s)), $tutorSubjects) : [];
 
-    $tutorAvailability = strtolower(trim($tutor->availability_status));
+            $tutorAvailability = strtolower(trim($tutor->availability_status));
 
-    // Filter matching students
-    $allStudents = Student::all();
+            // Filter matching students
+            $allStudents = Student::all();
 
-    $matchedStudents = $allStudents->filter(function ($student) use ($tutorSubjects, $tutorAvailability) {
-        $studentSubjects = explode(',', $student->subject);
-        $studentSubjects = array_map(fn($s) => strtolower(trim($s)), $studentSubjects);
-        $studentAvailability = strtolower(trim($student->availability_status));
-        return !empty(array_intersect($studentSubjects, $tutorSubjects)) && $studentAvailability === $tutorAvailability;
-    });
+            $matchedStudents = $allStudents->filter(function ($student) use ($tutorSubjects, $tutorAvailability) {
+                $studentSubjects = explode(',', $student->subject);
+                $studentSubjects = array_map(fn($s) => strtolower(trim($s)), $studentSubjects);
+                $studentAvailability = strtolower(trim($student->availability_status));
+                return !empty(array_intersect($studentSubjects, $tutorSubjects)) && $studentAvailability === $tutorAvailability;
+            });
 
-    // Format matched students
-    $matchedStudents->each(function ($student) {
-        $storedCountry = trim($student->country);
-        $student->country_name = config("countries_assoc.countries.$storedCountry", 'Unknown');
-        $student->language = json_decode($student->language, true) ?? [];
+            // Format matched students
+            $matchedStudents->each(function ($student) {
+                $storedCountry = trim($student->country);
+                $student->country_name = config("countries_assoc.countries.$storedCountry", 'Unknown');
+                $student->language = json_decode($student->language, true) ?? [];
 
-        if ($student->dob) {
-            $dob = Carbon::parse($student->dob);
-            $student->dob = $dob->format('d-m-Y');
-            $student->age = $dob->age;
-        } else {
-            $student->age = null;
+                if ($student->dob) {
+                    $dob = Carbon::parse($student->dob);
+                    $student->dob = $dob->format('d-m-Y');
+                    $student->age = $dob->age;
+                } else {
+                    $student->age = null;
+                }
+            });
+
+            // Paginate matched students
+            $currentPage = LengthAwarePaginator::resolveCurrentPage();
+            $paginatedStudents = new LengthAwarePaginator(
+                $matchedStudents->slice(($currentPage - 1) * $perPage, $perPage)->values(),
+                $matchedStudents->count(),
+                $perPage,
+                $currentPage,
+                ['path' => request()->url(), 'query' => request()->query()]
+            );
+
+            // Config data
+            $subjectsTeach = collect(config('subjects.subjects'));
+            $countries = collect(config('countries_assoc.countries'));
+            $countriesPhone = collect(config('phonecountries.countries'));
+            $countries_number_length = collect(config('countries_number_length.countries'));
+            $countries_prefix = collect(config('countries_prefix.countries'));
+
+            if ($tutor->user_id && Auth::loginUsingId($tutor->user_id)) {
+                return view('teacher_dashboard', [
+                    'student' => $student,'tutor' => $tutor,
+                    'matchedStudents' => $matchedStudents,
+                    'paginatedStudents' => $paginatedStudents,
+                    'sliderTutors' => $sliderTutors,
+                    'tutors' => $tutors,
+                    'blogs' => $blogs,
+                    'totalstudentCount' => $totalstudentCount,
+                    'subjectsTeach' => $subjectsTeach,
+                    'countries' => $countries,
+                    'countriesPhone' => $countriesPhone,
+                    'countries_number_length' => $countries_number_length,
+                    'countries_prefix' => $countries_prefix,
+                    'perPage' => $perPage
+                ])->with('success', 'Welcome to your dashboard.');
+            }
+
+            return redirect()->route('basicsignup')->with('error', 'Authentication failed.');
         }
-    });
-
-    // Paginate matched students
-    $currentPage = LengthAwarePaginator::resolveCurrentPage();
-    $paginatedStudents = new LengthAwarePaginator(
-        $matchedStudents->slice(($currentPage - 1) * $perPage, $perPage)->values(),
-        $matchedStudents->count(),
-        $perPage,
-        $currentPage,
-        ['path' => request()->url(), 'query' => request()->query()]
-    );
-
-    // Config data
-    $subjectsTeach = collect(config('subjects.subjects'));
-    $countries = collect(config('countries_assoc.countries'));
-    $countriesPhone = collect(config('phonecountries.countries'));
-    $countries_number_length = collect(config('countries_number_length.countries'));
-    $countries_prefix = collect(config('countries_prefix.countries'));
-
-    if ($tutor->user_id && Auth::loginUsingId($tutor->user_id)) {
-        return view('teacher_dashboard', [
-            'student' => $student,'tutor' => $tutor,
-            'matchedStudents' => $matchedStudents,
-            'paginatedStudents' => $paginatedStudents,
-            'sliderTutors' => $sliderTutors,
-            'tutors' => $tutors,
-            'blogs' => $blogs,
-            'totalstudentCount' => $totalstudentCount,
-            'subjectsTeach' => $subjectsTeach,
-            'countries' => $countries,
-            'countriesPhone' => $countriesPhone,
-            'countries_number_length' => $countries_number_length,
-            'countries_prefix' => $countries_prefix,
-            'perPage' => $perPage
-        ])->with('success', 'Welcome to your dashboard.');
-    }
-
-    return redirect()->route('basicsignup')->with('error', 'Authentication failed.');
-}
 
 
 

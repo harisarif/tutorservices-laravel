@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="{{ asset('css/new-home.css') }}">
     <link rel="shortcut icon" href="{{ asset('images/favicon.png')}}" type="image/png" />
 <style>
-    /* filter-section */
     .img-wrapper{
         max-width:30px !important;
         
@@ -54,7 +53,6 @@
     #heartIcon{
         cursor: pointer !important;
     }
-/*  */
     :root {
     --primary-color:  #42b979;
     }
@@ -120,145 +118,145 @@
         align-tutors: center; */
     }
     .dropdown-container {
-    position: relative;
-    display: inline-block;
-}
-
-.settings-icon {
-    font-size: 1rem;
-    color: #fff;
-    cursor: pointer;
-}
-
-.dropdown-menu-box {
-    position: absolute;
-    top: 30px;
-    right: 0;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    min-width: 140px;
-    z-index: 999;
-    padding: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.dropdown-menu-box ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;  outline: none;
-    border: none;
-}
-
-.dropdown-menu-box li {
-    margin-bottom: 10px; outline: none;
-    border: none; list-style: none;  
-}
-
-.dropdown-menu-box li:last-child {
-    margin-bottom: 0;   outline: none;
-    border: none; list-style: none; 
-   
-}
-
-.dropdown-menu-box a {
-    text-decoration: none;list-style: none;  outline: none;
-    border: none;
-    color: #333;
-    display: block;
-    padding: 5px 10px;
-}
-.dropdown-menu-box li:hover {
-    color: #42b979;  text-decoration: none; list-style: none;  outline: none;
-    border: none;
-}
-.dropdown-menu-box i:hover {
-    color: #42b979;  text-decoration: none; list-style: none;  outline: none;
-    border: none;
-}
-.dropdown-menu-box a:hover {
-    color: #42b979;  text-decoration: none; list-style: none;  outline: none;
-    border: none;
-}
-.dropdown-menu-box {
-    z-index: 9999;
-}
- 
-    .custom-select i {
-        font-size: 15px; /* Adjust icon size as needed */
-        margin-right:-22px;
+        position: relative;
+        display: inline-block;
     }
 
-    .custom-options {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: -30px;
-        background: white;
-        border: 1px solid #ccc;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        z-index: 10;
-    }
-    .custom-options-web {
-        display: none;
-        position: absolute;
-        top: 30px;
-        left: -58px;
-        background: white;
-        border: 1px solid #ccc;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        z-index: 10;
-    }
-
-    .custom-options.open {
-        display: block;
-    }
-
-    .custom-option {
-        padding: 10px;
-        cursor: pointer;
-    }
-
-    .custom-option:hover {
-        background: #f0f0f0;
-    }
-    .custom-options-web.open {
-        display: block;
-    }
-    .fa-globe{
-        color: #fff !important;
-    }
-    #page-2 {
-            height:300px;
-            overflow-y:scroll;
+        .settings-icon {
+            font-size: 1rem;
+            color: #fff;
+            cursor: pointer;
         }
-        /* Target the entire scrollbar */
-            ::-webkit-scrollbar {
-            width: 4px; /* Adjust the width */
-            }
 
-            /* Target the scrollbar track */
-            ::-webkit-scrollbar-track {
-            background: #f1f1f1; /* Color of the track */
-            }
+        .dropdown-menu-box {
+            position: absolute;
+            top: 30px;
+            right: 0;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            min-width: 140px;
+            z-index: 999;
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
 
-            /* Target the scrollbar thumb */
-            ::-webkit-scrollbar-thumb {
-            background: #42b979; /* Color of the thumb */
-            border-radius: 6px; /* Rounded corners */
-            }
+        .dropdown-menu-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;  outline: none;
+            border: none;
+        }
 
-            /* Target the scrollbar thumb on hover */
-            ::-webkit-scrollbar-thumb:hover {
-            background: #42b979; /* Color when hovering */
+        .dropdown-menu-box li {
+            margin-bottom: 10px; outline: none;
+            border: none; list-style: none;  
+        }
+
+        .dropdown-menu-box li:last-child {
+            margin-bottom: 0;   outline: none;
+            border: none; list-style: none; 
+        
+        }
+
+        .dropdown-menu-box a {
+            text-decoration: none;list-style: none;  outline: none;
+            border: none;
+            color: #333;
+            display: block;
+            padding: 5px 10px;
+        }
+        .dropdown-menu-box li:hover {
+            color: #42b979;  text-decoration: none; list-style: none;  outline: none;
+            border: none;
+        }
+        .dropdown-menu-box i:hover {
+            color: #42b979;  text-decoration: none; list-style: none;  outline: none;
+            border: none;
+        }
+        .dropdown-menu-box a:hover {
+            color: #42b979;  text-decoration: none; list-style: none;  outline: none;
+            border: none;
+        }
+        .dropdown-menu-box {
+            z-index: 9999;
+        }
+        
+        .custom-select i {
+            font-size: 15px; /* Adjust icon size as needed */
+            margin-right:-22px;
+        }
+
+        .custom-options {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: -30px;
+            background: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        .custom-options-web {
+            display: none;
+            position: absolute;
+            top: 30px;
+            left: -58px;
+            background: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .custom-options.open {
+            display: block;
+        }
+
+        .custom-option {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .custom-option:hover {
+            background: #f0f0f0;
+        }
+        .custom-options-web.open {
+            display: block;
+        }
+        .fa-globe{
+            color: #fff !important;
+        }
+        #page-2 {
+                height:300px;
+                overflow-y:scroll;
             }
-            .banner-heading-point, .p-h, .H-E, .hf{
-                color: var(--primary-color); 
-            }
-            
-    .main-footer{
-        display: none !important;
-    }
+            /* Target the entire scrollbar */
+                ::-webkit-scrollbar {
+                width: 4px; /* Adjust the width */
+                }
+
+                /* Target the scrollbar track */
+                ::-webkit-scrollbar-track {
+                background: #f1f1f1; /* Color of the track */
+                }
+
+                /* Target the scrollbar thumb */
+                ::-webkit-scrollbar-thumb {
+                background: #42b979; /* Color of the thumb */
+                border-radius: 6px; /* Rounded corners */
+                }
+
+                /* Target the scrollbar thumb on hover */
+                ::-webkit-scrollbar-thumb:hover {
+                background: #42b979; /* Color when hovering */
+                }
+                .banner-heading-point, .p-h, .H-E, .hf{
+                    color: var(--primary-color); 
+                }
+                
+        .main-footer{
+            display: none !important;
+        }
 </style>
 <body>
     @if(session('success'))
@@ -393,13 +391,13 @@
                 <div class="d-flex justify-content-between align-items-center mb-3 border p-2 rounded">
                    
                                         <p class="m-0 pt-1 tutors-range">
-                                            @if($totalstudentCount == 0 || $student->isEmpty())
+                                            @if($paginatedStudents->total() == 0)
                                                 0 of 0 tutors
                                             @else
-                                                {{ $student->firstItem() }} to {{ $student->lastItem() }} of {{ $totalstudentCount }} tutors
+                                                {{ $paginatedStudents->firstItem() }} to {{ $paginatedStudents->lastItem() }} of {{ $paginatedStudents->total() }} tutors
                                             @endif
                                        
-                    </p>
+                                        </p>
                     <button id="resetFilter" class="btn btn-outline-secondary">
                         {{ __('messages.Reset Filter') }}
                     </button>
@@ -429,12 +427,7 @@
                         </div>
 
                         <!-- Price filter -->
-                        <div class="col-lg-4">
-                            <label class="form-label">{{ __('messages.Price Selection') }}</label>
-                            <select name="prize-Range" id="prize-Range" class="form-select">
-                                <!-- Options will be populated dynamically -->
-                            </select>
-                        </div>
+                        
                     </div>
                 </div>
 
@@ -444,17 +437,23 @@
                         @foreach($paginatedStudents as $student)
                             <div class="mb-4">
                                 <div class="p-4 border border-success rounded">
-                                    <h5 class="fw-bold text-success mb-3">
-                                        <i class="fa-solid fa-user me-2"></i>Student Information
-                                    </h5>
+                                    
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            @if (  $student->profileImage) 
+                                                <img src="{{ asset('storage/' . $student->profileImage) }}" alt="Tutor Image" class="img-thumbnail" id="profileImages" style="height: 150px; width: 100%">
+                                            @else
+                                                <img src="{{ asset('images/avatar.png') }}" alt="Default Image" class="img-thumbnail" style="height: 150px; width: 100%;">
+                                            @endif
+                                        </div>
+                                        <div class="col-md-5">
                                             <p class="mb-1"><strong>Name:</strong> {{ $student->name ?? 'N/A' }}</p>
-                                            <p class="mb-1"><strong>Contact Email:</strong> {{ $student->c_email ?? 'N/A' }}</p>
+                                            <p class="mb-1"><strong>Contact Email:</strong> {{ $student->email ?? 'N/A' }}</p>
                                             <p class="mb-1"><strong>Subject:</strong> {{ $student->subject ?? 'N/A' }}</p>
                                             <p class="mb-1"><strong>Phone:</strong> {{ $student->phone ?? 'N/A' }}</p>
+                                            
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <p class="mb-1"><strong>Country:</strong> {{ $student->country ?? 'N/A' }}</p>
                                             <p class="mb-1"><strong>City:</strong> {{ $student->city ?? 'N/A' }}</p>
                                             <p class="mb-1"><strong>Teach By:</strong> {{ $student->subjects ?? 'N/A' }}</p>
