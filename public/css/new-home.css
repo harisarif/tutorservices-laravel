@@ -348,11 +348,12 @@
     }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1920px) {
   /* Styles for big screens */
   .adjustMobile {
     height: 17%;
   }
+  
 }
 @media (max-width: 767px) {
     .services-section .row {
@@ -438,7 +439,10 @@
         width: 30% !important;
     }
 }
-
+ .email-container {
+    width:20px;
+    margin-top: 25px;
+  }
 #countrySelect {
     width: 29% !important;
 }

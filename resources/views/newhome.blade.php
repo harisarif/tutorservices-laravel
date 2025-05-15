@@ -1378,6 +1378,7 @@ $(document).on('select2:open', function(e) {
 </script>
 <script>
 jQuery(document).ready(function($) {
+    console.log(window.innerWidth);
     "use strict";
     //  TESTIMONIALS CAROUSEL HOOK
     $('#customers-testimonials').owlCarousel({
