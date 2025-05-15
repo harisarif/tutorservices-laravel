@@ -74,7 +74,7 @@
             <li class=" p-0">
                 <a class="navbar-brand" href="{{ route('newhome') }}">
                     <img src="images/white-logo.jpeg" alt="logo"
-                        style="height: 100px; border-radius: 60px;width:100px;margin-top:40px;">
+                        style="height: 100px; border-radius: 60px;width:100px;margin-top:50px;">
                 </a>
             </li>
             <nav class="navbar navbar-expand-lg adjust-header-mobile">
