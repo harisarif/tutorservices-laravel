@@ -246,14 +246,28 @@
 
                             <div class="col" style="text-align:left;">
                                 <h3 style="font-size: 18px; text-align: center; margin-top: 15px;    margin-bottom: -9px; color: #42b979;"><b>{{ __('messages.Please Enter your Details') }}</b></h3>
-                                <label class="mini-heading" for="" style="color:#42b979;"><strong>{{ __('messages.Name') }} <b style="color: red;
-                                    font-size: 20px;">*</b></strong></label>
-                                <input required name="name" type="text" placeholder="{{ __('messages.Name') }}"  class="inp-1 w-100">
-
-                                <label class="mini-heading" for="" style="color:#42b979;"><strong>{{ __('messages.Email') }}<b style="color: red;
-                                    font-size: 20px;">*</b></strong></label>
-                                <input required name="email" type="email" placeholder="{{ __('messages.Email') }}"  class="inp-1 w-100">
-                                <div class="px-2 mb-2 col-12 d-flex flex-column align-items-left">
+                                <div>
+                                    <label class="mini-heading" for="" style="color:#42b979;"><strong>{{ __('messages.Name') }} <b style="color: red;
+                                        font-size: 20px;">*</b></strong></label>
+                                    <input required name="name" type="text" placeholder="{{ __('messages.Name') }}"  class="inp-1 w-100">
+                                </div>
+                                <div>
+                                    <label class="mini-heading" for="" style="color:#42b979;"><strong>{{ __('messages.Email') }}<b style="color: red;
+                                        font-size: 20px;">*</b></strong></label>
+                                    <input required name="email" type="email" placeholder="{{ __('messages.Email') }}"  class="inp-1 w-100">
+                                </div>
+                                <div class="col-12 px-0 mb-2">
+                                    <label for="gender" class="form-label" style="color:#42b979;">
+                                        <strong>Gender</strong>
+                                    </label>
+                                    <select class="form-control select2" id="gender" name="gender"
+                                        style="border: 1px solid #000;">
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    <option value="others">Others</option> 
+                                    </select>
+                                </div> 
+                                <div class="px-0 mb-2 col-12 d-flex flex-column align-items-left">
                                     <label class="mb-2 fw-bold" style="color: #42b979; font-size: 18px;text-align: left;">{{ __('messages.Picture') }}</label>
                                     <div class="upload-area d-flex flex-column align-items-center justify-content-center text-center" id="uploadArea"
                                         >
@@ -308,25 +322,15 @@
                                 <label class="mini-heading" for="curriculum" class="form-label" style="color:#42b979;"><strong>{{ __('messages.Description (Optional)') }}</strong></label>
                                 <textarea class="form-control" id="curriculum" name="description" rows="2" placeholder="{{ __('messages.Description') }}" style="box-shadow: none;border: 1px solid #aaa;"></textarea>
                             </div> 
-                              <div class="col-12 px-2 mb-2">
-                                <label for="gender" class="form-label" style="color:#42b979;">
-                                    <strong>Gender</strong>
-                                </label>
-                                <select class="form-control select2" id="gender" name="gender"
-                                    style="border: 1px solid #000;">
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                   <option value="others">Others</option> 
-                                </select>
-                            </div> 
+                              
                         </div>
 
                     </div>
 
-                    <div class="col-12 my-5 d-flex justify-content-between px-5 mb-1">
+                    <div class="col-12 my-3 d-flex justify-content-end px-5 mb-2">
 
                         <input onclick="backStep(this)" id="back-btn" type="button" value="{{ __('messages.Previous') }}"
-                            class="border-0 bg-body-secondary text-dark fs-6 py-1 px-4 rounded d-none">
+                            class="border-0 bg-body-secondary text-dark fs-6 py-1 px-4 me-2 rounded d-none">
                         <input onclick="NextStep(this)" id="next-btn" type="button" value="{{ __('messages.Next') }}"
                             class="border-0 bg_theme_green text-light fs-6 py-1 px-4 rounded">
                             

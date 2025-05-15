@@ -70,7 +70,7 @@
 <div class="row mini_header m-0 p-0 container-fluid position-relative">
     <div class="col-sm-12 px-3  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0 adjustMobile"
         style="background:#42b979;position:fixed !important;height:25%">
-        <ul class="p-1 m-0 d-sm-inline d-block text-center header-ul pt-2">
+        <ul class="p-1 m-0 d-sm-inline d-block text-center header-ul pt-2 pt-md-0">
             <li class=" p-0">
                 <a class="navbar-brand" href="{{ route('newhome') }}">
                     <img src="images/white-logo.jpeg" alt="logo"
@@ -873,7 +873,8 @@
                 </div>
                 <!-- tutor profile end -->
                 @else
-                <p>No tutors found.</p>
+                <!-- <p>No tutors found.</p> -->
+                <img class="not-found-img w-100" src="{{ asset('images/not-found.jpeg') }}"/>
                 @endif
 
                 <!-- Here is form -->
@@ -1007,6 +1008,7 @@
         <div class="row justify-content-cemter">
             <div class="col-sm-12 sm-div ms-lg-0 ms-3">
                 <div id="customers-testimonials" class="owl-carousel">
+                    @if ($sliderTutors->count())
                     @foreach ($sliderTutors as $sliderTutor)
                     <!--TESTIMONIAL 1 -->
                     <div class="profile-card mt-5 mb-3">
@@ -1033,27 +1035,13 @@
                             <!-- <button class="view-more-btn">View More</button> -->
                         </div>
                     </div>
-                    <!-- <div class="item">
-                                                <div class="shadow-effect">
-                                                @if (  $item->profileImage) 
-                                                    <img class="img-circle" src="{{ asset('storage/' . $sliderTutor->profileImage) }}" alt="" style="width:30px;">
-                                                @else
-                                                    <img src="{{ asset('images/avatar.png') }}" alt="Default Image" class="img-thumbnail" style="height: 150px; width: 100%;">
-                                                @endif
-
-                                                    <span>
-                                                    @php
-                                                        $specializations = json_decode($sliderTutor->specialization, true);
-                                                    @endphp
-                                                    Hello, my name is {{ $sliderTutor->f_name ?? 'Not Specified' }}. I have <b>{{ $sliderTutor->experience ?? 'Nullable' }}</b>+ years of experience as a {{ is_array($specializations) && count($specializations) ? implode(', ', $specializations) : 'Not Specified' }} Teacher & Tutor</span>
-                                                </div>
-                                                <div class="testimonial-name">{{ $sliderTutor->f_name ?? 'Nullable' }} {{ $sliderTutor->l_name ?? 'Nullable' }}</div>
-                                            </div> -->
                     @endforeach
-                    <!--END OF TESTIMONIAL 1 -->
-                    <!--TESTIMONIAL 2 -->
-
-                    <!--END OF TESTIMONIAL 5 -->
+                    @else
+                        <div class="text-center mt-5">
+                            <img src="{{ asset('images/not-found.jpeg') }}" alt="Not Found" class="img-fluid" style="max-width: 300px;">
+                            <!-- <p class="mt-3">No tutors found.</p> -->
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -1228,7 +1216,7 @@
 
 
     </section>
-    <section class="w-75 mx-auto mb-4">
+    <section class="w-75 mx-auto mb-4 services-section">
         <div class="keys-heading">
             <h2 class="text-center my-4 fw-bold">Our Services</h2>
         </div>
@@ -2596,7 +2584,9 @@ $(document).ready(function() {
                         }
                     });
                 } else {
-                    $('#tutorsContainer').append('<p>No tutors found.</p>');
+                     const notFoundImage = "{{ asset('images/not-found.jpeg') }}";
+                     $('#tutorsContainer').append(`<img class="not-found-img w-100" src="${notFoundImage}" />`);
+                    // $('#tutorsContainer').append(' <img src="{{ asset('images/not-found.jpeg') }}"/>');
                 }
 
                 // Update pagination details

@@ -471,7 +471,10 @@
                         @endforeach
                     </div>
                 @else
-                    <p>No tutors available matching your search criteria.</p>
+                    
+                     <div>
+                        <img class="not-found-img w-100" src="{{ asset('images/not-found.jpeg') }}" />
+                     </div>
                 @endif
             </div>
         </div>
@@ -851,7 +854,8 @@ $(document).ready(function () {
                         $('#paginationContainer').show();
                     }
                 } else {
-                    $('#tutorsContainer').html('<p>No tutors found for the selected Price.</p>');
+                    const notFoundImage = "{{ asset('images/not-found.jpeg') }}";
+                     $('#tutorsContainer').append(`<img class="not-found-img w-100" src="${notFoundImage}" />`);
                 }
             },
             error: function (xhr, status, error) {
@@ -1019,7 +1023,8 @@ $(document).ready(function () {
                         $('#paginationContainer').show();
                     }
                 } else {
-                    $('#tutorsContainer').html('<p>No tutors found for the selected gender.</p>');
+                    const notFoundImage = "{{ asset('images/not-found.jpeg') }}";
+                     $('#tutorsContainer').append(`<img class="not-found-img w-100" src="${notFoundImage}" />`);
                 }
             },
             error: function (xhr, status, error) {
@@ -1185,7 +1190,8 @@ $(document).ready(function () {
                         $('#paginationContainer').show();
                     }
                 } else {
-                    $('#tutorsContainer').html('<p>No tutors found for the selected country.</p>');
+                     const notFoundImage = "{{ asset('images/not-found.jpeg') }}";
+                     $('#tutorsContainer').append(`<img class="not-found-img w-100" src="${notFoundImage}" />`);
                 }
             },
             error: function (xhr, status, error) {
@@ -1351,7 +1357,8 @@ $(document).ready(function () {
                         $('#paginationContainer').show();
                     }
                 } else {
-                    $('#tutorsContainer').html('<p>No tutors found for the selected gender.</p>');
+                     const notFoundImage = "{{ asset('images/not-found.jpeg') }}";
+                     $('#tutorsContainer').append(`<img class="not-found-img w-100" src="${notFoundImage}" />`);
                 }
             },
             error: function (xhr, status, error) {

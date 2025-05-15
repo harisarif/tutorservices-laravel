@@ -471,7 +471,9 @@
                         @endforeach
                     </div>
                 @else
-                    <p class="text-muted">No students available matching your search criteria.</p>
+                <div>
+                    <img class="not-found-img w-100" src="${notFoundImage}" />
+                </div>
                 @endif
 
                 <!-- Pagination -->
@@ -503,102 +505,10 @@
      </div>
 
     @endsection 
-    @section('js')<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script>     
-//    $('#country').change(function (e) {
-//     e.preventDefault();
-//      $.ajaxSetup({
-//     headers: {
-//         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//     }
-// });
-
-//     var selectedCountry = $(this).val();
-//     console.log("✅ Country selected:", selectedCountry);
-
-//     var locationData = {
-//         country: selectedCountry !== "all" ? selectedCountry : "all"
-//     };
-
-//     console.log("📦 Data sent to backend:", locationData);
-
-//     $('#overlay').show(); // Show loading overlay
-
-//     $.ajax({
-//         type: 'POST',
-//         url: '{{ route('fetch-stduent-data') }}',
-//         data: locationData,
-//         dataType: 'json',
-//         success: function (response) {
-//             console.log("🎯 AJAX Success Response:", response);
-
-//             $('#tutorsContainer').empty();
-//             $('#overlay').hide();
-
-//             if (response && response.students && response.students.length > 0) {
-//                 console.log("✅ Students Found:", response.students.length);
-//                 response.students.forEach(function (student, index) {
-//                     console.log(`👤 Student ${index + 1}:`, student);
-
-//                     var studentHTML = `
-//                         <div class="mb-4">
-//                             <div class="p-4 border border-success rounded">
-//                                 <div class="row">
-//                                     <div class="col-md-4">
-//                                         <img src="${student.profileImage ? '/storage/' + student.profileImage : '/images/avatar.png'}" 
-//                                              alt="Student Image" 
-//                                              class="img-thumbnail" 
-//                                              style="height: 150px; width: 100%">
-//                                     </div>
-//                                     <div class="col-md-5">
-//                                         <p class="mb-1"><strong>Name:</strong> ${student.name ?? 'N/A'}</p>
-//                                         <p class="mb-1"><strong>Contact Email:</strong> ${student.email ?? 'N/A'}</p>
-//                                         <p class="mb-1"><strong>Subject:</strong> ${student.subject ?? 'N/A'}</p>
-//                                         <p class="mb-1"><strong>Phone:</strong> ${student.phone ?? 'N/A'}</p>
-//                                     </div>
-//                                     <div class="col-md-3">
-//                                         <p class="mb-1"><strong>Country:</strong> ${student.country ?? 'N/A'}</p>
-//                                         <p class="mb-1"><strong>City:</strong> ${student.city ?? 'N/A'}</p>
-//                                         <p class="mb-1"><strong>Teach By:</strong> ${student.subjects ?? 'N/A'}</p>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                         </div>
-//                     `;
-//                     $('#tutorsContainer').append(studentHTML);
-//                 });
-
-//                 // Pagination debug
-//                 var total = response.pagination.total;
-//                 var perPage = response.pagination.perPage;
-//                 var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
-//                 var lastItem = Math.min(response.pagination.currentPage * perPage, total);
-
-//                 console.log(`📊 Pagination: ${firstItem} to ${lastItem} of ${total}`);
-
-//                 $('.total-tutors-count').text(total);
-//                 $('.tutors-range').text(`${firstItem} to ${lastItem} of ${total} students`);
-
-//                 if (total <= perPage) {
-//                     $('#paginationContainer').hide();
-//                 } else {
-//                     $('#paginationContainer').show();
-//                     $('#paginationContainer').html(response.pagination); // Must be HTML
-//                 }
-//             } else {
-//                 console.warn("⚠️ No students found.");
-//                 $('#tutorsContainer').html('<p>No students found for the selected country.</p>');
-//                 $('#paginationContainer').hide();
-//             }
-//         },
-//         error: function (xhr, status, error) {
-//             console.error('❌ AJAX Error:', xhr.responseText);
-//             $('#overlay').hide();
-//         }
-//     });
-
-</script>
+    @section('js')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    
 <script>
 $(document).ready(function () {
     $.ajaxSetup({
@@ -675,7 +585,8 @@ $(document).ready(function () {
                     }
 
                 } else {
-                    $('#tutorsContainer').html('<p class="text-muted">No students found for the selected country.</p>');
+                    const notFoundImage = "{{ asset('images/not-found.jpeg') }}";
+                     $('#tutorsContainer').append(`<img class="not-found-img w-100" src="${notFoundImage}" />`);
                     $('#paginationContainer').hide();
                 }
             },
@@ -763,7 +674,8 @@ $(document).ready(function () {
                     }
 
                 } else {
-                    $('#tutorsContainer').html('<p class="text-muted">No students found for the selected gender.</p>');
+                    const notFoundImage = "{{ asset('images/not-found.jpeg') }}";
+                     $('#tutorsContainer').append(`<img class="not-found-img w-100" src="${notFoundImage}" />`);
                     $('#paginationContainer').hide();
                 }
             },
@@ -840,7 +752,8 @@ $('#resetFilter').on('click', function () {
                     $('#paginationContainer').show().html(response.pagination);
                 }
             } else {
-                $('#tutorsContainer').html('<p class="text-muted">No students found.</p>');
+               const notFoundImage = "{{ asset('images/not-found.jpeg') }}";
+                $('#tutorsContainer').append(`<img class="not-found-img w-100" src="${notFoundImage}" />`);
                 $('#paginationContainer').hide();
             }
         },

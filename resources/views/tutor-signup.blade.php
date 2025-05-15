@@ -13,7 +13,8 @@
     <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" type="image/png" />
     <link rel="stylesheet" href="{{ asset('css/tutor-form.css') }}">
 <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
-<link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}"><link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <style>
  .select2-container--default .select2-selection--multiple .select2-selection__choice {
             background-color: #42B979 !important;
