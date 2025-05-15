@@ -348,7 +348,12 @@
     }
 }
 
-
+@media (min-width: 1200px) {
+  /* Styles for big screens */
+  .adjustMobile {
+    height: 17%;
+  }
+}
 @media (max-width: 767px) {
     .services-section .row {
         margin: 0 auto;
