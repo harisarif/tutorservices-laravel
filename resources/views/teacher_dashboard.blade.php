@@ -14,6 +14,49 @@
     <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet" crossorigin="anonymous">
     <link rel="shortcut icon" href="{{ asset('images/favicon.png')}}" type="image/png" />
 <style>
+            .custom-pagination nav {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+
+        .custom-pagination .pagination {
+            display: flex;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .custom-pagination .pagination li {
+            margin: 0 5px;
+        }
+
+        .custom-pagination .pagination li a,
+        .custom-pagination .pagination li span {
+            padding: 8px 12px;
+            text-decoration: none;
+            color: #333;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .custom-pagination .pagination li a:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .custom-pagination .pagination li.active span {
+            background-color: #007bff;
+            color: white;
+            pointer-events: none;
+        }
+
+        .custom-pagination .pagination li.disabled span {
+            color: #999;
+            background-color: #e0e0e0;
+        }
+
     .img-wrapper{
         max-width:30px !important;
         
@@ -471,11 +514,13 @@
                         @endforeach
                     </div>
                 @else
-                    <p class="text-muted">No students available matching your search criteria.</p>
+                   <div>
+                        <img class="not-found-img w-100" src="{{ asset('images/not-found.jpeg') }}" />
+                     </div>
                 @endif
 
                 <!-- Pagination -->
-                <div class="d-flex justify-content-center mt-4">
+                <div class="d-flex justify-content-center mt-4 custom-pagination">
                     {{ $paginatedStudents->links() }}
                 </div>
             </div>
@@ -581,7 +626,8 @@ $(document).ready(function () {
                     $('#paginationContainer').show().html(response.pagination);
                 }
             } else {
-                $('#tutorsContainer').html('<p class="text-muted">No students found for selected filters.</p>');
+                    const notFoundImage = "{{ asset('images/not-found.jpeg') }}";
+                     $('#tutorsContainer').append(`<img class="not-found-img w-100" src="${notFoundImage}" />`);
                 $('#paginationContainer').hide();
             }
         },
@@ -664,7 +710,8 @@ $('#resetFilter').on('click', function () {
                     $('#paginationContainer').show().html(response.pagination);
                 }
             } else {
-                $('#tutorsContainer').html('<p class="text-muted">No students found.</p>');
+                    const notFoundImage = "{{ asset('images/not-found.jpeg') }}";
+                     $('#tutorsContainer').append(`<img class="not-found-img w-100" src="${notFoundImage}" />`);
                 $('#paginationContainer').hide();
             }
         },
