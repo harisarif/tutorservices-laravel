@@ -73,7 +73,7 @@
         <ul class="p-1 m-0 d-sm-inline d-block text-center header-ul pt-2 pt-md-0">
             <li class=" p-0">
                 <a class="navbar-brand" href="{{ route('newhome') }}">
-                    <img src="images/white-logo.jpeg" alt="logo"
+                    <img src="{{ asset('images/white-logo.jpeg') }}" alt="logo"
                         style="height: 100px; border-radius: 60px;width:100px;margin-top:50px;">
                 </a>
             </li>
