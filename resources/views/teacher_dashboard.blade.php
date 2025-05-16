@@ -13,6 +13,8 @@
 
     <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet" crossorigin="anonymous">
     <link rel="shortcut icon" href="{{ asset('images/favicon.png')}}" type="image/png" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
 <style>
             .custom-pagination nav {
                 display: flex;
