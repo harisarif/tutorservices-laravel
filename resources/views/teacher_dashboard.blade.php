@@ -16,10 +16,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
 <style>
-            .custom-pagination nav {
+        .custom-pagination nav {
                 display: flex;
-                justify-content: center;
-                margin-top: 20px;
+                justify-content: space-between;
+                width: 100%;
             }
 
         .custom-pagination .pagination {
@@ -522,7 +522,7 @@
                 @endif
 
                 <!-- Pagination -->
-                <div class="d-flex justify-content-center mt-4 custom-pagination">
+                <div class="d-flex justify-content-between mt-2 custom-pagination">
                     {{ $paginatedStudents->links() }}
                 </div>
             </div>
