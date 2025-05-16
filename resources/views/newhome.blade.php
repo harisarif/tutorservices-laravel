@@ -176,7 +176,7 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
-                    <div class="email-container">
+                    <div class="email-container mt-4">
                         <i class="fa fa-envelope-square" aria-hidden="true" style="color: #fff;"></i>
                         <a class="email text-decoration-none" href="mailto:info@eduexceledu.com"
                             style="color: #42b979;">info@eduexceledu.com</a>
