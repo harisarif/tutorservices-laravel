@@ -351,7 +351,10 @@
 @media (min-width: 1920px) {
   /* Styles for big screens */
   .adjustMobile {
-    height: 17%;
+    height: 17% !important;
+  }
+  .navbar-brand img {
+    margin-top:40px !important;
   }
   
 }
