@@ -433,7 +433,7 @@ $languages = is_array($tutor->language) ? $tutor->language : json_decode($tutor-
                 </nav>
 
             </ul>
-            <div>
+            <div class="mt-3">
                 <!-- <h1>{{ __('messages.welcome') }}</h1> -->
 
 

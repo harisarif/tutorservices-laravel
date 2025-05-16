@@ -254,7 +254,7 @@ main {
 
         </ul>
 
-        <div>
+        <div class="mt-3">
             <!-- <h1>{{ __('messages.welcome') }}</h1> -->
 
 
