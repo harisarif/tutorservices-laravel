@@ -17,7 +17,7 @@
 <style>
     
 .adjustMobile {
-    height: 22%;
+    height: 24% !important;
 }
 
 .custom-pagination nav {
@@ -336,7 +336,7 @@
             <ul class="p-1 m-0 d-sm-inline d-block text-center header-ul pt-2">
                 <li class=" p-0">
                      <a class="navbar-brand" href="{{ route('newhome') }}">
-                        <img src="{{ asset('images/white-logo.jpeg') }}"  alt="logo" style="height: 100px; border-radius: 60px;width:100px;margin-top:50px;">
+                        <img src="{{ asset('images/white-logo.jpeg') }}"  alt="logo" style="height: 100px; border-radius: 60px;width:100px;margin-top:55px;">
                     </a>
                 </li>
                 <nav class="navbar navbar-expand-lg adjust-header-mobile">
@@ -360,7 +360,7 @@
                 </nav>
 
                 </ul>
-            <div>
+            <div class="mt-3">
             <!-- <h1>{{ __('messages.welcome') }}</h1> -->
             
 
@@ -521,11 +521,13 @@
                         @endforeach
                     </div>
                 @else
-                    <p class="text-muted">No students available matching your search criteria.</p>
+                <div>
+                    <img class="not-found-img w-100" src="{{ asset('images/not-found.jpeg') }}" />
+                </div>
                 @endif
 
                 <!-- Pagination -->
-                <div class="d-flex justify-content-center mt-4">
+                <div class="d-flex justify-content-between my-2 custom-pagination">
                     {{ $paginatedStudents->links() }}
                 </div>
             </div>
@@ -632,7 +634,9 @@ $(document).ready(function () {
                     }
 
                 } else {
-                    $('#tutorsContainer').html('<p class="text-muted">No students found for the selected country.</p>');
+                    const notFoundImage = "{{ asset('images/not-found.jpeg') }}";
+                    $('#tutorsContainer').append(
+                        `<img class="not-found-img w-100" src="${notFoundImage}" />`);
                     $('#paginationContainer').hide();
                 }
             },
@@ -720,7 +724,9 @@ $(document).ready(function () {
                     }
 
                 } else {
-                    $('#tutorsContainer').html('<p class="text-muted">No students found for the selected gender.</p>');
+                    const notFoundImage = "{{ asset('images/not-found.jpeg') }}";
+                    $('#tutorsContainer').append(
+                        `<img class="not-found-img w-100" src="${notFoundImage}" />`);
                     $('#paginationContainer').hide();
                 }
             },
@@ -795,7 +801,9 @@ $('#resetFilter').on('click', function () {
                     $('#paginationContainer').show().html(response.pagination);
                 }
             } else {
-                $('#tutorsContainer').html('<p class="text-muted">No students found.</p>');
+                const notFoundImage = "{{ asset('images/not-found.jpeg') }}";
+                    $('#tutorsContainer').append(
+                        `<img class="not-found-img w-100" src="${notFoundImage}" />`);
                 $('#paginationContainer').hide();
             }
         },

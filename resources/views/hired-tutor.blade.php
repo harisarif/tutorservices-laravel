@@ -14,7 +14,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <style>
 .adjustMobile {
-    height: 22%;
+    height: 24% !important;
 }
 
 .custom-pagination nav {
@@ -226,7 +226,7 @@ main {
             <li class=" p-0">
                 <a class="navbar-brand" href="{{ route('newhome') }}">
                     <img src="{{ asset('images/white-logo.jpeg') }}" height="50px" alt="logo"
-                        style="height: 100px; border-radius: 60px;width:100px;margin-top:50px;">
+                        style="height: 100px; border-radius: 60px;width:100px;margin-top:55px;">
                 </a>
             </li>
             <nav class="navbar navbar-expand-lg adjust-header-mobile">
@@ -599,7 +599,7 @@ main {
     @endforeach
 
     <!-- Pagination links -->
-    <div class="d-flex justify-content-between mt-2 custom-pagination">
+    <div class="d-flex justify-content-between my-2 custom-pagination">
         {{ $paginatedMatchedTutors->links() }}
     </div>
 
