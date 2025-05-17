@@ -278,32 +278,26 @@ class TutorController extends Controller
         return response()->json($serializedData);
     }
 
-      public function fetchStudentData(Request $request)
+    public function fetchStudentData(Request $request)
 {
-    // Initialize the query builder
     $query = Student::query();
-
-    // Define the number of students per page
     $perPage = 5;
 
-    // Gender
-    if ($request->has('gender') && $request->gender !== 'all') {
-        $gender = $request->gender;
-        Log::info("Filtering students with gender: $gender");
-        $query->where('gender', $gender);
+    // Apply gender filter if set and not "all"
+    if ($request->filled('gender') && $request->gender !== 'all') {
+        $query->where('gender', $request->gender);
     }
 
-    // Country
-    if ($request->has('country') && $request->country !== 'all') {
+    // Apply country filter if set and not "all"
+    if ($request->filled('country') && $request->country !== 'all') {
         $query->where('country', $request->country);
     }
 
-    // Paginate the filtered students
     $students = $query->paginate($perPage);
 
     if ($students->isEmpty()) {
         return response()->json([
-            'message' => 'No students found.',
+            'students' => [],
             'totalStudentsCount' => 0,
             'perPage' => $perPage,
             'pagination' => [
@@ -319,18 +313,12 @@ class TutorController extends Controller
     // Transform students
     $studentsArray = $students->map(function ($student) {
         $student->country_name = config("countries_assoc.countries.{$student->country}", 'Unknown');
-
-    
         return $student->toArray();
     })->toArray();
 
-    // Total after filters
-    $totalStudentsCount = (clone $query)->count();
-
-    // Final response
     return response()->json([
         'students' => $studentsArray,
-        'totalStudentsCount' => $totalStudentsCount,
+        'totalStudentsCount' => $students->total(),
         'perPage' => $perPage,
         'pagination' => [
             'total' => $students->total(),
@@ -341,6 +329,7 @@ class TutorController extends Controller
         ],
     ]);
 }
+
 
     public function updateTutorStatus(Request $request)
     {
