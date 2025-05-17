@@ -13,7 +13,57 @@
 
     <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet" crossorigin="anonymous">
     <link rel="shortcut icon" href="{{ asset('images/favicon.png')}}" type="image/png" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <style>
+    
+.adjustMobile {
+    height: 22%;
+}
+
+.custom-pagination nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.custom-pagination .pagination {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+}
+
+.custom-pagination .pagination li {
+    margin: 0 5px;
+}
+
+.custom-pagination .pagination li a,
+.custom-pagination .pagination li span {
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #333;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.custom-pagination .pagination li a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.custom-pagination .pagination li.active span {
+    background-color: #007bff;
+    color: white;
+    pointer-events: none;
+}
+
+.custom-pagination .pagination li.disabled span {
+    color: #999;
+    background-color: #e0e0e0;
+}
+
     .img-wrapper{
         max-width:30px !important;
         
@@ -286,7 +336,7 @@
             <ul class="p-1 m-0 d-sm-inline d-block text-center header-ul pt-2">
                 <li class=" p-0">
                      <a class="navbar-brand" href="{{ route('newhome') }}">
-                        <img src="{{ asset('images/white-logo.jpeg') }}" height="50px" alt="logo" style="height: 50px; border-radius: 10px; margin-top: 14px;">
+                        <img src="{{ asset('images/white-logo.jpeg') }}"  alt="logo" style="height: 100px; border-radius: 60px;width:100px;margin-top:50px;">
                     </a>
                 </li>
                 <nav class="navbar navbar-expand-lg adjust-header-mobile">
