@@ -394,7 +394,7 @@
                                         </button>
                                         <ul class="dropdown-action" id="dropdownMenu">
                                             <li>
-                                                <a href="{{ route('edit-teacher', $student->id) }}" class="btn btn-sm text-justify">
+                                                <a href="{{ route('edit-student', $student->id) }}" class="btn btn-sm text-justify">
                                                 <i class="fa-regular fa-pen-to-square"></i>
                                                 <span>Edit</span>
                                             </a>
