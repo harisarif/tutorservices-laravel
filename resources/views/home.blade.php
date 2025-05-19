@@ -441,7 +441,7 @@
 
                             </div>
                             <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in BD notification-dropdown " id="notificationDropdown" aria-labelledby="alertsDropdown "  style="display: none;">
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in BD notification-dropdown " id="notificationDropdown" aria-labelledby="alertsDropdown ">
                                 <h6 class="dropdown-header bg-success border-success text-center">
                                 {{ __('messages.Notification') }}
                                 </h6>
