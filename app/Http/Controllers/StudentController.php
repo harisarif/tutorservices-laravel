@@ -528,7 +528,7 @@ foreach ($teacher as $tutor) {
         }
 
         $inquiry = new Inquiry();
-        $inquiry->description = $request->input('subjects');
+        $inquiry->description = $request->input('description');
         $inquiry->name = $request->input('fname');
         $inquiry->email = $request->input('email');
         $inquiry->phone = $request->input('phone');
@@ -537,31 +537,113 @@ foreach ($teacher as $tutor) {
         // Send email to the student
         $toStudent = $inquiry->email;
         $subjectStudent = "Welcome to Edexcel Academy!";
-        $messageStudent = "Dear " . $inquiry->name . "\r\n" .
-            "Welcome to Edexcel Academy! 🎉 We’re excited to to got your inquiry soon you will notified.\r\n" .
-            "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at info@edexceledu.com\r\n" .
-            "We’re here to help you succeed!\r\n\r\n" .
-            "Best regards,\r\n" .
-            "The Edexcel Academy Team";
+       $messageStudent = "
+<div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>
+    <table width='100%' cellpadding='0' cellspacing='0' border='0'>
+        <tr>
+            <td align='center'>
+                <table style='max-width: 600px; width: 100%; border: 1px solid #ddd; border-radius: 8px; background-color: #fff;' cellpadding='0' cellspacing='0'>
+
+                    <!-- Header -->
+                    <tr>
+                        <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 20px; font-weight: bold; color: #4CAF50; border-top-left-radius: 8px; border-top-right-radius: 8px;'>
+                            Thank You for Your Inquiry!
+                        </td>
+                    </tr>
+
+                    <!-- Body -->
+                    <tr>
+                        <td style='padding: 20px; text-align: left;'>
+                            <p style='font-size: 16px; margin: 0;'>Dear {$inquiry->name},</p>
+
+                            <p style='font-size: 16px; margin: 10px 0;'>
+                                Welcome to <strong>Edexcel Academy</strong>! 🎉 We're excited to receive your inquiry and will get back to you shortly.
+                            </p>
+
+                            <p style='font-size: 16px; margin: 10px 0;'>
+                                In the meantime, feel free to explore our courses, connect with expert educators, and join a community of enthusiastic learners.
+                            </p>
+
+                            <p style='font-size: 16px; margin: 10px 0;'>
+                                If you need any assistance, contact us at 
+                                <a href='mailto:info@edexceledu.com' style='color: #4CAF50; text-decoration: none;'>info@edexceledu.com</a>.
+                            </p>
+
+                            <p style='font-size: 16px; margin: 10px 0;'>We’re here to help you succeed!</p>
+
+                            <p style='font-size: 16px; margin: 10px 0;'>Best regards,</p>
+                            <p style='font-size: 16px; font-weight: bold; margin: 0;'>The Edexcel Academy Team</p>
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style='background-color: #f4f4f4; color: #4CAF50; padding: 15px; text-align: center; font-size: 14px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;'>
+                            &copy; 2025 Edexcel Academy. All rights reserved.
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+";
+
 
         $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
 
         // Send email to the admin
         $toAdmin = 'info@edexceledu.com';
         $subjectAdmin = "Edexcel Notification";
-        $messageAdmin = "Inquiry Added\n\n" .
-            "Dear Admin,\n\n" .
-            "A new inquiry has been added:\n\n" .
-            "- Name: {$inquiry->name}\n" .
-            "- Email: {$inquiry->email}\n" .
-            "- Phone: {$inquiry->phone}\n\n" .
-            "Best regards,\n" .
-            "The Edexcel Academy Team";
+       $messageAdmin = "
+<div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>
+    <table width='100%' cellpadding='0' cellspacing='0' border='0'>
+        <tr>
+            <td align='center'>
+                <table style='max-width: 600px; width: 100%; border: 1px solid #ddd; border-radius: 8px; background-color: #fff;' cellpadding='0' cellspacing='0'>
+                    <!-- Header -->
+                    <tr>
+                        <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 20px; font-weight: bold; color: #4CAF50; border-top-left-radius: 8px; border-top-right-radius: 8px;'>
+                            New Inquiry Received
+                        </td>
+                    </tr>
+                    
+                    <!-- Body -->
+                    <tr>
+                        <td style='padding: 20px; text-align: left;'>
+                            <p style='font-size: 16px; margin: 0;'>Dear Admin,</p>
+                            <p style='font-size: 16px; margin: 10px 0;'>
+                                A new inquiry has been added to the system. Please find the details below:
+                            </p>
+                            <ul style='font-size: 16px; margin: 10px 0; padding-left: 20px;'>
+                                <li><strong>Name:</strong> {$inquiry->name}</li>
+                                <li><strong>Email:</strong> {$inquiry->email}</li>
+                                <li><strong>Phone:</strong> {$inquiry->phone}</li>
+                            </ul>
+                            <p style='font-size: 16px; margin: 10px 0;'>Best regards,</p>
+                            <p style='font-size: 16px; font-weight: bold; margin: 0;'>The Edexcel Academy Team</p>
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style='background-color: #f4f4f4; color:#4CAF50; padding: 15px; text-align: center; font-size: 14px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;'>
+                            &copy; 2025 Edexcel Academy. All rights reserved.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+";
+
 
         $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
 
         // Send notification to the admin
-        $admin = User::where('email', 'ceo@edexceledu.com')->first(); // Admin user
+        $admin = User::where('email', 'info@edexceledu.com')->first(); // Admin user
         $admin->notify(new InquirySuccessNotification($inquiry)); // Notify the admin
 
         return redirect()->route('newhome')->with('success', 'Inquiry created successfully.');
