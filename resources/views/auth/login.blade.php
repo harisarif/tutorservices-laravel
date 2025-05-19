@@ -109,7 +109,7 @@
                 <div class="col-lg-5 col-sm-4">
                     
                     <div class="login-heading">
-                            <h3 class="my-2 fw-bold fs-4">{{ __('messages.Login Your Account') }}</h3>
+                            <h3 class="my-2 fw-bold fs-4 text-dark">{{ __('messages.Login Your Account') }}</h3>
                     </div>
                     <form method="POST" action="{{ route('login') }}"  style="margin-left: -2%;">
                         @csrf
