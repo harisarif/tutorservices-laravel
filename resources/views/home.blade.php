@@ -433,9 +433,9 @@
                             <div class="notification-icon" >
                                 <a href="#" class="nav-link dropdown-toggle"  id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-bell fa-fw text-success"></i> {{-- Replace with your icon --}}
-                                    @if(auth()->user()->unreadNotifications->count() > 0)
+                                    <!-- @if(auth()->user()->unreadNotifications->count() > 0) -->
                                         <span class="badge badge-danger badge-counter" id="notificationCount">{{ auth()->user()->unreadNotifications->count() }}</span>
-                                    @endif
+                                    <!-- @endif -->
                                 </a>
 
 
