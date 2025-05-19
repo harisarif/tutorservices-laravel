@@ -889,17 +889,17 @@
 
 
         $(document).ready(function() {
-                $('#alertsDropdown').on('click', function(e) {
+                $('.notification-icon').on('click', function(e) {
                     e.preventDefault();
                     $('#notificationDropdown').toggle();
                 });
 
         // Optionally, close the dropdown if clicking outside of it
-        $(document).on('click', function(event) {
-            if (!$(event.target).closest('.notification-icon').length) {
-                $('#notificationDropdown').hide();
-            }
-        });
+        // $(document).on('click', function(event) {
+        //     if (!$(event.target).closest('.notification-icon').length) {
+        //         $('#notificationDropdown').hide();
+        //     }
+        // });
         $('.notification-dropdown').on('click', 'li', function() {
         var notificationId = $(this).data('id');
         var isRead = $(this).hasClass('read');
