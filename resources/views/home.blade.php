@@ -467,7 +467,7 @@
                                     @endif
                                 </a>
 
-                                    <a class="dropdown-item-fector  small" href="#">Show All Notifications </a>
+                                    <a class="dropdown-item-fector  small" href="{{ route('admin.inquiry')}}">Show All Notifications </a>
                             </div>
                         </li>
                         <li class="nav-item dropdown no-arrow d-flex align-items-center">
