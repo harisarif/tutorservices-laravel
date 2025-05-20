@@ -642,9 +642,14 @@ foreach ($teacher as $tutor) {
 
         $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
 
-        // Send notification to the admin
-        $admin = User::where('email', 'info@edexceledu.com')->first(); // Admin user
-        $admin->notify(new InquirySuccessNotification($inquiry)); // Notify the admin
+       $admin = User::where('role', 'admin')->first();
+
+        if ($admin) {
+            $admin->notify(new InquirySuccessNotification($inquiry));
+        } else {
+            // Handle the case where no admin was found
+            Log::warning('Admin user not found');
+        }
 
         return redirect()->route('newhome')->with('success', 'Inquiry created successfully.');
     }
