@@ -564,7 +564,10 @@ main {
                                                                     </div> -->
                                             </div>
                                             <div>
-                                                <div id="btn-container">
+                                                <div id="btn-container"> <a href="{{ route('googleMeet', ['tutor_email' => $item->email, 'tutor_name' => $item->f_name . ' ' . $item->l_name]) }}" class="ms-2" title="Google Meet">
+    <i class="fa-solid fa-video text-danger" style="font-size: 20px;"></i>
+</a>
+
                                                     <button type="button" style="background-color: #1cc88a;"
                                                         class="btn4 btn-outline-light rounded fw-bold text-light p-2 w-100">Book
                                                         trail lesson</button>
