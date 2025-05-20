@@ -1,181 +1,10 @@
-@extends('layouts.app')
+
     <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/sb-admin-2.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/sweetalert2.min.css')}}" >
     <link rel="stylesheet" href="{{asset('css/fontawesome-free/css/all.min.css')}}"/>
+    <link rel="stylesheet" href="{{asset('css/admin.css')}}" />
 
-
-    <style>
-        .modalBox {
-            display: none !important;
-        }
-        footer {
-            display: none !important;
-        }
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        /* Icon Button */
-        .dropdown-icon {
-            border: none;
-            padding: 10px;
-            background: transparent;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        /* Hide dropdown menu by default */
-        .dropdown-action {
-            display: none;
-            position: absolute;
-            top: 40px; /* Adjust based on your design */
-            left: -7px;
-            background-color: white;
-            min-width: 100px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        /* Dropdown menu items */
-        .dropdown-action li {
-            display: block;
-            padding: 3px 8px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .dropdown-action li a {
-            color: black;
-            text-decoration: none;
-            display: block;
-        }
-
-        /* Show dropdown menu when the dropdown is active */
-        .dropdown-action.show {
-            display: block;
-            z-index: 66;
-            top: 50px;
-            border-radius: 5px;
-        }
-
-        /* Hover effect on dropdown items */
-        .dropdown-action li:hover {
-            background-color: #f1f1f1;
-        }
-        .dropdown-action li a{
-            margin-left: -9%;
-        }
-            .switch {
-            display: inline-block;
-            position: relative;
-            width: 50px;
-            height: 25px;
-            border-radius: 20px;
-            background: #dfd9ea;
-            transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-            vertical-align: middle;
-            cursor: pointer;
-        }
-        .switch::before {
-            content: '';
-            position: absolute;
-            top: 1px;
-            left: 2px;
-            width: 22px;
-            height: 22px;
-            background: #fafafa;
-            border-radius: 50%;
-            transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1), background 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .switch:active::before {
-            box-shadow: 0 2px 8px rgba(0,0,0,0.28), 0 0 0 20px rgba(128,128,128,0.1);
-        }
-        input:checked + .switch {
-            background: #72da67;
-        }
-        input:checked + .switch::before {
-            left: 27px;
-            background: #fff;
-        }
-        input:checked + .switch:active::before {
-            box-shadow: 0 2px 8px rgba(0,0,0,0.28), 0 0 0 20px rgba(0,150,136,0.2);
-        }
-
-        /* The switch - custom styled checkbox */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 20px;
-        }
-
-        /* Hide default HTML checkbox */
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        /* The slider */
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc; /* Default color */
-            transition: .4s;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 15px;
-            width: 17px;
-            top: 2px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-        }
-
-        /* When the switch is checked, make the slider green */
-        input:checked + .slider {
-            background-color: #4CAF50; /* Green color when active */
-        }
-
-        /* Move the slider circle to the right when checked */
-        input:checked + .slider:before {
-            transform: translateX(26px);
-        }
-
-        /* Rounded sliders */
-        .slider.round {
-            border-radius: 34px;
-        }
-
-        .slider.round:before {
-            border-radius: 50%;
-        }
-        .alert {
-            position: fixed !important;
-            padding: .75rem 1.25rem;
-            /* margin-bottom: 1rem; */
-            border: 1px solid transparent;
-            border-radius: .35rem;
-            float: right;
-            right: -2px !important;
-            display:flex;
-            width:20%;
-        }
-        /* Dropdown container */
-
-    </style>
 @php
     $notifications = auth()->user()->unreadNotifications;
 @endphp
@@ -524,8 +353,6 @@
     </div>
 
 </body>
-@endsection
-@section('js')
 
     <!-- Bootstrap core JavaScript-->
 
@@ -679,4 +506,3 @@
                     }, 0);
                 });
     </script>
-@endsection
