@@ -947,7 +947,8 @@
                                             style="color:#42b979;"><strong>{{ __('messages.Enter your   Email') }} <b
                                                     style="color: red; font-size: 20px;">*</b></strong></label>
                                         <div class="input-group"> <input name="email" class="form-control" type="text"
-                                                placeholder="{{ __('messages.Email ID') }}"></div>
+                                                placeholder="{{ __('messages.Email ID') }}" pattern="^[a-zA-Z0-9._%+-]+@(gmail|hotmail|yahoo)\.com$"
+                                                title="Only Gmail, Hotmail, or Yahoo emails are allowed (e.g., example@gmail.com)"></div>
                                     </div>
                                 </div>
                             </div>
