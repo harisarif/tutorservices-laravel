@@ -19,173 +19,12 @@
     <link href="{{asset('css/sweetalert2.min.css')}}" rel="stylesheet">
     <script src="{{asset('js/sweetalert2.min.js')}}"></script>
     <link rel="stylesheet" href="{{asset('css/select2.css')}}" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <link rel="stylesheet" href="{{asset('css/admin.css')}}" />
 </head>
-    <style>
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
+@php
+$notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get();
+@endphp
 
-        /* Icon Button */
-        .dropdown-icon {
-            border: none;
-            padding: 10px;
-            background: transparent;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        /* Hide dropdown menu by default */
-        .dropdown-action {
-            display: none;
-            position: absolute;
-            top: 40px; /* Adjust based on your design */
-            left: -7px;
-            background-color: white;
-            min-width: 100px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        /* Dropdown menu items */
-        .dropdown-action li {
-            display: block;
-            padding: 3px 8px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .dropdown-action li a {
-            color: black;
-            text-decoration: none;
-            display: block;
-        }
-
-        /* Show dropdown menu when the dropdown is active */
-        .dropdown-action.show {
-            display: block;
-            z-index: 66;
-            top: 50px;
-            border-radius: 5px;
-        }
-
-        /* Hover effect on dropdown items */
-        .dropdown-action li:hover {
-            background-color: #f1f1f1;
-        }
-        .dropdown-action li a{
-            margin-left: -9%;
-        }
-            .switch {
-            display: inline-block;
-            position: relative;
-            width: 50px;
-            height: 25px;
-            border-radius: 20px;
-            background: #dfd9ea;
-            transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-            vertical-align: middle;
-            cursor: pointer;
-        }
-        .switch::before {
-            content: '';
-            position: absolute;
-            top: 1px;
-            left: 2px;
-            width: 22px;
-            height: 22px;
-            background: #fafafa;
-            border-radius: 50%;
-            transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1), background 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .switch:active::before {
-            box-shadow: 0 2px 8px rgba(0,0,0,0.28), 0 0 0 20px rgba(128,128,128,0.1);
-        }
-        input:checked + .switch {
-            background: #72da67;
-        }
-        input:checked + .switch::before {
-            left: 27px;
-            background: #fff;
-        }
-        input:checked + .switch:active::before {
-            box-shadow: 0 2px 8px rgba(0,0,0,0.28), 0 0 0 20px rgba(0,150,136,0.2);
-        }
-
-        /* The switch - custom styled checkbox */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 20px;
-        }
-
-        /* Hide default HTML checkbox */
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        /* The slider */
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc; /* Default color */
-            transition: .4s;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 15px;
-            width: 17px;
-            top: 2px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-        }
-
-        /* When the switch is checked, make the slider green */
-        input:checked + .slider {
-            background-color: #4CAF50; /* Green color when active */
-        }
-
-        /* Move the slider circle to the right when checked */
-        input:checked + .slider:before {
-            transform: translateX(26px);
-        }
-
-        /* Rounded sliders */
-        .slider.round {
-            border-radius: 34px;
-        }
-
-        .slider.round:before {
-            border-radius: 50%;
-        }
-        .alert {
-            position: fixed !important;
-            padding: .75rem 1.25rem;
-            /* margin-bottom: 1rem; */
-            border: 1px solid transparent;
-            border-radius: .35rem;
-            float: right;
-            right: -2px !important;
-            display:flex;
-            width:20%;
-        }
-        /* Dropdown container */
-
-    </style>
 
 @if (session('success'))
         <div class="alert alert-success" style="z-index: 6;
@@ -297,24 +136,54 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow mx-1">
 
-                            <div class="notification-icon" >
-                                <a href="#" class="nav-link dropdown-toggle"  id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <li class="nav-item dropdown no-arrow mx-1">
+
+                            <div class="notification-icon">
+                                <a href="#" class="nav-link dropdown-toggle" id="alertsDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-bell fa-fw text-success"></i> {{-- Replace with your icon --}}
-                                   
+                                    <!-- @if(auth()->user()->unreadNotifications->count() > 0) -->
+                                    <span class="badge badge-danger badge-counter"
+                                        id="notificationCount">{{ auth()->user()->unreadNotifications->count() }}</span>
+                                    <!-- @endif -->
                                 </a>
 
 
                             </div>
                             <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in BD notification-dropdown " id="notificationDropdown" aria-labelledby="alertsDropdown "  style="display: none;">
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in BD notification-dropdown "
+                                id="notificationDropdown" aria-labelledby="alertsDropdown ">
                                 <h6 class="dropdown-header bg-success border-success text-center">
-                                {{ __('messages.Notification') }}
+                                    {{ __('messages.Notification') }}
                                 </h6>
-                               
+                                <a class="dropdown-item px-0 justify-content-center @if(auth()->user()->notifications->count() === 0) no-notifications @endif"
+                                    href="#">
+                                    @if(auth()->user()->notifications->count() > 0)
+                                    @foreach(auth()->user()->notifications as $notification)
+                                    <div class="classic d-flex py-2 px-3 @if(!$loop->last) border-bottom @endif">
+                                        <div class="mr-3">
+                                            <div class="icon-circle bg-success">
+                                                <i class="fas fa-file-alt text-white"></i>
+                                            </div>
+                                        </div>
+                                        <div class="ntf">
+                                            <div class="small">{{ $notification->data['message'] }}</div>
+                                            <span
+                                                class="font-weight-bold">{{ $notification->created_at->diffForHumans() }}</span>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                    @else
+                                    <div class="mt-2 text-center">
+                                        <div class="small no-message">No notifications available.</div>
+                                    </div>
+                                    @endif
+                                </a>
 
-                                    <a class="dropdown-item-fector  small" href="#">Show All Notifications </a>
+                                <a class="dropdown-item-fector  small" href="{{ route('admin.inquiry')}}">Show All
+                                    Notifications </a>
                             </div>
-                        </li>
+                            </li>
                         <li class="nav-item dropdown no-arrow d-flex align-items-center">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -482,144 +351,137 @@
 
     <script src="{{asset('js/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('js/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
-    integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
     <script src="{{asset('js/js/bootstrap.bundle.min.js')}}"></script>
-<script>
-        document.getElementById('dropdownButton').addEventListener('click', function() {
-            var dropdownMenu = document.getElementById('dropdownMenu');
-            dropdownMenu.classList.toggle('show');
-        });
-        function updateStatus(tutorId) {
-            let statusToggle = document.getElementById(`statusToggle_${tutorId}`);
-            let statusInput = document.getElementById(`statusInput_${tutorId}`);
-            let form = document.getElementById(`statusForm_${tutorId}`);
-
-            // Update the hidden status input based on the checkbox state
-            statusInput.value = statusToggle.checked ? 'active' : 'inactive';
-
-            // Submit the form
-            form.submit();
-        }
-        $('#select-all').click(function() {
-            // Check/uncheck all checkboxes based on the main checkbox
-            $('.tutor-checkbox').prop('checked', this.checked);
-        });
-        $('#delete-selected').click(function() {
-            // Gather all checked checkbox values
-            var selected = [];
-            $('.tutor-checkbox:checked').each(function() {
-                selected.push($(this).val());
-            });
-
-            if (selected.length === 0) {
-
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Please select at least one tutor to delete.',
-                    icon: 'error', // Use 'error' instead of 'danger'
-                    confirmButtonText: 'OK'
-                });
-
-                return;
-            }
-
-            // Confirm deletion
-            if (confirm('Are you sure you want to delete the selected tutors?')) {
-                $.ajax({
-                    url: "{{ route('teachers.destroy.bulk') }}", // Update with your route
-                    type: 'DELETE',
-                    data: {
-                        ids: selected,
-                        _token: '{{ csrf_token() }}' // Include CSRF token for security
-                    },
-                    success: function(response) {
-                        // Handle success (e.g., reload the page or remove deleted rows)
-                        location.reload(); // Reload page after successful deletion
-                    },
-                    error: function(xhr) {
-                        // Handle error
-                        alert('Error occurred while deleting tutors.');
-                    }
-                });
-            }
-        });
-        $('.country-select').select2()
-        $('#countryTeacher').on('change', function() {
-
-            var country_id = $(this).val(); // Get the selected country ID
-
-            // Make an AJAX request to find tutors based on the selected country
-            $.ajax({
-                url: '/find-tutors', // Your route for finding tutors
-                type: 'GET', // HTTP method (can be POST if needed)
-                data: { country_id: country_id }, // Send selected country ID
-                success: function(response) {
-                    // Handle the response, e.g., display the tutors on the page
-                    console.log('sadsads',response);
-                    // You can dynamically update the DOM with the returned data here
-                    $('.teachers-table tbody').html(response.html);
-                },
-                error: function(xhr) {
-                    console.log('Error:', xhr);
-                }
-            });
-        });
-        $(document).ready(function() {
-                $('#alertsDropdown').on('click', function(e) {
+        <script>
+                $('.notification-icon').on('click', function(e) {
                     e.preventDefault();
-                    $('#notificationDropdown').toggle();
+                    $('#notificationDropdown').toggleClass('d-block');
                 });
+                document.getElementById('dropdownButton').addEventListener('click', function() {
+                    var dropdownMenu = document.getElementById('dropdownMenu');
+                    dropdownMenu.classList.toggle('show');
+                });
+                function updateStatus(tutorId) {
+                    let statusToggle = document.getElementById(`statusToggle_${tutorId}`);
+                    let statusInput = document.getElementById(`statusInput_${tutorId}`);
+                    let form = document.getElementById(`statusForm_${tutorId}`);
 
-        // Optionally, close the dropdown if clicking outside of it
-        $(document).on('click', function(event) {
-            if (!$(event.target).closest('.notification-icon').length) {
-                $('#notificationDropdown').hide();
-            }
-        });
-        $('.notification-dropdown').on('click', 'li', function() {
-        var notificationId = $(this).data('id');
-        var isRead = $(this).hasClass('read');
+                    // Update the hidden status input based on the checkbox state
+                    statusInput.value = statusToggle.checked ? 'active' : 'inactive';
 
-        $.ajax({
-            url: "{{ route('mark.notifications.read') }}", // Define this route in your web.php
-            type: "POST",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data: { notification_id: notificationId, read: !isRead },
-            success: function(response) {
-                // Update the notification style based on the new read status
-                if (response.status === 'success') {
-                    if (isRead) {
-                        $(this).removeClass('read').addClass('unread');
-                        updateNotificationCount(1); // Increment the count for unread
-                    } else {
-                        $(this).removeClass('unread').addClass('read');
-                        updateNotificationCount(-1); // Decrement the count for read
-                    }
+                    // Submit the form
+                    form.submit();
                 }
-            }.bind(this) // Bind `this` to refer to the clicked notification item
-        });
-    });
-
-    function updateNotificationCount(change) {
-        var countElement = $('#notificationCount');
-        var currentCount = parseInt(countElement.text());
-        countElement.text(currentCount + change);
-    }
-    });
-    function cancel(){
-            $('.alert').addClass('d-none')
-        }
-        $(document).on('select2:open', function(e) {
-                    let scrollPos = $(window).scrollTop();
-                    setTimeout(function() {
-                        $(window).scrollTop(scrollPos);
-                    }, 0);
+                $('#select-all').click(function() {
+                    // Check/uncheck all checkboxes based on the main checkbox
+                    $('.tutor-checkbox').prop('checked', this.checked);
                 });
+                $('#delete-selected').click(function() {
+                    // Gather all checked checkbox values
+                    var selected = [];
+                    $('.tutor-checkbox:checked').each(function() {
+                        selected.push($(this).val());
+                    });
+
+                    if (selected.length === 0) {
+
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Please select at least one tutor to delete.',
+                            icon: 'error', // Use 'error' instead of 'danger'
+                            confirmButtonText: 'OK'
+                        });
+
+                        return;
+                    }
+
+                    // Confirm deletion
+                    if (confirm('Are you sure you want to delete the selected tutors?')) {
+                        $.ajax({
+                            url: "{{ route('teachers.destroy.bulk') }}", // Update with your route
+                            type: 'DELETE',
+                            data: {
+                                ids: selected,
+                                _token: '{{ csrf_token() }}' // Include CSRF token for security
+                            },
+                            success: function(response) {
+                                // Handle success (e.g., reload the page or remove deleted rows)
+                                location.reload(); // Reload page after successful deletion
+                            },
+                            error: function(xhr) {
+                                // Handle error
+                                alert('Error occurred while deleting tutors.');
+                            }
+                        });
+                    }
+                });
+                $('.country-select').select2()
+                $('#countryTeacher').on('change', function() {
+
+                    var country_id = $(this).val(); // Get the selected country ID
+
+                    // Make an AJAX request to find tutors based on the selected country
+                    $.ajax({
+                        url: '/find-tutors', // Your route for finding tutors
+                        type: 'GET', // HTTP method (can be POST if needed)
+                        data: { country_id: country_id }, // Send selected country ID
+                        success: function(response) {
+                            // Handle the response, e.g., display the tutors on the page
+                            console.log('sadsads',response);
+                            // You can dynamically update the DOM with the returned data here
+                            $('.teachers-table tbody').html(response.html);
+                        },
+                        error: function(xhr) {
+                            console.log('Error:', xhr);
+                        }
+                    });
+                });
+                $(document).ready(function() {
                 
-    </script>
+                $('.notification-dropdown').on('click', 'li', function() {
+                var notificationId = $(this).data('id');
+                var isRead = $(this).hasClass('read');
+
+                $.ajax({
+                    url: "{{ route('mark.notifications.read') }}", // Define this route in your web.php
+                    type: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: { notification_id: notificationId, read: !isRead },
+                    success: function(response) {
+                        // Update the notification style based on the new read status
+                        if (response.status === 'success') {
+                            if (isRead) {
+                                $(this).removeClass('read').addClass('unread');
+                                updateNotificationCount(1); // Increment the count for unread
+                            } else {
+                                $(this).removeClass('unread').addClass('read');
+                                updateNotificationCount(-1); // Decrement the count for read
+                            }
+                        }
+                    }.bind(this) // Bind `this` to refer to the clicked notification item
+                });
+            });
+
+            function updateNotificationCount(change) {
+                var countElement = $('#notificationCount');
+                var currentCount = parseInt(countElement.text());
+                countElement.text(currentCount + change);
+            }
+            });
+            function cancel(){
+                    $('.alert').addClass('d-none')
+                }
+                $(document).on('select2:open', function(e) {
+                            let scrollPos = $(window).scrollTop();
+                            setTimeout(function() {
+                                $(window).scrollTop(scrollPos);
+                            }, 0);
+                        });
+                        
+            </script>
     <!-- Select2 JS -->
       <script src="{{asset('js/inspect.js')}}"></script> 

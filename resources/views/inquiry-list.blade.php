@@ -27,8 +27,9 @@
 
     </style>
 @php
-    $notifications = auth()->user()->unreadNotifications;
+$notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get();
 @endphp
+
 @if (session('success'))
         <div class="alert alert-success" style="z-index: 6;
     padding: 14px !important;">

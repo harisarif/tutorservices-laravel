@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 </head>
+@php
+$notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get();
+@endphp
     <style>
          .btn-file {
         position: relative;
@@ -580,90 +583,94 @@
     <script src="{{asset('js/select2.min.js')}}"></script>
     <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
 <script>
+        $('.notification-icon').on('click', function(e) {
+                    e.preventDefault();
+                    $('#notificationDropdown').toggleClass('d-block');
+                });
         CKEDITOR.replace('editor1');
         $(function() {
-  $(".bcontent").wysihtml5({
-    toolbar: {
-      "image": false
-    }
-  });
-
-  $(document).on('change', '.btn-file :file', function() {
-    var input = $(this);
-    var numFiles = input.get(0).files ? input.get(0).files.length : 1;
-    console.log(input.get(0).files);
-    var label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-    input.trigger('fileselect', [numFiles, label]);
-  });
-
-  $('.btn-file :file').on('fileselect', function(event, numFiles, label){
-    var input = $(this).parents('.input-group').find(':text');
-    var log = numFiles > 1 ? numFiles + ' files selected' : label;
-
-    if( input.length ) {
-      input.val(log);
-    } else {
-      if( log ){ alert(log); }
-    }
-
-  });
-});
-
-const image = document.getElementById('image');
-        const dropZone = document.getElementById('dropZone');
-        const preview = document.getElementById('preview');
-        const progress = document.getElementById('progress');
-        const progressContainer = document.querySelector('.progress-container');
-
-        // Handle drag and drop functionality
-        dropZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropZone.classList.add('dragover');
+        $(".bcontent").wysihtml5({
+            toolbar: {
+            "image": false
+            }
         });
 
-        dropZone.addEventListener('dragleave', () => {
-            dropZone.classList.remove('dragover');
+        $(document).on('change', '.btn-file :file', function() {
+            var input = $(this);
+            var numFiles = input.get(0).files ? input.get(0).files.length : 1;
+            console.log(input.get(0).files);
+            var label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [numFiles, label]);
         });
 
-        dropZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropZone.classList.remove('dragover');
-            const files = e.dataTransfer.files;
-            handleFiles(files);
+        $('.btn-file :file').on('fileselect', function(event, numFiles, label){
+            var input = $(this).parents('.input-group').find(':text');
+            var log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+            if( input.length ) {
+            input.val(log);
+            } else {
+            if( log ){ alert(log); }
+            }
+
+        });
         });
 
-        image.addEventListener('change', (e) => {
-            const files = e.target.files;
-            handleFiles(files);
-        });
+        const image = document.getElementById('image');
+                const dropZone = document.getElementById('dropZone');
+                const preview = document.getElementById('preview');
+                const progress = document.getElementById('progress');
+                const progressContainer = document.querySelector('.progress-container');
 
-        function handleFiles(files) {
-            progressContainer.style.display = 'block';
-            preview.innerHTML = '';
-            progress.style.width = '0%';
+                // Handle drag and drop functionality
+                dropZone.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    dropZone.classList.add('dragover');
+                });
 
-            Array.from(files).forEach(file => {
-                const reader = new FileReader();
+                dropZone.addEventListener('dragleave', () => {
+                    dropZone.classList.remove('dragover');
+                });
 
-                reader.onload = function (e) {
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    preview.appendChild(img);
-                };
+                dropZone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    dropZone.classList.remove('dragover');
+                    const files = e.dataTransfer.files;
+                    handleFiles(files);
+                });
 
-                reader.readAsDataURL(file);
+                image.addEventListener('change', (e) => {
+                    const files = e.target.files;
+                    handleFiles(files);
+                });
 
-                // Fake progress update
-                let percentage = 0;
-                const interval = setInterval(() => {
-                    percentage += 10;
-                    progress.style.width = percentage + '%';
+                function handleFiles(files) {
+                    progressContainer.style.display = 'block';
+                    preview.innerHTML = '';
+                    progress.style.width = '0%';
 
-                    if (percentage === 100) {
-                        clearInterval(interval);
-                    }
-                }, 100);
-            });
-        }
+                    Array.from(files).forEach(file => {
+                        const reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            preview.appendChild(img);
+                        };
+
+                        reader.readAsDataURL(file);
+
+                        // Fake progress update
+                        let percentage = 0;
+                        const interval = setInterval(() => {
+                            percentage += 10;
+                            progress.style.width = percentage + '%';
+
+                            if (percentage === 100) {
+                                clearInterval(interval);
+                            }
+                        }, 100);
+                    });
+                }
 
     </script>

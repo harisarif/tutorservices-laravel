@@ -5,8 +5,8 @@
     <link rel="stylesheet" href="{{asset('css/fontawesome-free/css/all.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/admin.css')}}" />
 
-@php
-    $notifications = auth()->user()->unreadNotifications;
+    @php
+$notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get();
 @endphp
 @if (session('success'))
         <div class="alert alert-success" style="z-index: 6;
@@ -365,144 +365,138 @@
     <script src="{{asset('js/js/dataTables.bootstrap4.min.js')}}"></script>
     
     <script src="{{asset('js/js/bootstrap.bundle.min.js')}}"></script>
-<script>
-        document.querySelectorAll(".dropdownButton").forEach((button) => {
-            button.addEventListener("click", (event) => {
-                // Find the nearest dropdown menu relative to the clicked button
-                const dropdownMenu = event.target.nextElementSibling;
+        <script>
+                $('.notification-icon').on('click', function(e) {
+                            e.preventDefault();
+                            $('#notificationDropdown').toggleClass('d-block');
+                        });
+                document.querySelectorAll(".dropdownButton").forEach((button) => {
+                    button.addEventListener("click", (event) => {
+                        // Find the nearest dropdown menu relative to the clicked button
+                        const dropdownMenu = event.target.nextElementSibling;
 
-                if (dropdownMenu && dropdownMenu.classList.contains("dropdownMenu")) {
-                    dropdownMenu.classList.toggle("show");
-                }
-            });
-        });
-
-        function updateStatus(tutorId) {
-            let statusToggle = document.getElementById(`statusToggle_${tutorId}`);
-            let statusInput = document.getElementById(`statusInput_${tutorId}`);
-            let form = document.getElementById(`statusForm_${tutorId}`);
-
-            // Update the hidden status input based on the checkbox state
-            statusInput.value = statusToggle.checked ? 'active' : 'inactive';
-
-            // Submit the form
-            form.submit();
-        }
-        $('#select-all').click(function() {
-            // Check/uncheck all checkboxes based on the main checkbox
-            $('.tutor-checkbox').prop('checked', this.checked);
-        });
-        $('#delete-selected').click(function() {
-            // Gather all checked checkbox values
-            var selected = [];
-            $('.tutor-checkbox:checked').each(function() {
-                selected.push($(this).val());
-            });
-
-            if (selected.length === 0) {
-
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Please select at least one tutor to delete.',
-                    icon: 'error', // Use 'error' instead of 'danger'
-                    confirmButtonText: 'OK'
+                        if (dropdownMenu && dropdownMenu.classList.contains("dropdownMenu")) {
+                            dropdownMenu.classList.toggle("show");
+                        }
+                    });
                 });
 
-                return;
-            }
+                function updateStatus(tutorId) {
+                    let statusToggle = document.getElementById(`statusToggle_${tutorId}`);
+                    let statusInput = document.getElementById(`statusInput_${tutorId}`);
+                    let form = document.getElementById(`statusForm_${tutorId}`);
 
-            // Confirm deletion
-            if (confirm('Are you sure you want to delete the selected tutors?')) {
+                    // Update the hidden status input based on the checkbox state
+                    statusInput.value = statusToggle.checked ? 'active' : 'inactive';
+
+                    // Submit the form
+                    form.submit();
+                }
+                $('#select-all').click(function() {
+                    // Check/uncheck all checkboxes based on the main checkbox
+                    $('.tutor-checkbox').prop('checked', this.checked);
+                });
+                $('#delete-selected').click(function() {
+                    // Gather all checked checkbox values
+                    var selected = [];
+                    $('.tutor-checkbox:checked').each(function() {
+                        selected.push($(this).val());
+                    });
+
+                    if (selected.length === 0) {
+
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Please select at least one tutor to delete.',
+                            icon: 'error', // Use 'error' instead of 'danger'
+                            confirmButtonText: 'OK'
+                        });
+
+                        return;
+                    }
+
+                    // Confirm deletion
+                    if (confirm('Are you sure you want to delete the selected tutors?')) {
+                        $.ajax({
+                            url: "{{ route('teachers.destroy.bulk') }}", // Update with your route
+                            type: 'DELETE',
+                            data: {
+                                ids: selected,
+                                _token: '{{ csrf_token() }}' // Include CSRF token for security
+                            },
+                            success: function(response) {
+                                // Handle success (e.g., reload the page or remove deleted rows)
+                                location.reload(); // Reload page after successful deletion
+                            },
+                            error: function(xhr) {
+                                // Handle error
+                                alert('Error occurred while deleting tutors.');
+                            }
+                        });
+                    }
+                });
+                $('.country-select').select2()
+                $('#countryTeacher').on('change', function() {
+
+                    var country_id = $(this).val(); // Get the selected country ID
+
+                    // Make an AJAX request to find tutors based on the selected country
+                    $.ajax({
+                        url: '/find-tutors', // Your route for finding tutors
+                        type: 'GET', // HTTP method (can be POST if needed)
+                        data: { country_id: country_id }, // Send selected country ID
+                        success: function(response) {
+                            // Handle the response, e.g., display the tutors on the page
+                            console.log('sadsads',response);
+                            // You can dynamically update the DOM with the returned data here
+                            $('.teachers-table tbody').html(response.html);
+                        },
+                        error: function(xhr) {
+                            console.log('Error:', xhr);
+                        }
+                    });
+                });
+                $(document).ready(function() {
+                    
+                $('.notification-dropdown').on('click', 'li', function() {
+                var notificationId = $(this).data('id');
+                var isRead = $(this).hasClass('read');
+
                 $.ajax({
-                    url: "{{ route('teachers.destroy.bulk') }}", // Update with your route
-                    type: 'DELETE',
-                    data: {
-                        ids: selected,
-                        _token: '{{ csrf_token() }}' // Include CSRF token for security
+                    url: "{{ route('mark.notifications.read') }}", // Define this route in your web.php
+                    type: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
+                    data: { notification_id: notificationId, read: !isRead },
                     success: function(response) {
-                        // Handle success (e.g., reload the page or remove deleted rows)
-                        location.reload(); // Reload page after successful deletion
-                    },
-                    error: function(xhr) {
-                        // Handle error
-                        alert('Error occurred while deleting tutors.');
-                    }
+                        // Update the notification style based on the new read status
+                        if (response.status === 'success') {
+                            if (isRead) {
+                                $(this).removeClass('read').addClass('unread');
+                                updateNotificationCount(1); // Increment the count for unread
+                            } else {
+                                $(this).removeClass('unread').addClass('read');
+                                updateNotificationCount(-1); // Decrement the count for read
+                            }
+                        }
+                    }.bind(this) // Bind `this` to refer to the clicked notification item
                 });
-            }
-        });
-        $('.country-select').select2()
-        $('#countryTeacher').on('change', function() {
-
-            var country_id = $(this).val(); // Get the selected country ID
-
-            // Make an AJAX request to find tutors based on the selected country
-            $.ajax({
-                url: '/find-tutors', // Your route for finding tutors
-                type: 'GET', // HTTP method (can be POST if needed)
-                data: { country_id: country_id }, // Send selected country ID
-                success: function(response) {
-                    // Handle the response, e.g., display the tutors on the page
-                    console.log('sadsads',response);
-                    // You can dynamically update the DOM with the returned data here
-                    $('.teachers-table tbody').html(response.html);
-                },
-                error: function(xhr) {
-                    console.log('Error:', xhr);
-                }
             });
-        });
-        $(document).ready(function() {
-                $('#alertsDropdown').on('click', function(e) {
-                    e.preventDefault();
-                    $('#notificationDropdown').toggle();
-                });
 
-        // Optionally, close the dropdown if clicking outside of it
-        $(document).on('click', function(event) {
-            if (!$(event.target).closest('.notification-icon').length) {
-                $('#notificationDropdown').hide();
+            function updateNotificationCount(change) {
+                var countElement = $('#notificationCount');
+                var currentCount = parseInt(countElement.text());
+                countElement.text(currentCount + change);
             }
-        });
-        $('.notification-dropdown').on('click', 'li', function() {
-        var notificationId = $(this).data('id');
-        var isRead = $(this).hasClass('read');
-
-        $.ajax({
-            url: "{{ route('mark.notifications.read') }}", // Define this route in your web.php
-            type: "POST",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data: { notification_id: notificationId, read: !isRead },
-            success: function(response) {
-                // Update the notification style based on the new read status
-                if (response.status === 'success') {
-                    if (isRead) {
-                        $(this).removeClass('read').addClass('unread');
-                        updateNotificationCount(1); // Increment the count for unread
-                    } else {
-                        $(this).removeClass('unread').addClass('read');
-                        updateNotificationCount(-1); // Decrement the count for read
-                    }
+            });
+            function cancel(){
+                    $('.alert').addClass('d-none')
                 }
-            }.bind(this) // Bind `this` to refer to the clicked notification item
-        });
-    });
-
-    function updateNotificationCount(change) {
-        var countElement = $('#notificationCount');
-        var currentCount = parseInt(countElement.text());
-        countElement.text(currentCount + change);
-    }
-    });
-    function cancel(){
-            $('.alert').addClass('d-none')
-        }
-        $(document).on('select2:open', function(e) {
-                    let scrollPos = $(window).scrollTop();
-                    setTimeout(function() {
-                        $(window).scrollTop(scrollPos);
-                    }, 0);
-                });
-    </script>
+                $(document).on('select2:open', function(e) {
+                            let scrollPos = $(window).scrollTop();
+                            setTimeout(function() {
+                                $(window).scrollTop(scrollPos);
+                            }, 0);
+                        });
+            </script>
