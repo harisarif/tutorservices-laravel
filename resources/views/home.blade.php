@@ -233,7 +233,7 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                                             <div class="card-body">
                                                 <div class="media d-flex" style=" justify-content: space-between;">
                                                     <div class="media-body text-left counter">
-                                                        <h3 class="danger text-success" id="teacher-count">500+</h3>
+                                                        <h3 class="danger text-success" id="teacher-count">{{$tutors->count()}}</h3>
                                                         <span>{{ __('messages.Teachers') }} </span>
                                                     </div>
                                                     <div class="align-self-center animated-icons">
@@ -257,7 +257,7 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                                                     style=" justify-content: space-between;">
                                                     <div class="media-body text-left counter">
 
-                                                        <h3 class="success text-success" id="count">1000+</h3>
+                                                        <h3 class="success text-success" id="count">{{$students->count()}}</h3>
                                                         <span>{{ __('messages.Students') }}</span>
                                                     </div>
                                                     <div class="align-self-center animated-icons">
@@ -282,8 +282,8 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                                             <div class="card-body">
                                                 <div class="media d-flex" style=" justify-content: space-between;">
                                                     <div class="media-body text-left counter">
-                                                        <h3 class="warning text-success" id="subject-count">1500+</h3>
-                                                        <span>{{ __('messages.Subjects') }}</span>
+                                                        <h3 class="warning text-success" id="subject-count">{{$inquires->count()}}</h3>
+                                                        <span>{{ __('messages.Blogs') }}</span>
                                                     </div>
                                                     <div class="align-self-center animated-icons">
                                                         <i class="fa-solid fa-book-open "
@@ -301,8 +301,8 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                                             <div class="card-body">
                                                 <div class="media d-flex " style=" justify-content: space-between;">
                                                     <div class="media-body text-left counter">
-                                                        <h3 class="danger text-success" id="lang-count">500+</h3>
-                                                        <span>{{ __('messages.Languages') }}</span>
+                                                        <h3 class="danger text-success" id="lang-count">{{$blog->count()}}</h3>
+                                                        <span>{{ __('messages.Blogs') }}</span>
                                                     </div>
                                                     <div class="align-self-center animated-icons">
                                                         <i class="fas fa-globe" aria-hidden="true"

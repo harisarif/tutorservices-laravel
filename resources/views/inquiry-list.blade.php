@@ -24,7 +24,7 @@
 </head>
     <style>
         /* Dropdown container */
-
+      
     </style>
 @php
 $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get();
@@ -222,7 +222,9 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                     <div class="tab-content" id="myTabContent">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4 SB">
                                 <h1 class="h3 mb-0 text-gray-800">{{ __('Inquiry') }}</h1>
-                                
+                                 <div class="mt-3">
+                                    <button type="button" class="btn btn-danger" id="delete-selected">Multiple Delete</button>
+                                    </div>
                             </div>
                     <div id="statusMessage" style="display:none;" class="alert alert-success"></div>
                         <div class=" AB-sb">
@@ -230,7 +232,7 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                         <table class="student-table table">
                             <thead>
                                 <tr>
-                                    <th> <input class="form-check-input" type="checkbox" id="select-all-inquiry">
+                                    <th> <input class="form-check-input inquiry-checkbox" type="checkbox" id="select-all-inquiry" >
                                     <label class="form-check-label" for="select-all"></label></th>
                                     <th>ID</th>
                                     <th>Name</th>
@@ -242,7 +244,7 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                             </thead>
                             <tbody>
                                 @foreach ($inquires as $inquiry)
-                                <tr>
+                               <tr id="inquiry-row-{{ $inquiry->id }}">
                                     
                                     <td>
                                         <input class="form-check-input inquiry-checkbox" type="checkbox" value="{{ $inquiry->id }}" id="flexCheckChecked-{{ $inquiry->id }}">
@@ -255,18 +257,19 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                                         <td>{{ $inquiry->description ?? 'No description' }}</td>
                                     <td>
                                     <div class="dropdown">
-                                        <button class="dropdown-icon" id="dropdownInquiry">
+                                        <button class="btn btn-link border-0 no-caret" type="button"
+            data-toggle="dropdown" >
                                             <i class="fa-solid fa-ellipsis-vertical"></i> <!-- You can replace this with any icon -->
                                         </button>
-                                        <ul class="dropdown-action" id="dropdownInq">
-                                            <li class="d-flex align-items-center" style="border-bottom: 1px solid #ddd;     color: black;">
+                                        <ul class="dropdown-action dropdown-menu" id="dropdownInq">
+                                            <li class="d-flex align-items-center dropdown-item" style="border-bottom: 1px solid #ddd;     color: black;">
                                             <a href="{{ route('edit-student', $inquiry->id) }}" class="btn btn-sm">
                                                 <i class="fa-regular fa-pen-to-square" style="color: #4e73df;"></i>
                                                 <span class="mx-1">Edit</span>
                                             </a>
                                             </li>
-                                            <li >
-                                                    <form action="{{ route('students.destroy', $inquiry->id) }}" method="POST" style="display:inline;">
+                                            <li class="dropdown-item">
+                                                    <form action="{{ route('inquiries.destroy', $inquiry->id) }}" method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm d-flex align-items-center" onclick="return confirm('Are you sure?')" style="color: black; margin-left: -11%;">
@@ -340,12 +343,68 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
 </html>
     <script src="{{asset('js/js/jquery.min.js')}}"></script>
     <script src="{{asset('js/js/sb-admin-2.min.js')}}"></script>
-
+     <!-- Bootstrap JS (make sure this is included) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Include Popper.js if using Bootstrap 4 -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="{{asset('js/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('js/js/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('js/select2.min.js')}}"></script>
     <script src="{{asset('js/js/bootstrap.bundle.min.js')}}"></script>
-    <script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+$(document).ready(function () {
+    $('#select-all-inquiry').click(function () {
+        $('.inquiry-checkbox').prop('checked', this.checked);
+    });
+
+    $('#delete-selected').click(function () {
+        var selected = [];
+
+        $('.inquiry-checkbox:checked').each(function () {
+            selected.push($(this).val());
+        });
+
+        if (selected.length === 0) {
+            Swal.fire('No Inquiries Selected', 'Please select at least one inquiry to delete.', 'warning');
+            return;
+        }
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'This will delete the selected inquiries permanently.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete them!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "{{ route('inquiry.destroy.bulk') }}",
+                    type: 'DELETE',
+                    data: {
+                        ids: selected,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function (response) {
+                        selected.forEach(id => $('#inquiry-row-' + id).remove());
+                        Swal.fire('Deleted!', 'Selected inquiries have been deleted.', 'success');
+                    },
+                    error: function () {
+                        Swal.fire('Error!', 'Something went wrong.', 'error');
+                    }
+                });
+            }
+        });
+    });
+});
+</script>
+
+<script>
         $('.notification-icon').on('click', function(e) {
             e.preventDefault();
             $('#notificationDropdown').toggleClass('d-block');
@@ -366,49 +425,7 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                 // Submit the form
                 form.submit();
             }
-            $('#select-all').click(function() {
-                // Check/uncheck all checkboxes based on the main checkbox
-                $('.tutor-checkbox').prop('checked', this.checked);
-            });
-            $('#delete-selected').click(function() {
-                // Gather all checked checkbox values
-                var selected = [];
-                $('.tutor-checkbox:checked').each(function() {
-                    selected.push($(this).val());
-                });
-
-                if (selected.length === 0) {
-
-                    Swal.fire({
-                        title: 'Error!',
-                        text: 'Please select at least one tutor to delete.',
-                        icon: 'error', // Use 'error' instead of 'danger'
-                        confirmButtonText: 'OK'
-                    });
-
-                    return;
-                }
-
-                // Confirm deletion
-                if (confirm('Are you sure you want to delete the selected tutors?')) {
-                    $.ajax({
-                        url: "{{ route('teachers.destroy.bulk') }}", // Update with your route
-                        type: 'DELETE',
-                        data: {
-                            ids: selected,
-                            _token: '{{ csrf_token() }}' // Include CSRF token for security
-                        },
-                        success: function(response) {
-                            // Handle success (e.g., reload the page or remove deleted rows)
-                            location.reload(); // Reload page after successful deletion
-                        },
-                        error: function(xhr) {
-                            // Handle error
-                            alert('Error occurred while deleting tutors.');
-                        }
-                    });
-                }
-            });
+          
             $('.country-select').select2()
             $('#countryTeacher').on('change', function() {
 

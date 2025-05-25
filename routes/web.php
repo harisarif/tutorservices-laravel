@@ -16,6 +16,7 @@
 // });
 
 
+use App\Http\Controllers\GoogleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TutorController;
@@ -25,7 +26,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\NotificationController;
-use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Cookie;use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -109,6 +111,7 @@ Route::get('/faq', [StudentController::class, 'FAQ'])->name('faq.index');
 
 Route::get('/cities', [StudentController::class, 'getCities'])->name('cities');
 
+Route::delete('/inquiries/{id}', [StudentController::class, 'destroy'])->name('inquiries.destroy');
 
 Route::delete('/student/destroy-bulk', [StudentController::class, 'destroystudentBulk'])->name('student.destroy.bulk');
 Route::delete('/inquiry/destroy-bulk', [StudentController::class, 'destroyinquiryBulk'])->name('inquiry.destroy.bulk');
@@ -167,5 +170,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/inquiry-list', [App\Http\Controllers\HomeController::class, 'inquiry'])->name('admin.inquiry');
 Route::get('/hiring', [App\Http\Controllers\HomeController::class, 'hiring'])->name('hiring-tutor');
 Route::get('/student-hiring', [App\Http\Controllers\HomeController::class, 'studenthiring'])->name('students-listing');
-Route::get('/google-meet/send', [StudentController::class, 'sendGoogleMeetInvite'])->name('googleMeet');
+
 
