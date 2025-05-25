@@ -2991,10 +2991,11 @@ function LstopCounter() {
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(() => {
-        autoHideAlert("success");
-        autoHideAlert("error");
-    }, 200); // Added a delay to ensure alerts are available in the DOM
+    // setTimeout(() => {
+    //     autoHideAlert("success");
+    //     autoHideAlert("error");
+    // }, 200); 
+    // Added a delay to ensure alerts are available in the DOM
 
     document.querySelectorAll(".custom-alert .close-btn").forEach((btn) => {
         btn.addEventListener("click", function() {
