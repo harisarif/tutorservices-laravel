@@ -45,7 +45,7 @@ return [
     'Please Complete All Required Fields'=>'برجاء إكمال كافة الحقول المطلوبة',
     'Enter your Name'=>'أدخل اسمك',
     'Name'=>'اسم',
-    'Enter your   Email'=>'أدخل بريدك الإلكتروني',
+    'Enter your Email'=>'أدخل بريدك الإلكتروني',
     'Email ID'=>'معرف البريد الإلكتروني',
     'Enter your Number '=>'أدخل رقمك',
     'Description (Optional)'=>'الوصف (اختياري)',

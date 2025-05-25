@@ -46,7 +46,7 @@ return [
     'Please Complete All Required Fields'=>'Please Complete All Required Fields',
     'Enter your Name'=>'Enter your Name',
     'Name'=>'Name',
-    'Enter your   Email'=>'Enter your   Email',
+    'Enter your Email'=>'Enter your Email',
     'Email ID'=>'Email ID',
     'Enter your Number '=>'Enter your Number ',
     'Description (Optional)'=>'Description (Optional)',

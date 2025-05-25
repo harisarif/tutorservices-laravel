@@ -1365,16 +1365,17 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const submitBtn = document.getElementById("submitBtn");
+        const form = document.querySelector("form");
 
         const requiredFields = [
             document.getElementById("inquiryname"),
             document.getElementById("inquiryemail"),
             document.getElementById("phone"),
-            document.getElementById("inquirydesp") // Optional? Remove from list if truly optional
+            document.getElementById("inquirydesp"), // Remove this if optional
         ];
 
         function validateFields() {
-            let allFilled = requiredFields.every(field => field.value.trim() !== '');
+            const allFilled = requiredFields.every(field => field.value.trim() !== '');
             submitBtn.disabled = !allFilled;
         }
 
@@ -1382,8 +1383,11 @@
             field.addEventListener("input", validateFields);
         });
 
-        // Initial validation on load
-        validateFields();
+        validateFields(); // Initial check
+
+        form.addEventListener("submit", function (e) {
+            alert("Submitting your inquiry...");
+        });
     });
 document.querySelectorAll('.trigger-modal').forEach(function(element) {
     element.addEventListener('mouseenter', function() {

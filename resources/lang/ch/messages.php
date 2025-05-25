@@ -45,7 +45,7 @@ return [
     'Please Complete All Required Fields'=>'请填写所有必填字段',
     'Enter your Name'=>'输入您的姓名',
     'Name'=>'姓名',
-    'Enter your   Email'=>'输入您的电子邮件',
+    'Enter your Email'=>'输入您的电子邮件',
     'Email ID'=>'电子邮件ID',
     'Enter your Number '=>'输入您的电话号码',
     'Description (Optional)'=>'描述（可选）',
