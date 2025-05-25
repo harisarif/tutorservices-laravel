@@ -126,16 +126,15 @@ class InquiryController extends Controller
 
         $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
 
-        $this->sendAdminInquiryNotification($inquiry);
+        // $this->sendAdminInquiryNotification($inquiry);
 
-        $admin = User::where('role', 'admin')->first();
+        // $admin = User::where('role', 'admin')->first();
 
-        if ($admin) {
-            $admin->notify(new InquirySuccessNotification($inquiry));
-        } else {
-            // Handle the case where no admin was found
-            Log::warning('Admin user not found');
-        }
+        // if ($admin) {
+        //     $admin->notify(new InquirySuccessNotification($inquiry));
+        // } else {
+        //     Log::warning('Admin user not found');
+        // }
 
         return redirect()->route('newhome')->with('success', 'Inquiry created successfully.');
     }
@@ -143,10 +142,11 @@ class InquiryController extends Controller
     protected function sendAdminInquiryNotification(Inquiry $inquiry)
     {
         $adminEmail = env('email_name'); // Use config, not env()
-        $facebookImg  = $this->getSvgImageTag('facebook');
-        $instagramImg = $this->getSvgImageTag('instagram');
-        $linkedinImg  = $this->getSvgImageTag('linkedin');
-        $youtubeImg   = $this->getSvgImageTag('youtube');
+        $facebookImg = "<img src='https://edexceledu.com/icons/facebook.png' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";
+        $instagramImg = "<img src='https://edexceledu.com/icons/facebook.png' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";
+        $linkedinImg  = "<img src='https://edexceledu.com/icons/facebook.png' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";        
+        $youtubeImg   = "<img src='https://edexceledu.com/icons/facebook.png' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";       // Send email to the student
+        
         if (!$adminEmail) {
             Log::warning('Admin email not configured.');
             return;
