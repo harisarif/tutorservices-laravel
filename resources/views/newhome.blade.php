@@ -919,7 +919,7 @@
     </div>
     <div class="im row mx-0">
         <div class=" Ai col-5 ">
-            <form method="POST" action="{{ route('inquiry-create') }}">
+            <form method="POST" action="{{ route('inquiry-create') }}" enctype="multipart/form-data">
                 @csrf
                 <div class=" mt-3 mb-5 ">
                     <div class="ai-card px-3 py-4" style="border: 1px solid #ddd; border-radius: 5px;">
@@ -996,7 +996,6 @@
         </div>
         <div class="col-7 img-reqire p-0">
             <div class="ai-image-div">
-                <!-- <h1 class="text-center text-white">This Imaage will be Required</h1> -->
                 <img src="images/indian-asian.jpg" alt="">
             </div>
         </div>

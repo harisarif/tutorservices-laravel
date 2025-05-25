@@ -10,7 +10,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 class InquiryController extends Controller
 {
     //
-    public function createinquiry(Request $request)
+    public function createComplaints(Request $request)
     {
         $rules = [
             'email' => [
@@ -126,9 +126,6 @@ class InquiryController extends Controller
 
         $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
 
-
-
-        // $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
         // $this->sendAdminInquiryNotification($inquiry);
 
         $admin = User::where('role', 'admin')->first();
