@@ -124,7 +124,7 @@ class InquiryController extends Controller
             ";
 
 
-        $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
+        // $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
 
         // $this->sendAdminInquiryNotification($inquiry);
 

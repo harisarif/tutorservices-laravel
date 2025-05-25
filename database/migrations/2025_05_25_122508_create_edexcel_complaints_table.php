@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inquiries', function (Blueprint $table) {
+        Schema::create('edexcel_complaints', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone', 20);
-            $table->string('description')->nullable();
+            $table->text('message')->nullable();
             $table->timestamps();
         });
     }
@@ -25,7 +25,7 @@ return new class extends Migration
      * Reverse the migrations.
      */
     public function down(): void
-        {
-            Schema::rename('edexcelinquiries', 'inquiries');
-        }
+    {
+        Schema::dropIfExists('edexcel_complaints');
+    }
 };
