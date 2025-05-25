@@ -89,7 +89,7 @@ class InquiryController extends Controller
                                                     <div>
                                                                 <span style='color:#43b979 !important'>&copy; 2025 Edexcel Academy. All rights reserved.</span>
                                                     </div>     
-                                                    <div style='display:flex;gap:8px;'>  
+                                                    <div style='display:flex;gap:8px;justify-content:space-between'>  
                                                 <!-- Facebook -->
                                                     <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:-3px;'>
                                                         {$facebookImg}
@@ -126,7 +126,7 @@ class InquiryController extends Controller
 
         $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
 
-        // $this->sendAdminInquiryNotification($inquiry);
+        $this->sendAdminInquiryNotification($inquiry);
 
         $admin = User::where('role', 'admin')->first();
 
