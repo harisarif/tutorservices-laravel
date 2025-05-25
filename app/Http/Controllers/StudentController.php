@@ -681,6 +681,20 @@ foreach ($teacher as $tutor) {
 
         return redirect()->route('newhome')->with('success', 'Inquiry created successfully.');
     }
+    private function getSvgImageTag($name, $width = 16, $height = 16)
+            {
+                $path = public_path("icons/{$name}.svg");
+
+                if (!file_exists($path)) {
+                    return '';
+                }
+
+                $svg = file_get_contents($path);
+                $base64 = base64_encode($svg);
+
+                return "<img src='data:image/svg+xml;base64,{$base64}' width='{$width}' height='{$height}' alt='{$name}' style='vertical-align:middle;' />";
+            }
+
     protected function sendAdminInquiryNotification(Inquiry $inquiry)
             {
                 $adminEmail = env('email_name'); // Use config, not env()
@@ -731,9 +745,8 @@ foreach ($teacher as $tutor) {
                                                     <div>  
                                                 <!-- Facebook -->
                                                     <a href='https://facebook.com' target='_blank'>
-                                                        <svg width='24' height='24' fill='#43b979' xmlns='http://www.w3.org/2000/svg'>
-                                                            <path d='M22.675 0h-21.35C.592 0 0 .593 0 1.326v21.348C0 23.408.592 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.464.099 2.796.143v3.24l-1.918.001c-1.504 0-1.794.715-1.794 1.763v2.31h3.587l-.467 3.622h-3.12V24h6.116C23.408 24 24 23.408 24 22.674V1.326C24 .593 23.408 0 22.675 0z'/>
-                                                        </svg>
+                                                        {$facebookImg}
+                                                        
                                                     </a>
 
                                                     <!-- Instagram -->
