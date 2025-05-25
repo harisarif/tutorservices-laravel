@@ -937,16 +937,16 @@
                                         <label for="curriculum" class="form-label"
                                             style="color:#42b979;"><strong>{{ __('messages.Enter your Name') }} <b
                                                     style="color: red;font-size: 20px;">*</b></strong></label>
-                                        <input name="fname" class="form-control" type="text"
+                                        <input id="inquiryname" name="fname" class="form-control" type="text"
                                             placeholder="{{ __('messages.Name') }}">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group p-2 px-0">
                                         <label for="curriculum" class="form-label"
-                                            style="color:#42b979;"><strong>{{ __('messages.Enter your   Email') }} <b
+                                            style="color:#42b979;"><strong>{{ __('messages.Enter your Email') }} <b
                                                     style="color: red; font-size: 20px;">*</b></strong></label>
-                                        <div class="input-group"> <input name="email" class="form-control" type="text"
+                                        <div class="input-group"> <input id="inquiryemail" name="email" class="form-control" type="text"
                                                 placeholder="{{ __('messages.Email ID') }}" pattern="^[a-zA-Z0-9._%+-]+@(gmail|hotmail|yahoo)\.com$"
                                                 title="Only Gmail, Hotmail, or Yahoo emails are allowed (e.g., example@gmail.com)"></div>
                                     </div>
@@ -978,7 +978,7 @@
                                                     style="color: red; font-size: 20px;">*</b>
                                             </strong>
                                         </label>
-                                        <textarea class="form-control" id="curriculum" name="description" rows="2"
+                                        <textarea class="form-control" id="inquirydesp" name="description" rows="2"
                                             placeholder="{{ __('messages.Description') }}"
                                             style="box-shadow: none;border: 1px solid #ddd;"></textarea>
                                     </div>
@@ -986,7 +986,7 @@
 
                             </div>
 
-                            <button type="submit"
+                            <button disabled id="submitBtn" type="submit"
                                 class="AB-button btn btn-success btn-block confirm-button mt-4">{{ __('messages.Confirm') }}</button>
                         </div>
                     </div>
@@ -1363,6 +1363,28 @@
 
 <!-- Your custom script -->
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const submitBtn = document.getElementById("submitBtn");
+
+        const requiredFields = [
+            document.getElementById("inquiryname"),
+            document.getElementById("inquiryemail"),
+            document.getElementById("phone"),
+            document.getElementById("inquirydesp") // Optional? Remove from list if truly optional
+        ];
+
+        function validateFields() {
+            let allFilled = requiredFields.every(field => field.value.trim() !== '');
+            submitBtn.disabled = !allFilled;
+        }
+
+        requiredFields.forEach(field => {
+            field.addEventListener("input", validateFields);
+        });
+
+        // Initial validation on load
+        validateFields();
+    });
 document.querySelectorAll('.trigger-modal').forEach(function(element) {
     element.addEventListener('mouseenter', function() {
         var modal = new bootstrap.Modal(document.getElementById('videoModal'));
