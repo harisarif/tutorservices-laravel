@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Blog;
 use App\Models\Tutor;
 use Carbon\Carbon;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Notifications\InquirySuccessNotification;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
-  
+
 class StudentController extends Controller
 {
     public function index()
@@ -37,39 +38,40 @@ class StudentController extends Controller
         $students = Student::all();
         $countries = collect(config('countries_assoc.countries'));
         return view('student-list', compact('students', 'countries'));
-    } public function inquirydestroy($id)
-{
-    $inquiry = Inquiry::findOrFail($id);
-    $inquiry->delete();
+    }
+    public function inquirydestroy($id)
+    {
+        $inquiry = Inquiry::findOrFail($id);
+        $inquiry->delete();
 
-    return redirect()->back()->with('success', 'Inquiry deleted successfully.');
-}
-
-   public function destroystudentBulk(Request $request)
-{
-    $request->validate([
-        'ids' => 'required|array',
-        'ids.*' => 'exists:student,id', // Adjust table name if needed
-    ]);
-
-    $studentIds = $request->ids;
-
-    foreach ($studentIds as $id) {
-        $student = Student::find($id);
-
-        if ($student) {
-            // Delete the related user if it exists
-            if ($student->user_id) {
-                User::destroy($student->user_id);
-            }
-
-            // Delete the student
-            $student->delete();
-        }
+        return redirect()->back()->with('success', 'Inquiry deleted successfully.');
     }
 
-    return response()->json(['success' => 'Students and associated users deleted successfully.']);
-}
+    public function destroystudentBulk(Request $request)
+    {
+        $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'exists:student,id', // Adjust table name if needed
+        ]);
+
+        $studentIds = $request->ids;
+
+        foreach ($studentIds as $id) {
+            $student = Student::find($id);
+
+            if ($student) {
+                // Delete the related user if it exists
+                if ($student->user_id) {
+                    User::destroy($student->user_id);
+                }
+
+                // Delete the student
+                $student->delete();
+            }
+        }
+
+        return response()->json(['success' => 'Students and associated users deleted successfully.']);
+    }
     public function destroyinquiryBulk(Request $request)
     {
         $request->validate([
@@ -154,12 +156,12 @@ class StudentController extends Controller
 
 
     public function create(Request $request)
-    {  
-         
+    {
+
         $rules = [
             'email' => 'required|string|email|max:255|unique:student,email',
             'password' => 'required|min:8',
-            'phone' => 'nullable|string|max:20',// checks c_password too
+            'phone' => 'nullable|string|max:20', // checks c_password too
             'availability_status' => 'nullable|string|max:255',
             'country' => 'nullable|string|max:100',
             'city' => 'nullable|string|max:100',
@@ -187,7 +189,8 @@ class StudentController extends Controller
         $user->email = $student->email;
         $user->password = Hash::make($request->input('password'));
         $user->role = 'user';
-        $user->save();   $student->gender = $request->input('gender');
+        $user->save();
+        $student->gender = $request->input('gender');
         $student->country = $request->input('country');
         $student->city = $request->input('city');
         $student->subject = implode(',', $request->input('subject'));
@@ -275,27 +278,27 @@ class StudentController extends Controller
             $student->country = config("countries_assoc.countries.$storedCountry", 'Unknown');
             $teacher = Tutor::all();
 
-           $tutorSubjects = [];
+            $tutorSubjects = [];
 
-foreach ($teacher as $tutor) {
-    $json = $tutor->edu_teaching; // stored as JSON array
+            foreach ($teacher as $tutor) {
+                $json = $tutor->edu_teaching; // stored as JSON array
 
-    if ($json) {
-        $subjects = json_decode($json, true); // now array like ['Accounting', 'Aerospace Engineering']
+                if ($json) {
+                    $subjects = json_decode($json, true); // now array like ['Accounting', 'Aerospace Engineering']
 
-        if (is_array($subjects)) {
-            // Clean each subject: trim + lowercase
-            $cleaned = array_map(fn($s) => strtolower(trim($s)), $subjects);
-            $tutorSubjects[$tutor->id] = $cleaned;
-        } else {
-            $tutorSubjects[$tutor->id] = [];
-        }
-    } else {
-        $tutorSubjects[$tutor->id] = [];
-    }
-}
+                    if (is_array($subjects)) {
+                        // Clean each subject: trim + lowercase
+                        $cleaned = array_map(fn($s) => strtolower(trim($s)), $subjects);
+                        $tutorSubjects[$tutor->id] = $cleaned;
+                    } else {
+                        $tutorSubjects[$tutor->id] = [];
+                    }
+                } else {
+                    $tutorSubjects[$tutor->id] = [];
+                }
+            }
 
-               
+
             $matchedTutors = $teacher->filter(function ($tutor) use ($student, $tutorSubjects) {
                 $studentSubjects = array_map(
                     fn($s) => strtolower(trim($s)),
@@ -311,7 +314,6 @@ foreach ($teacher as $tutor) {
                 $hasCommonSubjects = !empty(array_intersect($studentSubjects, $tutorSubjectsList));
 
                 return $hasCommonSubjects && $tutorAvailability === $studentAvailability;
-
             });
 
 
@@ -373,7 +375,7 @@ foreach ($teacher as $tutor) {
         return redirect()->route('newhome')->with('error', 'Unauthorized access.');
     }
 
-     public function fetchData(Request $request)
+    public function fetchData(Request $request)
     {     // Debugging block: Check numeric extraction from price
 
 
@@ -383,7 +385,7 @@ foreach ($teacher as $tutor) {
         // Define the number of tutors per page
         $perPage = 5;
 
-       
+
 
         if ($request->has('price') && $request->price !== 'all') {
             $priceValue = trim($request->price);
@@ -399,7 +401,6 @@ foreach ($teacher as $tutor) {
                 Log::info("Filtering tutors between $minPrice and $maxPrice");
 
                 $query->whereRaw("CAST(REGEXP_REPLACE(price, '[^0-9]', '') AS UNSIGNED) BETWEEN ? AND ?", [$minPrice, $maxPrice]);
-
             } elseif (preg_match('/(\d+)\+/', $priceValue, $matches)) {
                 // Case: "5000+" (minimum price)
                 $minPrice = (int) $matches[1];
@@ -407,7 +408,6 @@ foreach ($teacher as $tutor) {
                 Log::info("Filtering tutors with price >= $minPrice");
 
                 $query->whereRaw("CAST(REGEXP_REPLACE(price, '[^0-9]', '') AS UNSIGNED) >= ?", [$minPrice]);
-
             } else {
                 // Case: Exact Price (e.g., "100")
                 if (is_numeric($priceValue)) {
@@ -477,7 +477,7 @@ foreach ($teacher as $tutor) {
             }
 
             $tutor->country_name = config("countries_assoc.countries.{$tutor->country}", 'Unknown');
-            
+
             $languageData = json_decode($tutor->language, true);
             if (!is_array($languageData)) {
                 \Log::error("Language decoding failed for Tutor ID: {$tutor->id}, Raw Data: " . $tutor->language);
@@ -533,22 +533,242 @@ foreach ($teacher as $tutor) {
         $user->save();
         return redirect()->route('newhome')->with('success', 'Student created successfully.');
     }
-    
+    public function createinquiry(Request $request)
+    {
+        $rules = [
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                'unique:inquiries,email',
+                'regex:/^[a-zA-Z0-9._%+-]+@(gmail|hotmail|yahoo)\.com$/'
+            ],
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $inquiry = new Inquiry();
+        $inquiry->description = $request->input('description');
+        $inquiry->name = $request->input('fname');
+        $inquiry->email = $request->input('email');
+        $inquiry->phone = $request->input('phone');
+        $inquiry->save();
+        $facebookImg = "<img src='https://edexceledu.com/icons/facebook.png' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";
+        $instagramImg = $this->getSvgImageTag('instagram');
+        $linkedinImg  = $this->getSvgImageTag('linkedin');
+        $youtubeImg   = $this->getSvgImageTag('youtube');
+        // Send email to the student
+        $toStudent = $inquiry->email;
+        $subjectStudent = "Welcome to Edexcel Academy!";
+        $messageStudent = "
+            <div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>
+                <table width='100%' cellpadding='0' cellspacing='0' border='0'>
+                    <tr>
+                        <td align='center'>
+                            <table style='max-width: 600px; width: 100%; border: 1px solid #ddd; border-radius: 8px; background-color: #fff;' cellpadding='0' cellspacing='0'>
+
+                                <!-- Header -->
+                                <tr>
+                                    <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 20px; font-weight: bold; color: #4CAF50; border-top-left-radius: 8px; border-top-right-radius: 8px;'>
+                                        Thank You for Your Inquiry!
+                                    </td>
+                                </tr>
+
+                                <!-- Body -->
+                                <tr>
+                                    <td style='padding: 20px; text-align: left;'>
+                                        <p style='font-size: 16px; margin: 0;'>Dear {$inquiry->name},</p>
+
+                                        <p style='font-size: 16px; margin: 10px 0;'>
+                                            Welcome to <strong>Edexcel Academy</strong>!We're excited to receive your inquiry and will get back to you shortly.
+                                        </p>
+
+                                        <p style='font-size: 16px; margin: 10px 0;'>
+                                            In the meantime, feel free to explore our courses, connect with expert educators, and join a community of enthusiastic learners.
+                                        </p>
+
+                                        <p style='font-size: 16px; margin: 10px 0;'>
+                                            If you need any assistance, contact us at 
+                                            <a href='mailto:info@edexceledu.com' style='color: #4CAF50; text-decoration: none;'>test@edexceledu.com</a>.
+                                        </p>
+
+                                        <p style='font-size: 16px; margin: 10px 0;'>We’re here to help you succeed!</p>
+
+                                        <p style='font-size: 16px; margin: 10px 0;'>Best regards,</p>
+                                        <p style='font-size: 16px; font-weight: bold; margin: 0;'>The Edexcel Academy Team</p>
+                                    </td>
+                                </tr>
+
+                                <!-- Footer -->
+                                <tr>
+                                            <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 14px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;'>
+                                                <div style='display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px;'>
+                                                    <div>
+                                                                <span style='color:#43b979 !important'>&copy; 2025 Edexcel Academy. All rights reserved.</span>
+                                                    </div>     
+                                                    <div style='display:flex;gap:8px;'>  
+                                                <!-- Facebook -->
+                                                    <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:-3px;'>
+                                                        {$facebookImg}
+                                                        
+                                                    </a>
+
+                                                    <!-- Instagram -->
+                                                    <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank'>
+                                                        {$instagramImg}
+                                                    </a>
+
+                                                    <!-- LinkedIn -->
+                                                    <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank'>
+                                                        {$linkedinImg}
+                                                    </a>
+
+                                                    <!-- YouTube -->
+                                                    <a href='https://youtube.com/@edexcelonline01?si=EuQwX0tL3zk4J-2p' target='_blank'>
+                                                       {$youtubeImg}
+                                                    </a>
+                                                    </div>
+                                                </div>
+                                                
+                                            </td>
+                                        </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            ";
+
+
+        $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
+
+
+
+        // $this->sendEmail($toAdmin, $subjectAdmin, $messageAdmin);
+        // $this->sendAdminInquiryNotification($inquiry);
+
+        $admin = User::where('role', 'admin')->first();
+
+        if ($admin) {
+            $admin->notify(new InquirySuccessNotification($inquiry));
+        } else {
+            // Handle the case where no admin was found
+            Log::warning('Admin user not found');
+        }
+
+        return redirect()->route('newhome')->with('success', 'Inquiry created successfully.');
+    }
     private function getSvgImageTag($name, $width = 16, $height = 16)
-            {
-                $path = public_path("icons/{$name}.svg");
+    {
+        $path = public_path("icons/{$name}.svg");
 
-                if (!file_exists($path)) {
-                    return '';
-                }
+        if (!file_exists($path)) {
+            return '';
+        }
 
-                $svg = file_get_contents($path);
-                $base64 = base64_encode($svg);
+        $svg = file_get_contents($path);
+        $base64 = base64_encode($svg);
 
-                return "<img src='data:image/svg+xml;base64,{$base64}' width='{$width}' height='{$height}' alt='{$name}' style='vertical-align:middle;' />";
-            }
+        return "<img src='data:image/svg+xml;base64,{$base64}' width='{$width}' height='{$height}' alt='{$name}' style='vertical-align:middle;' />";
+    }
 
-    
+    protected function sendAdminInquiryNotification(Inquiry $inquiry)
+    {
+        $adminEmail = env('email_name'); // Use config, not env()
+        $facebookImg  = $this->getSvgImageTag('facebook');
+        $instagramImg = $this->getSvgImageTag('instagram');
+        $linkedinImg  = $this->getSvgImageTag('linkedin');
+        $youtubeImg   = $this->getSvgImageTag('youtube');
+        if (!$adminEmail) {
+            Log::warning('Admin email not configured.');
+            return;
+        }
+
+        $subject = "Edexcel Notification";
+        $messageAdmin = "
+                    <div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>
+                        <table width='100%' cellpadding='0' cellspacing='0' border='0'>
+                            <tr>
+                                <td align='center'>
+                                    <table style='max-width: 600px; width: 100%; border: 1px solid #ddd; border-radius: 8px; background-color: #fff;' cellpadding='0' cellspacing='0'>
+                                        <!-- Header -->
+                                        <tr>
+                                            <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 20px; font-weight: bold; color: #4CAF50; border-top-left-radius: 8px; border-top-right-radius: 8px;'>
+                                                New Inquiry Received
+                                            </td>
+                                        </tr>
+                                        
+                                        <!-- Body -->
+                                        <tr>
+                                            <td style='padding: 20px; text-align: left;'>
+                                                <p style='font-size: 16px; margin: 0;'>Dear Admin,</p>
+                                                <p style='font-size: 16px; margin: 10px 0;'>
+                                                    A new inquiry has been added to the system. Please find the details below:
+                                                </p>
+                                                <ul style='font-size: 16px; margin: 10px 0; padding-left: 20px;'>
+                                                    <li><strong>Name:</strong> {$inquiry->name}</li>
+                                                    <li><strong>Email:</strong> {$inquiry->email}</li>
+                                                    <li><strong>Phone:</strong> {$inquiry->phone}</li>
+                                                </ul>
+                                                <p style='font-size: 16px; margin: 10px 0;'>Best regards,</p>
+                                                <p style='font-size: 16px; font-weight: bold; margin: 0;'>The Edexcel Academy Team</p>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Footer -->
+                                        <tr>
+                                            <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 14px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;'>
+                                                <div style='display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px;'>
+                                                    <div>
+                                                                <span style='color:#43b979 !important'>&copy; 2025 Edexcel Academy. All rights reserved.</span>
+                                                    </div>     
+                                                    <div style='display:flex;gap:8px;'>  
+                                                <!-- Facebook -->
+                                                    <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:-3px;'>
+                                                        {$facebookImg}
+                                                        
+                                                    </a>
+
+                                                    <!-- Instagram -->
+                                                    <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank'>
+                                                        {$instagramImg}
+                                                    </a>
+
+                                                    <!-- LinkedIn -->
+                                                    <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank'>
+                                                        {$linkedinImg}
+                                                    </a>
+
+                                                    <!-- YouTube -->
+                                                    <a href='https://youtube.com/@edexcelonline01?si=EuQwX0tL3zk4J-2p' target='_blank'>
+                                                       {$youtubeImg}
+                                                    </a>
+                                                    </div>
+                                                </div>
+                                                
+                                            </td>
+                                        </tr>
+
+
+
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    ";
+
+        // Send the email using your custom method
+        $this->sendEmail($adminEmail, $subject, $messageAdmin);
+    }
 
     function sendEmail($to, $subject, $body)
     {
@@ -646,5 +866,4 @@ foreach ($teacher as $tutor) {
         // If student not found, return with an error message
         return redirect()->route('all.students')->with('error', 'Student not found');
     }
-
 }
