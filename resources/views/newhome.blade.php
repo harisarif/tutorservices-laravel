@@ -941,6 +941,8 @@
                                             placeholder="{{ __('messages.Name') }}">
                                     </div>
                                 </div>
+                                <input type="text" name="website" style="display:none">
+
                                 <div class="col-sm-12">
                                     <div class="form-group p-2 px-0">
                                         <label for="curriculum" class="form-label"

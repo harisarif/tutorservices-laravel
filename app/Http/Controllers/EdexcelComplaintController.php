@@ -30,7 +30,17 @@ class EdexcelComplaintController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-
+        if ($request->filled('website')) {
+            // Bot detected, silently reject or log
+            return redirect()->back();
+        }
+        $spamKeywords = ['Поздравляем', 'лотерейный билет', 'tinyurl', 'bit.ly'];
+        foreach ($spamKeywords as $word) {
+            if (stripos($request->input('fname'), $word) !== false || 
+                stripos($request->input('description'), $word) !== false) {
+                return redirect()->back()->withErrors(['spam' => 'Spam content detected.'])->withInput();
+            }
+        }
         $EdexcelComplaint = new EdexcelComplaint();
         $EdexcelComplaint->description = $request->input('description');
         $EdexcelComplaint->name = $request->input('fname');
@@ -60,7 +70,7 @@ class EdexcelComplaintController extends Controller
                                 <!-- Body -->
                                 <tr>
                                     <td style='padding: 20px; text-align: left;'>
-                                        <p style='font-size: 16px; margin: 0;'>Dear {$inquiry->name},</p>
+                                        <p style='font-size: 16px; margin: 0;'>Dear {$EdexcelComplaint->name},</p>
 
                                         <p style='font-size: 16px; margin: 10px 0;'>
                                             Welcome to <strong>Edexcel Academy</strong>!We're excited to receive your inquiry and will get back to you shortly.
