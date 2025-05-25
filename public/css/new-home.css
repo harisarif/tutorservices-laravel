@@ -2217,7 +2217,7 @@ body {
     font-family: Arial, sans-serif;
     min-width: 250px;
     z-index: 1050;
-    display: block !important;
+    display: flex !important;
     opacity: 1 !important;
     visibility: visible !important;
     transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
