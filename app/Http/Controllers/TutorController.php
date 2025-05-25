@@ -102,28 +102,32 @@ class TutorController extends Controller
         return view('teacher-detail');
     }
 
-    public function destroyBulk(Request $request)
-    {
-        $request->validate([
-            'ids' => 'required|array',
-            'ids.*' => 'exists:tutors,id', // Assuming 'tutors' is your table name
-        ]);
+   public function destroyBulk(Request $request)
+{
+    $request->validate([
+        'ids' => 'required|array',
+        'ids.*' => 'exists:tutors,id',
+    ]);
 
-        // Delete the selected tutors
-        
-        $Tutor=$request->ids;
-        // Delete the selected tutors
-        Tutor::destroy($Tutor);
-         // Check if the student exists
-        if ($Tutor) {
-            $userId = $Tutor->user_id;
+    $tutorIds = $request->ids;
 
-            // Delete the student
-            $Tutor->delete();
+    // Loop through each tutor and delete associated user
+    foreach ($tutorIds as $id) {
+        $tutor = Tutor::find($id);
 
-            User::destroy($userId);}
-        return response()->json(['success' => 'Tutors deleted successfully.']);
+        if ($tutor) {
+            // Delete the related user if exists
+            if ($tutor->user_id) {
+                User::destroy($tutor->user_id);
+            }
+
+            // Delete the tutor
+            $tutor->delete();
+        }
     }
+
+    return response()->json(['success' => 'Tutors and associated users deleted successfully.']);
+}
 
     public function changeLanguage(Request $request)
     {

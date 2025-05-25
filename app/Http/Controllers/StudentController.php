@@ -45,25 +45,31 @@ class StudentController extends Controller
     return redirect()->back()->with('success', 'Inquiry deleted successfully.');
 }
 
-    public function destroystudentBulk(Request $request)
-    {
-        $request->validate([
-            'ids' => 'required|array',
-            'ids.*' => 'exists:student,id', // Assuming 'tutors' is your table name
-        ]);
-        $student=$request->ids;
-        // Delete the selected tutors
-        Student::destroy($student);
-         // Check if the student exists
+   public function destroystudentBulk(Request $request)
+{
+    $request->validate([
+        'ids' => 'required|array',
+        'ids.*' => 'exists:student,id', // Adjust table name if needed
+    ]);
+
+    $studentIds = $request->ids;
+
+    foreach ($studentIds as $id) {
+        $student = Student::find($id);
+
         if ($student) {
-            $userId = $student->user_id;
+            // Delete the related user if it exists
+            if ($student->user_id) {
+                User::destroy($student->user_id);
+            }
 
             // Delete the student
             $student->delete();
-
-            User::destroy($userId);}
-        return response()->json(['success' => 'Students deleted successfully.']);
+        }
     }
+
+    return response()->json(['success' => 'Students and associated users deleted successfully.']);
+}
     public function destroyinquiryBulk(Request $request)
     {
         $request->validate([
