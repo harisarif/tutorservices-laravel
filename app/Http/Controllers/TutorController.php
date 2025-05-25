@@ -21,6 +21,19 @@ use Illuminate\Support\Facades\Auth;
 class TutorController extends Controller
 {
     //
+    private function getSvgImageTag($name, $width = 16, $height = 16)
+        {
+                $path = public_path("icons/{$name}.svg");
+
+                if (!file_exists($path)) {
+                    return '';
+                }
+
+                $svg = file_get_contents($path);
+                $base64 = base64_encode($svg);
+
+                return "<img src='data:image/svg+xml;base64,{$base64}' width='{$width}' height='{$height}' alt='{$name}' style='vertical-align:middle;' />";
+        }
     public function index(Request $request)
     {
 
@@ -456,6 +469,10 @@ class TutorController extends Controller
                 }
             }
         }
+                $facebookImg  = $this->getSvgImageTag('facebook');
+                $instagramImg = $this->getSvgImageTag('instagram');
+                $linkedinImg  = $this->getSvgImageTag('linkedin');
+                $youtubeImg   = $this->getSvgImageTag('youtube');
         $studentExists = Student::where('id', 2)->exists();
         // Now create the Tutor and associate with the User
         $tutor = new Tutor();
@@ -534,9 +551,36 @@ class TutorController extends Controller
 
                     <!-- Footer -->
                     <tr>
-                        <td style='background-color: #f4f4f4; color:#4CAF50; padding: 15px; text-align: center; font-size: 14px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;'>
-                            &copy; 2025 Edexcel Academy. All rights reserved.
-                        </td>
+                         <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 14px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;'>
+                                                <div style='display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px;'>
+                                                    <div>
+                                                                <span style='color:#43b979 !important'>&copy; 2025 Edexcel Academy. All rights reserved.</span>
+                                                    </div>     
+                                                    <div style='display:flex;gap:8px;'>  
+                                                <!-- Facebook -->
+                                                    <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:-3px;'>
+                                                        {$facebookImg}
+                                                        
+                                                    </a>
+
+                                                    <!-- Instagram -->
+                                                    <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank'>
+                                                        {$instagramImg}
+                                                    </a>
+
+                                                    <!-- LinkedIn -->
+                                                    <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank'>
+                                                        {$linkedinImg}
+                                                    </a>
+
+                                                    <!-- YouTube -->
+                                                    <a href='https://youtube.com/@edexcelonline01?si=EuQwX0tL3zk4J-2p' target='_blank'>
+                                                       {$youtubeImg}
+                                                    </a>
+                                                    </div>
+                                                </div>
+                                                
+                                            </td>
                     </tr>
                 </table>
             </td>
