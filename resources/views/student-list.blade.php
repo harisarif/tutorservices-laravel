@@ -219,7 +219,7 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                                 <h1 class="h3 mb-0 text-gray-800">{{ __('messages.Student') }}</h1>
                                 <div class="del-button d-flex">
                                     <div>
-                                    <button type="button" class="btn btn-danger" id="delete-selected">Multiple Delete</button>
+                                    <button type="button" class="btn btn-danger" id="delete-selected-students">Multiple Delete</button>
                                     </div>
                                     
                                 </div>
@@ -230,7 +230,7 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                         <table class="student-table table">
                             <thead>
                                 <tr>
-                                <th> <input class="form-check-input" type="checkbox" id="select-all-student">
+                                <th> <input class="form-check-input student-checkbox" type="checkbox">
                                 <label class="form-check-label" for="select-all"></label></th>
                                     <th>ID</th>
                                     <th>Name</th>
@@ -244,7 +244,7 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                             </thead>
                             <tbody>
                                 @foreach ($students as $student)
-                                <tr>
+                               <tr id="student-row-{{ $student->id }}">
                                 <td>
                                     <input class="form-check-input student-checkbox" type="checkbox" value="{{ $student->id }}" id="flexCheckChecked-{{ $student->id }}">
                                     <label class="form-check-label" for="flexCheckChecked-{{ $student->id }}"></label>
@@ -348,13 +348,65 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
     <!-- Custom scripts for all pages-->
     <script src="{{asset('js/js/jquery.min.js')}}"></script>
     <script src="{{asset('js/js/sb-admin-2.min.js')}}"></script>
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="{{asset('js/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('js/js/dataTables.bootstrap4.min.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
     <script src="{{asset('js/js/bootstrap.bundle.min.js')}}"></script>
-        <script>
+      <script>
+$(document).ready(function () {
+    // Select/Deselect All
+    $('#select-all-students').click(function () {
+        $('.student-checkbox').prop('checked', this.checked);
+    });
+
+    // Delete selected students
+    $('#delete-selected-students').click(function () {
+        var selected = [];
+
+        $('.student-checkbox:checked').each(function () {
+            selected.push($(this).val());
+        });
+
+        if (selected.length === 0) {
+            Swal.fire('No Students Selected', 'Please select at least one student to delete.', 'warning');
+            return;
+        }
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'This will permanently delete the selected students.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete them!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "{{ route('student.destroy.bulk') }}", // Make sure this route exists
+                    type: 'DELETE',
+                    data: {
+                        ids: selected,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function (response) {
+                        selected.forEach(id => $('#student-row-' + id).remove());
+
+                        Swal.fire('Deleted!', 'Selected students have been deleted.', 'success');
+                    },
+                    error: function () {
+                        Swal.fire('Error!', 'Something went wrong.', 'error');
+                    }
+                });
+            }
+        });
+    });
+});
+</script>
+  <script>
                 $('.notification-icon').on('click', function(e) {
                     e.preventDefault();
                     $('#notificationDropdown').toggleClass('d-block');
@@ -374,49 +426,7 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                     // Submit the form
                     form.submit();
                 }
-                $('#select-all').click(function() {
-                    // Check/uncheck all checkboxes based on the main checkbox
-                    $('.tutor-checkbox').prop('checked', this.checked);
-                });
-                $('#delete-selected').click(function() {
-                    // Gather all checked checkbox values
-                    var selected = [];
-                    $('.tutor-checkbox:checked').each(function() {
-                        selected.push($(this).val());
-                    });
-
-                    if (selected.length === 0) {
-
-                        Swal.fire({
-                            title: 'Error!',
-                            text: 'Please select at least one tutor to delete.',
-                            icon: 'error', // Use 'error' instead of 'danger'
-                            confirmButtonText: 'OK'
-                        });
-
-                        return;
-                    }
-
-                    // Confirm deletion
-                    if (confirm('Are you sure you want to delete the selected tutors?')) {
-                        $.ajax({
-                            url: "{{ route('teachers.destroy.bulk') }}", // Update with your route
-                            type: 'DELETE',
-                            data: {
-                                ids: selected,
-                                _token: '{{ csrf_token() }}' // Include CSRF token for security
-                            },
-                            success: function(response) {
-                                // Handle success (e.g., reload the page or remove deleted rows)
-                                location.reload(); // Reload page after successful deletion
-                            },
-                            error: function(xhr) {
-                                // Handle error
-                                alert('Error occurred while deleting tutors.');
-                            }
-                        });
-                    }
-                });
+               q2
                 $('.country-select').select2()
                 $('#countryTeacher').on('change', function() {
 

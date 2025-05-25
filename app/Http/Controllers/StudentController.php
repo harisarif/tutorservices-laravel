@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Notifications\InquirySuccessNotification;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
-
+  
 class StudentController extends Controller
 {
     public function index()
@@ -37,17 +37,31 @@ class StudentController extends Controller
         $students = Student::all();
         $countries = collect(config('countries_assoc.countries'));
         return view('student-list', compact('students', 'countries'));
-    }
+    } public function inquirydestroy($id)
+{
+    $inquiry = Inquiry::findOrFail($id);
+    $inquiry->delete();
+
+    return redirect()->back()->with('success', 'Inquiry deleted successfully.');
+}
+
     public function destroystudentBulk(Request $request)
     {
         $request->validate([
             'ids' => 'required|array',
             'ids.*' => 'exists:student,id', // Assuming 'tutors' is your table name
         ]);
-
+        $student=$request->ids;
         // Delete the selected tutors
-        Student::destroy($request->ids);
+        Student::destroy($student);
+         // Check if the student exists
+        if ($student) {
+            $userId = $student->user_id;
 
+            // Delete the student
+            $student->delete();
+
+            User::destroy($userId);}
         return response()->json(['success' => 'Students deleted successfully.']);
     }
     public function destroyinquiryBulk(Request $request)
@@ -690,102 +704,6 @@ foreach ($teacher as $tutor) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
     }
-
-
-public function sendGoogleMeetInvite(Request $request)
-{
-    $student = Auth::user();
-    $studentEmail = $student->email;
-    $studentName = $student->name;
-
-    $tutorEmail = $request->query('tutor_email');
-    $tutorName = $request->query('tutor_name');
-
-    if (!$tutorEmail || !$tutorName) {
-        return back()->with('error', 'Tutor information is missing.');
-    }
-
-    $meetLink = 'https://meet.google.com/your-generated-link'; // Replace with dynamic link generation if needed
-
-    $subject = "Google Meet Invitation - Edexcel Trial Lesson";
-
-    // Styled email for student
-    $studentMessage = "
-    <div style='font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 30px;'>
-        <table width='100%' cellpadding='0' cellspacing='0' border='0'>
-            <tr>
-                <td align='center'>
-                    <table style='max-width: 600px; width: 100%; background-color: #ffffff; border-radius: 10px; border: 1px solid #e0e0e0;' cellpadding='0' cellspacing='0'>
-                        <tr>
-                            <td style='background-color: #4e73df; color: #fff; text-align: center; padding: 20px 30px; border-top-left-radius: 10px; border-top-right-radius: 10px; font-size: 22px; font-weight: bold;'>
-                                🎓 Trial Lesson Scheduled
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style='padding: 30px; font-size: 16px; color: #333; line-height: 1.6;'>
-                                <p>Dear $studentName,</p>
-                                <p>You have successfully scheduled a trial lesson via Google Meet.</p>
-                                <p><strong>Join Link:</strong><br>
-                                <a href='$meetLink' style='color: #4e73df;'>$meetLink</a></p>
-                                <p>Please be ready on time.</p>
-                                <p>Best regards,<br><strong>The Edexcel Academy Team</strong></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style='background-color: #f4f4f4; text-align: center; padding: 15px; font-size: 13px; color: #777; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;'>
-                                &copy; 2025 Edexcel Academy. All rights reserved.
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-    </div>";
-
-    // Styled email for tutor
-    $tutorMessage = "
-    <div style='font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 30px;'>
-        <table width='100%' cellpadding='0' cellspacing='0' border='0'>
-            <tr>
-                <td align='center'>
-                    <table style='max-width: 600px; width: 100%; background-color: #ffffff; border-radius: 10px; border: 1px solid #e0e0e0;' cellpadding='0' cellspacing='0'>
-                        <tr>
-                            <td style='background-color: #1cc88a; color: #fff; text-align: center; padding: 20px 30px; border-top-left-radius: 10px; border-top-right-radius: 10px; font-size: 22px; font-weight: bold;'>
-                                📅 New Trial Lesson Booking
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style='padding: 30px; font-size: 16px; color: #333; line-height: 1.6;'>
-                                <p>Dear $tutorName,</p>
-                                <p>A student has booked a trial lesson with you.</p>
-                                <p><strong>Join Link:</strong><br>
-                                <a href='$meetLink' style='color: #1cc88a;'>$meetLink</a></p>
-                                <p>We appreciate your time and commitment.</p>
-                                <p>Best regards,<br><strong>The Edexcel Academy Team</strong></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style='background-color: #f4f4f4; text-align: center; padding: 15px; font-size: 13px; color: #777; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;'>
-                                &copy; 2025 Edexcel Academy. All rights reserved.
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-    </div>";
-
-    try {
-        $this->sendEmail($studentEmail, $subject, $studentMessage);
-        $this->sendEmail($tutorEmail, $subject, $tutorMessage);
-    } catch (\Exception $e) {
-        return back()->with('error', 'Failed to send email: ' . $e->getMessage());
-    }
-
-    return back()->with('success', 'Google Meet invite sent to both tutor and student.');
-}
-
-
     public function update(Request $request, $id)
     {
         $rules = [

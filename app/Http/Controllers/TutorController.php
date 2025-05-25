@@ -110,8 +110,18 @@ class TutorController extends Controller
         ]);
 
         // Delete the selected tutors
-        Tutor::destroy($request->ids);
+        
+        $Tutor=$request->ids;
+        // Delete the selected tutors
+        Tutor::destroy($Tutor);
+         // Check if the student exists
+        if ($Tutor) {
+            $userId = $Tutor->user_id;
 
+            // Delete the student
+            $Tutor->delete();
+
+            User::destroy($userId);}
         return response()->json(['success' => 'Tutors deleted successfully.']);
     }
 

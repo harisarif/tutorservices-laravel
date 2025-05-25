@@ -128,7 +128,7 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                 <!-- Sidebar Toggle (Topbar) -->
 
                 <!-- Topbar Navbar -->
-                <ul class="navbar-nav ml-auto">
+                <ul  class="navbar-nav ml-auto">
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow mx-1">
 
@@ -207,7 +207,7 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                         <h1 class="h3 mb-0 text-gray-800">{{ __('messages.Blogs') }}</h1>
                         <div class="del-button d-flex">
                             <div>
-                                <button type="button" class="btn btn-danger" id="delete-selected">Multiple Delete</button>
+                                <button type="button" class="btn btn-danger" id="delete-selected-students">Multiple Delete</button>
                             </div>
 
                         </div>
@@ -228,7 +228,7 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                         </thead>
                         <tbody>
                         @foreach ($blogs as $blog)
-                            <tr>
+                            <tr id="student-row-{{ $blog->id }}">
                                 <td>
                                     <input class="form-check-input blog-checkbox" type="checkbox" value="{{ $blog->id }}" id="flexCheckChecked-{{ $blog->id }}">
                                     <label class="form-check-label" for="flexCheckChecked-{{ $blog->id }}"></label>
@@ -328,13 +328,61 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
 <!-- Custom scripts for all pages-->
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{asset('js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('js/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{asset('js/select2.min.js')}}"
         integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
+<script>
+$(document).ready(function () {
+    $('#select-all').click(function () {
+        $('.blog-checkbox').prop('checked', this.checked);
+    });
+
+    $('#delete-selected-students').click(function () {
+        var selected = [];
+
+        $('.blog-checkbox:checked').each(function () {
+            selected.push($(this).val());
+        });
+
+        if (selected.length === 0) {
+            Swal.fire('No Blogs Selected', 'Please select at least one blog to delete.', 'warning');
+            return;
+        }
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'This will permanently delete the selected blogs.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete them!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "{{ route('blogs.destroy.bulk') }}",
+                    type: 'DELETE',
+                    data: {
+                        ids: selected,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function (response) {
+                        selected.forEach(id => $('#blog-row-' + id).remove());
+                        Swal.fire('Deleted!', 'Selected blogs have been deleted.', 'success');
+                    },
+                    error: function () {
+                        Swal.fire('Error!', 'Something went wrong.', 'error');
+                    }
+                });
+            }
+        });
+    });
+});
+</script>
 <script>
         $('.notification-icon').on('click', function(e) {
                     e.preventDefault();
@@ -364,49 +412,7 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
             document.querySelectorAll('.dropdown-action').forEach(menu => menu.classList.add('d-none'));
         }
     });
-    $('#select-all').click(function() {
-        // Check/uncheck all checkboxes based on the main checkbox
-        $('.blog-checkbox').prop('checked', this.checked);
-    });
-    $('#delete-selected').click(function() {
-        // Gather all checked checkbox values
-        var selected = [];
-        $('.blog-checkbox:checked').each(function() {
-            selected.push($(this).val());
-        });
-
-        if (selected.length === 0) {
-
-            Swal.fire({
-                title: 'Error!',
-                text: 'Please select at least one blog to delete.',
-                icon: 'error', // Use 'error' instead of 'danger'
-                confirmButtonText: 'OK'
-            });
-
-            return;
-        }
-
-        // Confirm deletion
-        if (confirm('Are you sure you want to delete the selected tutors?')) {
-            $.ajax({
-                url: "{{ route('blogs.destroy.bulk') }}", // Update with your route
-                type: 'DELETE',
-                data: {
-                    ids: selected,
-                    _token: '{{ csrf_token() }}' // Include CSRF token for security
-                },
-                success: function(response) {
-                    // Handle success (e.g., reload the page or remove deleted rows)
-                    location.reload(); // Reload page after successful deletion
-                },
-                error: function(xhr) {
-                    // Handle error
-                    alert('Error occurred while deleting tutors.');
-                }
-            });
-        }
-    });
+    
     $('.country-select').select2()
     $('#countryTeacher').on('change', function() {
 

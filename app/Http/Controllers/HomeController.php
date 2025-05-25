@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Tutor;
 use App\Models\Student;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;use App\Models\Blog;
 class HomeController extends Controller
 {
     /**
@@ -28,9 +28,9 @@ class HomeController extends Controller
 {
     $tutors = Tutor::all();
     $inquires = DB::table('inquiries')->get();
-    $students = Tutor::all();
+    $students = Student::all();
     $countries = collect(config('countries_assoc.countries'));
-
+    $blog = Blog::all();
     // Get the admin user (same as in inquiry method)
     $admin = User::where('email', 'info@edexceledu.com')->first();
 
@@ -40,7 +40,7 @@ class HomeController extends Controller
     : collect();
 
 
-    return view('home', compact('tutors', 'countries', 'students', 'inquires', 'notifications'));
+    return view('home', compact('tutors','blog', 'countries', 'students', 'inquires', 'notifications'));
 }
 
     public function inquiry() {
