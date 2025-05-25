@@ -723,10 +723,41 @@ foreach ($teacher as $tutor) {
 
                                         <!-- Footer -->
                                         <tr>
-                                            <td style='background-color: #f4f4f4; color:#4CAF50; padding: 15px; text-align: center; font-size: 14px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;'>
-                                                &copy; 2025 Edexcel Academy. All rights reserved.
-                                            </td>
-                                        </tr>
+                                                <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 14px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;'>
+                                                    <div style='display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 10px;'>
+                                                        <!-- Facebook -->
+                                                        <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank'>
+                                                            <svg width='24' height='24' fill='#43b979' xmlns='http://www.w3.org/2000/svg'>
+                                                                <path d='M22.675 0h-21.35C.592 0 0 .593 0 1.326v21.348C0 23.408.592 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.464.099 2.796.143v3.24l-1.918.001c-1.504 0-1.794.715-1.794 1.763v2.31h3.587l-.467 3.622h-3.12V24h6.116C23.408 24 24 23.408 24 22.674V1.326C24 .593 23.408 0 22.675 0z'/>
+                                                            </svg>
+                                                        </a>
+
+                                                        <!-- Instagram -->
+                                                        <a href='https://www.instagram.com/edexcel.official/?igsh=bmNvcXpkOTUzN2J1&utm_source=qr#' target='_blank'>
+                                                            <svg width='24' height='24' fill='#43b979' xmlns='http://www.w3.org/2000/svg'>
+                                                                <path d='M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.35 3.608 1.325.975.976 1.263 2.243 1.325 3.608.058 1.267.07 1.647.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.35 2.633-1.325 3.608-.976.975-2.243 1.263-3.608 1.325-1.267.058-1.647.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.35-3.608-1.325-.975-.976-1.263-2.243-1.325-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.35-2.633 1.325-3.608.976-.975 2.243-1.263 3.608-1.325C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.014 7.052.072 5.772.13 4.661.419 3.68 1.4c-.982.981-1.271 2.092-1.329 3.372C2.014 5.668 2 6.078 2 9.337v5.326c0 3.26.014 3.669.072 4.949.058 1.28.347 2.391 1.329 3.372.981.981 2.092 1.271 3.372 1.329 1.28.058 1.69.072 4.949.072s3.669-.014 4.949-.072c1.28-.058 2.391-.347 3.372-1.329.981-.981 1.271-2.092 1.329-3.372.058-1.28.072-1.689.072-4.949V9.337c0-3.26-.014-3.669-.072-4.949-.058-1.28-.347-2.391-1.329-3.372-.981-.981-2.092-1.271-3.372-1.329C15.669.014 15.259 0 12 0zM12 5.838A6.162 6.162 0 105.838 12 6.162 6.162 0 0012 5.838zm0 10.162A3.999 3.999 0 1116 12a4 4 0 01-4 4zm6.406-11.845a1.44 1.44 0 11-1.44-1.439 1.44 1.44 0 011.44 1.439z'/>
+                                                            </svg>
+                                                        </a>
+
+                                                        <!-- LinkedIn -->
+                                                        <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank'>
+                                                            <svg width='24' height='24' fill='#43b979' xmlns='http://www.w3.org/2000/svg'>
+                                                                <path d='M4.98 3.5C4.98 2.12 6.09 1 7.48 1s2.5 1.12 2.5 2.5S8.87 6 7.48 6 4.98 4.88 4.98 3.5zM0 8h5v16H0V8zm7.5 0h4.5v2.44h.06c.63-1.2 2.18-2.44 4.49-2.44 4.8 0 5.5 3.16 5.5 7.27V24h-5V15.39c0-2.06-.04-4.7-2.86-4.7-2.87 0-3.31 2.24-3.31 4.55V24h-5V8z'/>
+                                                            </svg>
+                                                        </a>
+
+                                                        <!-- YouTube -->
+                                                        <a href='https://www.youtube.com/@edexcelonline01' target='_blank'>
+                                                            <svg width='24' height='24' fill='#43b979' xmlns='http://www.w3.org/2000/svg'>
+                                                                <path d='M19.615 3.184c-2.59-.176-9.64-.176-12.23 0-2.56.174-4.053 1.655-4.227 4.225-.176 2.591-.176 7.967 0 10.558.174 2.56 1.654 4.051 4.226 4.225 2.59.176 9.64.176 12.231 0 2.56-.174 4.051-1.654 4.225-4.225.176-2.59.176-7.967 0-10.558-.174-2.57-1.654-4.051-4.225-4.225zM9.75 15.023V8.976l6.2 3.024-6.2 3.023z'/>
+                                                            </svg>
+                                                        </a>
+                                                    </div>
+                                                    &copy; 2025 Edexcel Academy. All rights reserved.
+                                                </td>
+                                            </tr>
+
+
                                     </table>
                                 </td>
                             </tr>
