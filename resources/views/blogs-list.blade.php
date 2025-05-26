@@ -11,7 +11,8 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}"/>
+  
+<link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/all.min.css')}}" />
     <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" type="image/png" />
@@ -227,43 +228,58 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($blogs as $blog)
-                            <tr id="student-row-{{ $blog->id }}">
-                                <td>
-                                    <input class="form-check-input blog-checkbox" type="checkbox" value="{{ $blog->id }}" id="flexCheckChecked-{{ $blog->id }}">
-                                    <label class="form-check-label" for="flexCheckChecked-{{ $blog->id }}"></label>
-                                </td>
-                                <td>{{ $blog->title }}</td>
-                                <td>{{ strip_tags($blog->description) }}</td>
-                                <td><img src="{{ asset('storage/' . $blog->image) }}" alt="Blog Image" style="width: 50px;"/></td>
-                                <td>
-                                    <div class="dropdown">
-                                        <!-- Unique button and menu IDs -->
-                                        <button class="dropdown-icon" id="dropdownButton-{{ $blog->id }}" onclick="toggleDropdown({{ $blog->id }})">
-                                            <i class="fa-solid fa-ellipsis-vertical"></i>
-                                        </button>
-                                        <ul class="dropdown-action d-none" id="dropdownMenu-{{ $blog->id }}">
-                                            <li>
-                                                <a href="{{ route('edit-teacher', $blog->id) }}" class="btn btn-sm text-justify">
-                                                    <i class="fa-regular fa-pen-to-square" style="color: #4e73df;"></i>
-                                                    <span class="mx-1">Edit</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST" style="display:inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm d-flex align-items-center px-0" onclick="return confirm('Are you sure?')" style="color: black;">
-                                                        <i class="fa-solid fa-trash-can mx-1" style="color: #e74a3b;"></i>
-                                                        <span class="mx-1">Delete</span>
-                                                    </button>
-                                                </form>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
+                      @if($blogs->isEmpty())
+    <tr>
+        <td colspan="5" class="text-center p-4">
+            <img src="{{ asset('images/not-found.jpeg') }}" alt="No Blogs Found" style="width: 100%; max-width: 400px; height: auto; margin: 0 auto;">
+            <p class="mt-3">No blogs found.</p>
+        </td>
+    </tr>
+@else
+    @foreach ($blogs as $blog)
+        <tr id="student-row-{{ $blog->id }}">
+            <td>
+                <input class="form-check-input blog-checkbox" type="checkbox" value="{{ $blog->id }}" id="flexCheckChecked-{{ $blog->id }}">
+                <label class="form-check-label" for="flexCheckChecked-{{ $blog->id }}"></label>
+            </td>
+            <td>{{ $blog->title }}</td>
+            <td>{{ strip_tags($blog->description) }}</td>
+            <td>
+                @if ($blog->image)
+                    <img src="{{ asset('storage/' . $blog->image) }}" alt="Blog Image" style="width: 50px; height: auto;">
+                @else
+                    <span>No image</span>
+                @endif
+            </td>
+            <td>
+                <div class="dropdown">
+                    <button class="dropdown-icon" id="dropdownButton-{{ $blog->id }}" onclick="toggleDropdown({{ $blog->id }})">
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+                    <ul class="dropdown-action d-none" id="dropdownMenu-{{ $blog->id }}">
+                        <li>
+                            <a href="{{ route('edit-teacher', $blog->id) }}" class="btn btn-sm text-justify">
+                                <i class="fa-regular fa-pen-to-square" style="color: #4e73df;"></i>
+                                <span class="mx-1">Edit</span>
+                            </a>
+                        </li>
+                        <li>
+                            <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm d-flex align-items-center px-0" onclick="return confirm('Are you sure?')" style="color: black;">
+                                    <i class="fa-solid fa-trash-can mx-1" style="color: #e74a3b;"></i>
+                                    <span class="mx-1">Delete</span>
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    @endforeach
+@endif
+
                         </tbody>
                     </table>
                     </div>

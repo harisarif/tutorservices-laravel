@@ -243,47 +243,54 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($students as $student)
-                               <tr id="student-row-{{ $student->id }}">
-                                <td>
-                                    <input class="form-check-input student-checkbox" type="checkbox" value="{{ $student->id }}" id="flexCheckChecked-{{ $student->id }}">
-                                    <label class="form-check-label" for="flexCheckChecked-{{ $student->id }}"></label>
-                                </td>
-                                    <td>{{ $student->id }}</td>
-                                    <td>{{ $student->name }}</td>
-                                    <td>{{ $student->email }}</td>
-                                    <td>{{ $student->phone }}</td>
-                                    <td>{{ $student->country }}</td>
-                                    <td>{{ $student->city }}</td>
-                                    <td>{{ $student->subject }}</td>
-                                    <td>
-                                    <div class="dropdown">
-                                        <button class="dropdown-icon" id="dropdownButton">
-                                            <i class="fa-solid fa-ellipsis-vertical"></i> <!-- You can replace this with any icon -->
-                                        </button>
-                                        <ul class="dropdown-action" id="dropdownMenu">
-                                            <li>
-                                                <a href="{{ route('edit-student', $student->id) }}" class="btn btn-sm text-justify">
-                                                <i class="fa-regular fa-pen-to-square"></i>
-                                                <span>Edit</span>
-                                            </a>
-                                            </li>
-                                            <li>
-                                                <form action="{{ route('students.destroy', $student->id) }}" method="POST" style="display:inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm d-flex align-items-center" onclick="return confirm('Are you sure?')" style="color: black; margin-left: -15%;">
-                                                        <i class="fa-solid fa-trash-can mx-1"></i>
-                                                        <span>Deleted</span>
-                                                    </button>
-                                                </form>
-                                            </li>
-                                        
-                                        </ul>
-                                    </div>
-                                </td>
-                                </tr>
-                                @endforeach
+                                @if($students->isEmpty())
+    <tr>
+         <td colspan="11" class="text-center">
+             <img src="{{ asset('images/not-found.jpeg') }}" alt="No Blogs Found" style="width: 100%; max-width: 400px; height: auto; margin: 0 auto;">
+            <p>No tutors found.</p>
+        </td>
+    </tr>
+@else
+    @foreach ($students as $student)
+        <tr id="student-row-{{ $student->id }}">
+            <td>
+                <input class="form-check-input student-checkbox" type="checkbox" value="{{ $student->id }}" id="flexCheckChecked-{{ $student->id }}">
+                <label class="form-check-label" for="flexCheckChecked-{{ $student->id }}"></label>
+            </td>
+            <td>{{ $student->id }}</td>
+            <td>{{ $student->name }}</td>
+            <td>{{ $student->email }}</td>
+            <td>{{ $student->phone }}</td>
+            <td>{{ $student->country }}</td>
+            <td>{{ $student->city }}</td>
+            <td>{{ $student->subject }}</td>
+            <td>
+                <div class="dropdown">
+                    <button class="btn btn-sm" type="button" id="dropdownButton" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu" style="min-width: 120px;" aria-labelledby="dropdownButton">
+                        <li>
+                            <a href="{{ route('edit-student', $student->id) }}" class="dropdown-item">
+                                <i class="fa-regular fa-pen-to-square"></i> Edit
+                            </a>
+                        </li>
+                        <li>
+                            <form action="{{ route('students.destroy', $student->id) }}" method="POST" onsubmit="return confirm('Are you sure?')" style="margin:0;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="dropdown-item text-danger">
+                                    <i class="fa-solid fa-trash-can"></i> Delete
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    @endforeach
+@endif
+
                             </tbody>
                         </table>
                         </div>
@@ -350,6 +357,7 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
     <script src="{{asset('js/js/sb-admin-2.min.js')}}"></script>
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="{{asset('js/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('js/js/dataTables.bootstrap4.min.js')}}"></script>

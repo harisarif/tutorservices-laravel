@@ -145,7 +145,7 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow mx-1">
 
-                            <div class="notification-icon">
+                            
                                 <a href="#" class="nav-link dropdown-toggle" id="alertsDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-bell fa-fw text-success"></i> {{-- Replace with your icon --}}
@@ -155,11 +155,9 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                                     <!-- @endif -->
                                 </a>
 
-
-                            </div>
                             <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in BD notification-dropdown "
-                                id="notificationDropdown" aria-labelledby="alertsDropdown ">
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in BD  "
+                                id="notificationDropdown" aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header bg-success border-success text-center">
                                     {{ __('messages.Notification') }}
                                 </h6>
@@ -505,6 +503,10 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
 
     <!-- Page level plugins -->
     <script src="{{asset('js/js/demo/Chart.min.js')}}"></script>
+    <!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
     <!-- Page level custom scripts -->
     <script src="{{asset('js/js/demo/chart-area-demo.js')}}"></script>

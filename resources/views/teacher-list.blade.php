@@ -196,14 +196,19 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                                     <div class="mt-3">
                                     <button type="button" class="btn btn-danger" id="delete-selected">Multiple Delete</button>
                                     </div>
-                                    <div style="display:grid;margin-left:10px;margin-top:-7px;">
-                                        <label class="mb-0">Search By Country</label>
-                                        <select name="countryTeacher" id="countryTeacher" class="form-select select2 country-select w-50"  >
-                                                        @foreach ($countries as $key => $country)
-                                                            <option value="{{ $key }}">{{ $country }}</option>
-                                                        @endforeach
-                                        </select>
-                                    </div>
+                                   <form method="GET" action="{{ route('all.tutors') }}">
+    <div style="display:grid;margin-left:10px;margin-top:-7px;">
+        <label class="mb-0">Search By Country</label>
+        <select name="countryTeacher" id="countryTeacher" class="form-select select2 country-select w-50" onchange="this.form.submit()">
+            @foreach ($countries as $key => $country)
+                <option value="{{ $key }}" {{ request('countryTeacher', 'AF') == $key ? 'selected' : '' }}>
+                    {{ $country }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+</form>
+
                                 </div>
                             </div>
                     <div id="statusMessage" style="display:none;" class="alert alert-success"></div>
@@ -227,78 +232,79 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($tutors as $tutor)
-                                   <tr id="tutor-row-{{ $tutor->id }}">
+                              @if($tutors->isEmpty())
+    <tr>
+        <td colspan="11" class="text-center">
+            <img src="{{ asset('images/not-found.jpeg') }}" alt="No Blogs Found" style="width: 100%; max-width: 400px; height: auto; margin: 0 auto;">
+            <p>No tutors found.</p>
+        </td>
+    </tr>
+@else
+    @foreach ($tutors as $tutor)
+        <tr id="tutor-row-{{ $tutor->id }}">
+            <td class="border">
+                <input style="margin-left:-1px;" class="form-check-input tutor-checkbox" type="checkbox" value="{{ $tutor->id }}" id="flexCheckChecked-{{ $tutor->id }}">
+                <label class="form-check-label" for="flexCheckChecked-{{ $tutor->id }}"></label>
+            </td>
+            <td class="border">{{ $tutor->id }}</td>
+            <td class="border">{{ $tutor->f_name }} {{ $tutor->l_name }}</td>
+            <td class="border">{{ $tutor->qualification }}</td>
+            <td class="border">{{ $tutor->gender }}</td>
+            <td class="border">{{ $tutor->country }}</td>
+            <td class="border">
+                <a href="{{ url($tutor->document) }}" target="_blank">View PDF Document</a>
+            </td>
+            <td class="border">{{ $tutor->email }}</td>
+            <td class="border">{{ $tutor->phone }}</td>
+            <td class="border">
+                <form action="{{ route('update.tutor.status') }}" method="POST" id="statusForm_{{ $tutor->id }}">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $tutor->id }}">
+                    <input type="hidden" name="status" id="statusInput_{{ $tutor->id }}" value="{{ $tutor->status }}">
+                    <label class="switch mb-0 mt-2">
+                        <input type="checkbox" id="statusToggle_{{ $tutor->id }}"
+                            {{ $tutor->status === 'active' ? 'checked' : '' }}
+                            onchange="updateStatus({{ $tutor->id }})">
+                        <span class="slider round"></span>
+                    </label>
+                    <button type="submit" style="display:none;"></button>
+                </form>
+            </td>
+            <td class="border">
+                <div class="dropdown">
+                    <button class="dropdown-icon dropdownButton">
+                        <i class="fa fa-ellipsis-v"></i>
+                    </button>
+                    <ul class="dropdown-action dropdownMenu">
+                        <li>
+                            <a href="{{ route('view-teacher', $tutor->id) }}" class="btn btn-sm text-justify">
+                                <i class="fa fa-eye" style="color: #4e73df;"></i>
+                                <span class="mx-1">View</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('edit-teacher', $tutor->id) }}" class="btn btn-sm text-justify">
+                                <i class="fa fa-edit" style="color: #4e73df;"></i>
+                                <span class="mx-1">Edit</span>
+                            </a>
+                        </li>
+                        <li>
+                            <form action="{{ route('teachers.destroy', $tutor->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm d-flex align-items-center" onclick="return confirm('Are you sure?')" style="color: black; margin-left: -11%;">
+                                    <i class="fa fa-trash mx-1" style="color: #e74a3b;"></i>
+                                    <span class="mx-1">Delete</span>
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    @endforeach
+@endif
 
-                                    <td class="border">
-                                        <input style="margin-left:-1px;" class="form-check-input tutor-checkbox" type="checkbox" value="{{ $tutor->id }}" id="flexCheckChecked-{{ $tutor->id }}">
-                                        <label class="form-check-label" for="flexCheckChecked-{{ $tutor->id }}"></label>
-                                    </td>
-
-                                    <td class="border">{{ $tutor->id }}</td>
-                                    <td class="border">{{ $tutor->f_name }} {{ $tutor->l_name }}</td>
-                                    <td class="border">{{ $tutor->qualification }}</td>
-                                    <td class="border">{{ $tutor->gender }}</td>
-                                    <td class="border">{{ $tutor->country }}</td>
-                                    <td class="border"><a href="{{ url($tutor->document) }}" target="_blank">View PDF Document</a></td>
-                                   
-                                    <td class="border">{{ $tutor->email }}</td>
-                                    <!-- <td>{{ $tutor->experience }} {{ $tutor->experience > 1 ? 'years' : 'year' }}</td> -->
-
-                                    <td class="border">{{ $tutor->phone }}</td>
-                                    <!-- Toggle Switch -->
-                                    <td class="border">
-                                    <form action="{{ route('update.tutor.status') }}" method="POST" id="statusForm_{{ $tutor->id }}">
-                                        @csrf
-                                        <input type="hidden" name="id" value="{{ $tutor->id }}">
-                                        <input type="hidden" name="status" id="statusInput_{{ $tutor->id }}" value="{{ $tutor->status }}">
-
-                                        <!-- Switch -->
-                                        <label class="switch mb-0 mt-2">
-                                            <input type="checkbox" id="statusToggle_{{ $tutor->id }}"
-                                                {{ $tutor->status === 'active' ? 'checked' : '' }}
-                                                onchange="updateStatus({{ $tutor->id }})">
-                                            <span class="slider round"></span>
-                                        </label>
-
-                                        <button type="submit" style="display:none;"></button> <!-- Optional submit button (hidden) -->
-                                    </form>
-                                    </td>
-
-                                    <td class="border">
-                                        <div class="dropdown">
-                                            <button class="dropdown-icon dropdownButton">
-                                                <i class="fa fa-ellipsis-v"></i> <!-- You can replace this with any icon -->
-                                            </button>
-                                            <ul class="dropdown-action dropdownMenu">
-                                                <li>
-                                                    <a href="{{ route('view-teacher', $tutor->id) }}" class="btn btn-sm text-justify">
-                                                    <i class="fa fa-eye" style="color: #4e73df;"></i>
-                                                    <span class="mx-1">View</span>
-                                                </a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{ route('edit-teacher', $tutor->id) }}" class="btn btn-sm text-justify">
-                                                    <i class="fa fa-edit" style="color: #4e73df;"></i>
-                                                    <span class="mx-1">Edit</span>
-                                                </a>
-                                                </li>
-                                                <li>
-                                                    <form action="{{ route('teachers.destroy', $tutor->id) }}" method="POST" style="display:inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm d-flex align-items-center" onclick="return confirm('Are you sure?')" style="color: black; margin-left: -11%;">
-                                                            <i class="fa fa-trash mx-1" style="color: #e74a3b;"></i>
-                                                            <span class="mx-1">Delete</span>
-                                                        </button>
-                                                    </form>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
                                 </tbody>
                             </table>
                         </div>

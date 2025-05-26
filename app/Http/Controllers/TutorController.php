@@ -871,8 +871,14 @@ class TutorController extends Controller
     public function allTutors(Request $request)
     {
         $tutors = Tutor::all();
-        $countries = collect(config('countries_assoc.countries'));
-        return view('teacher-list', compact('tutors', 'countries'));
+        $countries = collect(config('countries_assoc.countries')); $query = Tutor::query();
+
+    if ($request->has('countryTeacher') && $request->countryTeacher !== null) {
+        $query->where('country', $request->countryTeacher); // Adjust if your column name is different
+    }
+
+    $tutor = $query->get();
+        return view('teacher-list', compact('tutors','tutor', 'countries'));
     }
     public function allBlogs()
     {
