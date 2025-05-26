@@ -47,10 +47,11 @@ class EdexcelComplaintController extends Controller
         $EdexcelComplaint->email = $request->input('email');
         $EdexcelComplaint->phone = $request->input('phone');
         $EdexcelComplaint->save();
-        $facebookImg = "<img src='https://edexceledu.com/icons/facebook.png' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";
-        $instagramImg = "<img src='https://edexceledu.com/icons/facebook.png' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";
-        $linkedinImg  = "<img src='https://edexceledu.com/icons/facebook.png' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";        
-        $youtubeImg   = "<img src='https://edexceledu.com/icons/facebook.png' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";       // Send email to the student
+        $facebookImg = "<img src='https://edexceledu.com/icons/facebook.jpeg' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";
+        $instagramImg = "<img src='https://edexceledu.com/icons/instagram.jpeg' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";
+        $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";        
+        $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";       // Send email to the student
+              // Send email to the student
         $toStudent = $EdexcelComplaint->email;
         $subjectStudent = "Welcome to Edexcel Academy!";
         $messageStudent = "
@@ -95,7 +96,7 @@ class EdexcelComplaintController extends Controller
                                 <!-- Footer -->
                                 <tr>
                                             <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 14px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;'>
-                                                <div style='display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px;'>
+                                                <div style='display: flex; justify-content:space-between; align-items: center; gap: 10px; margin-bottom: 10px;'>
                                                     <div>
                                                                 <span style='color:#43b979 !important'>&copy; 2025 Edexcel Academy. All rights reserved.</span>
                                                     </div>     
@@ -144,10 +145,10 @@ class EdexcelComplaintController extends Controller
     protected function sendAdminInquiryNotification(EdexcelComplaint $inquiry)
     {
         $adminEmail = env('email_name'); // Use config, not env()
-        $facebookImg = "<img src='https://edexceledu.com/icons/facebook.png' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";
-        $instagramImg = "<img src='https://edexceledu.com/icons/facebook.png' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";
-        $linkedinImg  = "<img src='https://edexceledu.com/icons/facebook.png' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";        
-        $youtubeImg   = "<img src='https://edexceledu.com/icons/facebook.png' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";       // Send email to the student
+        $facebookImg = "<img src='https://edexceledu.com/icons/facebook.jpeg' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";
+        $instagramImg = "<img src='https://edexceledu.com/icons/instagram.jpeg' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";
+        $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";        
+        $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";       // Send email to the student
         
         if (!$adminEmail) {
             Log::warning('Admin email not configured.');
