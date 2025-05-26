@@ -98,11 +98,9 @@ class EdexcelComplaintController extends Controller
                                     <td colspan='2' height='10' style='line-height:10px; font-size:0;'>&nbsp;</td>
                                 </tr>
                                 
-                                <tr>
-                                    <td align='left' style='color:#43b979; font-size:14px; padding-left:10px;'>
-                                        &copy; 2025 Edexcel Academy. All rights reserved.
-                                    </td>
-                                    <td align='right' style='padding-right:10px;display:flex'>
+                                <tr style='margin-bottom:10px;display:flex;'>
+                                    <td align='left' style='color:#43b979; font-size:14px;margin-left:5px;width:50%;'>&copy; 2025 Edexcel Academy. All rights reserved.</td>
+                                    <td align='right' style='display:flex;margin-left:30%'>
                                         <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:5px;'>{$facebookImg}</a>
                                         <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank' style='margin-right:5px;'>{$instagramImg}</a>
                                         <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank' style='margin-right:5px;'>{$linkedinImg}</a>
@@ -177,11 +175,9 @@ class EdexcelComplaintController extends Controller
                                         </tr>
 
                                         <!-- Footer -->
-                                        <tr>
-                                            <td align='left' style='color:#43b979; font-size:14px; padding-left:10px;'>
-                                                &copy; 2025 Edexcel Academy. All rights reserved.
-                                            </td>
-                                            <td align='right' style='padding-right:10px;display:flex'>
+                                        <tr style='margin-bottom:10px;display:flex;'>
+                                            <td align='left' style='color:#43b979; font-size:14px;margin-left:5px;width:50%;'>&copy; 2025 Edexcel Academy. All rights reserved.</td>
+                                            <td align='right' style='display:flex;margin-left:30%'>
                                                 <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:5px;'>{$facebookImg}</a>
                                                 <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank' style='margin-right:5px;'>{$instagramImg}</a>
                                                 <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank' style='margin-right:5px;'>{$linkedinImg}</a>
