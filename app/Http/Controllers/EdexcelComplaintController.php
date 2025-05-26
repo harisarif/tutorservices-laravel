@@ -47,10 +47,10 @@ class EdexcelComplaintController extends Controller
         $EdexcelComplaint->email = $request->input('email');
         $EdexcelComplaint->phone = $request->input('phone');
         $EdexcelComplaint->save();
-        $facebookImg = "<img src='https://edexceledu.com/icons/facebook.jpeg' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";
-        $instagramImg = "<img src='https://edexceledu.com/icons/instagram.jpeg' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";
-        $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";        
-        $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";       // Send email to the student
+        $facebookImg = "<img src='https://edexceledu.com/icons/facebook.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
+        $instagramImg = "<img src='https://edexceledu.com/icons/instagram.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
+        $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";        
+        $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";       // Send email to the student
               // Send email to the student
         $toStudent = $EdexcelComplaint->email;
         $subjectStudent = "Welcome to Edexcel Academy!";
@@ -94,9 +94,15 @@ class EdexcelComplaintController extends Controller
                                 </tr>
 
                                 <!-- Footer -->
-                                <tr style='margin-bottom:10px'>
-                                    <td align='left' style='color:#43b979; font-size:14px;margin-left:5px'>&copy; 2025 Edexcel Academy. All rights reserved.</td>
-                                    <td align='right' style='display:flex'>
+                                <tr>
+                                    <td colspan='2' height='10' style='line-height:10px; font-size:0;'>&nbsp;</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td align='left' style='color:#43b979; font-size:14px; padding-left:10px;'>
+                                        &copy; 2025 Edexcel Academy. All rights reserved.
+                                    </td>
+                                    <td align='right' style='padding-right:10px;display:flex'>
                                         <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:5px;'>{$facebookImg}</a>
                                         <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank' style='margin-right:5px;'>{$instagramImg}</a>
                                         <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank' style='margin-right:5px;'>{$linkedinImg}</a>
@@ -129,11 +135,11 @@ class EdexcelComplaintController extends Controller
     protected function sendAdminInquiryNotification(EdexcelComplaint $inquiry)
     {
         $adminEmail = env('email_name'); // Use config, not env()
-        $facebookImg = "<img src='https://edexceledu.com/icons/facebook.jpeg' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";
-        $instagramImg = "<img src='https://edexceledu.com/icons/instagram.jpeg' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";
-        $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";        
-        $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg' alt='Facebook' width='24' height='24' style='vertical-align:middle'>";       // Send email to the student
-        
+        $facebookImg = "<img src='https://edexceledu.com/icons/facebook.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
+        $instagramImg = "<img src='https://edexceledu.com/icons/instagram.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
+        $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";        
+        $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";       // Send email to the student
+         
         if (!$adminEmail) {
             Log::warning('Admin email not configured.');
             return;
@@ -172,28 +178,14 @@ class EdexcelComplaintController extends Controller
 
                                         <!-- Footer -->
                                         <tr>
-                                            <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 14px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;'>
-                                                <div style='display: flex;justify-content:space-between; align-items: center; gap: 10px; margin-bottom: 10px;'>
-                                                    <div>
-                                                        <span style='color:#43b979 !important'>&copy; 2025 Edexcel Academy. All rights reserved.</span>
-                                                    </div>     
-                                                    <div style='display:flex;gap:8px;'> 
-                                                            <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:-3px;'>
-                                                                {$facebookImg}
-                                                            </a>
-                                                            <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank'>
-                                                                {$instagramImg}
-                                                            </a>
-                                                            <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank'>
-                                                                {$linkedinImg}
-                                                            </a>
-
-                                                            <a href='https://youtube.com/@edexcelonline01?si=EuQwX0tL3zk4J-2p' target='_blank'>
-                                                                {$youtubeImg}
-                                                            </a>
-                                                    </div>
-                                                </div>
-                                                
+                                            <td align='left' style='color:#43b979; font-size:14px; padding-left:10px;'>
+                                                &copy; 2025 Edexcel Academy. All rights reserved.
+                                            </td>
+                                            <td align='right' style='padding-right:10px;display:flex'>
+                                                <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:5px;'>{$facebookImg}</a>
+                                                <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank' style='margin-right:5px;'>{$instagramImg}</a>
+                                                <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank' style='margin-right:5px;'>{$linkedinImg}</a>
+                                                <a href='https://youtube.com/@edexcelonline01?si=EuQwX0tL3zk4J-2p' target='_blank'>{$youtubeImg}</a>
                                             </td>
                                         </tr>
 
