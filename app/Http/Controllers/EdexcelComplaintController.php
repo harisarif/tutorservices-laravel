@@ -95,30 +95,14 @@ class EdexcelComplaintController extends Controller
 
                                 <!-- Footer -->
                                 <tr>
-                                            <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 14px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;'>
-                                                <div style='display: flex; justify-content:space-between !important;margin-bottom: 10px;'>
-                                                    <div>
-                                                                <span style='color:#43b979 !important'>&copy; 2025 Edexcel Academy. All rights reserved.</span>
-                                                    </div>     
-                                                    <div style='display:flex;gap:8px !important;'>  
-                                                        <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:-3px;'>
-                                                            {$facebookImg}
-                                                            
-                                                        </a>
-                                                        <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank'>
-                                                                {$instagramImg}
-                                                        </a>
-                                                        <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank'>
-                                                            {$linkedinImg}
-                                                        </a>
-                                                        <a href='https://youtube.com/@edexcelonline01?si=EuQwX0tL3zk4J-2p' target='_blank'>
-                                                        {$youtubeImg}
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                
-                                            </td>
-                                        </tr>
+                                    <td align='left' style='color:#43b979; font-size:14px;'>&copy; 2025 Edexcel Academy. All rights reserved.</td>
+                                    <td align='right'>
+                                        <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:5px;'>{$facebookImg}</a>
+                                        <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank' style='margin-right:5px;'>{$instagramImg}</a>
+                                        <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank' style='margin-right:5px;'>{$linkedinImg}</a>
+                                        <a href='https://youtube.com/@edexcelonline01?si=EuQwX0tL3zk4J-2p' target='_blank'>{$youtubeImg}</a>
+                                    </td>
+                                </tr>
 
                             </table>
                         </td>
