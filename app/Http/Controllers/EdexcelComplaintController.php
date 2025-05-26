@@ -94,9 +94,9 @@ class EdexcelComplaintController extends Controller
                                 </tr>
 
                                 <!-- Footer -->
-                                <tr>
-                                    <td align='left' style='color:#43b979; font-size:14px;'>&copy; 2025 Edexcel Academy. All rights reserved.</td>
-                                    <td align='right'>
+                                <tr style='margin-bottom:10px'>
+                                    <td align='left' style='color:#43b979; font-size:14px;margin-left:5px'>&copy; 2025 Edexcel Academy. All rights reserved.</td>
+                                    <td align='right' style='display:flex'>
                                         <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:5px;'>{$facebookImg}</a>
                                         <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank' style='margin-right:5px;'>{$instagramImg}</a>
                                         <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank' style='margin-right:5px;'>{$linkedinImg}</a>
