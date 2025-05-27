@@ -346,6 +346,7 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <!-- Bootstrap JS -->
+<script src="{{asset('js/js/jquery.easing.min.js')}}"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="{{asset('js/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('js/js/dataTables.bootstrap4.min.js')}}"></script>
