@@ -322,7 +322,7 @@
 
 
 <!-- Custom scripts for all pages-->
-<script src="{{asset('js/jquery.min.js')}}"></script>
+<script src="{{asset('js/js/jquery.min.js')}}"></script>
 <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
