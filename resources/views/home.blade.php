@@ -251,7 +251,7 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                                                 <div class="media d-flex" style=" justify-content: space-between;">
                                                     <div class="media-body text-left counter">
                                                         <h3 class="warning text-success" id="subject-count">{{$inquires->count()}}</h3>
-                                                        <span>{{ __('messages.Blogs') }}</span>
+                                                        <span>{{ __('messages.Inquiries') }}</span>
                                                     </div>
                                                     <div class="align-self-center animated-icons">
                                                         <i class="fa-solid fa-book-open "

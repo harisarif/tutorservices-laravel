@@ -1,7 +1,6 @@
-
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,8 +8,8 @@
     <meta name="author" content="">
     <meta name="description" content="Home Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
     <title>Edexcel Inquiries</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -22,22 +21,20 @@
     <script src="{{asset('js/select2.min.js')}}"></script>
     <link rel="stylesheet" href="{{asset('css/admin.css')}}" />
 </head>
-    <style>
-        /* Dropdown container */
-      
-    </style>
-@php
-$notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get();
-@endphp
+<style>
+    /* Dropdown container */
+</style>
+
 
 @if (session('success'))
-        <div class="alert alert-success" style="z-index: 6;
+<div class="alert alert-success" style="z-index: 6;
     padding: 14px !important;">
 
-            {{ session('success') }}
-            <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
-        </div>
-    @endif
+    {{ session('success') }}
+    <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
+</div>
+@endif
+
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -48,20 +45,20 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
 
             <li class=" py-2 mx-2 d-flex align-items-center">
                 <a class="navbar-brand" href="{{ route('home') }}">
-                   <img src=" {{asset('images/white-logo.jpeg')}}" class="d-lg-block d-none" id="toggleImage" height="50px" alt="logo" style="height: 50px; border-radius: 10px; width: 100%;">
-               </a>
-               <a href="{{ route('home') }}">
+                    <img src=" {{asset('images/white-logo.jpeg')}}" class="d-lg-block d-none" id="toggleImage" height="50px" alt="logo" style="height: 50px; border-radius: 10px; width: 100%;">
+                </a>
+                <a href="{{ route('home') }}">
                     <img src=" {{asset('images/favicon.png')}}" id="toggleImage" class="d-lg-none d-sm-block AB-img" alt="Image" style="width:70%;">
-               </a>
+                </a>
                 <div class="text-center d-none d-md-inline position-relative">
-                 <button class="rounded-circle border-0" id="sidebarToggle">
-                    <div class="icons d-none">
-                        <i class="fa-solid fa-angle-right"></i>
-                    </div>
-                 </button>
+                    <button class="rounded-circle border-0" id="sidebarToggle">
+                        <div class="icons d-none">
+                            <i class="fa-solid fa-angle-right"></i>
+                        </div>
+                    </button>
 
                 </div>
-           </li>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
@@ -69,7 +66,7 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
                 <a class="nav-link"
-                href="{{route('home')}}">
+                    href="{{route('home')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>{{ __('messages.Dashboard') }}</span>
                 </a>
@@ -80,15 +77,15 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
             <!-- Nav Item - Tables -->
             <li class="nav-item active">
                 <a class="nav-link py-2"
-                href="{{route('all.tutors')}}">
-                <i class="fas fa-chalkboard-teacher"></i>
+                    href="{{route('all.tutors')}}">
+                    <i class="fas fa-chalkboard-teacher"></i>
                     <span>{{ __('messages.Teacher') }}</span>
                 </a>
             </li>
             <hr class="sidebar-divider">
             <li class="nav-item">
                 <a class="nav-link py-2" href="{{route('all.students')}}">
-                <i class="fa-solid fa-user-graduate"></i>
+                    <i class="fa-solid fa-user-graduate"></i>
                     <span>{{ __('messages.Students') }}</span>
                 </a>
             </li>
@@ -140,7 +137,7 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow mx-1">
 
-                            <li class="nav-item dropdown no-arrow mx-1">
+                        <li class="nav-item dropdown no-arrow mx-1">
 
                             <div class="notification-icon">
                                 <a href="#" class="nav-link dropdown-toggle" id="alertsDropdown" role="button"
@@ -155,38 +152,7 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
 
                             </div>
                             <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in BD notification-dropdown "
-                                id="notificationDropdown" aria-labelledby="alertsDropdown ">
-                                <h6 class="dropdown-header bg-success border-success text-center">
-                                    {{ __('messages.Notification') }}
-                                </h6>
-                                <a class="dropdown-item px-0 justify-content-center @if(auth()->user()->notifications->count() === 0) no-notifications @endif"
-                                    href="#">
-                                    @if(auth()->user()->notifications->count() > 0)
-                                    @foreach(auth()->user()->notifications as $notification)
-                                    <div class="classic d-flex py-2 px-3 @if(!$loop->last) border-bottom @endif">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-success">
-                                                <i class="fas fa-file-alt text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div class="ntf">
-                                            <div class="small">{{ $notification->data['message'] }}</div>
-                                            <span
-                                                class="font-weight-bold">{{ $notification->created_at->diffForHumans() }}</span>
-                                        </div>
-                                    </div>
-                                    @endforeach
-                                    @else
-                                    <div class="mt-2 text-center">
-                                        <div class="small no-message">No notifications available.</div>
-                                    </div>
-                                    @endif
-                                </a>
-
-                                <a class="dropdown-item-fector  small" href="{{ route('admin.inquiry')}}">Show All
-                                    Notifications </a>
-                            </div>
+                            @include('notifications')
                         </li>
                         </li>
                         <li class="nav-item dropdown no-arrow d-flex align-items-center">
@@ -201,8 +167,8 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in md"
                                 aria-labelledby="userDropdown" style="left: -95px !important; width: 0;">
 
-                                <a class="dropdown-item text-success" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-success" ></i>
+                                <a class="dropdown-item text-success" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-success"></i>
                                     {{ __('messages.Logout') }}
                                 </a>
                             </div>
@@ -213,92 +179,93 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
 
                 </nav>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                     style="display: none;">@csrf
+                    style="display: none;">@csrf
                 </form>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid" >
+                <div class="container-fluid">
                     <div class="tab-content" id="myTabContent">
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4 SB">
-                                <h1 class="h3 mb-0 text-gray-800">{{ __('Inquiry') }}</h1>
-                                 <div class="mt-3">
-                                    <button type="button" class="btn btn-danger" id="delete-selected">Multiple Delete</button>
-                                    </div>
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4 SB">
+                            <h1 class="h3 mb-0 text-gray-800">{{ __('Inquiry') }}</h1>
+                            <div class="mt-3">
+                                <button type="button" class="btn btn-danger" id="delete-selected">Multiple Delete</button>
                             </div>
-                    <div id="statusMessage" style="display:none;" class="alert alert-success"></div>
+                        </div>
+                        <div id="statusMessage" style="display:none;" class="alert alert-success"></div>
                         <div class=" AB-sb">
 
-                        <table class="student-table table">
-                            <thead>
-                                <tr>
-                                    <th> <input class="form-check-input inquiry-checkbox" type="checkbox" id="select-all-inquiry" >
-                                    <label class="form-check-label" for="select-all"></label></th>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Description</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                               @if($inquires->isEmpty())
-    <tr>
-         <td colspan="11" class="text-center">
-            <img src="{{ asset('images/not-found.jpeg') }}" alt="No Blogs Found" style="width: 100%; max-width: 400px; height: auto; margin: 0 auto;">
-            <p>No tutors found.</p>
-        </td>
-    </tr>
-@else
-    @foreach ($inquires as $inquiry)
-        <tr id="inquiry-row-{{ $inquiry->id }}">
-            <td>
-                <input class="form-check-input inquiry-checkbox" type="checkbox" value="{{ $inquiry->id }}" id="flexCheckChecked-{{ $inquiry->id }}">
-                <label class="form-check-label" for="flexCheckChecked-{{ $inquiry->id }}"></label>
-            </td>
-            <td>{{ $inquiry->id }}</td>
-            <td>{{ $inquiry->name }}</td>
-            <td>{{ $inquiry->email }}</td>
-            <td>{{ $inquiry->phone }}</td>
-            <td>{{ $inquiry->description ?? 'No description' }}</td>
-            <td>
-                <div class="dropdown">
-                    <button class="btn btn-link border-0 no-caret" type="button" data-toggle="dropdown">
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                    </button>
-                    <ul class="dropdown-action dropdown-menu" id="dropdownInq">
-                        <li class="d-flex align-items-center dropdown-item" style="border-bottom: 1px solid #ddd; color: black;">
-                            <a href="{{ route('edit-student', $inquiry->id) }}" class="btn btn-sm">
-                                <i class="fa-regular fa-pen-to-square" style="color: #4e73df;"></i>
-                                <span class="mx-1">Edit</span>
-                            </a>
-                        </li>
-                        <li class="dropdown-item">
-                            <form action="{{ route('inquiries.destroy', $inquiry->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm d-flex align-items-center" onclick="return confirm('Are you sure?')" style="color: black; margin-left: -11%;">
-                                    <i class="fa-solid fa-trash-can mx-1" style="color: #e74a3b;"></i>
-                                    <span class="mx-1">Delete</span>
-                                </button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-            </td>
-        </tr>
-    @endforeach
-@endif
+                            <table class="student-table table">
+                                <thead>
+                                    <tr>
+                                        <th> <input class="form-check-input inquiry-checkbox" type="checkbox" id="select-all-inquiry">
+                                            <label class="form-check-label" for="select-all"></label>
+                                        </th>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Description</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if($inquires->isEmpty())
+                                    <tr>
+                                        <td colspan="11" class="text-center">
+                                            <img src="{{ asset('images/not-found.jpeg') }}" alt="No Blogs Found" style="width: 100%; max-width: 400px; height: auto; margin: 0 auto;">
 
-                            </tbody>
-                        </table>
+                                        </td>
+                                    </tr>
+                                    @else
+                                    @foreach ($inquires as $inquiry)
+                                    <tr id="inquiry-row-{{ $inquiry->id }}">
+                                        <td>
+                                            <input class="form-check-input inquiry-checkbox" type="checkbox" value="{{ $inquiry->id }}" id="flexCheckChecked-{{ $inquiry->id }}">
+                                            <label class="form-check-label" for="flexCheckChecked-{{ $inquiry->id }}"></label>
+                                        </td>
+                                        <td>{{ $inquiry->id }}</td>
+                                        <td>{{ $inquiry->name }}</td>
+                                        <td>{{ $inquiry->email }}</td>
+                                        <td>{{ $inquiry->phone }}</td>
+                                        <td>{{ $inquiry->description ?? 'No description' }}</td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-link border-0 no-caret" type="button" data-toggle="dropdown">
+                                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                                </button>
+                                                <ul class="dropdown-action dropdown-menu" id="dropdownInq">
+                                                    <li class="d-flex align-items-center dropdown-item" style="border-bottom: 1px solid #ddd; color: black;">
+                                                        <a href="{{ route('edit-student', $inquiry->id) }}" class="btn btn-sm">
+                                                            <i class="fa-regular fa-pen-to-square" style="color: #4e73df;"></i>
+                                                            <span class="mx-1">Edit</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="dropdown-item">
+                                                        <form action="{{ route('inquiries.destroy', $inquiry->id) }}" method="POST" style="display:inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm d-flex align-items-center" onclick="return confirm('Are you sure?')" style="color: black; margin-left: -11%;">
+                                                                <i class="fa-solid fa-trash-can mx-1" style="color: #e74a3b;"></i>
+                                                                <span class="mx-1">Delete</span>
+                                                            </button>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    @endif
+
+                                </tbody>
+                            </table>
                         </div>
 
                     </div>
 
 
-            </div>
+                </div>
                 <!-- /.container-fluid -->
 
             </div>
@@ -348,115 +315,113 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
 </body>
 
 </html>
-    <script src="{{asset('js/js/jquery.min.js')}}"></script>
-    <script src="{{asset('js/js/sb-admin-2.min.js')}}"></script>
-     <!-- Bootstrap JS (make sure this is included) -->
+<script src="{{asset('js/js/jquery.min.js')}}"></script>
+<script src="{{asset('js/js/sb-admin-2.min.js')}}"></script>
+<!-- Bootstrap JS (make sure this is included) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Include Popper.js if using Bootstrap 4 -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="{{asset('js/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('js/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('js/select2.min.js')}}"></script>
-    <script src="{{asset('js/js/bootstrap.bundle.min.js')}}"></script>
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{asset('js/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('js/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('js/select2.min.js')}}"></script>
+<script src="{{asset('js/js/bootstrap.bundle.min.js')}}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-$(document).ready(function () {
-    $('#select-all-inquiry').click(function () {
-        $('.inquiry-checkbox').prop('checked', this.checked);
-    });
-
-    $('#delete-selected').click(function () {
-        var selected = [];
-
-        $('.inquiry-checkbox:checked').each(function () {
-            selected.push($(this).val());
+    $(document).ready(function() {
+        $('#select-all-inquiry').click(function() {
+            $('.inquiry-checkbox').prop('checked', this.checked);
         });
 
-        if (selected.length === 0) {
-            Swal.fire('No Inquiries Selected', 'Please select at least one inquiry to delete.', 'warning');
-            return;
-        }
+        $('#delete-selected').click(function() {
+            var selected = [];
 
-        Swal.fire({
-            title: 'Are you sure?',
-            text: 'This will delete the selected inquiries permanently.',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete them!',
-            cancelButtonText: 'Cancel'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: "{{ route('inquiry.destroy.bulk') }}",
-                    type: 'DELETE',
-                    data: {
-                        ids: selected,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function (response) {
-                        selected.forEach(id => $('#inquiry-row-' + id).remove());
-                        Swal.fire('Deleted!', 'Selected inquiries have been deleted.', 'success');
-                    },
-                    error: function () {
-                        Swal.fire('Error!', 'Something went wrong.', 'error');
-                    }
-                });
+            $('.inquiry-checkbox:checked').each(function() {
+                selected.push($(this).val());
+            });
+
+            if (selected.length === 0) {
+                Swal.fire('No Inquiries Selected', 'Please select at least one inquiry to delete.', 'warning');
+                return;
             }
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'This will delete the selected inquiries permanently.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete them!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ route('inquiry.destroy.bulk') }}",
+                        type: 'DELETE',
+                        data: {
+                            ids: selected,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            selected.forEach(id => $('#inquiry-row-' + id).remove());
+                            Swal.fire('Deleted!', 'Selected inquiries have been deleted.', 'success');
+                        },
+                        error: function() {
+                            Swal.fire('Error!', 'Something went wrong.', 'error');
+                        }
+                    });
+                }
+            });
         });
     });
-});
 </script>
 
 <script>
-        $('.notification-icon').on('click', function(e) {
-            e.preventDefault();
-            $('#notificationDropdown').toggleClass('d-block');
-        });
+    document.getElementById('dropdownButton').addEventListener('click', function() {
+        var dropdownMenu = document.getElementById('dropdownMenu');
+        dropdownMenu.classList.toggle('show');
+    });
 
-            document.getElementById('dropdownButton').addEventListener('click', function() {
-                var dropdownMenu = document.getElementById('dropdownMenu');
-                dropdownMenu.classList.toggle('show');
-            });
-            function updateStatus(tutorId) {
-                let statusToggle = document.getElementById(`statusToggle_${tutorId}`);
-                let statusInput = document.getElementById(`statusInput_${tutorId}`);
-                let form = document.getElementById(`statusForm_${tutorId}`);
+    function updateStatus(tutorId) {
+        let statusToggle = document.getElementById(`statusToggle_${tutorId}`);
+        let statusInput = document.getElementById(`statusInput_${tutorId}`);
+        let form = document.getElementById(`statusForm_${tutorId}`);
 
-                // Update the hidden status input based on the checkbox state
-                statusInput.value = statusToggle.checked ? 'active' : 'inactive';
+        // Update the hidden status input based on the checkbox state
+        statusInput.value = statusToggle.checked ? 'active' : 'inactive';
 
-                // Submit the form
-                form.submit();
+        // Submit the form
+        form.submit();
+    }
+
+    $('.country-select').select2()
+    $('#countryTeacher').on('change', function() {
+
+        var country_id = $(this).val(); // Get the selected country ID
+
+        // Make an AJAX request to find tutors based on the selected country
+        $.ajax({
+            url: '/find-tutors', // Your route for finding tutors
+            type: 'GET', // HTTP method (can be POST if needed)
+            data: {
+                country_id: country_id
+            }, // Send selected country ID
+            success: function(response) {
+                // Handle the response, e.g., display the tutors on the page
+                console.log('sadsads', response);
+                // You can dynamically update the DOM with the returned data here
+                $('.teachers-table tbody').html(response.html);
+            },
+            error: function(xhr) {
+                console.log('Error:', xhr);
             }
-          
-            $('.country-select').select2()
-            $('#countryTeacher').on('change', function() {
+        });
+    });
+    $(document).ready(function() {
 
-                var country_id = $(this).val(); // Get the selected country ID
-
-                // Make an AJAX request to find tutors based on the selected country
-                $.ajax({
-                    url: '/find-tutors', // Your route for finding tutors
-                    type: 'GET', // HTTP method (can be POST if needed)
-                    data: { country_id: country_id }, // Send selected country ID
-                    success: function(response) {
-                        // Handle the response, e.g., display the tutors on the page
-                        console.log('sadsads',response);
-                        // You can dynamically update the DOM with the returned data here
-                        $('.teachers-table tbody').html(response.html);
-                    },
-                    error: function(xhr) {
-                        console.log('Error:', xhr);
-                    }
-                });
-            });
-            $(document).ready(function() {
-            
-            $('.notification-dropdown').on('click', 'li', function() {
+        $('.notification-dropdown').on('click', 'li', function() {
             var notificationId = $(this).data('id');
             var isRead = $(this).hasClass('read');
 
@@ -466,7 +431,10 @@ $(document).ready(function () {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                data: { notification_id: notificationId, read: !isRead },
+                data: {
+                    notification_id: notificationId,
+                    read: !isRead
+                },
                 success: function(response) {
                     // Update the notification style based on the new read status
                     if (response.status === 'success') {
@@ -487,16 +455,17 @@ $(document).ready(function () {
             var currentCount = parseInt(countElement.text());
             countElement.text(currentCount + change);
         }
-        });
-        function cancel(){
-                $('.alert').addClass('d-none')
-            }
-            $(document).on('select2:open', function(e) {
-                        let scrollPos = $(window).scrollTop();
-                        setTimeout(function() {
-                            $(window).scrollTop(scrollPos);
-                        }, 0);
-                    });
-    </script>
+    });
+
+    function cancel() {
+        $('.alert').addClass('d-none')
+    }
+    $(document).on('select2:open', function(e) {
+        let scrollPos = $(window).scrollTop();
+        setTimeout(function() {
+            $(window).scrollTop(scrollPos);
+        }, 0);
+    });
+</script>
 <!-- Select2 JS -->
 <script src="{{asset('js/inspect.js')}}"></script>
