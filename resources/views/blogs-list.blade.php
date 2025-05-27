@@ -323,7 +323,6 @@
 <script src="{{asset('js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('js/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{asset('js/select2.min.js')}}"
-    integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
 <script>

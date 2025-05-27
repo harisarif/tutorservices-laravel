@@ -145,19 +145,19 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow mx-1">
 
-                            
-                                <a href="#" class="nav-link dropdown-toggle" id="alertsDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-bell fa-fw text-success"></i> {{-- Replace with your icon --}}
-                                    <!-- @if(auth()->user()->unreadNotifications->count() > 0) -->
-                                    <span class="badge badge-danger badge-counter"
-                                        id="notificationCount">{{ auth()->user()->unreadNotifications->count() }}</span>
-                                    <!-- @endif -->
-                                </a>
+
+                            <a href="#" class="nav-link dropdown-toggle" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw text-success"></i> {{-- Replace with your icon --}}
+                                <!-- @if(auth()->user()->unreadNotifications->count() > 0) -->
+                                <span class="badge badge-danger badge-counter"
+                                    id="notificationCount">{{ auth()->user()->unreadNotifications->count() }}</span>
+                                <!-- @endif -->
+                            </a>
 
                             <!-- Dropdown - Alerts -->
                             @include('notifications')
-                           
+
                         </li>
                         <li class="nav-item dropdown no-arrow d-flex align-items-center">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -251,7 +251,7 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                                                 <div class="media d-flex" style=" justify-content: space-between;">
                                                     <div class="media-body text-left counter">
                                                         <h3 class="warning text-success" id="subject-count">{{$inquires->count()}}</h3>
-                                                        <span>{{ __('messages.Inquiries') }}</span>
+                                                        <span>Inquiries</span>
                                                     </div>
                                                     <div class="align-self-center animated-icons">
                                                         <i class="fa-solid fa-book-open "
@@ -293,7 +293,8 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                                         <div
                                             class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-gradient-success">
                                             <h6 class="m-0 font-weight-bold text-white">
-                                                {{ __('messages.Edexcel Overview') }}</h6>
+                                                {{ __('messages.Edexcel Overview') }}
+                                            </h6>
                                             <div class="dropdown no-arrow">
 
                                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
@@ -322,7 +323,8 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                                         <div
                                             class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-gradient-success">
                                             <h6 class="m-0 font-weight-bold text-white">
-                                                {{ __('messages.Revenue Sources') }}</h6>
+                                                {{ __('messages.Revenue Sources') }}
+                                            </h6>
                                             <div class="dropdown no-arrow">
 
                                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
@@ -474,9 +476,9 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
     <!-- Page level plugins -->
     <script src="{{asset('js/js/demo/Chart.min.js')}}"></script>
     <!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Bootstrap JS -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
     <!-- Page level custom scripts -->
     <script src="{{asset('js/js/demo/chart-area-demo.js')}}"></script>
@@ -485,170 +487,169 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
     <script src="{{asset('js/js/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('js/sweetalert.min.js')}}"></script>
     <script>
-    $(document).ready(function() {
+        $(document).ready(function() {
 
 
-        $('#select-all-student').click(function() {
-            // Check/uncheck all checkboxes based on the main checkbox
-            $('.student-checkbox').prop('checked', this.checked);
-        });
-        $('#select-all-inquiry').click(function() {
-            // Check/uncheck all checkboxes based on the main checkbox
-            $('.inquiry-checkbox').prop('checked', this.checked);
-        });
-
-        // Optional: Uncheck "Select All" if one of the checkboxes is unchecked
-        $('.tutor-checkbox').click(function() {
-            if (!$(this).prop('checked')) {
-                $('#select-all').prop('checked', false);
-            }
-        });
-
-
-        $('#delete-inquiry').click(function() {
-            // Gather all checked checkbox values
-            var selected = [];
-            $('.inquiry-checkbox:checked').each(function() {
-                selected.push($(this).val());
+            $('#select-all-student').click(function() {
+                // Check/uncheck all checkboxes based on the main checkbox
+                $('.student-checkbox').prop('checked', this.checked);
+            });
+            $('#select-all-inquiry').click(function() {
+                // Check/uncheck all checkboxes based on the main checkbox
+                $('.inquiry-checkbox').prop('checked', this.checked);
             });
 
-            if (selected.length === 0) {
-                Swal.fire({
-                    title: 'Warning!',
-                    text: 'Please select at least one inquiry to delete.',
-                    icon: 'warning',
-                    confirmButtonText: 'OK'
-                });
-
-                return;
-            }
-
-            // Confirm deletion
-            if (confirm('Are you sure you want to delete the selected inquiries?')) {
-                $.ajax({
-                    url: "{{ route('inquiry.destroy.bulk') }}", // Update with your route
-                    type: 'DELETE',
-                    data: {
-                        ids: selected,
-                        _token: '{{ csrf_token() }}' // Include CSRF token for security
-                    },
-                    success: function(response) {
-                        // Handle success (e.g., reload the page or remove deleted rows)
-                        location.reload(); // Reload page after successful deletion
-                    },
-                    error: function(xhr) {
-                        // Handle error
-                        alert('Error occurred while deleting inquires.');
-                    }
-                });
-            }
-        });
-        $('#delete-student').click(function() {
-            // Gather all checked checkbox values
-            var selected = [];
-            $('.student-checkbox:checked').each(function() {
-                selected.push($(this).val());
+            // Optional: Uncheck "Select All" if one of the checkboxes is unchecked
+            $('.tutor-checkbox').click(function() {
+                if (!$(this).prop('checked')) {
+                    $('#select-all').prop('checked', false);
+                }
             });
 
-            if (selected.length === 0) {
-                // alert('Please select at least one student to delete.');
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Please select at least one tutor to delete.',
-                    icon: 'error', // Use 'error' instead of 'danger'
-                    confirmButtonText: 'OK'
-                });
-                return;
-            }
 
-            // Confirm deletion
-            if (confirm('Are you sure you want to delete the selected students?')) {
-                $.ajax({
-                    url: "{{ route('student.destroy.bulk') }}", // Update with your route
-                    type: 'DELETE',
-                    data: {
-                        ids: selected,
-                        _token: '{{ csrf_token() }}' // Include CSRF token for security
-                    },
-                    success: function(response) {
-                        // Handle success (e.g., reload the page or remove deleted rows)
-                        location.reload(); // Reload page after successful deletion
-                    },
-                    error: function(xhr) {
-                        // Handle error
-                        alert('Error occurred while deleting students.');
-                    }
+            $('#delete-inquiry').click(function() {
+                // Gather all checked checkbox values
+                var selected = [];
+                $('.inquiry-checkbox:checked').each(function() {
+                    selected.push($(this).val());
                 });
-            }
-        });
-    });
-    $(document).ready(function() {
-        $('.teachers-table').DataTable({
-            responsive: true
-        });
-        $('.student-table').DataTable({
-            responsive: true
-        });
 
-    });
+                if (selected.length === 0) {
+                    Swal.fire({
+                        title: 'Warning!',
+                        text: 'Please select at least one inquiry to delete.',
+                        icon: 'warning',
+                        confirmButtonText: 'OK'
+                    });
+
+                    return;
+                }
+
+                // Confirm deletion
+                if (confirm('Are you sure you want to delete the selected inquiries?')) {
+                    $.ajax({
+                        url: "{{ route('inquiry.destroy.bulk') }}", // Update with your route
+                        type: 'DELETE',
+                        data: {
+                            ids: selected,
+                            _token: '{{ csrf_token() }}' // Include CSRF token for security
+                        },
+                        success: function(response) {
+                            // Handle success (e.g., reload the page or remove deleted rows)
+                            location.reload(); // Reload page after successful deletion
+                        },
+                        error: function(xhr) {
+                            // Handle error
+                            alert('Error occurred while deleting inquires.');
+                        }
+                    });
+                }
+            });
+            $('#delete-student').click(function() {
+                // Gather all checked checkbox values
+                var selected = [];
+                $('.student-checkbox:checked').each(function() {
+                    selected.push($(this).val());
+                });
+
+                if (selected.length === 0) {
+                    // alert('Please select at least one student to delete.');
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Please select at least one tutor to delete.',
+                        icon: 'error', // Use 'error' instead of 'danger'
+                        confirmButtonText: 'OK'
+                    });
+                    return;
+                }
+
+                // Confirm deletion
+                if (confirm('Are you sure you want to delete the selected students?')) {
+                    $.ajax({
+                        url: "{{ route('student.destroy.bulk') }}", // Update with your route
+                        type: 'DELETE',
+                        data: {
+                            ids: selected,
+                            _token: '{{ csrf_token() }}' // Include CSRF token for security
+                        },
+                        success: function(response) {
+                            // Handle success (e.g., reload the page or remove deleted rows)
+                            location.reload(); // Reload page after successful deletion
+                        },
+                        error: function(xhr) {
+                            // Handle error
+                            alert('Error occurred while deleting students.');
+                        }
+                    });
+                }
+            });
+        });
+        $(document).ready(function() {
+            $('.teachers-table').DataTable({
+                responsive: true
+            });
+            $('.student-table').DataTable({
+                responsive: true
+            });
+
+        });
     </script>
 
 </body>
 
 </html>
 <script>
+    $(document).ready(function() {
 
-$(document).ready(function() {
 
+        // Optionally, close the dropdown if clicking outside of it
+        // $(d9876
+        $('.notification-dropdown').on('click', 'li', function() {
+            var notificationId = $(this).data('id');
+            var isRead = $(this).hasClass('read');
 
-    // Optionally, close the dropdown if clicking outside of it
-    // $(d9876
-    $('.notification-dropdown').on('click', 'li', function() {
-        var notificationId = $(this).data('id');
-        var isRead = $(this).hasClass('read');
-
-        $.ajax({
-            url: "{{ route('mark.notifications.read') }}", // Define this route in your web.php
-            type: "POST",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data: {
-                notification_id: notificationId,
-                read: !isRead
-            },
-            success: function(response) {
-                // Update the notification style based on the new read status
-                if (response.status === 'success') {
-                    if (isRead) {
-                        $(this).removeClass('read').addClass('unread');
-                        updateNotificationCount(1); // Increment the count for unread
-                    } else {
-                        $(this).removeClass('unread').addClass('read');
-                        updateNotificationCount(-1); // Decrement the count for read
+            $.ajax({
+                url: "{{ route('mark.notifications.read') }}", // Define this route in your web.php
+                type: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    notification_id: notificationId,
+                    read: !isRead
+                },
+                success: function(response) {
+                    // Update the notification style based on the new read status
+                    if (response.status === 'success') {
+                        if (isRead) {
+                            $(this).removeClass('read').addClass('unread');
+                            updateNotificationCount(1); // Increment the count for unread
+                        } else {
+                            $(this).removeClass('unread').addClass('read');
+                            updateNotificationCount(-1); // Decrement the count for read
+                        }
                     }
-                }
-            }.bind(this) // Bind `this` to refer to the clicked notification item
+                }.bind(this) // Bind `this` to refer to the clicked notification item
+            });
         });
+
+        function updateNotificationCount(change) {
+            var countElement = $('#notificationCount');
+            var currentCount = parseInt(countElement.text());
+            countElement.text(currentCount + change);
+        }
     });
 
-    function updateNotificationCount(change) {
-        var countElement = $('#notificationCount');
-        var currentCount = parseInt(countElement.text());
-        countElement.text(currentCount + change);
+    function cancel() {
+        $('.alert').addClass('d-none')
     }
-});
-
-function cancel() {
-    $('.alert').addClass('d-none')
-}
-$(document).on('select2:open', function(e) {
-    let scrollPos = $(window).scrollTop();
-    setTimeout(function() {
-        $(window).scrollTop(scrollPos);
-    }, 0);
-});
-$(document).ready(function($) {
-    $('.country').select2();
-});
+    $(document).on('select2:open', function(e) {
+        let scrollPos = $(window).scrollTop();
+        setTimeout(function() {
+            $(window).scrollTop(scrollPos);
+        }, 0);
+    });
+    $(document).ready(function($) {
+        $('.country').select2();
+    });
 </script>

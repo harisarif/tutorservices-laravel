@@ -14,12 +14,12 @@
         rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}" />
     <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" type="image/png" />
 
     <link href="{{asset('css/sweetalert2.min.css')}}" rel="stylesheet">
     <script src="{{asset('js/sweetalert2.min.js')}}"></script>
-    <link rel="stylesheet" href="{{asset('css/select2.css')}}" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{asset('css/select2.css')}}"  crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{asset('css/admin.css')}}" />
 </head>
 
@@ -322,8 +322,8 @@
 
 
 <!-- Custom scripts for all pages-->
-<script src="{{asset('js/js/jquery.min.js')}}"></script>
-<script src="{{asset('js/js/sb-admin-2.min.js')}}"></script>
+<script src="{{asset('js/jquery.min.js')}}"></script>
+<script src="{{asset('js/sb-admin-2.min.js')}}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
