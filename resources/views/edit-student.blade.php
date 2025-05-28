@@ -1,13 +1,50 @@
-@extends('layouts.admin')
-@section('title')
-Edexcel Stundent
-@endsection
-<script src="{{asset('js/js/jquery.min.js')}}"></script>
+@extends('layouts.app')
+
+<link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}" />
+<link rel="stylesheet" href="{{asset('css/style1.css')}}" />
+<!-- Select2 CSS -->
+<link href="{{asset('js/select2.css')}}" rel="stylesheet" />
+<style>
+    .modalBox {
+        display: none !important;
+    }
+
+    .loader {
+        display: none !important;
+    }
+
+    footer {
+        display: none !important;
+    }
+
+    .alert-danger {
+        position: fixed;
+        /* Keeps it on top of everything */
+        top: 10px;
+        /* Adjust as needed */
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1050;
+        /* Bootstrap modal z-index is 1040, so this ensures it's on top */
+        width: 50%;
+        text-align: center;
+    }
+
+    .select2-container .select2-selection--single {
+        height: 38px !important;
+        /* Adjust height as needed */
+        line-height: 38px !important;
+    }
+</style>
+
 @if ($errors->any())
-<div class="alert alert-danger">
-    <ul>
+<div class="alert alert-danger opacity-100" id="close">
+    <ul style="margin: 0; padding: 10px 0;">
         @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
+        <li style="display:flex; justify-content: space-between; align-items: center;">
+            {{ $error }}
+            <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true"></i>
+        </li>
         @endforeach
     </ul>
 </div>
@@ -49,15 +86,15 @@ Edexcel Stundent
         <!-- Divider -->
         <hr class="sidebar-divider">
         <!-- Nav Item - Tables -->
-        <li class="nav-item">
-            <a class="nav-link py-2" id="profile-tab" data-toggle="tab"
-                href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+        <li class="nav-item active">
+            <a class="nav-link py-2"
+                href="{{route('all.tutors')}}">
                 <i class="fas fa-chalkboard-teacher"></i>
                 <span>{{ __('messages.Teacher') }}</span>
             </a>
         </li>
         <hr class="sidebar-divider">
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link py-2" href="{{route('all.students')}}">
                 <i class="fa-solid fa-user-graduate"></i>
                 <span>{{ __('messages.Students') }}</span>
@@ -92,10 +129,10 @@ Edexcel Stundent
     <div id="content-wrapper" class="d-flex flex-column">
 
         <!-- Main Content -->
-        <div id="content">
+        <div id="contents">
 
             <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-0 static-top shadow">
                 <div class="button-div">
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3 bg-success text-white">
                         <i class="fa fa-bars"></i>
@@ -171,96 +208,171 @@ Edexcel Stundent
                 </ul>
 
             </nav>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                style="display: none;">@csrf
-            </form>
-            <!-- End of Topbar -->
 
-            <!-- Begin Page Content -->
-            <div class="">
-                <div class="tab-content mx-3" id="myTabContent">
-                    <div class="blog-heading">
-                        <h1 class="text-center border-bottom text-success fw-bold">Edit Student</h1>
-                    </div>
 
-                    <form action="{{ route('students.update', $student->id) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-
-                        <div class="form-group">
-                            <label for="name">Name:</label><br>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ $student->name }}">
+            <section>
+               <form action="{{route('students.update', $student->id) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                 <div class="profile-header text-center">
+                <div class="profile-pic-container">
+                    <label for="imageUpload">
+                        <img src="{{asset('storage/' . $student->profileImage)}}" alt="Avatar" class="avatar img-thumbnail" id="profileImage">
+                        <div class="upload-icon">
+                            <i class="fas fa-camera"></i>
                         </div>
-
-                        <div class="form-group">
-                            <label for="email">Email:</label><br>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ $student->email }}">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phone">Phone:</label><br>
-                            <input type="tel" class="form-control" id="phone" name="phone" value="{{ $student->phone }}">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="class_start_time">Class Start Time:</label><br>
-                            <input type="time" class="form-control" id="class_start_time" name="class_start_time" value="{{ $student->class_start_time }}">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="class_end_time">Class End Time:</label><br>
-                            <input type="time" class="form-control" id="class_end_time" name="class_end_time" value="{{ $student->class_end_time }}">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="whatsapp_number">Whatsapp Number:</label><br>
-                            <input type="tel" class="form-control" id="whatsapp_number" name="whatsapp_number" value="{{ $student->whatsapp_number }}">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="country">Country:</label><br>
-                            <select name="country" id="country" class="form-select">
-                                @foreach($countries as $country)
-                                <option value="{{ $country }}" {{ $student->country == $country ? 'selected' : '' }}>{{ $country }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="city">City:</label><br>
-                            <input type="text" class="form-control" id="city" name="city" value="{{ $student->city }}">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="subject">Subject:</label><br>
-                            {{-- <input type="text" class="form-control" id="subject" name="subject" value="{{ $student->subject }}"> --}}
-                            <select name="subject" id="subject" class="form-select">
-                                <option value="English" {{ $student->subject == "English" ? 'selected' : '' }}>English</option>
-                                <option value="Mathematics" {{ $student->subject == "Mathematics" ? 'selected' : '' }}>Mathematics</option>
-                                <option value="Physics" {{ $student->subject == "Physics" ? 'selected' : '' }}>Physics</option>
-                                <option value="Chemistry" {{ $student->subject == "Chemistry" ? 'selected' : '' }}>Chemistry</option>
-                                <option value="Urdu" {{ $student->subject == "Urdu" ? 'selected' : '' }}>Urdu</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="city">Password:</label><br>
-                            <input type="password" class="form-control" id="password" name="password" value="{{ $student->password }}">
-                        </div>
-
-
-                        <button type="submit" class="btn btn-primary">Update</button>
-                    </form>
+                    </label>
                 </div>
-                @endsection
-                @section('js')
-                <script>
-                    $(document).ready(function($) {
-                        setTimeout(function() {
-                            $(".alert").fadeOut("slow");
-                        }, 5000);
-                    })
-                </script>
-                @endsection
-                @section('js')
-                @endsection
+                <input type="file" name="profileImage" id="imageUpload" class="form-control d-none" accept="image/*">
+                
+                
+            </div> 
+    
+            <!-- Personal Information & Education -->
+            <div class="row mt-4">
+                <div class="col-md-6 d-flex">
+                    <div class="card h-100 w-100 ms-3">
+                        <div class="card-body">
+                            <h5 class="section-title"><i class="fas fa-user icon"></i> Personal Information</h5>
+                        
+                            <div class="mb-2">
+                                <label class="form-label"><strong style="color: #1cc88a;">First name:</strong></label>
+                                <input type="text" class="form-control" id="fullName" name="name"  value="{{ $student->name}}">
+                            </div>
+                            
+                            <div class="mb-2">
+                                <label class="form-label"><strong style="color: #1cc88a;">Email:</strong></label>
+                                <input type="email" class="form-control"  name="email"id="email" value="{{ $student->email}}">
+                            </div>         
+                        
+                            <div class="mb-2">
+                                <label class="form-label"><strong style="color: #1cc88a;">Phone:</strong></label>
+                               <input  class="form-control w-100" required name="phone" value="{{ $student->phone}}" id="phone" type="text" placeholder="e.g +92XXXXXXXXXX" style="border: 1px solid #ddd; height: 44px; box-shadow: none;">
+                            </div>
+                        
+                            <div class="mb-2">
+                            <label for="gender" class="form-label fw-bold" style="color: #1cc88a;">Gender</label>
+                            <select name="gender" id="gender" class="form-select" required> 
+                            <option value="male" {{ $student->gender == 'male' ? 'selected' : '' }}>Male</option>
+                            <option value="female" {{ $student->gender == 'female' ? 'selected' : '' }}>Female</option>
+                            <option value="other" {{ $student->gender == 'other' ? 'selected' : '' }}>Other</option>
+                        </select>
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-md-6 d-flex">
+                    <div class="card h-100 w-100 mx-3">
+                        <div class="card-body">
+                            <h5 class="section-title">
+                                <i class="fas fa-graduation-cap icon"></i> Education & Qualifications
+                            </h5>
+                              <div class="mb-2">
+                            <label for="address" class="form-label fw-bold" style="color: #1cc88a;">Status</label>
+                            <select class="form-select school_class" id="qualification" name="availability_status">
+                                @php
+                                    $selectedStatus = $student->availability_status ?? ''; // Ensure it's defined
+                                @endphp
+                            
+                                @if($selectedStatus && !in_array($selectedStatus, ['Online', 'Physical', 'Both']))
+                                    <option value="{{ $selectedStatus }}" selected>{{ ucfirst($selectedStatus) }}</option>
+                                @endif
+                            
+                                <option value="Physical" @if($selectedStatus === 'Physical') selected @endif>Physical</option>
+                                <option value="Both" @if($selectedStatus === 'Both') selected @endif>Both</option>
+                                <option value="">Others</option>
+                            </select>
+                            
+                            </div>
+                                       <div class="mb-2">
+    <label for="grade" class="form-label fw-bold" style="color: #1cc88a;">Grade</label>
+    <select name="grade" class="form-select select2" id="grade">
+        @foreach($schoolClasses as $class)
+            <option value="{{ $class->id }}" {{ (isset($student->grade) && $student->grade == $class->id) ? 'selected' : '' }}>
+                {{ $class->name }}
+            </option>
+        @endforeach
+    </select>
+</div>
+
+
+    
+                     <div class="mb-2">
+    <label for="subject" class="form-label fw-bold" style="color: #1cc88a;">Subject</label>
+    <select name="subject[]" class="form-control select2" id="subject" multiple>
+        @php
+            // Safely decode stored value
+            $selectedsubjects = is_array($student->subject)
+                ? $student->subject
+                : explode(',', $student->subject ?? '');
+
+            // Get all available subjects with fallback
+            $allSubjects = config('subjects.subjects', []);
+        @endphp
+
+        @foreach($allSubjects as $subject)
+            <option value="{{ $subject }}" {{ in_array($subject, $selectedsubjects) ? 'selected' : '' }}>
+                {{ ucfirst(str_replace('_', ' ', $subject)) }}
+            </option>
+        @endforeach
+    </select>
+</div>
+                      <div class="mb-2">
+                            <label for="desciption" class="form-label fw-bold"  style="color: #1cc88a;">Description</label>
+                        <input type="text" class="form-control" id="desciption" name="description" value="{{$student->description}}" style="border: 2px solid #dee2e6;">
+                        </div>  
+                    </div>
+                </div>
+            </div>
+    
+            <div class="d-flex justify-content-end mt-4 mb-3">
+        <button type="submit" class="btn mt-2 mb-2 animated-button" style="background-color: #198754; color: white; margin-right: 25px;">
+            Submit
+        </button>
+    </div>
+</form>
+            </section>
+
+
+        </div>
+
+
+        <div class="sticky-footer  bg-gradient-success" style="padding:2rem 0">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto text-white">
+                    <span>Copyright &copy;Edexcel Academy & Educational Consultancy</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+@endsection
+
+@section('js')
+
+<!-- Select2 JS -->
+<script src="{{asset('js/select2.min.js')}}"></script>
+<!-- Include jQuery (if not already) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include Select2 -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#subject').select2({
+            placeholder: "Select subjects",
+            allowClear: true
+        });
+    });
+</script>
+
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+@endsection

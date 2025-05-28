@@ -606,7 +606,7 @@ class StudentController extends Controller
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
-    }
+    }     
     public function update(Request $request, $id)
     {
         $rules = [
