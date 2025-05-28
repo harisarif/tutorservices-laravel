@@ -206,20 +206,23 @@
 <form action="{{route('students.update', $student->id) }}" id="" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
-                                 {{-- <div class="profile-header text-center">
-                 <div class="profile-pic-container"> 
-                    <label for="imageUpload">
-                        <img src="{{asset('storage/' . $student->profileImage)}}" alt="Avatar" class="avatar img-thumbnail" >
-                        <div class="upload-icon">
-                            <i class="fas fa-camera"></i>
-                        </div>
-                    </label>
-               
-                <input type="file" name="profileImage"  class="form-control d-none" >
-                
-                
-            </div>  --}}
-    
+                               <div class="profile-header text-center">
+    <div class="profile-pic-container">
+        <label for="imageUpload" style="cursor: pointer;">
+            <img src="{{ asset('storage/' . $student->profileImage) }}" alt="Avatar" class="avatar img-thumbnail" id="profilePreview">
+            <div class="upload-icon">
+                <i class="fas fa-camera"></i>
+            </div>
+        </label>
+
+        <!-- File input -->
+        <input type="file" name="profileImage" id="imageUpload" class="form-control d-none" accept="image/*">
+
+        <!-- Hidden input to retain old image -->
+        <input type="hidden" name="oldImage" value="{{ $student->profileImage }}">
+    </div>
+</div>
+
             <!-- Personal Information & Education -->
             <div class="row mt-4">
                 <div class="col-md-6 d-flex">
@@ -241,7 +244,23 @@
                                 <label class="form-label"><strong style="color: #1cc88a;">Phone:</strong></label>
                                <input  class="form-control w-100"  name="phone" value="{{ $student->phone}}" id="phone" type="text" placeholder="e.g +92XXXXXXXXXX" style="border: 1px solid #ddd; height: 44px; box-shadow: none;">
                             </div>
-                        
+                             <div class="mb-2">
+                            <label for="address" class="form-label fw-bold" style="color: #1cc88a;">Status</label>
+                            <select class="form-select school_class" id="qualification" name="availability_status">
+                                @php
+                                    $selectedStatus = $student->availability_status ?? ''; // Ensure it's defined
+                                @endphp
+                            
+                                @if($selectedStatus && !in_array($selectedStatus, ['Online', 'Physical', 'Both']))
+                                    <option value="{{ $selectedStatus }}" selected>{{ ucfirst($selectedStatus) }}</option>
+                                @endif
+                            
+                                <option value="Physical" @if($selectedStatus === 'Physical') selected @endif>Physical</option>
+                                <option value="Both" @if($selectedStatus === 'Both') selected @endif>Both</option>
+                                <option value="">Others</option>
+                            </select>
+                            
+                            </div>
                             <div class="mb-2">
                             <label for="gender" class="form-label fw-bold" style="color: #1cc88a;">Gender</label>
                             <select name="gender" id="gender" class="form-select" > 
@@ -261,23 +280,7 @@
                             <h5 class="section-title">
                                 <i class="fas fa-graduation-cap icon"></i> Education & Qualifications
                             </h5>
-                              <div class="mb-2">
-                            <label for="address" class="form-label fw-bold" style="color: #1cc88a;">Status</label>
-                            <select class="form-select school_class" id="qualification" name="availability_status">
-                                @php
-                                    $selectedStatus = $student->availability_status ?? ''; // Ensure it's defined
-                                @endphp
-                            
-                                @if($selectedStatus && !in_array($selectedStatus, ['Online', 'Physical', 'Both']))
-                                    <option value="{{ $selectedStatus }}" selected>{{ ucfirst($selectedStatus) }}</option>
-                                @endif
-                            
-                                <option value="Physical" @if($selectedStatus === 'Physical') selected @endif>Physical</option>
-                                <option value="Both" @if($selectedStatus === 'Both') selected @endif>Both</option>
-                                <option value="">Others</option>
-                            </select>
-                            
-                            </div>
+                             
                                        <div class="mb-2">
     <label for="grade" class="form-label fw-bold" style="color: #1cc88a;">Grade</label>
     <select name="grade" class="form-select select2" id="grade">
@@ -289,7 +292,28 @@
     </select>
 </div>
 
+               <div class="mb-2">
+    <label for="country" class="form-label fw-bold" style="color: #1cc88a;">Country</label>
+    <select name="country" class="form-select select2" id="country">
+        @php
+            $countries = config('countries_assoc.countries');
+            $selectedCountry = $student->country ?? '';
+        @endphp
 
+        @foreach($countries as $country)
+            <option value="{{ $country }}" {{ $selectedCountry === $country ? 'selected' : '' }}>
+                {{ ucfirst(str_replace('_', ' ', $country)) }}
+            </option>
+        @endforeach
+    </select>
+</div>
+
+ <div class="mb-2">
+                            <label for="city" class="form-label fw-bold" style="color: #1cc88a;">City</label>
+                            <input class="form-select city" value="{{ $student->city}}" id="city" name="city">
+                              
+                            
+                            </div>
     
                      <div class="mb-2">
     <label for="subject" class="form-label fw-bold" style="color: #1cc88a;">Subject</label>
@@ -363,9 +387,18 @@
         });
     });
 </script>
-
-
-
+<script>
+    document.getElementById('imageUpload').addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                document.getElementById('profilePreview').src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
 @endsection
 
 

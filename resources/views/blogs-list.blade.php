@@ -213,20 +213,21 @@
                                                         </button>
                                                         <ul class="dropdown-action d-none">
                                                             <li>
-                                                                <a href="{{ route('edit-teacher', $blog->id) }}" class="btn btn-sm text-justify">
+                                                                <a href="{{ route('blog.edit', $blog->id) }}" class="btn btn-sm text-justify">
                                                                     <i class="fa-regular fa-pen-to-square" style="color: #4e73df;"></i>
                                                                     <span class="mx-1">Edit</span>
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST" style="display:inline;">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit" class="btn btn-sm d-flex align-items-center px-0" onclick="return confirm('Are you sure?')" style="color: black;">
-                                                                        <i class="fa-solid fa-trash-can mx-1" style="color: #e74a3b;"></i>
-                                                                        <span class="mx-1">Delete</span>
-                                                                    </button>
-                                                                </form>
+                                            
+    <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST" class="single-delete-form" style="display:inline;">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-sm d-flex align-items-center px-0 delete-btn" style="color: black;">
+            <i class="fa-solid fa-trash-can mx-1" style="color: #e74a3b;"></i>
+            <span class="mx-1">Delete</span>
+        </button>
+    </form>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -429,7 +430,30 @@
         setTimeout(function() {
             $(window).scrollTop(scrollPos);
         }, 0);
+    });$(document).ready(function() {
+    // Bulk delete script already here...
+
+    // Single delete with SweetAlert confirmation
+    $('.single-delete-form').on('submit', function(e) {
+        e.preventDefault(); // prevent the form from submitting immediately
+
+        const form = this; // reference to the current form
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This will permanently delete the blog.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit(); // submit the form if confirmed
+            }
+        });
     });
+});
+
 </script> <!-- Select2 JS -->
 
 @endsection

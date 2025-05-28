@@ -68,16 +68,48 @@ class BlogController extends Controller
      */
     public function edit(string $id)
     {
-        //
+         $blogs = Blog::find($id);
+        return view('edit-blog', compact('blogs'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+   public function update(Request $request, $id)
+{
+    // Find the blog post
+    $blog = Blog::findOrFail($id);
+
+    // Validate the input
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'required',
+        'image' => 'nullable|mimes:jpeg,jpg,png|max:2048',
+    ]);
+
+    // If a new image is uploaded
+    if ($request->hasFile('image')) {
+        // Delete old image if it exists
+        if ($blog->image && Storage::disk('public')->exists($blog->image)) {
+            Storage::disk('public')->delete($blog->image);
+        }
+
+        // Store the new image
+        $imagePath = $request->file('image')->store('blogs', 'public');
+        $blog->image = $imagePath;
     }
+
+    // If no new image is uploaded, the existing one stays the same
+
+    // Update other fields
+    $blog->title = $request->input('title');
+    $blog->description = $request->input('description');
+
+    $blog->save();
+
+    return redirect()->route('all.blogs')->with('success', 'Blog updated successfully!');
+}
+
 
     /**
      * Remove the specified resource from storage.

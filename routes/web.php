@@ -127,22 +127,22 @@ Route::post('/hire-tutor/create', [StudentController::class, 'create'])->name('s
 Route::post('/hire-tutor-new/create', [StudentController::class, 'newcreate'])->name('newstudent-create');
 Route::post('/inquiry/create', [EdexcelComplaintController::class, 'createComplaints'])->name('inquiry-create');
 Route::get('/student-list/{id}/edit', [StudentController:: class, 'edit'])->name('edit-student');
-Route::put('/student-list/{id}', [StudentController:: class, 'update'])->name('students.update');
+Route::get('/inqury-list/{id}', [InquiryController:: class, 'edit'])->name('inqury.edit');
 Route::delete('/student-list/{id}', [StudentController:: class, 'destroy'])->name('students.destroy');
-
+Route::put('/student-list/{id}', [StudentController:: class, 'update'])->name('students.update');
 Route::get('/students-list', [StudentController::class, 'showStudentsList'])->name('students.list');
 Route::get('/inquiries-list', [StudentController::class, 'inquiriesList'])->name('inquiries.list');
 Route::get('/students-pdf', [StudentController::class, 'studentsPDF'])->name('students.pdf');
-
+Route::put('/inquiry-list/{id}', [InquiryController:: class, 'update'])->name('inquiry.update');
 Route::get('/school-classes', [StudentController::class, 'indexClasses']);
 Route::get('/subjects/{schoolClassId}', [StudentController::class, 'getSubjects']);
-// end 
+Route::delete('/inquiry-destroy-list/{id}', [InquiryController:: class, 'destroy'])->name('inquiry.destroy');
 
 // routes/web.php
 // routes/web.php
-
+Route::get('/blog-list/{id}', [BlogController:: class, 'edit'])->name('blog.edit');
 Route::resource('blogs', BlogController::class);
-
+Route::put('/blogs-edit-list/{id}', [BlogController:: class, 'update'])->name('blogs.update');
 Route::delete('/blog/destroy-bulk', [BlogController::class, 'destroyBulk'])->name('blogs.destroy.bulk');
 Route::get('/verify-email', [VerificationController::class, 'show'])->name('verification.notice');
 Route::post('/send-verification-link', [VerificationController::class, 'sendLink'])->name('verification.send');

@@ -9,7 +9,7 @@
     <meta name="description" content="Home Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
     <!-- <title>Edexcel Inquiries</title> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -236,19 +236,23 @@
                                                 </button>
                                                 <ul class="dropdown-action dropdown-menu" id="dropdownInq">
                                                     <li class="d-flex align-items-center dropdown-item" style="border-bottom: 1px solid #ddd; color: black;">
-                                                        <a href="{{ route('edit-student', $inquiry->id) }}" class="btn btn-sm">
+                                                        <a href="{{ route('inqury.edit', $inquiry->id) }}" class="btn btn-sm">
                                                             <i class="fa-regular fa-pen-to-square" style="color: #4e73df;"></i>
                                                             <span class="mx-1">Edit</span>
                                                         </a>
                                                     </li>
                                                     <li class="dropdown-item">
-                                                        <form action="{{ route('inquiries.destroy', $inquiry->id) }}" method="POST" style="display:inline;">
+                                                        <form action="{{ route('inquiry.destroy', $inquiry->id) }}" method="POST" style="display:inline;">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-sm d-flex align-items-center" onclick="return confirm('Are you sure?')" style="color: black; margin-left: -11%;">
-                                                                <i class="fa-solid fa-trash-can mx-1" style="color: #e74a3b;"></i>
-                                                                <span class="mx-1">Delete</span>
-                                                            </button>
+                                                            <button type="button"
+        class="btn btn-sm d-flex align-items-center single-delete-btn"
+        data-id="{{ $inquiry->id }}"
+        style="color: black; margin-left: -11%;">
+    <i class="fa-solid fa-trash-can mx-1" style="color: #e74a3b;"></i>
+    <span class="mx-1">Delete</span>
+</button>
+
                                                         </form>
                                                     </li>
                                                 </ul>
@@ -330,6 +334,9 @@
 <script src="{{asset('js/js/bootstrap.bundle.min.js')}}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     $(document).ready(function() {
@@ -465,6 +472,41 @@
             $(window).scrollTop(scrollPos);
         }, 0);
     });
+</script><script>
+    $(document).ready(function () {
+        $('.single-delete-btn').click(function () {
+            var inquiryId = $(this).data('id');
+            var token = '{{ csrf_token() }}';
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'This inquiry will be deleted permanently.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "/inquiry/" + inquiryId,
+                        type: 'POST',
+                        data: {
+                            _method: 'DELETE',
+                            _token: token
+                        },
+                        success: function (response) {
+                            $('#inquiry-row-' + inquiryId).remove();
+                            Swal.fire('Deleted!', 'Inquiry has been deleted.', 'success');
+                        },
+                        error: function () {
+                            Swal.fire('Error!', 'Something went wrong.', 'error');
+                        }
+                    });
+                }
+            });
+        });
+    });
 </script>
+
 <!-- Select2 JS -->
 <script src="{{asset('js/inspect.js')}}"></script>

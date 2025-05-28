@@ -120,8 +120,8 @@ class StudentController extends Controller
     public function inquiriesList()
     {
 
-        $inquiries = Inquiry::all();
-        return view('inquiry-list', compact('inquiries'));
+        $inquires = Inquiry::all();
+        return view('inquiry-list', compact('inquires'));
     }
     public function indexClass()
     {
@@ -607,39 +607,60 @@ class StudentController extends Controller
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
     }     
-    public function update(Request $request, $id)
+   public function update(Request $request, $id)
+{   
+    $rules = [
+        'email' => "required|string|email|max:255|unique:student,email,$id",
+        'phone' => 'nullable|string|max:20',
+        'availability_status' => 'nullable|string|max:255',
+        'country' => 'nullable|string|max:100',
+        'city' => 'nullable|string|max:100',
+        'subject' => 'required|array',
+        'subject.*' => 'required|string|max:255',
+        'profileImage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ];
+
+    $validator = Validator::make($request->all(), $rules);
+
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+
     
-    {
-        $rules = [
-            'email' => 'required|string|email|max:255',
-        ];
+    $student = Student::findOrFail($id);
 
-        $validator = Validator::make($request->all(), $rules);
+    // Update student fields
+    $student->name = $request->input('name');
+    $student->email = $request->input('email');
+    $student->phone = $request->input('phone');
+    $student->gender = $request->input('gender');
+    $student->country = $request->input('country');
+    $student->city = $request->input('city');
+    $student->grade = $request->input('grade');
+    $student->description = $request->input('description');
+    $student->subject = implode(',', $request->input('subject'));
+    $student->availability_status = $request->input('availability_status');
 
-        // Check if validation fails
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
+  
+    if ($request->hasFile('profileImage')) {
+        // Delete old image if exists
+        if ($student->profileImage && \Storage::disk('public')->exists($student->profileImage)) {
+            \Storage::disk('public')->delete($student->profileImage);
         }
 
-        $student = Student::findOrFail($id);
-        $student->name = $request->input('name');
-        $student->email = $request->input('email');
-        $student->phone = $request->input('phone');
-
-        $student->country = $request->input('country');
-        $student->city = $request->input('city');
-        $student->subject = $request->input('subject');
-        // $student->c_email = $request->input('email');
-        $student->password = $request->input('password');
-        // $student->c_password = $request->input('password');
-
-        // Save the student instance to the database
-        $student->save();
-
-        return redirect('home')->with('message', 'Student updated successfully');
+        // Store new image
+        $image = $request->file('profileImage');
+        $imagePath = $image->store('students/images', 'public');
+        $student->profileImage = $imagePath;
     }
+
+   
+    $student->save();
+
+    return redirect()->route('students.list')->with('success', 'Student updated successfully.');
+
+}
+
 
     public function destroy($id)
     {

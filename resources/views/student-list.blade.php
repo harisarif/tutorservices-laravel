@@ -2,19 +2,31 @@
 @section('title')
    Edexcel Students
 @endsection 
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="{{asset('js/js/jquery.min.js')}}"></script>
 @section('content')
 
-
 @if (session('success'))
-<div class="alert alert-success" style="z-index: 6;
-    padding: 14px !important;">
-
-    {{ session('success') }}
-    <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
+<div id="success" class="custom-alert alert-success d-flex align-items-center fade show" role="alert">
+    <i class="fas fa-check-circle"></i>
+    <div>
+        <strong>Success!</strong> {{ session('success') }}
+    </div>
+    <button type="button" class="close-btn" data-dismiss="alert" aria-label="Close">
+        &times;
+    </button>
+    <div class="progress-line"></div>
 </div>
 @endif
 
+@if (session('error'))
+<div id="error" class="alert alert-danger" style="z-index: 6; padding: 14px !important;">
+    {{ session('error') }}
+    <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
+    <div class="progress-line"></div>
+</div>
+@endif
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -220,18 +232,19 @@
 
                                                 <ul class="dropdown-action d-none custom-dropdown-menu" style="min-width: 120px;">
                                                     <li>
-                                                        <a href="{{ route('students.update', $student->id) }}" class="dropdown-item">
+                                                        <a href="{{ route('edit-student', $student->id) }}" class="dropdown-item">
                                                             <i class="fa-regular fa-pen-to-square"></i> Edit
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <form action="{{ route('students.destroy', $student->id) }}" method="POST" onsubmit="return confirm('Are you sure?')" style="margin:0;">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="dropdown-item text-danger">
-                                                                <i class="fa-solid fa-trash-can"></i> Delete
-                                                            </button>
-                                                        </form>
+                                                       <form method="POST" action="{{ route('students.destroy', $student->id) }}" class="delete-student-form" id="delete-student-form-{{ $student->id }}">
+    @csrf
+    @method('DELETE')
+    <button type="button" class="dropdown-item text-danger delete-student-btn" data-student-id="{{ $student->id }}">
+        <i class="fa-solid fa-trash-can"></i> Delete
+    </button>
+</form>
+
                                                     </li>
                                                 </ul>
                                             </div>
@@ -290,7 +303,11 @@
     </div>
 
 @endsection
-@section('js')
+@section('js') <!-- Bootstrap Bundle JS (with Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
      document.addEventListener('DOMContentLoaded', function () {
         const toggleButtons = document.querySelectorAll('.dropdown-toggle-btn');
@@ -450,5 +467,75 @@
             $(window).scrollTop(scrollPos);
         }, 0);
     });
+</script><script>
+document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(() => {
+        autoHideAlert("success");
+        autoHideAlert("error");
+    }, 200); 
+    // Added a delay to ensure alerts are available in the DOM
+
+    document.querySelectorAll(".custom-alert .close-btn").forEach((btn) => {
+        btn.addEventListener("click", function() {
+            let alertBox = this.closest(".custom-alert");
+            if (alertBox) {
+                alertBox.classList.add("fade-out");
+                setTimeout(() => alertBox.remove(), 500);
+            }
+        });
+    });
+});
+
+function autoHideAlert(alertId) {
+    let alert = document.getElementById(alertId);
+    if (alert) {
+        let progressBar = alert.querySelector('.progress-line');
+
+        if (progressBar) {
+            // Make the progress bar fill over 30 seconds
+            progressBar.style.transition = "width 20s linear";
+            progressBar.style.width = "100%";
+        }
+
+        // Hide the alert after 30 seconds
+        setTimeout(() => {
+            alert.classList.add("fade-out");
+        }, 20000); // 30 seconds visible
+
+        // Remove the alert completely after fading out
+        setTimeout(() => {
+            alert.remove();
+        }, 20500); // 30.5 seconds total
+    }
+}
+
+
+
+function cancel() {
+    let alert = document.getElementById("error");
+    if (alert) alert.remove();
+}
+</script><script>$(document).ready(function () {
+    // Existing bulk delete logic here...
+
+    // Single delete confirmation
+    $('.delete-student-btn').on('click', function () {
+        const studentId = $(this).data('student-id');
+        const form = $('#delete-student-form-' + studentId);
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'This student will be permanently deleted.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
+});
 </script>
 @endsection
