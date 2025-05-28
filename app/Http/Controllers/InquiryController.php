@@ -138,7 +138,7 @@ class InquiryController extends Controller
 
         return redirect()->route('newhome')->with('success', 'Inquiry created successfully.');
     }
-
+     public function edit($id){ $inqury=Inquiry::find($id);}
     protected function sendAdminInquiryNotification(Inquiry $inquiry)
     {
         $adminEmail = env('email_name'); // Use config, not env()
@@ -259,5 +259,6 @@ class InquiryController extends Controller
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
-    }
+    }   
 }
+   
