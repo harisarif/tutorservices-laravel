@@ -361,7 +361,6 @@
 <script>
     
 
-    $('.country-select').select2()
     $('#countryTeacher').on('change', function() {
 
         var country_id = $(this).val(); // Get the selected country ID

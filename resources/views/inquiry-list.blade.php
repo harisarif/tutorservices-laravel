@@ -316,7 +316,7 @@
 
 </html>
 <script src="{{asset('js/js/jquery.min.js')}}"></script>
-<script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+<!-- <script src="{{asset('js/sb-admin-2.min.js')}}"></script> -->
 <!-- Bootstrap JS (make sure this is included) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Include Popper.js if using Bootstrap 4 -->
@@ -396,8 +396,6 @@
         // Submit the form
         form.submit();
     }
-
-    $('.country-select').select2()
     $('#countryTeacher').on('change', function() {
 
         var country_id = $(this).val(); // Get the selected country ID

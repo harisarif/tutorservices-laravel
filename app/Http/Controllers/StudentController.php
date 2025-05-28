@@ -255,6 +255,35 @@ class StudentController extends Controller
         // Optionally, you can redirect the user or return a response
         // return redirect()->route('newhome')->with('success', 'Student created successfully.');
     }
+    public function edit($id){
+        $schoolClasses = SchoolClass::all();
+        $student = Student::findOrFail($id);
+        $qualification = SchoolClass::where('id', $student->qualification)->value('name') ?? 'Not specified';
+        $student->teaching = unserialize($student->teaching);
+        $storedLanguageCode = $student->language;
+
+        $languages = collect(json_decode($storedLanguageCode, true)) // Decode JSON
+            ->pluck('language') // Extract language codes
+            ->toArray(); // Convert to array
+
+        // Map each language code to its full name from the config file
+        $languageNames = array_map(function ($code) {
+            return config("languages.languages.$code", 'Unknown');
+        }, $languages);
+
+        //country
+
+        $storedCountryCode = $student->country; // Get country code
+        $country = config("countries_assoc.countries.$storedCountryCode", 'Unknown'); // Convert to full name
+
+        $student->curriculum = unserialize($student->curriculum);
+        $countriesPhone = collect(config('phonecountries.countries'));
+        $countries_number_length = collect(config('countries_number_length.countries'));
+        $countries_prefix = collect(config('countries_prefix.countries'));
+        $countries = collect(config('countries_assoc.countries'));
+        return view('edit-student', compact(['student', 'country', 'countriesPhone', 'countries', 'countries_number_length', 'countries_prefix', 'languageNames', 'schoolClasses', 'qualification']));
+   
+    }
     public function student_dashboard(Request $request, $id)
     {
         $user = Auth::user();

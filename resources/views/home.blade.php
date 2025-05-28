@@ -119,20 +119,20 @@
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow mx-1">
 
+                            <div class="notification-icon">
+                                <a href="#" class="nav-link dropdown-toggle" id="alertsDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-bell fa-fw text-success"></i>
+                                    <span class="badge badge-danger badge-counter"
+                                        id="notificationCount">{{ auth()->user()->unreadNotifications->count() }}</span>
+                                
+                                </a>
 
-                        <a href="#" class="nav-link dropdown-toggle" id="alertsDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-bell fa-fw text-success"></i> {{-- Replace with your icon --}}
-                            <!-- @if(auth()->user()->unreadNotifications->count() > 0) -->
-                            <span class="badge badge-danger badge-counter"
-                                id="notificationCount">{{ auth()->user()->unreadNotifications->count() }}</span>
-                            <!-- @endif -->
-                        </a>
 
-                        <!-- Dropdown - Alerts -->
-                        @include('notifications')
-
-                    </li>
+                            </div>
+                            <!-- Dropdown - Alerts -->
+                            @include('notifications')
+                        </li>
                     <li class="nav-item dropdown no-arrow d-flex align-items-center">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -430,7 +430,16 @@
 @section('js')
 <script>
     $(document).ready(function() {
-
+        $('.text-success').on('click', function (e) {
+    e.preventDefault();
+    const dropdown = $('#notificationDropdown');
+    
+    if (dropdown.hasClass('d-block')) {
+        dropdown.removeClass('d-block').addClass('d-none');
+    } else {
+        dropdown.removeClass('d-none').addClass('d-block');
+    }
+});
 
         $('#select-all-student').click(function() {
             // Check/uncheck all checkboxes based on the main checkbox

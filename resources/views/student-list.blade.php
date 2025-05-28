@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-   Edexcel Blogs
+   Edexcel Students
 @endsection 
 <script src="{{asset('js/js/jquery.min.js')}}"></script>
 @section('content')
@@ -113,7 +113,6 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow mx-1">
 
                         <li class="nav-item dropdown no-arrow mx-1">
 
@@ -382,7 +381,6 @@
         // Submit the form
         form.submit();
     }
-    $('.country-select').select2()
     $('#countryTeacher').on('change', function() {
 
         var country_id = $(this).val(); // Get the selected country ID

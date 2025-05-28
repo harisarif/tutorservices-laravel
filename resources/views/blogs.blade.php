@@ -7,13 +7,12 @@
     <meta name="author" content="">
     <meta name="description" content="Home Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
     <!-- <title>Edexcel Dashbord</title> -->
-    <link rel="stylesheet" href="{{asset('css/fontawesome-free/css/all.min.css')}}"/>
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
      <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 </head>
 @php
@@ -478,8 +477,8 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                 <div class="container-fluid" >
                     <div class="tab-content" id="myTabContent">
                     <div class="blog-heading">
-        <h1 class="text-center border-bottom text-success fw-bold">Add New Blog</h1>
-    </div>
+                <h1 class="text-center border-bottom text-success fw-bold">Add New Blog</h1>
+            </div>
         <div class="row">
             <div class="col-md-12">
             <form method="post" action="{{route('blogs.store')}}"  enctype="multipart/form-data">
@@ -578,8 +577,8 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
     <script src="{{asset('js/js/jquery.min.js')}}"></script>
     <script src="{{asset('js/js/sb-admin-2.min.js')}}"></script>
 
-    <script src="{{asset('js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('js/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('js/js/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('js/select2.min.js')}}"></script>
     <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
 <script>

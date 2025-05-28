@@ -1,7 +1,6 @@
 <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}" />
 <link rel="stylesheet" href="{{asset('css/sb-admin-2.css')}}" />
 <link rel="stylesheet" href="{{asset('css/sweetalert2.min.css')}}">
-<link rel="stylesheet" href="{{asset('css/fontawesome-free/css/all.min.css')}}" />
 <link rel="stylesheet" href="{{asset('css/admin.css')}}" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="{{asset('js/js/jquery.min.js')}}"></script>
@@ -426,8 +425,6 @@
         form.submit();
     }
 
-
-    $('.country-select').select2()
     $('#countryTeacher').on('change', function() {
 
         var country_id = $(this).val(); // Get the selected country ID
