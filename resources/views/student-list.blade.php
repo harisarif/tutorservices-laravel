@@ -220,7 +220,7 @@
 
                                                 <ul class="dropdown-action d-none custom-dropdown-menu" style="min-width: 120px;">
                                                     <li>
-                                                        <a href="{{ route('edit-student', $student->id) }}" class="dropdown-item">
+                                                        <a href="{{ route('students.update', $student->id) }}" class="dropdown-item">
                                                             <i class="fa-regular fa-pen-to-square"></i> Edit
                                                         </a>
                                                     </li>
