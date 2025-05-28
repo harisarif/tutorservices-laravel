@@ -368,10 +368,9 @@ footer.sticky-footer .copyright {
 
         /* Hide dropdown menu by default */
         .dropdown-action {
-            display: none;
             position: absolute;
-            top: 40px; /* Adjust based on your design */
-            left: -7px;
+            top: 10px; /* Adjust based on your design */
+            left: 20px;
             background-color: white;
             min-width: 100px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);

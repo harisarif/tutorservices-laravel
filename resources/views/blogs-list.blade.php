@@ -1,26 +1,9 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="">
-    <meta name="description" content="Home Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
-    <title>Edexcel Dashbord</title>
-    <link rel="stylesheet" href="{{asset('css/fontawesome-free/css/all.min.css')}}" />
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('css/all.min.css')}}" />
-    <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" type="image/png" />
-    <link href="{{asset('css/sweetalert2.min.css')}}" rel="stylesheet">
-    <script src="{{asset('js/sweetalert.min.js')}}"></script>
-    <link rel="stylesheet" href="{{asset('css/admin.css')}}" />
-</head>
+@extends('layouts.admin')
+@section('title')
+   Edexcel Blogs
+@endsection 
+<script src="{{asset('js/js/jquery.min.js')}}"></script>
+@section('content')
 
 @if (session('success'))
 <div class="alert alert-success" style="z-index: 6;
@@ -30,8 +13,6 @@
     <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
 </div>
 @endif
-
-<body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -189,16 +170,16 @@
                         <div id="statusMessage" style="display:none;" class="alert alert-success"></div>
                         <div class=" AB-sb">
 
-                            <table class="table teachers-table">
+                            <table class="table teachers-table border">
                                 <thead>
                                     <tr>
-                                        <th><input class="form-check-input" type="checkbox" id="select-all">
+                                        <th class="border"><input class="form-check-input" type="checkbox" id="select-all">
                                             <label class="form-check-label" for="select-all"></label>
                                         </th>
-                                        <th>Title</th>
-                                        <th>Description</th>
-                                        <th>Image</th>
-                                        <th>Action</th>
+                                        <th class="border">Title</th>
+                                        <th class="border">Description</th>
+                                        <th class="border">Image</th>
+                                        <th class="border">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -212,43 +193,44 @@
                                     @else
                                     @foreach ($blogs as $blog)
                                     <tr id="student-row-{{ $blog->id }}">
-                                        <td>
+                                        <td class="border">
                                             <input class="form-check-input blog-checkbox" type="checkbox" value="{{ $blog->id }}" id="flexCheckChecked-{{ $blog->id }}">
                                             <label class="form-check-label" for="flexCheckChecked-{{ $blog->id }}"></label>
                                         </td>
-                                        <td>{{ $blog->title }}</td>
-                                        <td>{{ strip_tags($blog->description) }}</td>
-                                        <td>
+                                        <td class="border">{{ $blog->title }}</td>
+                                        <td class="border">{{ strip_tags($blog->description) }}</td>
+                                        <td class="border">
                                             @if ($blog->image)
                                             <img src="{{ asset('storage/' . $blog->image) }}" alt="Blog Image" style="width: 50px; height: auto;">
                                             @else
                                             <span>No image</span>
                                             @endif
                                         </td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button class="dropdown-icon" id="dropdownButton-{{ $blog->id }}" onclick="toggleDropdown({{ $blog->id }})">
-                                                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                                                </button>
-                                                <ul class="dropdown-action d-none" id="dropdownMenu-{{ $blog->id }}">
-                                                    <li>
-                                                        <a href="{{ route('edit-teacher', $blog->id) }}" class="btn btn-sm text-justify">
-                                                            <i class="fa-regular fa-pen-to-square" style="color: #4e73df;"></i>
-                                                            <span class="mx-1">Edit</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST" style="display:inline;">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-sm d-flex align-items-center px-0" onclick="return confirm('Are you sure?')" style="color: black;">
-                                                                <i class="fa-solid fa-trash-can mx-1" style="color: #e74a3b;"></i>
-                                                                <span class="mx-1">Delete</span>
-                                                            </button>
-                                                        </form>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                        <td class="border">
+                                        <div class="dropdown blog-dropdown">
+                                                        <button type="button" class="dropdown-icon toggle-dropdown">
+                                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                                        </button>
+                                                        <ul class="dropdown-action d-none">
+                                                            <li>
+                                                                <a href="{{ route('edit-teacher', $blog->id) }}" class="btn btn-sm text-justify">
+                                                                    <i class="fa-regular fa-pen-to-square" style="color: #4e73df;"></i>
+                                                                    <span class="mx-1">Edit</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST" style="display:inline;">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn btn-sm d-flex align-items-center px-0" onclick="return confirm('Are you sure?')" style="color: black;">
+                                                                        <i class="fa-solid fa-trash-can mx-1" style="color: #e74a3b;"></i>
+                                                                        <span class="mx-1">Delete</span>
+                                                                    </button>
+                                                                </form>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+
                                         </td>
                                     </tr>
                                     @endforeach
@@ -267,14 +249,7 @@
             </div>
             <!-- End of Main Content -->
 
-            <!-- Footer -->
-            <footer class="sticky-footer  bg-gradient-success">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto text-white">
-                        <span>Copyright &copy;Edexcel Academy & Educational Consultancy</span>
-                    </div>
-                </div>
-            </footer>
+            
             <!-- End of Footer -->
 
         </div>
@@ -308,25 +283,35 @@
         </div>
     </div>
 
-</body>
+@endsection
+@section('js')
 
-</html>
-
-<!-- Bootstrap core JavaScript-->
-
-
-<!-- Custom scripts for all pages-->
-<script src="{{asset('js/js/jquery.min.js')}}"></script>
-<script src="{{asset('js/sb-admin-2.min.js')}}"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{{asset('js/js/jquery.easing.min.js')}}"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="{{asset('js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('js/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{asset('js/select2.min.js')}}"
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
 <script>
+     document.addEventListener('DOMContentLoaded', function () {
+        // Toggle specific dropdown
+        document.querySelectorAll('.toggle-dropdown').forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation(); // prevent event bubbling
+                const parent = btn.closest('.blog-dropdown');
+                const dropdown = parent.querySelector('.dropdown-action');
+
+                // Hide all other dropdowns
+                document.querySelectorAll('.dropdown-action').forEach(el => {
+                    if (el !== dropdown) el.classList.add('d-none');
+                });
+
+                // Toggle current
+                dropdown.classList.toggle('d-none');
+            });
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function () {
+            document.querySelectorAll('.dropdown-action').forEach(el => {
+                el.classList.add('d-none');
+            });
+        });
+    });
     $(document).ready(function() {
         $('#select-all').click(function() {
             $('.blog-checkbox').prop('checked', this.checked);
@@ -374,30 +359,7 @@
     });
 </script>
 <script>
-    function toggleDropdown(id) {
-        const dropdownMenu = document.getElementById(`dropdownMenu-${id}`);
-
-        // Hide all other dropdowns first
-        document.querySelectorAll('.dropdown-action').forEach(menu => {
-            if (menu !== dropdownMenu) {
-                menu.classList.add('d-none');
-            }
-        });
-
-        // Toggle the selected dropdown menu
-        dropdownMenu.classList.toggle('d-none');
-    }
-
-    // Close all dropdowns if clicking outside
-    document.addEventListener('click', function(event) {
-        const isDropdownButton = event.target.closest('.dropdown-icon');
-        const isDropdownMenu = event.target.closest('.dropdown-action');
-
-        // Close all dropdowns if the click is outside dropdown buttons/menus
-        if (!isDropdownButton && !isDropdownMenu) {
-            document.querySelectorAll('.dropdown-action').forEach(menu => menu.classList.add('d-none'));
-        }
-    });
+    
 
     $('.country-select').select2()
     $('#countryTeacher').on('change', function() {
@@ -470,4 +432,5 @@
         }, 0);
     });
 </script> <!-- Select2 JS -->
-<script src="{{asset('js/inspect.js')}}"></script>
+
+@endsection

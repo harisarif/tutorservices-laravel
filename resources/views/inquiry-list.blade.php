@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="">
     <meta name="description" content="Home Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
-    <title>Edexcel Inquiries</title>
+    <!-- <title>Edexcel Inquiries</title> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link

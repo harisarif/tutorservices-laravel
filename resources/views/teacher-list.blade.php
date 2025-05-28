@@ -3,9 +3,10 @@
 <link rel="stylesheet" href="{{asset('css/sweetalert2.min.css')}}">
 <link rel="stylesheet" href="{{asset('css/fontawesome-free/css/all.min.css')}}" />
 <link rel="stylesheet" href="{{asset('css/admin.css')}}" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-<title>Edexcel Tutors</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="{{asset('js/js/jquery.min.js')}}"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+<!-- <title>Edexcel Tutors</title> -->
 <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" type="image/png" />
 @if (session('success'))
 <div class="alert alert-success" style="z-index: 6;
@@ -339,10 +340,10 @@
 
 
 <!-- Custom scripts for all pages-->
-<script src="{{asset('js/js/jquery.min.js')}}"></script>
+
 <script src="{{asset('js/js/sb-admin-2.min.js')}}"></script>
 <!-- Bootstrap JS (make sure this is included) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <!-- Bootstrap JS -->

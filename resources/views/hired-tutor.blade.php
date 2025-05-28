@@ -14,7 +14,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <style>
 .adjustMobile {
-    height: 24% !important;
+    height: 15% !important;
 }
 
 .custom-pagination nav {

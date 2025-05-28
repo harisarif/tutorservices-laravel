@@ -1,27 +1,9 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="">
-    <meta name="description" content="Home Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
-    <title>Edexcel Students</title>
-    <link rel="stylesheet" href="{{asset('css/fontawesome-free/css/all.min.css')}}" />
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" type="image/png" />
-
-    <link href="{{asset('css/sweetalert2.min.css')}}" rel="stylesheet">
-    <script src="{{asset('js/sweetalert2.min.js')}}"></script>
-    <link rel="stylesheet" href="{{asset('css/select2.css')}}"  crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{{asset('css/admin.css')}}" />
-</head>
+@extends('layouts.admin')
+@section('title')
+   Edexcel Blogs
+@endsection 
+<script src="{{asset('js/js/jquery.min.js')}}"></script>
+@section('content')
 
 
 @if (session('success'))
@@ -32,8 +14,6 @@
     <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
 </div>
 @endif
-
-<body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -195,50 +175,51 @@
                         <div id="statusMessage" style="display:none;" class="alert alert-success"></div>
                         <div class=" AB-sb">
 
-                            <table class="student-table table">
+                            <table class="student-table table border">
                                 <thead>
                                     <tr>
-                                        <th> <input class="form-check-input student-checkbox" type="checkbox">
-                                            <label class="form-check-label" for="select-all"></label>
+                                        <th class="border"> <input class="form-check-input student-checkbox" type="checkbox" style="margin-left: -1px;">
+                                            <label class="form-check-label" for="select-all" style="margin-bottom:1.5rem !important;margin-left:10px;"></label>
                                         </th>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Country</th>
-                                        <th>City</th>
-                                        <th>Subject</th>
-                                        <th>Actions</th>
+                                        <th class="border">ID</th>
+                                        <th class="border">Name</th>
+                                        <th class="border">Email</th>
+                                        <th class="border">Phone</th>
+                                        <th class="border">Country</th>
+                                        <th class="border">City</th>
+                                        <th class="border">Subject</th>
+                                        <th class="border">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if($students->isEmpty())
                                     <tr>
-                                        <td colspan="11" class="text-center">
+                                        <td colspan="11" class="text-center border">
                                             <img src="{{ asset('images/not-found.jpeg') }}" alt="No Blogs Found" style="width: 100%; max-width: 400px; height: auto; margin: 0 auto;">
-                                            <p>No tutors found.</p>
+                                           
                                         </td>
                                     </tr>
                                     @else
                                     @foreach ($students as $student)
                                     <tr id="student-row-{{ $student->id }}">
-                                        <td>
-                                            <input class="form-check-input student-checkbox" type="checkbox" value="{{ $student->id }}" id="flexCheckChecked-{{ $student->id }}">
+                                        <td class="border">
+                                            <input style="margin-left:-1px;" class="form-check-input student-checkbox" type="checkbox" value="{{ $student->id }}" id="flexCheckChecked-{{ $student->id }}">
                                             <label class="form-check-label" for="flexCheckChecked-{{ $student->id }}"></label>
                                         </td>
-                                        <td>{{ $student->id }}</td>
-                                        <td>{{ $student->name }}</td>
-                                        <td>{{ $student->email }}</td>
-                                        <td>{{ $student->phone }}</td>
-                                        <td>{{ $student->country }}</td>
-                                        <td>{{ $student->city }}</td>
-                                        <td>{{ $student->subject }}</td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button class="btn btn-sm" type="button" id="dropdownButton" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+                                        <td class="border">{{ $student->id }}</td>
+                                        <td class="border">{{ $student->name }}</td>
+                                        <td class="border">{{ $student->email }}</td>
+                                        <td class="border">{{ $student->phone }}</td>
+                                        <td class="border">{{ $student->country }}</td>
+                                        <td class="border">{{ $student->city }}</td>
+                                        <td class="border">{{ $student->subject }}</td>
+                                        <td class="border">
+                                            <div class="dropdown student-dropdown">
+                                                <button class="btn btn-sm dropdown-toggle-btn" type="button" aria-expanded="false" aria-haspopup="true">
                                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                                 </button>
-                                                <ul class="dropdown-menu" style="min-width: 120px;" aria-labelledby="dropdownButton">
+
+                                                <ul class="dropdown-action d-none custom-dropdown-menu" style="min-width: 120px;">
                                                     <li>
                                                         <a href="{{ route('edit-student', $student->id) }}" class="dropdown-item">
                                                             <i class="fa-regular fa-pen-to-square"></i> Edit
@@ -255,6 +236,7 @@
                                                     </li>
                                                 </ul>
                                             </div>
+
                                         </td>
                                     </tr>
                                     @endforeach
@@ -274,13 +256,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer  bg-gradient-success">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto text-white">
-                        <span>Copyright &copy;Edexcel Academy & Educational Consultancy</span>
-                    </div>
-                </div>
-            </footer>
+           
             <!-- End of Footer -->
 
         </div>
@@ -314,26 +290,36 @@
         </div>
     </div>
 
-</body>
-
-</html>
-
-<!-- Bootstrap core JavaScript-->
-
-
-<!-- Custom scripts for all pages-->
-<script src="{{asset('js/js/jquery.min.js')}}"></script>
-<script src="{{asset('js/sb-admin-2.min.js')}}"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<script src="{{asset('js/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('js/js/dataTables.bootstrap4.min.js')}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-
-<script src="{{asset('js/js/bootstrap.bundle.min.js')}}"></script>
+@endsection
+@section('js')
 <script>
+     document.addEventListener('DOMContentLoaded', function () {
+        const toggleButtons = document.querySelectorAll('.dropdown-toggle-btn');
+
+        toggleButtons.forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+
+                const parent = btn.closest('.student-dropdown');
+                const menu = parent.querySelector('.custom-dropdown-menu');
+
+                // Hide all other open dropdowns
+                document.querySelectorAll('.custom-dropdown-menu').forEach(m => {
+                    if (m !== menu) m.classList.add('d-none');
+                });
+
+                // Toggle current one
+                menu.classList.toggle('d-none');
+            });
+        });
+
+        // Hide on outside click
+        document.addEventListener('click', function () {
+            document.querySelectorAll('.custom-dropdown-menu').forEach(menu => {
+                menu.classList.add('d-none');
+            });
+        });
+    });
     $(document).ready(function() {
         // Select/Deselect All
         $('#select-all-students').click(function() {
@@ -384,10 +370,6 @@
     });
 </script>
 <script>
-    document.getElementById('dropdownButton').addEventListener('click', function() {
-        var dropdownMenu = document.getElementById('dropdownMenu');
-        dropdownMenu.classList.toggle('show');
-    });
 
     function updateStatus(tutorId) {
         let statusToggle = document.getElementById(`statusToggle_${tutorId}`);
@@ -400,7 +382,6 @@
         // Submit the form
         form.submit();
     }
-    q2
     $('.country-select').select2()
     $('#countryTeacher').on('change', function() {
 
@@ -472,5 +453,4 @@
         }, 0);
     });
 </script>
-<!-- Select2 JS -->
-<script src="{{asset('js/inspect.js')}}"></script>
+@endsection

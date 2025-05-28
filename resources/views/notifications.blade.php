@@ -34,8 +34,16 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
         Notifications </a>
 </div>
 <script>
-    $('.notification-icon').on('click', function(e) {
-        e.preventDefault();
-        $('#notificationDropdown').addClass('d-block');
-    });
+   $('.text-success').on('click', function (e) {
+    e.preventDefault();
+    const dropdown = $('#notificationDropdown');
+    
+    if (dropdown.hasClass('d-block')) {
+        dropdown.removeClass('d-block').addClass('d-none');
+    } else {
+        dropdown.removeClass('d-none').addClass('d-block');
+    }
+});
+
+
 </script>
