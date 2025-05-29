@@ -127,16 +127,17 @@ Route::post('/hire-tutor/create', [StudentController::class, 'create'])->name('s
 Route::post('/hire-tutor-new/create', [StudentController::class, 'newcreate'])->name('newstudent-create');
 Route::post('/inquiry/create', [EdexcelComplaintController::class, 'createComplaints'])->name('inquiry-create');
 Route::get('/student-list/{id}/edit', [StudentController:: class, 'edit'])->name('edit-student');
-Route::get('/inqury-list/{id}', [InquiryController:: class, 'edit'])->name('inqury.edit');
+Route::get('/inqury-list/{id}', [EdexcelComplaintController:: class, 'edit'])->name('inqury.edit');
 Route::delete('/student-list/{id}', [StudentController:: class, 'destroy'])->name('students.destroy');
 Route::put('/student-list/{id}', [StudentController:: class, 'update'])->name('students.update');
 Route::get('/students-list', [StudentController::class, 'showStudentsList'])->name('students.list');
-Route::get('/inquiries-list', [StudentController::class, 'inquiriesList'])->name('inquiries.list');
+Route::get('/inquiries-list', [EdexcelComplaintController::class, 'inquiriesList'])->name('inquiries.list');
 Route::get('/students-pdf', [StudentController::class, 'studentsPDF'])->name('students.pdf');
-Route::put('/inquiry-list/{id}', [InquiryController:: class, 'update'])->name('inquiry.update');
+Route::put('/inquiry-list/{id}', [EdexcelComplaintController:: class, 'update'])->name('inquiry.update');
 Route::get('/school-classes', [StudentController::class, 'indexClasses']);
 Route::get('/subjects/{schoolClassId}', [StudentController::class, 'getSubjects']);
-Route::delete('/inquiry-destroy-list/{id}', [InquiryController:: class, 'destroy'])->name('inquiry.destroy');
+Route::delete('/inquiry-destroy/{id}', [EdexcelComplaintController::class, 'destroy'])->name('inquiry.destroy');
+
 
 // routes/web.php
 // routes/web.php

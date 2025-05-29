@@ -228,7 +228,23 @@ Edexcel Students
 <!-- SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script>
+<script>$(document).ready(function () {
+    // When the "Select All" checkbox in the header is clicked
+    $('#select-all-students').on('change', function () {
+        // Toggle all student row checkboxes based on header checkbox
+        $('.student-checkbox').not('#select-all-students').prop('checked', this.checked);
+    });
+
+    // When any individual student checkbox is changed
+    $('.student-checkbox').not('#select-all-students').on('change', function () {
+        let totalCheckboxes = $('.student-checkbox').not('#select-all-students').length;
+        let totalChecked = $('.student-checkbox:checked').not('#select-all-students').length;
+
+        // If all student checkboxes are checked, check the header checkbox
+        $('#select-all-students').prop('checked', totalCheckboxes === totalChecked);
+    });
+});
+
     document.addEventListener('DOMContentLoaded', function() {
         const toggleButtons = document.querySelectorAll('.dropdown-toggle-btn');
 

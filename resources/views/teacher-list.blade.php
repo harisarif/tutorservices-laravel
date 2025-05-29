@@ -290,7 +290,23 @@
         });
     });
 </script>
-<script>
+<script> $(document).ready(function () {
+    // When the "Select All" checkbox in the header is clicked
+    $('#select-all-tutors').on('change', function () {
+        // Toggle all tutor row checkboxes based on header checkbox
+        $('.tutor-checkbox').not('#select-all-tutors').prop('checked', this.checked);
+    });
+
+    // When any individual tutor checkbox is changed
+    $('.tutor-checkbox').not('#select-all-tutors').on('change', function () {
+        let totalCheckboxes = $('.tutor-checkbox').not('#select-all-tutors').length;
+        let totalChecked = $('.tutor-checkbox:checked').not('#select-all-tutors').length;
+
+        // If all tutor checkboxes are checked, check the header checkbox
+        $('#select-all-tutors').prop('checked', totalCheckboxes === totalChecked);
+    });
+});
+
     document.querySelectorAll(".dropdownButton").forEach((button) => {
         button.addEventListener("click", (event) => {
             // Find the nearest dropdown menu relative to the clicked button

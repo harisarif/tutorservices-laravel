@@ -275,7 +275,23 @@
     });
 </script>
 <script>
-    
+    $(document).ready(function () {
+    // When the "Select All" checkbox in the header is clicked
+    $('#select-all-blogs').on('change', function () {
+        // Toggle all blog row checkboxes based on header checkbox
+        $('.blog-checkbox').not('#select-all-blogs').prop('checked', this.checked);
+    });
+
+    // When any individual blog checkbox is changed
+    $('.blog-checkbox').not('#select-all-blogs').on('change', function () {
+        let totalCheckboxes = $('.blog-checkbox').not('#select-all-blogs').length;
+        let totalChecked = $('.blog-checkbox:checked').not('#select-all-blogs').length;
+
+        // If all blog checkboxes are checked, check the header checkbox
+        $('#select-all-blogs').prop('checked', totalCheckboxes === totalChecked);
+    });
+});
+
 
     $('#countryTeacher').on('change', function() {
 

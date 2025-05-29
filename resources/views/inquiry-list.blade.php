@@ -140,18 +140,12 @@ Edexcel Inquires
                                                     </a>
                                                 </li>
                                                 <li class="dropdown-item">
-                                                    <form action="{{ route('inquiry.destroy', $inquiry->id) }}" method="POST" style="display:inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="button"
-                                                            class="dropdown-item text-danger delete-student-btn me-0 pe-0 ps-3 single-delete-btn"
-                                                            data-id="{{ $inquiry->id }}"
-                                                            style="color: black; margin-left: -11%;">
-                                                            <i class="fa-solid fa-trash-can mx-1" style="color: #e74a3b;"></i>
-                                                            Delete
-                                                        </button>
+                                                   <button type="button"
+    class="btn btn-sm btn-danger single-delete-btn"
+    data-id="{{ $inquiry->id }}">
+    <i class="fa fa-trash"></i> Delete
+</button>
 
-                                                    </form>
                                                 </li>
                                             </ul>
                                         </div>
@@ -250,7 +244,24 @@ Edexcel Inquires
                 }
             });
         });
+    });$(document).ready(function () {
+    // When header checkbox is clicked
+    $('#select-all-inquiry').on('change', function () {
+        // Only select row checkboxes (exclude the header one)
+        $('.inquiry-checkbox').not('#select-all-inquiry').prop('checked', this.checked);
     });
+
+    // Handle individual checkbox change
+    $('.inquiry-checkbox').not('#select-all-inquiry').on('change', function () {
+        let totalCheckboxes = $('.inquiry-checkbox').not('#select-all-inquiry').length;
+        let totalChecked = $('.inquiry-checkbox:checked').not('#select-all-inquiry').length;
+
+        $('#select-all-inquiry').prop('checked', totalCheckboxes === totalChecked);
+    });
+});
+
+
+
 </script>
 
 <script>
@@ -338,41 +349,42 @@ Edexcel Inquires
         setTimeout(function() {
             $(window).scrollTop(scrollPos);
         }, 0);
-    });
+    });  
 </script>
-<script>
-    $(document).ready(function() {
-        $('.single-delete-btn').click(function() {
-            var inquiryId = $(this).data('id');
-            var token = '{{ csrf_token() }}';
 
-            Swal.fire({
-                title: 'Are you sure?',
-                text: 'This inquiry will be deleted permanently.',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'Cancel'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: "/inquiry/" + inquiryId,
-                        type: 'POST',
-                        data: {
-                            _method: 'DELETE',
-                            _token: token
-                        },
-                        success: function(response) {
-                            $('#inquiry-row-' + inquiryId).remove();
-                            Swal.fire('Deleted!', 'Inquiry has been deleted.', 'success');
-                        },
-                        error: function() {
-                            Swal.fire('Error!', 'Something went wrong.', 'error');
-                        }
-                    });
+<script>
+$(document).on('click', '.single-delete-btn', function () {
+    let id = $(this).data('id');
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'This inquiry will be permanently deleted.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#e74a3b',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "/inquiry-destroy/" + id, // matches your route
+                type: 'DELETE',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function () {
+                    $('#inquiry-row-' + id).remove();
+                    Swal.fire('Deleted!', 'Inquiry has been deleted.', 'success');
+                },
+                error: function () {
+                    Swal.fire('Error!', 'Something went wrong.', 'error');
                 }
             });
-        });
+        }
     });
+});
 </script>
+
+
 @endsection

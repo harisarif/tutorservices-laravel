@@ -73,18 +73,21 @@ class StudentController extends Controller
 
         return response()->json(['success' => 'Students and associated users deleted successfully.']);
     }
-    public function destroyinquiryBulk(Request $request)
-    {
-        $request->validate([
-            'ids' => 'required|array',
-            'ids.*' => 'exists:inquiries,id', // Assuming 'tutors' is your table name
-        ]);
 
-        // Delete the selected tutors
-        Inquiry::destroy($request->ids);
 
-        return response()->json(['success' => 'Inquires deleted successfully.']);
+public function destroyinquiryBulk(Request $request)
+{
+    $ids = $request->input('ids'); // expecting an array of IDs
+
+    if (!$ids || !is_array($ids)) {
+        return response()->json(['message' => 'No IDs provided'], 400);
     }
+
+    EdexcelComplaint::whereIn('id', $ids)->delete();
+
+    return response()->json(['message' => 'Selected inquiries deleted successfully']);
+}
+
     public function getCities(Request $request)
     {
         $countryCode = $request->query('country');

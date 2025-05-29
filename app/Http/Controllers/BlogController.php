@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Blog;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -76,7 +77,7 @@ class BlogController extends Controller
      * Update the specified resource in storage.
      */
    public function update(Request $request, $id)
-{
+{    dd($request->all());
     // Find the blog post
     $blog = Blog::findOrFail($id);
 
@@ -87,21 +88,21 @@ class BlogController extends Controller
         'image' => 'nullable|mimes:jpeg,jpg,png|max:2048',
     ]);
 
-    // If a new image is uploaded
-    if ($request->hasFile('image')) {
-        // Delete old image if it exists
-        if ($blog->image && Storage::disk('public')->exists($blog->image)) {
-            Storage::disk('public')->delete($blog->image);
+   if ($request->hasFile('image')) {
+        // Delete the old image if it exists
+        if ($blog->image && Storage::exists('public/blogs/' . $blog->image)) {
+            Storage::delete('public/blogs/' . $blog->image);
         }
 
         // Store the new image
-        $imagePath = $request->file('image')->store('blogs', 'public');
-        $blog->image = $imagePath;
+        $image = $request->file('image');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->storeAs('public/blogs', $imageName);
+
+        // Save the image path in DB
+        $blog->image = $imageName;
     }
 
-    // If no new image is uploaded, the existing one stays the same
-
-    // Update other fields
     $blog->title = $request->input('title');
     $blog->description = $request->input('description');
 

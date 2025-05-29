@@ -9,7 +9,12 @@ use Illuminate\Support\Facades\Validator;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class EdexcelComplaintController extends Controller
-{
+{     public function inquiriesList()
+    {
+
+        $inquires = EdexcelComplaint::all(); 
+        return view('inquiry-list', compact('inquires'));
+    }
     public function createComplaints(Request $request)
     {
         $rules = [
@@ -196,7 +201,47 @@ class EdexcelComplaintController extends Controller
 
         // Send the email using your custom method
         $this->sendEmail($adminEmail, $subject, $messageAdmin);
+    }    public function edit($id){ $inqury=EdexcelComplaint::find($id);
+        
+        return view('edit-inquries',compact('inqury'));}
+    
+       public function update(Request $request, $id)
+{   
+    $rules = [
+        'email' => "required|string|email|max:255|unique:edexcel_complaints,email,$id",
+        'phone' => 'nullable|string|max:20',
+       
+    ];
+
+    $validator = Validator::make($request->all(), $rules);
+
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
     }
+
+    
+    $inquiry = EdexcelComplaint::findOrFail($id);
+
+    // Update inquiry fields
+    $inquiry->name = $request->input('name');
+    $inquiry->email = $request->input('email');
+    $inquiry->phone = $request->input('phone');
+    $inquiry->description = $request->input('description');
+  
+    $inquiry->save();
+
+    return redirect()->route('inquiries.list')->with('success', 'inquiry updated successfully.');
+
+}  public function destroy($id)
+{
+    $inquiry = EdexcelComplaint::findOrFail($id);
+    $inquiry->delete();
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Inquiry deleted successfully.'
+    ]);
+}
 
     function sendEmail($to, $subject, $body)
     {
