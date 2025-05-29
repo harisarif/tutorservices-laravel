@@ -1,12 +1,10 @@
-<link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}" />
-<link rel="stylesheet" href="{{asset('css/sb-admin-2.css')}}" />
-<link rel="stylesheet" href="{{asset('css/sweetalert2.min.css')}}">
-<link rel="stylesheet" href="{{asset('css/admin.css')}}" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+@extends('layouts.admin')
+@section('title')
+   Edexcel Teachers
+@endsection 
 <script src="{{asset('js/js/jquery.min.js')}}"></script>
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-<!-- <title>Edexcel Tutors</title> -->
-<link rel="shortcut icon" href="{{asset('images/favicon.png')}}" type="image/png" />
+
+@section('content')
 @if (session('success'))
 <div class="alert alert-success" style="z-index: 6;
     padding: 14px !important;">
@@ -17,86 +15,11 @@
 @endif
 @section('content')
 
-<body id="page-top">
-
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="nav nav-tabs navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <li class=" py-2 mx-2 d-flex align-items-center">
-                <a class="navbar-brand" href="{{ route('home') }}">
-                    <img src=" {{asset('images/white-logo.jpeg')}}" class="d-lg-block d-none" id="toggleImage" height="50px" alt="logo" style="height: 50px; border-radius: 10px; width: 100%;">
-                </a>
-                <a href="{{ route('home') }}">
-                    <img src=" {{asset('images/favicon.png')}}" id="toggleImage" class="d-lg-none d-sm-block AB-img" alt="Image" style="width:70%;">
-                </a>
-                <div class="text-center d-none d-md-inline position-relative">
-                    <button class="rounded-circle border-0" id="sidebarToggle">
-                        <div class="icons d-none">
-                            <i class="fa-solid fa-angle-right"></i>
-                        </div>
-                    </button>
-
-                </div>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link"
-                    href="{{route('home')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>{{ __('messages.Dashboard') }}</span>
-                </a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-            <!-- Nav Item - Tables -->
-            <li class="nav-item active">
-                <a class="nav-link py-2"
-                    href="{{route('all.tutors')}}">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                    <span>{{ __('messages.Teacher') }}</span>
-                </a>
-            </li>
-            <hr class="sidebar-divider">
-            <li class="nav-item">
-                <a class="nav-link py-2" href="{{route('all.students')}}">
-                    <i class="fa-solid fa-user-graduate"></i>
-                    <span>{{ __('messages.Students') }}</span>
-                </a>
-            </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-            <li class="nav-item">
-                <a class="nav-link py-2" href="{{route('admin.inquiry')}}" role="tab">
-                    <i class="fa fa-question-circle" aria-hidden="true"></i>
-                    <span>{{ __('messages.Direct inquiry') }}
-                    </span>
-                </a>
-            </li>
-            <hr class="sidebar-divider d-none d-md-block">
-            <li class="nav-item">
-                <a class="nav-link py-2" href="{{route('blogs.create')}}">
-                    <i class="fa-solid fa-blog" aria-hidden="true"></i>
-                    <span>{{ __('messages.Blogs') }}
-                    </span>
-                </a>
-            </li>
-            <hr class="sidebar-divider d-none d-md-block">
-            <li class="nav-item">
-                <a class="nav-link py-2" href="{{route('all.blogs')}}">
-                    <i class="fa-solid fa-blog" aria-hidden="true"></i>
-                    <span>{{ __('Blog List') }}
-                    </span>
-                </a>
-            </li>
-        </ul>
+        @include('layouts.admin-sidebar')
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -206,14 +129,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if($tutors->isEmpty())
-                                    <tr>
-                                        <td colspan="11" class="text-center">
-                                            <img src="{{ asset('images/not-found.jpeg') }}" alt="No Blogs Found" style="width: 100%; max-width: 400px; height: auto; margin: 0 auto;">
-                                            <p>No tutors found.</p>
-                                        </td>
-                                    </tr>
-                                    @else
+                                   
                                     @foreach ($tutors as $tutor)
                                     <tr id="tutor-row-{{ $tutor->id }}">
                                         <td class="border">
@@ -266,9 +182,9 @@
                                                         <form action="{{ route('teachers.destroy', $tutor->id) }}" method="POST" style="display:inline;">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-sm d-flex align-items-center" onclick="return confirm('Are you sure?')" style="color: black; margin-left: -11%;">
+                                                            <button type="submit" class="dropdown-item text-danger delete-student-btn me-0 pe-0 ps-3" onclick="return confirm('Are you sure?')" style="color: black; margin-left: -11%;">
                                                                 <i class="fa fa-trash mx-1" style="color: #e74a3b;"></i>
-                                                                <span class="mx-1">Delete</span>
+                                                                Delete
                                                             </button>
                                                         </form>
                                                     </li>
@@ -277,7 +193,7 @@
                                         </td>
                                     </tr>
                                     @endforeach
-                                    @endif
+                                  
 
                                 </tbody>
                             </table>
@@ -290,17 +206,6 @@
                 <!-- /.container-fluid -->
 
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer  bg-gradient-success">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto text-white">
-                        <span>Copyright &copy;Edexcel Academy & Educational Consultancy</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
 
         </div>
         <!-- End of Content Wrapper -->
@@ -333,24 +238,10 @@
         </div>
     </div>
 
-</body>
-
-<!-- Bootstrap core JavaScript-->
-
-
-<!-- Custom scripts for all pages-->
-
-<script src="{{asset('js/js/sb-admin-2.min.js')}}"></script>
-<!-- Bootstrap JS (make sure this is included) -->
-
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<!-- Bootstrap JS -->
-<script src="{{asset('js/js/jquery.easing.min.js')}}"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="{{asset('js/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('js/js/dataTables.bootstrap4.min.js')}}"></script>
+@endsection
+@section('js')
 <script>
+    
     $(document).ready(function() {
         // Select/Deselect All Tutors
         $('#select-all').click(function() {
@@ -399,8 +290,6 @@
         });
     });
 </script>
-
-<script src="{{asset('js/js/bootstrap.bundle.min.js')}}"></script>
 <script>
     document.querySelectorAll(".dropdownButton").forEach((button) => {
         button.addEventListener("click", (event) => {
@@ -495,3 +384,5 @@
         }, 0);
     });
 </script>
+@endsection
+

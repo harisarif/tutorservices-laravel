@@ -1,23 +1,9 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="">
-    <meta name="description" content="Home Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
-    <!-- <title>Edexcel Dashbord</title> -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-     <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.min.css')}}"/>
-    <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
-</head>
-@php
-$notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get();
-@endphp
+@extends('layouts.admin')
+@section('title')
+   Edexcel Blogs
+@endsection 
+<script src="{{asset('js/js/jquery.min.js')}}"></script>
+
     <style>
          .btn-file {
         position: relative;
@@ -292,9 +278,7 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
         /* Dropdown container */
 
     </style>
-@php
-    $notifications = auth()->user()->unreadNotifications;
-@endphp
+
 @if (session('success'))
         <div class="alert alert-success" style="z-index: 6;
     padding: 14px !important;">
@@ -303,86 +287,12 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
             <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
         </div>
     @endif
-<body id="page-top">
-
+@section('content')
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="nav nav-tabs navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <li class=" py-2 mx-2 d-flex align-items-center">
-                <a class="navbar-brand" href="{{ route('home') }}">
-                   <img src=" {{asset('images/white-logo.jpeg')}}" class="d-lg-block d-none" id="toggleImage" height="50px" alt="logo" style="height: 50px; border-radius: 10px; width: 100%;">
-               </a>
-               <a href="{{ route('home') }}">
-                    <img src=" {{asset('images/favicon.png')}}" id="toggleImage" class="d-lg-none d-sm-block AB-img" alt="Image" style="width:70%;">
-               </a>
-                <div class="text-center d-none d-md-inline position-relative">
-                 <button class="rounded-circle border-0" id="sidebarToggle">
-                    <div class="icons d-none">
-                        <i class="fa-solid fa-angle-right"></i>
-                    </div>
-                 </button>
-
-                </div>
-           </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link"
-                href="{{route('home')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>{{ __('messages.Dashboard') }}</span>
-                </a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link py-2" id="profile-tab" data-toggle="tab"
-                href="#profile" role="tab" aria-controls="profile" aria-selected="false">
-                <i class="fas fa-chalkboard-teacher"></i>
-                    <span>{{ __('messages.Teacher') }}</span>
-                </a>
-            </li>
-            <hr class="sidebar-divider">
-            <li class="nav-item">
-                <a class="nav-link py-2" href="{{route('all.students')}}">
-                <i class="fa-solid fa-user-graduate"></i>
-                    <span>{{ __('messages.Students') }}</span>
-                </a>
-            </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-            <li class="nav-item">
-                <a class="nav-link py-2" href="{{route('admin.inquiry')}}" role="tab">
-                    <i class="fa fa-question-circle" aria-hidden="true"></i>
-                    <span>{{ __('messages.Direct inquiry') }}
-                    </span>
-                </a>
-            </li>
-            <hr class="sidebar-divider d-none d-md-block">
-            <li class="nav-item active">
-                <a class="nav-link py-2" href="{{route('blogs.create')}}">
-                    <i class="fa-solid fa-blog" aria-hidden="true"></i>
-                    <span>{{ __('messages.Blogs') }}
-                    </span>
-                </a>
-            </li>
-            <hr class="sidebar-divider d-none d-md-block">
-            <li class="nav-item">
-                <a class="nav-link py-2" href="{{route('all.blogs')}}">
-                    <i class="fa-solid fa-blog" aria-hidden="true"></i>
-                    <span>{{ __('Blog List') }}
-                    </span>
-                </a>
-            </li>
-        </ul>
+       @include('layouts.admin-sidebar')
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -416,34 +326,7 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
 
                             </div>
                             <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in BD notification-dropdown " id="notificationDropdown" aria-labelledby="alertsDropdown "  style="display: none;">
-                                <h6 class="dropdown-header bg-success border-success text-center">
-                                {{ __('messages.Notification') }}
-                                </h6>
-                                <a class="dropdown-item px-0 justify-content-center @if(auth()->user()->notifications->count() === 0) no-notifications @endif" href="#">
-                                    @if(auth()->user()->notifications->count() > 0)
-                                        @foreach(auth()->user()->notifications as $notification)
-                                            <div class="classic d-flex py-2 px-3 @if(!$loop->last) border-bottom @endif">
-                                                <div class="mr-3">
-                                                    <div class="icon-circle bg-success">
-                                                        <i class="fas fa-file-alt text-white"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="ntf">
-                                                    <div class="small">{{ $notification->data['message'] }}</div>
-                                                    <span class="font-weight-bold">{{ $notification->created_at->diffForHumans() }}</span>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @else
-                                        <div class="mt-2 text-center">
-                                            <div class="small no-message">No notifications available.</div>
-                                        </div>
-                                    @endif
-                                </a>
-
-                                    <a class="dropdown-item-fector  small" href="#">Show All Notifications </a>
-                            </div>
+                            @include('notifications')
                         </li>
                         <li class="nav-item dropdown no-arrow d-flex align-items-center">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -522,21 +405,12 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                 <!-- /.container-fluid -->
 
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer  bg-gradient-success">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto text-white">
-                        <span>Copyright &copy;Edexcel Academy & Educational Consultancy</span>
-                    </div>
-                </div>
-            </footer>
             <!-- End of Footer -->
 
         </div>
         <!-- End of Content Wrapper -->
 
+    </div>
     </div>
     <!-- End of Page Wrapper -->
 
@@ -564,28 +438,13 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
             </div>
         </div>
     </div>
-
-</body>
-
-</html>
+   @endsection
 
     <!-- Bootstrap core JavaScript-->
      <!-- Select2 JS -->
-<script src="{{asset('js/inspect.js')}}"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="{{asset('js/js/jquery.min.js')}}"></script>
-    <script src="{{asset('js/js/sb-admin-2.min.js')}}"></script>
-
-    <script src="{{asset('js/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('js/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('js/select2.min.js')}}"></script>
-    <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
+@section('js')
 <script>
-        $('.notification-icon').on('click', function(e) {
-                    e.preventDefault();
-                    $('#notificationDropdown').toggleClass('d-block');
-                });
+    
         CKEDITOR.replace('editor1');
         $(function() {
         $(".bcontent").wysihtml5({
@@ -673,3 +532,4 @@ $notifications = auth()->user()->unreadNotifications()->latest()->take(10)->get(
                 }
 
     </script>
+@endsection

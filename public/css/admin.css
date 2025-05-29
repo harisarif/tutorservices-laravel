@@ -374,7 +374,7 @@ footer.sticky-footer .copyright {
             background-color: white;
             min-width: 100px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 1;
+            z-index: 5;
             list-style: none;
             padding: 0;
             margin: 0;
@@ -406,7 +406,7 @@ footer.sticky-footer .copyright {
             background-color: #f1f1f1;
         }
         .dropdown-action li a{
-            margin-left: -9%;
+            /* margin-left: -9%; */
         }
             .switch {
             display: inline-block;

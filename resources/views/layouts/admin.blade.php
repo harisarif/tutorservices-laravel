@@ -21,7 +21,22 @@
     <link rel="stylesheet" href="{{asset('css/sweetalert2.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/select2.css')}}" />
     <link rel="stylesheet" href="{{asset('css/admin.css')}}" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
     <style>
+        .select2-container {
+            width: 100% !important;
+        }
+        .select2-container--default .select2-selection--single {
+            height: 45px;
+        }
+        .table {
+            background-color: #fff;
+        }
+        .scroll-to-top a {
+            margin-top:13px;
+        }
         .loader {
         width: 100%;
         height: 100vh;
@@ -85,6 +100,8 @@
 </html>
 
 <script>
+    $('.select2').select2();
+    $('.table').dataTable();
     window.addEventListener('load', ()=>{
     document.getElementById('lazzyLoader').style.display = 'none';
 })
