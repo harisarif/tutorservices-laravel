@@ -25,6 +25,11 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
     <style>
+        .img-thumbnail {
+            height:65px !important;
+            margin-top:15px;
+            width: 125px;
+        }
         .select2-container {
             width: 100% !important;
         }

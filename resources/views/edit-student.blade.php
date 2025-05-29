@@ -4,17 +4,14 @@ Edexcel Dashboard
 
 @endsection
 <style>
-    .img-thumbnail {
-        height:65px !important;
-        margin-top:15px;
-    }
+    
     .section-title {
         font-size: 1.5rem;
         color: #4a90e2;
         margin-bottom: 20px;
         font-weight: bold;
     }
-    .custon-class label {
+    .custom-class label {
         font-weight: bold
     }
 </style>
