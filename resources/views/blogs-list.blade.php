@@ -173,8 +173,8 @@
                             <table class="table teachers-table border">
                                 <thead>
                                     <tr>
-                                        <th class="border"><input class="form-check-input" type="checkbox" id="select-all">
-                                            <label class="form-check-label" for="select-all"></label>
+                                        <th class="border"><input class="form-check-input" type="checkbox" id="select-all" style="margin-left: -1px;">
+                                            <label class="form-check-label" for="select-all" style="margin-bottom:1.5rem !important;margin-left:10px;"></label>
                                         </th>
                                         <th class="border">Title</th>
                                         <th class="border">Description</th>
@@ -187,14 +187,14 @@
                                     <tr>
                                         <td colspan="5" class="text-center p-4">
                                             <img src="{{ asset('images/not-found.jpeg') }}" alt="No Blogs Found" style="width: 100%; max-width: 400px; height: auto; margin: 0 auto;">
-                                            <p class="mt-3">No blogs found.</p>
+                                            
                                         </td>
                                     </tr>
                                     @else
                                     @foreach ($blogs as $blog)
                                     <tr id="student-row-{{ $blog->id }}">
                                         <td class="border">
-                                            <input class="form-check-input blog-checkbox" type="checkbox" value="{{ $blog->id }}" id="flexCheckChecked-{{ $blog->id }}">
+                                            <input class="form-check-input blog-checkbox" type="checkbox" value="{{ $blog->id }}" id="flexCheckChecked-{{ $blog->id }}" style="margin-left: -1px;">
                                             <label class="form-check-label" for="flexCheckChecked-{{ $blog->id }}"></label>
                                         </td>
                                         <td class="border">{{ $blog->title }}</td>
@@ -220,14 +220,14 @@
                                                             </li>
                                                             <li>
                                             
-    <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST" class="single-delete-form" style="display:inline;">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-sm d-flex align-items-center px-0 delete-btn" style="color: black;">
-            <i class="fa-solid fa-trash-can mx-1" style="color: #e74a3b;"></i>
-            <span class="mx-1">Delete</span>
-        </button>
-    </form>
+                                                        <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST" class="single-delete-form" style="display:inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm d-flex align-items-center px-0 delete-btn" style="color: black;">
+                                                                <i class="fa-solid fa-trash-can mx-1" style="color: #e74a3b;"></i>
+                                                                <span class="mx-1">Delete</span>
+                                                            </button>
+                                                        </form>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -288,29 +288,23 @@
 @section('js')
 
 <script>
-     document.addEventListener('DOMContentLoaded', function () {
-        // Toggle specific dropdown
-        document.querySelectorAll('.toggle-dropdown').forEach(function (btn) {
-            btn.addEventListener('click', function (e) {
-                e.stopPropagation(); // prevent event bubbling
-                const parent = btn.closest('.blog-dropdown');
-                const dropdown = parent.querySelector('.dropdown-action');
+     $(document).ready(function () {
+    // Toggle dropdown on icon click
+        $('.toggle-dropdown').on('click', function (e) {
+            e.stopPropagation();
 
-                // Hide all other dropdowns
-                document.querySelectorAll('.dropdown-action').forEach(el => {
-                    if (el !== dropdown) el.classList.add('d-none');
-                });
+            var $dropdown = $(this).closest('.blog-dropdown').find('.dropdown-action');
 
-                // Toggle current
-                dropdown.classList.toggle('d-none');
-            });
+            // Close all other dropdowns
+            $('.dropdown-action').not($dropdown).addClass('d-none');
+
+            // Toggle the clicked dropdown
+            $dropdown.toggleClass('d-none');
         });
 
-        // Close dropdowns when clicking outside
-        document.addEventListener('click', function () {
-            document.querySelectorAll('.dropdown-action').forEach(el => {
-                el.classList.add('d-none');
-            });
+        // Close all dropdowns when clicking outside
+        $(document).on('click', function () {
+            $('.dropdown-action').addClass('d-none');
         });
     });
     $(document).ready(function() {
