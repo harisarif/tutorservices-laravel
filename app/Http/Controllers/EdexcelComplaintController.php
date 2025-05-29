@@ -18,8 +18,8 @@ class EdexcelComplaintController extends Controller
                 'string',
                 'email',
                 'max:255',
-                'unique:inquiries,email',
-                'regex:/^[a-zA-Z0-9._%+-]+@(gmail|hotmail|yahoo)\.com$/'
+                'unique:edexcel_complaints,email',
+                'regex:/^[a-zA-Z0-9._%+-]+@(gmail|hotmail|yahoo)\.com$/',
             ],
         ];
 
