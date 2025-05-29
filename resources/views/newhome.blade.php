@@ -1388,7 +1388,6 @@
         validateFields(); // Initial check
 
         form.addEventListener("submit", function (e) {
-            alert("Submitting your inquiry...");
         });
     });
 document.querySelectorAll('.trigger-modal').forEach(function(element) {

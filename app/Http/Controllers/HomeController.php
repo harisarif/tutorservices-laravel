@@ -44,7 +44,7 @@ class HomeController extends Controller
 }
 
     public function inquiry() {
-        $inquires = DB::table('inquiries')->get();
+        $inquires = DB::table('edexcel_complaints')->get();
         return view('inquiry-list',compact('inquires'));
     }
     
