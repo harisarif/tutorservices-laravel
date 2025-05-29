@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Student;
 use App\Models\Inquiry;
+use App\Models\EdexcelComplaint;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -120,7 +121,7 @@ class StudentController extends Controller
     public function inquiriesList()
     {
 
-        $inquires = Inquiry::all();
+        $inquires = EdexcelComplaint::all();
         return view('inquiry-list', compact('inquires'));
     }
     public function indexClass()
