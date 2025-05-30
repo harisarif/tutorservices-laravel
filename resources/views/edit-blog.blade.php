@@ -47,7 +47,7 @@ $cleanDescription = strip_tags($blogs->description);
                             </label>
 
                             <!-- File input -->
-                            <input type="file" name="profileImage" id="imageUpload" class="form-control d-none" accept="image/*">
+                            <input type="file" name="image" id="imageUpload" class="form-control d-none" accept="image/*">
 
                             <!-- Hidden input to retain old image -->
                             <input type="hidden" name="oldImage" value="{{ $blogs->image }}">

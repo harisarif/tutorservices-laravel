@@ -77,7 +77,7 @@ class BlogController extends Controller
      * Update the specified resource in storage.
      */
    public function update(Request $request, $id)
-{    dd($request->all());
+{    
     // Find the blog post
     $blog = Blog::findOrFail($id);
 
@@ -88,20 +88,17 @@ class BlogController extends Controller
         'image' => 'nullable|mimes:jpeg,jpg,png|max:2048',
     ]);
 
-   if ($request->hasFile('image')) {
-        // Delete the old image if it exists
-        if ($blog->image && Storage::exists('public/blogs/' . $blog->image)) {
-            Storage::delete('public/blogs/' . $blog->image);
-        }
-
-        // Store the new image
-        $image = $request->file('image');
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
-        $image->storeAs('public/blogs', $imageName);
-
-        // Save the image path in DB
-        $blog->image = $imageName;
+  if ($request->hasFile('image')) {
+    // Delete the old image if it exists
+    if ($blog->image && Storage::disk('public')->exists($blog->image)) {
+        Storage::disk('public')->delete($blog->image);
     }
+
+    // Store the new image in 'public/blogs'
+    $imagePath = $request->file('image')->store('blogs', 'public');
+    $blog->image = $imagePath; // Save full path like 'blogs/imagename.jpg'
+}
+
 
     $blog->title = $request->input('title');
     $blog->description = $request->input('description');

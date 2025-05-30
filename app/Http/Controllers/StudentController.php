@@ -103,7 +103,7 @@ public function destroyinquiryBulk(Request $request)
     {
         return view('faq');
     }
-    public function privacyPolicy()
+    public function privacyPorlicy()
     {
         return view('privacy');
     }
