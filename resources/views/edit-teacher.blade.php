@@ -114,7 +114,7 @@ $selectedLanguage = $tutor->language_tech ?? '';
                     </div>
 
                     <!-- Personal Information & Education -->
-                    <div class="row mt-4">
+                    <div class="row mt-4 mx-2">
                         <div class="col-md-6 d-flex">
                             <div class="card h-100 w-100 ms-3">
                                 <div class="card-body">
@@ -383,16 +383,16 @@ $selectedLanguage = $tutor->language_tech ?? '';
                         <div class="col-md-6 mt-4 mb-3 d-flex">
                             <div class="card h-100 w-100 mx-3">
                                 <div class="card-body">
-                                    <h5 class="section-title"><i class="fas fa-language icon"></i> Languages</h5>
+                                    <h5 class="section-title mb-0"><i class="fas fa-language icon"></i> Languages</h5>
                                     @php
                                     $teaching = is_array(json_decode($tutor->edu_teaching))
                                     ? implode(', ', json_decode($tutor->edu_teaching))
                                     : $tutor->edu_teaching;
                                     @endphp
                                     <div class="row">
-                                        <div>
+                                        <div class="col-12">
                                             <div class="mb-2">
-                                                <label for="address" class="form-label" style="color: #1cc88a;">Educational teaching</label>
+                                                <label for="address" class="form-label"><strong  style="color: #1cc88a;">Educational teaching</strong></label>
                                                 <input type="text" class="form-control" name="edu_teaching" id="address" value="{{ $teaching }}" style="border: 2px solid #dee2e6;">
                                             </div>
                                         </div>
@@ -427,7 +427,7 @@ $selectedLanguage = $tutor->language_tech ?? '';
                                                     </strong>
                                                 </label>
                                                 <div class="position-relative">
-                                                    <select name="language_proficient[]" class="form-select rounded-md pr-5"
+                                                    <select name="language_proficient[]" class="form-select rounded-md pr-5 select2"
                                                         id="language_proficient" onchange="toggleArrow(this)">
                                                         <option value="" disabled>Select Language</option>
                                                         @foreach ($languageNames as $key => $language)
@@ -449,7 +449,7 @@ $selectedLanguage = $tutor->language_tech ?? '';
                                                     <strong style="color: #1cc88a;">Level</strong>
                                                 </label>
                                                 <div class="position-relative">
-                                                    <select name="language_level[]" class="form-select rounded-md pr-5"
+                                                    <select name="language_level[]" class="form-select rounded-md pr-5 select2"
                                                         id="language_level_{{ $index }}" onchange="toggleArrow(this)">
                                                         <option value="">Select Level</option>
                                                         <option value="A1" {{ $lang['level'] == 'A1' ? 'selected' : '' }}>A1</option>
