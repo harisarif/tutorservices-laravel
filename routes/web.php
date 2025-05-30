@@ -76,6 +76,7 @@ Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logou
         return view('emailVerification');
     })->name('tutor');
 // });
+Route::get('/inquiries-list-testing', [EdexcelComplaintController::class, 'inquiriesListTest'])->name('inquiries.listtesting');
 Route::get('/', [TutorController::class, 'index'])->name('newhome');
 Route::get('/tutor-signup/email-verified', [VerificationController::class, 'signup'])->name('tutor-signup');
 Route::get('/all-blogs', [TutorController::class, 'allBlogs'])->name('all.blogs');

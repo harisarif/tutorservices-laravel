@@ -15,6 +15,12 @@ class EdexcelComplaintController extends Controller
         $inquires = EdexcelComplaint::all(); 
         return view('inquiry-list', compact('inquires'));
     }
+    public function inquiriesListTest()
+    {
+
+        $inquires = EdexcelComplaint::all(); 
+        return $inquires;
+    }
     public function createComplaints(Request $request)
     {
         $rules = [
