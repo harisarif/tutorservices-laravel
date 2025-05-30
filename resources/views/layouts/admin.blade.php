@@ -21,10 +21,13 @@
     <link rel="stylesheet" href="{{asset('css/sweetalert2.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/select2.css')}}" />
     <link rel="stylesheet" href="{{asset('css/admin.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/bootstrap-admin.css')}}" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
     <style>
+        th , td{ border-right: 1px solid #e3e6f0!important;
+        }
         .img-thumbnail {
             height:65px !important;
             margin-top:15px;
@@ -105,6 +108,21 @@
 </html>
 
 <script>
+    $(document).ready(function () {
+    // Toggle dropdown
+    $('.dropdown-toggle').on('click', function (e) {
+        e.stopPropagation(); // prevent bubbling
+        // Close other dropdowns
+        $('.dropdown-menu').not($(this).siblings('.dropdown-menu')).slideUp(150);
+        // Toggle the clicked dropdown
+        $(this).siblings('.dropdown-menu').slideToggle(150);
+    });
+
+    // Close dropdown when clicking outside
+    $(document).on('click', function () {
+        $('.dropdown-menu').slideUp(150);
+    });
+});
     $('.select2').select2();
     $('.table').dataTable();
     window.addEventListener('load', ()=>{

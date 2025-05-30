@@ -3,7 +3,6 @@
 Edexcel Students
 @endsection
 <!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="{{asset('js/js/jquery.min.js')}}"></script>
 @section('content')
 
@@ -41,61 +40,7 @@ Edexcel Students
         <div id="content">
 
             <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                <div class="button-div">
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3 bg-success text-white">
-                        <i class="fa fa-bars"></i>
-                    </button>
-                </div>
-                <!-- Sidebar Toggle (Topbar) -->
-
-                <!-- Topbar Navbar -->
-                <ul class="navbar-nav ml-auto">
-                    <!-- Nav Item - User Information -->
-
-                    <li class="nav-item dropdown no-arrow mx-1">
-
-                        <div class="notification-icon">
-                            <a href="#" class="nav-link dropdown-toggle" id="alertsDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw text-success"></i> {{-- Replace with your icon --}}
-                                <!-- @if(auth()->user()->unreadNotifications->count() > 0) -->
-                                <span class="badge badge-danger badge-counter"
-                                    id="notificationCount">{{ auth()->user()->unreadNotifications->count() }}</span>
-                                <!-- @endif -->
-                            </a>
-
-
-                        </div>
-                        <!-- Dropdown - Alerts -->
-                        @include('notifications')
-                    </li>
-                    <li class="nav-item dropdown no-arrow d-flex align-items-center">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <!-- <span class="mr-2 d-none d-lg-inline text-gray-600 small">@if(auth()->check())
-                                    {{ auth()->user()->name}}@endif</span> -->
-                            <img class="img-profile rounded-circle"
-                                src="{{asset('images/undraw_profile.svg')}}">
-                        </a>
-                        <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in md"
-                            aria-labelledby="userDropdown" style="left: -95px !important; width: 0;">
-
-                            <a class="dropdown-item text-success" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-success"></i>
-                                {{ __('messages.Logout') }}
-                            </a>
-                        </div>
-
-                    </li>
-
-                </ul>
-
-            </nav>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                style="display: none;">@csrf
-            </form>
+            @include('layouts.admin-header')
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -145,31 +90,32 @@ Edexcel Students
                                     <td class="border">{{ $student->city }}</td>
                                     <td class="border">{{ $student->subject }}</td>
                                     <td class="border">
-                                        <div class="dropdown student-dropdown">
-                                            <button class="btn btn-sm dropdown-toggle-btn" type="button" aria-expanded="false" aria-haspopup="true">
+                                        <div class="dropdown position-relative">
+                                            <button class="btn btn-link border-0 no-caret dropdown-toggle-btn" type="button">
                                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                                             </button>
 
-                                            <ul class="dropdown-action d-none custom-dropdown-menu" style="min-width: 120px;">
+                                            <ul class="dropdown-action dropdown-menu position-absolute shadow-sm" style="display: none; z-index: 1000;">
                                                 <li>
                                                     <a href="{{ route('edit-student', $student->id) }}" class="dropdown-item">
-                                                        <i class="fa-regular fa-pen-to-square"></i> Edit
+                                                        <i class="fa-regular fa-pen-to-square"></i> 
+                                                        <span>Edit</span>
                                                     </a>
                                                 </li>
-                                                <li>
+                                                <li style="border-bottom:unset !important;">
                                                     <form method="POST" action="{{ route('students.destroy', $student->id) }}" class="delete-student-form mb-0" id="delete-student-form-{{ $student->id }}">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="button" class="dropdown-item text-danger delete-student-btn me-0 pe-0 ps-3" data-student-id="{{ $student->id }}">
-                                                            <i class="fa-solid fa-trash-can"></i> Delete
+                                                            <i class="fa-solid fa-trash-can"></i> 
+                                                            <span>Delete</span>
                                                         </button>
                                                     </form>
-
                                                 </li>
                                             </ul>
                                         </div>
-
                                     </td>
+
                                 </tr>
                                 @endforeach
                                
@@ -224,26 +170,54 @@ Edexcel Students
 
 @endsection
 @section('js') <!-- Bootstrap Bundle JS (with Popper) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- SweetAlert2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script>$(document).ready(function () {
-    // When the "Select All" checkbox in the header is clicked
-    $('#select-all-students').on('change', function () {
-        // Toggle all student row checkboxes based on header checkbox
-        $('.student-checkbox').not('#select-all-students').prop('checked', this.checked);
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll('.dropdown-toggle-btn').forEach(function (button) {
+            button.addEventListener('click', function (e) {
+                e.stopPropagation();
+                const dropdownMenu = button.nextElementSibling;
+
+                // Hide all other dropdowns
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    if (menu !== dropdownMenu) {
+                        menu.style.display = 'none';
+                    }
+                });
+
+                // Toggle this dropdown
+                dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
+            });
+        });
+
+        // Hide dropdown when clicking outside
+        document.addEventListener('click', function () {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.style.display = 'none';
+            });
+        });
     });
+        $(document).ready(function () {
+            document.getElementById('dropdownButton').addEventListener('click', function() {
+                var dropdownMenu = document.getElementById('dropdownMenu');
+                dropdownMenu.classList.toggle('show');
+            });
+            // When the "Select All" checkbox in the header is clicked
+            $('#select-all-students').on('change', function () {
+                // Toggle all student row checkboxes based on header checkbox
+                $('.student-checkbox').not('#select-all-students').prop('checked', this.checked);
+            });
 
-    // When any individual student checkbox is changed
-    $('.student-checkbox').not('#select-all-students').on('change', function () {
-        let totalCheckboxes = $('.student-checkbox').not('#select-all-students').length;
-        let totalChecked = $('.student-checkbox:checked').not('#select-all-students').length;
+            // When any individual student checkbox is changed
+            $('.student-checkbox').not('#select-all-students').on('change', function () {
+                let totalCheckboxes = $('.student-checkbox').not('#select-all-students').length;
+                let totalChecked = $('.student-checkbox:checked').not('#select-all-students').length;
 
-        // If all student checkboxes are checked, check the header checkbox
-        $('#select-all-students').prop('checked', totalCheckboxes === totalChecked);
-    });
-});
+                // If all student checkboxes are checked, check the header checkbox
+                $('#select-all-students').prop('checked', totalCheckboxes === totalChecked);
+            });
+        });
 
     document.addEventListener('DOMContentLoaded', function() {
         const toggleButtons = document.querySelectorAll('.dropdown-toggle-btn');
