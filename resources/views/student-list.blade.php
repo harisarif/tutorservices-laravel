@@ -7,7 +7,7 @@ Edexcel Students
 @section('content')
 
 @if (session('success'))
-<div id="success" class="custom-alert alert-success d-flex align-items-center fade show" role="alert">
+<div id="success" class="alert alert-success" role="alert">
     <i class="fas fa-check-circle"></i>
     <div>
         <strong>Success!</strong> {{ session('success') }}
@@ -16,6 +16,12 @@ Edexcel Students
         &times;
     </button>
     <div class="progress-line"></div>
+</div>
+<div class="alert alert-success" style="z-index: 6;
+    padding: 14px !important;">
+
+    {{ session('success') }}
+    <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
 </div>
 @endif
 
@@ -378,53 +384,7 @@ Edexcel Students
     });
 </script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        setTimeout(() => {
-            autoHideAlert("success");
-            autoHideAlert("error");
-        }, 200);
-        // Added a delay to ensure alerts are available in the DOM
-
-        document.querySelectorAll(".custom-alert .close-btn").forEach((btn) => {
-            btn.addEventListener("click", function() {
-                let alertBox = this.closest(".custom-alert");
-                if (alertBox) {
-                    alertBox.classList.add("fade-out");
-                    setTimeout(() => alertBox.remove(), 500);
-                }
-            });
-        });
-    });
-
-    function autoHideAlert(alertId) {
-        let alert = document.getElementById(alertId);
-        if (alert) {
-            let progressBar = alert.querySelector('.progress-line');
-
-            if (progressBar) {
-                // Make the progress bar fill over 30 seconds
-                progressBar.style.transition = "width 20s linear";
-                progressBar.style.width = "100%";
-            }
-
-            // Hide the alert after 30 seconds
-            setTimeout(() => {
-                alert.classList.add("fade-out");
-            }, 20000); // 30 seconds visible
-
-            // Remove the alert completely after fading out
-            setTimeout(() => {
-                alert.remove();
-            }, 20500); // 30.5 seconds total
-        }
-    }
-
-
-
-    function cancel() {
-        let alert = document.getElementById("error");
-        if (alert) alert.remove();
-    }
+    
 </script>
 <script>
     $(document).ready(function() {

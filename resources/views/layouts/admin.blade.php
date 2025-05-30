@@ -111,6 +111,53 @@
 </html>
 
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(() => {
+            autoHideAlert("success");
+            autoHideAlert("error");
+        }, 200);
+        // Added a delay to ensure alerts are available in the DOM
+
+        document.querySelectorAll(".custom-alert .close-btn").forEach((btn) => {
+            btn.addEventListener("click", function() {
+                let alertBox = this.closest(".custom-alert");
+                if (alertBox) {
+                    alertBox.classList.add("fade-out");
+                    setTimeout(() => alertBox.remove(), 500);
+                }
+            });
+        });
+    });
+
+    function autoHideAlert(alertId) {
+        let alert = document.getElementById(alertId);
+        if (alert) {
+            let progressBar = alert.querySelector('.progress-line');
+
+            if (progressBar) {
+                // Make the progress bar fill over 30 seconds
+                progressBar.style.transition = "width 20s linear";
+                progressBar.style.width = "100%";
+            }
+
+            // Hide the alert after 30 seconds
+            setTimeout(() => {
+                alert.classList.add("fade-out");
+            }, 20000); // 30 seconds visible
+
+            // Remove the alert completely after fading out
+            setTimeout(() => {
+                alert.remove();
+            }, 20500); // 30.5 seconds total
+        }
+    }
+
+
+
+    function cancel() {
+        let alert = document.getElementById("error");
+        if (alert) alert.remove();
+    }
     $(document).ready(function () {
     // Toggle dropdown
     $('.dropdown-toggle').on('click', function (e) {
