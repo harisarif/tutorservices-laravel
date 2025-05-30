@@ -308,7 +308,7 @@ $selectedLanguage = $tutor->language_tech ?? '';
                                         <div class="col-12">
                                             <div class="mb-2">
                                                 <label for="address" class="form-label"><strong style="color: #1cc88a;">Status</strong></label>
-                                                <select class="form-select school_class" id="qualification" name="availability_status">
+                                                <select class="form-select school_class select2" id="qualification" name="availability_status">
                                                     @php
                                                     $selectedStatus = $tutor->availability_status ?? ''; // Ensure it's defined
                                                     @endphp
@@ -330,7 +330,7 @@ $selectedLanguage = $tutor->language_tech ?? '';
                                         <div class="col-12">
                                             <div class="mb-2">
                                                 <label for="address" class="form-label"><strong style="color: #1cc88a;">Subject you want to teach</strong></label>
-                                                <select class="form-select teaching" id="teachingSubjects" name="teaching[]">
+                                                <select class="form-select teaching select2" id="teachingSubjects" name="teaching[]">
                                                     @foreach (config('subjects.subjects') as $subject)
                                                     <option value="{{ $subject }}" {{ in_array($subject, $selectedSubjects) ? 'selected' : '' }}>
                                                         {{ ucfirst(str_replace('_', ' ', $subject)) }}
@@ -402,7 +402,7 @@ $selectedLanguage = $tutor->language_tech ?? '';
                                         <div class="col-12">
                                             <div class="mb-2">
                                                 <label for="address" class="form-label"><strong style="color: #1cc88a;">Langauge teaching</strong></label>
-                                                <select name="language_tech" class="form-select" id="language">
+                                                <select name="language_tech" class="form-select select2" id="language">
                                                     @if($selectedLanguage && !in_array($selectedLanguage, ['english', 'spanish', 'french', 'german', 'italian', 'portuguese']))
                                                     <option value="{{ $selectedLanguage }}" selected>{{ ucfirst($selectedLanguage) }}</option>
                                                     @endif
