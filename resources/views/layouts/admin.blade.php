@@ -26,6 +26,9 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
     <style>
+        div.dataTables_wrapper div.dataTables_length select {
+            width: 60px !important;
+        }
         th , td{ border-right: 1px solid #e3e6f0!important;
         }
         .img-thumbnail {
