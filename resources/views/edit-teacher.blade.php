@@ -551,7 +551,7 @@ $selectedLanguage = $tutor->language_tech ?? '';
         const userNumber = $('#phone');
 
         // Get previously saved phone number from the tutor table
-        let savedPhoneNumber = @json($tutor - > phone);
+        let savedPhoneNumber = @json($tutor -> phone);
 
         // Function to set country prefix
         function setCountryPrefix(resetNumber = false) {
