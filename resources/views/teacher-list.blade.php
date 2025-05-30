@@ -2,6 +2,12 @@
 @section('title')
    Edexcel Teachers
 @endsection 
+<style>
+    .dropdownMenu {
+        min-width: 150px;
+        display: none;
+    }
+</style>
 <script src="{{asset('js/js/jquery.min.js')}}"></script>
 
 @section('content')
@@ -241,6 +247,25 @@
 @endsection
 @section('js')
 <script>
+        document.querySelectorAll('.dropdownButton').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.stopPropagation();
+                const menu = this.nextElementSibling;
+                // Close all open dropdowns first
+                document.querySelectorAll('.dropdownMenu').forEach(m => {
+                    if (m !== menu) m.style.display = 'none';
+                });
+                // Toggle current one
+                menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function () {
+            document.querySelectorAll('.dropdownMenu').forEach(menu => {
+                menu.style.display = 'none';
+            });
+        });
     
     $(document).ready(function() {
         // Select/Deselect All Tutors
