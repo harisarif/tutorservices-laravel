@@ -538,16 +538,20 @@
                                             <!--  -->
                                             <div class="py-2">
                                                 <span>
-                                                    <b>{{ $item->experience ?? 'Nullable' }}+ Years of
-                                                        {{ $item->edu_teaching ? implode(', ', json_decode($item->edu_teaching, true)) : 'Nullable' }}
-                                                        Teaching Experience: Your
-                                                        {{ $item->edu_teaching ? implode(', ', json_decode($item->edu_teaching, true)) : 'Nullable' }}
-                                                        Success, Guaranteed.</b>
+                                                @php
+                                                    $teachingSubjects = $item->edu_teaching;
+                                                    $decodedSubjects = is_array(json_decode($teachingSubjects, true)) ? json_decode($teachingSubjects, true) : null;
+                                                    $subjectList = $decodedSubjects ? implode(', ', $decodedSubjects) : 'Nullable';
+                                                    $experience = $item->experience ?? 'Nullable';
+                                                    $firstName = $item->f_name ?? 'Not Specified';
+                                                @endphp
 
-                                                    - Hello, my name is {{ $item->f_name ?? 'Not Specified' }}. I have
-                                                    {{ $item->experience ?? 'Nullable' }}+ years of experience as a
-                                                    {{ $item->edu_teaching ? implode(', ', json_decode($item->edu_teaching, true)) : 'Nullable' }}
-                                                    Teacher & Tutor
+                                                <b>
+                                                    {{ $experience }}+ Years of {{ $subjectList }} Teaching Experience: Your {{ $subjectList }} Success, Guaranteed.
+                                                </b>
+
+                                                - Hello, my name is {{ $firstName }}. I have {{ $experience }}+ years of experience as a {{ $subjectList }} Teacher & Tutor.
+
 
                                                 </span>
                                                 <ul class="read p-0 mt-3">
