@@ -299,7 +299,7 @@ $selectedLanguage = $tutor->language_tech ?? '';
                     </div>
 
                     <!-- Teaching Preferences & Languages -->
-                    <div class="row">
+                    <div class="row mx-2">
                         <div class="col-md-6 mt-4 mb-3 d-flex">
                             <div class="card h-100 w-100 ms-3">
                                 <div class="card-body">
@@ -382,8 +382,8 @@ $selectedLanguage = $tutor->language_tech ?? '';
 
                         <div class="col-md-6 mt-4 mb-3 d-flex">
                             <div class="card h-100 w-100 mx-3">
-                                <div class="card-body">
-                                    <h5 class="section-title mb-0"><i class="fas fa-language icon"></i> Languages</h5>
+                                <div class="p-4">
+                                    <h5 class="section-title mb-3"><i class="fas fa-language icon"></i> Languages</h5>
                                     @php
                                     $teaching = is_array(json_decode($tutor->edu_teaching))
                                     ? implode(', ', json_decode($tutor->edu_teaching))
