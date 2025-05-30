@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('title')
-   Edexcel Dashboard
-@endsection 
+Edexcel Dashboard
+@endsection
 <script src="{{asset('js/js/jquery.min.js')}}"></script>
 @php
 $languages_spoken = json_decode($tutor->language, true) ?? [];
@@ -37,7 +37,7 @@ $selectedLanguage = $tutor->language_tech ?? '';
 
 @section('content')
 <div id="wrapper">
-@include('layouts.admin-sidebar')
+    @include('layouts.admin-sidebar')
     <div id="content-wrapper" class="d-flex flex-column">
 
         <!-- Main Content -->
@@ -179,7 +179,7 @@ $selectedLanguage = $tutor->language_tech ?? '';
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="mb-2">
-                                                <label for="gender" class="form-label" style="color: #1cc88a;">Gender</label>
+                                                <label for="gender" class="form-label"><strong style="color: #1cc88a;">Gender</strong></label>
                                                 <select name="gender" id="gender" class="form-select select2" required>
                                                     <option value="male" {{ $tutor->gender == 'male' ? 'selected' : '' }}>Male</option>
                                                     <option value="female" {{ $tutor->gender == 'female' ? 'selected' : '' }}>Female</option>
@@ -188,7 +188,7 @@ $selectedLanguage = $tutor->language_tech ?? '';
                                             </div>
                                         </div>
                                     </div>
-                                    
+
 
                                 </div>
                             </div>
@@ -207,7 +207,7 @@ $selectedLanguage = $tutor->language_tech ?? '';
                                     </div>
 
                                     <div class="mb-2">
-                                        <label for="address" class="form-label" style="color: #1cc88a;">Institution/University Name</label>
+                                        <label for="address" class="form-label"><strong style="color: #1cc88a;">Institution/University Name</strong></label>
                                         <select name="location" class="form-select select2" id="institution">
                                             @if(isset($tutor->location) && !in_array($tutor->location, ['harvard', 'mit', 'stanford', 'oxford', 'cambridge', 'berkeley', 'yale', 'princeton']))
                                             <option value="{{ $tutor->location }}" selected>{{ ucfirst(str_replace('_', ' ', $tutor->location)) }}</option>
@@ -258,8 +258,11 @@ $selectedLanguage = $tutor->language_tech ?? '';
                                         <option value="">Others</option>
                                     </select>
 
-                                    <label for="specialization" class="form-label" style="color: #1cc88a;">
-                                        Specialization
+                                    <label for="specialization" class="form-label">
+                                        <strong style="color: #1cc88a;">
+                                            Specialization
+                                        </strong>
+
                                     </label>
                                     <select name="specialization[]" class="form-control select2" id="specialization" multiple>
                                         @php
@@ -280,7 +283,7 @@ $selectedLanguage = $tutor->language_tech ?? '';
 
 
                                     <div class="mb-2">
-                                        <label for="address" class="form-label" style="color: #1cc88a;">year</label>
+                                        <label for="address" class="form-label"><strong style="color: #1cc88a;">Year</strong></label>
                                         <select id="yearSelect" name="year" class="form-select select2">
                                             @if(isset($tutor->year))
                                             <option value="{{ $tutor->year }}" selected>{{ ucfirst(str_replace('_', ' ', $tutor->year)) }}</option>
@@ -301,64 +304,77 @@ $selectedLanguage = $tutor->language_tech ?? '';
                             <div class="card h-100 w-100 ms-3">
                                 <div class="card-body">
                                     <h5 class="section-title"><i class="fas fa-chalkboard-teacher icon"></i> Teaching Preferences</h5>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="mb-2">
+                                                <label for="address" class="form-label"><strong style="color: #1cc88a;">Status</strong></label>
+                                                <select class="form-select school_class" id="qualification" name="availability_status">
+                                                    @php
+                                                    $selectedStatus = $tutor->availability_status ?? ''; // Ensure it's defined
+                                                    @endphp
 
-                                    <div class="mb-2">
-                                        <label for="address" class="form-label" style="color: #1cc88a;">Status</label>
-                                        <select class="form-select school_class" id="qualification" name="availability_status">
-                                            @php
-                                            $selectedStatus = $tutor->availability_status ?? ''; // Ensure it's defined
-                                            @endphp
+                                                    @if($selectedStatus && !in_array($selectedStatus, ['Online', 'Physical', 'Both']))
+                                                    <option value="{{ $selectedStatus }}" selected>{{ ucfirst($selectedStatus) }}</option>
+                                                    @endif
 
-                                            @if($selectedStatus && !in_array($selectedStatus, ['Online', 'Physical', 'Both']))
-                                            <option value="{{ $selectedStatus }}" selected>{{ ucfirst($selectedStatus) }}</option>
-                                            @endif
+                                                    <option value="Physical" @if($selectedStatus==='Physical' ) selected @endif>Physical</option>
+                                                    <option value="Both" @if($selectedStatus==='Both' ) selected @endif>Both</option>
+                                                    <option value="">Others</option>
+                                                </select>
 
-                                            <option value="Physical" @if($selectedStatus==='Physical' ) selected @endif>Physical</option>
-                                            <option value="Both" @if($selectedStatus==='Both' ) selected @endif>Both</option>
-                                            <option value="">Others</option>
-                                        </select>
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="mb-2">
+                                                <label for="address" class="form-label"><strong style="color: #1cc88a;">Subject you want to teach</strong></label>
+                                                <select class="form-select teaching" id="teachingSubjects" name="teaching[]">
+                                                    @foreach (config('subjects.subjects') as $subject)
+                                                    <option value="{{ $subject }}" {{ in_array($subject, $selectedSubjects) ? 'selected' : '' }}>
+                                                        {{ ucfirst(str_replace('_', ' ', $subject)) }}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="mb-2">
-                                        <label for="address" class="form-label" style="color: #1cc88a;">Subject you want to teach</label>
-                                        <select class="form-select teaching" id="teachingSubjects" name="teaching[]">
-                                            @foreach (config('subjects.subjects') as $subject)
-                                            <option value="{{ $subject }}" {{ in_array($subject, $selectedSubjects) ? 'selected' : '' }}>
-                                                {{ ucfirst(str_replace('_', ' ', $subject)) }}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                    <div class="mb-2">
-                                        <label for="address" class="form-label" style="color: #1cc88a;">Description</label>
+                                        <label for="address" class="form-label"><strong style="color: #1cc88a;">Description</strong></label>
                                         <input type="text" class="form-control" id="address" name="description" value="{{$tutor->description}}" style="border: 2px solid #dee2e6;">
                                     </div>
-
-                                    <div class="mb-2">
-                                        <label for="document" class="form-label" style="color: #1cc88a;">Upload Qualification Document</label>
-                                        <div class="input-group">
-                                            <input type="file" class="form-control d-block" id="document" name="document" accept=".pdf,.doc,.docx,.jpg,.png" style="border: 2px solid #dee2e6;">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="mb-2">
+                                                <label for="document" class="form-label"><strong style="color: #1cc88a;">Upload Qualification Document</strong></label>
+                                                <div class="input-group">
+                                                    <input type="file" class="form-control d-block" id="document" name="document" accept=".pdf,.doc,.docx,.jpg,.png" style="border: 2px solid #dee2e6;">
+                                                </div>
+                                                {{-- Show previously uploaded file --}}
+                                                @if(isset($tutor->document))
+                                                <p class="mt-2">Previously uploaded:
+                                                    <a href="{{ asset( $tutor->document) }}" target="_blank" id="documents" style="background-color: #198754;color: white;margin-right: 25px;" class="btn">Watch Document</a>
+                                                </p>
+                                                @endif
+                                            </div>
                                         </div>
-                                        {{-- Show previously uploaded file --}}
-                                        @if(isset($tutor->document))
-                                        <p class="mt-2">Previously uploaded:
-                                            <a href="{{ asset( $tutor->document) }}" target="_blank" id="documents" style="background-color: #198754;color: white;margin-right: 25px;" class="btn">Watch Document</a>
-                                        </p>
-                                        @endif
                                     </div>
-
-                                    <div class="mb-2">
-                                        <label for="video" class="form-label" style="color: #1cc88a;">Video</label>
-                                        <div class="input-group">
-                                            <!-- <input type="text" class="form-control" id="video" placeholder="Video URL or Name"> -->
-                                            <input type="file" class="form-control" name="videoFile" id="videoUpload" accept="video/*" style="border: 2px solid #dee2e6;">
-                                        </div>@if(isset($tutor->video))
-                                        <p class="mt-2">Previously uploaded:
-                                            <a href="{{ asset($tutor->video) }}" target="_blank" id="video" style="background-color: #198754;color: white;margin-right: 25px;" class="btn">Watch Video</a>
-                                        </p>
-                                        @endif
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="mb-2">
+                                                <label for="video" class="form-label"><strong style="color: #1cc88a;">Video</strong></label>
+                                                <div class="input-group">
+                                                    <!-- <input type="text" class="form-control" id="video" placeholder="Video URL or Name"> -->
+                                                    <input type="file" class="form-control" name="videoFile" id="videoUpload" accept="video/*" style="border: 2px solid #dee2e6;">
+                                                </div>@if(isset($tutor->video))
+                                                <p class="mt-2">Previously uploaded:
+                                                    <a href="{{ asset($tutor->video) }}" target="_blank" id="video" style="background-color: #198754;color: white;margin-right: 25px;" class="btn">Watch Video</a>
+                                                </p>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -368,32 +384,47 @@ $selectedLanguage = $tutor->language_tech ?? '';
                             <div class="card h-100 w-100 mx-3">
                                 <div class="card-body">
                                     <h5 class="section-title"><i class="fas fa-language icon"></i> Languages</h5>
-
-                                    <div class="mb-2">
-                                        <label for="address" class="form-label" style="color: #1cc88a;">Educational teaching</label>
-                                        <input type="text" class="form-control" name="edu_teaching" id="address" value="{{$tutor->edu_teaching}}" style="border: 2px solid #dee2e6;">
+                                    @php
+                                    $teaching = is_array(json_decode($tutor->edu_teaching))
+                                    ? implode(', ', json_decode($tutor->edu_teaching))
+                                    : $tutor->edu_teaching;
+                                    @endphp
+                                    <div class="row">
+                                        <div>
+                                            <div class="mb-2">
+                                                <label for="address" class="form-label" style="color: #1cc88a;">Educational teaching</label>
+                                                <input type="text" class="form-control" name="edu_teaching" id="address" value="{{ $teaching }}" style="border: 2px solid #dee2e6;">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="mb-2">
-                                        <label for="address" class="form-label" style="color: #1cc88a;">Langauge teaching</label>
-                                        <select name="language_tech" class="form-select" id="language">
-                                            @if($selectedLanguage && !in_array($selectedLanguage, ['english', 'spanish', 'french', 'german', 'italian', 'portuguese']))
-                                            <option value="{{ $selectedLanguage }}" selected>{{ ucfirst($selectedLanguage) }}</option>
-                                            @endif
 
-                                            @foreach (config('languages.languages') as $code => $name)
-                                            <option value="{{ $code }}">{{ $name }}</option>
-                                            @endforeach
-                                        </select>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="mb-2">
+                                                <label for="address" class="form-label"><strong style="color: #1cc88a;">Langauge teaching</strong></label>
+                                                <select name="language_tech" class="form-select" id="language">
+                                                    @if($selectedLanguage && !in_array($selectedLanguage, ['english', 'spanish', 'french', 'german', 'italian', 'portuguese']))
+                                                    <option value="{{ $selectedLanguage }}" selected>{{ ucfirst($selectedLanguage) }}</option>
+                                                    @endif
+
+                                                    @foreach (config('languages.languages') as $code => $name)
+                                                    <option value="{{ $code }}">{{ $name }}</option>
+                                                    @endforeach
+                                                </select>
 
 
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div id="language-container">
                                         @foreach ($languages_spoken as $index => $lang)
-                                        <div class="form-row d-flex flex-column flex-md-row mb-4" id="language-row">
+                                        <div class="row" id="language-row">
                                             <div class="col-md-12 col-lg-12">
-                                                <label for="language_proficient" class="form-label" style="color: #1cc88a;">
-                                                    Language Proficient
+                                                <label for="language_proficient" class="form-label">
+                                                    <strong style="color: #1cc88a;">
+                                                        Language Proficient
+                                                    </strong>
                                                 </label>
                                                 <div class="position-relative">
                                                     <select name="language_proficient[]" class="form-select rounded-md pr-5"
@@ -411,11 +442,11 @@ $selectedLanguage = $tutor->language_tech ?? '';
                                                     </select>
                                                 </div>
                                             </div>
-
-
+                                        </div>
+                                        <div class="row">
                                             <div class="col-md-12 col-lg-12">
-                                                <label for="language_level_{{ $index }}" class="form-label" style="color: #1cc88a;">
-                                                    Level
+                                                <label for="language_level_{{ $index }}" class="form-label">
+                                                    <strong style="color: #1cc88a;">Level</strong>
                                                 </label>
                                                 <div class="position-relative">
                                                     <select name="language_level[]" class="form-select rounded-md pr-5"
@@ -449,7 +480,7 @@ $selectedLanguage = $tutor->language_tech ?? '';
         </div>
 
 
-        
+
     </div>
 
 
@@ -520,7 +551,7 @@ $selectedLanguage = $tutor->language_tech ?? '';
         const userNumber = $('#phone');
 
         // Get previously saved phone number from the tutor table
-        let savedPhoneNumber = @json($tutor->phone);
+        let savedPhoneNumber = @json($tutor - > phone);
 
         // Function to set country prefix
         function setCountryPrefix(resetNumber = false) {
