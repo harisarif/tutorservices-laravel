@@ -84,9 +84,9 @@
     </div>
 
     <!-- Header -->
-    <header class="text-center bg-white m-0 p-2 d-flex align-items-end justify-content-center">
+    <header style="background: #42b979;" class="text-center m-0 p-2 d-flex align-items-end justify-content-center">
         <a class="mx-auto" href="{{ route('newhome') }}">
-            <img src="{{ asset('images/logo.png') }}" alt="EDEXCEL-logo" height="50px">
+            <img src="{{ asset('images/white-logo.jpeg') }}" alt="Edexcel-logo" style="height: 100px; border-radius: 60px;width:100px;">
         </a>
     </header>
 
@@ -99,8 +99,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between">
-                    <h5 class="modal-title text-success" id="exampleModalLabel">Enter your email</h5>
-                    <span class="fs-1 pointer foucs" data-dismiss="modal">&times;</span>
+                    <h5 class="col-12 d-flex justify-content-between align-items-center px-2 text-success" id="exampleModalLabel">
+                        Enter your email
+                        <span class="fs-5 pointer foucs" data-bs-dismiss="modal" style="align-items: revert;">&times;</span>
+                    </h5>
+                    
                 </div>
                 <div class="modal-body">
                     <form method="POST" action="{{ route('send.verification.email') }}" onsubmit="storeEmail()">
