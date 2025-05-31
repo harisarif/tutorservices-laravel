@@ -5,33 +5,26 @@ Edexcel Students
 <!-- Bootstrap CSS -->
 <script src="{{asset('js/js/jquery.min.js')}}"></script>
 @section('content')
-
 @if (session('success'))
-<div id="success" class="alert alert-success" role="alert">
-    <i class="fas fa-check-circle"></i>
-    <div>
-        <strong>Success!</strong> {{ session('success') }}
+    <div class="alert alert-success alert-dismissible fade show" role="alert" style="z-index: 6; padding: 14px !important;">
+        <strong><i class="fas fa-check-circle"></i> Success!</strong> {{ session('success') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.style.display='none';">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="progress-line"></div>
     </div>
-    <button type="button" class="close-btn" data-dismiss="alert" aria-label="Close">
-        &times;
-    </button>
-    <div class="progress-line"></div>
-</div>
-<div class="alert alert-success" style="z-index: 6;
-    padding: 14px !important;">
-
-    {{ session('success') }}
-    <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
-</div>
 @endif
 
 @if (session('error'))
-<div id="error" class="alert alert-danger" style="z-index: 6; padding: 14px !important;">
-    {{ session('error') }}
-    <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
-    <div class="progress-line"></div>
-</div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="z-index: 6; padding: 14px !important;">
+        <strong><i class="fas fa-exclamation-circle"></i> Error!</strong> {{ session('error') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.style.display='none';">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="progress-line"></div>
+    </div>
 @endif
+
 <!-- Page Wrapper -->
 <div id="wrapper">
 
@@ -67,8 +60,9 @@ Edexcel Students
                         <table class="student-table table border">
                             <thead>
                                 <tr>
-                                    <th class="border"> <input class="form-check-input student-checkbox" type="checkbox" style="margin-left: -1px;">
-                                        <label class="form-check-label" for="select-all" style="margin-bottom:1.5rem !important;margin-left:10px;"></label>
+                                    <th class="border"> <input id="select-all-students" class="form-check-input student-checkbox" type="checkbox" style="margin-left: -1px;">
+<label class="form-check-label" for="select-all-students" style="margin-bottom:1.5rem !important;margin-left:10px;"></label>
+
                                     </th>
                                     <th class="border">ID</th>
                                     <th class="border">Name</th>
@@ -92,7 +86,7 @@ Edexcel Students
                                     <td class="border">{{ $student->name }}</td>
                                     <td class="border">{{ $student->email }}</td>
                                     <td class="border">{{ $student->phone }}</td>
-                                    <td class="border">{{ $student->country }}</td>
+                                     <td class="border">{{ $countries[$student->country] ?? 'Unknown' }}</td>
                                     <td class="border">{{ $student->city }}</td>
                                     <td class="border">{{ $student->subject }}</td>
                                     <td class="border">
@@ -409,5 +403,54 @@ Edexcel Students
             });
         });
     });
+</script><script>
+document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(() => {
+        autoHideAlert("success");
+        autoHideAlert("error");
+    }, 200); 
+    // Added a delay to ensure alerts are available in the DOM
+
+    document.querySelectorAll(".custom-alert .close-btn").forEach((btn) => {
+        btn.addEventListener("click", function() {
+            let alertBox = this.closest(".custom-alert");
+            if (alertBox) {
+                alertBox.classList.add("fade-out");
+                setTimeout(() => alertBox.remove(), 500);
+            }
+        });
+    });
+});
+
+function autoHideAlert(alertId) {
+    let alert = document.getElementById(alertId);
+    if (alert) {
+        let progressBar = alert.querySelector('.progress-line');
+
+        if (progressBar) {
+            // Make the progress bar fill over 30 seconds
+            progressBar.style.transition = "width 20s linear";
+            progressBar.style.width = "100%";
+        }
+
+        // Hide the alert after 30 seconds
+        setTimeout(() => {
+            alert.classList.add("fade-out");
+        }, 20000); // 30 seconds visible
+
+        // Remove the alert completely after fading out
+        setTimeout(() => {
+            alert.remove();
+        }, 20500); // 30.5 seconds total
+    }
+}
+
+
+
+function cancel() {
+    let alert = document.getElementById("error");
+    if (alert) alert.remove();
+}
 </script>
+
 @endsection

@@ -152,11 +152,12 @@ Edexcel Dashboard
                                                     $selectedCountry = $student->country ?? '';
                                                     @endphp
 
-                                                    @foreach($countries as $country)
-                                                    <option value="{{ $country }}" {{ $selectedCountry === $country ? 'selected' : '' }}>
-                                                        {{ ucfirst(str_replace('_', ' ', $country)) }}
-                                                    </option>
-                                                    @endforeach
+                                                   @foreach($countries as $code => $name)
+    <option value="{{ $code }}" {{ $selectedCountry === $code ? 'selected' : '' }}>
+        {{ ucfirst(str_replace('_', ' ', $name)) }}
+    </option>
+@endforeach
+
                                                 </select>
                                             </div>
                                         </div>
@@ -165,12 +166,11 @@ Edexcel Dashboard
                                         <div class="col-12">
                                             <div class="mb-2 custom-class">
                                                 <label for="city" class="form-label fw-bold" style="color: #1cc88a;">City</label>
-                                                <select class="form-select select2" id="city" name="city">
-                                                    
-                                                    <option value="{{ $student->city }}">
-                                                        {{ $student->city}}
-                                                    </option>
-                                                </select>
+                                               <label for="city" class="form-label fw-bold" style="color: #1cc88a;">City</label>
+    <select class="form-select select2" id="city" name="city">
+        <option value="{{ $student->city }}" selected>{{ $student->city }}</option>
+        {{-- Other cities will be populated by AJAX --}}
+    </select>
                                             </div>
                                         </div>
                                     </div>
@@ -226,7 +226,49 @@ Edexcel Dashboard
 @endsection
 
 @section('js')
+<script>
+    var selectedCity = @json($student->city);
+</script>
+<script>
+    $(document).ready(function () {
+        $('#country, #city').select2();
 
+        var $country = $('#country');
+        var $city = $('#city');
+
+        // On change of country
+        $country.on('change', function () {
+            var countryCode = $(this).val();
+            if (!countryCode) return;
+
+            $.ajax({
+                url: '{{ route('get.country.cities') }}',
+                type: 'GET',
+                data: { country: countryCode },
+                success: function (cities) {
+                    $city.empty();
+                    $city.append('<option value="">Select City</option>');
+
+                    $.each(cities, function (index, city) {
+                        var selected = city === selectedCity ? 'selected' : '';
+                        $city.append('<option value="' + city + '" ' + selected + '>' + city + '</option>');
+                    });
+
+                    // Trigger Select2 update
+                    $city.trigger('change.select2');
+                },
+                error: function () {
+                    $city.empty().append('<option value="">No cities available</option>');
+                }
+            });
+        });
+
+        // Trigger population of cities on page load
+        if ($country.val()) {
+            $country.trigger('change');
+        }
+    });
+</script>
 
 <script>
     $(document).ready(function() {

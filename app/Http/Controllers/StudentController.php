@@ -34,12 +34,13 @@ class StudentController extends Controller
         $countries_prefix = collect(config('countries_prefix.countries'));
         return view('hire-tutor', compact('countriesPhone', 'subjects', 'countries', 'schoolClasses', 'countries_prefix', 'countries_number_length'));
     }
-    public function allStudents(Request $request)
-    {
-        $students = Student::all();
-        $countries = collect(config('countries_assoc.countries'));
-        return view('student-list', compact('students', 'countries'));
-    }
+   public function allStudents(Request $request)
+{
+    $students = Student::all(); // This is a collection
+    $countries = config('countries_assoc.countries'); // Full country list
+
+    return view('student-list', compact('students', 'countries'));
+}
     public function inquirydestroy($id)
     {
         $inquiry = Inquiry::findOrFail($id);
@@ -87,6 +88,12 @@ public function destroyinquiryBulk(Request $request)
 
     return response()->json(['message' => 'Selected inquiries deleted successfully']);
 }
+      public function cities(Request $request)
+{
+    $countryCode = $request->query('country');
+    $cities = config('cities.cities')[$countryCode] ?? [];
+    return response()->json($cities);
+}
 
     public function getCities(Request $request)
     {
@@ -115,12 +122,13 @@ public function destroyinquiryBulk(Request $request)
     {
         return view('qr-code');
     }
-    public function showStudentsList()
-    {
+   public function showStudentsList()
+{
+    $students = Student::all();
+    $countries = config('countries_assoc.countries');
+    return view('student-list', compact('students', 'countries'));
+}
 
-        $students = Student::all();
-        return view('student-list', compact('students'));
-    }
     public function inquiriesList()
     {
 
@@ -259,9 +267,9 @@ public function destroyinquiryBulk(Request $request)
         // Optionally, you can redirect the user or return a response
         // return redirect()->route('newhome')->with('success', 'Student created successfully.');
     }
-    public function edit($id){
+    public function edit($id){  
         $schoolClasses = SchoolClass::all();
-        $student = Student::findOrFail($id);
+        $student = Student::findOrFail($id); 
         $qualification = SchoolClass::where('id', $student->qualification)->value('name') ?? 'Not specified';
         $student->teaching = unserialize($student->teaching);
         $storedLanguageCode = $student->language;
@@ -276,7 +284,7 @@ public function destroyinquiryBulk(Request $request)
         }, $languages);
 
         //country
-
+         
         $storedCountryCode = $student->country; // Get country code
         $country = config("countries_assoc.countries.$storedCountryCode", 'Unknown'); // Convert to full name
 
