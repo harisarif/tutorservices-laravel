@@ -402,6 +402,7 @@ class TutorController extends Controller
     }
     public function create(Request $request)
     {
+        // dd($request);
         $rules = [
             'f_name' => 'required|string|max:255',
             'intro' => 'nullable|string|max:255',
@@ -412,7 +413,7 @@ class TutorController extends Controller
             'experience' => 'required|string|max:255',
             'dob' => 'required|string|max:255',
             'document' => 'required|mimes:pdf,xlsx,docx|max:2048',
-            'videoFile' => 'required|mimes:mp4,webm,ogg|max:51200',
+
             'specialization' => 'required|array', // Ensure it's an array
             'specialization.*' => 'string',
             'language_proficient' => 'required|array',
@@ -424,7 +425,7 @@ class TutorController extends Controller
             'edu_teaching.*' => 'string|max:255',
             'currency_price' => 'required|string',
         ];
-
+        
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
@@ -453,9 +454,10 @@ class TutorController extends Controller
         }
 
         if ($request->hasFile('videoFile')) {
+            
             $videoPath = $request->file('videoFile')->store('videos', 'public');
         }
-
+        
         $language = [];
         if ($request->has('language_proficient') && $request->has('language_level')) {
             foreach ($request->input('language_proficient') as $index => $lang) {
@@ -502,10 +504,11 @@ class TutorController extends Controller
         // Upload profile image
         $imagePath = $request->file('profileImage')->store('uploads', 'public');
         $tutor->profileImage = $imagePath;
-        $facebookImg  = $this->getSvgImageTag('facebook');
-        $instagramImg = $this->getSvgImageTag('instagram');
-        $linkedinImg  = $this->getSvgImageTag('linkedin');
-        $youtubeImg   = $this->getSvgImageTag('youtube');
+        $facebookImg = "<img src='https://edexceledu.com/icons/facebook.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
+        $instagramImg = "<img src='https://edexceledu.com/icons/instagram.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
+        $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";        
+        $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>"; 
+        
         // Assign the user_id to the tutor
         $tutor->user_id = $user->id;
 
@@ -996,7 +999,8 @@ class TutorController extends Controller
             'language_level' => 'required|array',
             'language_level.*' => 'string|max:255',
             'language_tech' => 'nullable|string|max:255',
-            'edu_teaching' => 'nullable|string|max:255',
+            'edu_teaching' => 'nullable|array',
+            'edu_teaching.*' => 'string|max:255',
             'currency_price' => 'required|string',
         ];
 
@@ -1105,7 +1109,7 @@ class TutorController extends Controller
         $tutor->teaching = serialize($request->input('teaching'));
         $tutor->phone = $request->input('phone');
         $tutor->specialization = json_encode($request->input('specialization'));
-        $tutor->edu_teaching = $request->input('edu_teaching');
+        $tutor->edu_teaching = json_encode($request->input('edu_teaching'));
         $tutor->availability_status = $request->input('status') ?? 'online';
         $tutor->status = 'active';
 

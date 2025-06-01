@@ -302,122 +302,10 @@
 
 @endsection
 @section('js')
+
 <script>
-    $(document).ready(function() {
-        $('.text-success').on('click', function (e) {
-    e.preventDefault();
-    const dropdown = $('#notificationDropdown');
-    
-    if (dropdown.hasClass('d-block')) {
-        dropdown.removeClass('d-block').addClass('d-none');
-    } else {
-        dropdown.removeClass('d-none').addClass('d-block');
-    }
-});
-
-        $('#select-all-student').click(function() {
-            // Check/uncheck all checkboxes based on the main checkbox
-            $('.student-checkbox').prop('checked', this.checked);
-        });
-        $('#select-all-inquiry').click(function() {
-            // Check/uncheck all checkboxes based on the main checkbox
-            $('.inquiry-checkbox').prop('checked', this.checked);
-        });
-
-        // Optional: Uncheck "Select All" if one of the checkboxes is unchecked
-        $('.tutor-checkbox').click(function() {
-            if (!$(this).prop('checked')) {
-                $('#select-all').prop('checked', false);
-            }
-        });
 
 
-        $('#delete-inquiry').click(function() {
-            // Gather all checked checkbox values
-            var selected = [];
-            $('.inquiry-checkbox:checked').each(function() {
-                selected.push($(this).val());
-            });
-
-            if (selected.length === 0) {
-                Swal.fire({
-                    title: 'Warning!',
-                    text: 'Please select at least one inquiry to delete.',
-                    icon: 'warning',
-                    confirmButtonText: 'OK'
-                });
-
-                return;
-            }
-
-            // Confirm deletion
-            if (confirm('Are you sure you want to delete the selected inquiries?')) {
-                $.ajax({
-                    url: "{{ route('inquiry.destroy.bulk') }}", // Update with your route
-                    type: 'DELETE',
-                    data: {
-                        ids: selected,
-                        _token: '{{ csrf_token() }}' // Include CSRF token for security
-                    },
-                    success: function(response) {
-                        // Handle success (e.g., reload the page or remove deleted rows)
-                        location.reload(); // Reload page after successful deletion
-                    },
-                    error: function(xhr) {
-                        // Handle error
-                        alert('Error occurred while deleting inquires.');
-                    }
-                });
-            }
-        });
-        $('#delete-student').click(function() {
-            // Gather all checked checkbox values
-            var selected = [];
-            $('.student-checkbox:checked').each(function() {
-                selected.push($(this).val());
-            });
-
-            if (selected.length === 0) {
-                // alert('Please select at least one student to delete.');
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Please select at least one tutor to delete.',
-                    icon: 'error', // Use 'error' instead of 'danger'
-                    confirmButtonText: 'OK'
-                });
-                return;
-            }
-
-            // Confirm deletion
-            if (confirm('Are you sure you want to delete the selected students?')) {
-                $.ajax({
-                    url: "{{ route('student.destroy.bulk') }}", // Update with your route
-                    type: 'DELETE',
-                    data: {
-                        ids: selected,
-                        _token: '{{ csrf_token() }}' // Include CSRF token for security
-                    },
-                    success: function(response) {
-                        // Handle success (e.g., reload the page or remove deleted rows)
-                        location.reload(); // Reload page after successful deletion
-                    },
-                    error: function(xhr) {
-                        // Handle error
-                        alert('Error occurred while deleting students.');
-                    }
-                });
-            }
-        });
-    });
-    $(document).ready(function() {
-        $('.teachers-table').DataTable({
-            responsive: true
-        });
-        $('.student-table').DataTable({
-            responsive: true
-        });
-
-    });
 </script>
 <script>
     $(document).ready(function() {
@@ -461,17 +349,6 @@
         }
     });
 
-    function cancel() {
-        $('.alert').addClass('d-none')
-    }
-    $(document).on('select2:open', function(e) {
-        let scrollPos = $(window).scrollTop();
-        setTimeout(function() {
-            $(window).scrollTop(scrollPos);
-        }, 0);
-    });
-    $(document).ready(function($) {
-        $('.country').select2();
-    });
+    
 </script>
 @endsection

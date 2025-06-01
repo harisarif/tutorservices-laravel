@@ -88,7 +88,7 @@ Route::get('/find-tutors', [TutorController::class, 'findTutors'])->name('find.t
 Route::get('/all-tutors', [TutorController::class, 'allTutors'])->name('all.tutors');
 Route::post('/tutor/create', [TutorController::class, 'create'])->name('tutor-create');
 Route::get('/tutors', [TutorController::class, 'filterByCountry'])->name('tutors.filterByCountry');
-Route::get('/teachers-list', [TutorController::class, 'fetchTeachers'])->name('teachers.list');
+
 Route::get('/teachers-list/{id}/view', [TutorController::class, 'show'])->name('view-teacher');
 // document
 Route::get('/teachers-list/{id}/view/document', [TutorController::class, 'view'])->name('view_document');
@@ -166,8 +166,11 @@ Route::view('profile', 'profile')
     })->name('logout');
 
 
-
+    Route::middleware('auth:admin')->group(function () {
+        Route::get('/teachers-list', [TutorController::class, 'fetchTeachers'])->name('teachers.list');
+    });
 Auth::routes();
+
 Route::get('/student-dashboard/{id}', [StudentController::class, 'student_dashboard'])
     ->name('student_dashboard')
     ->middleware('auth', 'auto-logout');

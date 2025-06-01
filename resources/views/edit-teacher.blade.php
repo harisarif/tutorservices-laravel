@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-Edexcel Dashboard
+Edexcel Teachers
 @endsection
 <script src="{{asset('js/js/jquery.min.js')}}"></script>
 @php
@@ -336,15 +336,19 @@ $selectedLanguage = $tutor->language_tech ?? '';
                                 <div class="p-4">
                                     <h5 class="section-title mb-3"><i class="fas fa-language icon"></i> Languages</h5>
                                     @php
-                                    $teaching = is_array(json_decode($tutor->edu_teaching))
-                                    ? implode(', ', json_decode($tutor->edu_teaching))
-                                    : $tutor->edu_teaching;
+                                        $selectedTeachings = is_array(json_decode($tutor->edu_teaching, true)) ? json_decode($tutor->edu_teaching, true) : [];
                                     @endphp
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="mb-2">
-                                                <label for="address" class="form-label"><strong  style="color: #1cc88a;">Educational teaching</strong></label>
-                                                <input type="text" class="form-control" name="edu_teaching" id="address" value="{{ $teaching }}" style="border: 2px solid #dee2e6;">
+                                                <label for="address" class="form-label"><strong  style="color: #1cc88a;">Educational Teaching</strong></label>
+                                                <select name="edu_teaching[]" class="form-control h-40 select2" placeholder="Add Multiple Subject" id="edu_Teaching" multiple>
+                                                    @foreach (config('subjects.subjects') as $subject)
+                                                        <option value="{{ $subject }}" {{ in_array($subject, $selectedTeachings) ? 'selected' : '' }}>
+                                                            {{ $subject }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>   
                                             </div>
                                         </div>
                                     </div>

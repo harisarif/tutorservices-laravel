@@ -2,6 +2,7 @@
 @section('title')
    Edexcel Teachers
 @endsection 
+
 <style>
     .dropdownMenu {
         min-width: 150px;

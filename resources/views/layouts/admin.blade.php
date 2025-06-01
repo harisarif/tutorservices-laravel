@@ -160,7 +160,7 @@
     }
     $(document).ready(function () {
     // Toggle dropdown
-    $('.dropdown-toggle').on('click', function (e) {
+    $('.custom_dropdown-toggle').on('click', function (e) {
         e.stopPropagation(); // prevent bubbling
         // Close other dropdowns
         $('.dropdown-menu').not($(this).siblings('.dropdown-menu')).slideUp(150);
