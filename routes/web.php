@@ -113,6 +113,7 @@ Route::get('/hire-tutor', [StudentController::class, 'index'])->name('hire.tutor
 Route::get('/faq', [StudentController::class, 'FAQ'])->name('faq.index');
 
 Route::get('/cities', [StudentController::class, 'getCities'])->name('cities');
+Route::get('/get-cities', [StudentController::class, 'cities'])->name('get.country.cities');
 
 Route::delete('/inquiries/{id}', [StudentController::class, 'destroy'])->name('inquiries.destroy');
 
