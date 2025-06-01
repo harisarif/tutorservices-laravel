@@ -619,6 +619,12 @@
                                     <button class="btn btn-outline-secondary w-100 remove-btn mt-3" id="removeVideoButton">
                                         Remove Video
                                     </button>
+                                    <video id="live" autoplay muted></video>
+                                    <br>
+                                    <button id="startBtn">Start Recording</button>
+
+                                    <h3>Recorded Video Preview:</h3>
+                                    <video id="recorded" controls style="width: 300px;"></video>
                                 </div>
                             </div>
                             <!-- <div class="col-6">
@@ -642,7 +648,9 @@
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>
-                            <div id="live" class="d-flex"></div></div> 
+                                <!-- <div id="live" class="d-flex"></div> -->
+
+                            </div> 
                         </div>
 
                         <!-- Displaying the uploaded video in a row, full width (col-12)
@@ -716,6 +724,38 @@
 <script src=" {{ asset('js/tutor.js') }}"></script>
 <script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script>
 <script>
+     const live = document.getElementById('live');
+    const recorded = document.getElementById('recorded');
+    const startBtn = document.getElementById('startBtn');
+
+    let mediaRecorder;
+    let recordedChunks = [];
+
+    startBtn.onclick = async (event) => {
+    event.preventDefault(); // <-- stops the form from submitting
+
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    live.srcObject = stream;
+
+    recordedChunks = [];
+    mediaRecorder = new MediaRecorder(stream);
+
+    mediaRecorder.ondataavailable = event => {
+        if (event.data.size > 0) recordedChunks.push(event.data);
+    };
+
+    mediaRecorder.onstop = () => {
+        const blob = new Blob(recordedChunks, { type: 'video/webm' });
+        recorded.src = URL.createObjectURL(blob);
+        recorded.play();
+    };
+
+    mediaRecorder.start();
+    setTimeout(() => {
+        mediaRecorder.stop();
+    }, 10000);
+};
+
 $(document).ready(function(){
   $(".owl-carousel").owlCarousel({
     nav:true,

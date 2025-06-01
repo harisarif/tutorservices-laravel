@@ -57,10 +57,10 @@ class VerificationController extends Controller
             'email.regex' => 'Only Gmail, Yahoo, and Outlook emails are allowed.'
         ]);
         $otp = rand(100000, 999999);
-        $facebookImg  = "<img src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDI0IDEwMjQnPjxwYXRoIGZpbGw9JyM0M2I5NzknIGQ9J003MTEuMyw2NjAsNzM0LDUxMkg1OTJWNDE1Ljk1NzI4QzU5MiwzNzUuNDY2NjcsNjExLjgzNTA4LDMzNiw2NzUuNDM3MTMsMzM2SDc0MFYyMTBzLTU4LjU5MjM1LTEwLTExNC42MTA3OC0xMEM1MDguNDM4NTQsMjAwLDQzMiwyNzAuODc5ODIsNDMyLDM5OS4yVjUxMkgzMDJWNjYwSDQzMnYzNTcuNzc3NzdhNTE3LjM5NjE5LDUxNy4zOTYxOSwwLDAsMCwxNjAsMFY2NjBaJy8+PC9zdmc+' width='16' height='16' alt='facebook' style='vertical-align:middle;' />";
-        $instagramImg = $this->getSvgImageTag('instagram');
-        $linkedinImg  = $this->getSvgImageTag('linkedin');
-        $youtubeImg   = $this->getSvgImageTag('youtube');
+        $facebookImg = "<img src='https://edexceledu.com/icons/facebook.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
+        $instagramImg = "<img src='https://edexceledu.com/icons/instagram.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
+        $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";        
+        $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>"; 
         session(['otp' => $otp, 'otp_expiry' => now()->addMinutes(10)]);
 
         $email = $request->input('email');
@@ -99,32 +99,13 @@ class VerificationController extends Controller
                                             <p style='margin: 10px 0; font-size: 16px; font-weight: bold;'>Edexcel Academy</p>
                                         </td>
                                     </tr>
-                                        <tr>
-                                            <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 14px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;'>
-                                                <div style='display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px;'>
-                                                    <div>
-                                                                <span style='color:#43b979 !important'>&copy; 2025 Edexcel Academy. All rights reserved.</span>
-                                                    </div>     
-                                                    <div style='display:flex;gap:8px;'>  
-                                                        <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:-3px;'>
-                                                            {$facebookImg}
-                                                            
-                                                        </a>
-
-                                                        <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank'>
-                                                            {$instagramImg}
-                                                        </a>
-
-                                                        <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank'>
-                                                            {$linkedinImg}
-                                                        </a>
-
-                                                        <a href='https://youtube.com/@edexcelonline01?si=EuQwX0tL3zk4J-2p' target='_blank'>
-                                                        {$youtubeImg}
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                
+                                        <tr style='margin-bottom:10px;display:flex;'>
+                                            <td align='left' style='color:#43b979; font-size:14px;margin-left:5px;width:50%;'>&copy; 2025 Edexcel Academy. All rights reserved.</td>
+                                            <td align='right' style='display:flex;margin-left:30%'>
+                                                <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:5px;'>{$facebookImg}</a>
+                                                <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank' style='margin-right:5px;'>{$instagramImg}</a>
+                                                <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank' style='margin-right:5px;'>{$linkedinImg}</a>
+                                                <a href='https://youtube.com/@edexcelonline01?si=EuQwX0tL3zk4J-2p' target='_blank'>{$youtubeImg}</a>
                                             </td>
                                         </tr>
                                     </table>

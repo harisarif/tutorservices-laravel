@@ -16,9 +16,12 @@
     <header class="main_header d-flex  align-items-center">
         <a class="nav-link active px-3 py-0 fw-bold d-flex " style=" color: #42b974; flex-shrink: 0; transition: 0.5s;" aria-current="page" href="{{ route('hire.tutor') }}"><i>&#8592; <b>Hire Tutor</b></i></a>
 
-        <a class="hire-tutor-arrow" href="{{ route('newhome') }}"><img style="height: 50px" src="{{asset('images/logo.png')}}" alt="EDEXCEL-logo" height="50px"></a>
+        <a class="mx-auto" href="{{ route('newhome') }}">
+            <img src="{{ asset('images/white-logo.jpeg') }}" alt="Edexcel-logo" style="height: 100px; border-radius: 60px;width:100px;">
+        </a>
 
     </header>
+    
     <section class="inner">
     @include('whatsapp')
         <h1>Let's get started!</h1>

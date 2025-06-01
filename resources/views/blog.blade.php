@@ -8,9 +8,11 @@
     @include('whatsapp')
     <button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block; z-index: 66;" onclick="window.scrollTo(0, 0)"><i class="fa fa-chevron-up"></i></button>    
            
-    <header class="text-center bg-white m-0 p-2 d-flex  justify-content-center align-items-center">
+    <header style="background: #42b979;" class="text-center m-0 p-2 d-flex  justify-content-center align-items-center">
                 
-                <a class="mx-auto" href="{{ route('newhome') }}"><img src="/images/logo.png" alt="EDEXCEL-logo" height="50px"></a>
+                <a class="mx-auto" href="{{ route('newhome') }}">
+                        <img src="{{ asset('images/white-logo.jpeg') }}" alt="Edexcel-logo" style="height: 100px; border-radius: 60px;width:100px;">
+                </a>
                 <div class="custom-select-wrapper">
                     <div class="custom-select-web">
                         <i class="fa fa-globe" style="color:#42b979 " aria-hidden="true" onclick="toggleDropdownWeb()"></i>
