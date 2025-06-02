@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Auth;
 class TutorController extends Controller
 {
     //
-    
+
     public function index(Request $request)
     {
 
@@ -425,7 +425,7 @@ class TutorController extends Controller
             'edu_teaching.*' => 'string|max:255',
             'currency_price' => 'required|string',
         ];
-        
+
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
@@ -454,10 +454,10 @@ class TutorController extends Controller
         }
 
         if ($request->hasFile('videoFile')) {
-            
+
             $videoPath = $request->file('videoFile')->store('videos', 'public');
         }
-        
+
         $language = [];
         if ($request->has('language_proficient') && $request->has('language_level')) {
             foreach ($request->input('language_proficient') as $index => $lang) {
@@ -469,7 +469,7 @@ class TutorController extends Controller
                 }
             }
         }
-        
+
         $studentExists = Student::where('id', 2)->exists();
         // Now create the Tutor and associate with the User
         $tutor = new Tutor();
@@ -506,9 +506,9 @@ class TutorController extends Controller
         $tutor->profileImage = $imagePath;
         $facebookImg = "<img src='https://edexceledu.com/icons/facebook.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
         $instagramImg = "<img src='https://edexceledu.com/icons/instagram.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
-        $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";        
-        $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>"; 
-        
+        $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
+        $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
+
         // Assign the user_id to the tutor
         $tutor->user_id = $user->id;
 
@@ -546,43 +546,20 @@ class TutorController extends Controller
                             </p>
 
                             <p style='font-size: 16px; margin: 10px 0;'>Best regards,</p>
-                            <p style='font-size: 16px; font-weight: bold; margin: 0;'>The Edexcel Team</p>
+                            <p style='font-size: 16px; font-weight: bold; margin: 0;color:#43b979;'>The Edexcel Team</p>
                         </td>
                     </tr>
 
                     <!-- Footer -->
-                    <tr>
-                         <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 14px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;'>
-                                                <div style='display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px;'>
-                                                    <div>
-                                                                <span style='color:#43b979 !important'>&copy; 2025 Edexcel Academy. All rights reserved.</span>
-                                                    </div>     
-                                                    <div style='display:flex;gap:8px;'>  
-                                                <!-- Facebook -->
-                                                    <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:-3px;'>
-                                                        {$facebookImg}
-                                                        
-                                                    </a>
-
-                                                    <!-- Instagram -->
-                                                    <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank'>
-                                                        {$instagramImg}
-                                                    </a>
-
-                                                    <!-- LinkedIn -->
-                                                    <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank'>
-                                                        {$linkedinImg}
-                                                    </a>
-
-                                                    <!-- YouTube -->
-                                                    <a href='https://youtube.com/@edexcelonline01?si=EuQwX0tL3zk4J-2p' target='_blank'>
-                                                       {$youtubeImg}
-                                                    </a>
-                                                    </div>
-                                                </div>
-                                                
+                    <tr style='margin-bottom:10px;display:flex;'>
+                                            <td align='left' style='color:#43b979; font-size:11px;margin-left:5px;width:50%;'>&copy; 2025 Edexcel Academy. All rights reserved.</td>
+                                            <td align='right' style='display:flex;margin-left:25%'>
+                                                <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:5px;'>{$facebookImg}</a>
+                                                <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank' style='margin-right:5px;'>{$instagramImg}</a>
+                                                <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank' style='margin-right:5px;'>{$linkedinImg}</a>
+                                                <a href='https://youtube.com/@edexcelonline01?si=EuQwX0tL3zk4J-2p' target='_blank'>{$youtubeImg}</a>
                                             </td>
-                    </tr>
+                                        </tr>
                 </table>
             </td>
         </tr>
@@ -874,14 +851,15 @@ class TutorController extends Controller
     public function allTutors(Request $request)
     {
         $tutors = Tutor::all();
-        $countries = collect(config('countries_assoc.countries')); $query = Tutor::query();
+        $countries = collect(config('countries_assoc.countries'));
+        $query = Tutor::query();
 
-    if ($request->has('countryTeacher') && $request->countryTeacher !== null) {
-        $query->where('country', $request->countryTeacher); // Adjust if your column name is different
-    }
+        if ($request->has('countryTeacher') && $request->countryTeacher !== null) {
+            $query->where('country', $request->countryTeacher); // Adjust if your column name is different
+        }
 
-    $tutor = $query->get();
-        return view('teacher-list', compact('tutors','tutor', 'countries'));
+        $tutor = $query->get();
+        return view('teacher-list', compact('tutors', 'tutor', 'countries'));
     }
     public function allBlogs()
     {

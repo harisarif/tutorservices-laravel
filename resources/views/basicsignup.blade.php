@@ -13,8 +13,8 @@
             <button id="goToTop" class="goToTop fw-20px" onclick="window.scrollTo(0, 0)">
                 <i class="fa fa-chevron-up"></i>
             </button>
-    <header class="main_header d-flex  align-items-center">
-        <a class="nav-link active px-3 py-0 fw-bold d-flex " style=" color: #42b974; flex-shrink: 0; transition: 0.5s;" aria-current="page" href="{{ route('hire.tutor') }}"><i>&#8592; <b>Hire Tutor</b></i></a>
+    <header class="main_header d-flex  align-items-center" style="background: #42b979;">
+        <a class="nav-link active px-3 py-0 fw-bold d-flex " style=" color: #fff; flex-shrink: 0; transition: 0.5s;" aria-current="page" href="{{ route('hire.tutor') }}"><i>&#8592; <b>Hire Tutor</b></i></a>
 
         <a class="mx-auto" href="{{ route('newhome') }}">
             <img src="{{ asset('images/white-logo.jpeg') }}" alt="Edexcel-logo" style="height: 100px; border-radius: 60px;width:100px;">

@@ -593,59 +593,47 @@
                         <!-- Row for Upload Section and Demo Video -->
                         <div class="row">
                         <div class="col-6">
-    <div class="upload-box mx-3">
-        <div class="upload-area-video" id="uploadAreaVideo">
-            <!-- File input for both upload & recording -->
-            <input type="file" id="videoFileInput" name="videoFile" accept="video/*" style="display: none;" />
+                            <div class="upload-box mx-3">
+                                <div class="upload-area-video" id="uploadAreaVideo">
+                                    <!-- Hidden File Input -->
+                                    <input type="file" id="videoFileInput" name="videoFile" accept="video/mp4,video/webm,video/ogg" style="display: none;" />
 
-            <!-- Upload Content -->
-            <div class="upload-content-video" id="uploadVideoContent">
-                <div class="upload-icon-video">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                </div>
-                <div class="upload-text">
-                    <p class="mb-1">Click to upload or drag and drop your video</p>
-                    <small>MP4, WebM or OGG (max. 50MB)</small>
-                </div>
-            </div>
+                                    <!-- Upload Area -->
+                                    <div class="upload-content-video" id="uploadVideoContent" onclick="document.getElementById('videoFileInput').click();">
+                                        <div class="upload-icon-video">
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                        </div>
+                                        <div class="upload-text">
+                                            <p class="mb-1">Click to upload or drag and drop your video</p>
+                                            <small>MP4, WebM or OGG (max. 50MB)</small>
+                                        </div>
+                                    </div>
 
-            <!-- Loading Indicator -->
-            <div class="loading" id="loadingVideoIndicator" style="display:none;">
-                <i class="fas fa-spinner fa-2x loading-spinner"></i>
-            </div>
-        </div>
-
-        <div class="error-message" id="errorVideoMessage"></div>
-
-        <button class="btn btn-outline-secondary w-100 remove-btn mt-3" id="removeVideoButton">
-            Remove Video
-        </button>
-
-        <div class="btn btn-outline-secondary w-100 mt-3">
-            <span id="startBtn">Start Recording</span>
-        </div>
-
-        <video id="live" autoplay muted style="display:none;"></video>
-        <!-- <div id="demoVideoPreview" class="mt-2"></div> -->
-    </div>
-</div>
-
-                            <div class="col-6">
-                                <div class="demo-box">
-                                    <!-- Close Icon
-                                    <span class="close-video d-flex align-items-center justify-content-end top-0 end-0 m-2" id="removeVideoButton">
-                                        &times;
-                                    </span> -->
-
-                                    <!-- Demo Video -->
-                                    <!-- <video class="demo-video" controls id="demoVideoPreview">
-                                        
-                                    </video> -->
-                                    <div id="demoVideoPreview" class="mt-2"></div>
+                                    <!-- Loading Indicator -->
+                                    <div class="loading" id="loadingVideoIndicator" style="display:none;">
+                                        <i class="fas fa-spinner fa-2x loading-spinner"></i>
+                                    </div>
                                 </div>
-                                <!-- <div id="live" class="d-flex"></div> -->
 
-                            </div> 
+                                <!-- Error & Controls -->
+                                <div class="error-message text-danger mt-2" id="errorVideoMessage"></div>
+
+                                <button type="button" class="btn btn-outline-secondary w-100 remove-btn mt-3" id="removeVideoButton">
+                                    Remove Video
+                                </button>
+
+                                <div class="btn btn-outline-secondary w-100 mt-3" id="startBtn">
+                                    Start Recording
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="demo-box">
+                                <video id="live" controls style="width:100%;height:70%;" src="{{ asset('images/banner-video.mp4') }}"></video>
+                            </div>
+                        </div>
+
                         </div>
 
                         <!-- Displaying the uploaded video in a row, full width (col-12)
@@ -719,70 +707,89 @@
 <script src=" {{ asset('js/tutor.js') }}"></script>
 <script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script>
 <script>
-     const startBtn = document.getElementById('startBtn');
-const videoInput = document.getElementById('videoFileInput');
-const preview = document.getElementById('demoVideoPreview');
-const loadingIndicator = document.getElementById('loadingVideoIndicator');
+     
+     document.addEventListener('DOMContentLoaded', () => {
+        const startBtn = document.getElementById('startBtn');
+        const videoInput = document.getElementById('videoFileInput');
+        const loadingIndicator = document.getElementById('loadingVideoIndicator');
+        const videoPreview = document.getElementById('live');
+        const removeBtn = document.getElementById('removeVideoButton');
+        const errorMsg = document.getElementById('errorVideoMessage');
 
-startBtn.onclick = async (event) => {
-    event.preventDefault();
+        const defaultSrc = 'images/banner-video.mp4'; // Or use Blade: "{{ asset('videos/demo-video.mp4') }}"
+        videoPreview.src = defaultSrc;
+        videoPreview.style.display = 'block';
 
-    // Show loading spinner
-    if (loadingIndicator) loadingIndicator.style.display = 'block';
+        // Start Recording
+        startBtn.onclick = async () => {
+            errorMsg.innerText = '';
+            loadingIndicator.style.display = 'block';
 
-    try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-        const recordedChunks = [];
-        const mediaRecorder = new MediaRecorder(stream);
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                const recordedChunks = [];
+                const mediaRecorder = new MediaRecorder(stream);
 
-        mediaRecorder.ondataavailable = (e) => {
-            if (e.data.size > 0) recordedChunks.push(e.data);
-        };
+                mediaRecorder.ondataavailable = e => {
+                    if (e.data.size > 0) recordedChunks.push(e.data);
+                };
 
-        mediaRecorder.onstop = () => {
-            const blob = new Blob(recordedChunks, { type: 'video/webm' });
-            const filename = `live_video_${Date.now()}.webm`;
+                mediaRecorder.onstop = () => {
+                    const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                    const file = new File([blob], `live_video_${Date.now()}.webm`, { type: 'video/webm' });
 
-            // Create file from blob and assign to hidden input
-            const file = new File([blob], filename, { type: 'video/webm' });
-            const dataTransfer = new DataTransfer();
-            dataTransfer.items.add(file);
-            videoInput.files = dataTransfer.files;
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(file);
+                    videoInput.files = dataTransfer.files;
 
-            console.log("✅ Recorded file set to input:", videoInput.files[0]);
+                    videoPreview.src = URL.createObjectURL(blob);
+                    videoPreview.load();
+                    videoPreview.play();
 
-            // Optional: Show preview
-            if (preview) {
-                const videoElement = document.createElement('video');
-                videoElement.controls = true;
-                videoElement.src = URL.createObjectURL(blob);
-                videoElement.style.width = '100%';
-                preview.innerHTML = '';
-                preview.appendChild(videoElement);
+                    loadingIndicator.style.display = 'none';
+                };
+
+                mediaRecorder.start();
+
+                setTimeout(() => {
+                    mediaRecorder.stop();
+                    stream.getTracks().forEach(track => track.stop());
+                }, 10000);
+            } catch (err) {
+                errorMsg.innerText = 'Could not start recording. Please allow camera access.';
+                console.error("Recording error:", err);
+                loadingIndicator.style.display = 'none';
             }
-
-console.log("📝 File name:", file.name);              // shows filename with extension
-console.log("📦 MIME type:", file.type);              // e.g. "video/webm"
-console.log("📁 File object:", file);                 // full File object
-console.log("📏 Size (bytes):", file.size);  
-            // Hide loading spinner
-            if (loadingIndicator) loadingIndicator.style.display = 'none';
         };
 
-        mediaRecorder.start();
+        // Upload Preview
+        videoInput.onchange = () => {
+            errorMsg.innerText = '';
+            if (videoInput.files.length > 0) {
+                const file = videoInput.files[0];
+                const validTypes = ['video/mp4', 'video/webm', 'video/ogg'];
 
-        // Stop recording after 10 seconds
-        setTimeout(() => {
-            mediaRecorder.stop();
-            stream.getTracks().forEach(track => track.stop());
-        }, 5000);
+                if (!validTypes.includes(file.type)) {
+                    errorMsg.innerText = 'Invalid file type. Please upload MP4, WebM or OGG.';
+                    videoInput.value = '';
+                    return;
+                }
 
-    } catch (error) {
-        console.error("🚫 Recording error:", error.message || error);
-        if (loadingIndicator) loadingIndicator.style.display = 'none';
-        alert("Unable to access camera and microphone. Please allow permissions or use a supported browser.");
-    }
-};
+                videoPreview.src = URL.createObjectURL(file);
+                videoPreview.load();
+                videoPreview.play();
+            }
+        };
+
+        // Remove / Reset Video
+        removeBtn.onclick = () => {
+            videoInput.value = '';
+            errorMsg.innerText = '';
+            videoPreview.src = defaultSrc;
+            videoPreview.load();
+            videoPreview.play();
+        };
+    });
 
 
 
