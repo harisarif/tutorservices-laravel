@@ -1508,7 +1508,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: '{{ route('fetch-data') }}',
+            url: '{{ route("fetch-data") }}',
             data: locationData,
             dataType: 'json',
             success: function(response) {
@@ -1717,7 +1717,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: '{{ route('fetch-data') }}',
+            url: '{{ route("fetch-data") }}',
             data: JSON.stringify(locationData),
             contentType: 'application/json',
             dataType: 'json', // Corrected syntax (no extra comma or misplaced characters)
@@ -1913,7 +1913,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: '{{ route('fetch-data') }}',
+            url: '{{ route("fetch-data") }}',
             data: locationData,
             dataType: 'json',
             success: function(response) {
@@ -2104,7 +2104,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: '{{ route('fetch-data') }}',
+            url: '{{ route("fetch-data") }}',
             data: locationData,
             dataType: 'json',
             success: function(response) {
@@ -2288,7 +2288,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: '{{ route('fetch-data') }}',
+            url: '{{ route("fetch-data") }}',
             data: locationData,
             dataType: 'json',
             success: function(response) {
@@ -2468,7 +2468,7 @@ $(document).ready(function() {
     $('#resetFilterBtn').click(function() {
         $.ajax({
             type: 'POST',
-            url: '{{ route('fetch-data') }}',
+            url: '{{ route("fetch-data") }}',
             data: {
                 reset: true
             },
