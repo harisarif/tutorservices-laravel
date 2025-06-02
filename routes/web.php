@@ -116,6 +116,7 @@ Route::get('/cities', [StudentController::class, 'getCities'])->name('cities');
 Route::get('/get-cities', [StudentController::class, 'cities'])->name('get.country.cities');
 
 Route::delete('/inquiries/{id}', [StudentController::class, 'destroy'])->name('inquiries.destroy');
+Route::get('/notification/view/{id}', [NotificationController::class, 'view'])->name('notification.view');
 
 Route::delete('/student/destroy-bulk', [StudentController::class, 'destroystudentBulk'])->name('student.destroy.bulk');
 Route::delete('/inquiry/destroy-bulk', [StudentController::class, 'destroyinquiryBulk'])->name('inquiry.destroy.bulk');

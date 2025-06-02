@@ -20,4 +20,13 @@ class NotificationController extends Controller
     }
     return response()->json(['status' => 'error'], 400);
 }
+
+public function view($id)
+{
+    $notification = auth()->user()->notifications()->findOrFail($id);
+    $notification->markAsRead();
+    
+    return view('notifications.detail', ['notification' => $notification]);
+}
+
 }

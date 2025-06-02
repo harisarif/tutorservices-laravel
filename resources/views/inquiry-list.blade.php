@@ -180,7 +180,7 @@ Edexcel Inquires
                         },
                         success: function(response) {
                             selected.forEach(id => $('#inquiry-row-' + id).remove());
-                            Swal.fire('Deleted!', 'Selected inquiries have been deleted.', 'success');
+                              location.reload();
                         },
                         error: function() {
                             Swal.fire('Error!', 'Something went wrong.', 'error');
@@ -320,7 +320,7 @@ $(document).on('click', '.single-delete-btn', function () {
                 },
                 success: function () {
                     $('#inquiry-row-' + id).remove();
-                    Swal.fire('Deleted!', 'Inquiry has been deleted.', 'success');
+                     location.reload();
                 },
                 error: function () {
                     Swal.fire('Error!', 'Something went wrong.', 'error');
