@@ -152,6 +152,13 @@ Route::get('/verify-email', [VerificationController::class, 'show'])->name('veri
 Route::post('/send-verification-link', [VerificationController::class, 'sendLink'])->name('verification.send');
 Route::get('/verify/{token}', [VerificationController::class, 'verify'])->name('verification.verify');
 Route::post('/check-email', [VerificationController::class, 'checkEmail'])->name('check.email');
+Route::get('/inquiry/{id}', [EdexcelComplaintController::class, 'show'])->name('inqury.show');
+Route::get('/notifications', [NotificationController::class, 'index'])->name('admin.notifications');
+Route::prefix('notifications')->group(function () {
+    Route::get('/{id}', [NotificationController::class, 'show'])->name('notifications.show');
+    Route::delete('/{id}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
+    Route::delete('/bulk-delete', [NotificationController::class, 'destroyBulk'])->name('notifications.destroy.bulk');
+});
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified', 'auto-logout'])

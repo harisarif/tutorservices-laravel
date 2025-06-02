@@ -78,6 +78,14 @@ Edexcel Inquires
                                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                                             </button>
                                             <ul class="dropdown-action dropdown-menu" id="dropdownInq">
+    <li class="d-flex align-items-center dropdown-item" style="border-bottom: 1px solid #ddd; color: black;">
+        <a href="{{ route('inqury.show', $inquiry->id) }}" class="dropdown-item">
+            <i class="fa-regular fa-eye" style="color: #1cc88a;"></i>
+            <span class="mx-1">View</span>
+        </a>
+    </li>
+
+
                                                 <li class="d-flex align-items-center dropdown-item" style="border-bottom: 1px solid #ddd; color: black;">
                                                     <a href="{{ route('inqury.edit', $inquiry->id) }}" class="dropdown-item">
                                                         <i class="fa-regular fa-pen-to-square" style="color: #4e73df;"></i>

@@ -238,7 +238,12 @@ class EdexcelComplaintController extends Controller
 
     return redirect()->route('inquiries.list')->with('success', 'inquiry updated successfully.');
 
-}  public function destroy($id)
+} public function show($id)
+{
+    $inquiry = EdexcelComplaint::findOrFail($id);
+    return view('admin-inquiry-show', compact('inquiry'));
+}
+ public function destroy($id)
 {
     $inquiry = EdexcelComplaint::findOrFail($id);
     $inquiry->delete();
