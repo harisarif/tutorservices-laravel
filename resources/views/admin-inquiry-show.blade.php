@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-   Edexcel Dashboard
+   Edexcel Inquiry
 @endsection 
 <script src="{{asset('js/js/jquery.min.js')}}"></script>
 @section('content')
@@ -28,9 +28,7 @@
         <div id="contents">
 
             <!-- Topbar -->
-            @include('layouts.admin-header')
-
-                   
+            @include('layouts.admin-header') 
             <section>
              <div class="col-lg-12">
                         <div class="card mb-4">
@@ -66,25 +64,14 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="{{ route('admin.inquiry') }}" class="btn btn-success mb-5">Back To Dashboard</a>
+                        <!-- <a href="{{ route('admin.inquiry') }}" class="btn btn-success mb-5">Back To Dashboard</a> -->
                     </div>
     
             </section>
 
 
         </div>
-
-
-        <div class="sticky-footer  bg-gradient-success" style="padding:2rem 0">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto text-white">
-                    <span>Copyright &copy;Edexcel Academy & Educational Consultancy</span>
-                </div>
-            </div>
-        </div>
     </div>
-
-
 </div>
 @endsection
 

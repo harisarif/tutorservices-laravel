@@ -1006,7 +1006,7 @@
         </div>
         <div class="col-7 img-reqire p-0">
             <div class="ai-image-div">
-                <img src="images/indian-asian.jpg" alt="">
+                <img src="{{ asset('images/inquiry.jpeg') }}" alt="">
             </div>
         </div>
     </div>
@@ -1064,7 +1064,7 @@
         <div class="AE row border mx-0">
             <div class="col-lg-6 col-sm-6 im-div p-0">
                 <div class="im-img">
-                    <img src="images/group.png" alt="">
+                    <img src="{{ asset('images/become-tutor.jpeg') }}" alt="">
                 </div>
             </div>
 
@@ -1094,7 +1094,7 @@
     @if($blogs->count() > 0)
     <section class="w-75 mx-auto">
 
-        <div class="ad-heading-div-child">
+        <div class="ad-heading-div-child im-heading">
             <h2 class="text-center mt-3 fw-bold">{{ __('Trending Posts') }}</h2>
         </div>
         <div class="row g-4">

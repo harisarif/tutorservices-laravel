@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-Edexcel Notification
+Edexcel Notifications
 @endsection
 
 <script src="{{asset('js/js/jquery.min.js')}}"></script>
@@ -65,14 +65,14 @@ Edexcel Notification
                                  <td>{{ $notification->data['phone'] ?? 'No phone' }}</td><td>{{ $notification->data['message'] ?? 'No message' }}</td>
                                 <td>
                                   @if ($notification->read_at)
-    <span class="text-success">
-        <i class="fa fa-envelope-open" title="Read"></i>
-    </span>
-@else
-    <span class="text-warning">
-        <i class="fa fa-envelope" title="Unread"></i>
-    </span>
-@endif
+                                        <span class="text-success">
+                                            <i class="fa fa-envelope-open" title="Read"></i>
+                                        </span>
+                                    @else
+                                        <span class="text-warning">
+                                            <i class="fa fa-envelope" title="Unread"></i>
+                                        </span>
+                                    @endif
 
                                 </td>
                                 <td>
@@ -82,12 +82,12 @@ Edexcel Notification
                                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                                             </button>
                                             <ul class="dropdown-action dropdown-menu" id="dropdownInq">
-    <li class="d-flex align-items-center dropdown-item" style="border-bottom: 1px solid #ddd; color: black;">
-        <a href="{{ route('notifications.show', $notification->id) }}" class="dropdown-item">
-            <i class="fa-regular fa-eye" style="color: #1cc88a;"></i>
-            <span class="mx-1">View</span>
-        </a>
-    </li>
+                                                <li class="d-flex align-items-center dropdown-item" style="border-bottom: 1px solid #ddd; color: black;">
+                                                    <a href="{{ route('notifications.show', $notification->id) }}" class="dropdown-item">
+                                                        <i class="fa-regular fa-eye" style="color: #1cc88a;"></i>
+                                                        <span class="mx-1">View</span>
+                                                    </a>
+                                                </li>
                                                 <li class="dropdown-item">
                                                    <button type="button"
                                                         class="btn btn-sm single-delete-btn mx-2"

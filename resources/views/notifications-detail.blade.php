@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 @section('title')
-   Edexcel Dashboard
+   Edexcel Notifications
 @endsection 
 <script src="{{asset('js/js/jquery.min.js')}}"></script>
-@section('content')
+
 
 
 @if ($errors->any())
@@ -29,12 +29,10 @@
 
             <!-- Topbar -->
             @include('layouts.admin-header')
-
-                   
             <section>
              <div class="col-lg-12">
                         <div class="card mb-4">
-                            <div class="card-body" style="height: auto;"> <h3 class="text-success mb-1">Inquiry Details</h3>
+                            <div class="card-body" style="height: auto;"> <h3 class="text-success mb-1">Notifications Details</h3>
                                 <div class="row" style="margin-top: 100px;">
                                     <div class="col-md-6">
                                         <div class="d-flex pb-3 justify-content-between" style="border-bottom: 1px solid #b7b2b2;">
@@ -70,21 +68,8 @@
                     </div>
     
             </section>
-
-
-        </div>
-
-
-        <div class="sticky-footer  bg-gradient-success" style="padding:2rem 0">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto text-white">
-                    <span>Copyright &copy;Edexcel Academy & Educational Consultancy</span>
-                </div>
-            </div>
         </div>
     </div>
-
-
 </div>
 @endsection
 
