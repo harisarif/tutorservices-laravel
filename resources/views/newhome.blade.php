@@ -13,11 +13,11 @@
 <link rel="stylesheet" href="{{ asset('css/tutor-style.css')}}">
 <link rel="stylesheet" href="{{ asset('css/mediaquery.css')}}">
 <style>
-.alert {
-    display: flex !important;
-    align-items: center;
-    font-size: 14px !important;
-}
+    .alert {
+        display: flex !important;
+        align-items: center;
+        font-size: 14px !important;
+    }
 </style>
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -205,7 +205,8 @@
     style="background-image: url(images/group-of-kids.jpg); background-size: cover; background-blend-mode: multiply; background-color: #a5a5a5;">
     <div class="banner-content">
         <h1 class="aa fs-2" style="margin-top:10rem;">
-            {{ __('messages.Edexcel Academically with tailored tutoring and professional guidance') }}</h1>
+            {{ __('messages.Edexcel Academically with tailored tutoring and professional guidance') }}
+        </h1>
     </div>
     {{-- <button class="p-2  btn-an rounded border-0 text-light">
                         Student
@@ -458,12 +459,14 @@
                                                                 <h4 class="fw-bold mb-0">5</h4>
                                                             </div>
                                                             <p class="text-secondary fs-6">
-                                                                {{ $item->avalibility_status ?? 'Nullable' }}</p>
+                                                                {{ $item->avalibility_status ?? 'Nullable' }}
+                                                            </p>
                                                         </div>
                                                         <div class="me-md-5 me-2" id="dollar">
                                                             <h4 class="fw-bold mb-0">US$16</h4>
                                                             <p class="text-secondary fs-6 " style="text-align: center;">
-                                                                {{ $item->year ?? 'Nullable' }}</p>
+                                                                {{ $item->year ?? 'Nullable' }}
+                                                            </p>
                                                         </div>
                                                         <div>
                                                             <span><i class="fa-regular fa-heart"></i></span>
@@ -494,9 +497,9 @@
                                                 <p class="mb-0"
                                                     style="color:black; transform: scaleY(1);text-transform:capitalize">
                                                     @if($item->edu_teaching && is_array(json_decode($item->edu_teaching, true)))
-                                                        {{ implode(', ', json_decode($item->edu_teaching, true)) }}
+                                                    {{ implode(', ', json_decode($item->edu_teaching, true)) }}
                                                     @else
-                                                        {{ $item->edu_teaching ?? 'Nullable' }}
+                                                    {{ $item->edu_teaching ?? 'Nullable' }}
                                                     @endif
                                                 </p>
                                             </div>
@@ -505,14 +508,16 @@
                                                         style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
                                                 <p class="mb-0"
                                                     style="color:black; transform: scaleY(1);text-transform:capitalize">
-                                                    {{ $item->gender ?? 'Nullable' }}</p>
+                                                    {{ $item->gender ?? 'Nullable' }}
+                                                </p>
                                             </div>
 
                                             <div class="d-flex text-secondary">
                                                 <span class="me-2"><i class="fa-solid fa-earth-americas"
                                                         style="font-size: 13px;  margin-top: 5px;    color: #1cc88a;"></i></span>
                                                 <p class="mb-0 ms-1" style="color:black; transform: scaleY(1);">
-                                                    {{ $item->country_name ?? 'Nullable' }}</p>
+                                                    {{ $item->country_name ?? 'Nullable' }}
+                                                </p>
                                             </div>
 
                                             <div class="d-flex text-secondary py-2">
@@ -538,19 +543,19 @@
                                             <!--  -->
                                             <div class="py-2">
                                                 <span>
-                                                @php
+                                                    @php
                                                     $teachingSubjects = $item->edu_teaching;
                                                     $decodedSubjects = is_array(json_decode($teachingSubjects, true)) ? json_decode($teachingSubjects, true) : null;
                                                     $subjectList = $decodedSubjects ? implode(', ', $decodedSubjects) : 'Nullable';
                                                     $experience = $item->experience ?? 'Nullable';
                                                     $firstName = $item->f_name ?? 'Not Specified';
-                                                @endphp
+                                                    @endphp
 
-                                                <b>
-                                                    {{ $experience }}+ Years of {{ $subjectList }} Teaching Experience: Your {{ $subjectList }} Success, Guaranteed.
-                                                </b>
+                                                    <b>
+                                                        {{ $experience }}+ Years of {{ $subjectList }} Teaching Experience: Your {{ $subjectList }} Success, Guaranteed.
+                                                    </b>
 
-                                                - Hello, my name is {{ $firstName }}. I have {{ $experience }}+ years of experience as a {{ $subjectList }} Teacher & Tutor.
+                                                    - Hello, my name is {{ $firstName }}. I have {{ $experience }}+ years of experience as a {{ $subjectList }} Teacher & Tutor.
 
 
                                                 </span>
@@ -614,7 +619,8 @@
                         <span class="mb-div"><b>{{ __('messages.20 AED for 50 minutes') }}</b></span>
                         <div class="ae-detail">
                             <h4 class="fs-6 mt-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                {{ __('messages.Free Trial Section') }}</h4>
+                                {{ __('messages.Free Trial Section') }}
+                            </h4>
                         </div>
                     </div>
                 </div>
@@ -882,7 +888,7 @@
                 <!-- tutor profile end -->
                 @else
                 <!-- <p>No tutors found.</p> -->
-                <img class="not-found-img w-100" src="{{ asset('images/not-found.jpeg') }}"/>
+                <img class="not-found-img w-100" src="{{ asset('images/not-found.jpeg') }}" />
                 @endif
 
                 <!-- Here is form -->
@@ -936,7 +942,8 @@
                                 {{ __('messages.Submit your inquiry to request a callback for further assistance') }}
                             </h6>
                             <h3 class="Ab-heading fw-bold text-center" style="font-size: 15px;color: red;">
-                                <i>"{{ __('messages.Please Complete All Required Fields') }}"</i></h3>
+                                <i>"{{ __('messages.Please Complete All Required Fields') }}"</i>
+                            </h3>
 
 
                             <div class="row g-0">
@@ -1033,7 +1040,8 @@
                         </div>
                         <div class="card-body slider-body">
                             <h5 class="card-title slider-title">{{ $sliderTutor->f_name ?? 'Nullable' }}
-                                {{ $sliderTutor->l_name ?? 'Nullable' }}</h5>
+                                {{ $sliderTutor->l_name ?? 'Nullable' }}
+                            </h5>
                             <p class="card-text slider-text">
                                 @php
                                 $specializations = json_decode($sliderTutor->specialization, true);
@@ -1041,16 +1049,17 @@
                                 Hello, my name is {{ $sliderTutor->f_name ?? 'Not Specified' }}. I have
                                 <b>{{ $sliderTutor->experience ?? 'Nullable' }}</b>+ years of experience as a
                                 {{ is_array($specializations) && count($specializations) ? implode(', ', $specializations) : 'Not Specified' }}
-                                Teacher & Tutor</p>
+                                Teacher & Tutor
+                            </p>
                             <!-- <button class="view-more-btn">View More</button> -->
                         </div>
                     </div>
                     @endforeach
                     @else
-                        <div class="text-center mt-5">
-                            <img src="{{ asset('images/not-found.jpeg') }}" alt="Not Found" class="img-fluid" style="max-width: 300px;">
-                            <!-- <p class="mt-3">No tutors found.</p> -->
-                        </div>
+                    <div class="text-center mt-5">
+                        <img src="{{ asset('images/not-found.jpeg') }}" alt="Not Found" class="img-fluid" style="max-width: 300px;">
+                        <!-- <p class="mt-3">No tutors found.</p> -->
+                    </div>
                     @endif
                 </div>
             </div>
@@ -1373,7 +1382,7 @@
 
 <!-- Your custom script -->
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         const submitBtn = document.getElementById("submitBtn");
         const form = document.querySelector("form");
 
@@ -1395,167 +1404,165 @@
 
         validateFields(); // Initial check
 
-        form.addEventListener("submit", function (e) {
+        form.addEventListener("submit", function(e) {});
+    });
+    document.querySelectorAll('.trigger-modal').forEach(function(element) {
+        element.addEventListener('mouseenter', function() {
+            var modal = new bootstrap.Modal(document.getElementById('videoModal'));
+            modal.show();
         });
     });
-document.querySelectorAll('.trigger-modal').forEach(function(element) {
-    element.addEventListener('mouseenter', function() {
-        var modal = new bootstrap.Modal(document.getElementById('videoModal'));
-        modal.show();
+    $(document).on('select2:open', function(e) {
+        let scrollPos = $(window).scrollTop();
+        setTimeout(function() {
+            $(window).scrollTop(scrollPos);
+        }, 0);
     });
-});
-$(document).on('select2:open', function(e) {
-    let scrollPos = $(window).scrollTop();
-    setTimeout(function() {
-        $(window).scrollTop(scrollPos);
-    }, 0);
-});
 </script>
 <script>
-jQuery(document).ready(function($) {
-    console.log(window.innerWidth);
-    "use strict";
-    //  TESTIMONIALS CAROUSEL HOOK
-    $('#customers-testimonials').owlCarousel({
-        loop: true,
-        center: true,
-        items: 6,
-        margin: 0,
-        autoplay: true,
-        dots: true,
-        autoplayTimeout: 8500,
-        smartSpeed: 450,
-        rtl: true,
-        responsive: {
-            0: {
-                items: 1
-            },
-            768: {
-                items: 2
-            },
-            1170: {
-                items: 3
-            },
-            1440: {
-                items: 4
-            },
-            1600: {
-                items: 5
+    jQuery(document).ready(function($) {
+        console.log(window.innerWidth);
+        "use strict";
+        //  TESTIMONIALS CAROUSEL HOOK
+        $('#customers-testimonials').owlCarousel({
+            loop: true,
+            center: true,
+            items: 6,
+            margin: 0,
+            autoplay: true,
+            dots: true,
+            autoplayTimeout: 8500,
+            smartSpeed: 450,
+            rtl: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                768: {
+                    items: 2
+                },
+                1170: {
+                    items: 3
+                },
+                1440: {
+                    items: 4
+                },
+                1600: {
+                    items: 5
+                }
             }
-        }
+        });
     });
-});
 </script>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll(".img-wrapper").forEach(wrapper => {
-        const img = wrapper.querySelector(".profile-image");
-        const video = wrapper.querySelector(".profile-video");
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".img-wrapper").forEach(wrapper => {
+            const img = wrapper.querySelector(".profile-image");
+            const video = wrapper.querySelector(".profile-video");
 
-        if (video) {
-            // Show video on hover
-            wrapper.addEventListener("mouseenter", function() {
-                img.style.display = "none"; // Hide image
-                video.style.display = "block"; // Show video
-                video.play(); // Start playing
-            });
+            if (video) {
+                // Show video on hover
+                wrapper.addEventListener("mouseenter", function() {
+                    img.style.display = "none"; // Hide image
+                    video.style.display = "block"; // Show video
+                    video.play(); // Start playing
+                });
 
-            // Hide video when mouse leaves
-            wrapper.addEventListener("mouseleave", function() {
-                video.style.display = "none"; // Hide video
-                img.style.display = "block"; // Show image
-                video.pause(); // Pause video
-                video.currentTime = 0; // Reset video
-            });
-        }
+                // Hide video when mouse leaves
+                wrapper.addEventListener("mouseleave", function() {
+                    video.style.display = "none"; // Hide video
+                    img.style.display = "block"; // Show image
+                    video.pause(); // Pause video
+                    video.currentTime = 0; // Reset video
+                });
+            }
+        });
     });
-});
 </script>
 <script>
-const priceRanges = [
-    "0-50", "50-100", "100-200",
-];
+    const priceRanges = [
+        "0-50", "50-100", "100-200",
+    ];
 
-const select = document.getElementById("prize-Range");
+    const select = document.getElementById("prize-Range");
 
-// Generate options dynamically
-priceRanges.forEach(range => {
-    let option = document.createElement("option");
-    option.value = range;
-    option.textContent = `$${range.replace("-", " - $")}`;
-    select.appendChild(option);
-});
-$(document).ready(function() {
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+    // Generate options dynamically
+    priceRanges.forEach(range => {
+        let option = document.createElement("option");
+        option.value = range;
+        option.textContent = `$${range.replace("-", " - $")}`;
+        select.appendChild(option);
     });
+    $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
-    $('#prize-Range').change(function(e) {
-        e.preventDefault();
+        $('#prize-Range').change(function(e) {
+            e.preventDefault();
 
-        var selectedPrice = $(this).val();
-        console.log("Price selected:", selectedPrice);
+            var selectedPrice = $(this).val();
+            console.log("Price selected:", selectedPrice);
 
-        var locationData = {
-            price: selectedPrice !== "all" ? selectedPrice :
-                "all" // Use "price" instead of "price_range"
-        };
-        console.log("AJAX Data Sent:", locationData);
+            var locationData = {
+                price: selectedPrice !== "all" ? selectedPrice : "all" // Use "price" instead of "price_range"
+            };
+            console.log("AJAX Data Sent:", locationData);
 
-        $('#overlay').show(); // Show loading overlay
+            $('#overlay').show(); // Show loading overlay
 
-        $.ajax({
-            type: 'POST',
-            url: '{{ route("fetch-data") }}',
-            data: locationData,
-            dataType: 'json',
-            success: function(response) {
-                console.log("AJAX Success: ", response);
-                $('#tutorsContainer').empty();
-                $('#overlay').hide(); // Hide loading overlay
+            $.ajax({
+                type: 'POST',
+                url: '{{ route("fetch-data") }}',
+                data: locationData,
+                dataType: 'json',
+                success: function(response) {
+                    console.log("AJAX Success: ", response);
+                    $('#tutorsContainer').empty();
+                    $('#overlay').hide(); // Hide loading overlay
 
-                if (response && response.tutors && response.tutors.length > 0) {
-                    response.tutors.forEach(function(tutor) {
+                    if (response && response.tutors && response.tutors.length > 0) {
+                        response.tutors.forEach(function(tutor) {
 
-                        let specializations = tutor.specialization.split(
-                        ','); // Split by comma
-                        let specialization = tutor.specialization.split(',')[0];
+                            let specializations = tutor.specialization.split(
+                                ','); // Split by comma
+                            let specialization = tutor.specialization.split(',')[0];
 
-                        // Build specialization spans
-                        let specializationHTML = specializations.map(spec => `
+                            // Build specialization spans
+                            let specializationHTML = specializations.map(spec => `
                 <span id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold">
                     <i class="fa-solid fa-briefcase me-1"></i> ${spec.trim()}
                 </span>
             `).join(''); // Join without extra commas
 
 
-                        if (tutor.status !== 'inactive') {
-                            let edu_teaching = tutor
-                            .edu_teaching; // e.g., '["Physical Therapy","Physics"]'
+                            if (tutor.status !== 'inactive') {
+                                let edu_teaching = tutor
+                                    .edu_teaching; // e.g., '["Physical Therapy","Physics"]'
 
-                            let displayText = 'Others';
-                            if (edu_teaching) {
-                                try {
+                                let displayText = 'Others';
+                                if (edu_teaching) {
+                                    try {
 
-                                    let parsed = JSON.parse(edu_teaching);
-                                    if (Array.isArray(parsed)) {
-                                        displayText = parsed.join(', ');
+                                        let parsed = JSON.parse(edu_teaching);
+                                        if (Array.isArray(parsed)) {
+                                            displayText = parsed.join(', ');
+                                        }
+                                    } catch (e) {
+                                        // Optional: log or handle invalid JSON
                                     }
-                                } catch (e) {
-                                    // Optional: log or handle invalid JSON
                                 }
-                            }
-                            console.log('asdsadsa', displayText)
-                            // $('.subjects-name').html(displayText);
-                            var languages = tutor.languages && tutor.languages
-                                .length > 0 ?
-                                tutor.languages.map(lang =>
-                                    `${lang.language} (${lang.level})`).join(', ') :
-                                'Not Available';
+                                console.log('asdsadsa', displayText)
+                                // $('.subjects-name').html(displayText);
+                                var languages = tutor.languages && tutor.languages
+                                    .length > 0 ?
+                                    tutor.languages.map(lang =>
+                                        `${lang.language} (${lang.level})`).join(', ') :
+                                    'Not Available';
 
-                            var tutorHTML = `
+                                var tutorHTML = `
                                 <div class="ad-form">
                                     <div class="ad-img-card d-flex" style="margin-top: 20px;">
                                         <div class="MD col-lg-12 col-sm-5">
@@ -1659,111 +1666,111 @@ $(document).ready(function() {
                                 </div>
                             `;
 
-                            $('#tutorsContainer').append(tutorHTML);
+                                $('#tutorsContainer').append(tutorHTML);
+                            }
+                        });
+
+                        // Update Pagination Info
+                        var totalTutorsCount = response.pagination.total;
+                        var perPage = response.pagination.perPage;
+                        var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
+                        var lastItem = Math.min(response.pagination.currentPage * perPage,
+                            totalTutorsCount);
+
+                        $('.total-tutors-count').text(totalTutorsCount);
+                        $('.tutors-range').text(
+                            `${firstItem} to ${lastItem} of ${totalTutorsCount} tutors`);
+
+                        // Hide pagination if only one page of results
+                        if (totalTutorsCount <= perPage) {
+                            $('#paginationContainer').hide();
+                        } else {
+                            $('#paginationContainer').show();
                         }
-                    });
-
-                    // Update Pagination Info
-                    var totalTutorsCount = response.pagination.total;
-                    var perPage = response.pagination.perPage;
-                    var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
-                    var lastItem = Math.min(response.pagination.currentPage * perPage,
-                        totalTutorsCount);
-
-                    $('.total-tutors-count').text(totalTutorsCount);
-                    $('.tutors-range').text(
-                        `${firstItem} to ${lastItem} of ${totalTutorsCount} tutors`);
-
-                    // Hide pagination if only one page of results
-                    if (totalTutorsCount <= perPage) {
-                        $('#paginationContainer').hide();
                     } else {
-                        $('#paginationContainer').show();
+                        $('#tutorsContainer').html(
+                            '<p>No tutors found for the selected Price.</p>');
                     }
-                } else {
-                    $('#tutorsContainer').html(
-                        '<p>No tutors found for the selected Price.</p>');
+                },
+                error: function(xhr, status, error) {
+                    console.log('AJAX Error:', xhr.responseText);
+                    $('#overlay').hide();
                 }
-            },
-            error: function(xhr, status, error) {
-                console.log('AJAX Error:', xhr.responseText);
-                $('#overlay').hide();
-            }
+            });
         });
-    });
-    
 
-    $('#subjectSearch').change(function(e) {
-        e.preventDefault();
 
-        // Get the selected value
-        var selectedValue = $(this).val();
+        $('#subjectSearch').change(function(e) {
+            e.preventDefault();
 
-        // Get the selected text (subject name)
-        var selectedText = $('#subjectSearch option:selected').text();
+            // Get the selected value
+            var selectedValue = $(this).val();
 
-        // Ensure it's an array
-        var selectedsubject = Array.isArray(selectedText) ? selectedText : [selectedText];
+            // Get the selected text (subject name)
+            var selectedText = $('#subjectSearch option:selected').text();
 
-        console.log("Subject selected:", selectedsubject);
+            // Ensure it's an array
+            var selectedsubject = Array.isArray(selectedText) ? selectedText : [selectedText];
 
-        var locationData = {
-            specialization: selectedsubject
-        };
+            console.log("Subject selected:", selectedsubject);
 
-        console.log("AJAX:", locationData);
+            var locationData = {
+                specialization: selectedsubject
+            };
 
-        $('#overlay').show(); // Show loading overlay
+            console.log("AJAX:", locationData);
 
-        $.ajax({
-            type: 'POST',
-            url: '{{ route("fetch-data") }}',
-            data: JSON.stringify(locationData),
-            contentType: 'application/json',
-            dataType: 'json', // Corrected syntax (no extra comma or misplaced characters)
-            success: function(response) {
-                console.log("AJAX Success: ", response);
-                $('#tutorsContainer').empty();
-                $('#overlay').hide(); // Hide loading overlay
+            $('#overlay').show(); // Show loading overlay
 
-                if (response && response.tutors && response.tutors.length > 0) {
-                    response.tutors.forEach(function(tutor) {
-                        let specializations = tutor.specialization.split(
-                        ','); // Split by comma
-                        let specialization = tutor.specialization.split(',')[0];
+            $.ajax({
+                type: 'POST',
+                url: '{{ route("fetch-data") }}',
+                data: JSON.stringify(locationData),
+                contentType: 'application/json',
+                dataType: 'json', // Corrected syntax (no extra comma or misplaced characters)
+                success: function(response) {
+                    console.log("AJAX Success: ", response);
+                    $('#tutorsContainer').empty();
+                    $('#overlay').hide(); // Hide loading overlay
 
-                        // Build specialization spans
-                        let specializationHTML = specializations.map(spec => `
+                    if (response && response.tutors && response.tutors.length > 0) {
+                        response.tutors.forEach(function(tutor) {
+                            let specializations = tutor.specialization.split(
+                                ','); // Split by comma
+                            let specialization = tutor.specialization.split(',')[0];
+
+                            // Build specialization spans
+                            let specializationHTML = specializations.map(spec => `
                 <span id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold">
                     <i class="fa-solid fa-briefcase me-1"></i> ${spec.trim()}
                 </span>
             `).join(''); // Join without extra commas
 
 
-                        if (tutor.status !== 'inactive') {
-                            let edu_teaching = tutor
-                            .edu_teaching; // e.g., '["Physical Therapy","Physics"]'
+                            if (tutor.status !== 'inactive') {
+                                let edu_teaching = tutor
+                                    .edu_teaching; // e.g., '["Physical Therapy","Physics"]'
 
-                            let displayText = 'Others';
-                            if (edu_teaching) {
-                                try {
+                                let displayText = 'Others';
+                                if (edu_teaching) {
+                                    try {
 
-                                    let parsed = JSON.parse(edu_teaching);
-                                    if (Array.isArray(parsed)) {
-                                        displayText = parsed.join(', ');
+                                        let parsed = JSON.parse(edu_teaching);
+                                        if (Array.isArray(parsed)) {
+                                            displayText = parsed.join(', ');
+                                        }
+                                    } catch (e) {
+                                        // Optional: log or handle invalid JSON
                                     }
-                                } catch (e) {
-                                    // Optional: log or handle invalid JSON
                                 }
-                            }
-                            console.log('asdsadsa', displayText)
-                            var languages = tutor.languages && tutor.languages
-                                .length > 0 ?
-                                tutor.languages.map(lang =>
-                                    `${lang.language} (${lang.level})`).join(', ') :
-                                'Not Available';
+                                console.log('asdsadsa', displayText)
+                                var languages = tutor.languages && tutor.languages
+                                    .length > 0 ?
+                                    tutor.languages.map(lang =>
+                                        `${lang.language} (${lang.level})`).join(', ') :
+                                    'Not Available';
 
-                            var tutorHTML = `
+                                var tutorHTML = `
                                 <div class="ad-form">
                                     <div class="ad-img-card d-flex" style="margin-top: 20px;">
                                         <div class="MD col-lg-12 col-sm-5">
@@ -1867,98 +1874,98 @@ $(document).ready(function() {
                                 </div>
                             `;
 
-                            $('#tutorsContainer').append(tutorHTML);
+                                $('#tutorsContainer').append(tutorHTML);
+                            }
+                        });
+
+                        // Update Pagination Info
+                        var totalTutorsCount = response.pagination.total;
+                        var perPage = response.pagination.perPage;
+                        var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
+                        var lastItem = Math.min(response.pagination.currentPage * perPage,
+                            totalTutorsCount);
+
+                        $('.total-tutors-count').text(totalTutorsCount);
+                        $('.tutors-range').text(
+                            `${firstItem} to ${lastItem} of ${totalTutorsCount} tutors`);
+
+                        // Hide pagination if only one page of results
+                        if (totalTutorsCount <= perPage) {
+                            $('#paginationContainer').hide();
+                        } else {
+                            $('#paginationContainer').show();
                         }
-                    });
-
-                    // Update Pagination Info
-                    var totalTutorsCount = response.pagination.total;
-                    var perPage = response.pagination.perPage;
-                    var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
-                    var lastItem = Math.min(response.pagination.currentPage * perPage,
-                        totalTutorsCount);
-
-                    $('.total-tutors-count').text(totalTutorsCount);
-                    $('.tutors-range').text(
-                        `${firstItem} to ${lastItem} of ${totalTutorsCount} tutors`);
-
-                    // Hide pagination if only one page of results
-                    if (totalTutorsCount <= perPage) {
-                        $('#paginationContainer').hide();
                     } else {
-                        $('#paginationContainer').show();
+                        $('#tutorsContainer').html(
+                            '<p>No tutors found for the selected Price.</p>');
                     }
-                } else {
-                    $('#tutorsContainer').html(
-                        '<p>No tutors found for the selected Price.</p>');
+                },
+                error: function(xhr, status, error) {
+                    console.log('AJAX Error:', xhr.responseText);
+                    $('#overlay').hide();
                 }
-            },
-            error: function(xhr, status, error) {
-                console.log('AJAX Error:', xhr.responseText);
-                $('#overlay').hide();
-            }
+            });
         });
-    });
-    $('#country').change(function(e) {
-        e.preventDefault();
+        $('#country').change(function(e) {
+            e.preventDefault();
 
-        var selectedCountry = $(this).val();
-        console.log("Country selected:", selectedCountry);
+            var selectedCountry = $(this).val();
+            console.log("Country selected:", selectedCountry);
 
-        var locationData = {
-            country: selectedCountry !== "all" ? selectedCountry : "all"
-        };
+            var locationData = {
+                country: selectedCountry !== "all" ? selectedCountry : "all"
+            };
 
-        $('#overlay').show(); // Show loading overlay
+            $('#overlay').show(); // Show loading overlay
 
-        $.ajax({
-            type: 'POST',
-            url: '{{ route("fetch-data") }}',
-            data: locationData,
-            dataType: 'json',
-            success: function(response) {
-                console.log("AJAX Success: ", response);
-                $('#tutorsContainer').empty();
-                $('#overlay').hide(); // Hide loading overlay
+            $.ajax({
+                type: 'POST',
+                url: '{{ route("fetch-data") }}',
+                data: locationData,
+                dataType: 'json',
+                success: function(response) {
+                    console.log("AJAX Success: ", response);
+                    $('#tutorsContainer').empty();
+                    $('#overlay').hide(); // Hide loading overlay
 
-                if (response && response.tutors && response.tutors.length > 0) {
-                    response.tutors.forEach(function(tutor) {
-                        let specializations = tutor.specialization.split(
-                        ','); // Split by comma
-                        let specialization = tutor.specialization.split(',')[0];
+                    if (response && response.tutors && response.tutors.length > 0) {
+                        response.tutors.forEach(function(tutor) {
+                            let specializations = tutor.specialization.split(
+                                ','); // Split by comma
+                            let specialization = tutor.specialization.split(',')[0];
 
-                        // Build specialization spans
-                        let specializationHTML = specializations.map(spec => `
+                            // Build specialization spans
+                            let specializationHTML = specializations.map(spec => `
                 <span id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold">
                     <i class="fa-solid fa-briefcase me-1"></i> ${spec.trim()}
                 </span>
             `).join(''); // Join without extra commas
 
 
-                        if (tutor.status !== 'inactive') {
-                            let edu_teaching = tutor
-                            .edu_teaching; // e.g., '["Physical Therapy","Physics"]'
+                            if (tutor.status !== 'inactive') {
+                                let edu_teaching = tutor
+                                    .edu_teaching; // e.g., '["Physical Therapy","Physics"]'
 
-                            let displayText = 'Others';
-                            if (edu_teaching) {
-                                try {
+                                let displayText = 'Others';
+                                if (edu_teaching) {
+                                    try {
 
-                                    let parsed = JSON.parse(edu_teaching);
-                                    if (Array.isArray(parsed)) {
-                                        displayText = parsed.join(', ');
+                                        let parsed = JSON.parse(edu_teaching);
+                                        if (Array.isArray(parsed)) {
+                                            displayText = parsed.join(', ');
+                                        }
+                                    } catch (e) {
+                                        // Optional: log or handle invalid JSON
                                     }
-                                } catch (e) {
-                                    // Optional: log or handle invalid JSON
                                 }
-                            }
-                            console.log('asdsadsa', displayText)
-                            var languages = tutor.languages && tutor.languages
-                                .length > 0 ?
-                                tutor.languages.map(lang =>
-                                    `${lang.language} (${lang.level})`).join(', ') :
-                                'Not Available';
+                                console.log('asdsadsa', displayText)
+                                var languages = tutor.languages && tutor.languages
+                                    .length > 0 ?
+                                    tutor.languages.map(lang =>
+                                        `${lang.language} (${lang.level})`).join(', ') :
+                                    'Not Available';
 
-                            var tutorHTML = `
+                                var tutorHTML = `
                                 <div class="ad-form">
                                     <div class="ad-img-card d-flex" style="margin-top: 20px;">
                                         <div class="MD col-lg-12 col-sm-5">
@@ -2062,91 +2069,91 @@ $(document).ready(function() {
                                 </div>
                             `;
 
-                            $('#tutorsContainer').append(tutorHTML);
+                                $('#tutorsContainer').append(tutorHTML);
+                            }
+                        });
+
+                        // Update Pagination Info
+                        var totalTutorsCount = response.pagination.total;
+                        var perPage = response.pagination.perPage;
+                        var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
+                        var lastItem = Math.min(response.pagination.currentPage * perPage,
+                            totalTutorsCount);
+
+                        $('.total-tutors-count').text(totalTutorsCount);
+                        $('.tutors-range').text(
+                            `${firstItem} to ${lastItem} of ${totalTutorsCount} tutors`);
+
+                        // Hide pagination if only one page of results
+                        if (totalTutorsCount <= perPage) {
+                            $('#paginationContainer').hide();
+                        } else {
+                            $('#paginationContainer').show();
                         }
-                    });
-
-                    // Update Pagination Info
-                    var totalTutorsCount = response.pagination.total;
-                    var perPage = response.pagination.perPage;
-                    var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
-                    var lastItem = Math.min(response.pagination.currentPage * perPage,
-                        totalTutorsCount);
-
-                    $('.total-tutors-count').text(totalTutorsCount);
-                    $('.tutors-range').text(
-                        `${firstItem} to ${lastItem} of ${totalTutorsCount} tutors`);
-
-                    // Hide pagination if only one page of results
-                    if (totalTutorsCount <= perPage) {
-                        $('#paginationContainer').hide();
                     } else {
-                        $('#paginationContainer').show();
+                        $('#tutorsContainer').html(
+                            '<p>No tutors found for the selected country.</p>');
                     }
-                } else {
-                    $('#tutorsContainer').html(
-                        '<p>No tutors found for the selected country.</p>');
+                },
+                error: function(xhr, status, error) {
+                    console.log('AJAX Error:', xhr.responseText);
+                    $('#overlay').hide();
                 }
-            },
-            error: function(xhr, status, error) {
-                console.log('AJAX Error:', xhr.responseText);
-                $('#overlay').hide();
-            }
+            });
         });
-    });
-    $('#gender').on('keyup change', function() {
-        var selectedGender = $(this).val(); // Get selected gender
-        var locationData = {
-            gender: selectedGender // Include selected gender
-        };
+        $('#gender').on('keyup change', function() {
+            var selectedGender = $(this).val(); // Get selected gender
+            var locationData = {
+                gender: selectedGender // Include selected gender
+            };
 
-        $('#overlay').show(); // Show loading overlay
+            $('#overlay').show(); // Show loading overlay
 
-        $.ajax({
-            type: 'POST',
-            url: '{{ route("fetch-data") }}',
-            data: locationData,
-            dataType: 'json',
-            success: function(response) {
-                console.log("AJAX Success: ", response);
-                $('#tutorsContainer').empty(); // Clear existing tutors
-                $('#overlay').hide(); // Hide loading overlay
+            $.ajax({
+                type: 'POST',
+                url: '{{ route("fetch-data") }}',
+                data: locationData,
+                dataType: 'json',
+                success: function(response) {
+                    console.log("AJAX Success: ", response);
+                    $('#tutorsContainer').empty(); // Clear existing tutors
+                    $('#overlay').hide(); // Hide loading overlay
 
-                if (response && response.tutors && response.tutors.length > 0) {
-                    response.tutors.forEach(function(tutor) {
-                        let specializations = tutor.specialization.split(
-                        ','); // Split by comma
-                        let specialization = tutor.specialization.split(',')[0];
-                        // Build specialization spans
-                        let specializationHTML = specializations.map(spec => `
+                    if (response && response.tutors && response.tutors.length > 0) {
+                        response.tutors.forEach(function(tutor) {
+                            let specializations = tutor.specialization.split(
+                                ','); // Split by comma
+                            let specialization = tutor.specialization.split(',')[0];
+                            // Build specialization spans
+                            let specializationHTML = specializations.map(spec => `
                                                 <span id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold">
                                                     <i class="fa-solid fa-briefcase me-1"></i> ${spec.trim()}
                                                 </span>
                                             `).join('');
-                        if (tutor.status !== 'inactive') {
-                            let edu_teaching = tutor
-                            .edu_teaching; // e.g., '["Physical Therapy","Physics"]'
+                            if (tutor.status !== 'inactive') {
+                                let edu_teaching = tutor
+                                    .edu_teaching; // e.g., '["Physical Therapy","Physics"]'
 
-                            let displayText = 'Others';
-                            if (edu_teaching) {
-                                try {
+                                let displayText = 'Others';
+                                if (edu_teaching) {
+                                    try {
 
-                                    let parsed = JSON.parse(edu_teaching);
-                                    if (Array.isArray(parsed)) {
-                                        displayText = parsed.join(', ');
+                                        let parsed = JSON.parse(edu_teaching);
+                                        if (Array.isArray(parsed)) {
+                                            displayText = parsed.join(', ');
+                                        }
+                                    } catch (e) {
+                                        // Optional: log or handle invalid JSON
                                     }
-                                } catch (e) {
-                                    // Optional: log or handle invalid JSON
                                 }
-                            }
-                            console.log('asdsadsa', displayText)
-                            var languages = tutor.languages && tutor.languages
-                                .length > 0 ?
-                                tutor.languages.map(lang =>
-                                    `${lang.language} (${lang.level})`).join(', ') :
-                                'Not Available';
+                                console.log('asdsadsa', displayText)
+                                var languages = tutor.languages && tutor.languages
+                                    .length > 0 ?
+                                    tutor.languages.map(lang =>
+                                        `${lang.language} (${lang.level})`).join(', ') :
+                                    'Not Available';
 
-                            var tutorHTML = `
+                                var tutorHTML = `
                                                     <div class="ad-form">
                                                         <div class="ad-img-card d-flex" style="margin-top: 20px;">
                                                             <div class="MD col-lg-12 col-sm-5">
@@ -2244,93 +2251,93 @@ $(document).ready(function() {
                                                     </div>
                                                 `;
 
-                            $('#tutorsContainer').append(tutorHTML);
+                                $('#tutorsContainer').append(tutorHTML);
+                            }
+                        });
+
+                        // Update pagination data
+                        var totalTutorsCount = response.pagination.total;
+                        var perPage = response.pagination.perPage;
+                        var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
+                        var lastItem = Math.min(response.pagination.currentPage * perPage,
+                            totalTutorsCount);
+
+                        $('.total-tutors-count').text(totalTutorsCount);
+                        $('.tutors-range').text(firstItem + ' to ' + lastItem + ' of ' +
+                            totalTutorsCount + ' tutors');
+
+                        if (totalTutorsCount <= perPage) {
+                            $('#paginationContainer').hide();
+                        } else {
+                            $('#paginationContainer').show();
                         }
-                    });
 
-                    // Update pagination data
-                    var totalTutorsCount = response.pagination.total;
-                    var perPage = response.pagination.perPage;
-                    var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
-                    var lastItem = Math.min(response.pagination.currentPage * perPage,
-                        totalTutorsCount);
-
-                    $('.total-tutors-count').text(totalTutorsCount);
-                    $('.tutors-range').text(firstItem + ' to ' + lastItem + ' of ' +
-                        totalTutorsCount + ' tutors');
-
-                    if (totalTutorsCount <= perPage) {
-                        $('#paginationContainer').hide();
+                        // Update pagination
+                        $('#paginationContainer').html(response.pagination);
                     } else {
-                        $('#paginationContainer').show();
+                        $('#tutorsContainer').append(
+                            '<p>No tutors found for the selected criteria.</p>');
                     }
-
-                    // Update pagination
-                    $('#paginationContainer').html(response.pagination);
-                } else {
-                    $('#tutorsContainer').append(
-                        '<p>No tutors found for the selected criteria.</p>');
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error:', xhr.responseText);
                 }
-            },
-            error: function(xhr, status, error) {
-                console.error('AJAX Error:', xhr.responseText);
-            }
+            });
         });
-    });
-    $('#subjectsearch').keyup(function() {
-        var searchQuery = $(this).val(); // Get the value from the search input field
+        $('#subjectsearch').keyup(function() {
+            var searchQuery = $(this).val(); // Get the value from the search input field
 
-        var locationData = {
-            subjectsearch: searchQuery
-        };
+            var locationData = {
+                subjectsearch: searchQuery
+            };
 
-        $('#overlay').show();
+            $('#overlay').show();
 
-        $.ajax({
-            type: 'POST',
-            url: '{{ route("fetch-data") }}',
-            data: locationData,
-            dataType: 'json',
-            success: function(response) {
-                console.log("AJAX Success: ", response);
-                $('#tutorsContainer').empty();
-                $('#overlay').hide();
+            $.ajax({
+                type: 'POST',
+                url: '{{ route("fetch-data") }}',
+                data: locationData,
+                dataType: 'json',
+                success: function(response) {
+                    console.log("AJAX Success: ", response);
+                    $('#tutorsContainer').empty();
+                    $('#overlay').hide();
 
-                if (response && response.tutors && response.tutors.length > 0) {
-                    response.tutors.forEach(function(tutor) {
-                        let specializations = tutor.specialization.split(
-                        ','); // Split by comma
-                        let specialization = tutor.specialization.split(',')[0];
-                        // Build specialization spans
-                        let specializationHTML = specializations.map(spec => `
+                    if (response && response.tutors && response.tutors.length > 0) {
+                        response.tutors.forEach(function(tutor) {
+                            let specializations = tutor.specialization.split(
+                                ','); // Split by comma
+                            let specialization = tutor.specialization.split(',')[0];
+                            // Build specialization spans
+                            let specializationHTML = specializations.map(spec => `
                                                 <span id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold">
                                                     <i class="fa-solid fa-briefcase me-1"></i> ${spec.trim()}
                                                 </span>
                                             `).join('');
-                        if (tutor.status !== 'inactive') {
-                            let edu_teaching = tutor
-                            .edu_teaching; // e.g., '["Physical Therapy","Physics"]'
+                            if (tutor.status !== 'inactive') {
+                                let edu_teaching = tutor
+                                    .edu_teaching; // e.g., '["Physical Therapy","Physics"]'
 
-                            let displayText = 'Others';
-                            if (edu_teaching) {
-                                try {
+                                let displayText = 'Others';
+                                if (edu_teaching) {
+                                    try {
 
-                                    let parsed = JSON.parse(edu_teaching);
-                                    if (Array.isArray(parsed)) {
-                                        displayText = parsed.join(', ');
+                                        let parsed = JSON.parse(edu_teaching);
+                                        if (Array.isArray(parsed)) {
+                                            displayText = parsed.join(', ');
+                                        }
+                                    } catch (e) {
+                                        // Optional: log or handle invalid JSON
                                     }
-                                } catch (e) {
-                                    // Optional: log or handle invalid JSON
                                 }
-                            }
-                            console.log('asdsadsa', displayText)
-                            var languages = tutor.languages && tutor.languages
-                                .length > 0 ?
-                                tutor.languages.map(lang =>
-                                    `${lang.language} (${lang.level})`).join(', ') :
-                                'Not Available';
+                                console.log('asdsadsa', displayText)
+                                var languages = tutor.languages && tutor.languages
+                                    .length > 0 ?
+                                    tutor.languages.map(lang =>
+                                        `${lang.language} (${lang.level})`).join(', ') :
+                                    'Not Available';
 
-                            var tutorHTML = `
+                                var tutorHTML = `
                                 <div class="ad-form">
                                                         <div class="ad-img-card d-flex" style="margin-top: 20px;">
                                                             <div class="MD col-lg-12 col-sm-5">
@@ -2428,91 +2435,91 @@ $(document).ready(function() {
                                                     </div>
                             `;
 
-                            $('#tutorsContainer').append(tutorHTML);
-                        }
-                    });
-
-                    // Update pagination details only if pagination data is available
-                    if (response.pagination) {
-                        var totalTutorsCount = response.pagination.total;
-                        var perPage = response.pagination.perPage;
-                        var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
-                        var lastItem = Math.min(response.pagination.currentPage * perPage,
-                            totalTutorsCount);
-
-                        $('.total-tutors-count').text(totalTutorsCount);
-                        $('.tutors-range').text(
-                            `${firstItem} to ${lastItem} of ${totalTutorsCount} tutors`);
-
-                        if (totalTutorsCount <= perPage) {
-                            $('#paginationContainer').hide();
-                        } else {
-                            $('#paginationContainer').show();
-                            $('#paginationContainer').html(response.pagination.links);
-                        }
-                    }
-                } else {
-                    $('#tutorsContainer').html(
-                        '<p>No tutors found for the selected subject.</p>');
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error('AJAX error:', status, error);
-                $('#overlay').hide();
-                $('#tutorsContainer').html(
-                    '<p class="text-danger">An error occurred while fetching tutors. Please try again later.</p>'
-                    );
-            }
-        });
-    });
-    $('#resetFilterBtn').click(function() {
-        $.ajax({
-            type: 'POST',
-            url: '{{ route("fetch-data") }}',
-            data: {
-                reset: true
-            },
-            dataType: 'json',
-            success: function(response) {
-                $('#gender').val('Male').trigger('change');
-                $('#country').val('AL').trigger('change');
-                $('#price').val('0-50').trigger('change');
-                // Clear input fields
-                $('#tutorsContainer').empty(); // Clear tutor list
-                console.log("Filters reset successfully:", response);
-
-                if (response.tutors && response.tutors.length > 0) {
-                    response.tutors.forEach(function(tutor) {
-                        // Decode the serialized "teaching" string
-                        let teachingSubject = tutor.teaching;
-                        const match = teachingSubject.match(/s:\d+:"([^"]+)"/);
-                        teachingSubject = match ? match[1] : (teachingSubject ??
-                            'Not Available');
-
-                        if (tutor.status !== 'inactive') {
-                            let edu_teaching = tutor
-                            .edu_teaching; // e.g., '["Physical Therapy","Physics"]'
-
-                            let displayText = 'Others';
-                            if (edu_teaching) {
-                                try {
-
-                                    let parsed = JSON.parse(edu_teaching);
-                                    if (Array.isArray(parsed)) {
-                                        displayText = parsed.join(', ');
-                                    }
-                                } catch (e) {
-                                    // Optional: log or handle invalid JSON
-                                }
+                                $('#tutorsContainer').append(tutorHTML);
                             }
-                            console.log('asdsadsa', displayText)
-                            var languages = tutor.languages && tutor.languages
-                                .length > 0 ?
-                                tutor.languages.map(lang =>
-                                    `${lang.language} (${lang.level})`).join(', ') :
-                                'Not Available';
+                        });
 
-                            var tutorHTML = `
+                        // Update pagination details only if pagination data is available
+                        if (response.pagination) {
+                            var totalTutorsCount = response.pagination.total;
+                            var perPage = response.pagination.perPage;
+                            var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
+                            var lastItem = Math.min(response.pagination.currentPage * perPage,
+                                totalTutorsCount);
+
+                            $('.total-tutors-count').text(totalTutorsCount);
+                            $('.tutors-range').text(
+                                `${firstItem} to ${lastItem} of ${totalTutorsCount} tutors`);
+
+                            if (totalTutorsCount <= perPage) {
+                                $('#paginationContainer').hide();
+                            } else {
+                                $('#paginationContainer').show();
+                                $('#paginationContainer').html(response.pagination.links);
+                            }
+                        }
+                    } else {
+                        $('#tutorsContainer').html(
+                            '<p>No tutors found for the selected subject.</p>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX error:', status, error);
+                    $('#overlay').hide();
+                    $('#tutorsContainer').html(
+                        '<p class="text-danger">An error occurred while fetching tutors. Please try again later.</p>'
+                    );
+                }
+            });
+        });
+        $('#resetFilterBtn').click(function() {
+            $.ajax({
+                type: 'POST',
+                url: '{{ route("fetch-data") }}',
+                data: {
+                    reset: true
+                },
+                dataType: 'json',
+                success: function(response) {
+                    $('#gender').val('Male').trigger('change');
+                    $('#country').val('AL').trigger('change');
+                    $('#price').val('0-50').trigger('change');
+                    // Clear input fields
+                    $('#tutorsContainer').empty(); // Clear tutor list
+                    console.log("Filters reset successfully:", response);
+
+                    if (response.tutors && response.tutors.length > 0) {
+                        response.tutors.forEach(function(tutor) {
+                            // Decode the serialized "teaching" string
+                            let teachingSubject = tutor.teaching;
+                            const match = teachingSubject.match(/s:\d+:"([^"]+)"/);
+                            teachingSubject = match ? match[1] : (teachingSubject ??
+                                'Not Available');
+
+                            if (tutor.status !== 'inactive') {
+                                let edu_teaching = tutor
+                                    .edu_teaching; // e.g., '["Physical Therapy","Physics"]'
+
+                                let displayText = 'Others';
+                                if (edu_teaching) {
+                                    try {
+
+                                        let parsed = JSON.parse(edu_teaching);
+                                        if (Array.isArray(parsed)) {
+                                            displayText = parsed.join(', ');
+                                        }
+                                    } catch (e) {
+                                        // Optional: log or handle invalid JSON
+                                    }
+                                }
+                                console.log('asdsadsa', displayText)
+                                var languages = tutor.languages && tutor.languages
+                                    .length > 0 ?
+                                    tutor.languages.map(lang =>
+                                        `${lang.language} (${lang.level})`).join(', ') :
+                                    'Not Available';
+
+                                var tutorHTML = `
                                 <div class="ad-form">
                                     <div class="ad-img-card d-flex" style="margin-top: 20px;">
                                         <div class="MD col-lg-12 col-sm-5">
@@ -2616,87 +2623,85 @@ $(document).ready(function() {
                                 </div>
                             `;
 
-                            $('#tutorsContainer').append(tutorHTML);
-                        }
-                    });
-                } else {
-                     const notFoundImage = "{{ asset('images/not-found.jpeg') }}";
-                     $('#tutorsContainer').append(`<img class="not-found-img w-100" src="${notFoundImage}" />`);
-                    // $('#tutorsContainer').append(' <img src="{{ asset('images/not-found.jpeg') }}"/>');
-                }
+                                $('#tutorsContainer').append(tutorHTML);
+                            }
+                        });
+                    } else {
+                        const notFoundImage = "{{ asset('images/not-found.jpeg') }}";
+                        $('#tutorsContainer').append(`<img class="not-found-img w-100" src="${notFoundImage}" />`);
+                        // $('#tutorsContainer').append(' <img src="{{ asset('images/not-found.jpeg') }}"/>');
+                    }
 
-                // Update pagination details
-                if (response.pagination) {
-                    $('#paginationContainer').show().html(response.pagination);
-                } else {
-                    $('#paginationContainer').hide();
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error('Error resetting filters:', status, error);
-                $('#tutorsContainer').html(
-                    '<p class="text-danger">An error occurred while resetting filters. Please try again.</p>'
+                    // Update pagination details
+                    if (response.pagination) {
+                        $('#paginationContainer').show().html(response.pagination);
+                    } else {
+                        $('#paginationContainer').hide();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error resetting filters:', status, error);
+                    $('#tutorsContainer').html(
+                        '<p class="text-danger">An error occurred while resetting filters. Please try again.</p>'
                     );
-            }
+                }
+            });
+        });
+        $('.notification').hide();
+        $('.notify').click(function() {
+            $('.notification').toggle();
         });
     });
-    $('.notification').hide();
-    $('.notify').click(function() {
-        $('.notification').toggle();
-    });
-});
-
 </script>
 <script>
+    $(document).ready(function() {
+        // CSRF setup for AJAX
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
-$(document).ready(function() {
-    // CSRF setup for AJAX
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+        // Gender filter change event
+        $('#gender').change(function() {
+            const selectedGender = $(this).val();
+            $('#tutorsContainer').empty();
+            $('#overlay').show();
 
-    // Gender filter change event
-    $('#gender').change(function() {
-        const selectedGender = $(this).val();
-        $('#tutorsContainer').empty();
-        $('#overlay').show();
-
-        if (!selectedGender) {
-            $('#tutorsContainer').html('<p>Please select a gender.</p>');
-            $('#paginationContainer').hide();
-            $('#overlay').hide();
-            return;
-        }
-
-        $.ajax({
-            type: 'POST',
-            url: '{{ route("fetch-student") }}',
-            data: {
-                gender: selectedGender
-            },
-            dataType: 'json',
-            success: function(response) {
+            if (!selectedGender) {
+                $('#tutorsContainer').html('<p>Please select a gender.</p>');
+                $('#paginationContainer').hide();
                 $('#overlay').hide();
-                if (response.tutors && response.tutors.length > 0) {
-                    response.tutors.forEach(function(tutor) {
-                        if (tutor.status !== 'inactive') {
-                            let specializationArray = tutor.specialization.split(
-                                ',');
-                            let specializationHTML = specializationArray.map(spec => `
+                return;
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ route("fetch-student") }}',
+                data: {
+                    gender: selectedGender
+                },
+                dataType: 'json',
+                success: function(response) {
+                    $('#overlay').hide();
+                    if (response.tutors && response.tutors.length > 0) {
+                        response.tutors.forEach(function(tutor) {
+                            if (tutor.status !== 'inactive') {
+                                let specializationArray = tutor.specialization.split(
+                                    ',');
+                                let specializationHTML = specializationArray.map(spec => `
                                 <span class="p-1 me-2 bg-primary-subtle rounded fw-bold">
                                     <i class="fa-solid fa-briefcase me-1"></i> ${spec.trim()}
                                 </span>
                             `).join('');
 
-                            let languages = tutor.languages && tutor.languages
-                                .length > 0 ?
-                                tutor.languages.map(lang =>
-                                    `${lang.language} (${lang.level})`).join(', ') :
-                                'Not Available';
+                                let languages = tutor.languages && tutor.languages
+                                    .length > 0 ?
+                                    tutor.languages.map(lang =>
+                                        `${lang.language} (${lang.level})`).join(', ') :
+                                    'Not Available';
 
-                            let tutorHTML = `
+                                let tutorHTML = `
                                 <div class="ad-form">
                                     <div class="ad-img-card d-flex mt-3">
                                         <div class="MD col-lg-12 col-sm-5">
@@ -2773,303 +2778,303 @@ $(document).ready(function() {
                                     </div>
                                 </div>
                             `;
-                            $('#tutorsContainer').append(tutorHTML);
+                                $('#tutorsContainer').append(tutorHTML);
+                            }
+                        });
+
+                        const totalTutors = response.pagination.total;
+                        const perPage = response.pagination.perPage;
+                        const currentPage = response.pagination.currentPage;
+                        const firstItem = (currentPage - 1) * perPage + 1;
+                        const lastItem = Math.min(currentPage * perPage, totalTutors);
+
+                        $('.total-tutors-count').text(totalTutors);
+                        $('.tutors-range').text(
+                            `${firstItem} to ${lastItem} of ${totalTutors} tutors`);
+
+                        if (totalTutors <= perPage) {
+                            $('#paginationContainer').hide();
+                        } else {
+                            $('#paginationContainer').show();
                         }
-                    });
-
-                    const totalTutors = response.pagination.total;
-                    const perPage = response.pagination.perPage;
-                    const currentPage = response.pagination.currentPage;
-                    const firstItem = (currentPage - 1) * perPage + 1;
-                    const lastItem = Math.min(currentPage * perPage, totalTutors);
-
-                    $('.total-tutors-count').text(totalTutors);
-                    $('.tutors-range').text(
-                        `${firstItem} to ${lastItem} of ${totalTutors} tutors`);
-
-                    if (totalTutors <= perPage) {
-                        $('#paginationContainer').hide();
                     } else {
-                        $('#paginationContainer').show();
+                        $('#tutorsContainer').html(
+                            '<p>No tutors found for the selected gender.</p>');
+                        $('#paginationContainer').hide();
                     }
-                } else {
+                },
+                error: function(xhr) {
+                    console.error('AJAX Error:', xhr.responseText);
+                    $('#overlay').hide();
                     $('#tutorsContainer').html(
-                        '<p>No tutors found for the selected gender.</p>');
-                    $('#paginationContainer').hide();
+                        '<p class="text-danger">An error occurred. Please try again.</p>');
                 }
-            },
-            error: function(xhr) {
-                console.error('AJAX Error:', xhr.responseText);
-                $('#overlay').hide();
-                $('#tutorsContainer').html(
-                    '<p class="text-danger">An error occurred. Please try again.</p>');
-            }
+            });
         });
     });
-});
 </script>
 <script>
-function toggleDropdown() {
-    document.querySelector('.custom-options').classList.toggle('open');
-}
+    function toggleDropdown() {
+        document.querySelector('.custom-options').classList.toggle('open');
+    }
 
-function changeLanguage(value) {
-    document.querySelector('.custom-options').classList.remove('open');
-}
-
-// Close the dropdown if clicked outside
-document.addEventListener('click', function(event) {
-    if (!event.target.closest('.custom-select')) {
+    function changeLanguage(value) {
         document.querySelector('.custom-options').classList.remove('open');
     }
-});
 
-function toggleDropdownWeb() {
-    document.querySelector('.custom-options-web').classList.toggle('open');
-}
+    // Close the dropdown if clicked outside
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.custom-select')) {
+            document.querySelector('.custom-options').classList.remove('open');
+        }
+    });
 
-function changeLanguageWeb(value) {
-    document.querySelector('.custom-options-web').classList.remove('open');
-}
+    function toggleDropdownWeb() {
+        document.querySelector('.custom-options-web').classList.toggle('open');
+    }
 
-// Close the dropdown if clicked outside
-document.addEventListener('click', function(event) {
-    if (!event.target.closest('.custom-select-web')) {
+    function changeLanguageWeb(value) {
         document.querySelector('.custom-options-web').classList.remove('open');
     }
-});
 
-function changeLanguage(locale) {
-    var url = "{{ url('lang') }}/" + locale;
-    window.location.href = url;
-}
+    // Close the dropdown if clicked outside
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.custom-select-web')) {
+            document.querySelector('.custom-options-web').classList.remove('open');
+        }
+    });
 
-function changeLanguageWeb(locale) {
-    var url = "{{ url('lang') }}/" + locale;
-    window.location.href = url;
-}
-$(document).ready(function() {
-    $('#countrySelect').select2();
-
-    const defaultCountry = 'US';
-    const countriesPrefix = @json($countries_prefix);
-    const countriesNumberLength = @json($countries_number_length);
-    let countryValue = defaultCountry;
-
-    const country = $('#countrySelect');
-    const userNumber = $('#phone');
-
-    function setCountryPrefix() {
-        const prefix = countriesPrefix[countryValue];
-        userNumber.val(prefix);
-        userNumber.attr('data-prefix', prefix); // Store the prefix in a data attribute
+    function changeLanguage(locale) {
+        var url = "{{ url('lang') }}/" + locale;
+        window.location.href = url;
     }
 
-    // Prevent users from clearing the prefix
-    userNumber.on('keydown', function(event) {
-        const prefix = userNumber.attr('data-prefix');
-        const cursorPosition = this.selectionStart;
+    function changeLanguageWeb(locale) {
+        var url = "{{ url('lang') }}/" + locale;
+        window.location.href = url;
+    }
+    $(document).ready(function() {
+        $('#countrySelect').select2();
 
-        // Prevent deletion or backspace within the prefix
-        if (cursorPosition <= prefix.length && (event.key === 'Backspace' || event.key === 'Delete')) {
-            event.preventDefault();
+        const defaultCountry = 'US';
+        const countriesPrefix = @json($countries_prefix);
+        const countriesNumberLength = @json($countries_number_length);
+        let countryValue = defaultCountry;
+
+        const country = $('#countrySelect');
+        const userNumber = $('#phone');
+
+        function setCountryPrefix() {
+            const prefix = countriesPrefix[countryValue];
+            userNumber.val(prefix);
+            userNumber.attr('data-prefix', prefix); // Store the prefix in a data attribute
         }
 
-        // Prevent typing within the prefix
-        if (cursorPosition < prefix.length && !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown']
-            .includes(event.key)) {
-            event.preventDefault();
-        }
-    });
+        // Prevent users from clearing the prefix
+        userNumber.on('keydown', function(event) {
+            const prefix = userNumber.attr('data-prefix');
+            const cursorPosition = this.selectionStart;
 
-    // Adjust input length based on the selected country
-    userNumber.on('input', function() {
-        const prefix = userNumber.attr('data-prefix');
-        const maxLength = countriesNumberLength[countryValue];
-        if (userNumber.val().length > maxLength) {
-            userNumber.val(userNumber.val().slice(0, maxLength));
-        }
-    });
+            // Prevent deletion or backspace within the prefix
+            if (cursorPosition <= prefix.length && (event.key === 'Backspace' || event.key === 'Delete')) {
+                event.preventDefault();
+            }
 
-    // Change the prefix when the country selection changes
-    country.on('change', function() {
-        countryValue = country.val();
+            // Prevent typing within the prefix
+            if (cursorPosition < prefix.length && !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown']
+                .includes(event.key)) {
+                event.preventDefault();
+            }
+        });
+
+        // Adjust input length based on the selected country
+        userNumber.on('input', function() {
+            const prefix = userNumber.attr('data-prefix');
+            const maxLength = countriesNumberLength[countryValue];
+            if (userNumber.val().length > maxLength) {
+                userNumber.val(userNumber.val().slice(0, maxLength));
+            }
+        });
+
+        // Change the prefix when the country selection changes
+        country.on('change', function() {
+            countryValue = country.val();
+            setCountryPrefix();
+        });
+
+        // Set default country and prefix on page load
+        country.val(defaultCountry).trigger('change');
         setCountryPrefix();
     });
 
-    // Set default country and prefix on page load
-    country.val(defaultCountry).trigger('change');
-    setCountryPrefix();
-});
+    let count = 0;
+    const limit = 1000; // The limit for the counter
+    const countElement = document.getElementById('count');
 
-let count = 0;
-const limit = 1000; // The limit for the counter
-const countElement = document.getElementById('count');
-
-// Function to update the counter
-function updateCounter() {
-    if (count < limit) {
-        count += 100; // Increment by 100 for each interval
-        if (count > limit) {
-            count = limit; // Ensure count does not exceed the limit
+    // Function to update the counter
+    function updateCounter() {
+        if (count < limit) {
+            count += 100; // Increment by 100 for each interval
+            if (count > limit) {
+                count = limit; // Ensure count does not exceed the limit
+            }
+            countElement.textContent = count;
         }
-        countElement.textContent = count;
-    }
 
-    // Add a plus sign if the counter reaches the limit
-    if (count === limit) {
-        countElement.textContent = count + "+";
-    }
-}
-
-// Update counter every 100 milliseconds (0.1 seconds)
-const intervalId = setInterval(updateCounter, 100);
-
-// Optional: Clear the interval when the counter reaches the limit
-function stopCounter() {
-    if (count >= limit) {
-        clearInterval(intervalId);
-    }
-}
-
-let teachercount = 0;
-const Teacherlimit = 500; // The limit for the counter
-const TeachercountElement = document.getElementById('teacher-count');
-
-// Function to update the counter
-function TupdateCounter() {
-    if (teachercount < Teacherlimit) {
-        teachercount += 50; // Increment by 50 for each interval
-        if (teachercount > Teacherlimit) {
-            teachercount = Teacherlimit; // Ensure count does not exceed the limit
+        // Add a plus sign if the counter reaches the limit
+        if (count === limit) {
+            countElement.textContent = count + "+";
         }
-        TeachercountElement.textContent = teachercount;
     }
 
-    // Add a plus sign if the counter reaches the limit
-    if (teachercount === Teacherlimit) {
-        TeachercountElement.textContent = teachercount + "+";
-    }
-}
+    // Update counter every 100 milliseconds (0.1 seconds)
+    const intervalId = setInterval(updateCounter, 100);
 
-// Update counter every 100 milliseconds (0.1 seconds)
-const TintervalId = setInterval(TupdateCounter, 100);
-
-// Optional: Clear the interval when the counter reaches the limit
-function TstopCounter() {
-    if (teachercount >= Teacherlimit) {
-        clearInterval(TintervalId);
-    }
-}
-
-let subjectcount = 0;
-const Subjectlimit = 1500; // The limit for the counter
-const SubjectcountElement = document.getElementById('subject-count');
-
-// Function to update the counter
-function SupdateCounter() {
-    if (subjectcount < Subjectlimit) {
-        subjectcount += 50; // Increment by 50 for each interval
-        if (subjectcount > Subjectlimit) {
-            subjectrcount = Subjectlimit; // Ensure count does not exceed the limit
+    // Optional: Clear the interval when the counter reaches the limit
+    function stopCounter() {
+        if (count >= limit) {
+            clearInterval(intervalId);
         }
-        SubjectcountElement.textContent = subjectcount;
     }
 
-    // Add a plus sign if the counter reaches the limit
-    if (subjectcount === Subjectlimit) {
-        SubjectcountElement.textContent = subjectcount + "+";
-    }
-}
+    let teachercount = 0;
+    const Teacherlimit = 500; // The limit for the counter
+    const TeachercountElement = document.getElementById('teacher-count');
 
-// Update counter every 100 milliseconds (0.1 seconds)
-const SintervalId = setInterval(SupdateCounter, 100);
-
-// Optional: Clear the interval when the counter reaches the limit
-function SstopCounter() {
-    if (subjectcount >= Subjectlimit) {
-        clearInterval(SintervalId);
-    }
-}
-
-let langcount = 0;
-const Langlimit = 500; // The limit for the counter
-const LangcountElement = document.getElementById('lang-count');
-
-// Function to update the counter
-function LupdateCounter() {
-    if (langcount < Langlimit) {
-        langcount += 50; // Increment by 50 for each interval
-        if (langcount > Langlimit) {
-            langrcount = Langlimit; // Ensure count does not exceed the limit
+    // Function to update the counter
+    function TupdateCounter() {
+        if (teachercount < Teacherlimit) {
+            teachercount += 50; // Increment by 50 for each interval
+            if (teachercount > Teacherlimit) {
+                teachercount = Teacherlimit; // Ensure count does not exceed the limit
+            }
+            TeachercountElement.textContent = teachercount;
         }
-        LangcountElement.textContent = langcount;
+
+        // Add a plus sign if the counter reaches the limit
+        if (teachercount === Teacherlimit) {
+            TeachercountElement.textContent = teachercount + "+";
+        }
     }
 
-    // Add a plus sign if the counter reaches the limit
-    if (langcount === Langlimit) {
-        LangcountElement.textContent = langcount + "+";
-    }
-}
+    // Update counter every 100 milliseconds (0.1 seconds)
+    const TintervalId = setInterval(TupdateCounter, 100);
 
-// Update counter every 100 milliseconds (0.1 seconds)
-const lintervalId = setInterval(LupdateCounter, 100);
-
-// Optional: Clear the interval when the counter reaches the limit
-function LstopCounter() {
-    if (langcount >= Langlimit) {
-        clearInterval(LintervalId);
+    // Optional: Clear the interval when the counter reaches the limit
+    function TstopCounter() {
+        if (teachercount >= Teacherlimit) {
+            clearInterval(TintervalId);
+        }
     }
-}
+
+    let subjectcount = 0;
+    const Subjectlimit = 1500; // The limit for the counter
+    const SubjectcountElement = document.getElementById('subject-count');
+
+    // Function to update the counter
+    function SupdateCounter() {
+        if (subjectcount < Subjectlimit) {
+            subjectcount += 50; // Increment by 50 for each interval
+            if (subjectcount > Subjectlimit) {
+                subjectrcount = Subjectlimit; // Ensure count does not exceed the limit
+            }
+            SubjectcountElement.textContent = subjectcount;
+        }
+
+        // Add a plus sign if the counter reaches the limit
+        if (subjectcount === Subjectlimit) {
+            SubjectcountElement.textContent = subjectcount + "+";
+        }
+    }
+
+    // Update counter every 100 milliseconds (0.1 seconds)
+    const SintervalId = setInterval(SupdateCounter, 100);
+
+    // Optional: Clear the interval when the counter reaches the limit
+    function SstopCounter() {
+        if (subjectcount >= Subjectlimit) {
+            clearInterval(SintervalId);
+        }
+    }
+
+    let langcount = 0;
+    const Langlimit = 500; // The limit for the counter
+    const LangcountElement = document.getElementById('lang-count');
+
+    // Function to update the counter
+    function LupdateCounter() {
+        if (langcount < Langlimit) {
+            langcount += 50; // Increment by 50 for each interval
+            if (langcount > Langlimit) {
+                langrcount = Langlimit; // Ensure count does not exceed the limit
+            }
+            LangcountElement.textContent = langcount;
+        }
+
+        // Add a plus sign if the counter reaches the limit
+        if (langcount === Langlimit) {
+            LangcountElement.textContent = langcount + "+";
+        }
+    }
+
+    // Update counter every 100 milliseconds (0.1 seconds)
+    const lintervalId = setInterval(LupdateCounter, 100);
+
+    // Optional: Clear the interval when the counter reaches the limit
+    function LstopCounter() {
+        if (langcount >= Langlimit) {
+            clearInterval(LintervalId);
+        }
+    }
 </script>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(() => {
-        autoHideAlert("success");
-        autoHideAlert("error");
-    }, 200); 
-    // Added a delay to ensure alerts are available in the DOM
+    document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(() => {
+            autoHideAlert("success");
+            autoHideAlert("error");
+        }, 200);
+        // Added a delay to ensure alerts are available in the DOM
 
-    document.querySelectorAll(".custom-alert .close-btn").forEach((btn) => {
-        btn.addEventListener("click", function() {
-            let alertBox = this.closest(".custom-alert");
-            if (alertBox) {
-                alertBox.classList.add("fade-out");
-                setTimeout(() => alertBox.remove(), 500);
-            }
+        document.querySelectorAll(".custom-alert .close-btn").forEach((btn) => {
+            btn.addEventListener("click", function() {
+                let alertBox = this.closest(".custom-alert");
+                if (alertBox) {
+                    alertBox.classList.add("fade-out");
+                    setTimeout(() => alertBox.remove(), 500);
+                }
+            });
         });
     });
-});
 
-function autoHideAlert(alertId) {
-    let alert = document.getElementById(alertId);
-    if (alert) {
-        let progressBar = alert.querySelector('.progress-line');
+    function autoHideAlert(alertId) {
+        let alert = document.getElementById(alertId);
+        if (alert) {
+            let progressBar = alert.querySelector('.progress-line');
 
-        if (progressBar) {
-            // Make the progress bar fill over 30 seconds
-            progressBar.style.transition = "width 20s linear";
-            progressBar.style.width = "100%";
+            if (progressBar) {
+                // Make the progress bar fill over 30 seconds
+                progressBar.style.transition = "width 20s linear";
+                progressBar.style.width = "100%";
+            }
+
+            // Hide the alert after 30 seconds
+            setTimeout(() => {
+                alert.classList.add("fade-out");
+            }, 20000); // 30 seconds visible
+
+            // Remove the alert completely after fading out
+            setTimeout(() => {
+                alert.remove();
+            }, 20500); // 30.5 seconds total
         }
-
-        // Hide the alert after 30 seconds
-        setTimeout(() => {
-            alert.classList.add("fade-out");
-        }, 20000); // 30 seconds visible
-
-        // Remove the alert completely after fading out
-        setTimeout(() => {
-            alert.remove();
-        }, 20500); // 30.5 seconds total
     }
-}
 
 
 
-function cancel() {
-    let alert = document.getElementById("error");
-    if (alert) alert.remove();
-}
+    function cancel() {
+        let alert = document.getElementById("error");
+        if (alert) alert.remove();
+    }
 </script>
 @endsection

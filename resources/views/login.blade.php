@@ -71,6 +71,6 @@
     <footer>
      {{-- @include('layouts.footer') --}}
      </footer>
-<script  src="js/app.js">
+<script src="{{asset('js/app.js')}}"></script>
 <script src="{{asset('js/inspect.js')}}"></script>
 </html>
