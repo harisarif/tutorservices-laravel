@@ -71,7 +71,8 @@
                 <span>{{ __('Blog List') }}
                 </span>
             </a>
-        </li> <hr class="sidebar-divider d-none d-md-block">
+        </li> 
+        <hr class="sidebar-divider d-none d-md-block">
         <li class="nav-item {{ request()->routeIs('admin.notifications') ? 'active' : '' }}"">
             <a class="nav-link py-2" href="{{route('admin.notifications')}}">
                 <i class="fas fa-bell fa-fw" aria-hidden="true"></i>

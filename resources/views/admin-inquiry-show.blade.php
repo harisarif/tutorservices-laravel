@@ -77,27 +77,6 @@
 
 @section('js')
 
-<!-- Select2 JS -->
-<script src="{{asset('js/select2.min.js')}}"></script>
-<!-- Include jQuery (if not already) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!-- Include Select2 -->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $('#subject').select2({
-            placeholder: "Select subjects",
-            allowClear: true
-        });
-    });
-</script>
-
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
 @endsection
 
           

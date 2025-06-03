@@ -2,8 +2,8 @@
 <head>
     <style>
         .modalBox{
-        display: none !important;
-    }
+            display: none !important;
+        }
     </style>
     <link rel="stylesheet" href="{{asset('css/sign-up.css')}}">
 </head>
