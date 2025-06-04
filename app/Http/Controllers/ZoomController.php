@@ -182,6 +182,6 @@ public function createMeetingAndSendEmail(Request $request)
             // 3. Send Email
             Mail::to($teacher->email)->send(new ZoomMeetingNotification($teacher, $meeting));
             Mail::to($student->email)->send(new ZoomMeetingNotification($student, $meeting));
-            return response()->json(['success' => 'Meeting created and emails sent.']);
+            return back()->with('success', 'Meeting created and invites sent.');
         }
 }

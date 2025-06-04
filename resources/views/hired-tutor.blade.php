@@ -209,10 +209,18 @@
 </style>
 @section('content')
 @if (session('success'))
-<div class="alert alert-success">
-    {{ session('success') }}
+<div id="success" class="custom-alert alert-success d-flex align-items-center fade show" role="alert">
+    <i class="fas fa-check-circle"></i>
+    <div>
+        <strong>Success!</strong> {{ session('success') }}
+    </div>
+    <button type="button" class="close-btn" data-dismiss="alert" aria-label="Close">
+        &times;
+    </button>
+    <div class="progress-line"></div>
 </div>
-@endif <div id="overlay" class="overlay" style="display: none;">
+@endif 
+<div id="overlay" class="overlay" style="display: none;">
     <div class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>
     </div>
