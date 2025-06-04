@@ -253,7 +253,7 @@ class EdexcelComplaintController extends Controller
         'message' => 'Inquiry deleted successfully.'
     ]);
 }
-
+    
     function sendEmail($to, $subject, $body)
     {
         $pass = env('email_pass');

@@ -21,7 +21,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Notifications\InquirySuccessNotification;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Mail;
+use App\Notifications\TutorRequestNotification;
 class StudentController extends Controller
 {
     public function index()
@@ -295,7 +296,88 @@ public function destroyinquiryBulk(Request $request)
         $countries = collect(config('countries_assoc.countries'));
         return view('edit-student', compact(['student', 'country', 'countriesPhone', 'countries', 'countries_number_length', 'countries_prefix', 'languageNames', 'schoolClasses', 'qualification']));
    
+    }  
+
+public function sendTutorRequest(Request $request,$id)
+{    
+    $student = auth()->user();
+  $tutor = Tutor::find($id);
+    
+    if (!$tutor) {
+        return back()->with('error', 'Tutor not found.');
     }
+     $facebookImg = "<img src='https://edexceledu.com/icons/facebook.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
+        $instagramImg = "<img src='https://edexceledu.com/icons/instagram.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
+        $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";        
+        $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";       // Send email to the student
+    $subjectTutor = "New Tutoring Request from {$student->name}";
+
+    // Prepare the HTML message like your inquiry email style
+    $messageTutor = "
+    <div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>
+    <table width='100%' cellpadding='0' cellspacing='0' border='0'>
+        <tr>
+            <td align='center'>
+                <table style='max-width: 600px; width: 100%; border: 1px solid #ddd; border-radius: 8px; background-color: #fff;' cellpadding='0' cellspacing='0'>
+
+                    <!-- Header -->
+                    <tr>
+                        <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 20px; font-weight: bold; color: #4CAF50; border-top-left-radius: 8px; border-top-right-radius: 8px;'>
+                            New Tutoring Request
+                        </td>
+                    </tr>
+                    
+                    <!-- Body -->
+                    <tr>
+                        <td style='padding: 20px; text-align: left;'>
+                            <p style='font-size: 16px; margin: 0;'>Dear $tutor->f_name ,</p>
+                            <p style='font-size: 16px; margin: 10px 0;'>
+                                You have received a new tutoring request from <strong>$student->name </strong>.
+                            </p>
+                            <p style='font-size: 16px; margin: 10px 0;'>
+                                Please find the student's contact details below:
+                            </p>
+                            <ul style='font-size: 16px; margin: 10px 0 20px 20px; padding-left: 0;'>
+                                <li><strong>Email:</strong>  $student->email</li>
+                            </ul>
+                            <p style='font-size: 16px; margin: 10px 0;'>
+                                Kindly log in to your dashboard to review the request and respond accordingly.
+                            </p>
+                            <p style='font-size: 16px; margin: 10px 0;'>Thank you for being a valued member of Edexcel Academy.</p>
+                            <p style='font-size: 16px; font-weight: bold; margin: 0;'>Best regards,<br>The Edexcel Academy Team</p>
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr style='margin-bottom:10px;display:flex;'>
+                        <td align='left' style='color:#43b979; font-size:11px; margin-left:5px; width:50%;'>
+                            &copy; 2025 Edexcel Academy. All rights reserved.
+                        </td>
+                        <td align='right' style='display:flex; margin-left:25%;'>
+                            <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:5px;'>{$facebookImg}</a>
+                            <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank' style='margin-right:5px;'>{$instagramImg}</a>
+                            <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank' style='margin-right:5px;'>{$linkedinImg}</a>
+                            <a href='https://youtube.com/@edexcelonline01?si=EuQwX0tL3zk4J-2p' target='_blank'>{$youtubeImg}</a>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+    ";
+
+    // Send the email using your existing PHPMailer wrapper
+    $this->sendEmail($tutor->email, $subjectTutor, $messageTutor);
+
+    // Notify tutor in database (optional)
+    $tutor->notify(new TutorRequestNotification($student));
+
+    return back()->with('success', 'Tutoring request sent to tutor successfully!');
+}
+
+
     public function student_dashboard(Request $request, $id)
     {
         $user = Auth::user();

@@ -156,11 +156,10 @@ Route::get('/inquiry/{id}', [EdexcelComplaintController::class, 'show'])->name('
 Route::get('/notifications', [NotificationController::class, 'index'])->name('admin.notifications');
 Route::delete('/notifications/bulk-delete', [NotificationController::class, 'bulkDelete'])->name('notifications.destroy.bulk');
 Route::delete('/notifications/{notification}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
+Route::get('notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
+Route::post('/request-tutor/{id}', [StudentController::class, 'sendTutorRequest'])->name('request.tutor');
 
-Route::prefix('notifications')->group(function () {
-    Route::get('/{id}', [NotificationController::class, 'show'])->name('notifications.show');
-   
-});
+
 
 
 

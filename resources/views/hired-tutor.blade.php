@@ -208,10 +208,26 @@
     }
 </style>
 @section('content')
+
 @if (session('success'))
-<div class="alert alert-success">
-    {{ session('success') }}
-</div>
+    <div class="alert alert-success alert-dismissible fade show" role="alert" style="z-index: 6; padding: 14px !important;">
+        <strong><i class="fas fa-check-circle"></i> Success!</strong> {{ session('success') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.style.display='none';">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="progress-line"></div>
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="z-index: 6; padding: 14px !important;">
+        <strong><i class="fas fa-exclamation-circle"></i> Error!</strong> {{ session('error') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.style.display='none';">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="progress-line"></div>
+    </div>
+
 @endif <div id="overlay" class="overlay" style="display: none;">
     <div class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>
@@ -576,8 +592,13 @@
 
                                                     </a>
 
-                                                    <button type="button" style="background-color: #1cc88a;"
-                                                        class="btn4 btn-outline-light rounded fw-bold text-light p-2 w-100">Request tutor</button>
+                                                   <form action="{{ route('request.tutor', ['id' => $item->id]) }}" method="POST">
+    @csrf
+    <button type="submit" class="btn4 btn-outline-light rounded fw-bold text-light p-2 w-100" style="background-color: #1cc88a;">
+        Request tutor
+    </button>
+</form>
+
                                                 </div>
                                             </div>
                                         </div>

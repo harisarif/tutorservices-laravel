@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Notifications\Notifiable;
 class Tutor extends Model
 {
-    use HasFactory;
+    use HasFactory; use Notifiable;
     protected $fillable = [
         'f_name', 'intro', 'description', 'l_name', 'city',
         'email', 'document', 'dob', 'qualification', 'gender',
