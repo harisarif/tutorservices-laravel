@@ -330,9 +330,9 @@ public function sendTutorRequest(Request $request,$id)
                     <!-- Body -->
                     <tr>
                         <td style='padding: 20px; text-align: left;'>
-                            <p style='font-size: 16px; margin: 0;'>Dear $tutor->f_name ,</p>
+                            <p style='font-size: 16px; margin: 0;'>Dear $tutor->f_name,</p>
                             <p style='font-size: 16px; margin: 10px 0;'>
-                                You have received a new tutoring request from <strong>$student->name </strong>.
+                                You have received a new tutoring request from <strong style='color:#43b979'>$student->name</strong>.
                             </p>
                             <p style='font-size: 16px; margin: 10px 0;'>
                                 Please find the student's contact details below:
@@ -344,16 +344,16 @@ public function sendTutorRequest(Request $request,$id)
                                 Kindly log in to your dashboard to review the request and respond accordingly.
                             </p>
                             <p style='font-size: 16px; margin: 10px 0;'>Thank you for being a valued member of Edexcel Academy.</p>
-                            <p style='font-size: 16px; font-weight: bold; margin: 0;'>Best regards,<br>The Edexcel Academy Team</p>
+                            <p style='font-size: 16px; font-weight: bold; margin: 0;color:#43b979;'>The Edexcel Academy Team</p>
                         </td>
                     </tr>
 
                     <!-- Footer -->
                     <tr style='margin-bottom:10px;display:flex;'>
-                        <td align='left' style='color:#43b979; font-size:11px; margin-left:5px; width:50%;'>
+                        <td align='left' style='color:#43b979; font-size:12px; margin-left:5px; width:50%;'>
                             &copy; 2025 Edexcel Academy. All rights reserved.
                         </td>
-                        <td align='right' style='display:flex; margin-left:25%;'>
+                        <td align='right' style='display:flex;margin-left:29%;'>
                             <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:5px;'>{$facebookImg}</a>
                             <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank' style='margin-right:5px;'>{$instagramImg}</a>
                             <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank' style='margin-right:5px;'>{$linkedinImg}</a>

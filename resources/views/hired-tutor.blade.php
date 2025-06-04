@@ -220,7 +220,7 @@
     </button>
     <div class="progress-line"></div>
 </div>
-@endif 
+@endif
 <div id="overlay" class="overlay" style="display: none;">
 
     <div class="spinner-border" role="status">
@@ -578,23 +578,23 @@
                                             </div>
                                             <div>
                                                 <div id="btn-container">
-                                                <a href="{{ route('zoom.send.meeting.email', ['student_id' => $student->id, 'teacher_id' => $item->id]) }}"
-                                                class="mb-1 d-flex align-items-center btn4 btn-outline-light rounded fw-bold text-light p-2 w-100 justify-content-center"
-                                                style="background-color: #1cc88a; text-decoration: none;"
-                                                title="Zoom Meet">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" viewBox="0 0 24 24">
-                                                        <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z" />
-                                                    </svg>
-                                                    <span class="ms-1">Zoom Meet</span>
-                                                </a>
+                                                    <a href="{{ route('zoom.send.meeting.email', ['student_id' => $student->id, 'teacher_id' => $item->id]) }}"
+                                                        class="mb-1 d-flex align-items-center btn4 btn-outline-light rounded fw-bold text-light p-2 w-100 justify-content-center"
+                                                        style="background-color: #1cc88a; text-decoration: none;"
+                                                        title="Zoom Meet">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" viewBox="0 0 24 24">
+                                                            <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z" />
+                                                        </svg>
+                                                        <span class="ms-1">Zoom Meet</span>
+                                                    </a>
 
 
-                                                   <form action="{{ route('request.tutor', ['id' => $item->id]) }}" method="POST">
-    @csrf
-    <button type="submit" class="btn4 btn-outline-light rounded fw-bold text-light p-2 w-100" style="background-color: #1cc88a;">
-        Request tutor
-    </button>
-</form>
+                                                    <form action="{{ route('request.tutor', ['id' => $item->id]) }}" method="POST">
+                                                        @csrf
+                                                        <button type="submit" class="btn4 btn-outline-light rounded fw-bold text-light p-2 w-100" style="background-color: #1cc88a;">
+                                                            Request tutor
+                                                        </button>
+                                                    </form>
 
                                                 </div>
                                             </div>
@@ -939,9 +939,7 @@
                                                                         <b>${tutor.experience}+ Years of ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.</b>
                                                                         - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
                                                                     </span>
-                                                                    <ul class="read p-0 mt-3">
-                                                                        <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
-                                                                    </ul>
+                                                                    
                                                                 </div>
                                                         </div>
                                                          <div class="col-md-3">
@@ -953,12 +951,21 @@
                                                                         <span><i class="fa-regular fa-heart"></i></span>
                                                                     </div>
                                                                 </div>
-
-                                                                <div>
-                                                                    <div id="btn-container">
-                                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trial lesson</button>
-                                                                    </div>
-                                                                </div>
+                                                                    <a href="{{ route('zoom.send.meeting.email', ['student_id' => $student->id, 'teacher_id' => $tutor->id]) }}"
+                                                                        class="mb-1 d-flex align-items-center btn4 btn-outline-light rounded fw-bold text-light p-2 w-100 justify-content-center"
+                                                                        style="background-color: #1cc88a; text-decoration: none;"
+                                                                        title="Zoom Meet">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" viewBox="0 0 24 24">
+                                                                            <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z" />
+                                                                        </svg>
+                                                                        <span class="ms-1">Zoom Meet</span>
+                                                                    </a>
+                                                               <form action="{{ route('request.tutor', ['id' => $tutor->id]) }}" method="POST">
+                                                                    @csrf
+                                                                    <button type="submit" class="btn4 btn-outline-light rounded fw-bold text-light p-2 w-100" style="background-color: #1cc88a;">
+                                                                        Request tutor
+                                                                    </button>
+                                                                </form>
 
                                                                 
                                                         </div>
@@ -1114,9 +1121,7 @@
                                                                         <b>${tutor.experience}+ Years of ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.</b>
                                                                         - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
                                                                     </span>
-                                                                    <ul class="read p-0 mt-3">
-                                                                        <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
-                                                                    </ul>
+                                                                    
                                                                 </div>
                                                         </div>
                                                          <div class="col-md-3">
@@ -1128,12 +1133,21 @@
                                                                         <span><i class="fa-regular fa-heart"></i></span>
                                                                     </div>
                                                                 </div>
-
-                                                                <div>
-                                                                    <div id="btn-container">
-                                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trial lesson</button>
-                                                                    </div>
-                                                                </div>
+                                                                        <a href="{{ route('zoom.send.meeting.email', ['student_id' => $student->id, 'teacher_id' => $tutor->id]) }}"
+                                                                                class="mb-1 d-flex align-items-center btn4 btn-outline-light rounded fw-bold text-light p-2 w-100 justify-content-center"
+                                                                                style="background-color: #1cc88a; text-decoration: none;"
+                                                                                title="Zoom Meet">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" viewBox="0 0 24 24">
+                                                                                    <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z" />
+                                                                                </svg>
+                                                                                <span class="ms-1">Zoom Meet</span>
+                                                                            </a>
+                                                                <form action="{{ route('request.tutor', ['id' => $tutor->id]) }}" method="POST">
+                                                                        @csrf
+                                                                        <button type="submit" class="btn4 btn-outline-light rounded fw-bold text-light p-2 w-100" style="background-color: #1cc88a;">
+                                                                            Request tutor
+                                                                        </button>
+                                                                    </form>
 
                                                                 
                                                         </div>
@@ -1287,9 +1301,7 @@
                                                                         <b>${tutor.experience}+ Years of ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.</b>
                                                                         - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
                                                                     </span>
-                                                                    <ul class="read p-0 mt-3">
-                                                                        <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
-                                                                    </ul>
+                                                                    
                                                                 </div>
                                                         </div>
                                                          <div class="col-md-3">
@@ -1372,7 +1384,7 @@
                     console.log("AJAX Success: ", response);
                     $('#gender').val('Male').trigger('change');
                     $('#prize-Range').val('0-50').trigger('change');
-                    $('#country').val('AE').trigger('change');
+                    $('#country').val('AL').trigger('change');
                     $('#tutorsContainer').empty();
 
                     // Always hide overlay regardless of success or no tutors found
@@ -1458,9 +1470,7 @@
                                                                         <b>${tutor.experience}+ Years of ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.</b>
                                                                         - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
                                                                     </span>
-                                                                    <ul class="read p-0 mt-3">
-                                                                        <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
-                                                                    </ul>
+                                                                    
                                                                 </div>
                                                         </div>
                                                          <div class="col-md-3">
@@ -1475,8 +1485,21 @@
 
                                                                 <div>
                                                                     <div id="btn-container">
-                                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trial lesson</button>
-                                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trial lesson</button>
+                                                                        <a href="{{ route('zoom.send.meeting.email', ['student_id' => $student->id, 'teacher_id' => $tutor->id]) }}"
+                                                                            class="mb-1 d-flex align-items-center btn4 btn-outline-light rounded fw-bold text-light p-2 w-100 justify-content-center"
+                                                                            style="background-color: #1cc88a; text-decoration: none;"
+                                                                            title="Zoom Meet">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" viewBox="0 0 24 24">
+                                                                                <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z" />
+                                                                            </svg>
+                                                                            <span class="ms-1">Zoom Meet</span>
+                                                                        </a>
+                                                                        <form action="{{ route('request.tutor', ['id' => $tutor->id]) }}" method="POST">
+                                                                            @csrf
+                                                                            <button type="submit" class="btn4 btn-outline-light rounded fw-bold text-light p-2 w-100" style="background-color: #1cc88a;">
+                                                                                Request tutor
+                                                                            </button>
+                                                                        </form>
                                                                     
                                                                     </div>
                                                                 </div>
