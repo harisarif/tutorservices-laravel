@@ -2,19 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\Notifications\DatabaseNotification;
+use Illuminate\Support\Facades\Log;
 class NotificationController extends Controller
 {
     
 public function index()
-{
+{    
     // You can filter notifications as needed
     $notifications =auth()->user()->notifications; // or unreadNotifications / readNotifications
 
     return view('notifications-list', compact('notifications'));
+} 
+public function bulkDelete(Request $request)
+{
+    $ids = $request->ids;
+
+    if (!$ids || !is_array($ids)) {
+        return response()->json(['error' => 'No IDs provided'], 400);
+    }
+
+    DatabaseNotification::whereIn('id', $ids)->delete();
+
+    return response()->json(['success' => true, 'message' => 'Notifications deleted successfully']);
 }
+
     public function markNotificationAsRead(Request $request)
 {
     $notification = auth()->user()->notifications()->where('id', $request->notification_id)->first();
@@ -43,12 +58,10 @@ public function destroy($id)
     return response()->json(['success' => true]);
 }
 
-public function destroyBulk(Request $request)
-{
-    $ids = $request->ids;
-    auth()->user()->notifications()->whereIn('id', $ids)->delete();
-    return response()->json(['success' => true]);
-}
+
+
+
+
 
 
 

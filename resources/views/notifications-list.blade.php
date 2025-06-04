@@ -3,6 +3,7 @@
 Edexcel Notifications
 @endsection
 
+
 <script src="{{asset('js/js/jquery.min.js')}}"></script>
 @section('content')
 
@@ -59,7 +60,9 @@ Edexcel Notifications
                         <tbody>
                             @foreach ($notifications as $notification)
                             <tr id="notification-row-{{ $notification->id }}">
-                                <td><input type="checkbox" class="notification-checkbox" value="{{ $notification->id }}"></td>
+
+                                <td><input type="checkbox"  class="notification-checkbox" value="{{ $notification->id }}"  id="flexCheckChecked-{{ $notification->id }}">
+                             <label class="form-check-label" for="flexCheckChecked-{{ $notification->id }}"></label></td>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $notification->data['name'] ?? 'No name' }}</td> <td>{{ $notification->data['email'] ?? 'No email' }}</td>
                                  <td>{{ $notification->data['phone'] ?? 'No phone' }}</td><td>{{ $notification->data['message'] ?? 'No message' }}</td>
@@ -147,7 +150,107 @@ Edexcel Notifications
 
 @endsection
 @section('js')
+<script>
+$(document).ready(function () {
+    // Setup CSRF token for all AJAX requests
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
+    // Select/Deselect all
+    $('#select-all').click(function () {
+        $('.notification-checkbox').prop('checked', this.checked);
+    });
 
+    // Bulk delete
+    $('#delete-selected').click(function () {
+        var selected = [];
+        $('.notification-checkbox:checked').each(function () {
+            selected.push($(this).val());
+        });
 
+        if (selected.length === 0) {
+            Swal.fire('No Notifications Selected', 'Please select at least one notification to delete.', 'warning');
+            return;
+        }   
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'This will permanently delete the selected notifications.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete them!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+               $.ajax({
+    url: "{{ route('notifications.destroy.bulk') }}",
+    type: 'POST',
+    data: {
+        ids: selected,
+        _method: 'DELETE',
+        _token: $('meta[name="csrf-token"]').attr('content')
+    }, 
+
+    success: function (response) {
+        selected.forEach(id => {
+            $('#notification-row-' + id).remove();
+        });
+        location.reload();
+    },
+    error: function (xhr) {
+        console.error(xhr.responseText);
+        Swal.fire('Error!', 'Something went wrong.', 'error');
+    }
+});
+
+            }
+        });
+    });
+});
+</script> <script>
+$(document).ready(function () {
+    // Setup CSRF token for AJAX if not already set
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    // Single delete button click
+    $('.single-delete-btn').click(function () {
+        var notificationId = $(this).data('id');
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'This will permanently delete the notification.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "/notifications/" + notificationId,  // Adjust URL if needed
+                    type: 'POST',
+                    data: {
+                        _method: 'DELETE',
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (response) {
+                        $('#notification-row-' + notificationId).remove();
+                        location.reload();
+                    },
+                    error: function (xhr) {
+                        console.error(xhr.responseText);
+                        Swal.fire('Error!', 'Something went wrong.', 'error');
+                    }
+                });
+            }
+        });
+    });
+});
+</script>
 @endsection
