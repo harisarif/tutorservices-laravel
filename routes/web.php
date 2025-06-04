@@ -192,11 +192,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/inquiry-list', [App\Http\Controllers\HomeController::class, 'inquiry'])->name('admin.inquiry');
 Route::get('/hiring', [App\Http\Controllers\HomeController::class, 'hiring'])->name('hiring-tutor');
 Route::get('/student-hiring', [App\Http\Controllers\HomeController::class, 'studenthiring'])->name('students-listing');
-
-
-
-
 Route::get('/zoom/login', [ZoomController::class, 'redirectToZoom'])->name('zoom.login');
 Route::get('/zoom/callback', [ZoomController::class, 'handleZoomCallback'])->name('zoom.callback');
 Route::get('/zoom/create-meeting', [ZoomController::class, 'createMeeting'])->name('zoom.create.meeting');
 Route::get('/zoom/send-meeting-email', [ZoomController::class, 'sendMeetingEmail'])->name('zoom.send.meeting.email');
+Route::post('/zoom/create-meeting', [ZoomController::class, 'createAndMailMeeting'])
+     ->name('zoom.create.meeting');
+Route::post('/zoom/create-and-send', [ZoomController::class, 'createMeetingAndSendEmail'])->name('zoom.create_and_send');
