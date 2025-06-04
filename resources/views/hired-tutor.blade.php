@@ -568,13 +568,16 @@
                                             </div>
                                             <div>
                                                 <div id="btn-container">
-                                                    <a href="#" class="mb-1 d-flex align-items-center btn4 btn-outline-light rounded fw-bold text-light p-2 w-100 justify-content-center" style="background-color: #1cc88a;;text-decoration: none;" title="Zoom Meet">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" viewBox="0 0 24 24">
-                                                            <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z" />
-                                                        </svg>
-                                                        <span class="ms-1">Zoom Meet</span>
+                                                <a href="{{ route('zoom.send.meeting.email', ['student_id' => $student->id, 'teacher_id' => $item->id]) }}"
+                                                class="mb-1 d-flex align-items-center btn4 btn-outline-light rounded fw-bold text-light p-2 w-100 justify-content-center"
+                                                style="background-color: #1cc88a; text-decoration: none;"
+                                                title="Zoom Meet">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" viewBox="0 0 24 24">
+                                                        <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z" />
+                                                    </svg>
+                                                    <span class="ms-1">Zoom Meet</span>
+                                                </a>
 
-                                                    </a>
 
                                                     <button type="button" style="background-color: #1cc88a;"
                                                         class="btn4 btn-outline-light rounded fw-bold text-light p-2 w-100">Request tutor</button>
