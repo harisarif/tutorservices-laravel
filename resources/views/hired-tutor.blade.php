@@ -210,25 +210,19 @@
 @section('content')
 
 @if (session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert" style="z-index: 6; padding: 14px !important;">
-        <strong><i class="fas fa-check-circle"></i> Success!</strong> {{ session('success') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.style.display='none';">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <div class="progress-line"></div>
+<div id="success" class="custom-alert alert-success d-flex align-items-center fade show" role="alert">
+    <i class="fas fa-check-circle"></i>
+    <div>
+        <strong>Success!</strong> {{ session('success') }}
     </div>
-@endif
+    <button type="button" class="close-btn" data-dismiss="alert" aria-label="Close">
+        &times;
+    </button>
+    <div class="progress-line"></div>
+</div>
+@endif 
+<div id="overlay" class="overlay" style="display: none;">
 
-@if (session('error'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="z-index: 6; padding: 14px !important;">
-        <strong><i class="fas fa-exclamation-circle"></i> Error!</strong> {{ session('error') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.style.display='none';">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <div class="progress-line"></div>
-    </div>
-
-@endif <div id="overlay" class="overlay" style="display: none;">
     <div class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>
     </div>
@@ -584,13 +578,16 @@
                                             </div>
                                             <div>
                                                 <div id="btn-container">
-                                                    <a href="#" class="mb-1 d-flex align-items-center btn4 btn-outline-light rounded fw-bold text-light p-2 w-100 justify-content-center" style="background-color: #1cc88a;;text-decoration: none;" title="Zoom Meet">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" viewBox="0 0 24 24">
-                                                            <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z" />
-                                                        </svg>
-                                                        <span class="ms-1">Zoom Meet</span>
+                                                <a href="{{ route('zoom.send.meeting.email', ['student_id' => $student->id, 'teacher_id' => $item->id]) }}"
+                                                class="mb-1 d-flex align-items-center btn4 btn-outline-light rounded fw-bold text-light p-2 w-100 justify-content-center"
+                                                style="background-color: #1cc88a; text-decoration: none;"
+                                                title="Zoom Meet">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" viewBox="0 0 24 24">
+                                                        <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z" />
+                                                    </svg>
+                                                    <span class="ms-1">Zoom Meet</span>
+                                                </a>
 
-                                                    </a>
 
                                                    <form action="{{ route('request.tutor', ['id' => $item->id]) }}" method="POST">
     @csrf
