@@ -24,22 +24,48 @@ class ZoomController extends Controller
     }
 
     public function handleZoomCallback(Request $request)
-    {
-        $response = Http::asForm()->post('https://zoom.us/oauth/token', [
-            'grant_type' => 'authorization_code',
-            'code' => $request->code,
-            'redirect_uri' => env('ZOOM_REDIRECT_URI'),
-        ], [
-            'Authorization' => 'Basic ' . base64_encode(env('ZOOM_CLIENT_ID') . ':' . env('ZOOM_CLIENT_SECRET')),
-        ]);
+        {
+            $clientId = env('ZOOM_CLIENT_ID');
+            $clientSecret = env('ZOOM_CLIENT_SECRET');
+            $redirectUri = env('ZOOM_REDIRECT_URI');
 
-        $data = $response->json();
+            // Ensure code exists
+            if (!$request->has('code')) {
+                return response()->json(['error' => 'Authorization code missing from Zoom callback.'], 400);
+            }
 
-        // Save access token to session or database
-        Session::put('zoom_access_token', $data['access_token']);
+            $response = Http::asForm()
+                ->withHeaders([
+                    'Authorization' => 'Basic ' . base64_encode("{$clientId}:{$clientSecret}")
+                ])
+                ->post('https://zoom.us/oauth/token', [
+                    'grant_type' => 'authorization_code',
+                    'code' => $request->code,
+                    'redirect_uri' => $redirectUri,
+                ]);
 
-        return redirect()->route('zoom.create.meeting');
-    }
+            if (!$response->successful()) {
+                return response()->json([
+                    'error' => 'Token request failed',
+                    'status' => $response->status(),
+                    'body' => $response->json(),
+                ], 400);
+            }
+
+            $data = $response->json();
+
+            if (!isset($data['access_token'])) {
+                return response()->json([
+                    'error' => 'No access_token found in response',
+                    'response' => $data,
+                ], 400);
+            }
+
+            Session::put('zoom_access_token', $data['access_token']);
+
+            return redirect()->route('zoom.create.meeting');
+        }
+
 
     public function createMeeting()
     {
