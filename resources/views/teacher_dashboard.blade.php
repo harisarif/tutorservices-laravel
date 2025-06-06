@@ -436,14 +436,70 @@ $languages = is_array($tutor->language) ? $tutor->language : json_decode($tutor-
                         </div>
 
                     </div>
-                    <div class="d-flex align-items-center">
-                        <div class="email-container me-1">
-                            <i class="fas fa-bell fa-fw text-success text-white"></i>
-                        </div>
-                        <div class="email-container me-1">
-                            <i class="fa fa-envelope-square" aria-hidden="true" style="color: #fff;"></i>
-                            <a class="email text-decoration-none" href="mailto:info@eduexceledu.com" style="color: #42b979;">info@eduexceledu.com</a>
-                        </div>
+                 <div class="d-flex align-items-center">
+
+                    <!-- Notification Bell with Dropdown -->
+                    <div class="email-container me-1 dropdown">
+                       <a class="nav-link dropdown-toggle" href="#" id="tutorNotificationDropdown" role="button"
+   data-bs-toggle="dropdown" aria-expanded="false" style="padding: 0;">
+
+                            <i class="fas fa-bell fa-fw text-white position-relative">
+                                @php $count = $tutor->unreadNotifications->count(); @endphp
+                                @if($count > 0)
+                                    <span class="badge bg-danger rounded-circle" style="position:absolute; top:-6px; right:-10px; font-size:10px;">
+                                        {{ $count }}
+                                    </span>
+                                @endif
+                            </i>
+                        </a>
+
+                        <!-- Dropdown - Notifications -->
+                        <ul class="dropdown-menu shadow" aria-labelledby="tutorNotificationDropdown"
+                            style="width: 300px; max-height: 400px; overflow-y: auto;">
+                            <li>
+                                <h6 class="dropdown-header text-success">Notifications</h6>
+                            </li>
+
+                            @forelse ($tutor->unreadNotifications as $notification)
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <div class="me-3">
+                                            <div class="icon-circle bg-success rounded-circle p-2">
+                                                <i class="fas fa-user text-white"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="small text-muted">{{ $notification->created_at->diffForHumans() }}</div>
+                                            <span class="fw-bold">
+                                                {{ $notification->data['student_name'] ?? 'A student' }} sent a tutoring request.
+                                            </span>
+                                        </div>
+                                    </a>
+                                </li>
+                            @empty
+                                <li>
+                                    <a class="dropdown-item text-center small text-muted" href="#">No new notifications</a>
+                                </li>
+                            @endforelse
+
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item text-center small text-success" href="{{ route('notifications.markAllRead') }}">
+                                    Mark all as read
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Email Icon and Address -->
+                    <div class="email-container me-1 d-flex align-items-center">
+                        <i class="fa fa-envelope-square text-white me-1" aria-hidden="true"></i>
+                        <a class="email text-decoration-none" href="mailto:info@eduexceledu.com" style="color: #42b979;">
+                            info@eduexceledu.com
+                        </a>
+                    </div>
+
+                </div>
                 
                         <!-- <div class="p-2 header-phone-number phone-container">
                             <i class="fa fa-phone" aria-hidden="true" style="color: #fff;"></i>
@@ -623,7 +679,9 @@ $languages = is_array($tutor->language) ? $tutor->language : json_decode($tutor-
     @endsection
     @section('js')<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
+<!-- Bootstrap 5 JS + Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function() {
             $.ajaxSetup({

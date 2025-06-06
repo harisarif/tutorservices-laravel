@@ -160,6 +160,10 @@ Route::delete('/notifications/bulk-delete', [NotificationController::class, 'bul
 Route::delete('/notifications/{notification}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
 Route::get('notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
 Route::post('/request-tutor/{id}', [StudentController::class, 'sendTutorRequest'])->name('request.tutor');
+Route::get('/notifications/mark-all-read', function () {
+    auth()->user()->unreadNotifications->markAsRead();
+    return back();
+})->name('notifications.markAllRead');
 
 
 

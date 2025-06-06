@@ -302,7 +302,7 @@ public function sendTutorRequest(Request $request,$id)
 {    
     $student = auth()->user();
   $tutor = Tutor::find($id);
-    
+     
     if (!$tutor) {
         return back()->with('error', 'Tutor not found.');
     }
