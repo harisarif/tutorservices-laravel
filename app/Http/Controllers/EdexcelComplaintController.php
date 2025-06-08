@@ -52,16 +52,19 @@ class EdexcelComplaintController extends Controller
                 return redirect()->back()->withErrors(['spam' => 'Spam content detected.'])->withInput();
             }
         }
+        if (strtolower(trim($request->input('fname'))) === 'robertphesk') {
+            return redirect()->back()->withErrors(['fname' => 'Invalid name.'])->withInput();
+        }
         $EdexcelComplaint = new EdexcelComplaint();
         $EdexcelComplaint->description = $request->input('description');
         $EdexcelComplaint->name = $request->input('fname');
         $EdexcelComplaint->email = $request->input('email');
         $EdexcelComplaint->phone = $request->input('phone');
         $EdexcelComplaint->save();
-        $facebookImg = "<img src='https://edexceledu.com/icons/facebook.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
-        $instagramImg = "<img src='https://edexceledu.com/icons/instagram.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
-        $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";        
-        $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";       // Send email to the student
+        $facebookImg = "<img src='https://edexceledu.com/icons/facebook.jpeg'  alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
+        $instagramImg = "<img src='https://edexceledu.com/icons/instagram.jpeg'alt='Instagram'width='20' height='20' style='vertical-align:middle'>";
+        $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='linkedIn' width='20' height='20' style='vertical-align:middle'>";        
+        $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg'  alt='Youtube'  width='20' height='20' style='vertical-align:middle'>";       // Send email to the student
               // Send email to the student
         $toStudent = $EdexcelComplaint->email;
         $subjectStudent = "Welcome to Edexcel Academy!";
