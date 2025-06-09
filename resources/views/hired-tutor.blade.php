@@ -807,6 +807,8 @@
 
 <script>
     $(document).ready(function() {
+        const zoomRoute = "{{ route('zoom.send.meeting.email') }}";
+        const studentId = {{ $student->id }};
         console.log("Document ready - populating price ranges");
 
         const priceRanges = [
@@ -953,7 +955,7 @@
                                                                         <span><i class="fa-regular fa-heart"></i></span>
                                                                     </div>
                                                                 </div>
-                                                                    <a onclick="startZoomMeeting(this)" data-student-id="{{ $student->id }}" data-tutor-id="{{ $tutor->id }}"
+                                                                    <a href="${zoomRoute}?student_id=${studentId}&teacher_id=${tutorId}"
                                                                         class="mb-1 d-flex align-items-center btn4 btn-outline-light rounded fw-bold text-light p-2 w-100 justify-content-center"
                                                                         style="background-color: #1cc88a; text-decoration: none;"
                                                                         title="Zoom Meet">
@@ -1135,7 +1137,7 @@
                                                                         <span><i class="fa-regular fa-heart"></i></span>
                                                                     </div>
                                                                 </div>
-                                                                        <a onclick="startZoomMeeting(this)" data-student-id="{{ $student->id }}" data-tutor-id="{{ $tutor->id }}"
+                                                                        <a href="${zoomRoute}?student_id=${studentId}&teacher_id=${tutorId}"
                                                                                 class="mb-1 d-flex align-items-center btn4 btn-outline-light rounded fw-bold text-light p-2 w-100 justify-content-center"
                                                                                 style="background-color: #1cc88a; text-decoration: none;"
                                                                                 title="Zoom Meet">
@@ -1487,7 +1489,7 @@
 
                                                                 <div>
                                                                     <div id="btn-container">
-                                                                        <a onclick="startZoomMeeting(this)" data-student-id="{{ $student->id }}" data-tutor-id="{{ $tutor->id }}"
+                                                                        <a href="${zoomRoute}?student_id=${studentId}&teacher_id=${tutorId}"
                                                                             class="mb-1 d-flex align-items-center btn4 btn-outline-light rounded fw-bold text-light p-2 w-100 justify-content-center"
                                                                             style="background-color: #1cc88a; text-decoration: none;"
                                                                             title="Zoom Meet">
@@ -1559,13 +1561,6 @@
 </script>
 
 <script>
-    function startZoomMeeting(el) {
-        const studentId = el.dataset.studentId;
-        const tutorId = el.dataset.tutorId;
-
-        const url = `/zoom/send/meeting/email?student_id=${studentId}&teacher_id=${tutorId}`;
-        window.location.href = url;
-    }
     function toggleDropdownWeb() {
         document.querySelector('.custom-options-web').classList.toggle('open');
     }
@@ -1620,5 +1615,11 @@
         window.location.href = url;
     }
 </script>
+<script>
+    $(document).ready(function() {
 
+
+
+    });
+</script>
 <script src="{{asset('js/inspect.js')}}"></script>
