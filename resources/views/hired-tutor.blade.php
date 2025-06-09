@@ -964,7 +964,7 @@
                                                                         </svg>
                                                                         <span class="ms-1">Zoom Meet</span>
                                                                     </a>
-                                                               <form action="{{ route('request.tutor', ['id' => $tutor->id]) }}" method="POST">
+                                                               <form action="{{ route('request.tutor', ['id' => ${tutorId}]) }}" method="POST">
                                                                     @csrf
                                                                     <button type="submit" class="btn4 btn-outline-light rounded fw-bold text-light p-2 w-100" style="background-color: #1cc88a;">
                                                                         Request tutor
@@ -1146,7 +1146,7 @@
                                                                                 </svg>
                                                                                 <span class="ms-1">Zoom Meet</span>
                                                                             </a>
-                                                                <form action="{{ route('request.tutor', ['id' => $tutor->id]) }}" method="POST">
+                                                                <form action="{{ route('request.tutor', ['id' => ${tutorId}]) }}" method="POST">
                                                                         @csrf
                                                                         <button type="submit" class="btn4 btn-outline-light rounded fw-bold text-light p-2 w-100" style="background-color: #1cc88a;">
                                                                             Request tutor
@@ -1498,7 +1498,7 @@
                                                                             </svg>
                                                                             <span class="ms-1">Zoom Meet</span>
                                                                         </a>
-                                                                        <form action="{{ route('request.tutor', ['id' => $tutor->id]) }}" method="POST">
+                                                                        <form action="{{ route('request.tutor', ['id' => ${tutorId}]) }}" method="POST">
                                                                             @csrf
                                                                             <button type="submit" class="btn4 btn-outline-light rounded fw-bold text-light p-2 w-100" style="background-color: #1cc88a;">
                                                                                 Request tutor
