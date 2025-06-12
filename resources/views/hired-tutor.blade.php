@@ -14,7 +14,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <style>
     .adjustMobile {
-        height: 15% !important;
+        height: 25% !important;
     }
 
     .custom-pagination nav {
@@ -96,16 +96,11 @@
         position: absolute;
         left: -88px;
         top: 100%;
-        /* Adjust as needed to position below the icon */
         white-space: nowrap;
         background-color: white;
-        /* Optional: add a background color */
         padding: 5px;
-        /* Optional: add some padding */
         border-radius: 3px;
-        /* Optional: add rounded corners */
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        /* Optional: add a shadow */
         z-index: 100;
     }
 
@@ -128,16 +123,11 @@
         position: absolute;
         left: -88px;
         top: 100%;
-        /* Adjust as needed to position below the icon */
         white-space: nowrap;
         background-color: white;
-        /* Optional: add a background color */
         padding: 5px;
-        /* Optional: add some padding */
         border-radius: 3px;
-        /* Optional: add rounded corners */
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        /* Optional: add a shadow */
         z-index: 100;
     }
 
@@ -265,9 +255,6 @@
         </ul>
 
         <div class="mt-3">
-            <!-- <h1>{{ __('messages.welcome') }}</h1> -->
-
-
             <ul class="icons d-flex p-2 m-0  align-items-center gap-3" style="list-style:none;">
                 <div class="d-flex  align-items: center;" style="justify-content: center;">
                     <div class="col-12 ">
@@ -381,21 +368,11 @@
                                     <option value="female">{{ __('Female') }}</option>
                                 </select>
                             </div>
-                            <!-- <div class="col-md-6 px-2 col-lg-4">
-                                                        <select name="subjectSearch" id="subjectSearch" class="country" >
-                                                            <option value="all">{{ __('messages.Which Subject Interests You?') }}</option>
-                                                           
-                                                    @foreach($subjectsTeach as $subjectsCode => $subjects)
-                                                        <option value="{{ $subjectsCode }}">{{ $subjects }}</option>
-                                                    @endforeach
-                                                        </select>
-                                                </div> -->
                             <div class="col-md-6 px-2 col-lg-4">
                                 <label class="form-label filter-heading">
                                     {{ __('messages.Price Selection') }}
                                 </label>
                                 <select name="prize-Range" id="prize-Range" class="country">
-                                    <!-- <option value="all">{{ __('messages.Price Selection') }}</option> -->
                                 </select>
                             </div>
 
@@ -863,7 +840,7 @@
                         response.tutors.forEach(function(tutor) {
 
                             console.log('res======', tutor)
-                            const tutorId =  tutor.id;
+                            const tutorId = tutor.id;
 
                             if (tutor.status !== 'inactive') {
                                 let specializations = tutor.specialization.split(',');
