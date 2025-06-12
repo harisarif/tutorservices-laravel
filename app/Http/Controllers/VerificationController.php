@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Mail\VerificationNotification;
 use App\Models\SchoolClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -113,7 +113,7 @@ class VerificationController extends Controller
                             ";
 
         // Send the email using PHPMailer
-        $this->sendEmails($subject, $body, 'admin', $email, true); // true means it's sending HTML content
+        $this->sendEmails($email, $otp, $subject, $body, true); // true means it's sending HTML content
 
         return redirect()->route('tutor-signup')->with([
             'success' => 'Verification link sent to your email!',
@@ -165,40 +165,51 @@ class VerificationController extends Controller
 
 
 
-    function sendEmails($subject, $body, $to_name, $to_email)
+    function sendEmails($to, $otp, $subject, $body)
     {
-        $mail = new PHPMailer(true);
-        $pass = env('email_pass');
-        $name = env('email_name');
-
-        try {
-            $mail->isSMTP();
-            $mail->Host = 'smtp.hostinger.com';
-            $mail->SMTPAuth = true;
-            $mail->Username =  $name;  // Your email
-            $mail->Password =  $pass;  // Your password
-            $mail->SMTPSecure = 'tls';  // Encryption method
-            $mail->Port = 587;  // SMTP port
-
-            // Email settings
-            $mail->setFrom($name, 'Edexcel');
-            $mail->addAddress($to_email, $to_name);
-            $mail->isHTML(true);
-            $mail->Subject = $subject;
-            $mail->Body    = $body;
-            $mail->AltBody = 'This is the plain text version  of the email body.';
-
-            if ($mail->send()) {
-                Log::info("Email sent to $to_email successfully!");
-                return redirect()->route('newhome')->with('success', 'Email sent successfully!');
-            } else {
-                Log::error("Email sending failed to $to_email.");
-                return redirect()->back()->with('error', 'Email sending failed. Please try again.');
-            }
-        } catch (Exception $e) {
-            Log::error("Email sending failed: " . $e->getMessage());
-            return redirect()->back()->with('error', 'Email sending failed. Please try again.');
+        if (!filter_var($to, FILTER_VALIDATE_EMAIL)) {
+            \Log::error("Invalid email address: {$to}");
+            return;
         }
+        try {
+            Mail::to($to)->send(new VerificationNotification($otp, $subject, $body));
+            echo 'dsasa';
+            \Log::info("Email sent successfully to {$to}");
+        } catch (\Exception $e) {
+            \Log::error("Email sending failed to {$to}: " . $e->getMessage());
+        }
+        // $mail = new PHPMailer(true);
+        // $pass = env('email_pass');
+        // $name = env('email_name');
+
+        // try {
+        //     $mail->isSMTP();
+        //     $mail->Host = 'smtp.hostinger.com';
+        //     $mail->SMTPAuth = true;
+        //     $mail->Username =  $name;  // Your email
+        //     $mail->Password =  $pass;  // Your password
+        //     $mail->SMTPSecure = 'tls';  // Encryption method
+        //     $mail->Port = 587;  // SMTP port
+
+        //     // Email settings
+        //     $mail->setFrom($name, 'Edexcel');
+        //     $mail->addAddress($to_email, $to_name);
+        //     $mail->isHTML(true);
+        //     $mail->Subject = $subject;
+        //     $mail->Body    = $body;
+        //     $mail->AltBody = 'This is the plain text version  of the email body.';
+
+        //     if ($mail->send()) {
+        //         Log::info("Email sent to $to_email successfully!");
+        //         return redirect()->route('newhome')->with('success', 'Email sent successfully!');
+        //     } else {
+        //         Log::error("Email sending failed to $to_email.");
+        //         return redirect()->back()->with('error', 'Email sending failed. Please try again.');
+        //     }
+        // } catch (Exception $e) {
+        //     Log::error("Email sending failed: " . $e->getMessage());
+        //     return redirect()->back()->with('error', 'Email sending failed. Please try again.');
+        // }
     }
 
     public function sendLink(Request $request)
