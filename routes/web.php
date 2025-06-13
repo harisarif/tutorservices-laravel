@@ -188,6 +188,7 @@ Route::view('profile', 'profile')
     Route::middleware('auth:admin')->group(function () {
         Route::get('/teachers-list', [TutorController::class, 'fetchTeachers'])->name('teachers.list');
     });
+    Route::post('/newsletter/create', [EdexcelComplaintController::class, 'createNewsletter'])->name('newsletter-create');
 Auth::routes();
 
 Route::get('/student-dashboard/{id}', [StudentController::class, 'student_dashboard'])

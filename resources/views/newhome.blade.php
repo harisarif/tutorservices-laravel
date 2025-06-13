@@ -78,7 +78,7 @@
                         style="height: 100px; border-radius: 60px;width:100px;margin-top:50px;">
                 </a>
             </li>
-            <nav class="navbar navbar-expand-lg adjust-header-mobile">
+            <nav class="navbar navbar-expand-lg adjust-header-mobile d-none">
                 <div class="container-fluid">
                     <!-- Button to trigger the off-canvas -->
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
@@ -160,45 +160,46 @@
         <div>
             <!-- <h1>{{ __('messages.welcome') }}</h1> -->
 
-           
+
             <ul class="icons d-flex p-2 m-0  align-items-center gap-3 mt-4" style="list-style:none;">
-            <div class="d-flex align-items-center" style="justify-content: center;">
+                <div class="d-flex align-items-center" style="justify-content: center;">
 
-    {{-- Guest: Show Login and Register --}}
-    @guest
-        <div class="col-6">
-            <li class="nav-item m-1 btn-an text-center bg-white rounded w-1 py-1">
-                <a class="nav-link text-decoration-none solid_btn" href="{{ route('login') }}"
-                    style="color:#42b979;">{{ __('messages.login') }}</a>
-            </li>
-        </div>
-        <div class="col-6">
-            <li class="nav-item m-1 btn-an text-center bg-white rounded w-1 py-1">
-                <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}"
-                    style="color:#42b979;">{{ __('messages.register') }}</a>
-            </li>
-        </div>
-    @endguest
+                    {{-- Guest: Show Login and Register --}}
+                    @guest
+                    <div class="col-6">
+                        <li class="nav-item m-1 btn-an text-center bg-white rounded w-1 py-1">
+                            <a class="nav-link text-decoration-none solid_btn" href="{{ route('login') }}"
+                                style="color:#42b979;">{{ __('messages.login') }}</a>
+                        </li>
+                    </div>
+                    <div class="col-6">
+                        <li class="nav-item m-1 btn-an text-center bg-white rounded w-1 py-1">
+                            <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}"
+                                style="color:#42b979;">{{ __('messages.register') }}</a>
+                        </li>
+                    </div>
+                    @endguest
 
-    {{-- Authenticated: Show Logout --}}
-    @auth
-        <div class="col-12 d-flex"> <p class="mt-3 me-3" style="color:white"> {{ Auth::user()->name }}</p>
-            <li class="nav-item m-1 btn-an text-center bg-white rounded w-1 p-0">
-                <a class="nav-link text-decoration-none solid_btn pt-2" href="{{ route('logout') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                    style="color:#42b979;">
-                    {{ __('messages.logout') }}
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
-            </li>
-        </div>
-    @endauth
 
-</div>
+
+                </div>
 
                 <div class="d-flex align-items-center">
+                    <div>
+                        {{-- Authenticated: Show Logout --}}
+                        @auth
+                        <div class="col-12 d-flex">
+                            <!-- <p class="mt-3 me-3" style="color:white"> {{ Auth::user()->name }}</p> -->
+                            <a class="nav-link text-decoration-none solid_btn me-1" href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="fa fa-sign-out text-white"></i>
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                        @endauth
+                    </div>
                     <div class="email-container mt-4">
                         <i class="fa fa-envelope-square" aria-hidden="true" style="color: #fff;"></i>
                         <a class="email text-decoration-none" href="mailto:info@eduexceledu.com"
@@ -206,9 +207,7 @@
                     </div>
 
                     <div class=" p-2 header-phone-number phone-container">
-
                         <i class="fa fa-phone " aria-hidden="true" style="color: #fff;"></i>
-                        <!-- <a class="phone-number-header text-decoration-none " href="#" style="color: #42b979;">+971 56 642 8066</a> -->
                     </div>
                     <div class="custom-select-wrapper">
                         @include('language')
@@ -607,12 +606,12 @@
                                                 </div>
                                             </div>
                                             <div>
-                                               <div class="mt-2" id="btn-container">
-  <button type="button" id="demo" 
-    class="btn1 btn-outline-dark rounded fw-bold text-light">
-    Request a Demo
-  </button>
-</div>
+                                                <div class="mt-2" id="btn-container">
+                                                    <button type="button" id="demo"
+                                                        class="btn1 btn-outline-dark rounded fw-bold text-light">
+                                                        Request a Demo
+                                                    </button>
+                                                </div>
 
                                             </div>
                                         </div>
@@ -960,7 +959,7 @@
         <div class=" Ai col-5 ">
             <form method="POST" action="{{ route('inquiry-create') }}" enctype="multipart/form-data">
                 @csrf
-                <div class=" mt-3 mb-5 ">
+                <div class="mt-0 mb-5">
                     <div class="ai-card px-3 py-4" style="border: 1px solid #ddd; border-radius: 5px;">
                         <div class="card-body">
                             <h6 class="card-title mb-3 text-center fw-bold fs-6 ">
@@ -1396,66 +1395,67 @@
 </div>
 <!-- Sign Up Modal -->
 <div class="modal fade" id="signupPromptModal" tabindex="-1" aria-labelledby="signupPromptLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content" style="border-radius: 16px; overflow: hidden; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" style="border-radius: 16px; overflow: hidden; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
 
-      <div class="modal-body p-0 d-flex flex-wrap">
+            <div class="modal-body p-0 d-flex flex-wrap">
 
-        <!-- Left Side Image -->
-        <div class="col-md-6 d-none d-md-block">
-          <img src="{{ asset('images/new-logo.jpeg') }}" alt="" style="width:400px">
+                <!-- Left Side Image -->
+                <div class="col-md-6 d-none d-md-block">
+                    <img src="{{ asset('images/tutor-new.jpeg') }}" alt="student-signup" class="h-100 w-100">
+                </div>
+
+                <!-- Right Side Form -->
+                <div class="col-md-6 p-4 bg-white">
+                <span class="fs-2 pointer foucs mb-1 position-absolute top-0" style="right:0px" onclick="document.getElementById('signupPromptModal').style.display = 'none'"> &times;</span>
+                    <h4 class="text-center mb-3" style="color: #42b979;">Create Your Account</h4>
+
+                    <!-- Social Buttons -->
+                    <div class="mb-3 d-grid gap-2">
+                        <a href="{{ route('social.redirect', 'google') }}" class="btn btn-outline-success d-flex align-items-center justify-content-center"
+                            style="border-color: #42b979; color: #42b979; font-size: 14px;">
+                            <i class="fab fa-google me-2"></i> Sign up with Google
+                        </a>
+                        <a href="{{ route('social.redirect', 'facebook') }}" class="btn btn-outline-success d-flex align-items-center justify-content-center"
+                            style="border-color: #42b979; color: #42b979; font-size: 14px;">
+                            <i class="fab fa-facebook me-2"></i> Sign up with Facebook
+                        </a>
+                    </div>
+
+                    <div class="text-center my-2 text-muted" style="font-size: 13px;">OR</div>
+
+                    <!-- Form -->
+                    <form action="{{ route('student-create') }}" method="POST" class="pages" enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="mb-2">
+                            <label class="form-label mb-1">Full Name</label>
+                            <input type="text" name="name" class="form-control form-control-sm" required>
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label mb-1">Email Address</label>
+                            <input type="email" name="email" class="form-control form-control-sm" required>
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label mb-1">Password</label>
+                            <input type="password" name="password" class="form-control form-control-sm" required>
+                        </div>
+
+                        <button type="submit" class="btn text-white w-100 fw-semibold"
+                            style="background-color: #42b979; font-size: 14px;">
+                            Sign Up
+                        </button>
+                    </form>
+
+                    <p class="mt-3 text-center" style="font-size: 12px; color: #999;">
+                        Already have an account? <a href="{{ route('login') }}" style="color: #42b979;">Login here</a>
+                    </p>
+                </div>
+            </div>
         </div>
-
-        <!-- Right Side Form -->
-        <div class="col-md-6 p-4 bg-white">
-          <h4 class="text-center mb-3" style="color: #42b979;">Create Your Account</h4>
-
-          <!-- Social Buttons -->
-          <div class="mb-3 d-grid gap-2">
-            <a href="{{ route('social.redirect', 'google') }}" class="btn btn-outline-success d-flex align-items-center justify-content-center"
-               style="border-color: #42b979; color: #42b979; font-size: 14px;">
-              <i class="fab fa-google me-2"></i> Sign up with Google
-            </a>
-            <a href="{{ route('social.redirect', 'facebook') }}" class="btn btn-outline-success d-flex align-items-center justify-content-center"
-               style="border-color: #42b979; color: #42b979; font-size: 14px;">
-              <i class="fab fa-facebook me-2"></i> Sign up with Facebook
-            </a>
-          </div>
-
-          <div class="text-center my-2 text-muted" style="font-size: 13px;">OR</div>
-
-          <!-- Form -->
-          <form action="{{ route('student-create') }}" method="POST" class="pages" enctype="multipart/form-data">
-                    @csrf
-
-            <div class="mb-2">
-              <label class="form-label mb-1">Full Name</label>
-              <input type="text" name="name" class="form-control form-control-sm" required>
-            </div>
-
-            <div class="mb-2">
-              <label class="form-label mb-1">Email Address</label>
-              <input type="email" name="email" class="form-control form-control-sm" required>
-            </div>
-
-            <div class="mb-2">
-              <label class="form-label mb-1">Password</label>
-              <input type="password" name="password" class="form-control form-control-sm" required>
-            </div>
-
-            <button type="submit" class="btn text-white w-100 fw-semibold"
-                    style="background-color: #42b979; font-size: 14px;">
-              Sign Up
-            </button>
-          </form>
-
-          <p class="mt-3 text-center" style="font-size: 12px; color: #999;">
-            Already have an account? <a href="{{ route('login') }}" style="color: #42b979;">Login here</a>
-          </p>
-        </div>
-      </div>
     </div>
-  </div>
 </div>
 
 
@@ -1473,29 +1473,23 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const demoBtn = document.getElementById('demo');
+    document.addEventListener('DOMContentLoaded', function() {
+        const demoBtn = document.getElementById('demo');
 
-    demoBtn.addEventListener('click', function () {
-      @guest
-        const modal = new bootstrap.Modal(document.getElementById('signupPromptModal'));
-        modal.show();
-      @else
-        window.location.href = "{{ route('newhome') }}";
-      @endguest
+        demoBtn.addEventListener('click', function() {
+            @guest
+            const modal = new bootstrap.Modal(document.getElementById('signupPromptModal'));
+            modal.show();
+            @else
+            window.location.href = "{{ route('newhome') }}";
+            @endguest
+        });
     });
-  });
 </script>
 
 
 <script>
-    $('#newsletterForm').on('submit', function(e) {
-        e.preventDefault();
-        const email = $(this).find('input').val();
-        alert("Subscribed with email: " + email);
-        $('#newsletterModal').modal('hide');
-        // You can also add your AJAX request here to send the email to server
-    });
+    
     document.addEventListener("DOMContentLoaded", function() {
         const submitBtn = document.getElementById("submitBtn");
         const form = document.querySelector("form");
@@ -3153,6 +3147,15 @@
         document.querySelectorAll(".custom-alert .close-btn").forEach((btn) => {
             btn.addEventListener("click", function() {
                 let alertBox = this.closest(".custom-alert");
+                if (alertBox) {
+                    alertBox.classList.add("fade-out");
+                    setTimeout(() => alertBox.remove(), 500);
+                }
+            });
+        });
+        document.querySelectorAll(".custom-alert-danger .close-btn").forEach((btn) => {
+            btn.addEventListener("click", function() {
+                let alertBox = this.closest(".custom-alert-danger");
                 if (alertBox) {
                     alertBox.classList.add("fade-out");
                     setTimeout(() => alertBox.remove(), 500);
