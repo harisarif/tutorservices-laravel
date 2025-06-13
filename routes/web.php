@@ -194,7 +194,9 @@ Auth::routes();
 Route::get('/student-dashboard/{id}', [StudentController::class, 'student_dashboard'])
     ->name('student_dashboard')
     ->middleware('auth', 'auto-logout');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+    ->name('home')
+    ->middleware(['auth', 'admin.only']);
 Route::get('/inquiry-list', [App\Http\Controllers\HomeController::class, 'inquiry'])->name('admin.inquiry');
 Route::get('/hiring', [App\Http\Controllers\HomeController::class, 'hiring'])->name('hiring-tutor');
 Route::get('/student-hiring', [App\Http\Controllers\HomeController::class, 'studenthiring'])->name('students-listing');

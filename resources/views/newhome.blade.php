@@ -188,6 +188,7 @@
                     <div>
                         {{-- Authenticated: Show Logout --}}
                         @auth
+                        @if (Auth::user()->role === 'user')
                         <div class="col-12 d-flex">
                             <!-- <p class="mt-3 me-3" style="color:white"> {{ Auth::user()->name }}</p> -->
                             <a class="nav-link text-decoration-none solid_btn me-1" href="{{ route('logout') }}"
@@ -198,6 +199,7 @@
                                 @csrf
                             </form>
                         </div>
+                        @endif
                         @endauth
                     </div>
                     <div class="email-container mt-4">

@@ -194,7 +194,6 @@ class EdexcelComplaintController extends Controller
                                                 </p>
                                                 <ul style='font-size: 16px; margin: 10px 0; padding-left: 20px;'>
                                                     <p><strong>Email:</strong> {$validated['email']}</p>
-                                                    <p>This user has just subscribed to the newsletter.</p>
                                                     <hr style='border: none; border-top: 1px solid #ccc; margin: 20px 0;'>
                                                 </ul>
                                                 <p style='font-size: 16px; margin: 10px 0;'>Best regards,</p>
