@@ -88,7 +88,7 @@ $('#newsletterForm').on('submit', function (e) {
         },
         error: function (xhr) {
             let message = xhr.responseJSON?.message || 'Something went wrong!';
-
+            const modal = document.getElementById('newsletterModal');
             $('#success').removeClass('d-none');
             $('#success').removeClass('custom-alert');
             $('#success').addClass('custom-alert-danger');
