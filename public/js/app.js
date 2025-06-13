@@ -34,9 +34,16 @@ const toggle = (para, arr) => {
     }
 }
 
+// window.addEventListener('load', () => {
+//     setTimeout(() => {
+//         const MODAL_BOX = document.getElementById('allModal');
+//         MODAL_BOX.style.display = 'flex';
+//         MODAL_BOX.children[0].classList.add('dropModal')
+//     }, 1000)
+// })
 window.addEventListener('load', () => {
     setTimeout(() => {
-        const MODAL_BOX = document.getElementById('allModal');
+        const MODAL_BOX = document.getElementById('newsletterModal');
         MODAL_BOX.style.display = 'flex';
         MODAL_BOX.children[0].classList.add('dropModal')
     }, 1000)
