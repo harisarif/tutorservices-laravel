@@ -110,7 +110,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="newsletterModal" tabindex="-1" aria-hidden="true">
+{{-- <div class="modal fade" id="newsletterModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
 
         <div class="modal-content newsletter-modal">
@@ -131,7 +131,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 <body class="font-sans antialiased">
     {{-- <livewire:layout.navigation /> --}}

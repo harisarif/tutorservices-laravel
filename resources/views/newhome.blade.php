@@ -160,22 +160,44 @@
         <div>
             <!-- <h1>{{ __('messages.welcome') }}</h1> -->
 
-
+           
             <ul class="icons d-flex p-2 m-0  align-items-center gap-3 mt-4" style="list-style:none;">
-                <div class="d-flex  align-items: center;" style="justify-content: center;">
-                    <div class="col-6 ">
-                        <li class="nav-item m-1 btn-an text-center bg-white rounded w-1 py-1">
-                            <a class="nav-link text-decoration-none solid_btn" href="{{ route('login') }}"
-                                style="color:#42b979;">{{__('messages.login')}}</a>
-                        </li>
-                    </div>
-                    <div class="col-6 ">
-                        <li class="nav-item m-1 btn-an text-center  bg-white rounded w-1 py-1">
-                            <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}"
-                                style="color:#42b979;">{{__('messages.register')}}</a>
-                        </li>
-                    </div>
-                </div>
+            <div class="d-flex align-items-center" style="justify-content: center;">
+
+    {{-- Guest: Show Login and Register --}}
+    @guest
+        <div class="col-6">
+            <li class="nav-item m-1 btn-an text-center bg-white rounded w-1 py-1">
+                <a class="nav-link text-decoration-none solid_btn" href="{{ route('login') }}"
+                    style="color:#42b979;">{{ __('messages.login') }}</a>
+            </li>
+        </div>
+        <div class="col-6">
+            <li class="nav-item m-1 btn-an text-center bg-white rounded w-1 py-1">
+                <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}"
+                    style="color:#42b979;">{{ __('messages.register') }}</a>
+            </li>
+        </div>
+    @endguest
+
+    {{-- Authenticated: Show Logout --}}
+    @auth
+        <div class="col-12 d-flex"> <p class="mt-3 me-3" style="color:white"> {{ Auth::user()->name }}</p>
+            <li class="nav-item m-1 btn-an text-center bg-white rounded w-1 p-0">
+                <a class="nav-link text-decoration-none solid_btn pt-2" href="{{ route('logout') }}"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                    style="color:#42b979;">
+                    {{ __('messages.logout') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </li>
+        </div>
+    @endauth
+
+</div>
+
                 <div class="d-flex align-items-center">
                     <div class="email-container mt-4">
                         <i class="fa fa-envelope-square" aria-hidden="true" style="color: #fff;"></i>
@@ -1403,8 +1425,8 @@
           <div class="text-center my-2 text-muted" style="font-size: 13px;">OR</div>
 
           <!-- Form -->
-          <form action="{{ route('register') }}" method="POST" style="font-size: 14px;">
-            @csrf
+          <form action="{{ route('student-create') }}" method="POST" class="pages" enctype="multipart/form-data">
+                    @csrf
 
             <div class="mb-2">
               <label class="form-label mb-1">Full Name</label>
@@ -1419,11 +1441,6 @@
             <div class="mb-2">
               <label class="form-label mb-1">Password</label>
               <input type="password" name="password" class="form-control form-control-sm" required>
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label mb-1">Confirm Password</label>
-              <input type="password" name="password_confirmation" class="form-control form-control-sm" required>
             </div>
 
             <button type="submit" class="btn text-white w-100 fw-semibold"
@@ -1464,7 +1481,7 @@
         const modal = new bootstrap.Modal(document.getElementById('signupPromptModal'));
         modal.show();
       @else
-        window.location.href = "{{ route('demo.request') }}";
+        window.location.href = "{{ route('newhome') }}";
       @endguest
     });
   });

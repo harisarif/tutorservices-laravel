@@ -168,7 +168,7 @@ Route::get('/notifications/mark-all-read', function () {
 
 Route::get('/auth/redirect/{provider}', [SocialAuthController::class, 'redirect'])->name('social.redirect');
 Route::get('/auth/callback/{provider}', [SocialAuthController::class, 'callback']);
-
+Route::post('/logout', [StudentController::class, 'logout'])->name('logout');
 
 
 Route::view('dashboard', 'dashboard')

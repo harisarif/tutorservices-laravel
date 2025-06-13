@@ -129,7 +129,7 @@ public function destroyinquiryBulk(Request $request)
     $countries = config('countries_assoc.countries');
     return view('student-list', compact('students', 'countries'));
 }
-
+ 
     public function inquiriesList()
     {
 
@@ -166,10 +166,8 @@ public function destroyinquiryBulk(Request $request)
         // return $dompdf->stream('students.pdf'); // Change the filename if needed
         return view('student-list', compact('data'));
     }
-
-
-    public function create(Request $request)
-    {
+     public function create(Request $request)
+    { 
 
         $rules = [
             'email' => 'required|string|email|max:255|unique:student,email',
@@ -178,9 +176,9 @@ public function destroyinquiryBulk(Request $request)
             'availability_status' => 'nullable|string|max:255',
             'country' => 'nullable|string|max:100',
             'city' => 'nullable|string|max:100',
-            'subject' => 'required|array',
-            'subject.*' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'subject' => 'nullable|array',
+            'subject.*' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ];
 
 
@@ -193,30 +191,20 @@ public function destroyinquiryBulk(Request $request)
                 ->withInput();
         }
         $student = new Student();
-        $student->availability_status = $request->input('subjects');
         $student->name = $request->input('name');
         $student->email = $request->input('email');
-        $student->phone = $request->input('phone');
         $user = new User();
         $user->name = $student->name;
         $user->email = $student->email;
         $user->password = Hash::make($request->input('password'));
         $user->role = 'user';
         $user->save();
-        $student->gender = $request->input('gender');
-        $student->country = $request->input('country');
-        $student->city = $request->input('city');
-        $student->subject = implode(',', $request->input('subject'));
-        $student->grade = $request->input('grade');
         $student->password = Hash::make($request->input('password'));
-        $student->description = $request->input('description');
         $student->user_id = $user->id;
-        $imagePath = $request->file('image')->store('students/images', 'public');
-        $student->profileImage = $imagePath;
         $student->session_id = session()->getId();
         $student->save();
 
-
+        
 
         $toStudent = $student->email;
         $subjectStudent = "Welcome to Edexcel Your Learning Journey Starts Now!";
@@ -258,7 +246,7 @@ public function destroyinquiryBulk(Request $request)
 
         if ($user->role === 'user') {
             Auth::login($user);
-            return redirect()->route('student_dashboard', ['id' => $student->id])
+            return redirect()->route('newhome')
                 ->with('success', 'Tutor created successfully and logged in.');
         }
 
@@ -268,6 +256,107 @@ public function destroyinquiryBulk(Request $request)
         // Optionally, you can redirect the user or return a response
         // return redirect()->route('newhome')->with('success', 'Student created successfully.');
     }
+
+    // public function create(Request $request)
+    // {
+
+    //     $rules = [
+    //         'email' => 'required|string|email|max:255|unique:student,email',
+    //         'password' => 'required|min:8',
+    //         'phone' => 'nullable|string|max:20', // checks c_password too
+    //         'availability_status' => 'nullable|string|max:255',
+    //         'country' => 'nullable|string|max:100',
+    //         'city' => 'nullable|string|max:100',
+    //         'subject' => 'required|array',
+    //         'subject.*' => 'required|string|max:255',
+    //         'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+    //     ];
+
+
+    //     $validator = Validator::make($request->all(), $rules);
+
+    //     // Check if validation fails
+    //     if ($validator->fails()) {
+    //         return redirect()->back()
+    //             ->withErrors($validator)
+    //             ->withInput();
+    //     }
+    //     $student = new Student();
+    //     $student->availability_status = $request->input('subjects');
+    //     $student->name = $request->input('name');
+    //     $student->email = $request->input('email');
+    //     $student->phone = $request->input('phone');
+    //     $user = new User();
+    //     $user->name = $student->name;
+    //     $user->email = $student->email;
+    //     $user->password = Hash::make($request->input('password'));
+    //     $user->role = 'user';
+    //     $user->save();
+    //     $student->gender = $request->input('gender');
+    //     $student->country = $request->input('country');
+    //     $student->city = $request->input('city');
+    //     $student->subject = implode(',', $request->input('subject'));
+    //     $student->grade = $request->input('grade');
+    //     $student->password = Hash::make($request->input('password'));
+    //     $student->description = $request->input('description');
+    //     $student->user_id = $user->id;
+    //     $imagePath = $request->file('image')->store('students/images', 'public');
+    //     $student->profileImage = $imagePath;
+    //     $student->session_id = session()->getId();
+    //     $student->save();
+
+
+
+    //     $toStudent = $student->email;
+    //     $subjectStudent = "Welcome to Edexcel Your Learning Journey Starts Now!";
+    //     $messageStudent = "Dear " . $student->name . "\r\n" .
+    //         "Welcome to Edexcel! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.\r\n" .
+    //         "Explore our courses, connect with expert educators, and engage with fellow learners. If you need any assistance, contact us at info@edexceledu.com.\r\n" .
+    //         "We’re here to help you succeed!\r\n\r\n" .
+    //         "Best regards,\r\n" .
+    //         "The Edexcel Team";
+
+    //     $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
+
+    //     $toAdmin = 'info@edexceledu.com';
+    //     $subjectAdmin = "Edexcel Notification";
+    //     $messageAdmin = "Subject: New Student Enrollment Notification
+
+    //     Dear Babar,
+
+    //     I hope this email finds you well.
+
+    //     I am pleased to inform you that a new student, {$student->name}, has successfully enrolled through our website. Below are the details of the new enrollment:
+
+    //     - *Full Name:* {$student->name}
+    //     - *Email Address:* {$student->email}
+    //     - *Contact Number:* {$student->phone}
+    //     - *Program/Course Enrolled:* {$student->subjects}
+
+    //     Please ensure that {$student->name} is added to our records and receives all necessary welcome materials and instructions. If any further information is needed, feel free to contact me.
+
+    //     Thank you for your prompt attention to this new enrollment.
+
+    //     Best regards,
+    //     The Edexcel Team";
+
+
+
+    //     $this->sendEmail($student->email, $subjectAdmin, $messageAdmin);
+
+
+    //     if ($user->role === 'user') {
+    //         Auth::login($user);
+    //         return redirect()->route('student_dashboard', ['id' => $student->id])
+    //             ->with('success', 'Tutor created successfully and logged in.');
+    //     }
+
+    //     // Redirect to the "hire us" page
+    //     return redirect()->route('newhome')->with(compact('user'));
+
+    //     // Optionally, you can redirect the user or return a response
+    //     // return redirect()->route('newhome')->with('success', 'Student created successfully.');
+    // }  
     public function edit($id){  
         $schoolClasses = SchoolClass::all();
         $student = Student::findOrFail($id); 
@@ -296,7 +385,15 @@ public function destroyinquiryBulk(Request $request)
         $countries = collect(config('countries_assoc.countries'));
         return view('edit-student', compact(['student', 'country', 'countriesPhone', 'countries', 'countries_number_length', 'countries_prefix', 'languageNames', 'schoolClasses', 'qualification']));
    
-    }  
+    }   public function logout(Request $request)
+    {
+        Auth::logout(); // Log the user out
+
+        $request->session()->invalidate(); // Invalidate session
+        $request->session()->regenerateToken(); // Regenerate CSRF token
+
+        return redirect('newhome'); // Redirect to home or login page
+    }
 
 public function sendTutorRequest(Request $request,$id)
 {    
@@ -377,126 +474,131 @@ public function sendTutorRequest(Request $request,$id)
     return back()->with('success', 'Tutoring request sent to tutor successfully!');
 }
 
-public function signup(){ $user = Auth::user(); }
-    public function student_dashboard(Request $request, $id)
+       public function student_dashboard(Request $request, $id)
     {
         $user = Auth::user();
 
-        if ($user && $user->role === 'user') {
-            $student = Student::find($id);
-
-            if (!$student) {
-                return redirect()->route('basicsignup')->with('error', 'Student not found.');
-            }
-            $query = Tutor::where('status', 'active');
-            $sliderTutors = Tutor::where('status', 'active')->take(6)->get();
-            $perPage = 5; // Define the number of tutors per page
-            $blogs = Blog::orderBy('created_at', 'desc')->take(3)->get();
-
-            // Paginate the results
-            $tutors = $query->paginate($perPage);
-
-            $totalTutorsCount = Tutor::count();
-            $storedCountry = trim($student->country);
-            $student->country = config("countries_assoc.countries.$storedCountry", 'Unknown');
-            $teacher = Tutor::all();
-
-            $tutorSubjects = [];
-
-            foreach ($teacher as $tutor) {
-                $json = $tutor->edu_teaching; // stored as JSON array
-
-                if ($json) {
-                    $subjects = json_decode($json, true); // now array like ['Accounting', 'Aerospace Engineering']
-
-                    if (is_array($subjects)) {
-                        // Clean each subject: trim + lowercase
-                        $cleaned = array_map(fn($s) => strtolower(trim($s)), $subjects);
-                        $tutorSubjects[$tutor->id] = $cleaned;
-                    } else {
-                        $tutorSubjects[$tutor->id] = [];
-                    }
-                } else {
-                    $tutorSubjects[$tutor->id] = [];
-                }
-            }
-
-
-            $matchedTutors = $teacher->filter(function ($tutor) use ($student, $tutorSubjects) {
-                $studentSubjects = array_map(
-                    fn($s) => strtolower(trim($s)),
-                    explode(',', $student->subject)
-                );
-
-                // Use already processed and cleaned subjects from earlier
-                $tutorSubjectsList = $tutorSubjects[$tutor->id] ?? [];
-
-                $tutorAvailability = strtolower(trim($tutor->availability_status));
-                $studentAvailability = strtolower(trim($student->availability_status));
-
-                $hasCommonSubjects = !empty(array_intersect($studentSubjects, $tutorSubjectsList));
-
-                return $hasCommonSubjects && $tutorAvailability === $studentAvailability;
-            });
-
-
-
-            $matchedTutors->each(function ($tutor) {
-                $storedCountryCode = trim($tutor->country);
-                $tutor->country_name = config("countries_assoc.countries.$storedCountryCode", 'Unknown');
-
-                $language = json_decode($tutor->language, true);
-                $tutor->language = is_array($language) ? $language : [];
-
-                // This will dump the teaching property for each tutor
-
-                $specialization = json_decode($tutor->specialization, true);
-                $tutor->specialization = is_array($specialization) && !empty($specialization)
-                    ? $specialization : ['Not Specified'];
-
-                if ($tutor->dob) {
-                    $dob = Carbon::parse($tutor->dob);
-                    $tutor->dob = $dob->format('d-m-Y');
-                    $tutor->age = $dob->age;
-                } else {
-                    $tutor->age = null;
-                }
-            });
-            $currentPage = LengthAwarePaginator::resolveCurrentPage();
-            $matchedTutorsPerPage = 5;
-
-            $paginatedMatchedTutors = new LengthAwarePaginator(
-                $matchedTutors->slice(($currentPage - 1) * $matchedTutorsPerPage, $matchedTutorsPerPage)->values(),
-                $matchedTutors->count(),
-                $matchedTutorsPerPage,
-                $currentPage,
-                ['path' => request()->url(), 'query' => request()->query()]
-            );
-
-            $subjectsTeach = collect(config('subjects.subjects'));
-            $countries = collect(config('countries_assoc.countries'));
-            $countriesPhone = collect(config('phonecountries.countries'));
-            $countries_number_length = collect(config('countries_number_length.countries'));
-            $countries_prefix = collect(config('countries_prefix.countries'));
-            return view('hired-tutor', [
-                'student' => $student,
-                'matchedTutors' => $matchedTutors,
-                'paginatedMatchedTutors' => $paginatedMatchedTutors,
-                'blogs' => $blogs,
-                'sliderTutors' => $sliderTutors,
-                'tutors' => $tutors,
-                'subjectsTeach' => $subjectsTeach,
-                'totalTutorsCount' => $totalTutorsCount,
-                'perPage' => $perPage,
-                'countries' => $countries,
-                'countriesPhone' => $countriesPhone,
-                'countries_number_length' => $countries_number_length,
-                'countries_prefix' => $countries_prefix
-            ])->with('success', 'Welcome to your dashboard.');
-        }
-
-        return redirect()->route('newhome')->with('error', 'Unauthorized access.');
+        return redirect()->route('newhome')->with('success', 'authorized successfully.');
     }
+    // public function student_dashboard(Request $request, $id)
+    // {
+    //     $user = Auth::user();
+
+    //     if ($user && $user->role === 'user') {
+    //         $student = Student::find($id);
+
+    //         if (!$student) {
+    //             return redirect()->route('basicsignup')->with('error', 'Student not found.');
+    //         }
+    //         $query = Tutor::where('status', 'active');
+    //         $sliderTutors = Tutor::where('status', 'active')->take(6)->get();
+    //         $perPage = 5; // Define the number of tutors per page
+    //         $blogs = Blog::orderBy('created_at', 'desc')->take(3)->get();
+
+    //         // Paginate the results
+    //         $tutors = $query->paginate($perPage);
+
+    //         $totalTutorsCount = Tutor::count();
+    //         $storedCountry = trim($student->country);
+    //         $student->country = config("countries_assoc.countries.$storedCountry", 'Unknown');
+    //         $teacher = Tutor::all();
+
+    //         $tutorSubjects = [];
+
+    //         foreach ($teacher as $tutor) {
+    //             $json = $tutor->edu_teaching; // stored as JSON array
+
+    //             if ($json) {
+    //                 $subjects = json_decode($json, true); // now array like ['Accounting', 'Aerospace Engineering']
+
+    //                 if (is_array($subjects)) {
+    //                     // Clean each subject: trim + lowercase
+    //                     $cleaned = array_map(fn($s) => strtolower(trim($s)), $subjects);
+    //                     $tutorSubjects[$tutor->id] = $cleaned;
+    //                 } else {
+    //                     $tutorSubjects[$tutor->id] = [];
+    //                 }
+    //             } else {
+    //                 $tutorSubjects[$tutor->id] = [];
+    //             }
+    //         }
+
+
+    //         $matchedTutors = $teacher->filter(function ($tutor) use ($student, $tutorSubjects) {
+    //             $studentSubjects = array_map(
+    //                 fn($s) => strtolower(trim($s)),
+    //                 explode(',', $student->subject)
+    //             );
+
+    //             // Use already processed and cleaned subjects from earlier
+    //             $tutorSubjectsList = $tutorSubjects[$tutor->id] ?? [];
+
+    //             $tutorAvailability = strtolower(trim($tutor->availability_status));
+    //             $studentAvailability = strtolower(trim($student->availability_status));
+
+    //             $hasCommonSubjects = !empty(array_intersect($studentSubjects, $tutorSubjectsList));
+
+    //             return $hasCommonSubjects && $tutorAvailability === $studentAvailability;
+    //         });
+
+
+
+    //         $matchedTutors->each(function ($tutor) {
+    //             $storedCountryCode = trim($tutor->country);
+    //             $tutor->country_name = config("countries_assoc.countries.$storedCountryCode", 'Unknown');
+
+    //             $language = json_decode($tutor->language, true);
+    //             $tutor->language = is_array($language) ? $language : [];
+
+    //             // This will dump the teaching property for each tutor
+
+    //             $specialization = json_decode($tutor->specialization, true);
+    //             $tutor->specialization = is_array($specialization) && !empty($specialization)
+    //                 ? $specialization : ['Not Specified'];
+
+    //             if ($tutor->dob) {
+    //                 $dob = Carbon::parse($tutor->dob);
+    //                 $tutor->dob = $dob->format('d-m-Y');
+    //                 $tutor->age = $dob->age;
+    //             } else {
+    //                 $tutor->age = null;
+    //             }
+    //         });
+    //         $currentPage = LengthAwarePaginator::resolveCurrentPage();
+    //         $matchedTutorsPerPage = 5;
+
+    //         $paginatedMatchedTutors = new LengthAwarePaginator(
+    //             $matchedTutors->slice(($currentPage - 1) * $matchedTutorsPerPage, $matchedTutorsPerPage)->values(),
+    //             $matchedTutors->count(),
+    //             $matchedTutorsPerPage,
+    //             $currentPage,
+    //             ['path' => request()->url(), 'query' => request()->query()]
+    //         );
+
+    //         $subjectsTeach = collect(config('subjects.subjects'));
+    //         $countries = collect(config('countries_assoc.countries'));
+    //         $countriesPhone = collect(config('phonecountries.countries'));
+    //         $countries_number_length = collect(config('countries_number_length.countries'));
+    //         $countries_prefix = collect(config('countries_prefix.countries'));
+    //         return view('hired-tutor', [
+    //             'student' => $student,
+    //             'matchedTutors' => $matchedTutors,
+    //             'paginatedMatchedTutors' => $paginatedMatchedTutors,
+    //             'blogs' => $blogs,
+    //             'sliderTutors' => $sliderTutors,
+    //             'tutors' => $tutors,
+    //             'subjectsTeach' => $subjectsTeach,
+    //             'totalTutorsCount' => $totalTutorsCount,
+    //             'perPage' => $perPage,
+    //             'countries' => $countries,
+    //             'countriesPhone' => $countriesPhone,
+    //             'countries_number_length' => $countries_number_length,
+    //             'countries_prefix' => $countries_prefix
+    //         ])->with('success', 'Welcome to your dashboard.');
+    //     }
+
+    //     return redirect()->route('newhome')->with('error', 'Unauthorized access.');
+    // }
 
     public function fetchData(Request $request)
     {     // Debugging block: Check numeric extraction from price
