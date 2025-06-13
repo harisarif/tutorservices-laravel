@@ -377,7 +377,7 @@ public function sendTutorRequest(Request $request,$id)
     return back()->with('success', 'Tutoring request sent to tutor successfully!');
 }
 
-
+public function signup(){ $user = Auth::user(); }
     public function student_dashboard(Request $request, $id)
     {
         $user = Auth::user();

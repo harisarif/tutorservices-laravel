@@ -8,6 +8,7 @@
     content="Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
 <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}" referrerpolicy="no-referrer" />
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
 <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet" crossorigin="anonymous">
 <link rel="stylesheet" href="{{ asset('css/tutor-style.css')}}">
@@ -579,16 +580,18 @@
                                             <div>
                                                 <div id="btn-container">
                                                     <button type="button"
-                                                        class="btn1 btn-outline-dark rounded fw-bold text-light">Book
-                                                        trail lesson</button>
+                                                        class="btn1 btn-outline-dark rounded fw-bold text-light">
+                                                        Zoom Meeting</button>
                                                 </div>
                                             </div>
                                             <div>
-                                                <div class="mt-2" id="btn-container">
-                                                    <button type="button"
-                                                        class="btn1 btn-outline-dark rounded fw-bold text-light">Send
-                                                        Massage</button>
-                                                </div>
+                                               <div class="mt-2" id="btn-container">
+  <button type="button" id="demo" 
+    class="btn1 btn-outline-dark rounded fw-bold text-light">
+    Request a Demo
+  </button>
+</div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -1369,6 +1372,75 @@
         </div>
     </div>
 </div>
+<!-- Sign Up Modal -->
+<div class="modal fade" id="signupPromptModal" tabindex="-1" aria-labelledby="signupPromptLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content" style="border-radius: 16px; overflow: hidden; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
+
+      <div class="modal-body p-0 d-flex flex-wrap">
+
+        <!-- Left Side Image -->
+        <div class="col-md-6 d-none d-md-block">
+          <img src="{{ asset('images/new-logo.jpeg') }}" alt="" style="width:400px">
+        </div>
+
+        <!-- Right Side Form -->
+        <div class="col-md-6 p-4 bg-white">
+          <h4 class="text-center mb-3" style="color: #42b979;">Create Your Account</h4>
+
+          <!-- Social Buttons -->
+          <div class="mb-3 d-grid gap-2">
+            <a href="{{ route('social.redirect', 'google') }}" class="btn btn-outline-success d-flex align-items-center justify-content-center"
+               style="border-color: #42b979; color: #42b979; font-size: 14px;">
+              <i class="fab fa-google me-2"></i> Sign up with Google
+            </a>
+            <a href="{{ route('social.redirect', 'facebook') }}" class="btn btn-outline-success d-flex align-items-center justify-content-center"
+               style="border-color: #42b979; color: #42b979; font-size: 14px;">
+              <i class="fab fa-facebook me-2"></i> Sign up with Facebook
+            </a>
+          </div>
+
+          <div class="text-center my-2 text-muted" style="font-size: 13px;">OR</div>
+
+          <!-- Form -->
+          <form action="{{ route('register') }}" method="POST" style="font-size: 14px;">
+            @csrf
+
+            <div class="mb-2">
+              <label class="form-label mb-1">Full Name</label>
+              <input type="text" name="name" class="form-control form-control-sm" required>
+            </div>
+
+            <div class="mb-2">
+              <label class="form-label mb-1">Email Address</label>
+              <input type="email" name="email" class="form-control form-control-sm" required>
+            </div>
+
+            <div class="mb-2">
+              <label class="form-label mb-1">Password</label>
+              <input type="password" name="password" class="form-control form-control-sm" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label mb-1">Confirm Password</label>
+              <input type="password" name="password_confirmation" class="form-control form-control-sm" required>
+            </div>
+
+            <button type="submit" class="btn text-white w-100 fw-semibold"
+                    style="background-color: #42b979; font-size: 14px;">
+              Sign Up
+            </button>
+          </form>
+
+          <p class="mt-3 text-center" style="font-size: 12px; color: #999;">
+            Already have an account? <a href="{{ route('login') }}" style="color: #42b979;">Login here</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 
@@ -1379,8 +1451,26 @@
 <script src="{{ asset('js/bootstrap.min.js')}}"></script>
 <!-- testiomial -->
 <script src="{{ asset('js/owl.carousel.min.js')}}"></script>
+<!-- Bootstrap & FontAwesome (add these in your layout if not already included) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const demoBtn = document.getElementById('demo');
 
-<!-- Your custom script -->
+    demoBtn.addEventListener('click', function () {
+      @guest
+        const modal = new bootstrap.Modal(document.getElementById('signupPromptModal'));
+        modal.show();
+      @else
+        window.location.href = "{{ route('demo.request') }}";
+      @endguest
+    });
+  });
+</script>
+
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const submitBtn = document.getElementById("submitBtn");

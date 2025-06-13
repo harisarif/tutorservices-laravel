@@ -17,6 +17,7 @@
 
 
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\SocialAuthController;
 use App\Http\Controllers\ZoomController;
 
 use Illuminate\Support\Facades\Auth;
@@ -165,7 +166,8 @@ Route::get('/notifications/mark-all-read', function () {
     return back();
 })->name('notifications.markAllRead');
 
-
+Route::get('/auth/redirect/{provider}', [SocialAuthController::class, 'redirect'])->name('social.redirect');
+Route::get('/auth/callback/{provider}', [SocialAuthController::class, 'callback']);
 
 
 
