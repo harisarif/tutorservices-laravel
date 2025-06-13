@@ -24,7 +24,7 @@ class VerificationNotification extends Mailable
 
     public function build()
     {
-        return $this->from('noreply@edexceledu.com', 'Edexcel Academy')
+        return $this->from('haris@techtrack.online', 'Edexcel Academy')
                     ->subject($this->subject)
                     ->markdown('emails.verification')
                     ->with([
