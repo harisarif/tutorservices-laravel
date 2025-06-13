@@ -1472,6 +1472,13 @@
 
 
 <script>
+    $('#newsletterForm').on('submit', function(e) {
+        e.preventDefault();
+        const email = $(this).find('input').val();
+        alert("Subscribed with email: " + email);
+        $('#newsletterModal').modal('hide');
+        // You can also add your AJAX request here to send the email to server
+    });
     document.addEventListener("DOMContentLoaded", function() {
         const submitBtn = document.getElementById("submitBtn");
         const form = document.querySelector("form");

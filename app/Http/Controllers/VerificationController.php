@@ -167,16 +167,32 @@ class VerificationController extends Controller
 
     function sendEmails($to, $otp, $subject, $body)
     {
-        if (!filter_var($to, FILTER_VALIDATE_EMAIL)) {
-            \Log::error("Invalid email address: {$to}");
-            return;
-        }
+        $pass = env('email_pass');
+        $name = env('email_name');
+        $mail = new PHPMailer(true);
+
         try {
-            Mail::to($to)->send(new VerificationNotification($otp, $subject, $body));
-            echo 'dsasa';
-            \Log::info("Email sent successfully to {$to}");
-        } catch (\Exception $e) {
-            \Log::error("Email sending failed to {$to}: " . $e->getMessage());
+            $mail->isSMTP();
+            $mail->Host = 'smtp.hostinger.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = $name;
+            $mail->Password = $pass;
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+
+            // Recipients
+            $mail->setFrom($name, 'Edexcel'); // Use direct values here
+            $mail->addAddress($to);
+
+            // Content
+            $mail->isHTML(true); // Set email format to plain text
+            $mail->Subject = $subject;
+            $mail->Body = $body;
+
+            $mail->send();
+            // echo "Email has been sent to $to";
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
         // $mail = new PHPMailer(true);
         // $pass = env('email_pass');
