@@ -151,7 +151,7 @@ public function destroyinquiryBulk(Request $request)
         $data = Student::all();
         return view('student-list', compact('data'));
     }
-     public function create(Request $request)
+     public function create(Request $request,$id)
     { 
 
         $rules = [
@@ -189,7 +189,20 @@ public function destroyinquiryBulk(Request $request)
         $student->session_id = session()->getId();
         $student->save();
 
-        
+         $tutor = Tutor::findOrFail($id);
+
+        $toTutor = $tutor->email;
+        $subjectTutor = "Welcome to Edexcel Your Learning Journey Starts Now!";
+        $messageTutor ="Dear " . $tutor->name . ",\r\n\r\n" .
+"We are thrilled to welcome you to Edexcel! 🎉 As a valued tutor, your role is essential in shaping our students’ learning journey.\r\n\r\n" .
+"To get started, please log in to your account, complete your profile, and explore the available teaching tools and resources.\r\n" .
+"If you have any questions or require support, feel free to reach out to us at info@edexceledu.com — we're always here to help.\r\n\r\n" .
+"We look forward to working with you and empowering students together.\r\n\r\n" .
+"Best regards,\r\n" .
+"The Edexcel Team";
+
+        $this->sendEmail($toTutor, $subjectTutor, $messageTutor);
+
 
         $toStudent = $student->email;
         $subjectStudent = "Welcome to Edexcel Your Learning Journey Starts Now!";
