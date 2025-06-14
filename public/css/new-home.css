@@ -2222,6 +2222,24 @@ body {
     visibility: visible !important;
     transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
 }
+.custom-alert-danger {
+    position: fixed;
+    top: 60px;
+    right: 10px;
+    background-color: #f8d7da ;
+    color: #721c24;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border-left: 5px solid #f8d7da;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    min-width: 250px;
+    z-index: 1050;
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
+}
 
 .custom-alert .close-btn {
     background: none;
@@ -2237,7 +2255,20 @@ body {
 .custom-alert .close-btn:hover {
     color: #42b979;
 }
+.custom-alert-danger .close-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    color: #721c24;
+    cursor: pointer;
+    float: right;
+    margin-left: 10px;
+}
 
+.custom-alert-danger .close-btn:hover {
+    color: #721c24;
+}
 .blog-text {
     width: 100%;
     text-overflow: ellipsis;
@@ -2343,13 +2374,22 @@ body {
     /* Color of the track */
 }
 
-.progress-line {
+.custom-alert .progress-line {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 0%;
     height: 4px;
     background: #42b979;
+    transition: width 5s linear;
+}
+.custom-alert-danger .progress-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: #f8d7da;
     transition: width 5s linear;
 }
 

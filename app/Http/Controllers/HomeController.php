@@ -26,6 +26,9 @@ class HomeController extends Controller
      */
    public function index()
 {
+    if (auth()->user()->role !== 'admin') {
+        return redirect()->route('newhome')->with('error', 'Your role is not admin.');
+    }
     $tutors = Tutor::all();
     $inquires = DB::table('inquiries')->get();
     $students = Student::all();

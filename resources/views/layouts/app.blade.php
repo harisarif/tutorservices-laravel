@@ -86,7 +86,6 @@
 
 </head>
 <div class="loader" id="lazzyLoader">
-    <!-- <img src="{{ asset('images/loader.gif') }}" alt="lazzyloader"> -->
     <video autoplay loop muted playsinline>
         <source src="{{ asset('images/loader.webm') }}" type="video/webm">
         Your browser does not support the video tag.
@@ -110,7 +109,8 @@
         </div>
     </div>
 </div>
-{{-- <div class="modal fade" id="newsletterModal" tabindex="-1" aria-hidden="true">
+@if (Route::currentRouteName() === 'newhome' && !Auth::check())
+<div class="modal fade" id="newsletterModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
 
         <div class="modal-content newsletter-modal">
@@ -121,18 +121,31 @@
                 <span class="fs-2 pointer foucs closeModal" style="position: absolute;top:10px;right:10px;"> &times;</span>
                 <p class="mb-1" style="font-size:12px;">Newsletter</p>
                 <h2 class="mb-2" style="color:#42b979">Subscribe Now</h2>
+                <meta name="csrf-token" content="{{ csrf_token() }}">
+
                 <form id="newsletterForm">
                     <div class="mb-3">
                         <label class="d-flex align-items-center mb-2" style="font-size:12px;">Email Address <span class="text-danger ms-1">*</span></label>
-                        <input type="email" class="form-control" placeholder="Enter your email" required>
+                        <input type="email" class="form-control" placeholder="Enter your email" name="email" id="newsletterEmail" required pattern="^[\w\.\-]+@(gmail|yahoo|outlook)\.com$" >
                     </div>
                     <button type="submit" class="btn text-white w-100" style="background-color:#42b979">Subscribe</button>
                 </form>
+                
             </div>
         </div>
     </div>
-</div> --}}
-
+</div>
+@endif
+<div id="success" class="custom-alert alert-success d-flex align-items-center fade show d-none" role="alert">
+    <i class="fas fa-check-circle"></i>
+    <div>
+        <strong id="messageres"></strong>
+    </div>
+    <button type="button" class="close-btn" data-dismiss="alert" aria-label="Close">
+        &times;
+    </button>
+    <div class="progress-line custom-line-test"></div>
+</div>
 <body class="font-sans antialiased">
     {{-- <livewire:layout.navigation /> --}}
 

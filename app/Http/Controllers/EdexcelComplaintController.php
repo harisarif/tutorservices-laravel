@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
+use App\Models\Newsletter;
 use App\Models\EdexcelComplaint;
 use App\Notifications\InquirySuccessNotification;
 use Illuminate\Http\Request;
@@ -9,16 +11,17 @@ use Illuminate\Support\Facades\Validator;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class EdexcelComplaintController extends Controller
-{     public function inquiriesList()
+{
+    public function inquiriesList()
     {
 
-        $inquires = EdexcelComplaint::all(); 
+        $inquires = EdexcelComplaint::all();
         return view('inquiry-list', compact('inquires'));
     }
     public function inquiriesListTest()
     {
 
-        $inquires = EdexcelComplaint::all(); 
+        $inquires = EdexcelComplaint::all();
         return $inquires;
     }
     public function createComplaints(Request $request)
@@ -47,8 +50,10 @@ class EdexcelComplaintController extends Controller
         }
         $spamKeywords = ['Поздравляем', 'лотерейный билет', 'tinyurl', 'bit.ly'];
         foreach ($spamKeywords as $word) {
-            if (stripos($request->input('fname'), $word) !== false || 
-                stripos($request->input('description'), $word) !== false) {
+            if (
+                stripos($request->input('fname'), $word) !== false ||
+                stripos($request->input('description'), $word) !== false
+            ) {
                 return redirect()->back()->withErrors(['spam' => 'Spam content detected.'])->withInput();
             }
         }
@@ -63,9 +68,9 @@ class EdexcelComplaintController extends Controller
         $EdexcelComplaint->save();
         $facebookImg = "<img src='https://edexceledu.com/icons/facebook.jpeg'  alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
         $instagramImg = "<img src='https://edexceledu.com/icons/instagram.jpeg'alt='Instagram'width='20' height='20' style='vertical-align:middle'>";
-        $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='linkedIn' width='20' height='20' style='vertical-align:middle'>";        
+        $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='linkedIn' width='20' height='20' style='vertical-align:middle'>";
         $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg'  alt='Youtube'  width='20' height='20' style='vertical-align:middle'>";       // Send email to the student
-              // Send email to the student
+        // Send email to the student
         $toStudent = $EdexcelComplaint->email;
         $subjectStudent = "Welcome to Edexcel Academy!";
         $messageStudent = "
@@ -144,14 +149,93 @@ class EdexcelComplaintController extends Controller
 
         return redirect()->route('newhome')->with('success', 'Inquiry created successfully.');
     }
+    public function createNewsletter(Request $request)
+    {
+        $validated = $request->validate([
+            'email' => [
+                'required',
+                'email',
+                'unique:newsletters,email',
+                'regex:/^[\w\.\-]+@(gmail|yahoo|outlook)\.com$/i'
+            ],
+        ]);
+
+        // Save to database
+        $newsletter = new Newsletter();
+        $newsletter->email = $validated['email'];
+        $newsletter->save();
+        $subject = "Edexcel Notification";
+        $facebookImg = "<img src='https://edexceledu.com/icons/facebook.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
+        $instagramImg = "<img src='https://edexceledu.com/icons/instagram.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
+        $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
+        $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>"; 
+        $messageAdmin = "
+                   <div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6; padding: 20px;'>
+                       
+                    </div>
+                    <div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>
+                        <table width='100%' cellpadding='0' cellspacing='0' border='0'>
+                            <tr>
+                                <td align='center'>
+                                    <table style='max-width: 600px; width: 100%; border: 1px solid #ddd; border-radius: 8px; background-color: #fff;' cellpadding='0' cellspacing='0'>
+                                        <!-- Header -->
+                                        <tr>
+                                            <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 20px; font-weight: bold; color: #4CAF50; border-top-left-radius: 8px; border-top-right-radius: 8px;'>
+                                                Newsletter Recieved
+                                            </td>
+                                        </tr>
+                                        
+                                        <!-- Body -->
+                                        <tr>
+                                            <td style='padding: 20px; text-align: left;'>
+                                                <p style='font-size: 16px; margin: 0;'>Dear Admin,</p>
+                                                <p style='font-size: 16px; margin: 10px 0;'>
+                                                    A new newsletter has been added to the system. Please find the details below:
+                                                </p>
+                                                <ul style='font-size: 16px; margin: 10px 0; padding-left: 20px;'>
+                                                    <p><strong>Email:</strong> {$validated['email']}</p>
+                                                    <hr style='border: none; border-top: 1px solid #ccc; margin: 20px 0;'>
+                                                </ul>
+                                                <p style='font-size: 16px; margin: 10px 0;'>Best regards,</p>
+                                                <p style='font-size: 16px; font-weight: bold; margin: 0;'>The Edexcel Academy Team</p>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Footer -->
+                                        <tr style='margin-bottom:10px;display:flex;'>
+                                            <td align='left' style='color:#43b979; font-size:11px;margin-left:5px;width:50%;'>&copy; 2025 Edexcel Academy. All rights reserved.</td>
+                                            <td align='right' style='display:flex;margin-left:30%'>
+                                                <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:5px;'>{$facebookImg}</a>
+                                                <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank' style='margin-right:5px;'>{$instagramImg}</a>
+                                                <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank' style='margin-right:5px;'>{$linkedinImg}</a>
+                                                <a href='https://youtube.com/@edexcelonline01?si=EuQwX0tL3zk4J-2p' target='_blank'>{$youtubeImg}</a>
+                                            </td>
+                                        </tr>
+
+
+
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    ";
+
+        // Send the email using your custom method
+        $this->sendEmail($newsletter->email, $subject, $messageAdmin);
+        // Send confirmation email
+
+        // Optional response
+        return response()->json(['message' => 'Thanks for subscribing!']);
+    }
     protected function sendAdminInquiryNotification(EdexcelComplaint $inquiry)
     {
         $adminEmail = env('email_name'); // Use config, not env()
         $facebookImg = "<img src='https://edexceledu.com/icons/facebook.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
         $instagramImg = "<img src='https://edexceledu.com/icons/instagram.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
-        $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";        
+        $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
         $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";       // Send email to the student
-         
+
         if (!$adminEmail) {
             Log::warning('Admin email not configured.');
             return;
@@ -210,53 +294,57 @@ class EdexcelComplaintController extends Controller
 
         // Send the email using your custom method
         $this->sendEmail($adminEmail, $subject, $messageAdmin);
-    }    public function edit($id){ $inqury=EdexcelComplaint::find($id);
-        
-        return view('edit-inquries',compact('inqury'));}
-    
-       public function update(Request $request, $id)
-{   
-    $rules = [
-        'email' => "required|string|email|max:255|unique:edexcel_complaints,email,$id",
-        'phone' => 'nullable|string|max:20',
-       
-    ];
+    }
+    public function edit($id)
+    {
+        $inqury = EdexcelComplaint::find($id);
 
-    $validator = Validator::make($request->all(), $rules);
-
-    if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator)->withInput();
+        return view('edit-inquries', compact('inqury'));
     }
 
-    
-    $inquiry = EdexcelComplaint::findOrFail($id);
+    public function update(Request $request, $id)
+    {
+        $rules = [
+            'email' => "required|string|email|max:255|unique:edexcel_complaints,email,$id",
+            'phone' => 'nullable|string|max:20',
 
-    // Update inquiry fields
-    $inquiry->name = $request->input('name');
-    $inquiry->email = $request->input('email');
-    $inquiry->phone = $request->input('phone');
-    $inquiry->description = $request->input('description');
-  
-    $inquiry->save();
+        ];
 
-    return redirect()->route('inquiries.list')->with('success', 'inquiry updated successfully.');
+        $validator = Validator::make($request->all(), $rules);
 
-} public function show($id)
-{
-    $inquiry = EdexcelComplaint::findOrFail($id);
-    return view('admin-inquiry-show', compact('inquiry'));
-}
- public function destroy($id)
-{
-    $inquiry = EdexcelComplaint::findOrFail($id);
-    $inquiry->delete();
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
-    return response()->json([
-        'status' => 'success',
-        'message' => 'Inquiry deleted successfully.'
-    ]);
-}
-    
+
+        $inquiry = EdexcelComplaint::findOrFail($id);
+
+        // Update inquiry fields
+        $inquiry->name = $request->input('name');
+        $inquiry->email = $request->input('email');
+        $inquiry->phone = $request->input('phone');
+        $inquiry->description = $request->input('description');
+
+        $inquiry->save();
+
+        return redirect()->route('inquiries.list')->with('success', 'inquiry updated successfully.');
+    }
+    public function show($id)
+    {
+        $inquiry = EdexcelComplaint::findOrFail($id);
+        return view('admin-inquiry-show', compact('inquiry'));
+    }
+    public function destroy($id)
+    {
+        $inquiry = EdexcelComplaint::findOrFail($id);
+        $inquiry->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Inquiry deleted successfully.'
+        ]);
+    }
+
     function sendEmail($to, $subject, $body)
     {
         $pass = env('email_pass');

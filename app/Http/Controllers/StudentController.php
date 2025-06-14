@@ -149,21 +149,6 @@ public function destroyinquiryBulk(Request $request)
     public function studentsPDF()
     {
         $data = Student::all();
-        // $dompdf = new Dompdf();
-
-        // // Load HTML content into Dompdf
-        // $html = view('student-list', ['data' => $data])->render(); // Pass $data as an associative array
-        // $dompdf->loadHtml($html);
-
-        // // (Optional) Set paper size and orientation
-        // $options = new Options();
-        // $options->set('isHtml5ParserEnabled', true);
-        // $dompdf->setOptions($options);
-        // $dompdf->setPaper('A4', 'portrait');
-
-        // // Render the PDF
-        // $dompdf->render();
-        // return $dompdf->stream('students.pdf'); // Change the filename if needed
         return view('student-list', compact('data'));
     }
      public function create(Request $request)
@@ -247,7 +232,7 @@ public function destroyinquiryBulk(Request $request)
         if ($user->role === 'user') {
             Auth::login($user);
             return redirect()->route('newhome')
-                ->with('success', 'Tutor created successfully and logged in.');
+                ->with('success', 'Student created successfully and logged in.');
         }
 
         // Redirect to the "hire us" page
