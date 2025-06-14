@@ -19,7 +19,7 @@
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\SocialAuthController;
 use App\Http\Controllers\ZoomController;
-
+use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TutorController;
@@ -31,8 +31,7 @@ use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\NotificationController;
-use Illuminate\Support\Facades\Cookie;
-use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Cookie;use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 /*
 |--------------------------------------------------------------------------
@@ -128,10 +127,14 @@ Route::delete('/inquiry/destroy-bulk', [StudentController::class, 'destroyinquir
 Route::get('/policy', [StudentController::class, 'privacyPolicy'])->name('policy.index');
 Route::get('/terms', [StudentController::class, 'termsCondition'])->name('terms.condition');
 
+Route::get('/test-socialite', function () {
+    return Socialite::driver('google')->stateless()->redirect();
+});
+
 Route::get('/all-students', [StudentController::class, 'allStudents'])->name('all.students');
 Route::get('/qr-code', [StudentController::class, 'qrcode'])->name('qrcode');
 Route::post('/hire-tutor/create', [StudentController::class, 'viewHire'])->name('student-view');
-Route::post('/hire-tutor/create', [StudentController::class, 'create'])->name('student-create');
+Route::post('/hire-tutor/create/{id}', [StudentController::class, 'create'])->name('student-create');
 Route::post('/hire-tutor-new/create', [StudentController::class, 'newcreate'])->name('newstudent-create');
 Route::post('/inquiry/create', [EdexcelComplaintController::class, 'createComplaints'])->name('inquiry-create');
 Route::get('/student-list/{id}/edit', [StudentController::class, 'edit'])->name('edit-student');
@@ -145,6 +148,9 @@ Route::put('/inquiry-list/{id}', [EdexcelComplaintController::class, 'update'])-
 Route::get('/school-classes', [StudentController::class, 'indexClasses']);
 Route::get('/subjects/{schoolClassId}', [StudentController::class, 'getSubjects']);
 Route::delete('/inquiry-destroy/{id}', [EdexcelComplaintController::class, 'destroy'])->name('inquiry.destroy');
+
+Route::get('/auth/redirect/{provider}', [SocialAuthController::class, 'redirect'])->name('social.redirect');
+Route::get('/auth/{provider}/callback', [SocialAuthController::class, 'callback'])->name('social.callback');
 
 
 // routes/web.php

@@ -152,8 +152,8 @@ class StudentController extends Controller
         $data = Student::all();
         return view('student-list', compact('data'));
     }
-    public function create(Request $request)
-    {
+     public function create(Request $request)
+    { 
 
         $rules = [
             'email' => 'required|string|email|max:255|unique:student,email',
@@ -190,7 +190,7 @@ class StudentController extends Controller
         $student->session_id = session()->getId();
         $student->save();
 
-
+        
 
         $toStudent = $student->email;
         $subjectStudent = "Welcome to Edexcel Your Learning Journey Starts Now!";

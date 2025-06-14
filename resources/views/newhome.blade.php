@@ -602,9 +602,30 @@
                                             </div>
                                             <div>
                                                 <div id="btn-container">
-                                                    <button type="button"
-                                                        class="btn1 btn-outline-dark rounded fw-bold text-light">
-                                                        Zoom Meeting</button>
+                                                  @if(Auth::check() && Auth::user()->role === 'user')
+    <a href="{{ route('zoom.send.meeting.email', ['student_id' => Auth::user()->id, 'teacher_id' => $item->id]) }}"
+        id="demo"
+        class="mb-1 d-flex align-items-center btn4 btn-outline-light rounded fw-bold text-light p-2 w-100 justify-content-center"
+        style="background-color: #1cc88a; text-decoration: none;"
+        title="Zoom Meet">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" viewBox="0 0 24 24">
+            <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z" />
+        </svg>
+        <span class="ms-1">Zoom Meet</span>
+    </a>
+@else
+    <a href="javascript:void(0);"
+        data-bs-toggle="modal" data-bs-target="#signupPromptModal"
+        class="mb-1 d-flex align-items-center btn4 btn-outline-light rounded fw-bold text-light p-2 w-100 justify-content-center"
+        style="background-color: #1cc88a; text-decoration: none;"
+        title="Sign up to join Zoom Meet">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" viewBox="0 0 24 24">
+            <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z" />
+        </svg>
+        <span class="ms-1">Zoom Meet</span>
+    </a>
+@endif
+
                                                 </div>
                                             </div>
                                             <div>
@@ -1414,10 +1435,10 @@
 
                     <!-- Social Buttons -->
                     <div class="mb-3 d-grid gap-2">
-                        <a href="{{ route('social.redirect', 'google') }}" class="btn btn-outline-success d-flex align-items-center justify-content-center"
-                            style="border-color: #42b979; color: #42b979; font-size: 14px;">
-                            <i class="fab fa-google me-2"></i> Sign up with Google
-                        </a>
+                      <a href="{{ route('social.redirect','google') }}" class="btn btn-outline-success d-flex align-items-center justify-content-center" style="border-color: #42b979; color: #42b979; font-size: 14px;">
+    <i class="fab fa-google me-2"></i> Sign in with Google
+</a>
+
                         <a href="{{ route('social.redirect', 'facebook') }}" class="btn btn-outline-success d-flex align-items-center justify-content-center"
                             style="border-color: #42b979; color: #42b979; font-size: 14px;">
                             <i class="fab fa-facebook me-2"></i> Sign up with Facebook
@@ -1427,7 +1448,7 @@
                     <div class="text-center my-2 text-muted" style="font-size: 13px;">OR</div>
 
                     <!-- Form -->
-                    <form action="{{ route('student-create') }}" method="POST" class="pages" enctype="multipart/form-data">
+                    <form action="{{ route('student-create',$item->id) }}" method="POST" class="pages" enctype="multipart/form-data">
                         @csrf
 
                         <div class="mb-2">
