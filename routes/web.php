@@ -19,7 +19,6 @@
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\SocialAuthController;
 use App\Http\Controllers\ZoomController;
-use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TutorController;
@@ -31,7 +30,8 @@ use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\NotificationController;
-use Illuminate\Support\Facades\Cookie;use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Cookie;
+use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 /*
 |--------------------------------------------------------------------------
