@@ -31,7 +31,8 @@ use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\NotificationController;
-use Illuminate\Support\Facades\Cookie;use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Cookie;
+use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 /*
 |--------------------------------------------------------------------------
@@ -43,12 +44,13 @@ use App\Models\User;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::post('/cookie-consent', function (Request $request) {
     $consent = $request->input('consent');
     return response('OK')->cookie('cookie_consent', $consent, 60 * 24 * 365); // 1 year
 });
 Route::get('lang/{locale}', function ($locale) {
-    if (in_array($locale, ['en', 'ar','rs','ch'])) { // Only 'en' and 'ar' for English and Arabic
+    if (in_array($locale, ['en', 'ar', 'rs', 'ch'])) { // Only 'en' and 'ar' for English and Arabic
         session(['locale' => $locale]);
     }
     return redirect()->back();
@@ -58,7 +60,7 @@ Route::view('/welcome', 'welcome');
 Route::get('/basicsignup', function () {
     return view('basicsignup');
 })->name('basicsignup');
-Route::get('/enter-email', function() {
+Route::get('/enter-email', function () {
     return view('emailVerification');
 })->name('enter.email');
 Route::get('/debug-session', function () {
@@ -75,9 +77,9 @@ Route::post('/logout/teacher/{id}', [TutorController::class, 'logoutTeacher'])->
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 // Tutor Controllers
 // Route::middleware(['check.email.verified'])->group(function () {
-    Route::get('/tutor-signup',  function() {
-        return view('emailVerification');
-    })->name('tutor');
+Route::get('/tutor-signup',  function () {
+    return view('emailVerification');
+})->name('tutor');
 // });
 Route::get('/inquiries-list-testing', [EdexcelComplaintController::class, 'inquiriesListTest'])->name('inquiries.listtesting');
 Route::get('/', [TutorController::class, 'index'])->name('newhome');
@@ -98,8 +100,8 @@ Route::get('/teachers-list/{id}/view/document', [TutorController::class, 'view']
 Route::get('/teacher-dashboard/{id}', [TutorController::class, 'teacher_dashboard'])
     ->name('teacher_dashboard')
     ->middleware('auth', 'auto-logout');
-    Route::get('/teachers-dashboard-list', [TutorController::class, 'fetchAuthTeacher'])->name('teachers.dashboard.list');
-    Route::get('/teachers-list-edit/{id}', [TutorController::class, 'frontEdit'])->name('front-edit-teacher');
+Route::get('/teachers-dashboard-list', [TutorController::class, 'fetchAuthTeacher'])->name('teachers.dashboard.list');
+Route::get('/teachers-list-edit/{id}', [TutorController::class, 'frontEdit'])->name('front-edit-teacher');
 Route::get('/teachers-list/{id}/edit', [TutorController::class, 'edit'])->name('edit-teacher');
 Route::put('/teachers-list-update/{id}', [TutorController::class, 'updateTeacherProfile'])->name('teacher.update');
 Route::put('/teachers-list/{id}', [TutorController::class, 'updateProfile'])->name('teachers.update');
@@ -132,14 +134,14 @@ Route::post('/hire-tutor/create', [StudentController::class, 'viewHire'])->name(
 Route::post('/hire-tutor/create', [StudentController::class, 'create'])->name('student-create');
 Route::post('/hire-tutor-new/create', [StudentController::class, 'newcreate'])->name('newstudent-create');
 Route::post('/inquiry/create', [EdexcelComplaintController::class, 'createComplaints'])->name('inquiry-create');
-Route::get('/student-list/{id}/edit', [StudentController:: class, 'edit'])->name('edit-student');
-Route::get('/inqury-list/{id}', [EdexcelComplaintController:: class, 'edit'])->name('inqury.edit');
-Route::delete('/student-list/{id}', [StudentController:: class, 'destroy'])->name('students.destroy');
-Route::put('/student-list/{id}', [StudentController:: class, 'update'])->name('students.update');
+Route::get('/student-list/{id}/edit', [StudentController::class, 'edit'])->name('edit-student');
+Route::get('/inqury-list/{id}', [EdexcelComplaintController::class, 'edit'])->name('inqury.edit');
+Route::delete('/student-list/{id}', [StudentController::class, 'destroy'])->name('students.destroy');
+Route::put('/student-list/{id}', [StudentController::class, 'update'])->name('students.update');
 Route::get('/students-list', [StudentController::class, 'showStudentsList'])->name('students.list');
 Route::get('/inquiries-list', [EdexcelComplaintController::class, 'inquiriesList'])->name('inquiries.list');
 Route::get('/students-pdf', [StudentController::class, 'studentsPDF'])->name('students.pdf');
-Route::put('/inquiry-list/{id}', [EdexcelComplaintController:: class, 'update'])->name('inquiry.update');
+Route::put('/inquiry-list/{id}', [EdexcelComplaintController::class, 'update'])->name('inquiry.update');
 Route::get('/school-classes', [StudentController::class, 'indexClasses']);
 Route::get('/subjects/{schoolClassId}', [StudentController::class, 'getSubjects']);
 Route::delete('/inquiry-destroy/{id}', [EdexcelComplaintController::class, 'destroy'])->name('inquiry.destroy');
@@ -147,9 +149,9 @@ Route::delete('/inquiry-destroy/{id}', [EdexcelComplaintController::class, 'dest
 
 // routes/web.php
 // routes/web.php
-Route::get('/blog-list/{id}', [BlogController:: class, 'edit'])->name('blog.edit');
+Route::get('/blog-list/{id}', [BlogController::class, 'edit'])->name('blog.edit');
 Route::resource('blogs', BlogController::class);
-Route::put('/blogs-edit-list/{id}', [BlogController:: class, 'update'])->name('blogs.update');
+Route::put('/blogs-edit-list/{id}', [BlogController::class, 'update'])->name('blogs.update');
 Route::delete('/blog/destroy-bulk', [BlogController::class, 'destroyBulk'])->name('blogs.destroy.bulk');
 Route::get('/verify-email', [VerificationController::class, 'show'])->name('verification.notice');
 Route::post('/send-verification-link', [VerificationController::class, 'sendLink'])->name('verification.send');
@@ -179,16 +181,16 @@ Route::view('profile', 'profile')
     ->middleware(['auth', 'auto-logout'])
     ->name('profile');
 
-    Route::get('/logout', function () {
-        Auth::logout();
-        return redirect('/');
-    })->name('logout');
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect('/');
+})->name('logout');
 
 
-    Route::middleware('auth:admin')->group(function () {
-        Route::get('/teachers-list', [TutorController::class, 'fetchTeachers'])->name('teachers.list');
-    });
-    Route::post('/newsletter/create', [EdexcelComplaintController::class, 'createNewsletter'])->name('newsletter-create');
+Route::middleware('auth:admin')->group(function () {
+    Route::get('/teachers-list', [TutorController::class, 'fetchTeachers'])->name('teachers.list');
+});
+Route::post('/newsletter/create', [EdexcelComplaintController::class, 'createNewsletter'])->name('newsletter-create');
 Auth::routes();
 
 Route::get('/student-dashboard/{id}', [StudentController::class, 'student_dashboard'])
@@ -205,5 +207,5 @@ Route::get('/zoom/callback', [ZoomController::class, 'handleZoomCallback'])->nam
 Route::get('/zoom/create-meeting', [ZoomController::class, 'createMeeting'])->name('zoom.create.meeting');
 Route::get('/zoom/send-meeting-email', [ZoomController::class, 'sendMeetingEmail'])->name('zoom.send.meeting.email');
 Route::post('/zoom/create-meeting', [ZoomController::class, 'createAndMailMeeting'])
-     ->name('zoom.create.meeting');
+    ->name('zoom.create.meeting');
 Route::post('/zoom/create-and-send', [ZoomController::class, 'createMeetingAndSendEmail'])->name('zoom.create_and_send');
