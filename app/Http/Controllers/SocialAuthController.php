@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
-use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -25,7 +24,7 @@ class SocialAuthController extends Controller
 
     // Check if user exists
     $user = User::where('email', $socialUser->getEmail())->first();
-      
+
     if (!$user) {
         // Create new user
         $user = new User();
@@ -43,13 +42,17 @@ class SocialAuthController extends Controller
         $student->user_id = $user->id;
         $student->session_id = session()->getId();
         $student->save();
-
+    } else {
+        // If user exists, redirect with alert
+        Auth::login($user);
+        return redirect()->route('newhome')->with('alert', 'You are already registered. Logged in successfully.');
+    }
 
     // Log the user in
     Auth::login($user);
 
-    return redirect()->route('newhome'); // or any route you want
+    return redirect()->route('newhome');
 }
 
 }
-}
+
