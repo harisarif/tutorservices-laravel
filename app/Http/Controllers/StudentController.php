@@ -23,6 +23,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Notifications\TutorRequestNotification;
+
 class StudentController extends Controller
 {
     public function index()
@@ -35,13 +36,13 @@ class StudentController extends Controller
         $countries_prefix = collect(config('countries_prefix.countries'));
         return view('hire-tutor', compact('countriesPhone', 'subjects', 'countries', 'schoolClasses', 'countries_prefix', 'countries_number_length'));
     }
-   public function allStudents(Request $request)
-{
-    $students = Student::all(); // This is a collection
-    $countries = config('countries_assoc.countries'); // Full country list
+    public function allStudents(Request $request)
+    {
+        $students = Student::all(); // This is a collection
+        $countries = config('countries_assoc.countries'); // Full country list
 
-    return view('student-list', compact('students', 'countries'));
-}
+        return view('student-list', compact('students', 'countries'));
+    }
     public function inquirydestroy($id)
     {
         $inquiry = Inquiry::findOrFail($id);
@@ -77,24 +78,24 @@ class StudentController extends Controller
     }
 
 
-public function destroyinquiryBulk(Request $request)
-{
-    $ids = $request->input('ids'); // expecting an array of IDs
+    public function destroyinquiryBulk(Request $request)
+    {
+        $ids = $request->input('ids'); // expecting an array of IDs
 
-    if (!$ids || !is_array($ids)) {
-        return response()->json(['message' => 'No IDs provided'], 400);
+        if (!$ids || !is_array($ids)) {
+            return response()->json(['message' => 'No IDs provided'], 400);
+        }
+
+        EdexcelComplaint::whereIn('id', $ids)->delete();
+
+        return response()->json(['message' => 'Selected inquiries deleted successfully']);
     }
-
-    EdexcelComplaint::whereIn('id', $ids)->delete();
-
-    return response()->json(['message' => 'Selected inquiries deleted successfully']);
-}
-      public function cities(Request $request)
-{
-    $countryCode = $request->query('country');
-    $cities = config('cities.cities')[$countryCode] ?? [];
-    return response()->json($cities);
-}
+    public function cities(Request $request)
+    {
+        $countryCode = $request->query('country');
+        $cities = config('cities.cities')[$countryCode] ?? [];
+        return response()->json($cities);
+    }
 
     public function getCities(Request $request)
     {
@@ -123,13 +124,13 @@ public function destroyinquiryBulk(Request $request)
     {
         return view('qr-code');
     }
-   public function showStudentsList()
-{
-    $students = Student::all();
-    $countries = config('countries_assoc.countries');
-    return view('student-list', compact('students', 'countries'));
-}
- 
+    public function showStudentsList()
+    {
+        $students = Student::all();
+        $countries = config('countries_assoc.countries');
+        return view('student-list', compact('students', 'countries'));
+    }
+
     public function inquiriesList()
     {
 
@@ -151,7 +152,7 @@ public function destroyinquiryBulk(Request $request)
         $data = Student::all();
         return view('student-list', compact('data'));
     }
-     public function create(Request $request,$id)
+    public function create(Request $request,$id)
     { 
 
         $rules = [
@@ -189,19 +190,19 @@ public function destroyinquiryBulk(Request $request)
         $student->session_id = session()->getId();
         $student->save();
 
-         $tutor = Tutor::findOrFail($id);
+    //      $tutor = Tutor::findOrFail($id);
 
-        $toTutor = $tutor->email;
-        $subjectTutor = "Welcome to Edexcel Your Learning Journey Starts Now!";
-        $messageTutor ="Dear " . $tutor->name . ",\r\n\r\n" .
-"We are thrilled to welcome you to Edexcel! 🎉 As a valued tutor, your role is essential in shaping our students’ learning journey.\r\n\r\n" .
-"To get started, please log in to your account, complete your profile, and explore the available teaching tools and resources.\r\n" .
-"If you have any questions or require support, feel free to reach out to us at info@edexceledu.com — we're always here to help.\r\n\r\n" .
-"We look forward to working with you and empowering students together.\r\n\r\n" .
-"Best regards,\r\n" .
-"The Edexcel Team";
+    //     $toTutor = $tutor->email;
+    //     $subjectTutor = "Welcome to Edexcel Your Learning Journey Starts Now!";
+    //     $messageTutor ="Dear " . $tutor->name . ",\r\n\r\n" .
+    // "We are thrilled to welcome you to Edexcel! 🎉 As a valued tutor, your role is essential in shaping our students’ learning journey.\r\n\r\n" .
+    // "To get started, please log in to your account, complete your profile, and explore the available teaching tools and resources.\r\n" .
+    // "If you have any questions or require support, feel free to reach out to us at info@edexceledu.com — we're always here to help.\r\n\r\n" .
+    // "We look forward to working with you and empowering students together.\r\n\r\n" .
+    // "Best regards,\r\n" .
+    // "The Edexcel Team";
 
-        $this->sendEmail($toTutor, $subjectTutor, $messageTutor);
+        // $this->sendEmail($toTutor, $subjectTutor, $messageTutor);
 
 
         $toStudent = $student->email;
@@ -254,6 +255,7 @@ public function destroyinquiryBulk(Request $request)
         // Optionally, you can redirect the user or return a response
         // return redirect()->route('newhome')->with('success', 'Student created successfully.');
     }
+
 
     // public function create(Request $request)
     // {
@@ -355,9 +357,10 @@ public function destroyinquiryBulk(Request $request)
     //     // Optionally, you can redirect the user or return a response
     //     // return redirect()->route('newhome')->with('success', 'Student created successfully.');
     // }  
-    public function edit($id){  
+    public function edit($id)
+    {
         $schoolClasses = SchoolClass::all();
-        $student = Student::findOrFail($id); 
+        $student = Student::findOrFail($id);
         $qualification = SchoolClass::where('id', $student->qualification)->value('name') ?? 'Not specified';
         $student->teaching = unserialize($student->teaching);
         $storedLanguageCode = $student->language;
@@ -372,7 +375,7 @@ public function destroyinquiryBulk(Request $request)
         }, $languages);
 
         //country
-         
+
         $storedCountryCode = $student->country; // Get country code
         $country = config("countries_assoc.countries.$storedCountryCode", 'Unknown'); // Convert to full name
 
@@ -382,8 +385,8 @@ public function destroyinquiryBulk(Request $request)
         $countries_prefix = collect(config('countries_prefix.countries'));
         $countries = collect(config('countries_assoc.countries'));
         return view('edit-student', compact(['student', 'country', 'countriesPhone', 'countries', 'countries_number_length', 'countries_prefix', 'languageNames', 'schoolClasses', 'qualification']));
-   
-    }   public function logout(Request $request)
+    }
+    public function logout(Request $request)
     {
         Auth::logout(); // Log the user out
 
@@ -393,22 +396,22 @@ public function destroyinquiryBulk(Request $request)
         return redirect('newhome'); // Redirect to home or login page
     }
 
-public function sendTutorRequest(Request $request,$id)
-{    
-    $student = auth()->user();
-  $tutor = Tutor::find($id);
-     
-    if (!$tutor) {
-        return back()->with('error', 'Tutor not found.');
-    }
-     $facebookImg = "<img src='https://edexceledu.com/icons/facebook.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
-        $instagramImg = "<img src='https://edexceledu.com/icons/instagram.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
-        $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";        
-        $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";       // Send email to the student
-    $subjectTutor = "New Tutoring Request from {$student->name}";
+    public function sendTutorRequest(Request $request, $id)
+    {
+        $student = auth()->user();
+        $tutor = Tutor::find($id);
 
-    // Prepare the HTML message like your inquiry email style
-    $messageTutor = "
+        if (!$tutor) {
+            return back()->with('error', 'Tutor not found.');
+        }
+        $facebookImg = "<img src='https://edexceledu.com/icons/facebook.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
+        $instagramImg = "<img src='https://edexceledu.com/icons/instagram.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
+        $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
+        $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";       // Send email to the student
+        $subjectTutor = "New Tutoring Request from {$student->name}";
+
+        // Prepare the HTML message like your inquiry email style
+        $messageTutor = "
     <div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>
     <table width='100%' cellpadding='0' cellspacing='0' border='0'>
         <tr>
@@ -463,16 +466,16 @@ public function sendTutorRequest(Request $request,$id)
 </div>
     ";
 
-    // Send the email using your existing PHPMailer wrapper
-    $this->sendEmail($tutor->email, $subjectTutor, $messageTutor);
+        // Send the email using your existing PHPMailer wrapper
+        $this->sendEmail($tutor->email, $subjectTutor, $messageTutor);
 
-    // Notify tutor in database (optional)
-    $tutor->notify(new TutorRequestNotification($student));
+        // Notify tutor in database (optional)
+        $tutor->notify(new TutorRequestNotification($student));
 
-    return back()->with('success', 'Tutoring request sent to tutor successfully!');
-}
+        return back()->with('success', 'Tutoring request sent to tutor successfully!');
+    }
 
-       public function student_dashboard(Request $request, $id)
+    public function student_dashboard(Request $request, $id)
     {
         $user = Auth::user();
 
@@ -800,60 +803,59 @@ public function sendTutorRequest(Request $request,$id)
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
-    }     
-   public function update(Request $request, $id)
-{   
-    $rules = [
-        'email' => "required|string|email|max:255|unique:student,email,$id",
-        'phone' => 'nullable|string|max:20',
-        'availability_status' => 'nullable|string|max:255',
-        'country' => 'nullable|string|max:100',
-        'city' => 'nullable|string|max:100',
-        'subject' => 'required|array',
-        'subject.*' => 'required|string|max:255',
-        'profileImage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-    ];
-
-    $validator = Validator::make($request->all(), $rules);
-
-    if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator)->withInput();
     }
+    public function update(Request $request, $id)
+    {
+        $rules = [
+            'email' => "required|string|email|max:255|unique:student,email,$id",
+            'phone' => 'nullable|string|max:20',
+            'availability_status' => 'nullable|string|max:255',
+            'country' => 'nullable|string|max:100',
+            'city' => 'nullable|string|max:100',
+            'subject' => 'required|array',
+            'subject.*' => 'required|string|max:255',
+            'profileImage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ];
 
-    
-    $student = Student::findOrFail($id);
+        $validator = Validator::make($request->all(), $rules);
 
-    // Update student fields
-    $student->name = $request->input('name');
-    $student->email = $request->input('email');
-    $student->phone = $request->input('phone');
-    $student->gender = $request->input('gender');
-    $student->country = $request->input('country');
-    $student->city = $request->input('city');
-    $student->grade = $request->input('grade');
-    $student->description = $request->input('description');
-    $student->subject = implode(',', $request->input('subject'));
-    $student->availability_status = $request->input('availability_status');
-
-  
-    if ($request->hasFile('profileImage')) {
-        // Delete old image if exists
-        if ($student->profileImage && \Storage::disk('public')->exists($student->profileImage)) {
-            \Storage::disk('public')->delete($student->profileImage);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // Store new image
-        $image = $request->file('profileImage');
-        $imagePath = $image->store('students/images', 'public');
-        $student->profileImage = $imagePath;
+
+        $student = Student::findOrFail($id);
+
+        // Update student fields
+        $student->name = $request->input('name');
+        $student->email = $request->input('email');
+        $student->phone = $request->input('phone');
+        $student->gender = $request->input('gender');
+        $student->country = $request->input('country');
+        $student->city = $request->input('city');
+        $student->grade = $request->input('grade');
+        $student->description = $request->input('description');
+        $student->subject = implode(',', $request->input('subject'));
+        $student->availability_status = $request->input('availability_status');
+
+
+        if ($request->hasFile('profileImage')) {
+            // Delete old image if exists
+            if ($student->profileImage && \Storage::disk('public')->exists($student->profileImage)) {
+                \Storage::disk('public')->delete($student->profileImage);
+            }
+
+            // Store new image
+            $image = $request->file('profileImage');
+            $imagePath = $image->store('students/images', 'public');
+            $student->profileImage = $imagePath;
+        }
+
+
+        $student->save();
+
+        return redirect()->route('students.list')->with('success', 'Student updated successfully.');
     }
-
-   
-    $student->save();
-
-    return redirect()->route('students.list')->with('success', 'Student updated successfully.');
-
-}
 
 
     public function destroy($id)

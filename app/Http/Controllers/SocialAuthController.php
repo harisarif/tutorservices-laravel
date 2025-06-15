@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
+use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -42,7 +43,7 @@ class SocialAuthController extends Controller
         $student->user_id = $user->id;
         $student->session_id = session()->getId();
         $student->save();
-    }
+
 
     // Log the user in
     Auth::login($user);
@@ -51,4 +52,4 @@ class SocialAuthController extends Controller
 }
 
 }
-
+}

@@ -593,47 +593,49 @@
                                             <div class="d-flex pb-5" id="ff111">
                                                 <div class="me-lg-5 me-3" id="dollar">
                                                     <h4 class="fw-bold on">{{ $item->price ?? 'Nullable' }}</h4>
-                                                    <!-- <p class="text-secondary fs-6"><p><i class="fa-solid fa-calendar-days me-1" style="color:#1cc88a"></i> 
-                                                                        {{ $item->dob ?? 'Nullable' }}</p> -->
                                                 </div>
-                                                <!-- <div id="heart-icon">
-                                                                        <span><i class="fa-regular fa-heart"></i></span>
-                                                                    </div> -->
                                             </div>
                                             <div>
                                                 <div id="btn-container">
-                                                  @if(Auth::check() && Auth::user()->role === 'user')
-    <a href="{{ route('zoom.send.meeting.email', ['student_id' => Auth::user()->id, 'teacher_id' => $item->id]) }}"
-        id="demo"
-        class="mb-1 d-flex align-items-center btn4 btn-outline-light rounded fw-bold text-light p-2 w-100 justify-content-center"
-        style="background-color: #1cc88a; text-decoration: none;"
-        title="Zoom Meet">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" viewBox="0 0 24 24">
-            <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z" />
-        </svg>
-        <span class="ms-1">Zoom Meet</span>
-    </a>
-@else
-    <a href="javascript:void(0);"
-        data-bs-toggle="modal" data-bs-target="#signupPromptModal"
-        class="mb-1 d-flex align-items-center btn4 btn-outline-light rounded fw-bold text-light p-2 w-100 justify-content-center"
-        style="background-color: #1cc88a; text-decoration: none;"
-        title="Sign up to join Zoom Meet">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" viewBox="0 0 24 24">
-            <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z" />
-        </svg>
-        <span class="ms-1">Zoom Meet</span>
-    </a>
-@endif
+                                                    @if(Auth::check() && Auth::user()->role === 'user')
+                                                    <a href="{{ route('zoom.send.meeting.email', ['student_id' => Auth::user()->id, 'teacher_id' => $item->id]) }}"
+                                                        id="demo"
+                                                        class="mb-1 d-flex align-items-center btn4 btn-outline-light rounded fw-bold text-light p-2 w-100 justify-content-center"
+                                                        style="background-color: #1cc88a; text-decoration: none;"
+                                                        title="Zoom Meet">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" viewBox="0 0 24 24">
+                                                            <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z" />
+                                                        </svg>
+                                                        <span class="ms-1">Zoom Meet</span>
+                                                    </a>
+                                                    @else
+                                                    <a href="javascript:void(0);"
+                                                        data-bs-toggle="modal" data-bs-target="#signupPromptModal"
+                                                        class="mb-1 d-flex align-items-center btn4 btn-outline-light rounded fw-bold text-light p-2 w-100 justify-content-center"
+                                                        style="background-color: #1cc88a; text-decoration: none;"
+                                                        title="Sign up to join Zoom Meet">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" viewBox="0 0 24 24">
+                                                            <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z" />
+                                                        </svg>
+                                                        <span class="ms-1">Zoom Meet</span>
+                                                    </a>
+                                                    @endif
 
                                                 </div>
                                             </div>
                                             <div>
                                                 <div class="mt-2" id="btn-container">
+                                                @if(Auth::check() && Auth::user()->role === 'user')
+                                                    <button  data-teacher-id="{{ $item->teacher_id }}" type="button" id="demo"
+                                                        class="btn1 btn-outline-dark rounded fw-bold text-light">
+                                                        Request a Demo
+                                                    </button>
+                                                    @else
                                                     <button type="button" id="demo"
                                                         class="btn1 btn-outline-dark rounded fw-bold text-light">
                                                         Request a Demo
                                                     </button>
+                                                    @endif
                                                 </div>
 
                                             </div>
@@ -1430,14 +1432,14 @@
 
                 <!-- Right Side Form -->
                 <div class="col-md-6 p-4 bg-white">
-                <span class="fs-2 pointer foucs mb-1 position-absolute top-0" style="right:0px" onclick="document.getElementById('signupPromptModal').style.display = 'none'"> &times;</span>
+                    <span class="fs-2 pointer foucs mb-1 position-absolute top-0" style="right:0px" onclick="document.getElementById('signupPromptModal').style.display = 'none'"> &times;</span>
                     <h4 class="text-center mb-3" style="color: #42b979;">Create Your Account</h4>
 
                     <!-- Social Buttons -->
                     <div class="mb-3 d-grid gap-2">
-                      <a href="{{ route('social.redirect','google') }}" class="btn btn-outline-success d-flex align-items-center justify-content-center" style="border-color: #42b979; color: #42b979; font-size: 14px;">
-    <i class="fab fa-google me-2"></i> Sign in with Google
-</a>
+                        <a href="{{ route('social.redirect','google') }}" class="btn btn-outline-success d-flex align-items-center justify-content-center" style="border-color: #42b979; color: #42b979; font-size: 14px;">
+                            <i class="fab fa-google me-2"></i> Sign in with Google
+                        </a>
 
                         <a href="{{ route('social.redirect', 'facebook') }}" class="btn btn-outline-success d-flex align-items-center justify-content-center"
                             style="border-color: #42b979; color: #42b979; font-size: 14px;">
@@ -1512,7 +1514,6 @@
 
 
 <script>
-    
     document.addEventListener("DOMContentLoaded", function() {
         const submitBtn = document.getElementById("submitBtn");
         const form = document.querySelector("form");
