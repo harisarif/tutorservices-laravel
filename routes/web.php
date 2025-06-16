@@ -134,7 +134,8 @@ Route::get('/test-socialite', function () {
 Route::get('/all-students', [StudentController::class, 'allStudents'])->name('all.students');
 Route::get('/qr-code', [StudentController::class, 'qrcode'])->name('qrcode');
 Route::post('/hire-tutor/create', [StudentController::class, 'viewHire'])->name('student-view');
-Route::post('/hire-tutor/create/{id}', [StudentController::class, 'create'])->name('student-create');
+Route::post('/hire-tutor/create/', [StudentController::class, 'create'])->name('student-create');
+// Route::post('/hire-tutor/create/{id}', [StudentController::class, 'create'])->name('student-create');
 Route::post('/hire-tutor-new/create', [StudentController::class, 'newcreate'])->name('newstudent-create');
 Route::post('/inquiry/create', [EdexcelComplaintController::class, 'createComplaints'])->name('inquiry-create');
 Route::get('/student-list/{id}/edit', [StudentController::class, 'edit'])->name('edit-student');
@@ -197,7 +198,11 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/teachers-list', [TutorController::class, 'fetchTeachers'])->name('teachers.list');
 });
 Route::post('/newsletter/create', [EdexcelComplaintController::class, 'createNewsletter'])->name('newsletter-create');
+Route::post('/request-demo', [StudentController::class, 'send'])
+    ->middleware(['auth']) // ensure user is logged in
+    ->name('request.demo');
 Auth::routes();
+
 
 Route::get('/student-dashboard/{id}', [StudentController::class, 'student_dashboard'])
     ->name('student_dashboard')

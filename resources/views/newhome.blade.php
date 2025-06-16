@@ -626,8 +626,8 @@
                                             <div>
                                                 <div class="mt-2" id="btn-container">
                                                 @if(Auth::check() && Auth::user()->role === 'user')
-                                                    <button  data-teacher-id="{{ $item->teacher_id }}" type="button" id="demo"
-                                                        class="btn1 btn-outline-dark rounded fw-bold text-light">
+                                                    <button   data-teacher-id="{{ $item->teacher_id }}" type="button" id="demo"
+                                                        class="btn1 btn-outline-dark rounded fw-bold text-light request-demo-btn">
                                                         Request a Demo
                                                     </button>
                                                     @else
@@ -1450,7 +1450,7 @@
                     <div class="text-center my-2 text-muted" style="font-size: 13px;">OR</div>
 
                     <!-- Form -->
-                    <form action="{{ route('student-create',$item->id) }}" method="POST" class="pages" enctype="multipart/form-data">
+                    <form action="{{ route('student-create') }}" method="POST" class="pages" enctype="multipart/form-data">
                         @csrf
 
                         <div class="mb-2">
@@ -1497,6 +1497,53 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script>
+document.querySelectorAll('.request-demo-btn').forEach(button => {
+    button.addEventListener('click', function () {
+        const teacherId = this.getAttribute('data-teacher-id');
+
+        fetch('{{ route("request.demo") }}', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({ teacher_id: teacherId })
+        })
+        .then(response => {
+            if (!response.ok) throw new Error("Network error");
+            return response.json();
+        })
+        .then(data => {
+            const alertBox = document.getElementById('success');
+            const messageContainer = document.getElementById('messageres');
+
+            // Append new message (instead of replacing)
+            messageContainer.innerHTML += `<div>${data.message}</div>`;
+
+            // Show the alert
+            alertBox.classList.remove('d-none');
+
+            // Restart progress animation (optional)
+            const progressLine = alertBox.querySelector('.progress-line');
+            progressLine.classList.remove('custom-line-test'); // reset animation
+            void progressLine.offsetWidth; // reflow to restart animation
+            progressLine.classList.add('custom-line-test');
+
+            // Auto-hide after 5s
+            setTimeout(() => {
+                alertBox.classList.add('d-none');
+            }, 5000);
+        })
+        .catch(error => {
+            console.error('Request failed:', error);
+            alert("Something went wrong");
+        });
+    });
+});
+</script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const demoBtn = document.getElementById('demo');

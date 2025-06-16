@@ -152,7 +152,7 @@ class StudentController extends Controller
         $data = Student::all();
         return view('student-list', compact('data'));
     }
-    public function create(Request $request,$id)
+    public function create(Request $request)
     { 
 
         $rules = [
@@ -395,7 +395,81 @@ class StudentController extends Controller
 
         return redirect('newhome'); // Redirect to home or login page
     }
-
+    public function send(Request $request)
+    {
+        $request->validate([
+            'teacher_id' => 'required|integer|exists:tutors,teacher_id',
+        ]);
+    
+        // Get the tutor using teacher_id (not primary key)
+        $tutor = \App\Models\Tutor::where('teacher_id', $request->teacher_id)->first();
+    
+        if (!$tutor) {
+            return response()->json(['error' => 'Tutor not found.'], 404);
+        }
+    
+        $user = Auth::user();
+    
+        // Social Icons
+        $facebookImg = "<img src='https://edexceledu.com/icons/facebook.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
+        $instagramImg = "<img src='https://edexceledu.com/icons/instagram.jpeg' alt='Instagram' width='20' height='20' style='vertical-align:middle'>";
+        $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='LinkedIn' width='20' height='20' style='vertical-align:middle'>";
+        $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg' alt='YouTube' width='20' height='20' style='vertical-align:middle'>";
+    
+        $subjectTutor = "New Tutoring Request from {$user->name}";
+    
+        // Reusable HTML message body
+        $message = function ($recipientName, $recipientType) use ($user, $tutor, $facebookImg, $instagramImg, $linkedinImg, $youtubeImg) {
+            $otherPerson = $recipientType === 'tutor' ? $user : $tutor;
+            return "
+                <div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>
+                    <table width='100%' cellpadding='0' cellspacing='0' border='0'>
+                        <tr>
+                            <td align='center'>
+                                <table style='max-width: 600px; width: 100%; border: 1px solid #ddd; border-radius: 8px; background-color: #fff;' cellpadding='0' cellspacing='0'>
+                                    <tr>
+                                        <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 20px; font-weight: bold; color: #4CAF50; border-top-left-radius: 8px; border-top-right-radius: 8px;'>
+                                            New Tutoring Request
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style='padding: 20px; text-align: left;'>
+                                            <p style='font-size: 16px; margin: 0;'>Dear {$recipientName},</p>
+                                            <p style='font-size: 16px; margin: 10px 0;'>You have submitted/received a tutoring request with <strong style='color:#43b979'>{$otherPerson->name}</strong>.</p>
+                                            <p style='font-size: 16px; margin: 10px 0;'>Email: <strong>{$otherPerson->email}</strong></p>
+                                            <p style='font-size: 16px;'>Please log in to your dashboard to continue the communication.</p>
+                                            <p style='font-size: 16px; font-weight: bold; color:#43b979;'>The Edexcel Academy Team</p>
+                                        </td>
+                                    </tr>
+                                    <tr style='margin-bottom:10px;display:flex;'>
+                                        <td align='left' style='color:#43b979; font-size:12px; margin-left:5px; width:50%;'>
+                                            &copy; 2025 Edexcel Academy. All rights reserved.
+                                        </td>
+                                        <td align='right' style='display:flex;margin-left:29%;'>
+                                            <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:5px;'>{$facebookImg}</a>
+                                            <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank' style='margin-right:5px;'>{$instagramImg}</a>
+                                            <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank' style='margin-right:5px;'>{$linkedinImg}</a>
+                                            <a href='https://youtube.com/@edexcelonline01?si=EuQwX0tL3zk4J-2p' target='_blank'>{$youtubeImg}</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            ";
+        };
+    
+        // Send to Tutor
+        $this->sendEmail($tutor->email, $subjectTutor, $message($tutor->f_name, 'tutor'));
+    
+        // Send to User (confirmation)
+        $subjectUser = "Your Tutoring Request to {$tutor->name} was sent";
+        $this->sendEmail($user->email, $subjectUser, $message($user->name, 'user'));
+    
+        return response()->json(['success' => true, 'message' => 'Demo request sent to both tutor and student.']);
+    }
+    
     public function sendTutorRequest(Request $request, $id)
     {
         $student = auth()->user();
