@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+ use Illuminate\Http\Request;
 
 class SocialAuthController extends Controller
 {
@@ -52,6 +53,31 @@ class SocialAuthController extends Controller
     Auth::login($user);
 
     return redirect()->route('newhome');
+}
+
+// Make sure to import the Student model
+
+public function changePassword(Request $request)
+{
+    $request->validate([
+        'password' => 'required|string|min:8|confirmed',
+    ]);
+
+    $user = Auth::user();
+    $hashedPassword = Hash::make($request->password);
+
+    // Update password in users table
+    $user->password = $hashedPassword;
+    $user->save();
+
+    // If there's a linked student record, update that too
+    $student = Student::where('email', $user->email)->first();
+    if ($student) {
+        $student->password = $hashedPassword;
+        $student->save();
+    }
+
+    return redirect()->back()->with('success', 'Password changed successfully.');
 }
 
 }

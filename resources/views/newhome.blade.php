@@ -190,7 +190,10 @@
                         @auth
                         @if (Auth::user()->role === 'user')
                         <div class="col-12 d-flex">
-                            <!-- <p class="mt-3 me-3" style="color:white"> {{ Auth::user()->name }}</p> -->
+                           <!-- Change Password Button -->
+<a class="nav-link text-decoration-none solid_btn me-1" href="#" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+    <i class="fa fa-key text-white"></i>
+</a>
                             <a class="nav-link text-decoration-none solid_btn me-1" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fa fa-sign-out text-white"></i>
@@ -1482,7 +1485,34 @@
         </div>
     </div>
 </div>
-
+<!-- Change Password Modal -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form method="POST" action="{{ route('change.password') }}">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="password" class="form-label">New Password</label>
+                        <input type="password" class="form-control" name="password" required minlength="8">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password_confirmation" class="form-label">Confirm New Password</label>
+                        <input type="password" class="form-control" name="password_confirmation" required minlength="8">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Update Password</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
 
 
@@ -1657,7 +1687,7 @@ document.querySelectorAll('.request-demo-btn').forEach(button => {
             }
         });
     });
-</script>
+</script> 
 <script>
     const priceRanges = [
         "0-50", "50-100", "100-200",
