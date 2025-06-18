@@ -131,6 +131,8 @@ Route::get('/test-socialite', function () {
     return Socialite::driver('google')->stateless()->redirect();
 });
 Route::post('/change-password', [SocialAuthController::class, 'changePassword'])->name('change.password');
+Route::get('auth/facebook', [SocialController::class, 'redirectToFacebook']);
+Route::get('auth/facebook/callback', [SocialController::class, 'handleFacebookCallback']);
 
 Route::get('/all-students', [StudentController::class, 'allStudents'])->name('all.students');
 Route::get('/qr-code', [StudentController::class, 'qrcode'])->name('qrcode');

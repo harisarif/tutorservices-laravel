@@ -80,5 +80,46 @@ public function changePassword(Request $request)
     return redirect()->back()->with('success', 'Password changed successfully.');
 }
 
+public function redirectToFacebook()
+{
+    return Socialite::driver('facebook')
+        ->scopes(['email']) // request email permission
+        ->redirect();
+}
+
+
+public function handleFacebookCallback() {
+   $socialUser = Socialite::driver('facebook')->user();
+   // Check if user exists
+    $user = User::where('email', $socialUser->getEmail())->first();
+
+    if (!$user) {
+        // Create new user
+        $user = new User();
+        $user->name = $socialUser->getName();
+        $user->email = $socialUser->getEmail();
+        $user->password = Hash::make(strval(mt_rand(10000000, 99999999))); // random 8-digit password
+        $user->role = 'user';
+        $user->save();
+
+        // Create associated student
+        $student = new Student();
+        $student->name = $user->name;
+        $student->email = $user->email;
+        $student->password = $user->password; // use same hashed password
+        $student->user_id = $user->id;
+        $student->session_id = session()->getId();
+        $student->save();
+    } else {
+        // If user exists, redirect with alert
+        Auth::login($user);
+        return redirect()->route('newhome')->with('alert', 'You are already registered. Logged in successfully.');
+    }
+
+    // Log the user in
+    Auth::login($user);
+
+    return redirect()->route('newhome');
+}
 }
 
