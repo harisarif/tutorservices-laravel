@@ -106,11 +106,30 @@
                 <div class="col-lg-6 col-sm-4  img-cards  mx-0 d-flex justify-content-start ">
                     <img src="{{ asset('images/login-new.jpeg') }}" alt="">
                 </div>
+                
                 <div class="col-lg-5 col-sm-4">
-                    
-                    <div class="login-heading">
+                <div class="" style="margin-left:-18px;">
+                        <a href="{{ route('social.redirect','google') }}" class="" style="border:1px solid #000;text-decoration:none; font-size: 14px;padding:10px;border-radius:10px;">
+                            <!-- <i class="fab fa-google me-2"></i> -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 48 48">
+                                <path fill="#EA4335" d="M24 9.5c3.09 0 5.88 1.06 8.06 2.82l6.03-6.03C34.77 3.66 29.7 1.5 24 1.5 14.84 1.5 6.98 7.59 3.89 16.09l7.09 5.51C12.72 14.2 17.86 9.5 24 9.5z"/>
+                                <path fill="#34A853" d="M46.5 24c0-1.56-.14-3.07-.41-4.5H24v9h12.64c-1.06 3.01-2.99 5.55-5.51 7.3l7.09 5.51C43.61 37.01 46.5 30.98 46.5 24z"/>
+                                <path fill="#4A90E2" d="M10.98 27.6a14.58 14.58 0 010-7.2l-7.09-5.51a22.48 22.48 0 000 18.22l7.09-5.51z"/>
+                                <path fill="#FBBC05" d="M24 46.5c5.7 0 10.77-1.89 14.8-5.14l-7.09-5.51C29.88 37.44 27.09 38.5 24 38.5c-6.14 0-11.28-4.7-12.02-10.1l-7.09 5.51C6.98 40.41 14.84 46.5 24 46.5z"/>
+                            </svg>
+
+                            <span class="text-dark"> Sign in with Google </span>
+                        </a>
+
+                        <!-- <a href="{{ route('social.redirect', 'facebook') }}" class="btn btn-outline-success d-flex align-items-center justify-content-center"
+                            style="border-color: #42b979; color: #42b979; font-size: 14px;">
+                            <i class="fab fa-facebook me-2"></i> Sign up with Facebook
+                        </a> -->
+                    </div>
+                    <div class="login-heading mt-4">
                             <h3 class="my-2 fw-bold fs-4 text-dark">{{ __('messages.Login Your Account') }}</h3>
                     </div>
+                    
                     <form method="POST" action="{{ route('login') }}"  style="margin-left: -2%;">
                         @csrf
 
@@ -172,6 +191,7 @@
                             </div>
                         </div>
                     </form>
+                    
                 </div>
             </div>
         </div>

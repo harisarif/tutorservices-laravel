@@ -191,9 +191,9 @@
                         @if (Auth::user()->role === 'user')
                         <div class="col-12 d-flex">
                            <!-- Change Password Button -->
-<a class="nav-link text-decoration-none solid_btn me-1" href="#" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+<!-- <a class="nav-link text-decoration-none solid_btn me-1" href="#" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
     <i class="fa fa-key text-white"></i>
-</a>
+</a> -->
                             <a class="nav-link text-decoration-none solid_btn me-1" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fa fa-sign-out text-white"></i>
@@ -1486,7 +1486,7 @@
     </div>
 </div>
 <!-- Change Password Modal -->
-<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <form method="POST" action="{{ route('change.password') }}">
             @csrf
@@ -1512,7 +1512,7 @@
             </div>
         </form>
     </div>
-</div>
+</div> -->
 
 
 
