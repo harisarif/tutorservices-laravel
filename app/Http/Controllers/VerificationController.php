@@ -173,7 +173,7 @@ class VerificationController extends Controller
                                      
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;         // Enable TLS encryption, PHPMailer::ENCRYPTION_SMTPS also accepted
                 $mail->Port       = 465;
-            
+                
 
             // Recipients
             $mail->setFrom('info@edexceledu.com', 'Edexcel'); // Use direct values here
@@ -183,7 +183,7 @@ class VerificationController extends Controller
             $mail->isHTML(true); // Set email format to plain text
             $mail->Subject = $subject;
             $mail->Body = $body;
-            $mail->AltBody = strip_tags($body);
+             $mail->AltBody = strip_tags($body);
             $mail->send();
             // echo "Email has been sent to $to";
         } catch (Exception $e) {
