@@ -1444,10 +1444,14 @@
                             <i class="fab fa-google me-2"></i> Sign in with Google
                         </a>
 
-                        <a href="{{ route('social.redirect', 'facebook') }}" class="btn btn-outline-success d-flex align-items-center justify-content-center"
+                        <!-- <a href="{{ route('social.redirect', 'facebook') }}" class="btn btn-outline-success d-flex align-items-center justify-content-center"
                             style="border-color: #42b979; color: #42b979; font-size: 14px;">
                             <i class="fab fa-facebook me-2"></i> Sign up with Facebook
-                        </a>
+                        </a> -->
+                        <!-- <a href="{{ route('social.redirect', 'facebook') }}" class="btn btn-outline-success d-flex align-items-center justify-content-center"
+                            style="border-color: #42b979; color: #42b979; font-size: 14px;">
+                            <i class="fab fa-facebook me-2"></i> Sign up with Outlook
+                        </a> -->
                     </div>
 
                     <div class="text-center my-2 text-muted" style="font-size: 13px;">OR</div>

@@ -389,6 +389,7 @@
                                      <strong>Add Your Qualification Document</strong>
                                  </label>
                                  <input type="file" class="form-control" id="qualificationDocument"
+                                     accept="application/pdf"
                                      name="document"
                                      style="box-shadow: none;border: 1px solid rgba(137, 135, 135, 0.5);">
                                  <p style="text-align: justify;color: #42b979;font-weight: bold;font-size: 12px;">PDF OR DOC Files Are Allowed</p>
