@@ -601,7 +601,7 @@
                                             <div>
                                                 <div id="btn-container">
                                                     @if(Auth::check() && Auth::user()->role === 'user')
-                                                    <a href="{{ route('zoom.send.meeting.email', ['student_id' => Auth::user()->id, 'teacher_id' => $item->id]) }}"
+                                                    <a href="{{ route('zoom.send.meeting.email', ['student_id' => Auth::user()->id, 'teacher_id' => $item->teacher_id]) }}"
                                                         id="demo"
                                                         class="mb-1 d-flex align-items-center btn4 btn-outline-light rounded fw-bold text-light p-2 w-100 justify-content-center"
                                                         style="background-color: #1cc88a; text-decoration: none;"

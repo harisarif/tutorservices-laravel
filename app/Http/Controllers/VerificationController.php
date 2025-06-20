@@ -96,7 +96,6 @@ class VerificationController extends Controller
                                                 If you did not sign up for an account, please ignore this email.
                                             </p>
                                             <p style='margin: 10px 0; font-size: 16px;'>Best regards,</p>
-                                            <p style='margin: 10px 0; font-size: 16px; font-weight: bold;color:#43b979;'>Edexcel Academy</p>
                                         </td>
                                     </tr>
                                         <tr style='margin-bottom:10px;display:flex;'>
@@ -175,51 +174,19 @@ class VerificationController extends Controller
             $mail->Port = 587;
 
             // Recipients
-            $mail->setFrom($name, 'Edexcel'); // Use direct values here
+            $mail->setFrom('noreply@edexceledu.com', 'Edexcel'); // Use direct values here
             $mail->addAddress($to);
-
+            $mail->addReplyTo('noreply@edexceledu.com', 'Support');
             // Content
             $mail->isHTML(true); // Set email format to plain text
             $mail->Subject = $subject;
             $mail->Body = $body;
-
+            $mail->AltBody = strip_tags($body);
             $mail->send();
             // echo "Email has been sent to $to";
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
-        // $mail = new PHPMailer(true);
-        // $pass = env('email_pass');
-        // $name = env('email_name');
-
-        // try {
-        //     $mail->isSMTP();
-        //     $mail->Host = 'smtp.hostinger.com';
-        //     $mail->SMTPAuth = true;
-        //     $mail->Username =  $name;  // Your email
-        //     $mail->Password =  $pass;  // Your password
-        //     $mail->SMTPSecure = 'tls';  // Encryption method
-        //     $mail->Port = 587;  // SMTP port
-
-        //     // Email settings
-        //     $mail->setFrom($name, 'Edexcel');
-        //     $mail->addAddress($to_email, $to_name);
-        //     $mail->isHTML(true);
-        //     $mail->Subject = $subject;
-        //     $mail->Body    = $body;
-        //     $mail->AltBody = 'This is the plain text version  of the email body.';
-
-        //     if ($mail->send()) {
-        //         Log::info("Email sent to $to_email successfully!");
-        //         return redirect()->route('newhome')->with('success', 'Email sent successfully!');
-        //     } else {
-        //         Log::error("Email sending failed to $to_email.");
-        //         return redirect()->back()->with('error', 'Email sending failed. Please try again.');
-        //     }
-        // } catch (Exception $e) {
-        //     Log::error("Email sending failed: " . $e->getMessage());
-        //     return redirect()->back()->with('error', 'Email sending failed. Please try again.');
-        // }
     }
 
     public function sendLink(Request $request)
