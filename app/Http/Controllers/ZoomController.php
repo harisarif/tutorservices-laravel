@@ -153,36 +153,39 @@ class ZoomController extends Controller
     {
 
 
+        
+
         try {
             $teacher = Tutor::where('teacher_id', $request->teacher_id)->firstOrFail();
             $student = Student::where('user_id', $request->student_id)->firstOrFail();
-
+    
             $accessToken = Session::get('zoom_access_token');
             if (!$accessToken) {
                 return redirect()->route('zoom.login')->with('error', 'Zoom access token not found. Please login.');
             }
-
+    
             $response = Http::withToken($accessToken)->post('https://api.zoom.us/v2/users/me/meetings', [
                 'topic' => 'Student & Teacher Meeting',
-                'type' => 1, // Instant meeting
+                'type' => 1,
                 'settings' => [
                     'join_before_host' => true,
                     'host_video' => true,
                     'participant_video' => true,
                 ],
             ]);
-
+    
             if ($response->failed()) {
                 return back()->with('error', 'Failed to create Zoom meeting.');
             }
-
-            $meeting = $response->json();
-
-            // Send Zoom meeting email to teacher and student
+    
+            $meeting = $response->json(); // ✅ Defined only after success
+    
+            // ✅ Emails sent only after meeting is created
             Mail::to($teacher->email)->send(new ZoomMeetingNotification($teacher, $meeting));
             Mail::to($student->email)->send(new ZoomMeetingNotification($student, $meeting));
-
+    
             return back()->with('success', 'Zoom meeting created and emails sent successfully.');
+        
         } catch (ModelNotFoundException $e) {
             return back()->with('error', 'Teacher or student not found.');
         } catch (\Exception $e) {

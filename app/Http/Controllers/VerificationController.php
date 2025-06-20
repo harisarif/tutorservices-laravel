@@ -165,18 +165,20 @@ class VerificationController extends Controller
         $mail = new PHPMailer(true);
 
         try {
-            $mail->isSMTP();
-            $mail->Host = 'smtp.hostinger.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = $name;
-            $mail->Password = $pass;
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
+            $mail->isSMTP();                                            // Set mailer to use SMTP
+                $mail->Host       = 'smtp.hostinger.com';                     // Specify main and backup SMTP servers
+                $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                $mail->Username = $name;
+                $mail->Password = $pass;        
+                                     
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;         // Enable TLS encryption, PHPMailer::ENCRYPTION_SMTPS also accepted
+                $mail->Port       = 465;
+            
 
             // Recipients
-            $mail->setFrom('noreply@edexceledu.com', 'Edexcel'); // Use direct values here
+            $mail->setFrom('info@edexceledu.com', 'Edexcel'); // Use direct values here
             $mail->addAddress($to);
-            $mail->addReplyTo('noreply@edexceledu.com', 'Support');
+            $mail->addReplyTo('info@edexceledu.com', 'Support');
             // Content
             $mail->isHTML(true); // Set email format to plain text
             $mail->Subject = $subject;

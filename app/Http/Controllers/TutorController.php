@@ -413,7 +413,6 @@ class TutorController extends Controller
             'experience' => 'required|string|max:255',
             'dob' => 'required|string|max:255',
             'document' => 'required|mimes:pdf,xlsx,docx|max:2048',
-
             'specialization' => 'required|array', // Ensure it's an array
             'specialization.*' => 'string',
             'language_proficient' => 'required|array',
@@ -437,15 +436,7 @@ class TutorController extends Controller
         // Check if user already exists
         $user = User::where('email', $request->input('email'))->first();
 
-        if (!$user) {
-            // Create the User first
-            $user = new User();
-            $user->name = $request->input('f_name') . ' ' . $request->input('l_name');
-            $user->email = $request->input('email');
-            $user->password = $hashedPassword;
-            $user->role = 'tutor';
-            $user->save();
-        }
+        
         if ($request->hasFile('document')) {
             $file = $request->file('document');
             // Save the file to 'public/documents' with a unique name
@@ -514,58 +505,66 @@ class TutorController extends Controller
 
         // Save the Tutor instance
         $tutor->save();
-
+        if (!$user) {
+            // Create the User first
+            $user = new User();
+            $user->name = $request->input('f_name') . ' ' . $request->input('l_name');
+            $user->email = $request->input('email');
+            $user->password = $hashedPassword;
+            $user->role = 'tutor';
+            $user->save();
+        }
         // Send notification emails with HTML content
         $toStudent = $tutor->email;
         $subjectStudent = "Welcome to Edexcel Academy - Verify Your Email!";
         $bodyStudent = "
                         <div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>
-    <table width='100%' cellpadding='0' cellspacing='0' border='0'>
-        <tr>
-            <td align='center'>
-                <table style='max-width: 600px; width: 100%; border: 1px solid #ddd; border-radius: 8px; background-color: #fff;' cellpadding='0' cellspacing='0'>
-                    <!-- Header -->
-                    <tr>
-                        <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 20px; font-weight: bold; color: #4CAF50; border-top-left-radius: 8px; border-top-right-radius: 8px;'>
-                            Welcome to Edexcel Academy
-                        </td>
-                    </tr>
-                    
-                    <!-- Body -->
-                    <tr>
-                     <td style='padding: 20px; text-align: left;'>
-                             
-                            <p style='font-size: 16px; margin: 0;'>Dear {$tutor->f_name} {$tutor->l_name},</p>
-                            <p style='font-size: 16px; margin: 10px 0;'>
-                                Welcome to Edexcel Academy! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.
-                            </p>
-                            
+                            <table width='100%' cellpadding='0' cellspacing='0' border='0'>
+                                <tr>
+                                    <td align='center'>
+                                        <table style='max-width: 600px; width: 100%; border: 1px solid #ddd; border-radius: 8px; background-color: #fff;' cellpadding='0' cellspacing='0'>
+                                            <!-- Header -->
+                                            <tr>
+                                                <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 20px; font-weight: bold; color: #4CAF50; border-top-left-radius: 8px; border-top-right-radius: 8px;'>
+                                                    Welcome to Edexcel Academy
+                                                </td>
+                                            </tr>
+                                            
+                                            <!-- Body -->
+                                            <tr>
+                                            <td style='padding: 20px; text-align: left;'>
+                                                    
+                                                    <p style='font-size: 16px; margin: 0;'>Dear {$tutor->f_name} {$tutor->l_name},</p>
+                                                    <p style='font-size: 16px; margin: 10px 0;'>
+                                                        Welcome to Edexcel Academy! 🎉 We’re excited to support you on your educational journey with top-notch resources and interactive learning.
+                                                    </p>
+                                                    
 
-                            <p style='font-size: 16px; margin: 10px 0;'>
-                                If you need any assistance, contact us at <a href='mailto:info@edexceledu.com' style='color: #4CAF50; text-decoration: none;'>info@edexceledu.com</a> or +971566428066.
-                            </p>
+                                                    <p style='font-size: 16px; margin: 10px 0;'>
+                                                        If you need any assistance, contact us at <a href='mailto:info@edexceledu.com' style='color: #4CAF50; text-decoration: none;'>info@edexceledu.com</a> or +971566428066.
+                                                    </p>
 
-                            <p style='font-size: 16px; margin: 10px 0;'>Best regards,</p>
-                            <p style='font-size: 16px; font-weight: bold; margin: 0;color:#43b979;'>The Edexcel Team</p>
-                        </td>
-                    </tr>
+                                                    <p style='font-size: 16px; margin: 10px 0;'>Best regards,</p>
+                                                    <p style='font-size: 16px; font-weight: bold; margin: 0;color:#43b979;'>The Edexcel Team</p>
+                                                </td>
+                                            </tr>
 
-                    <!-- Footer -->
-                    <tr style='margin-bottom:10px;display:flex;'>
-                                            <td align='left' style='color:#43b979; font-size:11px;margin-left:5px;width:50%;'>&copy; 2025 Edexcel Academy. All rights reserved.</td>
-                                            <td align='right' style='display:flex;margin-left:25%'>
-                                                <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:5px;'>{$facebookImg}</a>
-                                                <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank' style='margin-right:5px;'>{$instagramImg}</a>
-                                                <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank' style='margin-right:5px;'>{$linkedinImg}</a>
-                                                <a href='https://youtube.com/@edexcelonline01?si=EuQwX0tL3zk4J-2p' target='_blank'>{$youtubeImg}</a>
-                                            </td>
-                                        </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-</div>
-";
+                                            <!-- Footer -->
+                                            <tr style='margin-bottom:10px;display:flex;'>
+                                                                    <td align='left' style='color:#43b979; font-size:11px;margin-left:5px;width:50%;'>&copy; 2025 Edexcel Academy. All rights reserved.</td>
+                                                                    <td align='right' style='display:flex;margin-left:25%'>
+                                                                        <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:5px;'>{$facebookImg}</a>
+                                                                        <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank' style='margin-right:5px;'>{$instagramImg}</a>
+                                                                        <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank' style='margin-right:5px;'>{$linkedinImg}</a>
+                                                                        <a href='https://youtube.com/@edexcelonline01?si=EuQwX0tL3zk4J-2p' target='_blank'>{$youtubeImg}</a>
+                                                                    </td>
+                                                                </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        ";
 
         // Send HTML email
         $this->sendEmail($toStudent, $subjectStudent, $bodyStudent); // true indicates HTML format
@@ -574,16 +573,16 @@ class TutorController extends Controller
         $toAdmin = 'info@edexceledu.com';
         $subjectAdmin = "New Teacher Enrollment Notification";
         $bodyAdmin = "
-    <p>Dear Babar,</p>
-    <p>I am pleased to inform you that a new teacher, <strong>{$tutor->f_name} {$tutor->l_name}</strong>, has successfully enrolled through our website. Below are the details:</p>
-    <ul>
-        <li><strong>Full Name:</strong> {$tutor->f_name} {$tutor->l_name}</li>
-        <li><strong>Email:</strong> {$tutor->email}</li>
-        <li><strong>Contact:</strong> {$tutor->phone}</li>
-        <li><strong>Location:</strong> {$tutor->location}</li>
-    </ul>
-    <p>Please ensure that {$tutor->f_name} {$tutor->l_name} is added to our records and receives all necessary welcome materials.</p>
-";
+                <p>Dear Babar,</p>
+                <p>I am pleased to inform you that a new teacher, <strong>{$tutor->f_name} {$tutor->l_name}</strong>, has successfully enrolled through our website. Below are the details:</p>
+                <ul>
+                    <li><strong>Full Name:</strong> {$tutor->f_name} {$tutor->l_name}</li>
+                    <li><strong>Email:</strong> {$tutor->email}</li>
+                    <li><strong>Contact:</strong> {$tutor->phone}</li>
+                    <li><strong>Location:</strong> {$tutor->location}</li>
+                </ul>
+                <p>Please ensure that {$tutor->f_name} {$tutor->l_name} is added to our records and receives all necessary welcome materials.</p>
+            ";
 
         // Send HTML email to admin
         $this->sendEmail($toAdmin, $subjectAdmin, $bodyAdmin, true);
