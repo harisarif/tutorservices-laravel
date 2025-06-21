@@ -15,7 +15,7 @@
  <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
  <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
  <script src="{{ asset('js/jquery.js') }}"></script>
  <style>
      .select2-container--default .select2-selection--multiple .select2-selection__choice {
@@ -97,11 +97,11 @@
                              onclick="verifyOTP()">Verify OTP</button>
                      </div>
 
-                     <p class="text-center mt-3">
-                         Didn't receive the OTP?
-                         <a href="javascript:void(0);" class="text-success fw-semibold" onclick="resendOTP()">Resend</a>
-                         <span id="resendMessage" class="text-muted ms-2" style="display: none;">Sending...</span>
-                     </p>
+                   <p class="text-center mt-3">
+    Didn't receive the OTP?
+    <a href="javascript:void(0);" id="resendLink" class="text-success fw-semibold" onclick="resendOTP()">Resend</a>
+    <span id="resendMessage" class="text-muted ms-2" style="display: none;">Sending...</span>
+</p>
 
                  </form>
              </div>
@@ -463,21 +463,31 @@
                              </div>
                          </div>
                          <div class="form-row d-flex flex-column flex-md-row">
-                             <div class="col-md-6 px-2 mb-2">
-                                 <label for="teaching" class="form-label" style="color:#42b979;"><strong>Subject You Can
-                                         Teach</strong></label>
+                    
+    <div class="col-md-6 px-2 mb-2">
+        <label for="teaching" class="form-label" style="color:#42b979;">
+            <strong>Subject You Can Teach</strong>
+        </label>
 
-                                 <select class="form-select teaching" id="teachingSubjects" name="teaching[]"
-                                     style="border: 1px solid rgba(137, 135, 135, 0.5);">
-                                     @foreach (config('subjects.subjects') as $subject)
-                                     <option value="{{ $subject }}">
-                                         {{$subject}}
-                                     </option>
-                                     @endforeach
+        <div class="row">
+            <div class="col-11">
+                <select class="form-select teaching" id="teachingSubjects" name="teaching[]"
+                    style="border: 1px solid rgba(137, 135, 135, 0.5);">
+                    @foreach (config('subjects.subjects') as $subject)
+                        <option value="{{ $subject }}">{{ $subject }}</option>
+                    @endforeach
+                </select>
+            </div>
 
-                                 </select>
+            <div class="col-1 d-flex align-items-center">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addSubjectModal"
+                    style="padding: 6px 10px; font-size: 16px;">
+                    +
+                </button>
+            </div>
+        </div>
+    </div>
 
-                             </div>
                              <div class="col-md-6 px-2 mb-2">
                                  <label for="language" class="form-label" style="color:#42b979;">
                                      <strong>Language Teaching</strong>
@@ -715,6 +725,23 @@
          </div>
      </div>
  </div>
+<div class="modal fade" id="addSubjectModal" tabindex="-1" aria-labelledby="addSubjectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius:10px;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addSubjectModalLabel">Add New Subject</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="newSubjectInput" class="form-control" placeholder="Enter new subject">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" onclick="addNewSubject()">Add Subject</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
  @endsection
@@ -732,7 +759,41 @@
  <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
  <script src=" {{ asset('js/tutor.js') }}"></script>
  <script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script>
- <script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+ <script>function addNewSubject() {
+    const newSubject = document.getElementById('newSubjectInput').value.trim();
+    if (newSubject === '') {
+        alert('Please enter a subject name.');
+        return;
+    }
+
+    const select = document.getElementById('teachingSubjects');
+
+    // Check if subject already exists
+    const existingOption = Array.from(select.options).find(opt => opt.value.toLowerCase() === newSubject.toLowerCase());
+    if (existingOption) {
+        alert('Subject already exists in the list.');
+        return;
+    }
+
+    // Create new option
+    const option = document.createElement('option');
+    option.value = newSubject;
+    option.text = newSubject;
+    option.selected = true; // select newly added one
+
+    select.add(option);
+
+    // Clear input
+    document.getElementById('newSubjectInput').value = '';
+
+    // Close modal
+    const modalEl = document.getElementById('addSubjectModal');
+    const modal = bootstrap.Modal.getInstance(modalEl);
+    modal.hide();
+}
+
      jQuery(document).ready(function($) {
          $(".owl-carousel").owlCarousel({
              nav: true,
@@ -964,38 +1025,49 @@
      });
  </script>
  <script>
-     function resendOTP() {
-         let email = "{{ session('verifiedEmail') }}"; // Get the user's email
-         let csrfToken = "{{ csrf_token() }}"; // CSRF token for security
+    function resendOTP() {
+    const resendMessage = document.getElementById('resendMessage');
+    const resendLink = document.getElementById('resendLink');
 
-         document.getElementById('resendMessage').style.display = 'inline'; // Show loading text
+    // Show sending message
+    resendMessage.style.display = 'inline';
+    // Disable the link temporarily
+    resendLink.style.pointerEvents = 'none';
+    resendLink.style.opacity = '0.6';
 
-         fetch("{{ route('send.verification.email') }}", {
-                 method: "POST",
-                 headers: {
-                     "Content-Type": "application/json",
-                     "X-CSRF-TOKEN": csrfToken
-                 },
-                 body: JSON.stringify({
-                     email: email
-                 }) // Send email in JSON format
-             })
-             .then(response => response.json())
-             .then(data => {
-                 if (data.success) {
-                     document.getElementById('resendMessage').innerText = "OTP sent successfully! ✅";
-                     setTimeout(() => {
-                         document.getElementById('resendMessage').style.display = 'none';
-                     }, 3000);
-                 } else {
-                     document.getElementById('resendMessage').innerText = "Failed to resend OTP. ❌";
-                 }
-             })
-             .catch(error => {
-                 console.error("Error:", error);
-                 document.getElementById('resendMessage').innerText = "Something went wrong. 😞";
-             });
-     }
+    fetch('/resend-verification-session', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        resendMessage.style.display = 'none';
+
+        if (data.success) {
+            alert(data.success);
+        } else {
+            alert(data.error || 'Failed to resend email.');
+        }
+
+        // Re-enable after 5 seconds
+        setTimeout(() => {
+            resendLink.style.pointerEvents = 'auto';
+            resendLink.style.opacity = '1';
+        }, 5000);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        resendMessage.style.display = 'none';
+        alert('An error occurred while resending the email.');
+
+        resendLink.style.pointerEvents = 'auto';
+        resendLink.style.opacity = '1';
+    });
+}
+
  </script>
 
  <script>
@@ -1040,9 +1112,7 @@
              });
      }
 
-     function resendOTP() {
-         alert("OTP has been resent to your email!"); // Placeholder for OTP resend functionality
-     }
+    
  </script>
  <script>
      document.addEventListener('DOMContentLoaded', function() {

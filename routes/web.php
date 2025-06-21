@@ -196,6 +196,7 @@ Route::get('/logout', function () {
     return redirect('/');
 })->name('logout');
 
+Route::post('/resend-verification-session', [VerificationController::class, 'resendVerificationEmailFromSession']);
 
 Route::middleware('auth:admin')->group(function () {
     Route::get('/teachers-list', [TutorController::class, 'fetchTeachers'])->name('teachers.list');

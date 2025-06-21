@@ -107,12 +107,77 @@ class VerificationController extends Controller
 
         // Send the email using PHPMailer
         $this->sendEmails($email, $otp, $subject, $body, true); // true means it's sending HTML content
-
+        //  Store email in session so it persists for resend
+    session(['verified_email' => $email]);
         return redirect()->route('tutor-signup')->with([
             'success' => 'Verification link sent to your email!',
             'verifiedEmail' => $email
         ]);
+    }    public function resendVerificationEmailFromSession()
+{
+     $email = session('verified_email', '');
+
+    if (!$email) {
+        return response()->json(['error' => 'No email found in session.'], 404);
     }
+
+    // Retrieve existing OTP from session or generate new if expired
+    $otp = session('otp');
+    $otpExpiry = session('otp_expiry');
+
+    if (!$otp || now()->greaterThan($otpExpiry)) {
+        $otp = rand(100000, 999999);
+        session(['otp' => $otp, 'otp_expiry' => now()->addMinutes(10)]);
+    }
+
+    $subject = 'Email Verification';
+
+    // Social icons
+    $facebookImg = "<img src='https://edexceledu.com/icons/facebook.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
+    $instagramImg = "<img src='https://edexceledu.com/icons/instagram.jpeg' alt='Instagram' width='20' height='20' style='vertical-align:middle'>";
+    $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='LinkedIn' width='20' height='20' style='vertical-align:middle'>";
+    $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg' alt='YouTube' width='20' height='20' style='vertical-align:middle'>";
+
+    // Email body (same as your earlier one)
+    $body = "
+        <div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>
+            <table style='max-width: 600px; margin: 0 auto; border: 1px solid #ddd; border-radius: 8px;'>
+                <thead>
+                    <tr>
+                        <th style='background-color: #f4f4f4; padding: 15px; text-align: center;'>
+                            <h2 style='margin: 0; color: #4CAF50;'>Welcome to Edexcel Academy</h2>
+                        </th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td style='padding: 20px; text-align: left;'>
+                        <p style='margin: 0; font-size: 16px;'>Dear User,</p>
+                        <p style='margin: 10px 0; font-size: 16px;'>Thank you for signing up!</p>
+                        <p style='margin: 10px 0; font-size: 16px;'>Your One-Time Password (OTP) for verification is:</p>
+                        <p style='text-align: center; font-size: 20px; font-weight: bold; color: #4CAF50;'>$otp</p>
+                        <p style='margin: 10px 0; font-size: 16px;'>This OTP is valid for 10 minutes. Do not share it with anyone.</p>
+                        <p style='margin: 10px 0; font-size: 16px;'>If you did not sign up for an account, please ignore this email.</p>
+                        <p style='margin: 10px 0; font-size: 16px;'>Best regards,</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style='padding: 10px; text-align: center;'>
+                        <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:5px;'>$facebookImg</a>
+                        <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank' style='margin-right:5px;'>$instagramImg</a>
+                        <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank' style='margin-right:5px;'>$linkedinImg</a>
+                        <a href='https://youtube.com/@edexcelonline01?si=EuQwX0tL3zk4J-2p' target='_blank'>$youtubeImg</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    ";
+
+    // Send email
+    $this->sendEmails($email, $otp, $subject, $body, true);
+
+    return response()->json(['success' => 'Verification email has been resent successfully.']);
+}
+
     public function signup()
     {
         $schoolClasses = SchoolClass::all();

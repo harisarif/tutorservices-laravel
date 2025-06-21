@@ -401,8 +401,7 @@ class TutorController extends Controller
         return "<img src='data:image/svg+xml;base64,{$base64}' width='{$width}' height='{$height}' alt='{$name}' style='vertical-align:middle;' />";
     }
     public function create(Request $request)
-    {
-        // dd($request);
+    {   
         $rules = [
             'f_name' => 'required|string|max:255',
             'intro' => 'nullable|string|max:255',
@@ -463,7 +462,7 @@ class TutorController extends Controller
 
         $studentExists = Student::where('id', 2)->exists();
         // Now create the Tutor and associate with the User
-        $tutor = new Tutor();
+        $tutor = new Tutor();  
         $tutor->teacher_id = mt_rand(1000, 9999);
         $tutor->f_name = $request->input('f_name');
         $tutor->description = $request->input('description');
@@ -482,7 +481,6 @@ class TutorController extends Controller
         $tutor->curriculum = serialize($request->input('courses'));
         $tutor->teaching = serialize($request->input('teaching'));
         $tutor->phone = $request->input('phone');
-        $user->password = Hash::make($request->input('password'));
         $tutor->video = 'storage/' . $videoPath; // Save video path in database
         $tutor->specialization = json_encode($request->input('specialization'));
         $tutor->password = $hashedPassword;
@@ -500,20 +498,21 @@ class TutorController extends Controller
         $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
         $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
 
-        // Assign the user_id to the tutor
-        $tutor->user_id = $user->id;
+        
+// If no user, create new one
+if (!$user) {
+   
+    $user = new User();
+    $user->name = $request->input('f_name') . ' ' . $request->input('l_name');
+    $user->email = $request->input('email');
+    $user->password = $hashedPassword;
+    $user->role = 'tutor';
+    $user->save();
+}
 
-        // Save the Tutor instance
-        $tutor->save();
-        if (!$user) {
-            // Create the User first
-            $user = new User();
-            $user->name = $request->input('f_name') . ' ' . $request->input('l_name');
-            $user->email = $request->input('email');
-            $user->password = $hashedPassword;
-            $user->role = 'tutor';
-            $user->save();
-        }
+// Always assign user_id to tutor (whether user existed before or created now)
+$tutor->user_id = $user->id;
+$tutor->save();
         // Send notification emails with HTML content
         $toStudent = $tutor->email;
         $subjectStudent = "Welcome to Edexcel Academy - Verify Your Email!";
