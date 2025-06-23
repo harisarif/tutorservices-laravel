@@ -518,16 +518,19 @@
                                                 </div>
                                                 @endforeach
                                             </div>
-                                            
                                             <div class="d-flex text-secondary my-1">
-                                                <span class="me-2"><i class="fa-solid fa-book"
+                                                <span class="me-2"><i class="fa-solid fa-globe"
                                                         style="font-size: 13px; margin-top: 5px;color: #1cc88a !important;"></i></span>
-                                                        @foreach(json_decode($item->teaching, true) as $teach)
-                                                            <p class="mb-0" style="color:black; transform: scaleY(1); text-transform:capitalize">
-                                                                {{ $teach }}
-                                                            </p>
-                                                        @endforeach
+                                                <p class="mb-0"
+                                                    style="color:black; transform: scaleY(1);text-transform:capitalize">
+                                                    @if($item->edu_teaching && is_array(json_decode($item->edu_teaching, true)))
+                                                    {{ implode(', ', json_decode($item->edu_teaching, true)) }}
+                                                    @else
+                                                    {{ $item->edu_teaching ?? 'Nullable' }}
+                                                    @endif
+                                                </p>
                                             </div>
+                                            
                                             <div class="d-flex text-secondary my-1">
                                                 <span class="me-2"><i class="fa-solid fa-venus-mars"
                                                         style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
