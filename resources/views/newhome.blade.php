@@ -523,11 +523,11 @@
                                                         style="font-size: 13px; margin-top: 5px;color: #1cc88a !important;"></i></span>
                                                 <p class="mb-0"
                                                     style="color:black; transform: scaleY(1);text-transform:capitalize">
-                                                    @if($item->edu_teaching && is_array(json_decode($item->edu_teaching, true)))
+                                                    <!-- @if($item->edu_teaching && is_array(json_decode($item->edu_teaching, true)))
                                                     {{ implode(', ', json_decode($item->edu_teaching, true)) }}
                                                     @else
                                                     {{ $item->edu_teaching ?? 'Nullable' }}
-                                                    @endif
+                                                    @endif -->
                                                 </p>
                                             </div>
                                             <div class="d-flex text-secondary my-1">
