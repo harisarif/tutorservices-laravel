@@ -489,7 +489,7 @@ class TutorController extends Controller
         $tutor->edu_teaching = json_encode($request->input('edu_teaching'));
         $tutor->availability_status = $request->input('availability_status');
         $tutor->student_id = $studentExists ? 2 : null;
-        $tutor->status = 'active';
+        $tutor->status = 'inactive';
         $tutor->session_id = session()->getId();
         // Upload profile image
         $imagePath = $request->file('profileImage')->store('uploads', 'public');
@@ -541,7 +541,7 @@ $tutor->save();
                                                     
 
                                                     <p style='font-size: 16px; margin: 10px 0;'>
-                                                        If you need any assistance, contact us at <a href='mailto:info@edexceledu.com' style='color: #4CAF50; text-decoration: none;'>info@edexceledu.com</a> or +971566428066.
+                                                       Your application will be reviewed by an admin and activated upon approval If you need any assistance, contact us at <a href='mailto:info@edexceledu.com' style='color: #4CAF50; text-decoration: none;'>info@edexceledu.com</a> or +971566428066.
                                                     </p>
 
                                                     <p style='font-size: 16px; margin: 10px 0;'>Best regards,</p>
