@@ -99,7 +99,16 @@ class VerificationController extends Controller
                                         </td>
                                     </tr>
                                         <tr style='margin-bottom:10px;display:flex;'>
-                                            
+                                            <td align='left' style='color:#43b979; font-size:11px; margin-left:5px; width:50%;'>
+                                                &copy; 2025 Edexcel Academy. All rights reserved.
+                                            </td>
+                                            <td align='right' style='display:flex;margin-left:25%;'>
+                                                <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:5px;'>{$facebookImg}</a>
+                                                <a href='https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr' target='_blank' style='margin-right:5px;'>{$instagramImg}</a>
+                                                <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank' style='margin-right:5px;'>{$linkedinImg}</a>
+                                                <a href='https://youtube.com/@edexcelonline01?si=EuQwX0tL3zk4J-2p' target='_blank'>{$youtubeImg}</a>
+                                            </td>
+
                                         </tr>
                                     </table>
                                 </div>

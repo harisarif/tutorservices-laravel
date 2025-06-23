@@ -479,7 +479,8 @@ class TutorController extends Controller
         $tutor->experience = $request->input('experience');
         $tutor->language_tech = $request->input('language_tech');
         $tutor->curriculum = serialize($request->input('courses'));
-        $tutor->teaching = serialize($request->input('teaching'));
+        // $tutor->teaching = serialize($request->input('teaching'));
+        $tutor->teaching = json_encode($request->input('teaching'));
         $tutor->phone = $request->input('phone');
         $tutor->video = 'storage/' . $videoPath; // Save video path in database
         $tutor->specialization = json_encode($request->input('specialization'));
@@ -645,6 +646,7 @@ $tutor->save();
 
         $tutor->language = json_decode($tutor->language, true) ?? [];
         $tutor->specialization = json_decode($tutor->specialization, true) ?? ['Not Specified'];
+        $tutor->teaching = json_decode($tutor->teaching, true) ?? ['Not Specified'];
 
         if ($tutor->dob) {
             $dob = Carbon::parse($tutor->dob);

@@ -418,7 +418,7 @@
                 <div id="tutorsContainer">
                     @foreach ($tutors as $item)
                     @if($item->status != 'inactive')
-
+                   
                     <div class="ad-form">
                         <div class="container-fluid pt-2 px-0">
 
@@ -510,12 +510,12 @@
                                                     <img src="{{ asset('image/flag.svg') }}" class="img-fluid" alt="">
                                                 </div>
                                             </div>
-                                            <div class="mt-1 cm">
+                                            <div class="mt-1 cm d-flex">
                                                 @foreach($item->specialization as $specialization)
-                                                <span id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold">
+                                                <div id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold">
                                                     <i class="fa-solid fa-briefcase me-1"></i>
                                                     {{ trim($specialization) }}
-                                                </span>
+                                                </div>
                                                 @endforeach
                                             </div>
                                             <div class="d-flex text-secondary my-1">
@@ -529,6 +529,15 @@
                                                     {{ $item->edu_teaching ?? 'Nullable' }}
                                                     @endif
                                                 </p>
+                                            </div>
+                                            <div class="d-flex text-secondary my-1">
+                                                <span class="me-2"><i class="fa-solid fa-book"
+                                                        style="font-size: 13px; margin-top: 5px;color: #1cc88a !important;"></i></span>
+                                                        @foreach(json_decode($item->teaching, true) as $teach)
+                                                            <p class="mb-0" style="color:black; transform: scaleY(1); text-transform:capitalize">
+                                                                {{ $teach }}
+                                                            </p>
+                                                        @endforeach
                                             </div>
                                             <div class="d-flex text-secondary my-1">
                                                 <span class="me-2"><i class="fa-solid fa-venus-mars"
