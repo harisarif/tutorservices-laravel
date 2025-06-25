@@ -26,6 +26,9 @@ use App\Notifications\TutorRequestNotification;
 
 class StudentController extends Controller
 {
+    public function LoginPage() {
+        return view('login-2');
+    }
     public function index()
     {
         $subjects = collect(config('subjects.subjects'));

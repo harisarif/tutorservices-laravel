@@ -55,7 +55,8 @@ Route::get('lang/{locale}', function ($locale) {
     return redirect()->back();
 })->name('language.change');
 Route::view('/welcome', 'welcome');
-
+Route::get('/login-new', [App\Http\Controllers\StudentController::class, 'LoginPage'])
+    ->name('LoginPage.new');
 Route::get('/basicsignup', function () {
     return view('basicsignup');
 })->name('basicsignup');

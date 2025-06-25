@@ -57,4 +57,5 @@ class HomeController extends Controller
     public function studenthiring() {
         return view('student-hiring');
     }
+    
 }
