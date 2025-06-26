@@ -37,7 +37,7 @@ const toggle = (para, arr) => {
 
 window.addEventListener('load', () => {
     setTimeout(() => {
-        const MODAL_BOX = document.getElementById('newsletterModal');
+        const MODAL_BOX = document.getElementById('allModal');
         MODAL_BOX.style.display = 'flex';
         MODAL_BOX.children[0].classList.add('dropModal')
     }, 1000)

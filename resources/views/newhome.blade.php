@@ -190,8 +190,8 @@
                         @auth
                         @if (Auth::user()->role === 'user')
                         <div class="col-12 d-flex">
-                           <!-- Change Password Button -->
-<!-- <a class="nav-link text-decoration-none solid_btn me-1" href="#" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+                            <!-- Change Password Button -->
+                            <!-- <a class="nav-link text-decoration-none solid_btn me-1" href="#" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
     <i class="fa fa-key text-white"></i>
 </a> -->
                             <a class="nav-link text-decoration-none solid_btn me-1" href="{{ route('logout') }}"
@@ -418,7 +418,7 @@
                 <div id="tutorsContainer">
                     @foreach ($tutors as $item)
                     @if($item->status != 'inactive')
-                   
+
                     <div class="ad-form">
                         <div class="container-fluid pt-2 px-0">
 
@@ -530,7 +530,7 @@
                                                     @endif
                                                 </p>
                                             </div>
-                                            
+
                                             <div class="d-flex text-secondary my-1">
                                                 <span class="me-2"><i class="fa-solid fa-venus-mars"
                                                         style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
@@ -629,8 +629,8 @@
                                             </div>
                                             <div>
                                                 <div class="mt-2" id="btn-container">
-                                                @if(Auth::check() && Auth::user()->role === 'user')
-                                                    <button   data-teacher-id="{{ $item->teacher_id }}" type="button" id="demo"
+                                                    @if(Auth::check() && Auth::user()->role === 'user')
+                                                    <button data-teacher-id="{{ $item->teacher_id }}" type="button" id="demo"
                                                         class="btn1 btn-outline-dark rounded fw-bold text-light request-demo-btn">
                                                         Request a Demo
                                                     </button>
@@ -1427,64 +1427,63 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content" style="border-radius: 16px; overflow: hidden; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
 
-            <div class="modal-body p-0 d-flex flex-wrap">
+            <div class="modal-body p-0 d-flex">
 
-                <!-- Left Side Image -->
-                <div class="col-md-6 d-none d-md-block">
-                    <img src="{{ asset('images/tutor-new.jpeg') }}" alt="student-signup" class="h-100 w-100">
-                </div>
+                <div class="left-panel col-6">
+                    <!-- <span class="fs-2 pointer foucs mb-1 position-absolute top-0" style="right:0px" onclick="document.getElementById('signupPromptModal').style.display = 'none'"> &times;</span> -->
+                    <h2 class="mb-0">Create Your Account</h4>
 
-                <!-- Right Side Form -->
-                <div class="col-md-6 p-4 bg-white">
-                    <span class="fs-2 pointer foucs mb-1 position-absolute top-0" style="right:0px" onclick="document.getElementById('signupPromptModal').style.display = 'none'"> &times;</span>
-                    <h4 class="text-center mb-3" style="color: #42b979;">Create Your Account</h4>
-
-                    <!-- Social Buttons -->
-                    <div class="mb-3 d-grid gap-2">
-                        <a href="{{ route('social.redirect','google') }}" class="btn btn-outline-success d-flex align-items-center justify-content-center" style="border-color: #42b979; color: #42b979; font-size: 14px;">
-                            <i class="fab fa-google me-2"></i> Sign in with Google
-                        </a>
-
-                        <!-- <a href="{{ route('social.redirect', 'facebook') }}" class="btn btn-outline-success d-flex align-items-center justify-content-center"
-                            style="border-color: #42b979; color: #42b979; font-size: 14px;">
-                            <i class="fab fa-facebook me-2"></i> Sign up with Facebook
-                        </a> -->
-                        <!-- <a href="{{ route('social.redirect', 'facebook') }}" class="btn btn-outline-success d-flex align-items-center justify-content-center"
-                            style="border-color: #42b979; color: #42b979; font-size: 14px;">
-                            <i class="fab fa-facebook me-2"></i> Sign up with Outlook
-                        </a> -->
-                    </div>
-
-                    <div class="text-center my-2 text-muted" style="font-size: 13px;">OR</div>
+                    <p class="my-2">How to i get started</p>
 
                     <!-- Form -->
-                    <form action="{{ route('student-create') }}" method="POST" class="pages" enctype="multipart/form-data">
+                    <form action="{{ route('student-create') }}" method="POST" class="pages" enctype="multipart/form-data" autocomplete="off">
                         @csrf
+                        <div class="modal-form-group">
+                            <img src="{{ asset('images/Frame-user.png') }}" alt="email icon" />
+                            <input type="text" placeholder="Full Name" name="name" required autocomplete="off" autofocus />
 
-                        <div class="mb-2">
-                            <label class="form-label mb-1">Full Name</label>
-                            <input type="text" name="name" class="form-control form-control-sm" required>
                         </div>
+                        <div class="modal-form-group">
+                            <img src="{{ asset('images/formkit_email.png') }}" alt="email icon" />
+                            <input type="email" placeholder="Email Address" name="email" value="{{ old('email') }}" required autocomplete="off" autofocus class="@error('email') is-invalid @enderror" />
 
-                        <div class="mb-2">
-                            <label class="form-label mb-1">Email Address</label>
-                            <input type="email" name="email" class="form-control form-control-sm" required>
                         </div>
-
-                        <div class="mb-2">
-                            <label class="form-label mb-1">Password</label>
-                            <input type="password" name="password" class="form-control form-control-sm" required>
+                        <div class="modal-form-group">
+                            <img src="{{ asset('images/Frame.png') }}" alt="password icon" />
+                            <input type="password" placeholder="Password" class=" @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" />
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
-
-                        <button type="submit" class="btn text-white w-100 fw-semibold"
-                            style="background-color: #42b979; font-size: 14px;">
-                            Sign Up
-                        </button>
+                        <button class="login-button" type="submit">Sign Up</button>
+                        @error('email')
+                        <span class="invalid-feedback" role="alert" style="color:red;">
+                            <strong class="text-danger">{{ $message }}</strong>
+                        </span>
+                        @enderror
+                        <div class="divider">Sign Up with Others</div>
+                        
                     </form>
+                    <a class="social-btn" href="{{ route('social.redirect','google') }}">
+                            <img src="https://img.icons8.com/color/48/000000/google-logo.png" />
+                            Sign Up with <strong style="margin-left: 5px;">google</strong>
+                        </a>
 
                     <p class="mt-3 text-center" style="font-size: 12px; color: #999;">
                         Already have an account? <a href="{{ route('login') }}" style="color: #42b979;">Login here</a>
                     </p>
+                </div>
+                <div class="right-panel col-6">
+                    <div class="close-btn" onclick="document.getElementById('signupPromptModal').style.display = 'none'">×</div>
+                    <div class="card-image">
+                        <div class="icon-badge">
+                            <img src="{{ asset('images/Group11.png') }}" />
+                        </div>
+                        <h3>Online Expert Training</h3>
+                        <img src="{{ asset('images/user.png') }}" alt="Woman with tablet" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -1533,50 +1532,52 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <script>
-document.querySelectorAll('.request-demo-btn').forEach(button => {
-    button.addEventListener('click', function () {
-        const teacherId = this.getAttribute('data-teacher-id');
+    document.querySelectorAll('.request-demo-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const teacherId = this.getAttribute('data-teacher-id');
 
-        fetch('{{ route("request.demo") }}', {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-            body: JSON.stringify({ teacher_id: teacherId })
-        })
-        .then(response => {
-            if (!response.ok) throw new Error("Network error");
-            return response.json();
-        })
-        .then(data => {
-            const alertBox = document.getElementById('success');
-            const messageContainer = document.getElementById('messageres');
+            fetch('{{ route("request.demo") }}', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        teacher_id: teacherId
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) throw new Error("Network error");
+                    return response.json();
+                })
+                .then(data => {
+                    const alertBox = document.getElementById('success');
+                    const messageContainer = document.getElementById('messageres');
 
-            // Append new message (instead of replacing)
-            messageContainer.innerHTML += `<div>${data.message}</div>`;
+                    // Append new message (instead of replacing)
+                    messageContainer.innerHTML += `<div>${data.message}</div>`;
 
-            // Show the alert
-            alertBox.classList.remove('d-none');
+                    // Show the alert
+                    alertBox.classList.remove('d-none');
 
-            // Restart progress animation (optional)
-            const progressLine = alertBox.querySelector('.progress-line');
-            progressLine.classList.remove('custom-line-test'); // reset animation
-            void progressLine.offsetWidth; // reflow to restart animation
-            progressLine.classList.add('custom-line-test');
+                    // Restart progress animation (optional)
+                    const progressLine = alertBox.querySelector('.progress-line');
+                    progressLine.classList.remove('custom-line-test'); // reset animation
+                    void progressLine.offsetWidth; // reflow to restart animation
+                    progressLine.classList.add('custom-line-test');
 
-            // Auto-hide after 5s
-            setTimeout(() => {
-                alertBox.classList.add('d-none');
-            }, 5000);
-        })
-        .catch(error => {
-            console.error('Request failed:', error);
-            alert("Something went wrong");
+                    // Auto-hide after 5s
+                    setTimeout(() => {
+                        alertBox.classList.add('d-none');
+                    }, 5000);
+                })
+                .catch(error => {
+                    console.error('Request failed:', error);
+                    alert("Something went wrong");
+                });
         });
     });
-});
 </script>
 
 <script>
@@ -1692,7 +1693,7 @@ document.querySelectorAll('.request-demo-btn').forEach(button => {
             }
         });
     });
-</script> 
+</script>
 <script>
     const priceRanges = [
         "0-50", "50-100", "100-200",

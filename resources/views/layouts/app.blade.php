@@ -74,6 +74,7 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/figma.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom-select2.css') }}">
     @if(Route::is('newhome'))
     <link rel="stylesheet" href="{{ asset('css/new-home.css') }}">

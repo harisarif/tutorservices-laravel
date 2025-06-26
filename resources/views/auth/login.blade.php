@@ -46,12 +46,14 @@
             font-size: 30px;
             font-weight: 700;
             margin-bottom: 10px;
+            font-family:Epilogue;
         }
 
         .left-panel p {
             color: #6c6c6c;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             font-size: 18px;
+            font-family: Poppins;
         }
 
         .form-group {
@@ -68,7 +70,7 @@
             border: none;
             outline: none;
             width: 100%;
-            background: #f5f5f5;
+            background-color: #f5f5f5 !important;
             font-size: 14px;
             margin-left: 10px;
         }
@@ -96,6 +98,7 @@
             text-align: center;
             color: #999;
             margin-bottom: 20px;
+            font-family: Sora;
         }
 
         .social-btn {
@@ -323,17 +326,17 @@
     <div class="container">
         <div class="left-panel">
             <h2>LOGIN YOUR ACCOUNT</h2>
-            <p>How to i get started lorem ipsum dolor at?</p>
-            <form method="POST" action="{{ route('login') }}">
+            <p>How to i get started?</p>
+            <form method="POST" action="{{ route('login') }}" autocomplete="off">
                 @csrf
                 <div class="form-group">
                     <img src="{{ asset('images/formkit_email.png') }}" alt="email icon" />
-                    <input type="email" placeholder="Email Address" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus class="@error('email') is-invalid @enderror" />
+                    <input type="email" placeholder="Email Address" name="email"  required autocomplete="off" />
                     
                 </div>
                 <div class="form-group">
                     <img src="{{ asset('images/Frame.png') }}" alt="password icon" />
-                    <input type="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" />
+                    <input type="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password"/>
                     @error('password')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
