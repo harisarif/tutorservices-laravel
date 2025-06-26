@@ -1,210 +1,391 @@
-@extends('layouts.app')
-<style>
-    #cookie-banner {
-        display:none;
-    }
-    footer {
-        /* display: none !important; */
-        position: fixed;
-        bottom: 0;
-        left: 0; 
-    }
-    .container{
-        display: none;
-    }
-    .alert-danger{ 
-        z-index: 6 !important;
-        display: flex;
-        justify-content: space-between;
-        font-size: 13px !important;
-        cursor: pointer;
-        align-items: center;
-    }
-    .fa-times{
-        margin-left: 0 !important;
-    }
-    .modalBox{
-        display: none !important;
-    }
-    .card-header{
-        background: #42b979 !important;
-        color: white !important;
-    }
-    .login-button{
-        background: #42b979 !important;
-        border: none !important;
-    }
-    @media(max-width: 425px){
-        footer{
-            top: 409px;
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edexcel Academy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-    }
-    .img-cards img{
-        width: 85%;
-    }
-    .header-img img{
-        width: 75%;
-    }
-   
-    .row{
-        --bs-gutter-x: none !important;
-    }
-    .login-button{
-        width: 350px;
-    }
-    .form-check-input{
-        cursor: pointer;
-    }
-    .input-div{
-        display: flex;
-        align-items: center;
-        width: 350px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        background-color: #fff;
-    }
-    .login-button {
-        transition: 0.5s !important;
-    }
 
-    /* Pulse effect on hover */
-    .login-button:hover {
-        background-color: #36a367;
-        box-shadow: 0 0 15px rgba(66, 185, 121, 0.6);
-        transform: scale(1.1);
-    }
-    main{
-        background: linear-gradient(45deg, #42b979, transparent);
-        height: 100vh;
-    }
-    [dir="rtl"] .form-check  {
-       width: 77%;
-    }
-    [dir="rtl"] .btn {
-       margin: 0 !important;
-    }
-    [dir="rtl"] .form-check-label {
-      width: 69%;
-    }
-    .login-heading h3{
-        margin-left: -2%;
-    }
-    
-</style>
-@if (session('error'))
-        <div class="alert alert-danger" style="z-index: 6;
-    padding: 14px !important;">
-            
-            {{ session('error') }}
-            <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
-        </div>
-    @endif
-@section('content')
-                
-        <div  id="login bg-gradient-success">
-            <div class="row align-items-center" >
-                <div class="col-lg-6 col-sm-4  img-cards  mx-0 d-flex justify-content-start ">
-                    <img src="{{ asset('images/login-new.jpeg') }}" alt="">
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+        }
+
+        .left-panel,
+        .right-panel {
+            flex: 1;
+            padding: 60px 250px;
+        }
+
+        .left-panel {
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .left-panel h2 {
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .left-panel p {
+            color: #6c6c6c;
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            border: 1px solid #f5f5f5;
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin-bottom: 16px;
+            background: #f5f5f5;
+        }
+
+        .form-group input {
+            border: none;
+            outline: none;
+            width: 100%;
+            background: #f5f5f5;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .form-group img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 17px;
+            background-color: #28b463;
+            color: white;
+            font-weight: 400;
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            font-size: 18px;
+        }
+
+        .divider {
+            text-align: center;
+            color: #999;
+            margin-bottom: 20px;
+        }
+
+        .social-btn {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            background-color: #fff;
+            font-weight: 400;
+            cursor: pointer;
+            color:#000;
+        }
+
+        .social-btn img {
+            width: 28px;
+            margin-right: 10px;
+        }
+
+        .right-panel {
+            background-image: url(../images/Rectangle4.png);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            color: white;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 30px;
+            padding: 36px;
+            text-align: center;
+            width: 100%;
+            position: relative;
+            border: 2px solid #ffffff52;
+            min-height: 500px;
+            position: relative;
+            /* overflow: hidden; */
+        }
+
+        .card h3 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #fff;
+            text-align: left;
+        }
+
+        .card img {
+            width: 64%;
+            border-radius: 12px;
+            position: absolute;
+            bottom: 0;
+            right: 16px;
+        }
+
+        .icon-badge {
+            position: absolute;
+            left: -20px;
+            top: 75%;
+            transform: translateY(-75%);
+            /* background-color: white; */
+            /* padding: 10px; */
+            border-radius: 50%;
+            /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); */
+        }
+
+        .icon-badge img {
+            width: 24px;
+            position: relative;
+            width: 100%;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: #28b463;
+        }
+
+
+
+        @media(max-width: 1850px) {
+
+            .left-panel,
+            .right-panel {
+                flex: 1;
+                padding: 60px 220px;
+            }
+        }
+
+        @media(max-width: 1650px) {
+
+            .left-panel,
+            .right-panel {
+                flex: 1;
+                padding: 60px 190px;
+            }
+        }
+
+        @media(max-width: 1650px) {
+
+            .left-panel,
+            .right-panel {
+                flex: 1;
+                padding: 60px 160px;
+            }
+        }
+
+        @media(max-width: 1380px) {
+
+            .left-panel,
+            .right-panel {
+                flex: 1;
+                padding: 60px 140px;
+            }
+
+            .card {
+                min-height: 480px;
+            }
+        }
+
+        @media(max-width: 1260px) {
+
+            .left-panel,
+            .right-panel {
+                flex: 1;
+                padding: 60px 110px;
+            }
+
+
+            .card {
+                min-height: 460px;
+            }
+        }
+
+        @media(max-width: 1192px) {
+
+            .left-panel,
+            .right-panel {
+                flex: 1;
+                padding: 60px 85px;
+            }
+
+        }
+
+        @media(max-width: 1092px) {
+
+            .left-panel,
+            .right-panel {
+                flex: 1;
+                padding: 60px 60px;
+            }
+
+            .left-panel h2 {
+                font-size: 24px;
+                font-weight: 700;
+                margin-bottom: 10px;
+            }
+
+            .left-panel p {
+                color: #6c6c6c;
+                margin-bottom: 30px;
+                font-size: 16px;
+            }
+
+        }
+
+        @media(max-width: 960px) {
+
+            .left-panel {
+                padding: 24px;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .right-panel {
+                display: none;
+            }
+
+        }
+
+        @media(max-width: 560px) {
+            .left-panel h2 {
+                font-size: 20px;
+            }
+
+            .left-panel p {
+                font-size: 14px;
+            }
+
+            .login-button {
+                padding: 13px;
+                font-size: 16px;
+            }
+
+            .social-btn {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .social-btn img {
+                width: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <h2>LOGIN YOUR ACCOUNT</h2>
+            <p>How to i get started lorem ipsum dolor at?</p>
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+                <div class="form-group">
+                    <img src="{{ asset('images/formkit_email.png') }}" alt="email icon" />
+                    <input type="email" placeholder="Email Address" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus class="@error('email') is-invalid @enderror" />
+                    
                 </div>
-                
-                <div class="col-lg-5 col-sm-4">
-                <div class="" style="margin-left:-18px;">
-                        <a href="{{ route('social.redirect','google') }}" class="" style="border:1px solid #000;text-decoration:none; font-size: 14px;padding:10px;border-radius:10px;">
-                            <!-- <i class="fab fa-google me-2"></i> -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 48 48">
-                                <path fill="#EA4335" d="M24 9.5c3.09 0 5.88 1.06 8.06 2.82l6.03-6.03C34.77 3.66 29.7 1.5 24 1.5 14.84 1.5 6.98 7.59 3.89 16.09l7.09 5.51C12.72 14.2 17.86 9.5 24 9.5z"/>
-                                <path fill="#34A853" d="M46.5 24c0-1.56-.14-3.07-.41-4.5H24v9h12.64c-1.06 3.01-2.99 5.55-5.51 7.3l7.09 5.51C43.61 37.01 46.5 30.98 46.5 24z"/>
-                                <path fill="#4A90E2" d="M10.98 27.6a14.58 14.58 0 010-7.2l-7.09-5.51a22.48 22.48 0 000 18.22l7.09-5.51z"/>
-                                <path fill="#FBBC05" d="M24 46.5c5.7 0 10.77-1.89 14.8-5.14l-7.09-5.51C29.88 37.44 27.09 38.5 24 38.5c-6.14 0-11.28-4.7-12.02-10.1l-7.09 5.51C6.98 40.41 14.84 46.5 24 46.5z"/>
-                            </svg>
+                <div class="form-group">
+                    <img src="{{ asset('images/Frame.png') }}" alt="password icon" />
+                    <input type="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" />
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <button class="login-button" type="submit">Login</button>
+                @error('email')
+                    <span class="invalid-feedback" role="alert" style="color:red;">
+                        <strong class="text-danger">{{ $message }}</strong>
+                    </span>
+                    @enderror
+                <div class="row mb-3" style="display:flex;justify-content:space-between">
+                    <div>
+                        <input class="form-check-input mt-2" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} style="box-shadow: none;">
 
-                            <span class="text-dark"> Sign in with Google </span>
+                        <label class="form-check-label" for="remember" style="font-size: 13px;">
+                            {{ __('messages.Remember Me') }}
+                        </label>
+                    </div>
+
+                    <div>
+                        @if (Route::has('password.request'))
+                        <a class="btn btn-link text-nowrap text-decoration-none text-black" href="{{ route('password.request') }}" style="color:#000;text-decoration:none; font-size: 13px;">
+                            {{ __('messages.Forgot Your Password') }}
                         </a>
-
-                        <!-- <a href="{{ route('social.redirect', 'facebook') }}" class="btn btn-outline-success d-flex align-items-center justify-content-center"
-                            style="border-color: #42b979; color: #42b979; font-size: 14px;">
-                            <i class="fab fa-facebook me-2"></i> Sign up with Facebook
-                        </a> -->
+                        @endif
                     </div>
-                    <div class="login-heading mt-4">
-                            <h3 class="my-2 fw-bold fs-4 text-dark">{{ __('messages.Login Your Account') }}</h3>
-                    </div>
-                    
-                    <form method="POST" action="{{ route('login') }}"  style="margin-left: -2%;">
-                        @csrf
 
-                        <div class="row mb-1 d-block">
-                            <label for="email" class="col-md-4 col-form-label text-md-justify" style="white-space: nowrap; text-decoration: none;">{{ __('messages.Email Address') }} </label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus style="width: 350; box-shadow: none;">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3 d-block">
-                            <label for="password" class="col-md-4 col-form-label text-md-justify ">{{ __('messages.Password') }}</label>
-
-                            <div class="col-md-6">
-                               <div class="input-div">
-                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" style="width: 350px; border: none; box-shadow: none;">
-                                 <span style="cursor: pointer; color: #dd;><i class="fa-regular fa-eye mx-2 cursor-pointer"></i></span>
-                               </div>
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div >
-                                <div class="form-check ">
-                                    <input class="form-check-input mt-2" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} style="box-shadow: none;">
-
-                                    <label class="form-check-label" for="remember" style="font-size: 13px;">
-                                    {{ __('messages.Remember Me') }}
-                                    </label>
-                                    
-                                    @if (Route::has('password.request'))
-                                        <a class="btn btn-link text-nowrap text-decoration-none text-black" href="{{ route('password.request') }}" style="margin-left: 12%; font-size: 13px;">
-                                        {{ __('messages.Forgot Your Password') }}
-                                        </a>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-lg-12">
-                                <button type="submit" class="btn btn-primary login-button">
-                                    {{ __('Login') }}
-                                </button>
-
-                            </div>
-                        </div>
-                    </form>
-                    
                 </div>
+            </form>
+            <div class="divider">Login with Others</div>
+            <a class="social-btn" href="{{ route('social.redirect','google') }}">
+                <img src="https://img.icons8.com/color/48/000000/google-logo.png" />
+                Login with <strong style="margin-left: 5px;">google</strong>
+            </a>
+            <!-- <div class="social-btn">
+        <img src="https://img.icons8.com/color/48/000000/facebook.png" />
+        Login with <strong style="margin-left: 5px;">Facebook</strong>
+      </div> -->
+        </div>
+        <div class="right-panel">
+            <div class="close-btn">×</div>
+            <div class="card">
+                <div class="icon-badge">
+                    <img src="{{ asset('images/Group11.png') }}" />
+                </div>
+                <h3>Online Expert Training</h3>
+                <img src="{{ asset('images/user.png') }}" alt="Woman with tablet" />
             </div>
         </div>
-@endsection
-<script>
-    function cancel(){
-            $('.alert').addClass('d-none')
-        }
-$(document).on('select2:open', function(e) {
-            let scrollPos = $(window).scrollTop();
-            setTimeout(function() {
-                $(window).scrollTop(scrollPos);
-            }, 0);
-        });
-    $(document).ready(function($) { $('.country').select2(); });
-</script>
+    </div>
+</body>
+
+</html>
