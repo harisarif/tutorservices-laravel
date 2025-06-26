@@ -67,9 +67,10 @@ Edexcel Students
                                     <th class="border">ID</th>
                                     <th class="border">Name</th>
                                     <th class="border">Email</th>
-                                    
+                                    <th class="border">Phone</th>
                                     <th class="border">Country</th>
-                                    
+                                    <th class="border">City</th>
+                                    <th class="border">Subject</th>
                                     <th class="border">Actions</th>
                                 </tr>
                             </thead>
