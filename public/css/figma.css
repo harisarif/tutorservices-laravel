@@ -5,7 +5,7 @@
         }
         .right-panel {
             flex: 1;
-            padding: 40px;
+            padding: 40px 70px;
         }
         .left-panel {
             background-color: #fff;

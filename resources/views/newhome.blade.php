@@ -1424,7 +1424,7 @@
 </div>
 <!-- Sign Up Modal -->
 <div class="modal fade" id="signupPromptModal" tabindex="-1" aria-labelledby="signupPromptLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 1000px !important;">
         <div class="modal-content" style="border-radius: 16px; overflow: hidden; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
 
             <div class="modal-body p-0 d-flex">
