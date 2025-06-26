@@ -541,7 +541,7 @@ $tutor->save();
                                                     
 
                                                     <p style='font-size: 16px; margin: 10px 0;'>
-                                                       Your application will be reviewed by an admin and activated upon approval If you need any assistance, contact us at <a href='mailto:info@edexceledu.com' style='color: #4CAF50; text-decoration: none;'>info@edexceledu.com</a> or +971566428066.
+                                                       Your application will be reviewed by an admin and activated upon approval If you need any assistance, contact us at <a href='mailto:info@edexceledu.com' style='color: #4CAF50; text-decoration: none;'>info@edexceledu.com</a>.
                                                     </p>
 
                                                     <p style='font-size: 16px; margin: 10px 0;'>Best regards,</p>
@@ -847,7 +847,78 @@ $tutor->save();
         // Return the generated HTML
         return response()->json(['html' => $html]);
     }
+    public function updateStatus(Request $request, $id)
+    {
+        $tutor = Tutor::findOrFail($id);
+        $oldStatus = $tutor->status;
+        $newStatus = $request->input('status');
+    
+        if ($oldStatus !== $newStatus) {
+            $tutor->status = $newStatus;
+            $tutor->save();
+            $facebookImg = "<img src='https://edexceledu.com/icons/facebook.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
+            $instagramImg = "<img src='https://edexceledu.com/icons/instagram.jpeg' alt='Instagram' width='20' height='20' style='vertical-align:middle'>";
+            $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='LinkedIn' width='20' height='20' style='vertical-align:middle'>";
+            $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg' alt='Youtube' width='20' height='20' style='vertical-align:middle'>";
+            $subjectStudent = "Your Tutor Profile Status Has Been Updated";
 
+            $bodyStudent = "
+            <div style='font-family: Arial, sans-serif; color: #333; line-height: 1.6;'>
+                <table width='100%' cellpadding='0' cellspacing='0' border='0'>
+                    <tr>
+                        <td align='center'>
+                            <table style='max-width: 600px; width: 100%; border: 1px solid #ddd; border-radius: 8px; background-color: #fff;' cellpadding='0' cellspacing='0'>
+                                <!-- Header -->
+                                <tr>
+                                    <td style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 20px; font-weight: bold; color: #4CAF50; border-top-left-radius: 8px; border-top-right-radius: 8px;'>
+                                        Status Updated
+                                    </td>
+                                </tr>
+                                
+                                <!-- Body -->
+                                <tr>
+                                    <td style='padding: 20px; text-align: left;'>
+                                        <p style='font-size: 16px; margin: 0;'>Dear {$tutor->f_name} {$tutor->l_name},</p>
+            
+                                        <p style='font-size: 16px; margin: 10px 0;'>
+                                            We wanted to inform you that the status of your tutor profile on <strong>Edexcel Academy</strong> has been updated by our administration team.
+                                        </p>
+            
+                                        <p style='font-size: 16px; margin: 10px 0;'>
+                                            <strong>New Status:</strong> <span style='color: #4CAF50;'>".ucfirst($tutor->status)."</span>
+                                        </p>
+            
+                                        <p style='font-size: 16px; margin: 10px 0;'>
+                                            If you have any questions or concerns regarding this change, feel free to reach out to us at 
+                                            <a href='mailto:info@edexceledu.com' style='color: #4CAF50; text-decoration: none;'>info@edexceledu.com</a>.
+                                        </p>
+            
+                                        <p style='font-size: 16px; margin: 10px 0;'>Thank you for being part of Edexcel Academy.</p>
+                                        <p style='font-size: 16px; font-weight: bold; margin: 0; color:#43b979;'>The Edexcel Team</p>
+                                    </td>
+                                </tr>
+            
+                                <!-- Footer -->
+                                <tr style='margin-bottom:10px;display:flex;'>
+                                    <td align='left' style='color:#43b979; font-size:11px;margin-left:5px;width:50%;'>
+                                        &copy; 2025 Edexcel Academy. All rights reserved.
+                                    </td>
+                                    <td align='right' style='display:flex;margin-left:25%'>
+                                        <a href='https://www.facebook.com/EdexcelAcademyOfficial/' target='_blank' style='margin-right:5px;'>{$facebookImg}</a>
+                                        <a href='https://www.instagram.com/edexcel.official' target='_blank' style='margin-right:5px;'>{$instagramImg}</a>
+                                        <a href='https://www.linkedin.com/company/edexcel-academy/' target='_blank' style='margin-right:5px;'>{$linkedinImg}</a>
+                                        <a href='https://youtube.com/@edexcelonline01' target='_blank'>{$youtubeImg}</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>";
+        }
+        $this->sendEmail($tutor->email, $subjectStudent, $bodyStudent);
+        return redirect()->back()->with('success', 'Tutor status updated successfully.');
+    }
     public function allTutors(Request $request)
     {
         $tutors = Tutor::all();

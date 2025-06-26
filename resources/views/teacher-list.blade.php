@@ -103,7 +103,7 @@
                                         <td class="border">{{ $tutor->email }}</td>
                                         <td class="border">{{ $tutor->phone }}</td>
                                         <td class="border">
-                                            <form action="{{ route('update.tutor.status') }}" method="POST" id="statusForm_{{ $tutor->id }}">
+                                            <form action="{{ route('tutors.updateStatus', $tutor->id) }}" method="POST" id="statusForm_{{ $tutor->id }}">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $tutor->id }}">
                                                 <input type="hidden" name="status" id="statusInput_{{ $tutor->id }}" value="{{ $tutor->status }}">
@@ -297,8 +297,6 @@
         let statusToggle = document.getElementById(`statusToggle_${tutorId}`);
         let statusInput = document.getElementById(`statusInput_${tutorId}`);
         let form = document.getElementById(`statusForm_${tutorId}`);
-
-        // Update the hidden status input based on the checkbox state
         statusInput.value = statusToggle.checked ? 'active' : 'inactive';
 
         // Submit the form

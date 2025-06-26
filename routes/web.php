@@ -208,6 +208,7 @@ Route::post('/request-demo', [StudentController::class, 'send'])
     ->name('request.demo');
 Auth::routes();
 
+Route::post('/tutors/{id}/update-status', [TutorController::class, 'updateStatus'])->name('tutors.updateStatus');
 
 Route::get('/student-dashboard/{id}', [StudentController::class, 'student_dashboard'])
     ->name('student_dashboard')
