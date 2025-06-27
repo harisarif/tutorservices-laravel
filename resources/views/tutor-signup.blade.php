@@ -379,7 +379,7 @@
                                  <select class="form-control school_class" id="qualification" name="qualification"
                                      style="border: 1px solid rgb(137, 135, 135);">
                                      @foreach($schoolClasses as $schoolClass)
-                                     <option value="{{ $schoolClass->id }}">{{ $schoolClass->name }}</option>
+                                     <option value="{{ $schoolClass->name }}">{{ $schoolClass->name }}</option>
                                      @endforeach
                                      <option value="">Others</option>
                                  </select>
