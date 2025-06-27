@@ -98,10 +98,10 @@
                      </div>
 
                    <p class="text-center mt-3">
-    Didn't receive the OTP?
-    <a href="javascript:void(0);" id="resendLink" class="text-success fw-semibold" onclick="resendOTP()">Resend</a>
-    <span id="resendMessage" class="text-muted ms-2" style="display: none;">Sending...</span>
-</p>
+                        Didn't receive the OTP?
+                        <a href="javascript:void(0);" id="resendLink" class="text-success fw-semibold" onclick="resendOTP()">Resend</a>
+                        <span id="resendMessage" class="text-muted ms-2" style="display: none;">Sending...</span>
+                    </p>
 
                  </form>
              </div>
@@ -748,7 +748,12 @@
  @section('js')
  @if (session('verifiedEmail'))
  <script>
-     console.log('Session verifiedEmail:', "{{ session('verifiedEmail') }}");
+     document.getElementById('otpForm').addEventListener('keypress', function (event) {
+        // If Enter key is pressed
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Stop form submission
+        }
+    });
      $(document).ready(function() {
          $('#otpModal').modal('show');
      });
