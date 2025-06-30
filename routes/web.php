@@ -191,8 +191,7 @@ Route::view('dashboard', 'dashboard')
 Route::view('profile', 'profile')
     ->middleware(['auth', 'auto-logout'])
     ->name('profile');
-Route::view('newhomepage', 'newhomepage')
-    ->name('newhomepage');
+
 Route::get('/logout', function () {
     Auth::logout();
     return redirect('/');

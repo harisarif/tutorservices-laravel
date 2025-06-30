@@ -25,7 +25,7 @@ class EdexcelComplaintController extends Controller
         return $inquires;
     }
     public function createComplaints(Request $request)
-    {
+    { 
         $rules = [
             'email' => [
                 'required',
@@ -64,7 +64,7 @@ class EdexcelComplaintController extends Controller
         $EdexcelComplaint->description = $request->input('description');
         $EdexcelComplaint->name = $request->input('fname');
         $EdexcelComplaint->email = $request->input('email');
-        $EdexcelComplaint->phone = $request->input('phone');
+        $EdexcelComplaint->phone = $request->input('country_code') . $request->input('phone');
         $EdexcelComplaint->save();
         $facebookImg = "<img src='https://edexceledu.com/icons/facebook.jpeg'  alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
         $instagramImg = "<img src='https://edexceledu.com/icons/instagram.jpeg'alt='Instagram'width='20' height='20' style='vertical-align:middle'>";

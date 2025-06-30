@@ -1,1015 +1,1526 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edexcel Online Courses</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-   <link rel="stylesheet" href="{{ asset('css/home.css/style.css') }}">
-<link rel="stylesheet" href="{{ asset('css/home.css/style2.css') }}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="education, online courses, learning, tutoring, e-learning, eduexceledu">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<meta name="description"
+    content="Eduexceledu offers a range of online courses and tutoring services to enhance your learning experience.">
+<link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}" referrerpolicy="no-referrer" />
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-</head>
+<link href="{{asset('css/bootstrap.css')}}" rel="stylesheet" crossorigin="anonymous">
+<link rel="stylesheet" href="{{ asset('css/tutor-style.css')}}">
+<link rel="stylesheet" href="{{ asset('css/mediaquery.css')}}">
+<style>
+    .alert {
+        display: flex !important;
+        align-items: center;
+        font-size: 14px !important;
+    }
+</style>
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+@section('content')
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 
-<body>
-    <!-- Top Bar -->
-    <div class="top-bar text-white py-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <i class="fas fa-phone me-2"></i> +875 784 5682
-                    <i class="fas fa-envelope ms-3 me-2"></i> edexceledu@gmail.com
-                    <i class="fas fa-map-marker-alt ms-3 me-2"></i> 238, Arimantab, Moska - USA
+@if (session('success'))
+<div id="success" class="custom-alert alert-success d-flex align-items-center fade show" role="alert">
+    <i class="fas fa-check-circle"></i>
+    <div>
+        <strong>Success!</strong> {{ session('success') }}
+    </div>
+    <button type="button" class="close-btn" data-dismiss="alert" aria-label="Close">
+        &times;
+    </button>
+    <div class="progress-line"></div>
+</div>
+@endif
+
+@if (session('error'))
+<div id="error" class="alert alert-danger" style="z-index: 6; padding: 14px !important;">
+    {{ session('error') }}
+    <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
+    <div class="progress-line"></div>
+</div>
+@endif
+
+<div id="overlay" class="overlay" style="display: none;">
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+<button class="goToTop fw-20px" style="background-color: rgb(66, 185, 121); display: block; z-index: 9;"
+    onclick="window.scrollTo(0, 0)"><i class="fa fa-chevron-up"></i></button>
+<div class="row mini_header m-0 p-0 container-fluid position-relative">
+    <div class="col-sm-12 px-3  d-flex justify-content-between  my-1 align-items-center flex-sm-row flex-column p-0 adjustMobile"
+        style="background:#42b979;position:fixed !important;height:25%">
+        <ul class="p-1 m-0 d-sm-inline d-block text-center header-ul pt-2 pt-md-0">
+            <li class=" p-0">
+                <a class="navbar-brand" href="{{ route('newhome') }}">
+                    <img src="{{ asset('images/white-logo.jpeg') }}" alt="logo"
+                        style="height: 100px; border-radius: 60px;width:100px;margin-top:50px;">
+                </a>
+            </li>
+            <nav class="navbar navbar-expand-lg adjust-header-mobile d-none">
+                <div class="container-fluid">
+                    <!-- Button to trigger the off-canvas -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false"
+                        aria-label="Toggle navigation" style="border:1px solid #fff;">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="custom-select-wrapper mx-1">
+                        <div class="custom-select">
+                            <i class="fa fa-globe" style="color:#fff !important" aria-hidden="true"
+                                onclick="toggleDropdown()"></i>
+                            <div class="custom-options" id="language-select">
+                                <div class="custom-option " data-value="en" onclick="changeLanguage('en')">English</div>
+                                <div class="custom-option" data-value="ar" onclick="changeLanguage('ar')">Arabic</div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Off-canvas component -->
+                    <div class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasNavbar"
+                        aria-labelledby="offcanvasNavbarLabel" style="width:100%;">
+                        <div class="offcanvas-header p-1" style="width:96%;">
+                            <a class="navbar-brand" href="{{ route('newhome') }}">
+                                <img src="images/white-logo.jpeg" height="50px" alt="logo"
+                                    style="height: 50px; border-radius: 10px;">
+                            </a>
+                            <button type="button" class="btn-close " data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body p-2 px-3">
+                            <ul class="navbar-nav align-items-md-center">
+                                <div class="ai-nav">
+                                    <div class="AI">
+                                        <li class="nav-item m-1 rounded w-1 py-0">
+                                            <a class="nav-link text-decoration-none solid_btn p-0 "
+                                                href="{{ route('login') }}">
+                                                <i class="fas fa-sign-in-alt"></i><span style="margin-left:5px;">
+                                                    {{ __('messages.login') }}</span>
+                                            </a>
+                                        </li>
+                                    </div>
+                                    <div class="AI">
+                                        <li class="nav-item m-1 rounded w-1 py-0">
+                                            <a class="nav-link text-decoration-none solid_btn p-0"
+                                                href="{{ route('basicsignup') }}">
+                                                <i class="fa-regular fa-clipboard"></i> <span
+                                                    class="mx-2">{{ __('messages.register') }}</span>
+                                            </a>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <div class="email-container mx-0 ">
+                                        <i class="fa fa-envelope-square" aria-hidden="true" style="color: #42b979;"></i>
+                                        <a class="email text-decoration-none mx-2" href="mailto:info@eduexceledu.com "
+                                            style="color: #42b979;">
+                                            info@eduexceledu.com
+                                        </a>
+                                    </div>
+                                    <div class="d-flex alig header-phone-number phone-container mx-0"
+                                        style="align-items: center;">
+                                        <i class="fa-solid fa-phone" aria-hidden="true" style="color: #42b979;"></i>
+                                        <a class="phone-number-header text-decoration-none mx-2" href="#"
+                                            style="color: #42b979;">
+
+                                        </a>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4 text-md-end">
+            </nav>
+
+        </ul>
+        <a href="{{ route('hire.tutor') }}" class="hiring-button mt-4">
+            {{ __('messages.Book a free demo for your child') }}
+        </a>
+        <div>
+            <!-- <h1>{{ __('messages.welcome') }}</h1> -->
+
+
+            <ul class="icons d-flex p-2 m-0  align-items-center gap-3 mt-4" style="list-style:none;">
+                <div class="d-flex align-items-center" style="justify-content: center;">
+
+                    {{-- Guest: Show Login and Register --}}
+                    @guest
+                    <div class="col-6">
+                        <li class="nav-item m-1 btn-an text-center bg-white rounded w-1 py-1">
+                            <a class="nav-link text-decoration-none solid_btn" href="{{ route('login') }}"
+                                style="color:#42b979;">{{ __('messages.login') }}</a>
+                        </li>
+                    </div>
+                    <div class="col-6">
+                        <li class="nav-item m-1 btn-an text-center bg-white rounded w-1 py-1">
+                            <a class="nav-link text-decoration-none solid_btn" href="{{ route('basicsignup') }}"
+                                style="color:#42b979;">{{ __('messages.register') }}</a>
+                        </li>
+                    </div>
+                    @endguest
+
+
 
                 </div>
+
+                <div class="d-flex align-items-center">
+                    <div>
+                        {{-- Authenticated: Show Logout --}}
+                        @auth
+                        @if (Auth::user()->role === 'user')
+                        <div class="col-12 d-flex">
+                            <!-- Change Password Button -->
+                            <!-- <a class="nav-link text-decoration-none solid_btn me-1" href="#" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+    <i class="fa fa-key text-white"></i>
+</a> -->
+                            <a class="nav-link text-decoration-none solid_btn me-1" href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="fa fa-sign-out text-white"></i>
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                        @endif
+                        @endauth
+                    </div>
+                    <div class="email-container mt-4">
+                        <i class="fa fa-envelope-square" aria-hidden="true" style="color: #fff;"></i>
+                        <a class="email text-decoration-none" href="mailto:info@eduexceledu.com"
+                            style="color: #42b979;">info@eduexceledu.com</a>
+                    </div>
+
+                    <div class=" p-2 header-phone-number phone-container">
+                        <i class="fa fa-phone " aria-hidden="true" style="color: #fff;"></i>
+                    </div>
+                    <div class="custom-select-wrapper">
+                        @include('language')
+                    </div>
+                </div>
+
+
+            </ul>
+            {{-- <a href="#" class="btn notify position-relative"><i class="fa-regular fa-bell text-white"></i><span class="position-absolute top-10 start-60 translate-middle p-1 bg-danger border border-light rounded-circle">
+                    <span class="visually-hidden">New alerts</span>
+                </span></a> --}}
+        </div>
+    </div>
+    <!-- <div class="notification mb-2 w-25 p-2 bg-info-subtle position-absolute end-0 top-100 z-1">This is a demo</div> -->
+</div>
+<section class="banner-section"
+    style="background-image: url(images/group-of-kids.jpg); background-size: cover; background-blend-mode: multiply; background-color: #a5a5a5;">
+    <div class="banner-content">
+        <h1 class="aa fs-2" style="margin-top:10rem;">
+            {{ __('messages.Edexcel Academically with tailored tutoring and professional guidance') }}
+        </h1>
+    </div>
+    {{-- <button class="p-2  btn-an rounded border-0 text-light">
+                        Student
+                    </button> --}}
+    <div class="AB mt-5">
+        <button class="ab  p-2  btn-an rounded border-0 text-success hover-button" style=" white-space: nowrap;">
+            <a class=" text-decoration-none active solid_btn" aria-current="page"
+                href="{{ route('hire.tutor') }}">{{ __('messages.Request A Tutor') }} </a>
+
+        </button>
+    </div>
+</section>
+<div class="wrapper mx-5">
+    <!-- WhatsApp Button html start -->
+    @include('whatsapp')
+
+    <section class="row justify-content-center mx-0">
+        <div class="ad-headin-div mt-2">
+            <h2 style="text-align: center; color: #42b979; font-weight: 600;">{{ __('messages.Data Insights') }}</h2>
+        </div>
+        <div class="row mb-3">
+            <div class="col-xl-3 col-sm-6 col-12 my-3">
+                <div class="MH card">
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="media d-flex" style=" justify-content: space-between;">
+                                <div class="media-body text-left counter">
+                                    <h3 class="danger" id="teacher-count">500+</h3>
+                                    <span>{{ __('messages.Teachers') }}</span>
+                                </div>
+                                <div class="align-self-center animated-icons">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="64"
+                                        fill="#42b979">
+                                        <path
+                                            d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-2.67 0-8 1.337-8 4v3h16v-3c0-2.663-5.33-4-8-4zm-8 6v-1c0-1.721 3.468-3 8-3s8 1.279 8 3v1H4z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12 my-3">
+                <div class="MH card">
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="media d-flex" style=" justify-content: space-between;">
+                                <div class="media-body text-left counter">
+
+                                    <h3 class="success" id="count">1000+</h3>
+                                    <span>{{ __('messages.Students') }}</span>
+                                </div>
+                                <div class="align-self-center animated-icons">
+                                    <svg width="40" height="64" viewBox="0 0 64 64" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="32" cy="20" r="12" fill="#42b979" />
+                                        <path d="M32 36C22 36 14 44 14 54H50C50 44 42 36 32 36Z" fill="#42b979" />
+                                        <path d="M32 4L14 14L32 24L50 14L32 4Z" fill="#42b979" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-sm-6 col-12 my-3">
+                <div class="MH card">
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="media d-flex" style=" justify-content: space-between;">
+                                <div class="media-body text-left counter">
+                                    <h3 class="warning" id="subject-count">1500+</h3>
+                                    <span>{{ __('messages.Subjects') }}</span>
+                                </div>
+                                <div class="align-self-center animated-icons">
+                                    <i class="fa-solid fa-book-open " style="color:#42b979; font-size:25px;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-sm-6 col-12 my-3">
+                <div class="MH card">
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="media d-flex " style=" justify-content: space-between;">
+                                <div class="media-body text-left counter">
+                                    <h3 class="danger" id="lang-count">500+</h3>
+                                    <span>{{ __('messages.Languages') }}</span>
+                                </div>
+                                <div class="align-self-center animated-icons">
+                                    <i class="fa-solid fa-globe data-insight-globe" aria-hidden="true"
+                                        style="font-size: 25px;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section class="AD-teacher" style="overflow-x:hidden;">
+        <div class="ae-heading my-4">
+            <h2 class="text-center fw-bold ">{{ __('messages.Discover Your Tutor') }}</h2>
+        </div>
+        <div class="row justify-content-center px-0 mx-0">
+
+
+            <div class="col-md-9">
+                <div class="d-flex justify-content-between ad-border-div">
+                    <div class="mx-2">
+                        <p class="m-0 pt-1 tutors-range">
+                            @if($totalTutorsCount == 0 || $tutors->isEmpty())
+                            0 of 0 tutors
+                            @else
+                            {{ $tutors->firstItem() }} to {{ $tutors->lastItem() }} of {{ $totalTutorsCount }} tutors
+                            @endif
+                        </p>
+
+                    </div>
+                    <div class="my-2 mx-2">
+                        <button id="resetFilterBtn" class="ad-btn-reset">{{ __('messages.Reset Filter') }}</button>
+
+                    </div>
+
+                </div>
+                <div class="ad-border-filters">
+
+                    <div class="row  country-row">
+                        <div class="col-lg-3 country-drop-down">
+                            <label class="form-label filter-heading">
+                                {{ __('messages.Please select a country') }}
+                            </label>
+                            <select name="country" id="country" class="country">
+
+
+                                @foreach($countries as $countryCode => $countryName)
+                                <option value="{{ $countryCode }}">{{ $countryName }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-lg-9 adjust-filters-wrap ">
+                            <div class="col-md-6 px-2 col-lg-4">
+                                <label class="form-label filter-heading">
+                                    {{ __('messages.Gender Selection') }}
+                                </label>
+                                <select name="gender" id="gender" class="country">
+                                    <option value="Male">{{ __('Male') }}</option>
+                                    <option value="female">{{ __('Female') }}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 px-2 col-lg-4">
+                                <label class="form-label filter-heading">
+                                    {{ __('messages.Which Subject Interests You?') }}
+                                </label>
+                                <select name="subjectSearch" id="subjectSearch" class="country">
+
+                                    @foreach($subjectsTeach as $subjectsCode => $subjects)
+                                    <option value="{{ $subjectsCode }}">{{ $subjects }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6 px-2 col-lg-4">
+                                <label class="form-label filter-heading">
+                                    {{ __('messages.Price Selection') }}
+                                </label>
+                                <select name="prize-Range" id="prize-Range" class="country">
+                                    <option value="all">{{ __('messages.Price Selection') }}</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tutor profile -->
+                @if ($tutors->count() > 0)
+                <div id="tutorsContainer">
+                    @foreach ($tutors as $item)
+                    @if($item->status != 'inactive')
+
+                    <div class="ad-form">
+                        <div class="container-fluid pt-2 px-0">
+
+                            <div class="recomended-badge mb-1" data-toggle="tooltip" data-placement="top"
+                                title="{{ $item->f_name ?? 'Nullable' }}  {{ $item->l_name ?? 'Nullable' }}"
+                                style="float: right;">
+                                <span class="badge badge-primary">Recomended</span>
+                            </div>
+                            <div class="row ">
+                                <div class="col-xl-12 col-lg-12">
+                                    <div class="row py-4" style="margin: 0 auto;">
+                                        <div class="col-md-3">
+                                            <div id="waste1">
+                                                <div class="img-wrapper trigger-modal" id="triggerImage">
+                                                    @if ( $item->profileImage)
+                                                    <img src="{{ asset('storage/' . $item->profileImage) }}"
+                                                        alt="Tutor Image" class="img-thumbnail" id="profileImages"
+                                                        style="height: 150px; width: 100%">
+                                                    @else
+                                                    <img src="{{ asset('images/avatar.png') }}" alt="Default Image"
+                                                        class="img-thumbnail" style="height: 150px; width: 100%;">
+                                                    @endif
+
+                                                </div>
+                                                <div class="modal fade" id="videoModal" tabindex="-1"
+                                                    aria-labelledby="videoModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" id="pro1">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header"
+                                                                style="background-color: #1cc88a;">
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"
+                                                                    style="filter: invert(2);"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <!-- Video Embed -->
+                                                                <video controls height="250px" width="100%">
+                                                                    <source src="{{ asset('/' . $item->video) }}"
+                                                                        type="video/mp4">
+                                                                    Your browser does not support the video tag.
+                                                                </video>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4" id="waste"
+                                                    style="display: none;margin: 0 auto;     margin-top: 20px;">
+                                                    <div class="d-flex">
+                                                        <h4 class="me-2 fw-bold">
+                                                            {{ $item->f_name ?? 'Nullable' }}{{ $item->l_name ?? 'Nullable' }}
+                                                        </h4>
+                                                        <span class="me-3"><i class="fa-regular fa-star"></i></span>
+                                                        <div class="img-wrapper1"
+                                                            style="max-width: 15px;     margin-top: 3px;">
+                                                            <img src="{{ asset('image/flag.svg') }}" class="img-fluid1"
+                                                                alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex mt-md-5 mt-2" id="for-320">
+                                                        <div class="me-md-5 me-3" id="new">
+                                                            <div class="d-flex text-center">
+                                                                <span class=""><i
+                                                                        class="fa-regular fa-star text-warning"></i></span>
+                                                                <h4 class="fw-bold mb-0">5</h4>
+                                                            </div>
+                                                            <p class="text-secondary fs-6">
+                                                                {{ $item->avalibility_status ?? 'Nullable' }}
+                                                            </p>
+                                                        </div>
+                                                        <div class="me-md-5 me-2" id="dollar">
+                                                            <h4 class="fw-bold mb-0">US$16</h4>
+                                                            <p class="text-secondary fs-6 " style="text-align: center;">
+                                                                {{ $item->year ?? 'Nullable' }}
+                                                            </p>
+                                                        </div>
+                                                        <div>
+                                                            <span><i class="fa-regular fa-heart"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="d-flex" id="ff000">
+                                                <h4 class="me-2 fw-bold sd">{{ $item->f_name ?? 'Nullable' }}</h4>
+                                                <span class="me-3"><i class="fa-regular fa-star "></i></span>
+                                                <div class="img-wrapper" style="max-width:15px;margin-top:5px;">
+                                                    <img src="{{ asset('image/flag.svg') }}" class="img-fluid" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="mt-1 cm d-flex">
+                                                @foreach($item->specialization as $specialization)
+                                                <div id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold">
+                                                    <i class="fa-solid fa-briefcase me-1"></i>
+                                                    {{ trim($specialization) }}
+                                                </div>
+                                                @endforeach
+                                            </div>
+                                            <div class="d-flex text-secondary my-1">
+                                                <span class="me-2"><i class="fa-solid fa-globe"
+                                                        style="font-size: 13px; margin-top: 5px;color: #1cc88a !important;"></i></span>
+                                                <p class="mb-0"
+                                                    style="color:black; transform: scaleY(1);text-transform:capitalize">
+                                                    @if($item->edu_teaching && is_array(json_decode($item->edu_teaching, true)))
+                                                    {{ implode(', ', json_decode($item->edu_teaching, true)) }}
+                                                    @else
+                                                    {{ $item->edu_teaching ?? 'Nullable' }}
+                                                    @endif
+                                                </p>
+                                            </div>
+
+                                            <div class="d-flex text-secondary my-1">
+                                                <span class="me-2"><i class="fa-solid fa-venus-mars"
+                                                        style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
+                                                <p class="mb-0"
+                                                    style="color:black; transform: scaleY(1);text-transform:capitalize">
+                                                    {{ $item->gender ?? 'Nullable' }}
+                                                </p>
+                                            </div>
+
+                                            <div class="d-flex text-secondary">
+                                                <span class="me-2"><i class="fa-solid fa-earth-americas"
+                                                        style="font-size: 13px;  margin-top: 5px;    color: #1cc88a;"></i></span>
+                                                <p class="mb-0 ms-1" style="color:black; transform: scaleY(1);">
+                                                    {{ $item->country_name ?? 'Nullable' }}
+                                                </p>
+                                            </div>
+
+                                            <div class="d-flex text-secondary py-2">
+                                                <span class="me-2"><i class="fa-solid fa-language"
+                                                        style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
+                                                <p class="mb-0" style="color:black; transform: scaleY(1);" id="on-1024">
+                                                    Speaks
+                                                    @if(!empty($item->language) && is_array($item->language))
+                                                    @foreach($item->language as $lang)
+                                                    {{ $lang['language'] ?? 'Unknown' }}
+                                                    ({{ $lang['level'] ?? 'Unknown' }})
+                                                    @endforeach
+                                                    @else
+                                                    Nullable
+                                                    @endif
+                                                </p>
+                                            </div>
+
+                                            <!--  -->
+                                            <span class="cv" style="color:black; transform: scaleY(1);"><i
+                                                    class="fa-solid fa-calendar-days me-1" style="color: #1cc88a;"></i>
+                                                {{ $item->dob ?? 'Nullable' }}</span>
+                                            <!--  -->
+                                            <div class="py-2">
+                                                <span>
+                                                    @php
+                                                    $teachingSubjects = $item->edu_teaching;
+                                                    $decodedSubjects = is_array(json_decode($teachingSubjects, true)) ? json_decode($teachingSubjects, true) : null;
+                                                    $subjectList = $decodedSubjects ? implode(', ', $decodedSubjects) : 'Nullable';
+                                                    $experience = $item->experience ?? 'Nullable';
+                                                    $firstName = $item->f_name ?? 'Not Specified';
+                                                    @endphp
+
+                                                    <b>
+                                                        {{ $experience }}+ Years of {{ $subjectList }} Teaching Experience: Your {{ $subjectList }} Success, Guaranteed.
+                                                    </b>
+
+                                                    - Hello, my name is {{ $firstName }}. I have {{ $experience }}+ years of experience as a {{ $subjectList }} Teacher & Tutor.
+
+
+                                                </span>
+                                                <ul class="read p-0 mt-3">
+                                                    <li style="list-style: none;"><a class="fw-bold" href="">Read
+                                                            More</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="d-flex pb-5" id="ff111">
+                                                <div class="me-lg-5 me-3" id="dollar">
+                                                    <h4 class="fw-bold on">{{ $item->price ?? 'Nullable' }}</h4>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div id="btn-container">
+                                                    @if(Auth::check() && Auth::user()->role === 'user')
+                                                    <a href="{{ route('zoom.send.meeting.email', ['student_id' => Auth::user()->id, 'teacher_id' => $item->teacher_id]) }}"
+                                                        id="demo"
+                                                        class="mb-1 d-flex align-items-center btn4 btn-outline-light rounded fw-bold text-light p-2 w-100 justify-content-center"
+                                                        style="background-color: #1cc88a; text-decoration: none;"
+                                                        title="Zoom Meet">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" viewBox="0 0 24 24">
+                                                            <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z" />
+                                                        </svg>
+                                                        <span class="ms-1">Zoom Meet</span>
+                                                    </a>
+                                                    @else
+                                                    <a href="javascript:void(0);"
+                                                        data-bs-toggle="modal" data-bs-target="#signupPromptModal"
+                                                        class="mb-1 d-flex align-items-center btn4 btn-outline-light rounded fw-bold text-light p-2 w-100 justify-content-center"
+                                                        style="background-color: #1cc88a; text-decoration: none;"
+                                                        title="Sign up to join Zoom Meet">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" viewBox="0 0 24 24">
+                                                            <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z" />
+                                                        </svg>
+                                                        <span class="ms-1">Zoom Meet</span>
+                                                    </a>
+                                                    @endif
+
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="mt-2" id="btn-container">
+                                                    @if(Auth::check() && Auth::user()->role === 'user')
+                                                    <button data-teacher-id="{{ $item->teacher_id }}" type="button" id="demo"
+                                                        class="btn1 btn-outline-dark rounded fw-bold text-light request-demo-btn">
+                                                        Request a Demo
+                                                    </button>
+                                                    @else
+                                                    <button type="button" id="demo"
+                                                        class="btn1 btn-outline-dark rounded fw-bold text-light">
+                                                        Request a Demo
+                                                    </button>
+                                                    @endif
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        {{-- <div class="ad-img-card d-flex"> --}}
+                        {{-- <div class="tutor-profile" style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+                                                        
+                                                               Tutor Image 
+                                                        @if (!empty(trim($item->profileImages)))
+                                                        <img src="{{ asset($item->profileImages) }}"
+                        alt="Tutor Image" class="img-thumbnail"
+                        style="max-width: 100px; height: 100px; width: 100px; border-radius: 70px;">
+                        @else
+                        <img src="{{ asset('images/avatar.png') }}" alt="Default Image" class="img-thumbnail"
+                            style="max-width: 100px; height: 100px; width: 100px; border-radius: 70px;">
+                        @endif
+
+
+                        Tutor Rating
+                        <p class="mb-0 mx-1 fs-5" style="color:#42b979;">4.5 <i class="fa-solid fa-star"></i></p>
+                    </div>
+
+                    <div class="md-div col-lg-5 d-none mt-2" style="margin-left: 17px;">
+                        <span class="mb-div"><b>{{ __('messages.20 AED for 50 minutes') }}</b></span>
+                        <div class="ae-detail">
+                            <h4 class="fs-6 mt-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                {{ __('messages.Free Trial Section') }}
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ad-detail my-1 mx-4 w-100">
+                    <div class="ae-div row">
+                        <div class="col-9">
+                            <div class="ae-detail-div">
+                                <span><i class="fa-solid fa-graduation-cap"></i>
+                                    <strong style="margin-left: 11px;">{{ __('Name') }} :</strong>
+                                    {{ $item->f_name }}</span>
+
+                                <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
+                                    <strong>{{ __('Date') }} :</strong> {{ $item->dob ?? 'Nullable' }}</span>
+
+                                <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
+                                    <strong style="margin-left: 7px;">{{ __('Language') }} :</strong>
+                                    @if(!empty($item->language) && is_array($item->language))
+                                    @foreach($item->language as $lang)
+                                    {{ $lang['language'] ?? 'Unknown' }} ({{ $lang['level'] ?? 'Unknown' }})
+                                    @endforeach
+                                    @else
+                                    Nullable
+                                    @endif
+                                </span>
+
+                                <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
+                                    <strong>{{ __('Phone') }} :</strong> {{ $item->phone ?? 'Nullable' }}</span>
+
+                                **Subjects Logic**
+                                <span>
+                                    <i class="fa fa-globe" style="color: #42b979 !important;"></i>
+                                    <strong>{{ __('Specialization') }}:</strong>
+                                    {{ $item->specialization ?? 'Not Specified' }}
+                                </span>
+
+                                <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
+                                    <strong>{{ __('Experience') }} :</strong> {{ $item->experience ?? 'Nullable' }}
+                                    years</span>
+
+                                <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
+                                    <strong>{{ __('messages.Country') }} :</strong>
+                                    {{ $item->country_name ?? 'Nullable' }}</span>
+
+                                <span><i class="fa fa-globe" style="color: #42b979 !important;"></i>
+                                    <strong>{{ __('University') }} :</strong> {{ $item->location ?? 'Nullable' }}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-3 ad-div">
+                            <span><b>{{ __('messages.20 AED for 50 minutes') }}</b></span>
+                            <div class="ae-detail">
+                                <h4 class="fs-6 mt-1" style="cursor:pointer" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                    {{ __('messages.Free Trial Section') }}
+                                </h4>
+                            </div>
+                        </div>--}}
+                        {{-- </div>  --}}
+                        {{-- </div> --}}
+                    </div>
+
+
+                    <div class="d-none tutor_profile rounded overflow-hidden mb-3 mt-3">
+                        <div class="d-flex justify-content-between">
+                            <button class="p-1 bg_theme_green text-light border border-0" style="display:none;">
+                                Sponsored
+                            </button>
+                            <span class="p-1 text-secondary">
+                                <i class="fa fa-bookmark text-body-tertiary"></i>
+                                Watchlist
+                            </span>
+                        </div>
+
+                        <div class="py-2 px-5">
+                            <div class="row d-flex">
+                                <div class="col d-flex flex-column flex-md-row align-items-center rmb-3 m-lg-0">
+                                    <div class="imgBox col-sm-4 d-grid mx-3">
+                                        <img class="img-1 rounded-circle"
+                                            src="{{ asset('storage/' . $item->profileImage) }}" alt="" />
+                                        <p class="d-flex align-items-center m-auto">
+                                            Verified
+                                            <span class="mx-1 varified bg-primary rounded-circle text-light"><i
+                                                    class="fa fa-check"></i></span>
+                                        </p>
+                                    </div>
+                                    <div class="personal_detail text-center text-md-start">
+                                        <!-- <div> -->
+
+                                        <h5>{{ $item->f_name }} {{$item->l_name}}</h5>
+                                        <span>{{ $item->gender }}
+                                            @if ( $item->experience >= 1 )
+                                            <span style="background-color: red"
+                                                class="text-light font-s px-1">Pro</span></span>
+                                        @endif
+                                        <p class="m-0">{{ $item->experience }}
+                                            @if ( $item->experience > 1 )
+                                            years
+                                            @else
+                                            year
+                                            @endif of teaching
+                                            experience</p>
+                                        <!-- stars -->
+                                        <span
+                                            class="d-flex align-items-center text-warning d-flex justify-content-center justify-content-md-start">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </span>
+                                        <p class="text-danger m-0">( 10 reviews )</p>
+                                        <!-- </div> -->
+                                    </div>
+                                </div>
+
+                                <div class="qualification col-lg-6">
+                                    <div class="row p-0">
+                                        <table class="col-12">
+                                            <tr class="title-1 col col-md-3">
+                                                <td class="text-dark fw-bold font-s">Qualification</td>
+                                                <td class="d-none d-md-block px-2">:</td>
+                                                <td class="font-s text-secondary">
+                                                    {{ $item->qualification }}
+                                                </td>
+                                            </tr>
+                                            <tr class="title-1 col col-md-3">
+                                                <td class="font-s text-dark fw-bold">Country</td>
+                                                <td class="d-none d-md-block px-2">:</td>
+                                                <td class="font-s text-secondary">
+                                                    {{ $item->location }}
+                                                </td>
+                                            </tr>
+                                            <tr class="title-1 col col-md-3">
+                                                <td class="font-s text-dark fw-bold">City</td>
+                                                <td class="d-none d-md-block px-2">:</td>
+                                                <td class="font-s text-secondary">
+                                                    {{ $item->city }}
+                                                </td>
+                                            </tr>
+                                            <tr class="title-1 col col-md-3" style="display:none;">
+                                                <td class="font-s text-dark fw-bold">Mobile</td>
+                                                <td class="d-none d-md-block px-2">:</td>
+                                                <td class="font-s text-secondary">
+                                                    {{ $item->phone }}
+                                                    <button class="text-success bg-transparent fw-bold border-0">
+                                                        view contact
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr class="title-1 col col-md-3" style="display:none;">
+                                                <td class="font-s fw-bold">WhatsApp</td>
+                                                <td class="d-none d-md-block px-2">:</td>
+                                                <td class="font-s text-secondary">
+                                                    {{ $item->whatsapp }}
+                                                    <button class="text-success bg-transparent fw-bold border-0">
+                                                        view contact
+                                                    </button>
+                                                </td>
+                                            </tr>
+
+                                            <tr class="title-1 col col-md-3">
+                                                <td class="font-s fw-bold">Availability</td>
+                                                <td class="d-none d-md-block px-2">:</td>
+                                                <td class="font-s text-secondary">
+                                                    {{ $item->availability }}
+
+                                                </td>
+                                            </tr>
+
+                                            <tr class="title-1 col col-md-3">
+                                                <td class="font-s fw-bold">Date of Birth</td>
+                                                <td class="d-none d-md-block px-2">:</td>
+                                                <td class="font-s text-secondary">
+                                                    {{ $item->dob }}
+
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div
+                                    class="col-12 d-flex m-1 align-items-center align-items-sm-center flex-column flex-sm-row">
+                                    <div class="option d-flex align-items-start py-1">
+                                        <h5 class="label-h m-0 m-1 font-s1 text-center text-md-left fw-bold">
+                                            Teaches
+                                        </h5>
+                                        <span class="d-none d-sm-block">:</span>
+                                    </div>
+
+                                    <div class="d-flex flex-column flex-md-row flex-wrap">
+
+                                        {{-- @php
+                                                                    // Assuming $item->teaching is a JSON string
+                                                                    // Serialized string
+                                                                    $serializedData = $item->teaching;
+
+                                                                    // Convert the serialized string to an array
+                                                                    $arrayData = unserialize($serializedData);
+                                                                @endphp
+                                                                @foreach ($arrayData as $teaching)
+                                                                    <span
+                                                                        class="bg-body-secondary rounded font-s m-1 d-inline-block p-1 bg_green_hover text-center">{{ $teaching }}</span>
+                                        @endforeach --}}
+
+
+                                        <button class="m-1 text-danger border-0 bg-transparent">
+                                            +1 more
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="d-flex flex-column flex-lg-row mt-5 py-1 bd_top_dashed">
+                                <div class="d-flex align-items-center flex-column flex-sm-row justify-content-between">
+                                    <span class="d-flex align-items-center px-2 py-2">
+                                        Expand
+                                        <i class="fa fa-chevron-down mx-1" aria-hidden="true"></i>
+                                    </span>
+
+                                    <div class="d-flex">
+                                        <p
+                                            class="d-flex justify-content-center align-items-center box-3 bg_theme_green rounded-circle text-light m-0 mx-1 box-2">
+                                            <i class="fa fa-mobile"></i>
+                                        </p>
+
+                                        <p
+                                            class="d-flex justify-content-center align-items-center box-3 bg_theme_green rounded-circle text-light m-0 mx-1 box-2">
+                                            <i class="fas fa-envelope"></i>
+                                        </p>
+
+                                        <p
+                                            class="d-flex justify-content-center align-items-center box-3 bg_theme_green rounded-circle text-light m-0 mx-1 box-2">
+                                            <i class="fas fa-location"></i>
+                                        </p>
+
+                                        <p
+                                            class="d-flex justify-content-center align-items-center box-3 bg_theme_green rounded-circle text-light m-0 mx-1 box-2">
+                                            <i class="fas fa-certificate"></i>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="col d-flex align-items-center justify-content-center justify-content-lg-end flex-column flex-sm-row py-2">
+                                    <a class="text-success text-decoration-none text-center px-2 py-2" href="#">Request
+                                        a callback</a>
+                                    <button class="bg_theme_green border border-0 text-light rounded p-2">
+                                        Send Message
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @endif
+                    @endforeach
+                </div>
+                <!-- Display pagination links -->
+                <div id="paginationContainer">
+                    {{ $tutors->links('custom-pagination') }}
+                </div>
+                <!-- tutor profile end -->
+                @else
+                <!-- <p>No tutors found.</p> -->
+                <img class="not-found-img w-100" src="{{ asset('images/not-found.jpeg') }}" />
+                @endif
+
+                <!-- Here is form -->
+
+                <!-- end job section  -->
+
+
+                <!-- form end -->
+            </div>
+            @if (App::getLocale() === 'en')
+            <div class="col col-lg-3 my-0 p-0">
+                <video src="{{ asset('images/video.mp4') }}" class="object-fit-cover mt-0" autoplay muted loop
+                    width="100%"></video>
+            </div>
+            @elseif (App::getLocale() === 'ar')
+            <div class="col col-lg-3 my-0 p-0">
+                <video src="{{ asset('videos/arabic.mp4') }}" class="object-fit-cover mt-0" autoplay muted loop
+                    width="100%"></video>
+            </div>
+            @elseif (App::getLocale() === 'rs')
+            <div class="col col-lg-3 my-0 p-0">
+                <video src="{{ asset('videos/russian.mp4') }}" class="object-fit-cover mt-0" autoplay muted loop
+                    width="100%"></video>
+            </div>
+            @elseif (App::getLocale() === 'zh')
+            <div class="col col-lg-3 my-0 p-0">
+                <video src="{{ asset('videos/chinese.mp4') }}" class="object-fit-cover mt-0" autoplay muted loop
+                    width="100%"></video>
+            </div>
+            @else
+            <!-- Default or fallback video in case no matching locale is found -->
+            <!-- <div class="col col-lg-3 my-0 p-0">
+                                    <video src="{{ asset('videos/default.mp4') }}" class="object-fit-cover mt-2" autoplay muted loop width="100%"></video>
+                                </div> -->
+            @endif
+
+        </div>
+    </section>
+
+    <div class="ai-heading-div py-2">
+        <h2 class="text-center  fw-bold">{{ __('messages.Inquiry Overview') }}</h2>
+    </div>
+    <div class="im row mx-0">
+        <div class=" Ai col-5 ">
+            <form method="POST" action="{{ route('inquiry-create') }}" enctype="multipart/form-data">
+                @csrf
+                <div class="mt-0 mb-5">
+                    <div class="ai-card px-3 py-4" style="border: 1px solid #ddd; border-radius: 5px;">
+                        <div class="card-body">
+                            <h6 class="card-title mb-3 text-center fw-bold fs-6 ">
+                                {{ __('messages.Submit your inquiry to request a callback for further assistance') }}
+                            </h6>
+                            <h3 class="Ab-heading fw-bold text-center" style="font-size: 15px;color: red;">
+                                <i>"{{ __('messages.Please Complete All Required Fields') }}"</i>
+                            </h3>
+
+
+                            <div class="row g-0">
+                                <div class="col-sm-12">
+                                    <div class="form-group p-2 px-0">
+                                        <label for="curriculum" class="form-label"
+                                            style="color:#42b979;"><strong>{{ __('messages.Enter your Name') }} <b
+                                                    style="color: red;font-size: 20px;">*</b></strong></label>
+                                        <input id="inquiryname" name="fname" class="form-control" type="text"
+                                            placeholder="{{ __('messages.Name') }}">
+                                    </div>
+                                </div>
+                                <input type="text" name="website" style="display:none">
+
+                                <div class="col-sm-12">
+                                    <div class="form-group p-2 px-0">
+                                        <label for="curriculum" class="form-label"
+                                            style="color:#42b979;"><strong>{{ __('messages.Enter your Email') }} <b
+                                                    style="color: red; font-size: 20px;">*</b></strong></label>
+                                        <div class="input-group"> <input id="inquiryemail" name="email" class="form-control" type="text"
+                                                placeholder="{{ __('messages.Email ID') }}" pattern="^[a-zA-Z0-9._%+-]+@(gmail|hotmail|yahoo)\.com$"
+                                                title="Only Gmail, Hotmail, or Yahoo emails are allowed (e.g., example@gmail.com)"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group p-2 px-0">
+                                    <label for="curriculum" class="form-label" style="color:#42b979;">
+                                        <strong>{{ __('messages.Enter your Number ') }}<b
+                                                style="color: red; font-size: 20px;">*</b></strong>
+                                    </label>
+                                    <div class="inquiry-select input-group d-flex justify-content-between align-items-center"
+                                        style="width: 100%;">
+
+                                        <select name="countrySelect" id="countrySelect"
+                                            class="form-select country-select w-50" required>
+                                            @foreach ($countriesPhone as $key => $country)
+                                            <option value="{{ $key }}">{{ $country }}</option>
+                                            @endforeach
+                                        </select>
+
+                                        <input class="form-control w-50" required name="phone" id="phone" type="text"
+                                            placeholder="e.g +92XXXXXXXXXX"
+                                            style="border: 1px solid #ddd; height: 50px; box-shadow: none;">
+                                    </div>
+                                    <div class="col-12  py-2">
+                                        <label for="curriculum" class="form-label" style="color:#42b979;">
+                                            <strong>{{ __('messages.Description (Optional)') }} <b
+                                                    style="color: red; font-size: 20px;">*</b>
+                                            </strong>
+                                        </label>
+                                        <textarea class="form-control" id="inquirydesp" name="description" rows="2"
+                                            placeholder="{{ __('messages.Description') }}"
+                                            style="box-shadow: none;border: 1px solid #ddd;"></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <button disabled id="submitBtn" type="submit"
+                                class="AB-button btn btn-success btn-block confirm-button mt-4">{{ __('messages.Confirm') }}</button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="col-7 img-reqire p-0">
+            <div class="ai-image-div">
+                <img src="{{ asset('images/inquiry.jpeg') }}" alt="">
             </div>
         </div>
     </div>
+    <section class="w-100 mx-auto">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm p-0">
-        <div class="container d-flex justify-content-between">
-            <a class="navbar-brand fw-bold p-0 m-0" href="#"><img src="{{asset('homeImage/dots.png')}}" alt="Edecxel"></a>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link text-primary" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Courses</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="get-started-header">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <button class="primary-btn">
-                    Get Started
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
-                            <path d="M11.5293 2.2207L16.5293 8.2207L11.5293 14.2207" stroke="white" stroke-width="1.5"
-                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M1.5293 8.2207H16.5293" stroke="white" stroke-width="1.5" stroke-miterlimit="10"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </span>
-                </button>
-            </div>
+        <div class="ad-heading-div-child">
+            <h2 class="text-center mt-3 fw-bold">{{ __('Expert Educators') }}</h2>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero-section position-relative">
-        <div class="container" style="z-index: 4; position: relative;">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <h4 class="hero-pretitle">WELCOME EDEXCEL ONLINE COURSES.</h4>
-                    <h2 class="hero-title">Edexcel Academically With Tailored Tutoring And Professional Guidance</h2>
-                    <p class="mb-4">We are experienced in education platform and skilled strategies for the success of
-                        our online learning.</p>
-                    <button class="primary-btn">
-                        Request a Tutor
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15"
-                                fill="none">
-                                <path d="M11.5293 2.2207L16.5293 8.2207L11.5293 14.2207" stroke="white"
-                                    stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M1.5293 8.2207H16.5293" stroke="white" stroke-width="1.5"
-                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <img src="{{asset('homeImage/dots.png')}}" class="dots" alt="">
-        <spna class="tutor-span">
-            <h3><span class="text-primary">+200 </span>Tutors</h3>
-            <img src="{{asset('homeImage/tutor-banner.png')}}" alt="">
-        </spna>
-        <img src="{{asset('homeImage/5c59f5b1f89aa3bf34e0e8a6afa3bc296d7128e5.jpg')}}" class="banner-image" alt="">
-    </section>
-
-    <!-- Services Section -->
-    <section class="padding-120">
-        <div class="container">
-            <span class="primary-badge mx-auto mb-3">SERVICES</span>
-            <h2 class="text-center section-title">Our Services</h2>
-            <div class="row g-3 justify-content-center">
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card service-card text-center p-4">
-                        <div class="service-icon">
-                            <img src="{{asset('homeImage/teacher.png')}}" width="54" alt="">
+        <div class="row justify-content-cemter">
+            <div class="col-sm-12 sm-div ms-lg-0 ms-3">
+                <div id="customers-testimonials" class="owl-carousel">
+                    @if ($sliderTutors->count())
+                    @foreach ($sliderTutors as $sliderTutor)
+                    <!--TESTIMONIAL 1 -->
+                    <div class="profile-card mt-5 mb-3">
+                        <div class="card-header tutor-slider-card">
+                            @if ( $item->profileImage)
+                            <img src="{{ asset('storage/' . $sliderTutor->profileImage) }}" alt="Profile"
+                                class="profile-img-slider">
+                            @else
+                            <img src="{{ asset('images/avatar.png') }}" alt="Default Image" class="img-thumbnail"
+                                style="height: 150px; width: 100%;">
+                            @endif
                         </div>
-                        <h3>ONLINE CLASSES</h3>
-                        <p>Duis aute irure dolor reprehenderit in voluptate velit esse cillum dolore fugiat nulla
-                            pariatur Excepteur</p>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card service-card active text-center p-4">
-                        <div class="service-icon active">
-                            <img src="{{asset('homeImage/student.png')}}" width="54" alt="">
+                        <div class="card-body slider-body">
+                            <h5 class="card-title slider-title">{{ $sliderTutor->f_name ?? 'Nullable' }}
+                                {{ $sliderTutor->l_name ?? 'Nullable' }}
+                            </h5>
+                            <p class="card-text slider-text">
+                                @php
+                                $specializations = json_decode($sliderTutor->specialization, true);
+                                @endphp
+                                Hello, my name is {{ $sliderTutor->f_name ?? 'Not Specified' }}. I have
+                                <b>{{ $sliderTutor->experience ?? 'Nullable' }}</b>+ years of experience as a
+                                {{ is_array($specializations) && count($specializations) ? implode(', ', $specializations) : 'Not Specified' }}
+                                Teacher & Tutor
+                            </p>
+                            <!-- <button class="view-more-btn">View More</button> -->
                         </div>
-                        <h3>ONLINE TUTORS</h3>
-                        <p>Duis aute irure dolor reprehenderit in voluptate velit esse cillum dolore fugiat nulla
-                            pariatur. Excepteur</p>
                     </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card service-card text-center p-4">
-                        <div class="service-icon">
-                            <img src="{{asset('homeImage/mic.png')}}" width="54" alt="">
-                        </div>
-                        <h3>SUPPORT</h3>
-                        <p>Duis aute irure dolor reprehenderit in voluptate velit esse cillum dolore fugiat nulla
-                            pariatur Excepteur</p>
+                    @endforeach
+                    @else
+                    <div class="text-center mt-5">
+                        <img src="{{ asset('images/not-found.jpeg') }}" alt="Not Found" class="img-fluid" style="max-width: 300px;">
+                        <!-- <p class="mt-3">No tutors found.</p> -->
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Tutors Section -->
-    <section class="padding-120 bg-light">
-        <div class="container">
-            <span class="primary-badge mb-3">OUR TUTORS</span>
-            <h2 class="section-title">Discover Your Tutor</h2>
-
-            <div class="search-box row g-3">
-                <div class="col-md-9">
-                    <input type="text" class="form-control" placeholder="Search Tutor...">
-                </div>
-                <div class="col-md-3">
-                    <button type="submit" class="btn-warning warning-btn">Reset Filter</button>
+    <section class="ad-Tutor ">
+        <div class="im-heading py-3">
+            <h2>{{ __('messages.Become A Tutor') }}</h2>
+        </div>
+        <div class="AE row border mx-0">
+            <div class="col-lg-6 col-sm-6 im-div p-0">
+                <div class="im-img">
+                    <img src="{{ asset('images/become-tutor.jpeg') }}" alt="">
                 </div>
             </div>
 
-            <div class="row mb-4 g-3">
-                <div class="col-6 col-md-4 col-lg-2">
-                    <label for="" class="small-label">Please Select A Country</label>
-                    <select class="form-select">
-                        <option>Afghanistan</option>
-                        <option>USA</option>
-                        <option>UK</option>
-                    </select>
-                </div>
-                <div class="col-6 col-md-4 col-lg-2">
-                    <label for="" class="small-label">Gender Selection</label>
-                    <select class="form-select">
-                        <option>Male</option>
-                        <option>Female</option>
-                    </select>
-                </div>
-                <div class="col-6 col-md-4 col-lg-2">
-                    <label for="" class="small-label">Which Subject Interests You?</label>
-                    <select class="form-select">
-                        <option>Accounting</option>
-                        <option>Mathematics</option>
-                    </select>
-                </div>
-                <div class="col-6 col-md-4 col-lg-2">
-                    <label for="" class="small-label">Price Selection</label>
-                    <select class="form-select">
-                        <option>$0-$50</option>
-                        <option>$50-$100</option>
-                    </select>
-                </div>
-                <div class="col-6 col-md-4 col-lg-2">
-                    <label for="" class="small-label">Add Varified</label>
-                    <select class="form-select">
-                        <option value="">Select</option>
-                        <option>$0-$50</option>
-                        <option>$50-$100</option>
-                    </select>
-                </div>
-                <div class="col-6 col-md-4 col-lg-2">
-                    <label for="" class="small-label">Select Tutor</label>
-                    <select class="form-select">
-                        <option value="">Select</option>
-                        <option>$0-$50</option>
-                        <option>$50-$100</option>
-                    </select>
-                </div>
-            </div>
+            <div class="col-6 ad-div-child">
+                <div class="im-heading-div text-white mt-4">
+                    <h1 class="text-white fw-bold ">{{ __('messages.Guide and Inspire Learners') }}</h1>
+                    <p class="mx-md-2 mx-sm-0">
+                        {{ __('messages.Earn while you teach—share your expertise with students on Edexcel. Sign up to start tutoring online.') }}
+                    </p>
 
-            <div class="row g-3 justify-content-center">
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="tutor-card">
-                        <div class="image-section">
-                            <img src="{{asset('homeImage/Link.png')}}" alt="">
-                            <span class="course-badge">Aerospace Engineering</span>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center mb-3 align-items-center">
-                            <h3 class="display-6">Haris Arif</h3>
-                            <div class="d-flex justify-content-end gap-1 align-items-center">
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <div class="price">$50.00</div>
-                            </div>
-                        </div>
-                        <p class="content">1+ Years Of Air Conditioning And Refrigeration Service Teaching Experience:
-                            Your Air
-                            Conditioning And Refrigeration Service Success, Guaranteed. - Hello, My Name Is Haris. I
-                            Have 1+ Years Of Experience As A Air Conditioning And
-                            Refrigeration Service Teacher & Tutor.</p>
-                        <div class="d-flex justify-content-between mt-3 info-bar">
-                            <span class="text-muted">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="15" viewBox="0 0 11 15"
-                                    fill="none">
-                                    <path
-                                        d="M7.875 7.26953V9.01953H2.625V7.26953H7.875ZM10.3086 3.14062C10.4362 3.26823 10.5 3.42318 10.5 3.60547V3.76953H7V0.269531H7.16406C7.34635 0.269531 7.5013 0.333333 7.62891 0.460938L10.3086 3.14062ZM6.125 3.98828C6.125 4.17057 6.1888 4.32552 6.31641 4.45312C6.44401 4.58073 6.59896 4.64453 6.78125 4.64453H10.5V13.6133C10.5 13.7956 10.4362 13.9505 10.3086 14.0781C10.181 14.2057 10.026 14.2695 9.84375 14.2695H0.65625C0.473958 14.2695 0.31901 14.2057 0.191406 14.0781C0.0638021 13.9505 0 13.7956 0 13.6133V0.925781C0 0.74349 0.0638021 0.588542 0.191406 0.460938C0.31901 0.333333 0.473958 0.269531 0.65625 0.269531H6.125V3.98828ZM1.75 2.23828V2.67578C1.75 2.82161 1.82292 2.89453 1.96875 2.89453H4.15625C4.30208 2.89453 4.375 2.82161 4.375 2.67578V2.23828C4.375 2.09245 4.30208 2.01953 4.15625 2.01953H1.96875C1.82292 2.01953 1.75 2.09245 1.75 2.23828ZM1.75 3.98828V4.42578C1.75 4.57161 1.82292 4.64453 1.96875 4.64453H4.15625C4.30208 4.64453 4.375 4.57161 4.375 4.42578V3.98828C4.375 3.84245 4.30208 3.76953 4.15625 3.76953H1.96875C1.82292 3.76953 1.75 3.84245 1.75 3.98828ZM8.75 12.3008V11.8633C8.75 11.7174 8.67708 11.6445 8.53125 11.6445H6.34375C6.19792 11.6445 6.125 11.7174 6.125 11.8633V12.3008C6.125 12.4466 6.19792 12.5195 6.34375 12.5195H8.53125C8.67708 12.5195 8.75 12.4466 8.75 12.3008ZM8.75 6.83203C8.75 6.70443 8.70443 6.60417 8.61328 6.53125C8.54036 6.4401 8.4401 6.39453 8.3125 6.39453H2.1875C2.0599 6.39453 1.95052 6.4401 1.85938 6.53125C1.78646 6.60417 1.75 6.70443 1.75 6.83203V9.45703C1.75 9.58464 1.78646 9.69401 1.85938 9.78516C1.95052 9.85807 2.0599 9.89453 2.1875 9.89453H8.3125C8.4401 9.89453 8.54036 9.85807 8.61328 9.78516C8.70443 9.69401 8.75 9.58464 8.75 9.45703V6.83203Z"
-                                        fill="black" />
-                                </svg>
-                                <span>Albanian(Cl)</span>
-                            </span>
-                            <span class="text-muted">
-                                <span>Male</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="15" viewBox="0 0 13 15"
-                                    fill="none">
-                                    <path
-                                        d="M8.58594 6.25781C7.91146 6.93229 7.09115 7.26953 6.125 7.26953C5.15885 7.26953 4.32943 6.93229 3.63672 6.25781C2.96224 5.5651 2.625 4.73568 2.625 3.76953C2.625 2.80339 2.96224 1.98307 3.63672 1.30859C4.32943 0.615885 5.15885 0.269531 6.125 0.269531C7.09115 0.269531 7.91146 0.615885 8.58594 1.30859C9.27865 1.98307 9.625 2.80339 9.625 3.76953C9.625 4.73568 9.27865 5.5651 8.58594 6.25781ZM8.58594 8.14453C9.58854 8.14453 10.4453 8.50911 11.1562 9.23828C11.8854 9.94922 12.25 10.806 12.25 11.8086V12.957C12.25 13.3216 12.1224 13.6315 11.8672 13.8867C11.612 14.1419 11.3021 14.2695 10.9375 14.2695H1.3125C0.947917 14.2695 0.638021 14.1419 0.382812 13.8867C0.127604 13.6315 0 13.3216 0 12.957V11.8086C0 10.806 0.355469 9.94922 1.06641 9.23828C1.79557 8.50911 2.66146 8.14453 3.66406 8.14453H4.12891C4.76693 8.4362 5.43229 8.58203 6.125 8.58203C6.81771 8.58203 7.48307 8.4362 8.12109 8.14453H8.58594Z"
-                                        fill="black" />
-                                </svg>
-                            </span>
-                            <span class="text-muted">
-                                <span>13-05-1985</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"
-                                    fill="none">
-                                    <path
-                                        d="M2.70703 2.48438C4.03776 1.15365 5.64193 0.488281 7.51953 0.488281C9.39714 0.488281 10.9922 1.15365 12.3047 2.48438C13.6354 3.79688 14.3008 5.39193 14.3008 7.26953C14.3008 9.14714 13.6354 10.7513 12.3047 12.082C10.9922 13.3945 9.39714 14.0508 7.51953 14.0508C5.64193 14.0508 4.03776 13.3945 2.70703 12.082C1.39453 10.7513 0.738281 9.14714 0.738281 7.26953C0.738281 5.39193 1.39453 3.79688 2.70703 2.48438ZM9.07812 10.0586C9.26042 10.1862 9.41536 10.168 9.54297 10.0039L10.3086 8.9375C10.4362 8.75521 10.418 8.60026 10.2539 8.47266L8.50391 7.21484V3.44141C8.50391 3.22266 8.39453 3.11328 8.17578 3.11328H6.86328C6.64453 3.11328 6.53516 3.22266 6.53516 3.44141V8.03516C6.53516 8.14453 6.58073 8.23568 6.67188 8.30859L9.07812 10.0586Z"
-                                        fill="black" />
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="d-flex justify-content-between gap-3 mt-3">
-                            <button class="primary-btn-2 flex-grow-1">Send Message</button>
-                            <button class="primary-btn-2 flex-grow-1">Enroll</button>
-                        </div>
+                    <div class="im-detail">
+                        <ul class="mt-lg-5 mt-md-3 mt-sm-0">
+                            <li class="AH fs-5 mx-3">{{ __('messages.Expand Your Student Base') }}</li>
+                            <li class="AH fs-5 mx-3">{{ __('messages.Boost Your Business') }}</li>
+                            <li class="AH fs-5 mx-3">{{ __('messages.Guaranteed Payment Security') }}</li>
+                        </ul>
                     </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="tutor-card">
-                        <div class="image-section">
-                            <img src="{{asset('homeImage/Link.png')}}" alt="">
-                            <span class="course-badge">Aerospace Engineering</span>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center mb-3 align-items-center">
-                            <h3 class="display-6">Haris Arif</h3>
-                            <div class="d-flex justify-content-end gap-1 align-items-center">
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <div class="price">$50.00</div>
-                            </div>
-                        </div>
-                        <p class="content">1+ Years Of Air Conditioning And Refrigeration Service Teaching Experience:
-                            Your Air
-                            Conditioning And Refrigeration Service Success, Guaranteed. - Hello, My Name Is Haris. I
-                            Have 1+ Years Of Experience As A Air Conditioning And
-                            Refrigeration Service Teacher & Tutor.</p>
-                        <div class="d-flex justify-content-between mt-3 info-bar">
-                            <span class="text-muted">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="15" viewBox="0 0 11 15"
-                                    fill="none">
-                                    <path
-                                        d="M7.875 7.26953V9.01953H2.625V7.26953H7.875ZM10.3086 3.14062C10.4362 3.26823 10.5 3.42318 10.5 3.60547V3.76953H7V0.269531H7.16406C7.34635 0.269531 7.5013 0.333333 7.62891 0.460938L10.3086 3.14062ZM6.125 3.98828C6.125 4.17057 6.1888 4.32552 6.31641 4.45312C6.44401 4.58073 6.59896 4.64453 6.78125 4.64453H10.5V13.6133C10.5 13.7956 10.4362 13.9505 10.3086 14.0781C10.181 14.2057 10.026 14.2695 9.84375 14.2695H0.65625C0.473958 14.2695 0.31901 14.2057 0.191406 14.0781C0.0638021 13.9505 0 13.7956 0 13.6133V0.925781C0 0.74349 0.0638021 0.588542 0.191406 0.460938C0.31901 0.333333 0.473958 0.269531 0.65625 0.269531H6.125V3.98828ZM1.75 2.23828V2.67578C1.75 2.82161 1.82292 2.89453 1.96875 2.89453H4.15625C4.30208 2.89453 4.375 2.82161 4.375 2.67578V2.23828C4.375 2.09245 4.30208 2.01953 4.15625 2.01953H1.96875C1.82292 2.01953 1.75 2.09245 1.75 2.23828ZM1.75 3.98828V4.42578C1.75 4.57161 1.82292 4.64453 1.96875 4.64453H4.15625C4.30208 4.64453 4.375 4.57161 4.375 4.42578V3.98828C4.375 3.84245 4.30208 3.76953 4.15625 3.76953H1.96875C1.82292 3.76953 1.75 3.84245 1.75 3.98828ZM8.75 12.3008V11.8633C8.75 11.7174 8.67708 11.6445 8.53125 11.6445H6.34375C6.19792 11.6445 6.125 11.7174 6.125 11.8633V12.3008C6.125 12.4466 6.19792 12.5195 6.34375 12.5195H8.53125C8.67708 12.5195 8.75 12.4466 8.75 12.3008ZM8.75 6.83203C8.75 6.70443 8.70443 6.60417 8.61328 6.53125C8.54036 6.4401 8.4401 6.39453 8.3125 6.39453H2.1875C2.0599 6.39453 1.95052 6.4401 1.85938 6.53125C1.78646 6.60417 1.75 6.70443 1.75 6.83203V9.45703C1.75 9.58464 1.78646 9.69401 1.85938 9.78516C1.95052 9.85807 2.0599 9.89453 2.1875 9.89453H8.3125C8.4401 9.89453 8.54036 9.85807 8.61328 9.78516C8.70443 9.69401 8.75 9.58464 8.75 9.45703V6.83203Z"
-                                        fill="black" />
-                                </svg>
-                                <span>Albanian(Cl)</span>
-                            </span>
-                            <span class="text-muted">
-                                <span>Male</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="15" viewBox="0 0 13 15"
-                                    fill="none">
-                                    <path
-                                        d="M8.58594 6.25781C7.91146 6.93229 7.09115 7.26953 6.125 7.26953C5.15885 7.26953 4.32943 6.93229 3.63672 6.25781C2.96224 5.5651 2.625 4.73568 2.625 3.76953C2.625 2.80339 2.96224 1.98307 3.63672 1.30859C4.32943 0.615885 5.15885 0.269531 6.125 0.269531C7.09115 0.269531 7.91146 0.615885 8.58594 1.30859C9.27865 1.98307 9.625 2.80339 9.625 3.76953C9.625 4.73568 9.27865 5.5651 8.58594 6.25781ZM8.58594 8.14453C9.58854 8.14453 10.4453 8.50911 11.1562 9.23828C11.8854 9.94922 12.25 10.806 12.25 11.8086V12.957C12.25 13.3216 12.1224 13.6315 11.8672 13.8867C11.612 14.1419 11.3021 14.2695 10.9375 14.2695H1.3125C0.947917 14.2695 0.638021 14.1419 0.382812 13.8867C0.127604 13.6315 0 13.3216 0 12.957V11.8086C0 10.806 0.355469 9.94922 1.06641 9.23828C1.79557 8.50911 2.66146 8.14453 3.66406 8.14453H4.12891C4.76693 8.4362 5.43229 8.58203 6.125 8.58203C6.81771 8.58203 7.48307 8.4362 8.12109 8.14453H8.58594Z"
-                                        fill="black" />
-                                </svg>
-                            </span>
-                            <span class="text-muted">
-                                <span>13-05-1985</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"
-                                    fill="none">
-                                    <path
-                                        d="M2.70703 2.48438C4.03776 1.15365 5.64193 0.488281 7.51953 0.488281C9.39714 0.488281 10.9922 1.15365 12.3047 2.48438C13.6354 3.79688 14.3008 5.39193 14.3008 7.26953C14.3008 9.14714 13.6354 10.7513 12.3047 12.082C10.9922 13.3945 9.39714 14.0508 7.51953 14.0508C5.64193 14.0508 4.03776 13.3945 2.70703 12.082C1.39453 10.7513 0.738281 9.14714 0.738281 7.26953C0.738281 5.39193 1.39453 3.79688 2.70703 2.48438ZM9.07812 10.0586C9.26042 10.1862 9.41536 10.168 9.54297 10.0039L10.3086 8.9375C10.4362 8.75521 10.418 8.60026 10.2539 8.47266L8.50391 7.21484V3.44141C8.50391 3.22266 8.39453 3.11328 8.17578 3.11328H6.86328C6.64453 3.11328 6.53516 3.22266 6.53516 3.44141V8.03516C6.53516 8.14453 6.58073 8.23568 6.67188 8.30859L9.07812 10.0586Z"
-                                        fill="black" />
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="d-flex justify-content-between gap-3 mt-3">
-                            <button class="primary-btn-2 flex-grow-1">Send Message</button>
-                            <button class="primary-btn-2 flex-grow-1">Enroll</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="tutor-card">
-                        <div class="image-section">
-                            <img src="{{asset('homeImage/Link.png')}}" alt="">
-                            <span class="course-badge">Aerospace Engineering</span>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center mb-3 align-items-center">
-                            <h3 class="display-6">Haris Arif</h3>
-                            <div class="d-flex justify-content-end gap-1 align-items-center">
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <div class="price">$50.00</div>
-                            </div>
-                        </div>
-                        <p class="content">1+ Years Of Air Conditioning And Refrigeration Service Teaching Experience:
-                            Your Air
-                            Conditioning And Refrigeration Service Success, Guaranteed. - Hello, My Name Is Haris. I
-                            Have 1+ Years Of Experience As A Air Conditioning And
-                            Refrigeration Service Teacher & Tutor.</p>
-                        <div class="d-flex justify-content-between mt-3 info-bar">
-                            <span class="text-muted">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="15" viewBox="0 0 11 15"
-                                    fill="none">
-                                    <path
-                                        d="M7.875 7.26953V9.01953H2.625V7.26953H7.875ZM10.3086 3.14062C10.4362 3.26823 10.5 3.42318 10.5 3.60547V3.76953H7V0.269531H7.16406C7.34635 0.269531 7.5013 0.333333 7.62891 0.460938L10.3086 3.14062ZM6.125 3.98828C6.125 4.17057 6.1888 4.32552 6.31641 4.45312C6.44401 4.58073 6.59896 4.64453 6.78125 4.64453H10.5V13.6133C10.5 13.7956 10.4362 13.9505 10.3086 14.0781C10.181 14.2057 10.026 14.2695 9.84375 14.2695H0.65625C0.473958 14.2695 0.31901 14.2057 0.191406 14.0781C0.0638021 13.9505 0 13.7956 0 13.6133V0.925781C0 0.74349 0.0638021 0.588542 0.191406 0.460938C0.31901 0.333333 0.473958 0.269531 0.65625 0.269531H6.125V3.98828ZM1.75 2.23828V2.67578C1.75 2.82161 1.82292 2.89453 1.96875 2.89453H4.15625C4.30208 2.89453 4.375 2.82161 4.375 2.67578V2.23828C4.375 2.09245 4.30208 2.01953 4.15625 2.01953H1.96875C1.82292 2.01953 1.75 2.09245 1.75 2.23828ZM1.75 3.98828V4.42578C1.75 4.57161 1.82292 4.64453 1.96875 4.64453H4.15625C4.30208 4.64453 4.375 4.57161 4.375 4.42578V3.98828C4.375 3.84245 4.30208 3.76953 4.15625 3.76953H1.96875C1.82292 3.76953 1.75 3.84245 1.75 3.98828ZM8.75 12.3008V11.8633C8.75 11.7174 8.67708 11.6445 8.53125 11.6445H6.34375C6.19792 11.6445 6.125 11.7174 6.125 11.8633V12.3008C6.125 12.4466 6.19792 12.5195 6.34375 12.5195H8.53125C8.67708 12.5195 8.75 12.4466 8.75 12.3008ZM8.75 6.83203C8.75 6.70443 8.70443 6.60417 8.61328 6.53125C8.54036 6.4401 8.4401 6.39453 8.3125 6.39453H2.1875C2.0599 6.39453 1.95052 6.4401 1.85938 6.53125C1.78646 6.60417 1.75 6.70443 1.75 6.83203V9.45703C1.75 9.58464 1.78646 9.69401 1.85938 9.78516C1.95052 9.85807 2.0599 9.89453 2.1875 9.89453H8.3125C8.4401 9.89453 8.54036 9.85807 8.61328 9.78516C8.70443 9.69401 8.75 9.58464 8.75 9.45703V6.83203Z"
-                                        fill="black" />
-                                </svg>
-                                <span>Albanian(Cl)</span>
-                            </span>
-                            <span class="text-muted">
-                                <span>Male</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="15" viewBox="0 0 13 15"
-                                    fill="none">
-                                    <path
-                                        d="M8.58594 6.25781C7.91146 6.93229 7.09115 7.26953 6.125 7.26953C5.15885 7.26953 4.32943 6.93229 3.63672 6.25781C2.96224 5.5651 2.625 4.73568 2.625 3.76953C2.625 2.80339 2.96224 1.98307 3.63672 1.30859C4.32943 0.615885 5.15885 0.269531 6.125 0.269531C7.09115 0.269531 7.91146 0.615885 8.58594 1.30859C9.27865 1.98307 9.625 2.80339 9.625 3.76953C9.625 4.73568 9.27865 5.5651 8.58594 6.25781ZM8.58594 8.14453C9.58854 8.14453 10.4453 8.50911 11.1562 9.23828C11.8854 9.94922 12.25 10.806 12.25 11.8086V12.957C12.25 13.3216 12.1224 13.6315 11.8672 13.8867C11.612 14.1419 11.3021 14.2695 10.9375 14.2695H1.3125C0.947917 14.2695 0.638021 14.1419 0.382812 13.8867C0.127604 13.6315 0 13.3216 0 12.957V11.8086C0 10.806 0.355469 9.94922 1.06641 9.23828C1.79557 8.50911 2.66146 8.14453 3.66406 8.14453H4.12891C4.76693 8.4362 5.43229 8.58203 6.125 8.58203C6.81771 8.58203 7.48307 8.4362 8.12109 8.14453H8.58594Z"
-                                        fill="black" />
-                                </svg>
-                            </span>
-                            <span class="text-muted">
-                                <span>13-05-1985</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"
-                                    fill="none">
-                                    <path
-                                        d="M2.70703 2.48438C4.03776 1.15365 5.64193 0.488281 7.51953 0.488281C9.39714 0.488281 10.9922 1.15365 12.3047 2.48438C13.6354 3.79688 14.3008 5.39193 14.3008 7.26953C14.3008 9.14714 13.6354 10.7513 12.3047 12.082C10.9922 13.3945 9.39714 14.0508 7.51953 14.0508C5.64193 14.0508 4.03776 13.3945 2.70703 12.082C1.39453 10.7513 0.738281 9.14714 0.738281 7.26953C0.738281 5.39193 1.39453 3.79688 2.70703 2.48438ZM9.07812 10.0586C9.26042 10.1862 9.41536 10.168 9.54297 10.0039L10.3086 8.9375C10.4362 8.75521 10.418 8.60026 10.2539 8.47266L8.50391 7.21484V3.44141C8.50391 3.22266 8.39453 3.11328 8.17578 3.11328H6.86328C6.64453 3.11328 6.53516 3.22266 6.53516 3.44141V8.03516C6.53516 8.14453 6.58073 8.23568 6.67188 8.30859L9.07812 10.0586Z"
-                                        fill="black" />
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="d-flex justify-content-between gap-3 mt-3">
-                            <button class="primary-btn-2 flex-grow-1">Send Message</button>
-                            <button class="primary-btn-2 flex-grow-1">Enroll</button>
-                        </div>
+                    <div class="im-button d-flex mx-3 mb-lg-0 mb-2">
+                        <a href="{{route('tutor')}}" class="btn btn-light bg-white my-lg-5 my-sm-3  fs-lg-6 fs-sm-3"
+                            style="color : #42b979;">{{ __('messages.Register yourself as a professional teacher') }} <i
+                                class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    @if($blogs->count() > 0)
+    <section class="w-75 mx-auto">
 
-    <!-- About Section -->
-    <section class="padding-120 about">
-        <div class="container">
-            <div class="row align-items-center g-3">
-                <div class="col-lg-6 text-center text-lg-start">
-                    <img src="{{asset('homeImage/about-section.png')}}" alt="About Edexcel" class="img-fluid rounded">
-                </div>
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <span class="primary-badge mb-3">ABOUT EDEXCELEDU</span>
-                    <h2 class="section-title">Learn & Grow Your Skills From Anywhere</h2>
-                    <h3 class="mb-3"></h3>
-                    <p class="mb-4 about-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                        eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris..</p>
-
-                    <div class="row g-3">
-                        <div class="col-md-6 mb-4">
-                            <h4 class="about-heading">FLEXIBLE CLASSNAMEES</h4>
-                            <p class="about-content">Suspendisse ultrice gravida dictum fusce placerat ultricies integer
-                                quis auctor elit sed
-                                vulputate mi sit.</p>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <h4 class="about-heading">FLEXIBLE CLASSNAMEES</h4>
-                            <p class="about-content">Suspendisse ultrice gravida dictum fusce placerat ultricies integer
-                                quis auctor elit sed
-                                vulputate mi sit.</p>
-                        </div>
+        <div class="ad-heading-div-child im-heading">
+            <h2 class="text-center mt-3 fw-bold">{{ __('Trending Posts') }}</h2>
+        </div>
+        <div class="row g-4">
+            <!-- Card 1 -->
+            @foreach ($blogs as $blog)
+            <div class="col-md-4">
+                <div class="blog-card">
+                    <!-- <div class="blog-number">01</div> -->
+                    <div class="blog-title">{{ $blog->title }}</div>
+                    @if($blog->image)
+                    <div class="blog-image">
+                        <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}">
+                    </div>
+                    @endif
+                    <p class="blog-text">{{ strip_tags($blog->description) }}</p>
+                    <div class="d-flex">
+                        <small class="text-start">{{ $blog->created_at->diffForHumans() }}</small>
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
     </section>
+    @endif
 
-    <!-- Courses Section -->
-    <section class="padding-120 bg-light">
-        <div class="container">
-            <span class="primary-badge mb-3">COURSES</span>
-            <h2 class="section-title mb-3">Explore Top Courses</h2>
 
-            <div class="row mb-4 ">
-                <div class="col">
-                    <ul class="nav nav-pills gap-3">
-                        <li class="nav-item">
-                            <a class="nav-link nav-primary active" href="#">All</a>
+
+    <section class="fb-ad ">
+        <div class="ad-line"></div>
+        <div class="im-heading">
+            <h2 class="mx-heading-div py-3">Frequently Asked Questions</h2>
+        </div>
+    </section>
+    <section class="w-75 mx-auto">
+        <div>
+            <div class="list-group-item border rounded my-2 px-2">
+                <div class="d-flex justify-content-between align-items-center" onclick="toggle('para','toggle-arrow')">
+                    <h6 class="fw-bold py-3 faq-heading">
+                        {{ __('messages.How can students improve their knowledge?') }}
+                    </h6>
+                    <i class="fa fa-chevron-down" id="toggle-arrow"></i>
+                </div>
+                <div id="para" style="height:auto;">
+                    <p>
+                        {{ __('messages.Students can improve their knowledge and skills in a number of ways like:') }}
+                    </p>
+                    <ul>
+                        <li> {{ __('messages.Practicing solutions regularly.') }}</li>
+                        <li>
+                            {{ __('messages.Understand the underlying concepts/formulas clearly.') }}
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-primary" href="#">Data Science</a>
+                        <li>{{ __('messages.Solving additional exercises.') }}</li>
+                        <li>{{ __('messages.Sharing a positive attitude about the subject.') }}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="list-group-item border rounded my-2 px-2">
+                <div class="d-flex justify-content-between align-items-center"
+                    onclick="toggle('para1','toggle-arrow1')">
+                    <h6 class="fw-bold py-3 faq-heading">
+                        {{ __('messages.How can tutors help students improve their score and skills?') }}
+                    </h6>
+                    <i class="fa fa-chevron-down" id="toggle-arrow1"></i>
+                </div>
+                <div id="para1">
+                    <p>
+                        {{ __('messages.There are many ways students can improve their skills. But experienced tutors in Dubai can help to:') }}
+                    </p>
+                    <ul>
+                        <li>{{ __('messages.Build confidence in the student.') }}</li>
+                        <li>{{ __('messages.Encourage questioning and make space for curiosity.') }}</li>
+                        <li>{{ __('messages.Emphasize conceptual understanding over procedure.') }}</li>
+                        <li>
+                            {{ __('messages. Provide authentic problems that increase students’ drive to engage with the subject.') }}
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-primary" href="#">Business</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-primary" href="#">Artificial Intelligence</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-primary" href="#">Computer Science</a>
-                        </li>
+                        <li>{{ __('messages.Share a positive attitude about the subject.') }}</li>
                     </ul>
                 </div>
             </div>
 
-            <div class="row g-3 justify-content-center">
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card course-card">
-                        <div class="image-section">
-                            <img src="{{asset('homeImage/course.png')}}" alt="Course">
-                            <span class="course-badge">OxfordX</span>
-                        </div>
-                        <h5 class="display-6 mb-3">Artificial Intelligence: Implications For Business Strategy</h5>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="primary-badge">Executive Education</span>
-                            <span class="text-muted">3 Courses</span>
-                        </div>
-                    </div>
+            <div class="list-group-item border rounded my-2 px-2">
+                <div class="d-flex justify-content-between align-items-center"
+                    onclick="toggle('para2','toggle-arrow2')">
+                    <h6 class="fw-bold py-3 faq-heading">
+                        {{ __('messages.Want to know what we can offer?') }}
+                    </h6>
+                    <i class="fa fa-chevron-down" id="toggle-arrow1"></i>
                 </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card course-card">
-                        <div class="image-section">
-                            <img src="{{asset('homeImage/course.png')}}" alt="Course">
-                            <span class="course-badge">OxfordX</span>
-                        </div>
-                        <h5 class="display-6 mb-3">Artificial Intelligence: Implications For Business Strategy</h5>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="primary-badge">Executive Education</span>
-                            <span class="text-muted">3 Courses</span>
-                        </div>
-                    </div>
+                <div id="para2">
+                    <p>
+                        {{ __('messages.There are many ways students can improve their skills. But experienced tutors in Dubai can help to:') }}
+                    </p>
+                    <ul>
+                        <li>{{ __('messages.Build confidence in the student.') }}</li>
+                        <li>{{ __('messages.Encourage questioning and make space for curiosity.') }}</li>
+                        <li>{{ __('messages.Emphasize conceptual understanding over procedure.') }}</li>
+                        <li>{{ __('messages.EProvide authentic problems that increase students’ drive to engage with the subject.') }}
+
+                        </li>
+                        <li>{{ __('messages.Share a positive attitude about the subject.') }}</li>
+                    </ul>
                 </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card course-card">
-                        <div class="image-section">
-                            <img src="{{asset('homeImage/course.png')}}" alt="Course">
-                            <span class="course-badge">OxfordX</span>
-                        </div>
-                        <h5 class="display-6 mb-3">Artificial Intelligence: Implications For Business Strategy</h5>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="primary-badge">Executive Education</span>
-                            <span class="text-muted">3 Courses</span>
-                        </div>
-                    </div>
+            </div>
+
+            <div class="list-group-item border rounded my-2 px-2">
+                <div class="d-flex justify-content-between align-items-center"
+                    onclick="toggle('para3','toggle-arrow3')">
+                    <h6 class="fw-bold py-3 faq-heading">
+                        {{ __('messages.If you have tried all means and yet looking for a tutor❓') }}
+                    </h6>
+                    <i class="fa fa-chevron-down" id="toggle-arrow1"></i>
+                </div>
+                <div id="para3">
+                    <p>{{ __('messages.There are many ways students can improve their skills. But experienced tutors in Dubai can help to:') }}
+
+                    </p>
+                    <ul>
+                        <li>{{ __('messages.Build confidence in the student.') }}</li>
+                        <li>{{ __('messages.Encourage questioning and make space for curiosity.') }}</li>
+                        <li>{{ __('messages.Emphasize conceptual understanding over procedure.') }}</li>
+                        <li>{{ __('messages.Provide authentic problems that increase students’ drive
+                                                            to engage with the subject.') }}
+                        </li>
+                        <li>>{{ __('messages.Share a positive attitude about the subject.') }}</li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Call to Action -->
-    <section class="call-to-action">
-        <div class="dark-bg">
-            <div class="container padding-70">
-                <h4 class="pre-heading">Join Our New Session</h4>
-                <h2 class="section-title">Call To Enroll Your Child <br>(+91)958423452</h2>
-                <button class="warning-btn-2">
-                    Join With Us
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
-                            <path d="M11.5293 2.2207L16.5293 8.2207L11.5293 14.2207" stroke="white" stroke-width="1.5"
-                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M1.5293 8.2207H16.5293" stroke="white" stroke-width="1.5" stroke-miterlimit="10"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </span>
-                </button>
+
+    </section>
+    <section class="w-75 mx-auto mb-4 services-section">
+        <div class="keys-heading">
+            <h2 class="text-center my-4 fw-bold">Our Services</h2>
+        </div>
+        <div class="row justify-content-center">
+
+            <!-- Card 1 -->
+            <div class="col-md-4">
+                <div class="service-card h-100">
+                    <div class="service-icon">
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/classroom.png" alt="Online Tutors">
+                    </div>
+                    <h5 class="service-title">Online Tutors</h5>
+                    <p class="service-text">Get personalized, one-on-one tutoring from certified educators—anytime,
+                        anywhere. We help learners of all ages master subjects with clarity and confidence.</p>
+                </div>
             </div>
+
+            <!-- Card 2 -->
+            <div class="col-md-4">
+                <div class="service-card h-100">
+                    <div class="service-icon">
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/laptop.png" alt="Online Classes">
+                    </div>
+                    <h5 class="service-title">Online Classes</h5>
+                    <p class="service-text">Interactive, expert-led online classes designed to fit your schedule. Learn
+                        new skills, upgrade your knowledge, and achieve your goals.</p>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="col-md-4">
+                <div class="service-card h-100">
+                    <div class="service-icon">
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/customer-support.png" alt="Support">
+                    </div>
+                    <h5 class="service-title">Support</h5>
+                    <p class="service-text">24/7 dedicated support to ensure your experience is smooth and stress-free.
+                        We're here to solve problems, answer questions, and keep you moving forward.</p>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <!-- Inquiry Form -->
-    <section class="padding-120 padding-bottom-150">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-start">
-                    <div class="max-width-550">
-                        <span class="primary-badge mb-3">INQUIRY OVERVIEW</span>
-                        <h3 class="section-title mb-4">Submit Your Inquiry To Request A Callback For Further Assistance
-                        </h3>
-                        <small class="text-muted mb-3">"Please Complete All Required Fields"</small>
+</div>
 
-                        <form method="POST" action="{{ route('inquiry-create') }}" enctype="multipart/form-data" class="mt-3">
-    @csrf
-    <div class="mb-3">
-        <input type="text" class="form-control" name="fname" placeholder="{{ __('messages.Name') }}" required>
-    </div>
-    <div class="mb-3">
-        <input type="email" class="form-control" name="email" placeholder="{{ __('messages.Email ID') }}"
-               pattern="^[a-zA-Z0-9._%+-]+@(gmail|hotmail|yahoo)\.com$"
-               title="Only Gmail, Hotmail, or Yahoo emails are allowed (e.g., example@gmail.com)" required>
-    </div>
-    <div class="mb-3 d-flex gap-2">
-       <select name="country_code" class="form-select w-50" required>
-    @foreach ($countries_prefix as $countryCode => $dialCode)
-        <option value="{{ $dialCode }}"> {{ $dialCode }}</option>
-    @endforeach
-</select>
 
-        <input type="text" class="form-control w-50" name="phone" placeholder="e.g +92XXXXXXXXXX" required>
-    </div>
-    <div class="mb-3">
-        <textarea class="form-control" name="description" rows="4" placeholder="{{ __('messages.Description') }}"></textarea>
-    </div>
-    <button type="submit" class="btn-submit primary-btn">
-        {{ __('messages.Confirm') }}
-        <span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
-                <path d="M11.5293 2.2207L16.5293 8.2207L11.5293 14.2207" stroke="white"
-                      stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                      stroke-linejoin="round"/>
-                <path d="M1.5293 8.2207H16.5293" stroke="white" stroke-width="1.5"
-                      stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </span>
-    </button>
-</form>
 
-                    </div>
-                </div>
-                <div class="col-lg-6 text-center text-lg-end">
-                    <img src="{{asset('homeImage/question.png')}}" alt="Inquiry" class="img-fluid rounded">
-                </div>
+<button class="goToTop fw-20px" style="background-color:#42B979" onclick="window.scrollTo(0, 0)"><i
+        class="fa fa-chevron-up"></i></button>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width:750px !important">
+        <div class="modal-content" style="width:700px">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Register</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        </div>
-    </section>
+            <div class="modal-body">
+                <form method="POST" action="{{ route('newstudent-create') }}">
+                    @csrf
 
-    <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="container">
-            <div class="stat-counter row g-3">
-                <div class="col-12 col-md-6 col-lg-3">
-                    <div class="d-flex gap-2 align-items-center">
-                        <div class="stat-icon">
-                            <img src="{{asset('homeImage/teacher-2.png')}}" alt="">
-                        </div>
-                        <div class="d-flex flex-column gap-1">
-                            <h4 class="stat-count">+500</h4>
-                            <span class="stat-heading">Teacher</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3">
-                    <div class="d-flex gap-2 align-items-center">
-                        <div class="stat-icon">
-                            <img src="{{asset('homeImage/language.png')}}" alt="">
-                        </div>
-                        <div class="d-flex flex-column gap-1">
-                            <h4 class="stat-count">+500</h4>
-                            <span class="stat-heading">Languages</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3">
-                    <div class="d-flex gap-2 align-items-center">
-                        <div class="stat-icon">
-                            <img src="{{asset('homeImage/students-2.png')}}" alt="">
-                        </div>
-                        <div class="d-flex flex-column gap-1">
-                            <h4 class="stat-count">+1000</h4>
-                            <span class="stat-heading">Students</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3">
-                    <div class="d-flex gap-2 align-items-center">
-                        <div class="stat-icon">
-                            <img src="{{asset('homeImage/subjects.png')}}" alt="">
-                        </div>
-                        <div class="d-flex flex-column gap-1">
-                            <h4 class="stat-count">+1500</h4>
-                            <span class="stat-heading">Subjects</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                    <div class="row mb-3">
+                        <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
-    <!-- Testimonials -->
-    <section class="padding-120 padding-top-180 bg-light">
-        <div class="container">
-            <span class="primary-badge mb-4 mx-auto">TESTIMONIALS</span>
-            <h2 class="text-center section-title">Creating A Community Of <br>Life Long Learners.</h2>
+                        <div class="col-md-6">
+                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                                name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-            <div class="row g-5 justify-content-center">
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="testimonial-card">
-                        <p class="testimonial-text">"Lorem ipsum dolor sit amet, elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Orci nulla pellentesque dignissim enim. Amet consectetur
-                            adipiscing"</p>
-                        <div class="d-flex gap-1 flex-column">
-                            <div class="testimonial-author">Kathy Sullivan</div>
-                            <div class="testimonial-position">CEO at ordian it</div>
+                            @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
-                        <span class="quttes">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                width="70" height="47" viewBox="0 0 70 47" fill="none">
-                                <rect width="70" height="46" transform="translate(0 0.0292969)"
-                                    fill="url(#pattern0_427_218)" />
-                                <defs>
-                                    <pattern id="pattern0_427_218" patternContentUnits="objectBoundingBox" width="1"
-                                        height="1">
-                                        <use xlink:href="#image0_427_218" transform="scale(0.0142857 0.0217391)" />
-                                    </pattern>
-                                    <image id="image0_427_218" width="70" height="46" preserveAspectRatio="none"
-                                        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAAuCAYAAACViW+zAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAUUSURBVHgB7ZrPb+NEFMefxx7Hjps0bUKSbrcl7Ub8OCFRiZU4rYQEQmIl9tAbSJz6d+TPQPwLvay0SKBKSEjcWIK4gBB02Wq3JT/dzTZNk9hjG4+z2Q1pftkziXPYz83JSPP8nffePM88AeZAPv9ppE4iKgZDwSLGRBBk2zZExxLcJ4ToGNO0bYyj9fLxYQ0WQgGl3v5V61625FVNVYghYYIMmf4jIRH3R9kgdqrHT58IwIUCim3+tKbhWMx0TLX/8rMgtJzHpdK3VzAHNjY+i5KIHXcQxAdffipEbEnAAJ0YVEgZ1kPNXX1XDAswzKyJh7hmKlACjsIUUDb/e9LumnEnYikiiOAXQSZKQGEOcDZX3XQkS6NPGAVzPGJbZlmtN4ETm5v3kh3pYRoAIRSBwDi2pft+o97kRtpPuAxD84skmXrlyw/rUCjYwExvoeDFQgWGmC2nbdcqlaOWD2FcF839ts0yOfUQYsvVxsn9BnAil/s80XTMDaaFQk5Dj5WqUCya/d9mFOYAp3ZPd3wlsCEcp1vj5yE9MrfupQWBvAEBoTuQ0LwqUw8Z/m8GYdhEoV4itsjZqMlZYBXFIpZe++qD6riFmiKMu/fv/pxnEaW+Vnk86KI8oHnOUkkWAkOq5ePvJtZPE3eltY1fbrKED/UU+IevKAB3FCZR3ARbPvl+alE5NmFRV41oQgyCW1DlHT69sI5uQ0C88iBZO5tlLBpnAEv8egZ8cVsHziRv/ptm8eCI3NVnDeuRZWFqN5NHAvJfMr7AsHC5c//rNnAk4W7LEdlJQ0DoYlX+PjqddTwaZQDLqlADeNYpfSRkBBaFQusnP+OHhDnArAY4EuKcV3r5jmWxKI3kU192CcMGsOQWSoeIZ2qXGIO/aZplHR/fdmM7SHHHXlzSr2WhS655zI0bJbM4JucMCLMvpnZbt1hXZhK00jQI6H5CLfbOR0mNRBlqlsnQ7zawhAv91P0kgFcivUywidxbq7IICZgjghtoEnLiSiK/dvUsfgFQmupB8fi7WywbwTREURBESVBW1mPJlfX34PL8D+8I5GWOYc0tfqBe6e58OwB7E72TdSPwTyedze97qcQTJpP5WFusAT1xsrmtzUljFJivB4+mk6YHcJ4wBMshGODiHmHs7Y3zmgPMfL4SECmOEp4w7lF1KAZQHumxkXMnctXQbGqbZAVB7o6y6DAaRJHUkXMj8YrhO40NqgdKQEKBJQQ5kgohgujdDywd+2KYXkxxCwR56YTJZJ6HbhPq38YtE101Gqq3UBC2g5+uzwvNbM6t0p0VN8cJoRsxjKXKoS/W0nnLsvBamDEgeuIGS0aHREK3CSHTsWDJQBddbreVgW2wo5jroTUPzne2QrcJRS5bXVg2it+YAgnXk9EZtrgfXvOgKxqh2oXg5MfOMiZg24pyaygKgrddiwLhfg/ESuMEN8MMJ0+YyqNVPeyYvs6hZYvGOYQECtuISTVLWAtGUwsaNCKMXDP5hvDQulTaC+oDfgW9TUWDRnj9LAuE9r5N6z5o/vmDTm8SYYHQfrz/fSvRfhZiLiakqHd6DYEzUE6mzxYXUsRrUrx25HD1/P22kuiuzvP2j3Y1VderT2ZuQSsVbSG75cg2XoE5Qa9q5Ui7UvrrqE6fR/bg5dybg0sU3eZ+7uoK0gGlEbRNJPXmJxsSlteBI1QQpDnPampFn7mddfxlmH+Kd+9aXFpZCwW09+ABN28e1+3wH5+NLVJDMgdDAAAAAElFTkSuQmCC" />
-                                </defs>
-                            </svg>
-                        </span>
                     </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="testimonial-card">
-                        <p class="testimonial-text">"Lorem ipsum dolor sit amet, elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Orci nulla pellentesque dignissim enim. Amet consectetur
-                            adipiscing"</p>
-                        <div class="d-flex gap-1 flex-column">
-                            <div class="testimonial-author">Kathy Sullivan</div>
-                            <div class="testimonial-position">CEO at ordian it</div>
-                        </div>
-                        <span class="quttes">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                width="70" height="47" viewBox="0 0 70 47" fill="none">
-                                <rect width="70" height="46" transform="translate(0 0.0292969)"
-                                    fill="url(#pattern0_427_218)" />
-                                <defs>
-                                    <pattern id="pattern0_427_218" patternContentUnits="objectBoundingBox" width="1"
-                                        height="1">
-                                        <use xlink:href="#image0_427_218" transform="scale(0.0142857 0.0217391)" />
-                                    </pattern>
-                                    <image id="image0_427_218" width="70" height="46" preserveAspectRatio="none"
-                                        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAAuCAYAAACViW+zAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAUUSURBVHgB7ZrPb+NEFMefxx7Hjps0bUKSbrcl7Ub8OCFRiZU4rYQEQmIl9tAbSJz6d+TPQPwLvay0SKBKSEjcWIK4gBB02Wq3JT/dzTZNk9hjG4+z2Q1pftkziXPYz83JSPP8nffePM88AeZAPv9ppE4iKgZDwSLGRBBk2zZExxLcJ4ToGNO0bYyj9fLxYQ0WQgGl3v5V61625FVNVYghYYIMmf4jIRH3R9kgdqrHT58IwIUCim3+tKbhWMx0TLX/8rMgtJzHpdK3VzAHNjY+i5KIHXcQxAdffipEbEnAAJ0YVEgZ1kPNXX1XDAswzKyJh7hmKlACjsIUUDb/e9LumnEnYikiiOAXQSZKQGEOcDZX3XQkS6NPGAVzPGJbZlmtN4ETm5v3kh3pYRoAIRSBwDi2pft+o97kRtpPuAxD84skmXrlyw/rUCjYwExvoeDFQgWGmC2nbdcqlaOWD2FcF839ts0yOfUQYsvVxsn9BnAil/s80XTMDaaFQk5Dj5WqUCya/d9mFOYAp3ZPd3wlsCEcp1vj5yE9MrfupQWBvAEBoTuQ0LwqUw8Z/m8GYdhEoV4itsjZqMlZYBXFIpZe++qD6riFmiKMu/fv/pxnEaW+Vnk86KI8oHnOUkkWAkOq5ePvJtZPE3eltY1fbrKED/UU+IevKAB3FCZR3ARbPvl+alE5NmFRV41oQgyCW1DlHT69sI5uQ0C88iBZO5tlLBpnAEv8egZ8cVsHziRv/ptm8eCI3NVnDeuRZWFqN5NHAvJfMr7AsHC5c//rNnAk4W7LEdlJQ0DoYlX+PjqddTwaZQDLqlADeNYpfSRkBBaFQusnP+OHhDnArAY4EuKcV3r5jmWxKI3kU192CcMGsOQWSoeIZ2qXGIO/aZplHR/fdmM7SHHHXlzSr2WhS655zI0bJbM4JucMCLMvpnZbt1hXZhK00jQI6H5CLfbOR0mNRBlqlsnQ7zawhAv91P0kgFcivUywidxbq7IICZgjghtoEnLiSiK/dvUsfgFQmupB8fi7WywbwTREURBESVBW1mPJlfX34PL8D+8I5GWOYc0tfqBe6e58OwB7E72TdSPwTyedze97qcQTJpP5WFusAT1xsrmtzUljFJivB4+mk6YHcJ4wBMshGODiHmHs7Y3zmgPMfL4SECmOEp4w7lF1KAZQHumxkXMnctXQbGqbZAVB7o6y6DAaRJHUkXMj8YrhO40NqgdKQEKBJQQ5kgohgujdDywd+2KYXkxxCwR56YTJZJ6HbhPq38YtE101Gqq3UBC2g5+uzwvNbM6t0p0VN8cJoRsxjKXKoS/W0nnLsvBamDEgeuIGS0aHREK3CSHTsWDJQBddbreVgW2wo5jroTUPzne2QrcJRS5bXVg2it+YAgnXk9EZtrgfXvOgKxqh2oXg5MfOMiZg24pyaygKgrddiwLhfg/ESuMEN8MMJ0+YyqNVPeyYvs6hZYvGOYQECtuISTVLWAtGUwsaNCKMXDP5hvDQulTaC+oDfgW9TUWDRnj9LAuE9r5N6z5o/vmDTm8SYYHQfrz/fSvRfhZiLiakqHd6DYEzUE6mzxYXUsRrUrx25HD1/P22kuiuzvP2j3Y1VderT2ZuQSsVbSG75cg2XoE5Qa9q5Ui7UvrrqE6fR/bg5dybg0sU3eZ+7uoK0gGlEbRNJPXmJxsSlteBI1QQpDnPampFn7mddfxlmH+Kd+9aXFpZCwW09+ABN28e1+3wH5+NLVJDMgdDAAAAAElFTkSuQmCC" />
-                                </defs>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="testimonial-card">
-                        <p class="testimonial-text">"Lorem ipsum dolor sit amet, elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Orci nulla pellentesque dignissim enim. Amet consectetur
-                            adipiscing"</p>
-                        <div class="d-flex gap-1 flex-column">
-                            <div class="testimonial-author">Kathy Sullivan</div>
-                            <div class="testimonial-position">CEO at ordian it</div>
-                        </div>
-                        <span class="quttes">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                width="70" height="47" viewBox="0 0 70 47" fill="none">
-                                <rect width="70" height="46" transform="translate(0 0.0292969)"
-                                    fill="url(#pattern0_427_218)" />
-                                <defs>
-                                    <pattern id="pattern0_427_218" patternContentUnits="objectBoundingBox" width="1"
-                                        height="1">
-                                        <use xlink:href="#image0_427_218" transform="scale(0.0142857 0.0217391)" />
-                                    </pattern>
-                                    <image id="image0_427_218" width="70" height="46" preserveAspectRatio="none"
-                                        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAAuCAYAAACViW+zAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAUUSURBVHgB7ZrPb+NEFMefxx7Hjps0bUKSbrcl7Ub8OCFRiZU4rYQEQmIl9tAbSJz6d+TPQPwLvay0SKBKSEjcWIK4gBB02Wq3JT/dzTZNk9hjG4+z2Q1pftkziXPYz83JSPP8nffePM88AeZAPv9ppE4iKgZDwSLGRBBk2zZExxLcJ4ToGNO0bYyj9fLxYQ0WQgGl3v5V61625FVNVYghYYIMmf4jIRH3R9kgdqrHT58IwIUCim3+tKbhWMx0TLX/8rMgtJzHpdK3VzAHNjY+i5KIHXcQxAdffipEbEnAAJ0YVEgZ1kPNXX1XDAswzKyJh7hmKlACjsIUUDb/e9LumnEnYikiiOAXQSZKQGEOcDZX3XQkS6NPGAVzPGJbZlmtN4ETm5v3kh3pYRoAIRSBwDi2pft+o97kRtpPuAxD84skmXrlyw/rUCjYwExvoeDFQgWGmC2nbdcqlaOWD2FcF839ts0yOfUQYsvVxsn9BnAil/s80XTMDaaFQk5Dj5WqUCya/d9mFOYAp3ZPd3wlsCEcp1vj5yE9MrfupQWBvAEBoTuQ0LwqUw8Z/m8GYdhEoV4itsjZqMlZYBXFIpZe++qD6riFmiKMu/fv/pxnEaW+Vnk86KI8oHnOUkkWAkOq5ePvJtZPE3eltY1fbrKED/UU+IevKAB3FCZR3ARbPvl+alE5NmFRV41oQgyCW1DlHT69sI5uQ0C88iBZO5tlLBpnAEv8egZ8cVsHziRv/ptm8eCI3NVnDeuRZWFqN5NHAvJfMr7AsHC5c//rNnAk4W7LEdlJQ0DoYlX+PjqddTwaZQDLqlADeNYpfSRkBBaFQusnP+OHhDnArAY4EuKcV3r5jmWxKI3kU192CcMGsOQWSoeIZ2qXGIO/aZplHR/fdmM7SHHHXlzSr2WhS655zI0bJbM4JucMCLMvpnZbt1hXZhK00jQI6H5CLfbOR0mNRBlqlsnQ7zawhAv91P0kgFcivUywidxbq7IICZgjghtoEnLiSiK/dvUsfgFQmupB8fi7WywbwTREURBESVBW1mPJlfX34PL8D+8I5GWOYc0tfqBe6e58OwB7E72TdSPwTyedze97qcQTJpP5WFusAT1xsrmtzUljFJivB4+mk6YHcJ4wBMshGODiHmHs7Y3zmgPMfL4SECmOEp4w7lF1KAZQHumxkXMnctXQbGqbZAVB7o6y6DAaRJHUkXMj8YrhO40NqgdKQEKBJQQ5kgohgujdDywd+2KYXkxxCwR56YTJZJ6HbhPq38YtE101Gqq3UBC2g5+uzwvNbM6t0p0VN8cJoRsxjKXKoS/W0nnLsvBamDEgeuIGS0aHREK3CSHTsWDJQBddbreVgW2wo5jroTUPzne2QrcJRS5bXVg2it+YAgnXk9EZtrgfXvOgKxqh2oXg5MfOMiZg24pyaygKgrddiwLhfg/ESuMEN8MMJ0+YyqNVPeyYvs6hZYvGOYQECtuISTVLWAtGUwsaNCKMXDP5hvDQulTaC+oDfgW9TUWDRnj9LAuE9r5N6z5o/vmDTm8SYYHQfrz/fSvRfhZiLiakqHd6DYEzUE6mzxYXUsRrUrx25HD1/P22kuiuzvP2j3Y1VderT2ZuQSsVbSG75cg2XoE5Qa9q5Ui7UvrrqE6fR/bg5dybg0sU3eZ+7uoK0gGlEbRNJPXmJxsSlteBI1QQpDnPampFn7mddfxlmH+Kd+9aXFpZCwW09+ABN28e1+3wH5+NLVJDMgdDAAAAAElFTkSuQmCC" />
-                                </defs>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Become Tutor -->
-    <section class="padding-120">
-        <div class="container text-center">
-            <span class="primary-badge mb-4 mx-auto">BECOM A TUTOR</span>
-            <h2 class="text-center section-title">Guide And Inspire Learners</h2>
-            <div class="become-tutor-div">
-                <div class="row g-3">
-                    <div class="col-12 col-lg-7">
-                        <div class="tutor-content">
-                            <h4>Guide and Inspire Learners</h4>
-                            <p>Earn while you teach—share your expertise with students on Edexcel. Sign up to start
-                                tutoring online.</p>
-                            <button class="warning-btn-2">
-                                Register yourself as a professional teacher
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15"
-                                        fill="none">
-                                        <path d="M11.5293 2.2207L16.5293 8.2207L11.5293 14.2207" stroke="white"
-                                            stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                        <path d="M1.5293 8.2207H16.5293" stroke="white" stroke-width="1.5"
-                                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                </span>
+                    <div class="row mb-3">
+                        <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                            @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="password" type="password"
+                                class="form-control @error('password') is-invalid @enderror" name="password" required
+                                autocomplete="new-password">
+
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="password-confirm"
+                            class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="password-confirm" type="password" class="form-control"
+                                name="password_confirmation" required autocomplete="new-password">
+                        </div>
+                    </div>
+
+                    <div class="row mb-0">
+                        <div class="col-md-6 offset-md-4">
+                            <button type="submit" class="btn btn-primary login-button">
+                                {{ __('Register') }}
                             </button>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-5">
-                        <div class="tutor-image text-center">
-                            <img src="{{asset('homeImage/become-tutor-teacher.png')}}" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="padding-120 bg-light">
-        <div class="container">
-            <span class="primary-badge mb-4 mx-auto">FAQ</span>
-            <h2 class="text-center section-title">Frequently Asked Questions</h2>
-
-            <div class="row g-3">
-                <div class="col-lg-6">
-                    <div class="faq-image text-center text-lg-start">
-                        <img src="{{asset('homeImage/faq-image.png')}}" alt="">
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="accordion" id="faqAccordion">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                    Which class is right for me?
-                                </button>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-                                data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    You can select a class based on your current level, academic goals, and interest
-                                    areas.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    How do I register to take classes?
-                                </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                                data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Registration can be done online via our website or in person at our office.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    Is there a fee to take the class?
-                                </button>
-                            </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                                data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Yes, each course has a fee based on the subject and duration. Please check the
-                                    course page for details.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingFour">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                    What kind of material is taught in class?
-                                </button>
-                            </h2>
-                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
-                                data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    The material is based on the latest curriculum and includes practical examples and
-                                    assessments.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingFive">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                    Are the instructors in the class experienced?
-                                </button>
-                            </h2>
-                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
-                                data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Yes, all instructors are highly experienced and qualified in their respective
-                                    fields.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingSix">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                    Can this class guarantee me good grades in school?
-                                </button>
-                            </h2>
-                            <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
-                                data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    While we can’t guarantee grades, we provide you with the tools and support to
-                                    succeed.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingSeven">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                                    Can this class help me pass the chemistry olympiad?
-                                </button>
-                            </h2>
-                            <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
-                                data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Yes, we offer specialized training and practice sessions to help you prepare for the
-                                    chemistry olympiad.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-    </section>
-
-    <!-- News Latter -->
-    <section class="position-relative padding-70 bg-primary">
-        <div class="bg-images">
-            <img src="{{asset('homeImage/start-top.png')}}" class="start-top" alt="">
-            <img src="{{asset('homeImage/bottom-end.png')}}" class="bottom-end" alt="">
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-lg-5 text-center text-lg-start">
-                    <h2 class="section-title text-white">Join Our Newsletter</h2>
-                    <p class="text-white">Subscribe our newsletter to get our latest update & news.</p>
-            
-                <meta name="csrf-token" content="{{ csrf_token() }}">
-                </div>
-                <div class="col-12 col-lg-7">
-                    <div class="mail-section text-center text-lg-end">
-                         <form id="newsletterForm">
-                    <div class="mb-3">
-                        <label class="d-flex align-items-center mb-2" style="font-size:12px;">Email Address <span class="text-danger ms-1">*</span></label>
-                        <input type="email" class="form-control" placeholder="Enter your email" name="email" id="newsletterEmail" required pattern="^[\w\.\-]+@(gmail|yahoo|outlook)\.com$" >
-                    </div>
-                    <button type="submit" class="btn text-white w-100" style="background-color:#42b979">Subscribe</button>
                 </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Sign Up Modal -->
+<div class="modal fade" id="signupPromptModal" tabindex="-1" aria-labelledby="signupPromptLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 1000px !important;">
+        <div class="modal-content" style="border-radius: 16px; overflow: hidden; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
+
+            <div class="modal-body p-0 d-flex">
+
+                <div class="left-panel col-6">
+                    <!-- <span class="fs-2 pointer foucs mb-1 position-absolute top-0" style="right:0px" onclick="document.getElementById('signupPromptModal').style.display = 'none'"> &times;</span> -->
+                    <h2 class="mb-0">Create Your Account</h4>
+
+                    <p class="my-2">How to i get started</p>
+
+                    <!-- Form -->
+                    <form action="{{ route('student-create') }}" method="POST" class="pages" enctype="multipart/form-data" autocomplete="off">
+                        @csrf
+                        <div class="modal-form-group">
+                            <img src="{{ asset('images/Frame-user.png') }}" alt="email icon" />
+                            <input type="text" placeholder="Full Name" name="name" required autocomplete="off" autofocus />
+
+                        </div>
+                        <div class="modal-form-group">
+                            <img src="{{ asset('images/formkit_email.png') }}" alt="email icon" />
+                            <input type="email" placeholder="Email Address" name="email" value="{{ old('email') }}" required autocomplete="off" autofocus class="@error('email') is-invalid @enderror" />
+
+                        </div>
+                        <div class="modal-form-group">
+                            <img src="{{ asset('images/Frame.png') }}" alt="password icon" />
+                            <input type="password" placeholder="Password" class=" @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" />
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <button class="login-button" type="submit">Sign Up</button>
+                        @error('email')
+                        <span class="invalid-feedback" role="alert" style="color:red;">
+                            <strong class="text-danger">{{ $message }}</strong>
+                        </span>
+                        @enderror
+                        <div class="divider">Sign Up with Others</div>
+                        
+                    </form>
+                    <a class="social-btn" href="{{ route('social.redirect','google') }}">
+                            <img src="https://img.icons8.com/color/48/000000/google-logo.png" />
+                            Sign Up with <strong style="margin-left: 5px;">google</strong>
+                        </a>
+
+                    <p class="mt-3 text-center" style="font-size: 12px; color: #999;">
+                        Already have an account? <a href="{{ route('login') }}" style="color: #42b979;">Login here</a>
+                    </p>
+                </div>
+                <div class="right-panel col-6">
+                    <div class="close-btn" onclick="document.getElementById('signupPromptModal').style.display = 'none'">×</div>
+                    <div class="card-image">
+                        <div class="icon-badge">
+                            <img src="{{ asset('images/Group11.png') }}" />
+                        </div>
+                        <h3>Online Expert Training</h3>
+                        <img src="{{ asset('images/user.png') }}" alt="Woman with tablet" />
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="padding-120">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="footer-logo mb-2">
-                        <img src="{{asset('homeImage/logo.jpg')}}" alt="">
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
-                    <div class="contact-info">
-                        <a href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46"
-                                fill="none">
-                                <rect x="0.5" y="0.0302734" width="45" height="45" rx="22.5" fill="#EEFBF5" />
-                                <path
-                                    d="M27.1158 22.7178H24.6256V30.1553H21.3053V22.7178H18.5826V19.6631H21.3053V17.3057C21.3053 14.6494 22.899 13.1553 25.3228 13.1553C26.485 13.1553 27.7135 13.3877 27.7135 13.3877V16.0107H26.3521C25.024 16.0107 24.6256 16.8076 24.6256 17.6709V19.6631H27.5807L27.1158 22.7178Z"
-                                    fill="#42B979" />
-                            </svg>
-                        </a>
-                        <a href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46"
-                                fill="none">
-                                <rect x="0.5" y="0.0302734" width="45" height="45" rx="22.5" fill="#EEFBF5" />
-                                <path
-                                    d="M23.1873 17.8369C25.2791 17.8369 27.0057 19.5635 27.0057 21.6553C27.0057 23.7803 25.2791 25.4736 23.1873 25.4736C21.0623 25.4736 19.3689 23.7803 19.3689 21.6553C19.3689 19.5635 21.0623 17.8369 23.1873 17.8369ZM23.1873 24.1455C24.5486 24.1455 25.6443 23.0498 25.6443 21.6553C25.6443 20.2939 24.5486 19.1982 23.1873 19.1982C21.7928 19.1982 20.6971 20.2939 20.6971 21.6553C20.6971 23.0498 21.826 24.1455 23.1873 24.1455ZM28.035 17.7041C28.035 18.2021 27.6365 18.6006 27.1385 18.6006C26.6404 18.6006 26.242 18.2021 26.242 17.7041C26.242 17.2061 26.6404 16.8076 27.1385 16.8076C27.6365 16.8076 28.035 17.2061 28.035 17.7041ZM30.5584 18.6006C30.6248 19.8291 30.6248 23.5146 30.5584 24.7432C30.492 25.9385 30.2264 26.9678 29.3631 27.8643C28.4998 28.7275 27.4373 28.9932 26.242 29.0596C25.0135 29.126 21.3279 29.126 20.0994 29.0596C18.9041 28.9932 17.8748 28.7275 16.9783 27.8643C16.115 26.9678 15.8494 25.9385 15.783 24.7432C15.7166 23.5146 15.7166 19.8291 15.783 18.6006C15.8494 17.4053 16.115 16.3428 16.9783 15.4795C17.8748 14.6162 18.9041 14.3506 20.0994 14.2842C21.3279 14.2178 25.0135 14.2178 26.242 14.2842C27.4373 14.3506 28.4998 14.6162 29.3631 15.4795C30.2264 16.3428 30.492 17.4053 30.5584 18.6006ZM28.9646 26.0381C29.3631 25.0752 29.2635 22.751 29.2635 21.6553C29.2635 20.5928 29.3631 18.2686 28.9646 17.2725C28.699 16.6416 28.201 16.1104 27.5701 15.8779C26.574 15.4795 24.2498 15.5791 23.1873 15.5791C22.0916 15.5791 19.7674 15.4795 18.8045 15.8779C18.1404 16.1436 17.6424 16.6416 17.3767 17.2725C16.9783 18.2686 17.0779 20.5928 17.0779 21.6553C17.0779 22.751 16.9783 25.0752 17.3767 26.0381C17.6424 26.7021 18.1404 27.2002 18.8045 27.4658C19.7674 27.8643 22.0916 27.7646 23.1873 27.7646C24.2498 27.7646 26.574 27.8643 27.5701 27.4658C28.201 27.2002 28.7322 26.7021 28.9646 26.0381Z"
-                                    fill="#42B979" />
-                            </svg>
-                        </a>
-                        <a href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46"
-                                fill="none">
-                                <rect x="0.5" y="0.0302734" width="45" height="45" rx="22.5" fill="#EEFBF5" />
-                                <path
-                                    d="M23.5777 13.3877C26.6988 13.3877 29.5543 15.5459 29.5543 18.833C29.5543 21.9209 27.9605 25.374 24.441 25.374C23.5777 25.374 22.5484 24.9424 22.1168 24.1787C21.3863 27.167 21.4195 27.6318 19.7594 29.9229C19.5934 29.9893 19.6266 29.9893 19.527 29.8564C19.4605 29.2256 19.3941 28.6279 19.3941 27.9971C19.3941 25.9717 20.3238 23.0166 20.7887 21.0576C20.523 20.5264 20.4566 19.9287 20.4566 19.3643C20.4566 16.708 23.5777 16.3096 23.5777 18.501C23.5777 19.7959 22.6813 21.0244 22.6813 22.2861C22.6813 23.1162 23.4117 23.7139 24.2418 23.7139C26.5328 23.7139 27.2301 20.4268 27.2301 18.667C27.2301 16.3096 25.5699 15.0146 23.2789 15.0146C20.6559 15.0146 18.6305 16.9072 18.6305 19.5635C18.6305 20.8584 19.4273 21.5225 19.4273 21.8213C19.4273 22.0869 19.2281 22.9834 18.8961 22.9834C18.0992 22.9834 16.8043 21.6553 16.8043 19.3311C16.8043 15.6455 20.1578 13.3877 23.5777 13.3877Z"
-                                    fill="#42B979" />
-                            </svg>
-                        </a>
-                        <a href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46"
-                                fill="none">
-                                <rect x="0.5" y="0.0302734" width="45" height="45" rx="22.5" fill="#EEFBF5" />
-                                <path
-                                    d="M29.9402 18.2021C29.9402 18.3682 29.9402 18.501 29.9402 18.667C29.9402 23.2822 26.4539 28.5615 20.0457 28.5615C18.0535 28.5615 16.2273 27.9971 14.7 27.001C14.9656 27.0342 15.2313 27.0674 15.5301 27.0674C17.157 27.0674 18.6512 26.5029 19.8465 25.5732C18.3191 25.54 17.0242 24.5439 16.5926 23.1494C16.825 23.1826 17.0242 23.2158 17.2566 23.2158C17.5555 23.2158 17.8875 23.1494 18.1531 23.083C16.5594 22.751 15.3641 21.3564 15.3641 19.6631V19.6299C15.8289 19.8955 16.3934 20.0283 16.9578 20.0615C15.9949 19.4307 15.3973 18.3682 15.3973 17.1729C15.3973 16.5088 15.5633 15.9111 15.8621 15.4131C17.5887 17.5049 20.1785 18.8994 23.0672 19.0654C23.0008 18.7998 22.9676 18.5342 22.9676 18.2686C22.9676 16.3428 24.5281 14.7822 26.4539 14.7822C27.45 14.7822 28.3465 15.1807 29.0105 15.8779C29.7742 15.7119 30.5379 15.4131 31.202 15.0146C30.9363 15.8447 30.4051 16.5088 29.6746 16.9404C30.3719 16.874 31.0691 16.6748 31.6668 16.4092C31.202 17.1064 30.6043 17.7041 29.9402 18.2021Z"
-                                    fill="#42B979" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="text-white mb-4">Quick Links:</h5>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Courses</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="text-white mb-4">Courses:</h5>
-                    <ul>
-                        <li><a href="#">Data Science</a></li>
-                        <li><a href="#">Business</a></li>
-                        <li><a href="#">Artificial Intelligence</a></li>
-                        <li><a href="#">Computer Science</a></li>
-                        <li><a href="#">All Courses</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3">
-                    <h5 class="text-white mb-4">Gallery</h5>
-                    <div class="d-flex justify-content-start gap-2 flex-wrap">
-        <img src="{{ asset('homeImage/footer-image-1.png') }}" alt="" class="footer-image">
-        <img src="{{ asset('homeImage/footer-image-2.png') }}" alt="" class="footer-image">
-        <img src="{{ asset('homeImage/footer-image-3.png') }}" alt="" class="footer-image">
-        <img src="{{ asset('homeImage/footer-image-4.png') }}" alt="" class="footer-image">
-        <img src="{{ asset('homeImage/footer-image-5.png') }}" alt="" class="footer-image">
-        <img src="{{ asset('homeImage/footer-image-6.png') }}" alt="" class="footer-image">
     </div>
+</div>
+<!-- Change Password Modal -->
+<!-- <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form method="POST" action="{{ route('change.password') }}">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="password" class="form-label">New Password</label>
+                        <input type="password" class="form-control" name="password" required minlength="8">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password_confirmation" class="form-label">Confirm New Password</label>
+                        <input type="password" class="form-control" name="password_confirmation" required minlength="8">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Update Password</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </div>
-        </div>
-    </footer>
-
-    <!-- copyright -->
-    <div class="copyright text-center py-3 bg-dark text-white mt-0">
-        <p class="mb-0">Copyright © 2024 <span class="text-primary">edexceledu</span> || All Rights Reserved</p>
+        </form>
     </div>
+</div> -->
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+@endsection
 
 @section('js')
 <script src="{{ asset('js/popper.min.js')}}"></script>
@@ -2790,6 +3301,4 @@
         if (alert) alert.remove();
     }
 </script>
-</body>
-
-</html>
+@endsection
