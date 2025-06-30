@@ -38,7 +38,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm p-0">
         <div class="container d-flex justify-content-between">
-            <a class="navbar-brand fw-bold p-0 m-0" href="#"><img src="./images/logo.jpg" alt="Edecxel"></a>
+            <a class="navbar-brand fw-bold p-0 m-0" href="#"><img src="{{asset('homeImage/logo.jpg')}}" alt="Edecxel"></a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
