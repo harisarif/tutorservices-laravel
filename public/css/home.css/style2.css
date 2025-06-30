@@ -461,9 +461,9 @@
 
 .accordion-item {
     color: var(--bs-accordion-color);
-    background-color: transparent;
-    border: none;
-    border-bottom: var(--bs-accordion-border-width) solid var(--bs-accordion-border-color);
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: var(--bs-accordion-border-width) solid var(--bs-accordion-border-color) !important;
 }
 
 .accordion-button {
@@ -598,7 +598,7 @@ footer {
     }
 
     & ul {
-        list-style-image: url('../images/Symbol.png');
+        list-style-image: url('../../images/Symbol.png');
         padding-left: 18px;
 
         & li {
