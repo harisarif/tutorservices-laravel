@@ -98,14 +98,17 @@
 @endif
 
 @if (session('success'))
-<div id="success" class="custom-alert alert-success d-flex align-items-center fade show" role="alert">
-    <i class="fas fa-check-circle"></i>
+<div id="success" class="custom-alert alert-success d-flex align-items-center fade show justify-content-between" role="alert">
+   
     <div>
+        <i class="fas fa-check-circle"></i>
         <strong>Success!</strong> {{ session('success') }}
     </div>
+    <div>
     <button type="button" class="close-btn" data-dismiss="alert" aria-label="Close">
         &times;
     </button>
+    </div>
     <div class="progress-line"></div>
 </div>
 @endif
