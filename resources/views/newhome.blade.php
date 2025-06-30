@@ -219,7 +219,7 @@
             <h2 class="text-center section-title">Our Services</h2>
             <div class="row g-3 justify-content-center">
                 <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card service-card text-center p-4">
+                    <div class="service-card text-center p-4">
                         <div class="service-icon">
                             <img src="{{asset('homeImage/teacher.png')}}" width="54" alt="">
                         </div>
@@ -229,7 +229,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card service-card active text-center p-4">
+                    <div class="service-card active text-center p-4">
                         <div class="service-icon active">
                             <img src="{{asset('homeImage/student.png')}}" width="54" alt="">
                         </div>
@@ -239,7 +239,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card service-card text-center p-4">
+                    <div class="service-card text-center p-4">
                         <div class="service-icon">
                             <img src="{{asset('homeImage/mic.png')}}" width="54" alt="">
                         </div>
