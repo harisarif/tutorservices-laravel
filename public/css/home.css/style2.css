@@ -355,7 +355,7 @@
 
         & .stat-counter {
             display: flex;
-            background-image: url(../images/map.png);
+            background-image: url(/homeImage/map.png);
             background-repeat: no-repeat;
             background-position: center;
             background-origin: border-box;
@@ -399,7 +399,7 @@
     border-radius: 16px;
 
     & .row {
-        background-image: url(../images/become-tutor-bg.png);
+        background-image: url(/homeImage/become-tutor-bg.png);
 
         & .tutor-content {
             padding: 30px 100px 30px 30px;
@@ -540,7 +540,7 @@ body {
 }
 
 .call-to-action {
-    background-image: url(../images/call-to-action.jpg);
+    background-image: url(/homeImage/call-to-action.jpg);
 
     & .dark-bg {
         background-color: #000000bd;
@@ -567,7 +567,7 @@ body {
 }
 
 footer {
-    background-image: url(../images/footer-bg.jpg);
+    background-image: url(/homeImage/footer-bg.jpg);
     background-position: top;
     background-repeat: round;
 
