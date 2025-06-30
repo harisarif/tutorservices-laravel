@@ -15,9 +15,108 @@
         rel="stylesheet">
    <link rel="stylesheet" href="{{ asset('css/home.css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('css/home.css/style2.css') }}">
+<style>
+    .custom-alert {
+        position: fixed;
+        top: 60px;
+        right: 10px;
+        background-color: #d4edda;
+        color: #42b979;
+        padding: 15px 20px;
+        border-radius: 8px;
+        border-left: 5px solid #42b979;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+        min-width: 250px;
+        z-index: 1050;
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
+    }
+    .custom-alert-danger {
+        position: fixed !important;
+        top: 60px;
+        right: 10px;
+        background-color: #f8d7da ;
+        color: #721c24;
+        padding: 15px 20px;
+        border-radius: 8px;
+        border-left: 5px solid #f8d7da;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+        min-width: 250px;
+        z-index: 1050;
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
+    }
 
+    .custom-alert .close-btn {
+        background: none;
+        border: none;
+        font-size: 16px;
+        font-weight: bold;
+        color: #42b979;
+        cursor: pointer;
+        float: right;
+        margin-left: 10px;
+    }
+
+    .custom-alert .close-btn:hover {
+        color: #42b979;
+    }
+    .custom-alert-danger .close-btn {
+        background: none;
+        border: none;
+        font-size: 16px;
+        font-weight: bold;
+        color: #721c24;
+        cursor: pointer;
+        float: right;
+        margin-left: 10px;
+    }
+
+    .custom-alert-danger .close-btn:hover {
+        color: #721c24;
+    }
+</style>
 </head>
+@if ($errors->any())
+<div id="error" class="custom-alert-danger alert-danger d-flex" style="padding: 14px !important;">
+    <div>
+    @foreach ($errors->all() as $error)
+        <span>{{ $error }}</span>
+        @endforeach
+        </div>
+        <div>
+    <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
+    <div class="progress-line"></div>
+    </div>
+</div>
+@endif
 
+@if (session('success'))
+<div id="success" class="custom-alert alert-success d-flex align-items-center fade show" role="alert">
+    <i class="fas fa-check-circle"></i>
+    <div>
+        <strong>Success!</strong> {{ session('success') }}
+    </div>
+    <button type="button" class="close-btn" data-dismiss="alert" aria-label="Close">
+        &times;
+    </button>
+    <div class="progress-line"></div>
+</div>
+@endif
+
+@if (session('error'))
+<div id="error" class="alert alert-danger" style="z-index: 6; padding: 14px !important;">
+    {{ session('error') }}
+    <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
+    <div class="progress-line"></div>
+</div>
+@endif
 <body>
     <!-- Top Bar -->
     <div class="top-bar text-white py-2">
@@ -38,7 +137,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm p-0">
         <div class="container d-flex justify-content-between">
-            <a class="navbar-brand fw-bold p-0 m-0" href="#"><img src="{{asset('homeImage/dots.png')}}" alt="Edecxel"></a>
+            <a class="navbar-brand fw-bold p-0 m-0" href="#"><img src="{{asset('homeImage/logo.jpg')}}" alt="Edecxel"></a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
@@ -891,7 +990,7 @@
     </section>
 
     <!-- News Latter -->
-    <section class="position-relative padding-70 bg-primary">
+    <section class="position-relative padding-70" style="background:#42B979">
         <div class="bg-images">
             <img src="{{asset('homeImage/start-top.png')}}" class="start-top" alt="">
             <img src="{{asset('homeImage/bottom-end.png')}}" class="bottom-end" alt="">
@@ -906,12 +1005,9 @@
                 </div>
                 <div class="col-12 col-lg-7">
                     <div class="mail-section text-center text-lg-end">
-                         <form id="newsletterForm">
-                    <div class="mb-3">
-                        <label class="d-flex align-items-center mb-2" style="font-size:12px;">Email Address <span class="text-danger ms-1">*</span></label>
-                        <input type="email" class="form-control" placeholder="Enter your email" name="email" id="newsletterEmail" required pattern="^[\w\.\-]+@(gmail|yahoo|outlook)\.com$" >
-                    </div>
-                    <button type="submit" class="btn text-white w-100" style="background-color:#42b979">Subscribe</button>
+                         <form id="newsletterForm" class="mail">
+                        <input type="email" class="form-control" placeholder="Enter your email" name="email" id="newsletterEmail" required pattern="^[\w\.\-]+@(gmail|yahoo|outlook)\.com$">
+                    <button type="submit" class="submit-btn">Subscribe</button>
                 </form>
                     </div>
                 </div>

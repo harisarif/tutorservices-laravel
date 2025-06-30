@@ -59,7 +59,7 @@
 }
 
 .navbar-collapse {
-    flex-grow: unset;
+    flex-grow: unset !important;
 }
 
 .primary-badge {
