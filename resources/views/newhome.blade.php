@@ -370,7 +370,10 @@
               </div>
         @endforeach
     </div>
-@endif 
+@endif  <!-- Display pagination links -->
+                <div id="paginationContainer">
+                    {{ $tutors->links('custom-pagination') }}
+                </div>
                 {{-- <div class="col-12 col-md-6 col-lg-4">
                     <div class="tutor-card">
                         <div class="image-section">
