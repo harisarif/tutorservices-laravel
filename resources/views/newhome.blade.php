@@ -15,111 +15,12 @@
         rel="stylesheet">
    <link rel="stylesheet" href="{{ asset('css/home.css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('css/home.css/style2.css') }}">
-<style>
-    .custom-alert {
-        position: fixed;
-        top: 60px;
-        right: 10px;
-        background-color: #d4edda;
-        color: #42b979;
-        padding: 15px 20px;
-        border-radius: 8px;
-        border-left: 5px solid #42b979;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        font-family: Arial, sans-serif;
-        min-width: 250px;
-        z-index: 1050;
-        display: flex !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
-    }
-    .custom-alert-danger {
-        position: fixed !important;
-        top: 60px;
-        right: 10px;
-        background-color: #f8d7da ;
-        color: #721c24;
-        padding: 15px 20px;
-        border-radius: 8px;
-        border-left: 5px solid #f8d7da;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        font-family: Arial, sans-serif;
-        min-width: 250px;
-        z-index: 1050;
-        display: flex !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
-    }
+<link rel="stylesheet" href="{{asset('css/figma.css')}}" referrerpolicy="no-referrer" />
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-    .custom-alert .close-btn {
-        background: none;
-        border: none;
-        font-size: 16px;
-        font-weight: bold;
-        color: #42b979;
-        cursor: pointer;
-        float: right;
-        margin-left: 10px;
-    }
-
-    .custom-alert .close-btn:hover {
-        color: #42b979;
-    }
-    .custom-alert-danger .close-btn {
-        background: none;
-        border: none;
-        font-size: 16px;
-        font-weight: bold;
-        color: #721c24;
-        cursor: pointer;
-        float: right;
-        margin-left: 10px;
-    }
-
-    .custom-alert-danger .close-btn:hover {
-        color: #721c24;
-    }
-</style>
 </head>
-@if ($errors->any())
-<div id="error" class="custom-alert-danger alert-danger d-flex" style="padding: 14px !important;">
-    <div>
-    @foreach ($errors->all() as $error)
-        <span>{{ $error }}</span>
-        @endforeach
-        </div>
-        <div>
-    <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
-    <div class="progress-line"></div>
-    </div>
-</div>
-@endif
 
-@if (session('success'))
-<div id="success" class="custom-alert alert-success d-flex align-items-center fade show justify-content-between" role="alert">
-   
-    <div>
-        <i class="fas fa-check-circle"></i>
-        <strong>Success!</strong> {{ session('success') }}
-    </div>
-    <div>
-    <button type="button" class="close-btn" data-dismiss="alert" aria-label="Close">
-        &times;
-    </button>
-    </div>
-    <div class="progress-line"></div>
-</div>
-@endif
-
-@if (session('error'))
-<div id="error" class="alert alert-danger" style="z-index: 6; padding: 14px !important;">
-    {{ session('error') }}
-    <i class="fa fa-times" id="cross" onclick="cancel()" aria-hidden="true" style="margin-left: 35%;"></i>
-    <div class="progress-line"></div>
-</div>
-@endif
 <body>
     <!-- Top Bar -->
     <div class="top-bar text-white py-2">
@@ -160,22 +61,62 @@
                     </li>
                 </ul>
             </div>
-            <div class="get-started-header">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <button class="primary-btn">
-                    Get Started
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
-                            <path d="M11.5293 2.2207L16.5293 8.2207L11.5293 14.2207" stroke="white" stroke-width="1.5"
-                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M1.5293 8.2207H16.5293" stroke="white" stroke-width="1.5" stroke-miterlimit="10"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </span>
-                </button>
-            </div>
+          <div class="get-started-header">
+    {{-- Guest view: Show Register and Login --}}
+    @guest
+        <a href="{{ route('basicsignup') }}">
+            <button class="primary-btn">
+                Register
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
+                        <path d="M11.5293 2.2207L16.5293 8.2207L11.5293 14.2207" stroke="white" stroke-width="1.5"
+                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M1.5293 8.2207H16.5293" stroke="white" stroke-width="1.5" stroke-miterlimit="10"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </span>
+            </button>
+        </a>
+
+        <a href="{{ route('login') }}">
+            <button class="primary-btn">
+                Login
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
+                        <path d="M11.5293 2.2207L16.5293 8.2207L11.5293 14.2207" stroke="white" stroke-width="1.5"
+                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M1.5293 8.2207H16.5293" stroke="white" stroke-width="1.5" stroke-miterlimit="10"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </span>
+            </button>
+        </a>
+    @endguest
+
+    {{-- Auth view: Show Logout for any logged-in user --}}
+    @auth
+        @if (Auth::user()->role === 'user')
+            
+        @endif
+
+        {{-- Logout form --}}
+        <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+            @csrf
+    <a class="" href="{{ route('logout') }}">        <button type="submit" class="primary-btn">  
+                Logout
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
+                        <path d="M6.4707 2.2207L1.4707 8.2207L6.4707 14.2207" stroke="white" stroke-width="1.5"
+                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M16.4707 8.2207H1.4707" stroke="white" stroke-width="1.5" stroke-miterlimit="10"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </span>
+            </button> </a>
+        </form>
+    @endauth
+</div>
+
         </div>
     </nav>
 
@@ -219,7 +160,7 @@
             <h2 class="text-center section-title">Our Services</h2>
             <div class="row g-3 justify-content-center">
                 <div class="col-12 col-md-6 col-lg-4">
-                    <div class="service-card text-center p-4">
+                    <div class="card service-card text-center p-4">
                         <div class="service-icon">
                             <img src="{{asset('homeImage/teacher.png')}}" width="54" alt="">
                         </div>
@@ -229,7 +170,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
-                    <div class="service-card active text-center p-4">
+                    <div class="card service-card active text-center p-4">
                         <div class="service-icon active">
                             <img src="{{asset('homeImage/student.png')}}" width="54" alt="">
                         </div>
@@ -239,7 +180,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
-                    <div class="service-card text-center p-4">
+                    <div class="card service-card text-center p-4">
                         <div class="service-icon">
                             <img src="{{asset('homeImage/mic.png')}}" width="54" alt="">
                         </div>
@@ -314,10 +255,13 @@
                     </select>
                 </div>
             </div>
-
-            <div class="row g-3 justify-content-center">
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="tutor-card">
+            
+                  
+           @if ($tutors->count() > 0)
+    <div class="row">
+        @foreach ($tutors as $item)
+            <div class="col-12 col-md-6 col-lg-4 d-flex">
+                <div class="tutor-card d-flex flex-column w-100">
                         <div class="image-section">
                             <img src="{{asset('homeImage/Link.png')}}" alt="">
                             <span class="course-badge">Aerospace Engineering</span>
@@ -370,12 +314,64 @@
                             </span>
                         </div>
                         <div class="d-flex justify-content-between gap-3 mt-3">
-                            <button class="primary-btn-2 flex-grow-1">Send Message</button>
-                            <button class="primary-btn-2 flex-grow-1">Enroll</button>
+                           @if(Auth::check() && Auth::user()->role === 'user')
+    <a href="{{ route('zoom.send.meeting.email', ['student_id' => Auth::user()->id, 'teacher_id' => $item->teacher_id]) }}"
+       class="primary-btn-2 flex-grow-1 d-flex align-items-center justify-content-center px-3 py-2"
+       style="text-decoration: none;"
+       title="Zoom Meet">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 24 24">
+            <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z"/>
+        </svg>
+        <span class="ms-2">Zoom Meet</span>
+    </a>
+@else
+    <a href="javascript:void(0);"
+       data-bs-toggle="modal" data-bs-target="#signupPromptModal"
+       class="primary-btn-2 flex-grow-1 d-flex align-items-center justify-content-center px-3 py-2"
+       style="text-decoration: none;"
+       title="Sign up to join Zoom Meet">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 24 24">
+            <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z"/>
+        </svg>
+        <span class="ms-2">Zoom Meet</span>
+    </a>
+@endif
+   {{-- //request a demo code --}}
+                         @if(Auth::check() && Auth::user()->role === 'user')
+    <button type="button"
+            id="demo"
+            data-teacher-id="{{ $item->teacher_id }}"
+            class="primary-btn-2 flex-grow-1 d-flex align-items-center justify-content-center  request-demo-btn" style="width: 130px;
+    height: 45px;"
+            title="Request a Demo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-2.83.48-5.42-.48-7.07-2.27a9.015 9.015 0 0 1-1.71-9.37c.2-.52.92-.66 1.33-.26l4.07 4.07V7h2v6h-4l4.59 4.59c.39.39.39 1.02 0 1.41-.26.26-.64.36-1 .26z"/>
+        </svg>
+        <span class="ms-2">Request a Demo</span>
+    </button>
+@else
+    <button type="button"
+            id="demo"
+            data-bs-toggle="modal"
+            data-bs-target="#signupPromptModal"
+            class="primary-btn-2 flex-grow-1 d-flex align-items-center justify-content-center "  style="width: 130px;
+    height: 45px;"
+            title="Sign up to request a demo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-2.83.48-5.42-.48-7.07-2.27a9.015 9.015 0 0 1-1.71-9.37c.2-.52.92-.66 1.33-.26l4.07 4.07V7h2v6h-4l4.59 4.59c.39.39.39 1.02 0 1.41-.26.26-.64.36-1 .26z"/>
+        </svg>
+        <span class="ms-2">Request a Demo</span>
+    </button>
+@endif
+
+
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
+              </div>
+        @endforeach
+    </div>
+@endif 
+                {{-- <div class="col-12 col-md-6 col-lg-4">
                     <div class="tutor-card">
                         <div class="image-section">
                             <img src="{{asset('homeImage/Link.png')}}" alt="">
@@ -494,7 +490,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>     --}}
     </section>
 
     <!-- About Section -->
@@ -993,7 +989,7 @@
     </section>
 
     <!-- News Latter -->
-    <section class="position-relative padding-70" style="background:#42B979">
+    <section class="position-relative padding-70 bg-primary">
         <div class="bg-images">
             <img src="{{asset('homeImage/start-top.png')}}" class="start-top" alt="">
             <img src="{{asset('homeImage/bottom-end.png')}}" class="bottom-end" alt="">
@@ -1008,9 +1004,12 @@
                 </div>
                 <div class="col-12 col-lg-7">
                     <div class="mail-section text-center text-lg-end">
-                         <form id="newsletterForm" class="mail">
-                        <input type="email" class="form-control" placeholder="Enter your email" name="email" id="newsletterEmail" required pattern="^[\w\.\-]+@(gmail|yahoo|outlook)\.com$">
-                    <button type="submit" class="submit-btn">Subscribe</button>
+                         <form id="newsletterForm">
+                    <div class="mb-3">
+                        <label class="d-flex align-items-center mb-2" style="font-size:12px;">Email Address <span class="text-danger ms-1">*</span></label>
+                        <input type="email" class="form-control" placeholder="Enter your email" name="email" id="newsletterEmail" required pattern="^[\w\.\-]+@(gmail|yahoo|outlook)\.com$" >
+                    </div>
+                    <button type="submit" class="btn text-white w-100" style="background-color:#42b979">Subscribe</button>
                 </form>
                     </div>
                 </div>
@@ -1106,10 +1105,74 @@
     <div class="copyright text-center py-3 bg-dark text-white mt-0">
         <p class="mb-0">Copyright © 2024 <span class="text-primary">edexceledu</span> || All Rights Reserved</p>
     </div>
+<!-- Sign Up Modal -->
+<div class="modal fade" id="signupPromptModal" tabindex="-1" aria-labelledby="signupPromptLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 1000px !important;">
+        <div class="modal-content" style="border-radius: 16px; overflow: hidden; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <div class="modal-body p-0 d-flex">
 
+                <div class="left-panel col-6">
+                    <!-- <span class="fs-2 pointer foucs mb-1 position-absolute top-0" style="right:0px" onclick="document.getElementById('signupPromptModal').style.display = 'none'"> &times;</span> -->
+                    <h2 class="mb-0">Create Your Account</h4>
+
+                    <p class="my-2">How to i get started</p>
+
+                    <!-- Form -->
+                    <form action="{{ route('student-create') }}" method="POST" class="pages" enctype="multipart/form-data" autocomplete="off">
+                        @csrf
+                        <div class="modal-form-group">
+                            <img src="{{ asset('images/Frame-user.png') }}" alt="email icon" />
+                            <input type="text" placeholder="Full Name" name="name" required autocomplete="off" autofocus />
+
+                        </div>
+                        <div class="modal-form-group">
+                            <img src="{{ asset('images/formkit_email.png') }}" alt="email icon" />
+                            <input type="email" placeholder="Email Address" name="email" value="{{ old('email') }}" required autocomplete="off" autofocus class="@error('email') is-invalid @enderror" />
+
+                        </div>
+                        <div class="modal-form-group">
+                            <img src="{{ asset('images/Frame.png') }}" alt="password icon" />
+                            <input type="password" placeholder="Password" class=" @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" />
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <button class="login-button" type="submit">Sign Up</button>
+                        @error('email')
+                        <span class="invalid-feedback" role="alert" style="color:red;">
+                            <strong class="text-danger">{{ $message }}</strong>
+                        </span>
+                        @enderror
+                        <div class="divider">Sign Up with Others</div>
+                        
+                    </form>
+                    <a class="social-btn" href="{{ route('social.redirect','google') }}">
+                            <img src="https://img.icons8.com/color/48/000000/google-logo.png" />
+                            Sign Up with <strong style="margin-left: 5px;">google</strong>
+                        </a>
+
+                    <p class="mt-3 text-center" style="font-size: 12px; color: #999;">
+                        Already have an account? <a href="{{ route('login') }}" style="color: #42b979;">Login here</a>
+                    </p>
+                </div>
+                <div class="right-panel col-6">
+                    <div class="close-btn" onclick="document.getElementById('signupPromptModal').style.display = 'none'">×</div>
+                    <div class="card-image">
+                        <div class="icon-badge">
+                            <img src="{{ asset('images/Group11.png') }}" />
+                        </div>
+                        <h3>Online Expert Training</h3>
+                        <img src="{{ asset('images/user.png') }}" alt="Woman with tablet" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+   
 @section('js')
 <script src="{{ asset('js/popper.min.js')}}"></script>
 <script src="{{ asset('js/bootstrap.min.js')}}"></script>
