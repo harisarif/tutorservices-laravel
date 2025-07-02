@@ -393,12 +393,115 @@
                                 <label class="form-label filter-heading">
                                     {{ __('messages.Which Subject Interests You?') }}
                                 </label>
-                                <select name="subjectSearch" id="subjectSearch" class="country">
+                                $('#gender').change(function (e) {
+    e.preventDefault();
 
-                                    @foreach($subjectsTeach as $subjectsCode => $subjects)
-                                    <option value="{{ $subjectsCode }}">{{ $subjects }}</option>
-                                    @endforeach
-                                </select>
+    var selectedGender = $(this).val();
+    console.log("Gender selected:", selectedGender);
+
+    var genderData = {
+        gender: selectedGender !== "all" ? selectedGender : "all"
+    };
+
+    $('#overlay').show(); // Show loading overlay
+
+    $.ajax({
+        type: 'POST',
+        url: '{{ route("fetch-data") }}',
+        data: genderData,
+        dataType: 'json',
+        success: function (response) {
+            console.log("AJAX Success:", response);
+            $('#tutorsContainer').empty();
+            $('#overlay').hide(); // Hide loading overlay
+
+            if (response && response.tutors && response.tutors.length > 0) {
+                response.tutors.forEach(function (tutor) {
+                    if (tutor.status !== 'inactive') {
+                        var languages = (tutor.languages && tutor.languages.length > 0)
+                            ? tutor.languages.map(lang => `${lang.language} (${lang.level})`).join(', ')
+                            : 'Not Available';
+
+                        var specialization = tutor.specialization ?? 'Subject';
+
+                        var tutorHTML = `
+                            <div class="col-12 col-md-6 col-lg-4 d-flex m-0" style="padding:1px;">
+                                <div class="tutor-card d-flex flex-column w-100">
+                                    <div class="image-section">
+                                        <img src="${tutor.profileImage ? '/storage/' + tutor.profileImage : '/images/avatar.png'}"
+                                             alt="Tutor Image"
+                                             class="img-thumbnail"
+                                             ${tutor.video ? 'data-bs-toggle="modal" data-bs-target="#videoModal-' + tutor.teacher_id + '"' : ''}>
+                                    </div>
+
+                                    ${tutor.video ? `
+                                    <div class="modal fade" id="videoModal-${tutor.teacher_id}" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-success">
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1);"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <video controls width="100%" height="250">
+                                                        <source src="/${tutor.video}" type="video/mp4">
+                                                        Your browser does not support the video tag.
+                                                    </video>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>` : ''}
+
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h3 class="display-6">${tutor.f_name} ${tutor.l_name}</h3>
+                                        <div class="d-flex justify-content-end gap-1 align-items-center">
+                                            <div class="rating">${'★'.repeat(5)}</div>
+                                            <div class="price">${tutor.price ?? 'N/A'}</div>
+                                        </div>
+                                    </div>
+
+                                    <p class="content">
+                                        ${tutor.experience}+ Years of ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.<br>
+                                        - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
+                                    </p>
+
+                                    <div class="d-flex justify-content-between mt-3 info-bar">
+                                        <span class="text-muted">${languages}</span>
+                                        <span class="text-muted">${tutor.gender ?? 'N/A'}</span>
+                                        <span class="text-muted">${tutor.dob ?? 'N/A'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                        $('#tutorsContainer').append(tutorHTML);
+                    }
+                });
+
+                // Update Pagination Info
+                const { total, perPage, currentPage } = response.pagination;
+                const firstItem = (currentPage - 1) * perPage + 1;
+                const lastItem = Math.min(currentPage * perPage, total);
+
+                $('.total-tutors-count').text(total);
+                $('.tutors-range').text(`${firstItem} to ${lastItem} of ${total} tutors`);
+
+                if (total <= perPage) {
+                    $('#paginationContainer').hide();
+                } else {
+                    $('#paginationContainer').show();
+                }
+            } else {
+                $('#tutorsContainer').html('<p>No tutors found for the selected gender.</p>');
+            }
+        },
+        error: function (xhr) {
+            console.error('AJAX Error:', xhr.responseText);
+            $('#overlay').hide();
+        }
+    });
+});
+
+        // $('#subjectsearch').keyup(function() {
                             </div>
                             <div class="col-md-6 px-2 col-lg-4">
                                 <label class="form-label filter-heading">
@@ -583,12 +686,12 @@
                                                         {{ $experience }}+ Years of {{ $subjectList }} Teaching Experience: Your {{ $subjectList }} Success, Guaranteed.
                                                     </b>
 
-                                                    - Hello, my name is . I have {{ $experience }}+ years of experience as a {{ $subjectList }} Teacher & Tutor.
+                                                    - Hello, my name is {{ $firstName }}. I have {{ $experience }}+ years of experience as a {{ $subjectList }} Teacher & Tutor.
 
 
                                                 </span>
                                                 <ul class="read p-0 mt-3">
-                          {{ $firstName }}                          <li style="list-style: none;"><a class="fw-bold" href="">Read
+                                                    <li style="list-style: none;"><a class="fw-bold" href="">Read
                                                             More</a></li>
                                                 </ul>
                                             </div>

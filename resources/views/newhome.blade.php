@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edexcel Online Courses</title>
-    <!-- Bootstrap CSS -->
+   <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -37,7 +38,11 @@
             </div>
         </div>
     </div>
-
+<div id="overlay" class="overlay" style="display: none;">
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm p-0">
         <div class="container d-flex justify-content-between">
@@ -204,39 +209,41 @@
                     <input type="text" class="form-control" placeholder="Search Tutor...">
                 </div>
                 <div class="col-md-3">
-                    <button type="submit" class="btn-warning warning-btn">Reset Filter</button>
+                    <button type="submit" id="resetFilterBtn" class="btn-warning warning-btn">Reset Filter</button>
                 </div>
             </div>
 
             <div class="row mb-4 g-3">
                 <div class="col-6 col-md-4 col-lg-2">
                     <label for="" class="small-label">Please Select A Country</label>
-                    <select class="form-select">
-                        <option>Afghanistan</option>
-                        <option>USA</option>
-                        <option>UK</option>
+                    <select class="country form-select" name="country" id="country">
+                         @foreach($countries as $countryCode => $countryName)
+                                <option value="{{ $countryCode }}">{{ $countryName }}</option>
+                                @endforeach
                     </select>
                 </div>
                 <div class="col-6 col-md-4 col-lg-2">
                     <label for="" class="small-label">Gender Selection</label>
-                    <select class="form-select">
-                        <option>Male</option>
-                        <option>Female</option>
-                    </select>
+                    <select name="gender" id="gender" class="country form-select">
+                                    <option value="Male">{{ __('Male') }}</option>
+                                    <option value="female">{{ __('Female') }}</option>
+                                </select>
                 </div>
                 <div class="col-6 col-md-4 col-lg-2">
                     <label for="" class="small-label">Which Subject Interests You?</label>
-                    <select class="form-select">
-                        <option>Accounting</option>
-                        <option>Mathematics</option>
-                    </select>
+                    <select name="subjectSearch" id="subjectSearch" class="form-control country">
+
+                                    @foreach($subjectsTeach as $subjectsCode => $subjects)
+                                    <option value="{{ $subjectsCode }}">{{ $subjects }}</option>
+                                    @endforeach
+                                </select>
                 </div>
                 <div class="col-6 col-md-4 col-lg-2">
                     <label for="" class="small-label">Price Selection</label>
-                    <select class="form-select">
-                        <option>$0-$50</option>
-                        <option>$50-$100</option>
-                    </select>
+                  <select name="prize-Range" id="prize-Range" class="form-select country">
+                                    <option value="all">{{ __('messages.Price Selection') }}</option>
+
+                                </select>
                 </div>
                 <div class="col-6 col-md-4 col-lg-2">
                     <label for="" class="small-label">Add Varified</label>
@@ -255,18 +262,50 @@
                     </select>
                 </div>
             </div>
-            
+            @if ($tutors->count() > 0)
+                <div id="tutorsContainer" class="row">
+                    @foreach ($tutors as $item)
+                    @if($item->status != 'inactive')
                   
-           @if ($tutors->count() > 0)
-    <div class="row">
-        @foreach ($tutors as $item)
-            <div class="col-12 col-md-6 col-lg-4 d-flex">
-                <div class="tutor-card d-flex flex-column w-100">
+           {{-- @if ($tutors->count() > 0)
+    <div class="row tutorsContainer p-0 m-0"> --}}
+        {{-- @foreach ($tutors as $item) --}}
+            <div class="col-12 col-md-6 col-lg-4 d-flex m-0 " style="padding:1px;">
+                <div class="tutor-card d-flex flex-column w-100 ">
                         <div class="image-section">
-                            <img src="{{ asset('storage/' . $item->profileImage) }}" alt="">
-                           
+                            @if ( $item->profileImage)
+                                                    <img src="{{ asset('storage/' . $item->profileImage) }}"
+     alt="Tutor Image"
+     class="img-thumbnail"
+     id="profileImages"
+     data-bs-toggle="modal"
+     data-bs-target="#videoModal">
 
-                        </div>
+                                                    @else
+                                                    <img src="{{ asset('images/avatar.png') }}" alt="Default Image"
+                                                        class="img-thumbnail" >
+                                                    @endif
+                        </div> <div class="modal fade" id="videoModal" tabindex="-1"
+                                                    aria-labelledby="videoModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" id="pro1">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header"
+                                                                style="background-color: #1cc88a;">
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"
+                                                                    style="filter: invert(2);"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <!-- Video Embed -->
+                                                                <video controls height="250px" width="100%">
+                                                                    <source src="{{ asset('/' . $item->video) }}"
+                                                                        type="video/mp4">
+                                                                    Your browser does not support the video tag.
+                                                                </video>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                         <div class="d-flex justify-content-between align-items-center mb-3 align-items-center">
                             <h3 class="display-6">{{ $item->f_name }} {{$item->l_name}}</h3>
                             <div class="d-flex justify-content-end gap-1 align-items-center">
@@ -331,7 +370,8 @@
                            @if(Auth::check() && Auth::user()->role === 'user')
     <a href="{{ route('zoom.send.meeting.email', ['student_id' => Auth::user()->id, 'teacher_id' => $item->teacher_id]) }}"
        class="primary-btn-2 flex-grow-1 d-flex align-items-center justify-content-center px-3 py-2"
-       style="text-decoration: none;"
+       style="text-decoration: none; 
+"
        title="Zoom Meet">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 24 24">
             <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z"/>
@@ -340,9 +380,9 @@
     </a>
 @else
     <a href="javascript:void(0);"
-       data-bs-toggle="modal" data-bs-target="#signupPromptModal"
+       data-bs-toggle="modal" data-bs-target="#signupPromptModal" style="width: 150px; height:45px;" 
        class="primary-btn-2 flex-grow-1 d-flex align-items-center justify-content-center px-3 py-2"
-       style="text-decoration: none;"
+         style="text-decoration: none;"
        title="Sign up to join Zoom Meet">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 24 24">
             <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z"/>
@@ -355,32 +395,32 @@
     <button type="button"
             id="demo"
             data-teacher-id="{{ $item->teacher_id }}"
-            class="primary-btn-2 flex-grow-1 d-flex align-items-center justify-content-center  request-demo-btn" style="width: 130px;
-    height: 45px;"
+            class="primary-btn-2  flex-grow-1 p-0  d-flex align-items-center request-demo-btn" style="width: 150px; height:45px;
+    "
             title="Request a Demo">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 24 24">
+        {{-- <svg xmlns="http://www.w3.org/2000/svg"
+ width="18" height="18" fill="#fff" viewBox="0 0 24 24">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-2.83.48-5.42-.48-7.07-2.27a9.015 9.015 0 0 1-1.71-9.37c.2-.52.92-.66 1.33-.26l4.07 4.07V7h2v6h-4l4.59 4.59c.39.39.39 1.02 0 1.41-.26.26-.64.36-1 .26z"/>
-        </svg>
-        <span class="ms-2">Request a Demo</span>
+        </svg> --}}
+        <span class="" style="font-size:12px;">Request a Demo</span>
     </button>
 @else
     <button type="button"
             id="demo"
             data-bs-toggle="modal"
             data-bs-target="#signupPromptModal"
-            class="primary-btn-2 flex-grow-1 d-flex align-items-center justify-content-center "  style="width: 130px;
-    height: 45px;"
+            class="primary-btn-2 p-0 flex-grow-1 d-flex align-items-center justify-content-center " style="width: 150px; height:45px;" 
             title="Sign up to request a demo">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 24 24">
+        {{-- <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 24 24">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-2.83.48-5.42-.48-7.07-2.27a9.015 9.015 0 0 1-1.71-9.37c.2-.52.92-.66 1.33-.26l4.07 4.07V7h2v6h-4l4.59 4.59c.39.39.39 1.02 0 1.41-.26.26-.64.36-1 .26z"/>
-        </svg>
-        <span class="ms-2">Request a Demo</span>
+        </svg> --}}
+        <span class="" style=" font-size: 12px;">Request a Demo</span>
     </button>
 @endif
                         </div>
                     </div>
               </div>
-        @endforeach
+    @endif    @endforeach
     </div>
 @endif  <!-- Display pagination links -->
                 <div id="paginationContainer">
@@ -1188,13 +1228,14 @@
     </div>
 </div>
    
-@section('js')
+@section('js') <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Your script comes after this -->
+
 <script src="{{ asset('js/popper.min.js')}}"></script>
 <script src="{{ asset('js/bootstrap.min.js')}}"></script>
 <!-- testiomial -->
 <script src="{{ asset('js/owl.carousel.min.js')}}"></script>
 <!-- Bootstrap & FontAwesome (add these in your layout if not already included) -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <script>
@@ -1379,7 +1420,7 @@
 </script>
 <script>
     const priceRanges = [
-        "0-50", "50-100", "100-200",
+        "0-50", "50-100", "100-200","500-1000"
     ];
 
     const select = document.getElementById("prize-Range");
@@ -1460,109 +1501,55 @@
                                         `${lang.language} (${lang.level})`).join(', ') :
                                     'Not Available';
 
-                                var tutorHTML = `
-                                <div class="ad-form">
-                                    <div class="ad-img-card d-flex" style="margin-top: 20px;">
-                                        <div class="MD col-lg-12 col-sm-5">
-                                            <img src="storage/${tutor.profileImage}" alt="Tutor Image" class="img-thumbnail" 
-                                                 style="width: 100%; height: 140px;">
-                                        </div>
-                                        <div class="md-div col-lg-5 d-none mt-2" style="margin-left: 17px;">
-                                            <span class="mb-div"><b>20 AED for 50 minutes</b></span>
-                                            <div class="ae-detail">
-                                                <h4 class="fs-6 mt-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                    Free Trial Section
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="my-1 mx-2 w-100">
-                                        <div class="ae-div row" style="margin-top: 20px;">
-                                            <div class="col-8">
-                                                <div class="ae-detail-div">
-                                                
-                                                  <div class="d-flex" id="ff000">
-                                                                    <h4 class="me-2 fw-bold sd"> ${tutor.f_name} ${tutor.l_name}</h4>
-                                                                    <span class="me-3"><i class="fa-regular fa-star"  style="margin-top: 6px;"></i></span>
-                                                                    <div class="img-wrapper" style="max-width:22px;margin-top:5px;">
-                                                                        <img src="/image/flag.svg" class="img-fluid" alt="">
-                                                                    </div>
-                                                                </div>
+                                const tutorHTML = `
+<div class="col-12 col-md-6 col-lg-4 d-flex m-0" style="padding:1px;">
+    <div class="tutor-card d-flex flex-column w-100">
+        <div class="image-section">
+            <img src="${tutor.profileImage ? '/storage/' + tutor.profileImage : '/images/avatar.png'}"
+                 alt="Tutor Image"
+                 class="img-thumbnail"
+                 ${tutor.video ? `data-bs-toggle="modal" data-bs-target="#videoModal-${tutor.teacher_id}"` : ''}>
+        </div>
 
-                                                                        <div class="mt-1 cm d-flex">
-                                                                        ${specializationHTML}
-                                                                                                           
-                                                                        </div>
-                                                                    <div class="d-flex text-secondary my-1">
-                                                                        <span class="me-2"><i class="fa-solid fa-globe" style="font-size: 13px; margin-top: 5px;color: #1cc88a !important;"></i></span>
-                                                                        <p class="mb-0 subjects-name" style="color:black; transform: scaleY(1);text-transform:capitalize">${displayText}</p>
-                                                                    </div>
-                                                                    <div class="d-flex text-secondary my-1">
-                                                                    <span class="me-2"><i class="fa-solid fa-venus-mars" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
-                                                                    <p class="mb-0" style="color:black; transform: scaleY(1);text-transform:capitalize">${tutor.gender ?? 'Others'}</p>
-                                                                    </div>
+        ${tutor.video ? `
+        <div class="modal fade" id="videoModal-${tutor.teacher_id}" tabindex="-1" aria-labelledby="videoModalLabel-${tutor.teacher_id}" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #1cc88a;">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(2);"></button>
+                    </div>
+                    <div class="modal-body">
+                        <video controls height="250px" width="100%">
+                            <source src="/${tutor.video}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>` : ''}
 
-                                                                      
-                                                                      <div class="d-flex text-secondary">
-                                                                    <span class="me-2"><i class="fa-solid fa-earth-americas" style="font-size: 13px;  margin-top: 5px;    color: #1cc88a;"></i></span>
-                                                                    <p class="mb-0 ms-1" style="color:black; transform: scaleY(1);">${tutor.country_name ?? 'Not Available'}</p>
-                                                                </div>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3 class="display-6">${tutor.f_name ?? ''} ${tutor.l_name ?? ''}</h3>
+            <div class="d-flex justify-content-end gap-1 align-items-center">
+                <div class="rating">${'★'.repeat(5)}</div>
+                <div class="price">$${tutor.price ?? 'N/A'}</div>
+            </div>
+        </div>
 
+        <p class="content">
+            ${tutor.experience ?? '0'}+ Years of ${specialization} Teaching Experience: 
+            Your ${specialization} Success, Guaranteed.
+            <br><br>
+            - Hello, my name is ${tutor.f_name ?? 'Tutor'}. I have ${tutor.experience ?? '0'}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
+        </p>
 
-                                                                   <div class="d-flex text-secondary py-2">
-                                                                    <span class="me-2"><i class="fa-solid fa-language" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
-                                                                    <p class="mb-0" style="color:black; transform: scaleY(1);" id="on-1024">
-                                                                    ${languages ?? 'Not Available'}
-                                                                    </p>
-                                                                </div>
-
-
-
-                                                                <p class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-1" style="color: #1cc88a;"></i> 
-                                                                ${tutor.dob}</p>
-
-                                                    
-                                                </div>
-                                                <div class="py-2">
-                                                                    <span>
-                                                                         <b> ${tutor.experience}+ Years of  ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.</b> 
-
-                                                                        - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
-                                                                        
-                                                                    </span>
-                                                                    <ul class="read p-0 mt-3">
-                                                                        <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
-                                                                    </ul>
-                                                                </div>
-                                            </div>
-                                            <div class="ad-div col-4">
-                                                <div class="d-flex pb-5" id="ff111">
-                                                                    <div class="me-lg-5 me-3" id="dollar">
-                                                                        <h4 class="fw-bold on">${tutor.price ?? 'Not Available'}</h4>
-                                                                        <!-- <p class="text-secondary fs-6"><p><i class="fa-solid fa-calendar-days me-1" style="color:#1cc88a"></i> 
-                                                                        14-09-1982</p> -->
-                                                                    </div>
-                                                                    <div id="heart-icon" style="margin-top: 6px;">
-                                                                        <span><i class="fa-regular fa-heart"></i></span>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div>
-                                                                    <div id="btn-container">
-                                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trail lesson</button>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div>
-                                                                    <div id="btn-container" style=" margin-top: 5px;">
-                                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trail lesson</button>
-                                                                    </div>
-                                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            `;
+        <div class="d-flex justify-content-between mt-3 info-bar">
+            <span class="text-muted">${languages}</span>
+            <span class="text-muted">${tutor.gender ?? 'Not specified'}</span>
+            <span class="text-muted">${tutor.dob ?? 'DOB not provided'}</span>
+        </div>
+    </div>
+</div>`;
 
                                 $('#tutorsContainer').append(tutorHTML);
                             }
@@ -1596,6 +1583,8 @@
                 }
             });
         });
+
+
 
 
         $('#subjectSearch').change(function(e) {
@@ -1669,108 +1658,53 @@
                                     'Not Available';
 
                                 var tutorHTML = `
-                                <div class="ad-form">
-                                    <div class="ad-img-card d-flex" style="margin-top: 20px;">
-                                        <div class="MD col-lg-12 col-sm-5">
-                                            <img src="storage/${tutor.profileImage}" alt="Tutor Image" class="img-thumbnail" 
-                                                 style="width: 100%; height: 140px;">
-                                        </div>
-                                        <div class="md-div col-lg-5 d-none mt-2" style="margin-left: 17px;">
-                                            <span class="mb-div"><b>20 AED for 50 minutes</b></span>
-                                            <div class="ae-detail">
-                                                <h4 class="fs-6 mt-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                    Free Trial Section
-                                                </h4>
+                                <div class="col-12 col-md-6 col-lg-4 d-flex m-0" style="padding:1px;">
+                                <div class="tutor-card d-flex flex-column w-100">
+                                    <div class="image-section">
+                                        <img src="${tutor.profileImage ? '/storage/' + tutor.profileImage : '/images/avatar.png'}"
+                                             alt="Tutor Image"
+                                             class="img-thumbnail"
+                                             ${tutor.video ? 'data-bs-toggle="modal" data-bs-target="#videoModal-' + tutor.teacher_id + '"' : ''}>
+                                    </div>
+
+                                    ${tutor.video ? `
+                                    <div class="modal fade" id="videoModal-${tutor.teacher_id}" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-success">
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1);"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <video controls width="100%" height="250">
+                                                        <source src="/${tutor.video}" type="video/mp4">
+                                                        Your browser does not support the video tag.
+                                                    </video>
+                                                </div>
                                             </div>
+                                        </div>
+                                    </div>` : ''}
+
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h3 class="display-6">${tutor.f_name} ${tutor.l_name}</h3>
+                                        <div class="d-flex justify-content-end gap-1 align-items-center">
+                                            <div class="rating">${'★'.repeat(5)}</div>
+                                            <div class="price">${tutor.price ?? 'N/A'}</div>
                                         </div>
                                     </div>
-                                    <div class="my-1 mx-2 w-100">
-                                        <div class="ae-div row" style="margin-top: 20px;">
-                                            <div class="col-8">
-                                                <div class="ae-detail-div">
-                                                
-                                                  <div class="d-flex" id="ff000">
-                                                                    <h4 class="me-2 fw-bold sd"> ${tutor.f_name} ${tutor.l_name}</h4>
-                                                                    <span class="me-3"><i class="fa-regular fa-star"  style="margin-top: 6px;"></i></span>
-                                                                    <div class="img-wrapper" style="max-width:22px;margin-top:5px;">
-                                                                        <img src="/image/flag.svg" class="img-fluid" alt="">
-                                                                    </div>
-                                                                </div>
 
-                                                     <div class="mt-1 cm d-flex">
-                                                        ${specializationHTML}
-                                                                                                           
-                                                                        </div>
-                                                                    <div class="d-flex text-secondary my-1">
-                                                                        <span class="me-2"><i class="fa-solid fa-globe" style="font-size: 13px; margin-top: 5px;color: #1cc88a !important;"></i></span>
-                                                                        <p class="mb-0 subjects-name" style="color:black; transform: scaleY(1);text-transform:capitalize">${displayText}</p>
-                                                                    </div>
-                                                                    <div class="d-flex text-secondary my-1">
-                                                                    <span class="me-2"><i class="fa-solid fa-venus-mars" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
-                                                                    <p class="mb-0" style="color:black; transform: scaleY(1);text-transform:capitalize">${tutor.gender ?? 'Others'}</p>
-                                                                    </div>
+                                    <p class="content">
+                                        ${tutor.experience}+ Years of ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.<br>
+                                        - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
+                                    </p>
 
-                                                                      
-                                                                      <div class="d-flex text-secondary">
-                                                                    <span class="me-2"><i class="fa-solid fa-earth-americas" style="font-size: 13px;  margin-top: 5px;    color: #1cc88a;"></i></span>
-                                                                    <p class="mb-0 ms-1" style="color:black; transform: scaleY(1);">${tutor.country_name ?? 'Not Available'}</p>
-                                                                </div>
-
-
-                                                                   <div class="d-flex text-secondary py-2">
-                                                                    <span class="me-2"><i class="fa-solid fa-language" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
-                                                                    <p class="mb-0" style="color:black; transform: scaleY(1);" id="on-1024">
-                                                                    ${languages ?? 'Not Available'}
-                                                                    </p>
-                                                                </div>
-
-
-
-                                                                <p class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-1" style="color: #1cc88a;"></i> 
-                                                                ${tutor.dob}</p>
-
-                                                    
-                                                </div>
-                                                <div class="py-2">
-                                                                    <span>
-                                                                         <b> ${tutor.experience}+ Years of  ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.</b> 
-
-                                                                        - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
-                                                                        
-                                                                    </span>
-                                                                    <ul class="read p-0 mt-3">
-                                                                        <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
-                                                                    </ul>
-                                                                </div>
-                                            </div>
-                                            <div class="ad-div col-4">
-                                                <div class="d-flex pb-5" id="ff111">
-                                                                    <div class="me-lg-5 me-3" id="dollar">
-                                                                        <h4 class="fw-bold on">${tutor.price ?? 'Not Available'}</h4>
-                                                                        <!-- <p class="text-secondary fs-6"><p><i class="fa-solid fa-calendar-days me-1" style="color:#1cc88a"></i> 
-                                                                        14-09-1982</p> -->
-                                                                    </div>
-                                                                    <div id="heart-icon" style="margin-top: 6px;">
-                                                                        <span><i class="fa-regular fa-heart"></i></span>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div>
-                                                                    <div id="btn-container">
-                                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trail lesson</button>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div>
-                                                                    <div id="btn-container" style=" margin-top: 5px;">
-                                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trail lesson</button>
-                                                                    </div>
-                                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="d-flex justify-content-between mt-3 info-bar">
+                                        <span class="text-muted">${languages}</span>
+                                        <span class="text-muted">${tutor.gender ?? 'N/A'}</span>
+                                        <span class="text-muted">${tutor.dob ?? 'N/A'}</span>
                                     </div>
                                 </div>
-                            `;
+                            </div>
+                        `;
 
                                 $('#tutorsContainer').append(tutorHTML);
                             }
@@ -1804,572 +1738,410 @@
                 }
             });
         });
-        $('#country').change(function(e) {
-            e.preventDefault();
+   $('#country').change(function (e) {
+    e.preventDefault();
 
-            var selectedCountry = $(this).val();
-            console.log("Country selected:", selectedCountry);
+    var selectedCountry = $(this).val();
+    console.log("Country selected:", selectedCountry);
 
-            var locationData = {
-                country: selectedCountry !== "all" ? selectedCountry : "all"
-            };
+    var locationData = {
+        country: selectedCountry !== "all" ? selectedCountry : "all"
+    };
 
-            $('#overlay').show(); // Show loading overlay
+    $('#overlay').show(); // Show loading overlay
 
-            $.ajax({
-                type: 'POST',
-                url: '{{ route("fetch-data") }}',
-                data: locationData,
-                dataType: 'json',
-                success: function(response) {
-                    console.log("AJAX Success: ", response);
-                    $('#tutorsContainer').empty();
-                    $('#overlay').hide(); // Hide loading overlay
+    $.ajax({
+        type: 'POST',
+        url: '{{ route("fetch-data") }}',
+        data: locationData,
+        dataType: 'json',
+        success: function (response) {
+            console.log("AJAX Success:", response);
+            $('#tutorsContainer').empty();
+            $('#overlay').hide(); // Hide loading overlay
 
-                    if (response && response.tutors && response.tutors.length > 0) {
-                        response.tutors.forEach(function(tutor) {
-                            let specializations = tutor.specialization.split(
-                                ','); // Split by comma
-                            let specialization = tutor.specialization.split(',')[0];
+            if (response && response.tutors && response.tutors.length > 0) {
+                response.tutors.forEach(function (tutor) {
+                    if (tutor.status !== 'inactive') {
+                        var languages = (tutor.languages && tutor.languages.length > 0)
+                            ? tutor.languages.map(lang => `${lang.language} (${lang.level})`).join(', ')
+                            : 'Not Available';
 
-                            // Build specialization spans
-                            let specializationHTML = specializations.map(spec => `
-                <span id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold">
-                    <i class="fa-solid fa-briefcase me-1"></i> ${spec.trim()}
-                </span>
-            `).join(''); // Join without extra commas
+                        var specialization = tutor.specialization ?? 'Subject';
 
+                        var tutorHTML = `
+                            <div class="col-12 col-md-6 col-lg-4 d-flex m-0" style="padding:1px;">
+                                <div class="tutor-card d-flex flex-column w-100">
+                                    <div class="image-section">
+                                        <img src="${tutor.profileImage ? '/storage/' + tutor.profileImage : '/images/avatar.png'}"
+                                             alt="Tutor Image"
+                                             class="img-thumbnail"
+                                             ${tutor.video ? 'data-bs-toggle="modal" data-bs-target="#videoModal-' + tutor.teacher_id + '"' : ''}>
+                                    </div>
 
-                            if (tutor.status !== 'inactive') {
-                                let edu_teaching = tutor
-                                    .edu_teaching; // e.g., '["Physical Therapy","Physics"]'
-
-                                let displayText = 'Others';
-                                if (edu_teaching) {
-                                    try {
-
-                                        let parsed = JSON.parse(edu_teaching);
-                                        if (Array.isArray(parsed)) {
-                                            displayText = parsed.join(', ');
-                                        }
-                                    } catch (e) {
-                                        // Optional: log or handle invalid JSON
-                                    }
-                                }
-                                console.log('asdsadsa', displayText)
-                                var languages = tutor.languages && tutor.languages
-                                    .length > 0 ?
-                                    tutor.languages.map(lang =>
-                                        `${lang.language} (${lang.level})`).join(', ') :
-                                    'Not Available';
-
-                                var tutorHTML = `
-                                <div class="ad-form">
-                                    <div class="ad-img-card d-flex" style="margin-top: 20px;">
-                                        <div class="MD col-lg-12 col-sm-5">
-                                            <img src="storage/${tutor.profileImage}" alt="Tutor Image" class="img-thumbnail" 
-                                                 style="width: 100%; height: 140px;">
-                                        </div>
-                                        <div class="md-div col-lg-5 d-none mt-2" style="margin-left: 17px;">
-                                            <span class="mb-div"><b>20 AED for 50 minutes</b></span>
-                                            <div class="ae-detail">
-                                                <h4 class="fs-6 mt-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                    Free Trial Section
-                                                </h4>
+                                    ${tutor.video ? `
+                                    <div class="modal fade" id="videoModal-${tutor.teacher_id}" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-success">
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1);"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <video controls width="100%" height="250">
+                                                        <source src="/${tutor.video}" type="video/mp4">
+                                                        Your browser does not support the video tag.
+                                                    </video>
+                                                </div>
                                             </div>
+                                        </div>
+                                    </div>` : ''}
+
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h3 class="display-6">${tutor.f_name} ${tutor.l_name}</h3>
+                                        <div class="d-flex justify-content-end gap-1 align-items-center">
+                                            <div class="rating">${'★'.repeat(5)}</div>
+                                            <div class="price">${tutor.price ?? 'N/A'}</div>
                                         </div>
                                     </div>
-                                    <div class="my-1 mx-2 w-100">
-                                        <div class="ae-div row" style="margin-top: 20px;">
-                                            <div class="col-8">
-                                                <div class="ae-detail-div">
-                                                
-                                                  <div class="d-flex" id="ff000">
-                                                                    <h4 class="me-2 fw-bold sd"> ${tutor.f_name} ${tutor.l_name}</h4>
-                                                                    <span class="me-3"><i class="fa-regular fa-star"  style="margin-top: 6px;"></i></span>
-                                                                    <div class="img-wrapper" style="max-width:22px;margin-top:5px;">
-                                                                        <img src="/image/flag.svg" class="img-fluid" alt="">
-                                                                    </div>
-                                                                </div>
 
-                                                     <div class="mt-1 cm d-flex">
-                                                        ${specializationHTML}
-                                                                                                           
-                                                                        </div>
-                                                                    <div class="d-flex text-secondary my-1">
-                                                                        <span class="me-2"><i class="fa-solid fa-globe" style="font-size: 13px; margin-top: 5px;color: #1cc88a !important;"></i></span>
-                                                                        <p class="mb-0 subjects-name" style="color:black; transform: scaleY(1);text-transform:capitalize">${displayText}</p>
-                                                                    </div>
-                                                                    <div class="d-flex text-secondary my-1">
-                                                                    <span class="me-2"><i class="fa-solid fa-venus-mars" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
-                                                                    <p class="mb-0" style="color:black; transform: scaleY(1);text-transform:capitalize">${tutor.gender ?? 'Others'}</p>
-                                                                    </div>
+                                    <p class="content">
+                                        ${tutor.experience}+ Years of ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.<br>
+                                        - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
+                                    </p>
 
-                                                                      
-                                                                      <div class="d-flex text-secondary">
-                                                                    <span class="me-2"><i class="fa-solid fa-earth-americas" style="font-size: 13px;  margin-top: 5px;    color: #1cc88a;"></i></span>
-                                                                    <p class="mb-0 ms-1" style="color:black; transform: scaleY(1);">${tutor.country_name ?? 'Not Available'}</p>
-                                                                </div>
-
-
-                                                                   <div class="d-flex text-secondary py-2">
-                                                                    <span class="me-2"><i class="fa-solid fa-language" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
-                                                                    <p class="mb-0" style="color:black; transform: scaleY(1);" id="on-1024">
-                                                                    ${languages ?? 'Not Available'}
-                                                                    </p>
-                                                                </div>
-
-
-
-                                                                <p class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-1" style="color: #1cc88a;"></i> 
-                                                                ${tutor.dob}</p>
-
-                                                    
-                                                </div>
-                                                <div class="py-2">
-                                                                    <span>
-                                                                         <b> ${tutor.experience}+ Years of  ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.</b> 
-
-                                                                        - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
-                                                                        
-                                                                    </span>
-                                                                    <ul class="read p-0 mt-3">
-                                                                        <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
-                                                                    </ul>
-                                                                </div>
-                                            </div>
-                                            <div class="ad-div col-4">
-                                                <div class="d-flex pb-5" id="ff111">
-                                                                    <div class="me-lg-5 me-3" id="dollar">
-                                                                        <h4 class="fw-bold on">${tutor.price ?? 'Not Available'}</h4>
-                                                                        <!-- <p class="text-secondary fs-6"><p><i class="fa-solid fa-calendar-days me-1" style="color:#1cc88a"></i> 
-                                                                        14-09-1982</p> -->
-                                                                    </div>
-                                                                    <div id="heart-icon" style="margin-top: 6px;">
-                                                                        <span><i class="fa-regular fa-heart"></i></span>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div>
-                                                                    <div id="btn-container">
-                                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trail lesson</button>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div>
-                                                                    <div id="btn-container" style=" margin-top: 5px;">
-                                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trail lesson</button>
-                                                                    </div>
-                                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="d-flex justify-content-between mt-3 info-bar">
+                                        <span class="text-muted">${languages}</span>
+                                        <span class="text-muted">${tutor.gender ?? 'N/A'}</span>
+                                        <span class="text-muted">${tutor.dob ?? 'N/A'}</span>
                                     </div>
                                 </div>
-                            `;
+                            </div>
+                        `;
 
-                                $('#tutorsContainer').append(tutorHTML);
-                            }
-                        });
-
-                        // Update Pagination Info
-                        var totalTutorsCount = response.pagination.total;
-                        var perPage = response.pagination.perPage;
-                        var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
-                        var lastItem = Math.min(response.pagination.currentPage * perPage,
-                            totalTutorsCount);
-
-                        $('.total-tutors-count').text(totalTutorsCount);
-                        $('.tutors-range').text(
-                            `${firstItem} to ${lastItem} of ${totalTutorsCount} tutors`);
-
-                        // Hide pagination if only one page of results
-                        if (totalTutorsCount <= perPage) {
-                            $('#paginationContainer').hide();
-                        } else {
-                            $('#paginationContainer').show();
-                        }
-                    } else {
-                        $('#tutorsContainer').html(
-                            '<p>No tutors found for the selected country.</p>');
+                        $('#tutorsContainer').append(tutorHTML);
                     }
-                },
-                error: function(xhr, status, error) {
-                    console.log('AJAX Error:', xhr.responseText);
-                    $('#overlay').hide();
+                });
+
+                // Update Pagination Info
+                const { total, perPage, currentPage } = response.pagination;
+                const firstItem = (currentPage - 1) * perPage + 1;
+                const lastItem = Math.min(currentPage * perPage, total);
+
+                $('.total-tutors-count').text(total);
+                $('.tutors-range').text(`${firstItem} to ${lastItem} of ${total} tutors`);
+
+                if (total <= perPage) {
+                    $('#paginationContainer').hide();
+                } else {
+                    $('#paginationContainer').show();
                 }
-            });
-        });
-        $('#gender').on('keyup change', function() {
-            var selectedGender = $(this).val(); // Get selected gender
-            var locationData = {
-                gender: selectedGender // Include selected gender
-            };
+            } else {
+                $('#tutorsContainer').html('<p>No tutors found for the selected country.</p>');
+            }
+        },
+        error: function (xhr) {
+            console.error('AJAX Error:', xhr.responseText);
+            $('#overlay').hide();
+        }
+    });
+});
 
-            $('#overlay').show(); // Show loading overlay
+       $('#gender').change(function (e) {
+    e.preventDefault();
 
-            $.ajax({
-                type: 'POST',
-                url: '{{ route("fetch-data") }}',
-                data: locationData,
-                dataType: 'json',
-                success: function(response) {
-                    console.log("AJAX Success: ", response);
-                    $('#tutorsContainer').empty(); // Clear existing tutors
-                    $('#overlay').hide(); // Hide loading overlay
+    var selectedGender = $(this).val();
+    console.log("Gender selected:", selectedGender);
 
-                    if (response && response.tutors && response.tutors.length > 0) {
-                        response.tutors.forEach(function(tutor) {
-                            let specializations = tutor.specialization.split(
-                                ','); // Split by comma
-                            let specialization = tutor.specialization.split(',')[0];
-                            // Build specialization spans
-                            let specializationHTML = specializations.map(spec => `
-                                                <span id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold">
-                                                    <i class="fa-solid fa-briefcase me-1"></i> ${spec.trim()}
-                                                </span>
-                                            `).join('');
-                            if (tutor.status !== 'inactive') {
-                                let edu_teaching = tutor
-                                    .edu_teaching; // e.g., '["Physical Therapy","Physics"]'
+    var genderData = {
+        gender: selectedGender !== "all" ? selectedGender : "all"
+    };
 
-                                let displayText = 'Others';
-                                if (edu_teaching) {
-                                    try {
+    $('#overlay').show(); // Show loading overlay
 
-                                        let parsed = JSON.parse(edu_teaching);
-                                        if (Array.isArray(parsed)) {
-                                            displayText = parsed.join(', ');
-                                        }
-                                    } catch (e) {
-                                        // Optional: log or handle invalid JSON
-                                    }
-                                }
-                                console.log('asdsadsa', displayText)
-                                var languages = tutor.languages && tutor.languages
-                                    .length > 0 ?
-                                    tutor.languages.map(lang =>
-                                        `${lang.language} (${lang.level})`).join(', ') :
-                                    'Not Available';
+    $.ajax({
+        type: 'POST',
+        url: '{{ route("fetch-data") }}',
+        data: genderData,
+        dataType: 'json',
+        success: function (response) {
+            console.log("AJAX Success:", response);
+            $('#tutorsContainer').empty();
+            $('#overlay').hide(); // Hide loading overlay
 
-                                var tutorHTML = `
-                                                    <div class="ad-form">
-                                                        <div class="ad-img-card d-flex" style="margin-top: 20px;">
-                                                            <div class="MD col-lg-12 col-sm-5">
-                                                                <img src="storage/${tutor.profileImage}" alt="Tutor Image" class="img-thumbnail" 
-                                                                    style="max-width: 100%; height: 140px; width: 100%;">
+            if (response && response.tutors && response.tutors.length > 0) {
+                response.tutors.forEach(function (tutor) {
+                    if (tutor.status !== 'inactive') {
+                        var languages = (tutor.languages && tutor.languages.length > 0)
+                            ? tutor.languages.map(lang => `${lang.language} (${lang.level})`).join(', ')
+                            : 'Not Available';
+
+                        var specialization = tutor.specialization ?? 'Subject';
+
+                        var tutorHTML = `
+                            <div class="col-12 col-md-6 col-lg-4 d-flex m-0" style="padding:1px;">
+                                <div class="tutor-card d-flex flex-column w-100">
+                                    <div class="image-section">
+                                        <img src="${tutor.profileImage ? '/storage/' + tutor.profileImage : '/images/avatar.png'}"
+                                             alt="Tutor Image"
+                                             class="img-thumbnail"
+                                             ${tutor.video ? 'data-bs-toggle="modal" data-bs-target="#videoModal-' + tutor.teacher_id + '"' : ''}>
+                                    </div>
+
+                                    ${tutor.video ? `
+                                    <div class="modal fade" id="videoModal-${tutor.teacher_id}" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-success">
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1);"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <video controls width="100%" height="250">
+                                                        <source src="/${tutor.video}" type="video/mp4">
+                                                        Your browser does not support the video tag.
+                                                    </video>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>` : ''}
+
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h3 class="display-6">${tutor.f_name} ${tutor.l_name}</h3>
+                                        <div class="d-flex justify-content-end gap-1 align-items-center">
+                                            <div class="rating">${'★'.repeat(5)}</div>
+                                            <div class="price">${tutor.price ?? 'N/A'}</div>
+                                        </div>
+                                    </div>
+
+                                    <p class="content">
+                                        ${tutor.experience}+ Years of ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.<br>
+                                        - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
+                                    </p>
+
+                                    <div class="d-flex justify-content-between mt-3 info-bar">
+                                        <span class="text-muted">${languages}</span>
+                                        <span class="text-muted">${tutor.gender ?? 'N/A'}</span>
+                                        <span class="text-muted">${tutor.dob ?? 'N/A'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                        $('#tutorsContainer').append(tutorHTML);
+                    }
+                });
+
+                // Update Pagination Info
+                const { total, perPage, currentPage } = response.pagination;
+                const firstItem = (currentPage - 1) * perPage + 1;
+                const lastItem = Math.min(currentPage * perPage, total);
+
+                $('.total-tutors-count').text(total);
+                $('.tutors-range').text(`${firstItem} to ${lastItem} of ${total} tutors`);
+
+                if (total <= perPage) {
+                    $('#paginationContainer').hide();
+                } else {
+                    $('#paginationContainer').show();
+                }
+            } else {
+                $('#tutorsContainer').html('<p>No tutors found for the selected gender.</p>');
+            }
+        },
+        error: function (xhr) {
+            console.error('AJAX Error:', xhr.responseText);
+            $('#overlay').hide();
+        }
+    });
+});
+
+        // $('#subjectsearch').keyup(function() {
+        //     var searchQuery = $(this).val(); // Get the value from the search input field
+
+        //     var locationData = {
+        //         subjectsearch: searchQuery
+        //     };
+
+        //     $('#overlay').show();
+
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: '{{ route("fetch-data") }}',
+        //         data: locationData,
+        //         dataType: 'json',
+        //         success: function(response) {
+        //             console.log("AJAX Success: ", response);
+        //             $('#tutorsContainer').empty();
+        //             $('#overlay').hide();
+
+        //             if (response && response.tutors && response.tutors.length > 0) {
+        //                 response.tutors.forEach(function(tutor) {
+        //                     let specializations = tutor.specialization.split(
+        //                         ','); // Split by comma
+        //                     let specialization = tutor.specialization.split(',')[0];
+        //                     // Build specialization spans
+        //                     let specializationHTML = specializations.map(spec => `
+        //                                         <span id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold">
+        //                                             <i class="fa-solid fa-briefcase me-1"></i> ${spec.trim()}
+        //                                         </span>
+        //                                     `).join('');
+        //                     if (tutor.status !== 'inactive') {
+        //                         let edu_teaching = tutor
+        //                             .edu_teaching; // e.g., '["Physical Therapy","Physics"]'
+
+        //                         let displayText = 'Others';
+        //                         if (edu_teaching) {
+        //                             try {
+
+        //                                 let parsed = JSON.parse(edu_teaching);
+        //                                 if (Array.isArray(parsed)) {
+        //                                     displayText = parsed.join(', ');
+        //                                 }
+        //                             } catch (e) {
+        //                                 // Optional: log or handle invalid JSON
+        //                             }
+        //                         }
+        //                         console.log('asdsadsa', displayText)
+        //                         var languages = tutor.languages && tutor.languages
+        //                             .length > 0 ?
+        //                             tutor.languages.map(lang =>
+        //                                 `${lang.language} (${lang.level})`).join(', ') :
+        //                             'Not Available';
+
+        //                         var tutorHTML = `
+        //                         <div class="ad-form">
+        //                                                 <div class="ad-img-card d-flex" style="margin-top: 20px;">
+        //                                                     <div class="MD col-lg-12 col-sm-5">
+        //                                                         <img src="storage/${tutor.profileImage}" alt="Tutor Image" class="img-thumbnail" 
+        //                                                             style="max-width: 100%; height: 140px; width: 100%;">
                                                             
-                                                            </div>
-                                                            <div class="md-div col-lg-5 d-none mt-2" style="margin-left: 17px;">
-                                                                <span class="mb-div"><b>20 AED for 50 minutes</b></span>
-                                                                <div class="ae-detail">
-                                                                    <h4 class="fs-6 mt-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                                        Free Trial Section
-                                                                    </h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="my-4 mx-4 w-100">
-                                                            <div class="ae-div row">
-                                                                <div class="col-8">
-                                                                    <div class="ae-detail-div">
-                                                                        <span>
-                                                                            <div class="d-flex" id="ff000" style="margin-left: 3px;">
-                                                                                        <h4 class="me-2 fw-bold sd"> ${tutor.f_name} ${tutor.l_name}</h4>
-                                                                                        <span class="me-3"><i class="fa-regular fa-star "></i></span>
-                                                                                        <div class="img-wrapper" style="max-width:20px;margin-top:5px;">
-                                                                                            <img src="/image/flag.svg" class="img-fluid" alt="">
-                                                                                        </div>
-                                                                                    </div>
-                                                                        </span>
+        //                                                     </div>
+        //                                                     <div class="md-div col-lg-5 d-none mt-2" style="margin-left: 17px;">
+        //                                                         <span class="mb-div"><b>20 AED for 50 minutes</b></span>
+        //                                                         <div class="ae-detail">
+        //                                                             <h4 class="fs-6 mt-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        //                                                                 Free Trial Section
+        //                                                             </h4>
+        //                                                         </div>
+        //                                                     </div>
+        //                                                 </div>
+        //                                                 <div class="my-4 mx-4 w-100">
+        //                                                     <div class="ae-div row">
+        //                                                         <div class="col-8">
+        //                                                             <div class="ae-detail-div">
+        //                                                                 <span>
+        //                                                                     <div class="d-flex" id="ff000" style="margin-left: 3px;">
+        //                                                                                 <h4 class="me-2 fw-bold sd"> ${tutor.f_name} ${tutor.l_name}</h4>
+        //                                                                                 <span class="me-3"><i class="fa-regular fa-star "></i></span>
+        //                                                                                 <div class="img-wrapper" style="max-width:20px;margin-top:5px;">
+        //                                                                                     <img src="/image/flag.svg" class="img-fluid" alt="">
+        //                                                                                 </div>
+        //                                                                             </div>
+        //                                                                 </span>
                                                                         
 
-                                                                                        <div class="mt-1 cm" style="display: flex;">
-                                                                                            ${specializationHTML}
-                                                                                        </div>
-                                                                                        <div class="d-flex text-secondary my-1">
-                                                                                            <span class="me-2"><i class="fa-solid fa-globe" style="font-size: 13px; margin-top: 5px;color: #1cc88a !important;"></i></span>
-                                                                                            <p class="mb-0 subjects-name" style="color:black; transform: scaleY(1);text-transform:capitalize">${displayText}</p>
-                                                                                        </div>
-                                                                                        <div class="d-flex text-secondary my-1">
-                                                                                        <span class="me-2"><i class="fa-solid fa-venus-mars" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
-                                                                                        <p class="mb-0" style="color:black; transform: scaleY(1);text-transform:capitalize">${tutor.gender ?? 'Others'}</p>
-                                                                                        </div>
+        //                                                                                 <div class="mt-1 cm" style="display: flex;">
+        //                                                                                     ${specializationHTML}
+        //                                                                                                                                                 </div>
+        //                                                                                 <div class="d-flex text-secondary my-1">
+        //                                                                                     <span class="me-2"><i class="fa-solid fa-globe" style="font-size: 13px; margin-top: 5px;color: #1cc88a !important;"></i></span>
+        //                                                                                     <p class="mb-0 subjects-name" style="color:black; transform: scaleY(1);text-transform:capitalize">${displayText}</p>
+        //                                                                                 </div>
+        //                                                                                 <div class="d-flex text-secondary my-1">
+        //                                                                                 <span class="me-2"><i class="fa-solid fa-venus-mars" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
+        //                                                                                 <p class="mb-0" style="color:black; transform: scaleY(1);text-transform:capitalize">${tutor.gender ?? 'Others'}</p>
+        //                                                                                 </div>
 
-                                                                                        <div class="d-flex text-secondary">
-                                                                                        <span class="me-2"><i class="fa-solid fa-earth-americas" style="font-size: 13px;  margin-top: 5px;    color: #1cc88a;"></i></span>
-                                                                                        <p class="mb-0 ms-1" style="color:black; transform: scaleY(1);">${tutor.country_name ?? 'Not Available'}</p>
-                                                                                    </div>
+        //                                                                                 <div class="d-flex text-secondary">
+        //                                                                                 <span class="me-2"><i class="fa-solid fa-earth-americas" style="font-size: 13px;  margin-top: 5px;    color: #1cc88a;"></i></span>
+        //                                                                                 <p class="mb-0 ms-1" style="color:black; transform: scaleY(1);">${tutor.country_name ?? 'Not Available'}</p>
+        //                                                                             </div>
                                                                                 
-                                                                                    <div class="d-flex text-secondary py-2">
-                                                                                        <span class="me-2"><i class="fa-solid fa-language" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
-                                                                                        <p class="mb-0" style="color:black; transform: scaleY(1);" id="on-1024">
-                                                                                            ${languages ?? 'Not Available'}</p>
-                                                                                    </div>
+        //                                                                             <div class="d-flex text-secondary py-2">
+        //                                                                                 <span class="me-2"><i class="fa-solid fa-language" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
+        //                                                                                 <p class="mb-0" style="color:black; transform: scaleY(1);" id="on-1024">
+        //                                                                                     ${languages ?? 'Not Available'}</p>
+        //                                                                             </div>
                                                                         
-                                                                                    <span class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-1" style="color: #1cc88a;"></i> 
-                                                                                    ${tutor.dob}</span>                              
+        //                                                                             <span class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-1" style="color: #1cc88a;"></i> 
+        //                                                                             ${tutor.dob}</span>                              
                                                                         
-                                                                        <div class="py-2">
-                                                                                        <span>
-                                                                                           <b> ${tutor.experience}+ Years of  ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.</b> 
+        //                                                                 <div class="py-2">
+        //                                                                                 <span>
+        //                                                                                    <b> ${tutor.experience}+ Years of  ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.</b> 
 
-                                                                        - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
+        //                                                                 - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
                                                                         
-                                                                    </span>
-                                                                                        <ul class="read p-0 mt-3">
-                                                                                            <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
-                                                                                        </ul>
-                                                                                    </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                                    <div class="d-flex pb-5" id="ff111">
-                                                                                        <div class="me-lg-5 me-3" id="dollar">
-                                                                                            <h4 class="fw-bold on">${tutor.price ?? 'Not Available'}</h4>
-                                                                                            <!-- <p class="text-secondary fs-6"><p><i class="fa-solid fa-calendar-days me-1" style="color:#1cc88a"></i> 
-                                                                                            05-03-1972</p> -->
-                                                                                        </div>
-                                                                                        <div id="heart-icon">
-                                                                                            <span><i class="fa-regular fa-heart"></i></span>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div>
-                                                                                        <div id="btn-container">
-                                                                                            <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trail lesson</button>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div>
-                                                                                    <div class="mt-2" id="btn-container">
-                                                                                            <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Send Massage</button>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                `;
+        //                                                             </span>
+        //                                                                                 <ul class="read p-0 mt-3">
+        //                                                                                     <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
+        //                                                                                 </ul>
+        //                                                                             </div>
+        //                                                             </div>
+        //                                                         </div>
+        //                                                         <div class="col-md-4">
+        //                                                                             <div class="d-flex pb-5" id="ff111">
+        //                                                                                 <div class="me-lg-5 me-3" id="dollar">
+        //                                                                                     <h4 class="fw-bold on">${tutor.price ?? 'Not Available'}</h4>
+        //                                                                                     <!-- <p class="text-secondary fs-6"><p><i class="fa-solid fa-calendar-days me-1" style="color:#1cc88a"></i> 
+        //                                                                                     05-03-1972</p> -->
+        //                                                                                 </div>
+        //                                                                                 <div id="heart-icon">
+        //                                                                                     <span><i class="fa-regular fa-heart"></i></span>
+        //                                                                                 </div>
+        //                                                                             </div>
+        //                                                                             <div>
+        //                                                                                 <div id="btn-container">
+        //                                                                                     <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trail lesson</button>
+        //                                                                                 </div>
+        //                                                                             </div>
+        //                                                                             <div>
+        //                                                                             <div class="mt-2" id="btn-container">
+        //                                                                                     <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Send Massage</button>
+        //                                                                                 </div>
+        //                                                                             </div>
+        //                                                                         </div>
+        //                                                     </div>
+        //                                                 </div>
+        //                                             </div>
+        //                     `;
 
-                                $('#tutorsContainer').append(tutorHTML);
-                            }
-                        });
+        //                         $('#tutorsContainer').append(tutorHTML);
+        //                     }
+        //                 });
 
-                        // Update pagination data
-                        var totalTutorsCount = response.pagination.total;
-                        var perPage = response.pagination.perPage;
-                        var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
-                        var lastItem = Math.min(response.pagination.currentPage * perPage,
-                            totalTutorsCount);
+        //                 // Update pagination details only if pagination data is available
+        //                 if (response.pagination) {
+        //                     var totalTutorsCount = response.pagination.total;
+        //                     var perPage = response.pagination.perPage;
+        //                     var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
+        //                     var lastItem = Math.min(response.pagination.currentPage * perPage,
+        //                         totalTutorsCount);
 
-                        $('.total-tutors-count').text(totalTutorsCount);
-                        $('.tutors-range').text(firstItem + ' to ' + lastItem + ' of ' +
-                            totalTutorsCount + ' tutors');
+        //                     $('.total-tutors-count').text(totalTutorsCount);
+        //                     $('.tutors-range').text(
+        //                         `${firstItem} to ${lastItem} of ${totalTutorsCount} tutors`);
 
-                        if (totalTutorsCount <= perPage) {
-                            $('#paginationContainer').hide();
-                        } else {
-                            $('#paginationContainer').show();
-                        }
-
-                        // Update pagination
-                        $('#paginationContainer').html(response.pagination);
-                    } else {
-                        $('#tutorsContainer').append(
-                            '<p>No tutors found for the selected criteria.</p>');
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('AJAX Error:', xhr.responseText);
-                }
-            });
-        });
-        $('#subjectsearch').keyup(function() {
-            var searchQuery = $(this).val(); // Get the value from the search input field
-
-            var locationData = {
-                subjectsearch: searchQuery
-            };
-
-            $('#overlay').show();
-
-            $.ajax({
-                type: 'POST',
-                url: '{{ route("fetch-data") }}',
-                data: locationData,
-                dataType: 'json',
-                success: function(response) {
-                    console.log("AJAX Success: ", response);
-                    $('#tutorsContainer').empty();
-                    $('#overlay').hide();
-
-                    if (response && response.tutors && response.tutors.length > 0) {
-                        response.tutors.forEach(function(tutor) {
-                            let specializations = tutor.specialization.split(
-                                ','); // Split by comma
-                            let specialization = tutor.specialization.split(',')[0];
-                            // Build specialization spans
-                            let specializationHTML = specializations.map(spec => `
-                                                <span id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold">
-                                                    <i class="fa-solid fa-briefcase me-1"></i> ${spec.trim()}
-                                                </span>
-                                            `).join('');
-                            if (tutor.status !== 'inactive') {
-                                let edu_teaching = tutor
-                                    .edu_teaching; // e.g., '["Physical Therapy","Physics"]'
-
-                                let displayText = 'Others';
-                                if (edu_teaching) {
-                                    try {
-
-                                        let parsed = JSON.parse(edu_teaching);
-                                        if (Array.isArray(parsed)) {
-                                            displayText = parsed.join(', ');
-                                        }
-                                    } catch (e) {
-                                        // Optional: log or handle invalid JSON
-                                    }
-                                }
-                                console.log('asdsadsa', displayText)
-                                var languages = tutor.languages && tutor.languages
-                                    .length > 0 ?
-                                    tutor.languages.map(lang =>
-                                        `${lang.language} (${lang.level})`).join(', ') :
-                                    'Not Available';
-
-                                var tutorHTML = `
-                                <div class="ad-form">
-                                                        <div class="ad-img-card d-flex" style="margin-top: 20px;">
-                                                            <div class="MD col-lg-12 col-sm-5">
-                                                                <img src="storage/${tutor.profileImage}" alt="Tutor Image" class="img-thumbnail" 
-                                                                    style="max-width: 100%; height: 140px; width: 100%;">
-                                                            
-                                                            </div>
-                                                            <div class="md-div col-lg-5 d-none mt-2" style="margin-left: 17px;">
-                                                                <span class="mb-div"><b>20 AED for 50 minutes</b></span>
-                                                                <div class="ae-detail">
-                                                                    <h4 class="fs-6 mt-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                                        Free Trial Section
-                                                                    </h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="my-4 mx-4 w-100">
-                                                            <div class="ae-div row">
-                                                                <div class="col-8">
-                                                                    <div class="ae-detail-div">
-                                                                        <span>
-                                                                            <div class="d-flex" id="ff000" style="margin-left: 3px;">
-                                                                                        <h4 class="me-2 fw-bold sd"> ${tutor.f_name} ${tutor.l_name}</h4>
-                                                                                        <span class="me-3"><i class="fa-regular fa-star "></i></span>
-                                                                                        <div class="img-wrapper" style="max-width:20px;margin-top:5px;">
-                                                                                            <img src="/image/flag.svg" class="img-fluid" alt="">
-                                                                                        </div>
-                                                                                    </div>
-                                                                        </span>
-                                                                        
-
-                                                                                        <div class="mt-1 cm" style="display: flex;">
-                                                                                            ${specializationHTML}
-                                                                                                                                                        </div>
-                                                                                        <div class="d-flex text-secondary my-1">
-                                                                                            <span class="me-2"><i class="fa-solid fa-globe" style="font-size: 13px; margin-top: 5px;color: #1cc88a !important;"></i></span>
-                                                                                            <p class="mb-0 subjects-name" style="color:black; transform: scaleY(1);text-transform:capitalize">${displayText}</p>
-                                                                                        </div>
-                                                                                        <div class="d-flex text-secondary my-1">
-                                                                                        <span class="me-2"><i class="fa-solid fa-venus-mars" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
-                                                                                        <p class="mb-0" style="color:black; transform: scaleY(1);text-transform:capitalize">${tutor.gender ?? 'Others'}</p>
-                                                                                        </div>
-
-                                                                                        <div class="d-flex text-secondary">
-                                                                                        <span class="me-2"><i class="fa-solid fa-earth-americas" style="font-size: 13px;  margin-top: 5px;    color: #1cc88a;"></i></span>
-                                                                                        <p class="mb-0 ms-1" style="color:black; transform: scaleY(1);">${tutor.country_name ?? 'Not Available'}</p>
-                                                                                    </div>
-                                                                                
-                                                                                    <div class="d-flex text-secondary py-2">
-                                                                                        <span class="me-2"><i class="fa-solid fa-language" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
-                                                                                        <p class="mb-0" style="color:black; transform: scaleY(1);" id="on-1024">
-                                                                                            ${languages ?? 'Not Available'}</p>
-                                                                                    </div>
-                                                                        
-                                                                                    <span class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-1" style="color: #1cc88a;"></i> 
-                                                                                    ${tutor.dob}</span>                              
-                                                                        
-                                                                        <div class="py-2">
-                                                                                        <span>
-                                                                                           <b> ${tutor.experience}+ Years of  ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.</b> 
-
-                                                                        - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
-                                                                        
-                                                                    </span>
-                                                                                        <ul class="read p-0 mt-3">
-                                                                                            <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
-                                                                                        </ul>
-                                                                                    </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                                    <div class="d-flex pb-5" id="ff111">
-                                                                                        <div class="me-lg-5 me-3" id="dollar">
-                                                                                            <h4 class="fw-bold on">${tutor.price ?? 'Not Available'}</h4>
-                                                                                            <!-- <p class="text-secondary fs-6"><p><i class="fa-solid fa-calendar-days me-1" style="color:#1cc88a"></i> 
-                                                                                            05-03-1972</p> -->
-                                                                                        </div>
-                                                                                        <div id="heart-icon">
-                                                                                            <span><i class="fa-regular fa-heart"></i></span>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div>
-                                                                                        <div id="btn-container">
-                                                                                            <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trail lesson</button>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div>
-                                                                                    <div class="mt-2" id="btn-container">
-                                                                                            <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Send Massage</button>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                            `;
-
-                                $('#tutorsContainer').append(tutorHTML);
-                            }
-                        });
-
-                        // Update pagination details only if pagination data is available
-                        if (response.pagination) {
-                            var totalTutorsCount = response.pagination.total;
-                            var perPage = response.pagination.perPage;
-                            var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
-                            var lastItem = Math.min(response.pagination.currentPage * perPage,
-                                totalTutorsCount);
-
-                            $('.total-tutors-count').text(totalTutorsCount);
-                            $('.tutors-range').text(
-                                `${firstItem} to ${lastItem} of ${totalTutorsCount} tutors`);
-
-                            if (totalTutorsCount <= perPage) {
-                                $('#paginationContainer').hide();
-                            } else {
-                                $('#paginationContainer').show();
-                                $('#paginationContainer').html(response.pagination.links);
-                            }
-                        }
-                    } else {
-                        $('#tutorsContainer').html(
-                            '<p>No tutors found for the selected subject.</p>');
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('AJAX error:', status, error);
-                    $('#overlay').hide();
-                    $('#tutorsContainer').html(
-                        '<p class="text-danger">An error occurred while fetching tutors. Please try again later.</p>'
-                    );
-                }
-            });
-        });
+        //                     if (totalTutorsCount <= perPage) {
+        //                         $('#paginationContainer').hide();
+        //                     } else {
+        //                         $('#paginationContainer').show();
+        //                         $('#paginationContainer').html(response.pagination.links);
+        //                     }
+        //                 }
+        //             } else {
+        //                 $('#tutorsContainer').html(
+        //                     '<p>No tutors found for the selected subject.</p>');
+        //             }
+        //         },
+        //         error: function(xhr, status, error) {
+        //             console.error('AJAX error:', status, error);
+        //             $('#overlay').hide();
+        //             $('#tutorsContainer').html(
+        //                 '<p class="text-danger">An error occurred while fetching tutors. Please try again later.</p>'
+        //             );
+        //         }
+        //     });
+        // });
         $('#resetFilterBtn').click(function() {
             $.ajax({
                 type: 'POST',
@@ -2418,108 +2190,54 @@
                                     'Not Available';
 
                                 var tutorHTML = `
-                                <div class="ad-form">
-                                    <div class="ad-img-card d-flex" style="margin-top: 20px;">
-                                        <div class="MD col-lg-12 col-sm-5">
-                                            <img src="storage/${tutor.profileImage}" alt="Tutor Image" class="img-thumbnail" 
-                                                 style="width: 100%; height: 140px;">
-                                        </div>
-                                        <div class="md-div col-lg-5 d-none mt-2" style="margin-left: 17px;">
-                                            <span class="mb-div"><b>20 AED for 50 minutes</b></span>
-                                            <div class="ae-detail">
-                                                <h4 class="fs-6 mt-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                    Free Trial Section
-                                                </h4>
+                                <div class="col-12 col-md-6 col-lg-4 d-flex m-0" style="padding:1px;">
+                                <div class="tutor-card d-flex flex-column w-100">
+                                    <div class="image-section">
+                                        <img src="${tutor.profileImage ? '/storage/' + tutor.profileImage : '/images/avatar.png'}"
+                                             alt="Tutor Image"
+                                             class="img-thumbnail"
+                                             ${tutor.video ? 'data-bs-toggle="modal" data-bs-target="#videoModal-' + tutor.teacher_id + '"' : ''}>
+                                    </div>
+
+                                    ${tutor.video ? `
+                                    <div class="modal fade" id="videoModal-${tutor.teacher_id}" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-success">
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1);"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <video controls width="100%" height="250">
+                                                        <source src="/${tutor.video}" type="video/mp4">
+                                                        Your browser does not support the video tag.
+                                                    </video>
+                                                </div>
                                             </div>
+                                        </div>
+                                    </div>` : ''}
+
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h3 class="display-6">${tutor.f_name} ${tutor.l_name}</h3>
+                                        <div class="d-flex justify-content-end gap-1 align-items-center">
+                                            <div class="rating">${'★'.repeat(5)}</div>
+                                            <div class="price">${tutor.price ?? 'N/A'}</div>
                                         </div>
                                     </div>
-                                    <div class="my-1 mx-2 w-100">
-                                        <div class="ae-div row" style="margin-top: 20px;">
-                                            <div class="col-8">
-                                                <div class="ae-detail-div">
-                                                
-                                                  <div class="d-flex" id="ff000">
-                                                                    <h4 class="me-2 fw-bold sd"> ${tutor.f_name} ${tutor.l_name}</h4>
-                                                                    <span class="me-3"><i class="fa-regular fa-star"  style="margin-top: 6px;"></i></span>
-                                                                    <div class="img-wrapper" style="max-width:22px;margin-top:5px;">
-                                                                        <img src="/image/flag.svg" class="img-fluid" alt="">
-                                                                    </div>
-                                                                </div>
 
-                                                     <div class="mt-1 cm d-flex">
-                                                        ${specializationHTML}
-                                                                                                           
-                                                                        </div>
-                                                                    <div class="d-flex text-secondary my-1">
-                                                                        <span class="me-2"><i class="fa-solid fa-globe" style="font-size: 13px; margin-top: 5px;color: #1cc88a !important;"></i></span>
-                                                                        <p class="mb-0 subjects-name" style="color:black; transform: scaleY(1);text-transform:capitalize">${displayText}</p>
-                                                                    </div>
-                                                                    <div class="d-flex text-secondary my-1">
-                                                                    <span class="me-2"><i class="fa-solid fa-venus-mars" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
-                                                                    <p class="mb-0" style="color:black; transform: scaleY(1);text-transform:capitalize">${tutor.gender ?? 'Others'}</p>
-                                                                    </div>
+                                    <p class="content">
+                                        ${tutor.experience}+ Years of ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.<br>
+                                        - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
+                                    </p>
 
-                                                                      
-                                                                      <div class="d-flex text-secondary">
-                                                                    <span class="me-2"><i class="fa-solid fa-earth-americas" style="font-size: 13px;  margin-top: 5px;    color: #1cc88a;"></i></span>
-                                                                    <p class="mb-0 ms-1" style="color:black; transform: scaleY(1);">${tutor.country_name ?? 'Not Available'}</p>
-                                                                </div>
-
-
-                                                                   <div class="d-flex text-secondary py-2">
-                                                                    <span class="me-2"><i class="fa-solid fa-language" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
-                                                                    <p class="mb-0" style="color:black; transform: scaleY(1);" id="on-1024">
-                                                                    ${languages ?? 'Not Available'}
-                                                                    </p>
-                                                                </div>
-
-
-
-                                                                <p class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-1" style="color: #1cc88a;"></i> 
-                                                                ${tutor.dob}</p>
-
-                                                    
-                                                </div>
-                                                <div class="py-2">
-                                                                    <span>
-                                                                         <b> ${tutor.experience}+ Years of  ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.</b> 
-
-                                                                        - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
-                                                                        
-                                                                    </span>
-                                                                    <ul class="read p-0 mt-3">
-                                                                        <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
-                                                                    </ul>
-                                                                </div>
-                                            </div>
-                                            <div class="ad-div col-4">
-                                                <div class="d-flex pb-5" id="ff111">
-                                                                    <div class="me-lg-5 me-3" id="dollar">
-                                                                        <h4 class="fw-bold on">${tutor.price ?? 'Not Available'}</h4>
-                                                                        <!-- <p class="text-secondary fs-6"><p><i class="fa-solid fa-calendar-days me-1" style="color:#1cc88a"></i> 
-                                                                        14-09-1982</p> -->
-                                                                    </div>
-                                                                    <div id="heart-icon" style="margin-top: 6px;">
-                                                                        <span><i class="fa-regular fa-heart"></i></span>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div>
-                                                                    <div id="btn-container">
-                                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trail lesson</button>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div>
-                                                                    <div id="btn-container" style=" margin-top: 5px;">
-                                                                        <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trail lesson</button>
-                                                                    </div>
-                                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="d-flex justify-content-between mt-3 info-bar">
+                                        <span class="text-muted">${languages}</span>
+                                        <span class="text-muted">${tutor.gender ?? 'N/A'}</span>
+                                        <span class="text-muted">${tutor.dob ?? 'N/A'}</span>
                                     </div>
                                 </div>
-                            `;
+                            </div>
+                        `;
+                            
 
                                 $('#tutorsContainer').append(tutorHTML);
                             }
@@ -2561,154 +2279,7 @@
         });
 
         // Gender filter change event
-        $('#gender').change(function() {
-            const selectedGender = $(this).val();
-            $('#tutorsContainer').empty();
-            $('#overlay').show();
-
-            if (!selectedGender) {
-                $('#tutorsContainer').html('<p>Please select a gender.</p>');
-                $('#paginationContainer').hide();
-                $('#overlay').hide();
-                return;
-            }
-
-            $.ajax({
-                type: 'POST',
-                url: '{{ route("fetch-student") }}',
-                data: {
-                    gender: selectedGender
-                },
-                dataType: 'json',
-                success: function(response) {
-                    $('#overlay').hide();
-                    if (response.tutors && response.tutors.length > 0) {
-                        response.tutors.forEach(function(tutor) {
-                            if (tutor.status !== 'inactive') {
-                                let specializationArray = tutor.specialization.split(
-                                    ',');
-                                let specializationHTML = specializationArray.map(spec => `
-                                <span class="p-1 me-2 bg-primary-subtle rounded fw-bold">
-                                    <i class="fa-solid fa-briefcase me-1"></i> ${spec.trim()}
-                                </span>
-                            `).join('');
-
-                                let languages = tutor.languages && tutor.languages
-                                    .length > 0 ?
-                                    tutor.languages.map(lang =>
-                                        `${lang.language} (${lang.level})`).join(', ') :
-                                    'Not Available';
-
-                                let tutorHTML = `
-                                <div class="ad-form">
-                                    <div class="ad-img-card d-flex mt-3">
-                                        <div class="MD col-lg-12 col-sm-5">
-                                            <img src="/storage/${tutor.profileImage}" alt="Tutor Image" class="img-thumbnail" 
-                                                 style="width: 100%; height: 140px;">
-                                        </div>
-                                        <div class="md-div col-lg-5 d-none mt-2" style="margin-left: 17px;">
-                                            <span class="mb-div"><b>20 AED for 50 minutes</b></span>
-                                            <div class="ae-detail">
-                                                <h4 class="fs-6 mt-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                    Free Trial Section
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="my-1 mx-2 w-100">
-                                        <div class="ae-div row mt-3">
-                                            <div class="col-8">
-                                                <div class="ae-detail-div">
-                                                    <div class="d-flex">
-                                                        <h4 class="me-2 fw-bold">${tutor.f_name} ${tutor.l_name}</h4>
-                                                        <span class="me-3"><i class="fa-regular fa-star mt-1"></i></span>
-                                                        <div class="img-wrapper" style="max-width:22px;margin-top:5px;">
-                                                            <img src="/image/flag.svg" class="img-fluid" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="mt-1 d-flex">${specializationHTML}</div>
-                                                    <div class="d-flex text-secondary my-1">
-                                                        <i class="fa-solid fa-venus-mars text-success me-2"></i>
-                                                        <p class="mb-0 text-capitalize">${tutor.gender ?? 'Others'}</p>
-                                                    </div>
-                                                    <div class="d-flex text-secondary">
-                                                        <i class="fa-solid fa-earth-americas text-success me-2"></i>
-                                                        <p class="mb-0">${tutor.country_name ?? 'Not Available'}</p>
-                                                    </div>
-                                                    <div class="d-flex text-secondary py-2">
-                                                        <i class="fa-solid fa-language text-success me-2"></i>
-                                                        <p class="mb-0">${languages}</p>
-                                                    </div>
-                                                    <p class="cv">
-                                                        <i class="fa-solid fa-calendar-days me-1 text-success"></i>
-                                                        ${tutor.dob}
-                                                    </p>
-                                                </div>
-                                                <div class="py-2">
-                                                    <span>
-                                                        <b>${tutor.experience}+ Years of ${specializationArray[0]} Teaching Experience:</b>
-                                                        - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specializationArray[0]} tutor. 🇬🇧
-                                                    </span>
-                                                    <ul class="read p-0 mt-3">
-                                                        <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="ad-div col-4">
-                                                <div class="d-flex pb-5">
-                                                    <div class="me-lg-5 me-3">
-                                                        <h4 class="fw-bold on">${tutor.price ?? 'Not Available'}</h4>
-                                                    </div>
-                                                    <div class="mt-1">
-                                                        <i class="fa-regular fa-heart"></i>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light mb-2">
-                                                        Book trial lesson
-                                                    </button>
-                                                    <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">
-                                                        Book trial lesson
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            `;
-                                $('#tutorsContainer').append(tutorHTML);
-                            }
-                        });
-
-                        const totalTutors = response.pagination.total;
-                        const perPage = response.pagination.perPage;
-                        const currentPage = response.pagination.currentPage;
-                        const firstItem = (currentPage - 1) * perPage + 1;
-                        const lastItem = Math.min(currentPage * perPage, totalTutors);
-
-                        $('.total-tutors-count').text(totalTutors);
-                        $('.tutors-range').text(
-                            `${firstItem} to ${lastItem} of ${totalTutors} tutors`);
-
-                        if (totalTutors <= perPage) {
-                            $('#paginationContainer').hide();
-                        } else {
-                            $('#paginationContainer').show();
-                        }
-                    } else {
-                        $('#tutorsContainer').html(
-                            '<p>No tutors found for the selected gender.</p>');
-                        $('#paginationContainer').hide();
-                    }
-                },
-                error: function(xhr) {
-                    console.error('AJAX Error:', xhr.responseText);
-                    $('#overlay').hide();
-                    $('#tutorsContainer').html(
-                        '<p class="text-danger">An error occurred. Please try again.</p>');
-                }
-            });
-        });
+      
     });
 </script>
 <script>

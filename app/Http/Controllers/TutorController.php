@@ -150,7 +150,7 @@ class TutorController extends Controller
         $query = Tutor::query();
 
         // Define the number of tutors per page
-        $perPage = 5;
+        $perPage = 6;
 
 
         if ($request->has('price') && $request->price !== 'all') {
@@ -296,7 +296,7 @@ class TutorController extends Controller
     public function fetchStudentData(Request $request)
     {
         $query = Student::query();
-        $perPage = 5;
+        $perPage = 6;
 
         // Apply gender filter if set and not "all"
         if ($request->filled('gender') && $request->gender !== 'all') {
