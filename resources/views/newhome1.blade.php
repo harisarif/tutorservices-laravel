@@ -583,12 +583,12 @@
                                                         {{ $experience }}+ Years of {{ $subjectList }} Teaching Experience: Your {{ $subjectList }} Success, Guaranteed.
                                                     </b>
 
-                                                    - Hello, my name is {{ $firstName }}. I have {{ $experience }}+ years of experience as a {{ $subjectList }} Teacher & Tutor.
+                                                    - Hello, my name is . I have {{ $experience }}+ years of experience as a {{ $subjectList }} Teacher & Tutor.
 
 
                                                 </span>
                                                 <ul class="read p-0 mt-3">
-                                                    <li style="list-style: none;"><a class="fw-bold" href="">Read
+                          {{ $firstName }}                          <li style="list-style: none;"><a class="fw-bold" href="">Read
                                                             More</a></li>
                                                 </ul>
                                             </div>

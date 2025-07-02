@@ -263,11 +263,12 @@
             <div class="col-12 col-md-6 col-lg-4 d-flex">
                 <div class="tutor-card d-flex flex-column w-100">
                         <div class="image-section">
-                            <img src="{{asset('homeImage/Link.png')}}" alt="">
-                            <span class="course-badge">Aerospace Engineering</span>
+                            <img src="{{ asset('storage/' . $item->profileImage) }}" alt="">
+                           
+
                         </div>
                         <div class="d-flex justify-content-between align-items-center mb-3 align-items-center">
-                            <h3 class="display-6">Haris Arif</h3>
+                            <h3 class="display-6">{{ $item->f_name }} {{$item->l_name}}</h3>
                             <div class="d-flex justify-content-end gap-1 align-items-center">
                                 <div class="rating">
                                     <i class="fa fa-star"></i>
@@ -276,14 +277,20 @@
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
-                                <div class="price">$50.00</div>
+                                <div class="price">{{ $item->price ?? 'Nullable' }}</div>
                             </div>
                         </div>
-                        <p class="content">1+ Years Of Air Conditioning And Refrigeration Service Teaching Experience:
-                            Your Air
-                            Conditioning And Refrigeration Service Success, Guaranteed. - Hello, My Name Is Haris. I
-                            Have 1+ Years Of Experience As A Air Conditioning And
-                            Refrigeration Service Teacher & Tutor.</p>
+                       @php
+                                                    $teachingSubjects = $item->edu_teaching;
+                                                    $decodedSubjects = is_array(json_decode($teachingSubjects, true)) ? json_decode($teachingSubjects, true) : null;
+                                                    $subjectList = $decodedSubjects ? implode(', ', $decodedSubjects) : 'Nullable';
+                                                    $experience = $item->experience ?? 'Nullable';
+                                                    $firstName = $item->f_name ?? 'Not Specified';
+                                                    @endphp 
+                                                    
+                           <p class="content"> {{ $experience }}+ Years Of {{ $subjectList }} Teaching Experience:
+                            Your {{ $subjectList }} Success, Guaranteed. - Hello, My Name Is {{ $firstName }}. I
+                            Have {{ $experience }}+ Years Of Experience As A {{ $subjectList }} Teacher & Tutor.</p>
                         <div class="d-flex justify-content-between mt-3 info-bar">
                             <span class="text-muted">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="15" viewBox="0 0 11 15"
@@ -292,10 +299,17 @@
                                         d="M7.875 7.26953V9.01953H2.625V7.26953H7.875ZM10.3086 3.14062C10.4362 3.26823 10.5 3.42318 10.5 3.60547V3.76953H7V0.269531H7.16406C7.34635 0.269531 7.5013 0.333333 7.62891 0.460938L10.3086 3.14062ZM6.125 3.98828C6.125 4.17057 6.1888 4.32552 6.31641 4.45312C6.44401 4.58073 6.59896 4.64453 6.78125 4.64453H10.5V13.6133C10.5 13.7956 10.4362 13.9505 10.3086 14.0781C10.181 14.2057 10.026 14.2695 9.84375 14.2695H0.65625C0.473958 14.2695 0.31901 14.2057 0.191406 14.0781C0.0638021 13.9505 0 13.7956 0 13.6133V0.925781C0 0.74349 0.0638021 0.588542 0.191406 0.460938C0.31901 0.333333 0.473958 0.269531 0.65625 0.269531H6.125V3.98828ZM1.75 2.23828V2.67578C1.75 2.82161 1.82292 2.89453 1.96875 2.89453H4.15625C4.30208 2.89453 4.375 2.82161 4.375 2.67578V2.23828C4.375 2.09245 4.30208 2.01953 4.15625 2.01953H1.96875C1.82292 2.01953 1.75 2.09245 1.75 2.23828ZM1.75 3.98828V4.42578C1.75 4.57161 1.82292 4.64453 1.96875 4.64453H4.15625C4.30208 4.64453 4.375 4.57161 4.375 4.42578V3.98828C4.375 3.84245 4.30208 3.76953 4.15625 3.76953H1.96875C1.82292 3.76953 1.75 3.84245 1.75 3.98828ZM8.75 12.3008V11.8633C8.75 11.7174 8.67708 11.6445 8.53125 11.6445H6.34375C6.19792 11.6445 6.125 11.7174 6.125 11.8633V12.3008C6.125 12.4466 6.19792 12.5195 6.34375 12.5195H8.53125C8.67708 12.5195 8.75 12.4466 8.75 12.3008ZM8.75 6.83203C8.75 6.70443 8.70443 6.60417 8.61328 6.53125C8.54036 6.4401 8.4401 6.39453 8.3125 6.39453H2.1875C2.0599 6.39453 1.95052 6.4401 1.85938 6.53125C1.78646 6.60417 1.75 6.70443 1.75 6.83203V9.45703C1.75 9.58464 1.78646 9.69401 1.85938 9.78516C1.95052 9.85807 2.0599 9.89453 2.1875 9.89453H8.3125C8.4401 9.89453 8.54036 9.85807 8.61328 9.78516C8.70443 9.69401 8.75 9.58464 8.75 9.45703V6.83203Z"
                                         fill="black" />
                                 </svg>
-                                <span>Albanian(Cl)</span>
+                                <span> @if(!empty($item->language) && is_array($item->language))
+                                                    @foreach($item->language as $lang)
+                                                    {{ $lang['language'] ?? 'Unknown' }}
+                                                    ({{ $lang['level'] ?? 'Unknown' }})
+                                                    @endforeach
+                                                    @else
+                                                    Nullable
+                                                    @endif</span>
                             </span>
                             <span class="text-muted">
-                                <span>Male</span>
+                                <span>{{ $item->gender ?? 'Nullable' }}</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="13" height="15" viewBox="0 0 13 15"
                                     fill="none">
                                     <path
@@ -304,7 +318,7 @@
                                 </svg>
                             </span>
                             <span class="text-muted">
-                                <span>13-05-1985</span>
+                                <span>{{ $item->dob ?? 'Nullable' }}</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"
                                     fill="none">
                                     <path
@@ -363,8 +377,6 @@
         <span class="ms-2">Request a Demo</span>
     </button>
 @endif
-
-
                         </div>
                     </div>
               </div>

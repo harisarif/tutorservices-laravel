@@ -29,7 +29,7 @@ class TutorController extends Controller
 
         $query = Tutor::where('status', 'active');
         $sliderTutors = Tutor::where('status', 'active')->take(6)->get();
-        $perPage = 3; // Define the number of tutors per page
+        $perPage = 6; // Define the number of tutors per page
         $blogs = Blog::orderBy('created_at', 'desc')->take(3)->get();
 
         // Paginate the results
