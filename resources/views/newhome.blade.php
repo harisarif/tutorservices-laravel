@@ -160,7 +160,7 @@
             <h2 class="text-center section-title">Our Services</h2>
             <div class="row g-3 justify-content-center">
                 <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card service-card text-center p-4">
+                    <div class=" service-card text-center p-4">
                         <div class="service-icon">
                             <img src="{{asset('homeImage/teacher.png')}}" width="54" alt="">
                         </div>
@@ -170,7 +170,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card service-card active text-center p-4">
+                    <div class=" service-card active text-center p-4">
                         <div class="service-icon active">
                             <img src="{{asset('homeImage/student.png')}}" width="54" alt="">
                         </div>
@@ -180,7 +180,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card service-card text-center p-4">
+                    <div class=" service-card text-center p-4">
                         <div class="service-icon">
                             <img src="{{asset('homeImage/mic.png')}}" width="54" alt="">
                         </div>
@@ -1162,7 +1162,7 @@
                     </p>
                 </div>
                 <div class="right-panel col-6">
-                    <div class="close-btn" onclick="document.getElementById('signupPromptModal').style.display = 'none'">×</div>
+                    <div class="close-btn"  onclick="closeModal()">×</div>
                     <div class="card-image">
                         <div class="icon-badge">
                             <img src="{{ asset('images/Group11.png') }}" />
@@ -1186,6 +1186,23 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <script>
+    function closeModal() {
+        const modal = document.getElementById('signupPromptModal');
+    if (modal) {
+        modal.style.display = 'none';
+        modal.classList.remove('show');
+    }
+
+    // Remove all modal backdrops
+    const backdrops = document.querySelectorAll('.modal-backdrop');
+    backdrops.forEach(backdrop => backdrop.remove());
+
+    // Enable scrolling again
+    document.body.classList.remove('modal-open');
+    document.body.style.overflow = ''; // reset overflow
+    document.body.style.paddingRight = ''; // reset padding if Bootstrap added it
+}
+
     document.querySelectorAll('.request-demo-btn').forEach(button => {
         button.addEventListener('click', function() {
             const teacherId = this.getAttribute('data-teacher-id');
