@@ -210,7 +210,7 @@
                                      <strong>Mobile Number</strong>
                                  </label>
                                  <div class="d-flex align-items-center">
-                                     <select class="form-select w-auto" id="countrySelect"
+                                     <select class="form-select w-auto" id="countrySelect" 
                                          style="border: 1px solid rgb(137, 135, 135); flex-shrink: 0;">
                                          @foreach ($countriesPhone as $key => $country)
                                          <option value="{{ $key }}">{{ $country }}</option>

@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Models\Country;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 use PHPMailer\PHPMailer\PHPMailer;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
@@ -24,82 +25,98 @@ class TutorController extends Controller
 {
     //
 
-    public function index(Request $request)
-    {
+public function index(Request $request)
+{
+    $perPage = 6;
+    $blogs = Blog::orderBy('created_at', 'desc')->take(3)->get();
+    $sliderTutors = Tutor::where('status', 'active')->take(6)->get();
+    $totalTutorsCount = Tutor::count();
 
-        $query = Tutor::where('status', 'active');
-        $sliderTutors = Tutor::where('status', 'active')->take(6)->get();
-        $perPage = 6; // Define the number of tutors per page
-        $blogs = Blog::orderBy('created_at', 'desc')->take(3)->get();
+    $subjectSearch = null;
+    $inputSearch = trim($request->input('subjectsearch'));
 
-        // Paginate the results
-        $tutors = $query->paginate($perPage);
-        // $tutor = Tutor::get();
-        // Fetch the total count of tutors (for all countries)
-        $totalTutorsCount = Tutor::count();
+    if ($inputSearch !== '') {
+        $subjectSearch = $inputSearch;
 
+        if (auth()->check() && auth()->user()->role === 'user') {
+            DB::table('student')
+                ->where('user_id', auth()->id())
+                ->update([
+                    'searchQuery' => $subjectSearch,
+                    'updated_at' => now(),
+                ]);
+        }
+    } elseif (auth()->check() && auth()->user()->role === 'user') {
+        $student = DB::table('student')->where('user_id', auth()->id())->first();
 
-        // Initialize country array
-        $tutors->each(function ($tutor) {
-            $storedCountryCode = trim($tutor->country); // Remove any unwanted spaces/newline
-            // Get country code
-            $tutor->country_name = config("countries_assoc.countries.$storedCountryCode", 'Unknown'); // Convert to full name
-            // Debug Language Decoding
-            $language = json_decode($tutor->language, true);
-
-            if (!is_array($language)) {
-                \Log::error("Language decoding failed for Tutor ID: {$tutor->id}, Raw Data: " . $tutor->language);
-                $tutor->language = []; // Fallback to empty array
-            } else {
-                $tutor->language = $language;
-            }
-            // Deserialize subjects safely
-
-            $tutor->specialization = json_decode($tutor->specialization, true);
-
-            // Ensure it's an array
-            if (!is_array($tutor->specialization) || empty($tutor->specialization)) {
-                $tutor->specialization = ['Not Specified'];
-            }
-
-            // Process Profile Image (Check if exists)
-
-            // $tutor->profileImage = trim(preg_replace('/\s+/', '', $tutor->profileImage)); // Remove spaces & new lines
-
-            // if (!empty($tutor->profileImage) && file_exists(public_path('storage/' . $tutor->profileImage))) {
-            //     $tutor->profileImages = asset('storage/' . $tutor->profileImage);
-            // } else {
-            //     $tutor->profileImage = asset('default-profile.png');
-            // }
-
-
-            // Calculate age if DOB exists
-            if ($tutor->dob) {
-                $dob = Carbon::parse($tutor->dob);
-                $tutor->dob = $dob->format('d-m-Y'); // Convert DOB to "DD-MM-YYYY"
-                $tutor->age = $dob->age;
-            } else {
-                $tutor->age = null; // Default value
-            }
-        });
-        $subjectsTeach = collect(config('subjects.subjects'));
-        $countries = collect(config('countries_assoc.countries'));
-        $countriesPhone = collect(config('phonecountries.countries'));
-        $countries_number_length = collect(config('countries_number_length.countries'));
-        $countries_prefix = collect(config('countries_prefix.countries'));
-        return view('newhome', [
-            'blogs' => $blogs,
-            'sliderTutors' => $sliderTutors,
-            'tutors' => $tutors,
-            'subjectsTeach' => $subjectsTeach,
-            'totalTutorsCount' => $totalTutorsCount,
-            'perPage' => $perPage,
-            'countries' => $countries,
-            'countriesPhone' => $countriesPhone,
-            'countries_number_length' => $countries_number_length,
-            'countries_prefix' => $countries_prefix
-        ]);
+        if ($student && $student->searchQuery) {
+            $subjectSearch = $student->searchQuery;
+            Log::info("📌 Loaded previous subject search: " . $subjectSearch);
+        }
     }
+
+    // Fetch all active tutors
+    $allTutors = Tutor::where('status', 'active')->get();
+
+    // Partition tutors based on subject match
+    if ($subjectSearch) {
+        [$matchedTutors, $otherTutors] = $allTutors->partition(function ($tutor) use ($subjectSearch) {
+            return str_contains(strtolower($tutor->subject), strtolower($subjectSearch)) ||
+                   str_contains(strtolower($tutor->edu_teaching), strtolower($subjectSearch));
+        });
+
+        $sortedTutors = $matchedTutors->concat($otherTutors);
+    } else {
+        $sortedTutors = $allTutors;
+    }
+
+    // Manual pagination
+    $page = request()->get('page', 1);
+    $paginatedTutors = new \Illuminate\Pagination\LengthAwarePaginator(
+        $sortedTutors->forPage($page, $perPage),
+        $sortedTutors->count(),
+        $perPage,
+        $page,
+        ['path' => request()->url(), 'query' => request()->query()]
+    );
+
+    // Enrich tutor data
+    $paginatedTutors->each(function ($tutor) {
+        $storedCountryCode = trim($tutor->country);
+        $tutor->country_name = config("countries_assoc.countries.$storedCountryCode", 'Unknown');
+
+        $tutor->language = json_decode($tutor->language, true) ?? [];
+        $tutor->specialization = json_decode($tutor->specialization, true) ?? ['Not Specified'];
+
+        if ($tutor->dob) {
+            $dob = \Carbon\Carbon::parse($tutor->dob);
+            $tutor->dob = $dob->format('d-m-Y');
+            $tutor->age = $dob->age;
+        } else {
+            $tutor->age = null;
+        }
+    });
+
+    // Load configs
+    $subjectsTeach = collect(config('subjects.subjects'));
+    $countries = collect(config('countries_assoc.countries'));
+    $countriesPhone = collect(config('phonecountries.countries'));
+    $countries_number_length = collect(config('countries_number_length.countries'));
+    $countries_prefix = collect(config('countries_prefix.countries'));
+
+    return view('newhome', [
+        'blogs' => $blogs,
+        'sliderTutors' => $sliderTutors,
+        'tutors' => $paginatedTutors,
+        'subjectsTeach' => $subjectsTeach,
+        'totalTutorsCount' => $totalTutorsCount,
+        'perPage' => $perPage,
+        'countries' => $countries,
+        'countriesPhone' => $countriesPhone,
+        'countries_number_length' => $countries_number_length,
+        'countries_prefix' => $countries_prefix,
+    ]);
+}
     public function tutorDetail()
     {
         return view('teacher-detail');
@@ -193,7 +210,7 @@ class TutorController extends Controller
             Log::info("Filtering tutors with gender: $gender");
             $query->where('gender', $gender);
         }
-
+    $teacher=Tutor::all();
         //country
         if ($request->has('country') && $request->country !== 'all') {
             $query->where('country', $request->country);
@@ -213,7 +230,52 @@ class TutorController extends Controller
                 $query->whereJsonContains('specialization', $specialization);
             }
         }
+         $subjectSearch = null;
 
+// Safely get trimmed input
+$inputSearch = trim($request->input('subjectsearch'));
+
+// CASE 1: User provided a new input
+if ($inputSearch !== '') {
+    $subjectSearch = $inputSearch;
+
+    // Save it to the DB if logged-in user is a student (role: user)
+    if (auth()->check() && auth()->user()->role === 'user') {
+        DB::table('student')
+            ->where('user_id', auth()->id())
+            ->update([
+                'searchQuery' => $subjectSearch,
+                'updated_at' => now(),
+            ]);
+    }
+
+// CASE 2: Input is empty, but user is logged in — load saved search
+} elseif  (auth()->check() && auth()->user()->role === 'user') {
+    $student = DB::table('student')->where('user_id', auth()->id())->first();
+
+    if ($student && $student->searchQuery) {
+        $subjectSearch = strtolower($student->searchQuery); // normalize case
+        Log::info("📌 Loaded previous subject search: " . $subjectSearch);
+
+        $tutors = collect($teacher); // ensure it's a collection
+
+        [$matchedTutors, $otherTutors] = $tutors->partition(function ($tutor) use ($subjectSearch) {
+            // Adjust logic based on how subject is stored
+            return str_contains(strtolower($tutor->subject), $subjectSearch);
+        });
+
+        // Merge matched first, then others
+        $tutors = $matchedTutors->concat($otherTutors);
+    }
+}
+
+
+// CASE 3: Apply the search filter if we have one
+if (!empty($subjectSearch)) {
+    $query->where(function ($q) use ($subjectSearch) {
+        $q->whereRaw("LOWER(edu_teaching) LIKE ?", ['%' . strtolower($subjectSearch) . '%']);
+    });
+}
         // Paginate the filtered tutors
         $tutors = $query->paginate($perPage);
 
@@ -725,7 +787,6 @@ $tutor->save();
 
         return redirect()->route('basicsignup')->with('error', 'Authentication failed.');
     }
-
 
 
 

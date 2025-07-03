@@ -223,7 +223,9 @@
 
             <div class="search-box row g-3">
                 <div class="col-md-9">
-                    <input type="text" class="form-control" placeholder="Search Tutor...">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search Tutor...">
+
+
                 </div>
                 <div class="col-md-3">
                     <button type="submit" id="resetFilterBtn" class="btn-warning warning-btn">Reset Filter</button>
@@ -348,7 +350,18 @@
                         <p class="content"> {{ $experience }}+ Years Of {{ $subjectList }} Teaching Experience:
                             Your {{ $subjectList }} Success, Guaranteed. - Hello, My Name Is {{ $firstName }}. I
                             Have {{ $experience }}+ Years Of Experience As A {{ $subjectList }} Teacher & Tutor.</p>
-                        <div class="d-flex justify-content-between mt-3 info-bar">
+                       <div class="d-flex text-secondary my-1">
+                                                <span class="me-2"><i class="fa-solid fa-globe"
+                                                        style="font-size: 13px; margin-top: 5px;color: #1cc88a !important;"></i></span>
+                                                <p class="mb-0"
+                                                    style="color:black; transform: scaleY(1);text-transform:capitalize">
+                                                    @if($item->edu_teaching && is_array(json_decode($item->edu_teaching, true)))
+                                                    {{ implode(', ', json_decode($item->edu_teaching, true)) }}
+                                                    @else
+                                                    {{ $item->edu_teaching ?? 'Nullable' }}
+                                                    @endif
+                                                </p>
+                                            </div> <div class="d-flex justify-content-between mt-3 info-bar">
                             <span class="text-muted">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="15" viewBox="0 0 11 15"
                                     fill="none">
@@ -413,7 +426,7 @@
                             <button type="button"
                                 id="demo"
                                 data-teacher-id="{{ $item->teacher_id }}"
-                                class="primary-btn-2  flex-grow-1 p-0  d-flex align-items-center request-demo-btn" style="width: 150px; height:45px;
+                                class="primary-btn-2  flex-grow-1 p-0  d-flex align-items-center  justify-content-center request-demo-btn" style="width: 120px; height:45px;
     "
                                 title="Request a Demo">
                                 {{-- <svg xmlns="http://www.w3.org/2000/svg"
@@ -427,7 +440,7 @@
                                 id="demo"
                                 data-bs-toggle="modal"
                                 data-bs-target="#signupPromptModal"
-                                class="primary-btn-2 p-0 flex-grow-1 d-flex align-items-center justify-content-center " style="width: 150px; height:45px;"
+                                class="primary-btn-2 p-0 flex-grow-1 d-flex align-items-center justify-content-center " style="width: 120px; height:45px;"
                                 title="Sign up to request a demo">
                                 {{-- <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 24 24">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-2.83.48-5.42-.48-7.07-2.27a9.015 9.015 0 0 1-1.71-9.37c.2-.52.92-.66 1.33-.26l4.07 4.07V7h2v6h-4l4.59 4.59c.39.39.39 1.02 0 1.41-.26.26-.64.36-1 .26z"/>
@@ -1571,7 +1584,10 @@
                                                 <br><br>
                                                 - Hello, my name is ${tutor.f_name ?? 'Tutor'}. I have ${tutor.experience ?? '0'}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
                                             </p>
-
+                                            <div class="d-flex text-secondary my-1">
+                                                                        <span class="me-2"><i class="fa-solid fa-globe" style="font-size: 13px; margin-top: 5px;color: #1cc88a !important;"></i></span>
+                                                                        <p class="mb-0 subjects-name" style="color:black; transform: scaleY(1);text-transform:capitalize">${displayText}</p>
+                                                                    </div>
                                             <div class="d-flex justify-content-between mt-3 info-bar">
                                                 <span class="text-muted">${languages}</span>
                                                 <span class="text-muted">${tutor.gender ?? 'Not specified'}</span>
@@ -1991,194 +2007,144 @@
                 });
             });
 
-            // $('#subjectsearch').keyup(function() {
-            //     var searchQuery = $(this).val(); // Get the value from the search input field
+             $('#searchInput').keyup(function() {
+                 var searchQuery = $(this).val(); // Get the value from the search input field
 
-            //     var locationData = {
-            //         subjectsearch: searchQuery
-            //     };
+                 var locationData = {
+                     subjectsearch: searchQuery
+                 };
 
-            //     $('#overlay').show();
+                $('#overlay').show();
 
-            //     $.ajax({
-            //         type: 'POST',
-            //         url: '{{ route("fetch-data") }}',
-            //         data: locationData,
-            //         dataType: 'json',
-            //         success: function(response) {
-            //             console.log("AJAX Success: ", response);
-            //             $('#tutorsContainer').empty();
-            //             $('#overlay').hide();
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route("fetch-data") }}',
+                    data: locationData,
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log("AJAX Success: ", response);
+                        $('#tutorsContainer').empty();
+                        $('#overlay').hide();
 
-            //             if (response && response.tutors && response.tutors.length > 0) {
-            //                 response.tutors.forEach(function(tutor) {
-            //                     let specializations = tutor.specialization.split(
-            //                         ','); // Split by comma
-            //                     let specialization = tutor.specialization.split(',')[0];
-            //                     // Build specialization spans
-            //                     let specializationHTML = specializations.map(spec => `
-            //                                         <span id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold">
-            //                                             <i class="fa-solid fa-briefcase me-1"></i> ${spec.trim()}
-            //                                         </span>
-            //                                     `).join('');
-            //                     if (tutor.status !== 'inactive') {
-            //                         let edu_teaching = tutor
-            //                             .edu_teaching; // e.g., '["Physical Therapy","Physics"]'
+                       if (response && response.tutors && response.tutors.length > 0) {
+                           response.tutors.forEach(function(tutor) {
+                               let specializations = tutor.specialization.split(
+                                   ','); // Split by comma
+                               let specialization = tutor.specialization.split(',')[0];
+                               // Build specialization spans
+                                let specializationHTML = specializations.map(spec => `
+                                                    <span id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold">
+                                                        <i class="fa-solid fa-briefcase me-1"></i> ${spec.trim()}
+                                                    </span>
+                                                `).join('');
+                                if (tutor.status !== 'inactive') {
+                                    let edu_teaching = tutor
+                                        .edu_teaching; // e.g., '["Physical Therapy","Physics"]'
 
-            //                         let displayText = 'Others';
-            //                         if (edu_teaching) {
-            //                             try {
+                                   let displayText = 'Others';
+                                   if (edu_teaching) {
+                                       try {
 
-            //                                 let parsed = JSON.parse(edu_teaching);
-            //                                 if (Array.isArray(parsed)) {
-            //                                     displayText = parsed.join(', ');
-            //                                 }
-            //                             } catch (e) {
-            //                                 // Optional: log or handle invalid JSON
-            //                             }
-            //                         }
-            //                         console.log('asdsadsa', displayText)
-            //                         var languages = tutor.languages && tutor.languages
-            //                             .length > 0 ?
-            //                             tutor.languages.map(lang =>
-            //                                 `${lang.language} (${lang.level})`).join(', ') :
-            //                             'Not Available';
+                                         let parsed = JSON.parse(edu_teaching);
+                                           if (Array.isArray(parsed)) {
+                                               displayText = parsed.join(', ');
+                                       }
+                                        } catch (e) {
+                                            // Optional: log or handle invalid JSON
+                                        }
+                                    }
+                                    console.log('asdsadsa', displayText)
+                                    var languages = tutor.languages && tutor.languages
+                                        .length > 0 ?
+                                        tutor.languages.map(lang =>
+                                         `${lang.language} (${lang.level})`).join(', ') :
+                                     'Not Available';
 
-            //                         var tutorHTML = `
-            //                         <div class="ad-form">
-            //                                                 <div class="ad-img-card d-flex" style="margin-top: 20px;">
-            //                                                     <div class="MD col-lg-12 col-sm-5">
-            //                                                         <img src="storage/${tutor.profileImage}" alt="Tutor Image" class="img-thumbnail" 
-            //                                                             style="max-width: 100%; height: 140px; width: 100%;">
+                                    var tutorHTML = `
+                            <div class="col-12 col-md-6 col-lg-4 d-flex m-0" style="padding:1px;">
+                                <div class="tutor-card d-flex flex-column w-100">
+                                    <div class="image-section">
+                                        <img src="${tutor.profileImage ? '/storage/' + tutor.profileImage : '/images/avatar.png'}"
+                                             alt="Tutor Image"
+                                             class="img-thumbnail"
+                                             ${tutor.video ? 'data-bs-toggle="modal" data-bs-target="#videoModal-' + tutor.teacher_id + '"' : ''}>
+                                    </div>
 
-            //                                                     </div>
-            //                                                     <div class="md-div col-lg-5 d-none mt-2" style="margin-left: 17px;">
-            //                                                         <span class="mb-div"><b>20 AED for 50 minutes</b></span>
-            //                                                         <div class="ae-detail">
-            //                                                             <h4 class="fs-6 mt-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            //                                                                 Free Trial Section
-            //                                                             </h4>
-            //                                                         </div>
-            //                                                     </div>
-            //                                                 </div>
-            //                                                 <div class="my-4 mx-4 w-100">
-            //                                                     <div class="ae-div row">
-            //                                                         <div class="col-8">
-            //                                                             <div class="ae-detail-div">
-            //                                                                 <span>
-            //                                                                     <div class="d-flex" id="ff000" style="margin-left: 3px;">
-            //                                                                                 <h4 class="me-2 fw-bold sd"> ${tutor.f_name} ${tutor.l_name}</h4>
-            //                                                                                 <span class="me-3"><i class="fa-regular fa-star "></i></span>
-            //                                                                                 <div class="img-wrapper" style="max-width:20px;margin-top:5px;">
-            //                                                                                     <img src="/image/flag.svg" class="img-fluid" alt="">
-            //                                                                                 </div>
-            //                                                                             </div>
-            //                                                                 </span>
+                                    ${tutor.video ? `
+                                    <div class="modal fade" id="videoModal-${tutor.teacher_id}" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-success">
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1);"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <video controls width="100%" height="250">
+                                                        <source src="/${tutor.video}" type="video/mp4">
+                                                        Your browser does not support the video tag.
+                                                    </video>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>` : ''}
 
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h3 class="display-6">${tutor.f_name} ${tutor.l_name}</h3>
+                                        <div class="d-flex justify-content-end gap-1 align-items-center">
+                                            <div class="rating">${'★'.repeat(5)}</div>
+                                            <div class="price">${tutor.price ?? 'N/A'}</div>
+                                        </div>
+                                    </div>
 
-            //                                                                                 <div class="mt-1 cm" style="display: flex;">
-            //                                                                                     ${specializationHTML}
-            //                                                                                                                                                 </div>
-            //                                                                                 <div class="d-flex text-secondary my-1">
-            //                                                                                     <span class="me-2"><i class="fa-solid fa-globe" style="font-size: 13px; margin-top: 5px;color: #1cc88a !important;"></i></span>
-            //                                                                                     <p class="mb-0 subjects-name" style="color:black; transform: scaleY(1);text-transform:capitalize">${displayText}</p>
-            //                                                                                 </div>
-            //                                                                                 <div class="d-flex text-secondary my-1">
-            //                                                                                 <span class="me-2"><i class="fa-solid fa-venus-mars" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
-            //                                                                                 <p class="mb-0" style="color:black; transform: scaleY(1);text-transform:capitalize">${tutor.gender ?? 'Others'}</p>
-            //                                                                                 </div>
+                                    <p class="content">
+                                        ${tutor.experience}+ Years of ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.<br>
+                                        - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
+                                    </p>
 
-            //                                                                                 <div class="d-flex text-secondary">
-            //                                                                                 <span class="me-2"><i class="fa-solid fa-earth-americas" style="font-size: 13px;  margin-top: 5px;    color: #1cc88a;"></i></span>
-            //                                                                                 <p class="mb-0 ms-1" style="color:black; transform: scaleY(1);">${tutor.country_name ?? 'Not Available'}</p>
-            //                                                                             </div>
+                                    <div class="d-flex justify-content-between mt-3 info-bar">
+                                        <span class="text-muted">${languages}</span>
+                                        <span class="text-muted">${tutor.gender ?? 'N/A'}</span>
+                                        <span class="text-muted">${tutor.dob ?? 'N/A'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
 
-            //                                                                             <div class="d-flex text-secondary py-2">
-            //                                                                                 <span class="me-2"><i class="fa-solid fa-language" style="font-size: 13px; margin-top: 5px;color: #1cc88a;"></i></span>
-            //                                                                                 <p class="mb-0" style="color:black; transform: scaleY(1);" id="on-1024">
-            //                                                                                     ${languages ?? 'Not Available'}</p>
-            //                                                                             </div>
+                                    $('#tutorsContainer').append(tutorHTML);
+                                }
+                            });
+                           // Update pagination details only if pagination data is available
+                          if (response.pagination) {
+                              var totalTutorsCount = response.pagination.total;
+                              var perPage = response.pagination.perPage;
+                              var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
+                              var lastItem = Math.min(response.pagination.currentPage * perPage,
+                                  totalTutorsCount);
 
-            //                                                                             <span class="cv" style="color:black; transform: scaleY(1);"><i class="fa-solid fa-calendar-days me-1" style="color: #1cc88a;"></i> 
-            //                                                                             ${tutor.dob}</span>                              
+                              $('.total-tutors-count').text(totalTutorsCount);
+                              $('.tutors-range').text(
+                                  `${firstItem} to ${lastItem} of ${totalTutorsCount} tutors`);
 
-            //                                                                 <div class="py-2">
-            //                                                                                 <span>
-            //                                                                                    <b> ${tutor.experience}+ Years of  ${specialization} Teaching Experience: Your ${specialization} Success, Guaranteed.</b> 
-
-            //                                                                 - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
-
-            //                                                             </span>
-            //                                                                                 <ul class="read p-0 mt-3">
-            //                                                                                     <li style="list-style: none;"><a class="fw-bold" href="">Read More</a></li>
-            //                                                                                 </ul>
-            //                                                                             </div>
-            //                                                             </div>
-            //                                                         </div>
-            //                                                         <div class="col-md-4">
-            //                                                                             <div class="d-flex pb-5" id="ff111">
-            //                                                                                 <div class="me-lg-5 me-3" id="dollar">
-            //                                                                                     <h4 class="fw-bold on">${tutor.price ?? 'Not Available'}</h4>
-            //                                                                                     <!-- <p class="text-secondary fs-6"><p><i class="fa-solid fa-calendar-days me-1" style="color:#1cc88a"></i> 
-            //                                                                                     05-03-1972</p> -->
-            //                                                                                 </div>
-            //                                                                                 <div id="heart-icon">
-            //                                                                                     <span><i class="fa-regular fa-heart"></i></span>
-            //                                                                                 </div>
-            //                                                                             </div>
-            //                                                                             <div>
-            //                                                                                 <div id="btn-container">
-            //                                                                                     <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Book trail lesson</button>
-            //                                                                                 </div>
-            //                                                                             </div>
-            //                                                                             <div>
-            //                                                                             <div class="mt-2" id="btn-container">
-            //                                                                                     <button type="button" class="btn1 btn-outline-dark rounded fw-bold text-light">Send Massage</button>
-            //                                                                                 </div>
-            //                                                                             </div>
-            //                                                                         </div>
-            //                                                     </div>
-            //                                                 </div>
-            //                                             </div>
-            //                     `;
-
-            //                         $('#tutorsContainer').append(tutorHTML);
-            //                     }
-            //                 });
-
-            //                 // Update pagination details only if pagination data is available
-            //                 if (response.pagination) {
-            //                     var totalTutorsCount = response.pagination.total;
-            //                     var perPage = response.pagination.perPage;
-            //                     var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
-            //                     var lastItem = Math.min(response.pagination.currentPage * perPage,
-            //                         totalTutorsCount);
-
-            //                     $('.total-tutors-count').text(totalTutorsCount);
-            //                     $('.tutors-range').text(
-            //                         `${firstItem} to ${lastItem} of ${totalTutorsCount} tutors`);
-
-            //                     if (totalTutorsCount <= perPage) {
-            //                         $('#paginationContainer').hide();
-            //                     } else {
-            //                         $('#paginationContainer').show();
-            //                         $('#paginationContainer').html(response.pagination.links);
-            //                     }
-            //                 }
-            //             } else {
-            //                 $('#tutorsContainer').html(
-            //                     '<p>No tutors found for the selected subject.</p>');
-            //             }
-            //         },
-            //         error: function(xhr, status, error) {
-            //             console.error('AJAX error:', status, error);
-            //             $('#overlay').hide();
-            //             $('#tutorsContainer').html(
-            //                 '<p class="text-danger">An error occurred while fetching tutors. Please try again later.</p>'
-            //             );
-            //         }
-            //     });
-            // });
+                              if (totalTutorsCount <= perPage) {
+                                  $('#paginationContainer').hide();
+                              } else {
+                                  $('#paginationContainer').show();
+                                  $('#paginationContainer').html(response.pagination.links);
+                              }
+                          }
+                      } else {
+                          $('#tutorsContainer').html(
+                              '<p>No tutors found for the selected subject.</p>');
+                      }
+                  },
+                  error: function(xhr, status, error) {
+                      console.error('AJAX error:', status, error);
+                      $('#overlay').hide();
+                      $('#tutorsContainer').html(
+                          '<p class="text-danger">An error occurred while fetching tutors. Please try again later.</p>'
+                      );
+                  }
+              });
+          });
             $('#resetFilterBtn').click(function() {
                 $.ajax({
                     type: 'POST',

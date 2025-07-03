@@ -134,6 +134,7 @@ Route::get('/test-socialite', function () {
 Route::post('/change-password', [SocialAuthController::class, 'changePassword'])->name('change.password');
 Route::get('auth/facebook', [SocialController::class, 'redirectToFacebook']);
 Route::get('auth/facebook/callback', [SocialController::class, 'handleFacebookCallback']);
+Route::get('/search-tutors', [TutorController::class, 'search']);
 
 Route::get('/all-students', [StudentController::class, 'allStudents'])->name('all.students');
 Route::get('/qr-code', [StudentController::class, 'qrcode'])->name('qrcode');
