@@ -25,98 +25,98 @@ class TutorController extends Controller
 {
     //
 
-public function index(Request $request)
-{
-    $perPage = 6;
-    $blogs = Blog::orderBy('created_at', 'desc')->take(3)->get();
-    $sliderTutors = Tutor::where('status', 'active')->take(6)->get();
-    $totalTutorsCount = Tutor::count();
+    public function index(Request $request)
+    {
+        $perPage = 6;
+        $blogs = Blog::orderBy('created_at', 'desc')->take(3)->get();
+        $sliderTutors = Tutor::where('status', 'active')->take(6)->get();
+        $totalTutorsCount = Tutor::count();
 
-    $subjectSearch = null;
-    $inputSearch = trim($request->input('subjectsearch'));
+        $subjectSearch = null;
+        $inputSearch = trim($request->input('subjectsearch'));
 
-    if ($inputSearch !== '') {
-        $subjectSearch = $inputSearch;
+        if ($inputSearch !== '') {
+            $subjectSearch = $inputSearch;
 
-        if (auth()->check() && auth()->user()->role === 'user') {
-            DB::table('student')
-                ->where('user_id', auth()->id())
-                ->update([
-                    'searchQuery' => $subjectSearch,
-                    'updated_at' => now(),
-                ]);
+            if (auth()->check() && auth()->user()->role === 'user') {
+                DB::table('student')
+                    ->where('user_id', auth()->id())
+                    ->update([
+                        'searchQuery' => $subjectSearch,
+                        'updated_at' => now(),
+                    ]);
+            }
+        } elseif (auth()->check() && auth()->user()->role === 'user') {
+            $student = DB::table('student')->where('user_id', auth()->id())->first();
+
+            if ($student && $student->searchQuery) {
+                $subjectSearch = $student->searchQuery;
+                Log::info("📌 Loaded previous subject search: " . $subjectSearch);
+            }
         }
-    } elseif (auth()->check() && auth()->user()->role === 'user') {
-        $student = DB::table('student')->where('user_id', auth()->id())->first();
 
-        if ($student && $student->searchQuery) {
-            $subjectSearch = $student->searchQuery;
-            Log::info("📌 Loaded previous subject search: " . $subjectSearch);
+        // Fetch all active tutors
+        $allTutors = Tutor::where('status', 'active')->get();
+
+        // Partition tutors based on subject match
+        if ($subjectSearch) {
+            [$matchedTutors, $otherTutors] = $allTutors->partition(function ($tutor) use ($subjectSearch) {
+                return str_contains(strtolower($tutor->subject), strtolower($subjectSearch)) ||
+                    str_contains(strtolower($tutor->edu_teaching), strtolower($subjectSearch));
+            });
+
+            $sortedTutors = $matchedTutors->concat($otherTutors);
+        } else {
+            $sortedTutors = $allTutors;
         }
-    }
 
-    // Fetch all active tutors
-    $allTutors = Tutor::where('status', 'active')->get();
+        // Manual pagination
+        $page = request()->get('page', 1);
+        $paginatedTutors = new \Illuminate\Pagination\LengthAwarePaginator(
+            $sortedTutors->forPage($page, $perPage),
+            $sortedTutors->count(),
+            $perPage,
+            $page,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
 
-    // Partition tutors based on subject match
-    if ($subjectSearch) {
-        [$matchedTutors, $otherTutors] = $allTutors->partition(function ($tutor) use ($subjectSearch) {
-            return str_contains(strtolower($tutor->subject), strtolower($subjectSearch)) ||
-                   str_contains(strtolower($tutor->edu_teaching), strtolower($subjectSearch));
+        // Enrich tutor data
+        $paginatedTutors->each(function ($tutor) {
+            $storedCountryCode = trim($tutor->country);
+            $tutor->country_name = config("countries_assoc.countries.$storedCountryCode", 'Unknown');
+
+            $tutor->language = json_decode($tutor->language, true) ?? [];
+            $tutor->specialization = json_decode($tutor->specialization, true) ?? ['Not Specified'];
+
+            if ($tutor->dob) {
+                $dob = \Carbon\Carbon::parse($tutor->dob);
+                $tutor->dob = $dob->format('d-m-Y');
+                $tutor->age = $dob->age;
+            } else {
+                $tutor->age = null;
+            }
         });
 
-        $sortedTutors = $matchedTutors->concat($otherTutors);
-    } else {
-        $sortedTutors = $allTutors;
+        // Load configs
+        $subjectsTeach = collect(config('subjects.subjects'));
+        $countries = collect(config('countries_assoc.countries'));
+        $countriesPhone = collect(config('phonecountries.countries'));
+        $countries_number_length = collect(config('countries_number_length.countries'));
+        $countries_prefix = collect(config('countries_prefix.countries'));
+
+        return view('newhome', [
+            'blogs' => $blogs,
+            'sliderTutors' => $sliderTutors,
+            'tutors' => $paginatedTutors,
+            'subjectsTeach' => $subjectsTeach,
+            'totalTutorsCount' => $totalTutorsCount,
+            'perPage' => $perPage,
+            'countries' => $countries,
+            'countriesPhone' => $countriesPhone,
+            'countries_number_length' => $countries_number_length,
+            'countries_prefix' => $countries_prefix,
+        ]);
     }
-
-    // Manual pagination
-    $page = request()->get('page', 1);
-    $paginatedTutors = new \Illuminate\Pagination\LengthAwarePaginator(
-        $sortedTutors->forPage($page, $perPage),
-        $sortedTutors->count(),
-        $perPage,
-        $page,
-        ['path' => request()->url(), 'query' => request()->query()]
-    );
-
-    // Enrich tutor data
-    $paginatedTutors->each(function ($tutor) {
-        $storedCountryCode = trim($tutor->country);
-        $tutor->country_name = config("countries_assoc.countries.$storedCountryCode", 'Unknown');
-
-        $tutor->language = json_decode($tutor->language, true) ?? [];
-        $tutor->specialization = json_decode($tutor->specialization, true) ?? ['Not Specified'];
-
-        if ($tutor->dob) {
-            $dob = \Carbon\Carbon::parse($tutor->dob);
-            $tutor->dob = $dob->format('d-m-Y');
-            $tutor->age = $dob->age;
-        } else {
-            $tutor->age = null;
-        }
-    });
-
-    // Load configs
-    $subjectsTeach = collect(config('subjects.subjects'));
-    $countries = collect(config('countries_assoc.countries'));
-    $countriesPhone = collect(config('phonecountries.countries'));
-    $countries_number_length = collect(config('countries_number_length.countries'));
-    $countries_prefix = collect(config('countries_prefix.countries'));
-
-    return view('newhome', [
-        'blogs' => $blogs,
-        'sliderTutors' => $sliderTutors,
-        'tutors' => $paginatedTutors,
-        'subjectsTeach' => $subjectsTeach,
-        'totalTutorsCount' => $totalTutorsCount,
-        'perPage' => $perPage,
-        'countries' => $countries,
-        'countriesPhone' => $countriesPhone,
-        'countries_number_length' => $countries_number_length,
-        'countries_prefix' => $countries_prefix,
-    ]);
-}
     public function tutorDetail()
     {
         return view('teacher-detail');
@@ -210,7 +210,7 @@ public function index(Request $request)
             Log::info("Filtering tutors with gender: $gender");
             $query->where('gender', $gender);
         }
-    $teacher=Tutor::all();
+        $teacher = Tutor::all();
         //country
         if ($request->has('country') && $request->country !== 'all') {
             $query->where('country', $request->country);
@@ -230,52 +230,52 @@ public function index(Request $request)
                 $query->whereJsonContains('specialization', $specialization);
             }
         }
-         $subjectSearch = null;
+        $subjectSearch = null;
 
-// Safely get trimmed input
-$inputSearch = trim($request->input('subjectsearch'));
+        // Safely get trimmed input
+        $inputSearch = trim($request->input('subjectsearch'));
 
-// CASE 1: User provided a new input
-if ($inputSearch !== '') {
-    $subjectSearch = $inputSearch;
+        // CASE 1: User provided a new input
+        if ($inputSearch !== '') {
+            $subjectSearch = $inputSearch;
 
-    // Save it to the DB if logged-in user is a student (role: user)
-    if (auth()->check() && auth()->user()->role === 'user') {
-        DB::table('student')
-            ->where('user_id', auth()->id())
-            ->update([
-                'searchQuery' => $subjectSearch,
-                'updated_at' => now(),
-            ]);
-    }
+            // Save it to the DB if logged-in user is a student (role: user)
+            if (auth()->check() && auth()->user()->role === 'user') {
+                DB::table('student')
+                    ->where('user_id', auth()->id())
+                    ->update([
+                        'searchQuery' => $subjectSearch,
+                        'updated_at' => now(),
+                    ]);
+            }
 
-// CASE 2: Input is empty, but user is logged in — load saved search
-} elseif  (auth()->check() && auth()->user()->role === 'user') {
-    $student = DB::table('student')->where('user_id', auth()->id())->first();
+            // CASE 2: Input is empty, but user is logged in — load saved search
+        } elseif (auth()->check() && auth()->user()->role === 'user') {
+            $student = DB::table('student')->where('user_id', auth()->id())->first();
 
-    if ($student && $student->searchQuery) {
-        $subjectSearch = strtolower($student->searchQuery); // normalize case
-        Log::info("📌 Loaded previous subject search: " . $subjectSearch);
+            if ($student && $student->searchQuery) {
+                $subjectSearch = strtolower($student->searchQuery); // normalize case
+                Log::info("📌 Loaded previous subject search: " . $subjectSearch);
 
-        $tutors = collect($teacher); // ensure it's a collection
+                $tutors = collect($teacher); // ensure it's a collection
 
-        [$matchedTutors, $otherTutors] = $tutors->partition(function ($tutor) use ($subjectSearch) {
-            // Adjust logic based on how subject is stored
-            return str_contains(strtolower($tutor->subject), $subjectSearch);
-        });
+                [$matchedTutors, $otherTutors] = $tutors->partition(function ($tutor) use ($subjectSearch) {
+                    // Adjust logic based on how subject is stored
+                    return str_contains(strtolower($tutor->subject), $subjectSearch);
+                });
 
-        // Merge matched first, then others
-        $tutors = $matchedTutors->concat($otherTutors);
-    }
-}
+                // Merge matched first, then others
+                $tutors = $matchedTutors->concat($otherTutors);
+            }
+        }
 
 
-// CASE 3: Apply the search filter if we have one
-if (!empty($subjectSearch)) {
-    $query->where(function ($q) use ($subjectSearch) {
-        $q->whereRaw("LOWER(edu_teaching) LIKE ?", ['%' . strtolower($subjectSearch) . '%']);
-    });
-}
+        // CASE 3: Apply the search filter if we have one
+        if (!empty($subjectSearch)) {
+            $query->where(function ($q) use ($subjectSearch) {
+                $q->whereRaw("LOWER(specialization) LIKE ?", ['%' . strtolower($subjectSearch) . '%']);
+            });
+        }
         // Paginate the filtered tutors
         $tutors = $query->paginate($perPage);
 
@@ -463,7 +463,7 @@ if (!empty($subjectSearch)) {
         return "<img src='data:image/svg+xml;base64,{$base64}' width='{$width}' height='{$height}' alt='{$name}' style='vertical-align:middle;' />";
     }
     public function create(Request $request)
-    {   
+    {
         $rules = [
             'f_name' => 'required|string|max:255',
             'intro' => 'nullable|string|max:255',
@@ -497,7 +497,7 @@ if (!empty($subjectSearch)) {
         // Check if user already exists
         $user = User::where('email', $request->input('email'))->first();
 
-        
+
         if ($request->hasFile('document')) {
             $file = $request->file('document');
             // Save the file to 'public/documents' with a unique name
@@ -524,7 +524,7 @@ if (!empty($subjectSearch)) {
 
         $studentExists = Student::where('id', 2)->exists();
         // Now create the Tutor and associate with the User
-        $tutor = new Tutor();  
+        $tutor = new Tutor();
         $tutor->teacher_id = mt_rand(1000, 9999);
         $tutor->f_name = $request->input('f_name');
         $tutor->description = $request->input('description');
@@ -561,21 +561,21 @@ if (!empty($subjectSearch)) {
         $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
         $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
 
-        
-// If no user, create new one
-if (!$user) {
-   
-    $user = new User();
-    $user->name = $request->input('f_name') . ' ' . $request->input('l_name');
-    $user->email = $request->input('email');
-    $user->password = $hashedPassword;
-    $user->role = 'tutor';
-    $user->save();
-}
 
-// Always assign user_id to tutor (whether user existed before or created now)
-$tutor->user_id = $user->id;
-$tutor->save();
+        // If no user, create new one
+        if (!$user) {
+
+            $user = new User();
+            $user->name = $request->input('f_name') . ' ' . $request->input('l_name');
+            $user->email = $request->input('email');
+            $user->password = $hashedPassword;
+            $user->role = 'tutor';
+            $user->save();
+        }
+
+        // Always assign user_id to tutor (whether user existed before or created now)
+        $tutor->user_id = $user->id;
+        $tutor->save();
         // Send notification emails with HTML content
         $toStudent = $tutor->email;
         $subjectStudent = "Welcome to Edexcel Academy - Verify Your Email!";
@@ -913,7 +913,7 @@ $tutor->save();
         $tutor = Tutor::findOrFail($id);
         $oldStatus = $tutor->status;
         $newStatus = $request->input('status');
-    
+
         if ($oldStatus !== $newStatus) {
             $tutor->status = $newStatus;
             $tutor->save();
@@ -946,7 +946,7 @@ $tutor->save();
                                         </p>
             
                                         <p style='font-size: 16px; margin: 10px 0;'>
-                                            <strong>New Status:</strong> <span style='color: #4CAF50;'>".ucfirst($tutor->status)."</span>
+                                            <strong>New Status:</strong> <span style='color: #4CAF50;'>" . ucfirst($tutor->status) . "</span>
                                         </p>
             
                                         <p style='font-size: 16px; margin: 10px 0;'>

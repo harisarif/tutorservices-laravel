@@ -350,18 +350,18 @@
                         <p class="content"> {{ $experience }}+ Years Of {{ $subjectList }} Teaching Experience:
                             Your {{ $subjectList }} Success, Guaranteed. - Hello, My Name Is {{ $firstName }}. I
                             Have {{ $experience }}+ Years Of Experience As A {{ $subjectList }} Teacher & Tutor.</p>
-                       <div class="d-flex text-secondary my-1">
-                                                <span class="me-2"><i class="fa-solid fa-globe"
-                                                        style="font-size: 13px; margin-top: 5px;color: #1cc88a !important;"></i></span>
-                                                <p class="mb-0"
-                                                    style="color:black; transform: scaleY(1);text-transform:capitalize">
-                                                    @if($item->edu_teaching && is_array(json_decode($item->edu_teaching, true)))
-                                                    {{ implode(', ', json_decode($item->edu_teaching, true)) }}
-                                                    @else
-                                                    {{ $item->edu_teaching ?? 'Nullable' }}
-                                                    @endif
-                                                </p>
-                                            </div> <div class="d-flex justify-content-between mt-3 info-bar">
+                        <div class="d-flex text-secondary my-1">
+                            <span class="me-2"><i class="fa-solid fa-globe"
+                                    style="font-size: 13px; margin-top: 5px;color: #1cc88a !important;"></i></span>
+                            <p class="mb-0"
+                                style="color:black; transform: scaleY(1);text-transform:capitalize">
+                                @if(!empty($item->specialization))
+                                @foreach($item->specialization as $specializations)
+                                    <p>{{ $specializations }}</p>
+                                    @endforeach
+                                    @endif
+                        </div>
+                        <div class="d-flex justify-content-between mt-3 info-bar">
                             <span class="text-muted">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="15" viewBox="0 0 11 15"
                                     fill="none">
@@ -1464,15 +1464,15 @@
 
             if (select) {
                 priceRanges.forEach(range => {
-                const option = document.createElement("option");
-                option.value = range;
-                option.textContent = `$${range.replace("-", " - $")}`;
-                select.appendChild(option);
+                    const option = document.createElement("option");
+                    option.value = range;
+                    option.textContent = `$${range.replace("-", " - $")}`;
+                    select.appendChild(option);
                 });
             } else {
                 console.error("Element with ID 'prize-Range' not found.");
             }
-            });
+        });
 
         $(document).ready(function() {
             $.ajaxSetup({
@@ -2007,12 +2007,12 @@
                 });
             });
 
-             $('#searchInput').keyup(function() {
-                 var searchQuery = $(this).val(); // Get the value from the search input field
+            $('#searchInput').keyup(function() {
+                var searchQuery = $(this).val(); // Get the value from the search input field
 
-                 var locationData = {
-                     subjectsearch: searchQuery
-                 };
+                var locationData = {
+                    subjectsearch: searchQuery
+                };
 
                 $('#overlay').show();
 
@@ -2026,12 +2026,12 @@
                         $('#tutorsContainer').empty();
                         $('#overlay').hide();
 
-                       if (response && response.tutors && response.tutors.length > 0) {
-                           response.tutors.forEach(function(tutor) {
-                               let specializations = tutor.specialization.split(
-                                   ','); // Split by comma
-                               let specialization = tutor.specialization.split(',')[0];
-                               // Build specialization spans
+                        if (response && response.tutors && response.tutors.length > 0) {
+                            response.tutors.forEach(function(tutor) {
+                                let specializations = tutor.specialization.split(
+                                    ','); // Split by comma
+                                let specialization = tutor.specialization.split(',')[0];
+                                // Build specialization spans
                                 let specializationHTML = specializations.map(spec => `
                                                     <span id="pro" class="p-1 me-2 bg-primary-subtle rounded fw-bold">
                                                         <i class="fa-solid fa-briefcase me-1"></i> ${spec.trim()}
@@ -2041,14 +2041,14 @@
                                     let edu_teaching = tutor
                                         .edu_teaching; // e.g., '["Physical Therapy","Physics"]'
 
-                                   let displayText = 'Others';
-                                   if (edu_teaching) {
-                                       try {
+                                    let displayText = 'Others';
+                                    if (edu_teaching) {
+                                        try {
 
-                                         let parsed = JSON.parse(edu_teaching);
-                                           if (Array.isArray(parsed)) {
-                                               displayText = parsed.join(', ');
-                                       }
+                                            let parsed = JSON.parse(edu_teaching);
+                                            if (Array.isArray(parsed)) {
+                                                displayText = parsed.join(', ');
+                                            }
                                         } catch (e) {
                                             // Optional: log or handle invalid JSON
                                         }
@@ -2057,8 +2057,8 @@
                                     var languages = tutor.languages && tutor.languages
                                         .length > 0 ?
                                         tutor.languages.map(lang =>
-                                         `${lang.language} (${lang.level})`).join(', ') :
-                                     'Not Available';
+                                            `${lang.language} (${lang.level})`).join(', ') :
+                                        'Not Available';
 
                                     var tutorHTML = `
                             <div class="col-12 col-md-6 col-lg-4 d-flex m-0" style="padding:1px;">
@@ -2112,39 +2112,39 @@
                                     $('#tutorsContainer').append(tutorHTML);
                                 }
                             });
-                           // Update pagination details only if pagination data is available
-                          if (response.pagination) {
-                              var totalTutorsCount = response.pagination.total;
-                              var perPage = response.pagination.perPage;
-                              var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
-                              var lastItem = Math.min(response.pagination.currentPage * perPage,
-                                  totalTutorsCount);
+                            // Update pagination details only if pagination data is available
+                            if (response.pagination) {
+                                var totalTutorsCount = response.pagination.total;
+                                var perPage = response.pagination.perPage;
+                                var firstItem = (response.pagination.currentPage - 1) * perPage + 1;
+                                var lastItem = Math.min(response.pagination.currentPage * perPage,
+                                    totalTutorsCount);
 
-                              $('.total-tutors-count').text(totalTutorsCount);
-                              $('.tutors-range').text(
-                                  `${firstItem} to ${lastItem} of ${totalTutorsCount} tutors`);
+                                $('.total-tutors-count').text(totalTutorsCount);
+                                $('.tutors-range').text(
+                                    `${firstItem} to ${lastItem} of ${totalTutorsCount} tutors`);
 
-                              if (totalTutorsCount <= perPage) {
-                                  $('#paginationContainer').hide();
-                              } else {
-                                  $('#paginationContainer').show();
-                                  $('#paginationContainer').html(response.pagination.links);
-                              }
-                          }
-                      } else {
-                          $('#tutorsContainer').html(
-                              '<p>No tutors found for the selected subject.</p>');
-                      }
-                  },
-                  error: function(xhr, status, error) {
-                      console.error('AJAX error:', status, error);
-                      $('#overlay').hide();
-                      $('#tutorsContainer').html(
-                          '<p class="text-danger">An error occurred while fetching tutors. Please try again later.</p>'
-                      );
-                  }
-              });
-          });
+                                if (totalTutorsCount <= perPage) {
+                                    $('#paginationContainer').hide();
+                                } else {
+                                    $('#paginationContainer').show();
+                                    $('#paginationContainer').html(response.pagination.links);
+                                }
+                            }
+                        } else {
+                            $('#tutorsContainer').html(
+                                '<p>No tutors found for the selected subject.</p>');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX error:', status, error);
+                        $('#overlay').hide();
+                        $('#tutorsContainer').html(
+                            '<p class="text-danger">An error occurred while fetching tutors. Please try again later.</p>'
+                        );
+                    }
+                });
+            });
             $('#resetFilterBtn').click(function() {
                 $.ajax({
                     type: 'POST',

@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('city')->nullable()->change();
             $table->string('subject')->nullable()->change();
             $table->string('gender')->nullable()->change();
-           $table->renameColumn('grade', 'searchQuery')->nullable();
+           $table->renameColumn('grade', 'searchQuery')->default('')->change();
+           
            });
     }
 
