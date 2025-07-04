@@ -356,7 +356,7 @@
                             <div class="d-flex gap-2">
                                 @if(!empty($item->specialization))
                                 @foreach($item->specialization as $specializations)
-                                    <p class=" bg-primary text-center text-white rounded mb-1" style="font-size: 11px;padding:3px 0px;width:70px">{{ $specializations }}</p>
+                                    <p class=" bg-primary text-center text-white rounded mb-1" style="font-size: 11px;padding:3px 5px;width:auto;white-space:nowrap">{{ $specializations }}</p>
                                     @endforeach
                                     @endif
                                     </div>
