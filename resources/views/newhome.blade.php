@@ -353,7 +353,7 @@
                         <div class="d-block text-secondary my-1">
                             <span class="ms-1" style="font-size: 12px;"><i class="me-1 fa-solid fa-globe"
                                     style="font-size: 10px; margin-top: 5px;color: #000 !important;"></i>Subjects</span>
-                            <div class="d-flex gap-2">
+                            <div class="row gap-2 g-1">
                                 @if(!empty($item->specialization))
                                 @foreach($item->specialization as $specializations)
                                     <p class=" bg-primary text-center text-white rounded mb-1" style="font-size: 11px;padding:3px 5px;width:auto;white-space:nowrap">{{ $specializations }}</p>
