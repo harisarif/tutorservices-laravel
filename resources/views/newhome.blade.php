@@ -38,6 +38,16 @@
         </div>
     </div>
 </div>
+@if (session('alert'))
+    <div class="alert alert-danger alert-dismissible  fade show d-flex align-items-center"
+         role="alert"
+         style="position: fixed; top: 20px; font-size:13px; right: 20px; width: 450px; z-index: 1050;">
+        <div class="flex-grow-1">
+            {{ session('alert') }}
+        </div>
+        <button type="button" class="btn-close ms-2" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
 
 <body>
     <!-- Top Bar -->
@@ -132,8 +142,34 @@
                             </span>
                         </button> </a>
                 </form>
-                @endif
+                @elseif(Auth::user()->role === 'admin')
+                   <a href="{{ route('basicsignup') }}">
+                    <button class="primary-btn">
+                        Register
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
+                                <path d="M11.5293 2.2207L16.5293 8.2207L11.5293 14.2207" stroke="white" stroke-width="1.5"
+                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M1.5293 8.2207H16.5293" stroke="white" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                    </button>
+                </a>
 
+                <a href="{{ route('login') }}">
+                    <button class="primary-btn">
+                        Login
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
+                                <path d="M11.5293 2.2207L16.5293 8.2207L11.5293 14.2207" stroke="white" stroke-width="1.5"
+                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M1.5293 8.2207H16.5293" stroke="white" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                    </button>
+                </a>  @endif
                 {{-- Logout form --}}
 
                 @endauth

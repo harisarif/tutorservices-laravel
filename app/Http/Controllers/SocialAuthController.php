@@ -25,7 +25,10 @@ class SocialAuthController extends Controller
 
     // Check if user exists
     $user = User::where('email', $socialUser->getEmail())->first();
-
+      if ($user) {
+        // Email is already present
+        return redirect()->route('newhome')->with('alert', 'Your email is already registered. Please log in using your credentials.');
+    }
     if (!$user) {
         // Create new user
         $user = new User();
