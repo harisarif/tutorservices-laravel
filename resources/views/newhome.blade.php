@@ -22,11 +22,11 @@
 
 </head>
 <div class="modalBox" id="allModal">
-    <div class="boxModal-1 col-4 bg-light rounded p-2">
-        <h5 class="col-12 d-flex justify-content-between align-items-center px-2">
+    <div class="boxModal-1 col-4 bg-light rounded py-2 p-0">
+        <h5 class="col-12 d-flex justify-content-between align-items-center px-2 border-bottom">
             {{__('messages.academy_name')}}
-            <span class="fs-2 pointer foucs"
-                onclick="document.getElementById('allModal').style.display = 'none'" style="cursor:pointer"> &times;</span>
+            <span class="fs-2 pointer foucs bg-primary text-white text-center rounded mb-1"
+                onclick="document.getElementById('allModal').style.display = 'none'" style="cursor:pointer;height:35px;width:35px;"> &times;</span>
         </h5>
 
         <p class="px-2">{{__('messages.welcome_message')}}</p>
@@ -34,7 +34,7 @@
         <hr />
         <div class="d-flex justify-content-end gap-2">
 
-            <a href="{{ route('tutor') }}" class="btn bg_theme_green border-0 bg-primary text-white">{{__('messages.tutor')}}</a>
+            <a href="{{ route('tutor') }}" class="btn bg_theme_green border-0 bg-primary text-white me-2">{{__('messages.tutor')}}</a>
         </div>
     </div>
 </div>
@@ -350,16 +350,16 @@
                         <p class="content"> {{ $experience }}+ Years Of {{ $subjectList }} Teaching Experience:
                             Your {{ $subjectList }} Success, Guaranteed. - Hello, My Name Is {{ $firstName }}. I
                             Have {{ $experience }}+ Years Of Experience As A {{ $subjectList }} Teacher & Tutor.</p>
-                        <div class="d-flex text-secondary my-1">
-                            <span class="me-2"><i class="fa-solid fa-globe"
-                                    style="font-size: 13px; margin-top: 5px;color: #1cc88a !important;"></i></span>
-                            <p class="mb-0"
-                                style="color:black; transform: scaleY(1);text-transform:capitalize">
+                        <div class="d-block text-secondary my-1">
+                            <span class="ms-1" style="font-size: 12px;"><i class="me-1 fa-solid fa-globe"
+                                    style="font-size: 10px; margin-top: 5px;color: #000 !important;"></i>Subjects</span>
+                            <div class="d-flex gap-2">
                                 @if(!empty($item->specialization))
                                 @foreach($item->specialization as $specializations)
-                                    <p>{{ $specializations }}</p>
+                                    <p class=" bg-primary text-center text-white rounded mb-1" style="font-size: 11px;padding:3px 0px;width:70px">{{ $specializations }}</p>
                                     @endforeach
                                     @endif
+                                    </div>
                         </div>
                         <div class="d-flex justify-content-between mt-3 info-bar">
                             <span class="text-muted">
