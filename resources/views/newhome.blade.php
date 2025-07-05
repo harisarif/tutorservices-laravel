@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edexcel Online Courses</title>
+    <title>Edexcel Academy</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -39,14 +39,14 @@
     </div>
 </div>
 @if (session('alert'))
-    <div class="alert alert-danger alert-dismissible  fade show d-flex align-items-center"
-         role="alert"
-         style="position: fixed; top: 20px; font-size:13px; right: 20px; width: 450px; z-index: 1050;">
-        <div class="flex-grow-1">
-            {{ session('alert') }}
-        </div>
-        <button type="button" class="btn-close ms-2" data-bs-dismiss="alert" aria-label="Close"></button>
+<div class="alert alert-danger alert-dismissible  fade show d-flex align-items-center"
+    role="alert"
+    style="position: fixed; top: 20px; font-size:13px; right: 20px; width: 450px; z-index: 1050;">
+    <div class="flex-grow-1">
+        {{ session('alert') }}
     </div>
+    <button type="button" class="btn-close ms-2" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 @endif
 
 <body>
@@ -143,7 +143,7 @@
                         </button> </a>
                 </form>
                 @elseif(Auth::user()->role === 'admin')
-                   <a href="{{ route('basicsignup') }}">
+                <a href="{{ route('basicsignup') }}">
                     <button class="primary-btn">
                         Register
                         <span>
@@ -169,7 +169,7 @@
                             </svg>
                         </span>
                     </button>
-                </a>  @endif
+                </a> @endif
                 {{-- Logout form --}}
 
                 @endauth
@@ -392,10 +392,10 @@
                             <div class="row gap-2 g-1">
                                 @if(!empty($item->specialization))
                                 @foreach($item->specialization as $specializations)
-                                    <p class=" bg-primary text-center text-white rounded mb-1" style="font-size: 11px;padding:3px 5px;width:auto;white-space:nowrap">{{ $specializations }}</p>
-                                    @endforeach
-                                    @endif
-                                    </div>
+                                <p class=" bg-primary text-center text-white rounded mb-1" style="font-size: 11px;padding:3px 5px;width:auto;white-space:nowrap">{{ $specializations }}</p>
+                                @endforeach
+                                @endif
+                            </div>
                         </div>
                         <div class="d-flex justify-content-between mt-3 info-bar">
                             <span class="text-muted">
@@ -1629,6 +1629,21 @@
                                                 <span class="text-muted">${tutor.gender ?? 'Not specified'}</span>
                                                 <span class="text-muted">${tutor.dob ?? 'DOB not provided'}</span>
                                             </div>
+                                            <div class="d-flex justify-content-between gap-3 mt-3">
+                                                        <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#signupPromptModal" style="width: 150px; height:45px;" class="primary-btn-2 flex-grow-1 d-flex align-items-center justify-content-center px-3 py-2" title="Sign up to join Zoom Meet">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 24 24">
+                                                <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z"></path>
+                                            </svg>
+                                            <span class="ms-2">Zoom Meet</span>
+                                        </a>
+                                                                    
+                                                                    <button type="button" id="demo" data-bs-toggle="modal" data-bs-target="#signupPromptModal" class="primary-btn-2 p-0 flex-grow-1 d-flex align-items-center justify-content-center " style="width: 120px; height:45px;" title="Sign up to request a demo">
+                                            
+                                            <span class="" style=" font-size: 12px;">Request a Demo</span>
+                                        </button>
+                                                                </div>
+                                            </div>
+                                        </div>
                                         </div>
                                     </div>`;
 
@@ -1783,6 +1798,21 @@
                                         <span class="text-muted">${tutor.gender ?? 'N/A'}</span>
                                         <span class="text-muted">${tutor.dob ?? 'N/A'}</span>
                                     </div>
+                                    <div class="d-flex justify-content-between gap-3 mt-3">
+                                                        <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#signupPromptModal" style="width: 150px; height:45px;" class="primary-btn-2 flex-grow-1 d-flex align-items-center justify-content-center px-3 py-2" title="Sign up to join Zoom Meet">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 24 24">
+                                                <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z"></path>
+                                            </svg>
+                                            <span class="ms-2">Zoom Meet</span>
+                                        </a>
+                                                                    
+                                                                    <button type="button" id="demo" data-bs-toggle="modal" data-bs-target="#signupPromptModal" class="primary-btn-2 p-0 flex-grow-1 d-flex align-items-center justify-content-center " style="width: 120px; height:45px;" title="Sign up to request a demo">
+                                            
+                                            <span class="" style=" font-size: 12px;">Request a Demo</span>
+                                        </button>
+                                                                </div>
+                                            </div>
+                                        </div>
                                 </div>
                             </div>
                         `;
@@ -1895,6 +1925,21 @@
                                         <span class="text-muted">${tutor.gender ?? 'N/A'}</span>
                                         <span class="text-muted">${tutor.dob ?? 'N/A'}</span>
                                     </div>
+                                    <div class="d-flex justify-content-between gap-3 mt-3">
+                                                        <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#signupPromptModal" style="width: 150px; height:45px;" class="primary-btn-2 flex-grow-1 d-flex align-items-center justify-content-center px-3 py-2" title="Sign up to join Zoom Meet">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 24 24">
+                                                <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z"></path>
+                                            </svg>
+                                            <span class="ms-2">Zoom Meet</span>
+                                        </a>
+                                                                    
+                                                                    <button type="button" id="demo" data-bs-toggle="modal" data-bs-target="#signupPromptModal" class="primary-btn-2 p-0 flex-grow-1 d-flex align-items-center justify-content-center " style="width: 120px; height:45px;" title="Sign up to request a demo">
+                                            
+                                            <span class="" style=" font-size: 12px;">Request a Demo</span>
+                                        </button>
+                                                                </div>
+                                            </div>
+                                        </div>
                                 </div>
                             </div>
                         `;
@@ -2007,8 +2052,21 @@
                                         <span class="text-muted">${tutor.gender ?? 'N/A'}</span>
                                         <span class="text-muted">${tutor.dob ?? 'N/A'}</span>
                                     </div>
-                                </div>
-                            </div>
+                                    <div class="d-flex justify-content-between gap-3 mt-3">
+                                                        <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#signupPromptModal" style="width: 150px; height:45px;" class="primary-btn-2 flex-grow-1 d-flex align-items-center justify-content-center px-3 py-2" title="Sign up to join Zoom Meet">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 24 24">
+                                                <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z"></path>
+                                            </svg>
+                                            <span class="ms-2">Zoom Meet</span>
+                                        </a>
+                                                                    
+                                                                    <button type="button" id="demo" data-bs-toggle="modal" data-bs-target="#signupPromptModal" class="primary-btn-2 p-0 flex-grow-1 d-flex align-items-center justify-content-center " style="width: 120px; height:45px;" title="Sign up to request a demo">
+                                            
+                                            <span class="" style=" font-size: 12px;">Request a Demo</span>
+                                        </button>
+                                                                </div>
+                                            </div>
+                                        </div>
                         `;
 
                                     $('#tutorsContainer').append(tutorHTML);
@@ -2141,6 +2199,21 @@
                                         <span class="text-muted">${tutor.gender ?? 'N/A'}</span>
                                         <span class="text-muted">${tutor.dob ?? 'N/A'}</span>
                                     </div>
+                                    <div class="d-flex justify-content-between gap-3 mt-3">
+                                                        <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#signupPromptModal" style="width: 150px; height:45px;" class="primary-btn-2 flex-grow-1 d-flex align-items-center justify-content-center px-3 py-2" title="Sign up to join Zoom Meet">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 24 24">
+                                                <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z"></path>
+                                            </svg>
+                                            <span class="ms-2">Zoom Meet</span>
+                                        </a>
+                                                                    
+                                                                    <button type="button" id="demo" data-bs-toggle="modal" data-bs-target="#signupPromptModal" class="primary-btn-2 p-0 flex-grow-1 d-flex align-items-center justify-content-center " style="width: 120px; height:45px;" title="Sign up to request a demo">
+                                            
+                                            <span class="" style=" font-size: 12px;">Request a Demo</span>
+                                        </button>
+                                                                </div>
+                                            </div>
+                                        </div>
                                 </div>
                             </div>
                         `;
@@ -2273,6 +2346,21 @@
                                         <span class="text-muted">${tutor.gender ?? 'N/A'}</span>
                                         <span class="text-muted">${tutor.dob ?? 'N/A'}</span>
                                     </div>
+                                    <div class="d-flex justify-content-between gap-3 mt-3">
+                                                        <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#signupPromptModal" style="width: 150px; height:45px;" class="primary-btn-2 flex-grow-1 d-flex align-items-center justify-content-center px-3 py-2" title="Sign up to join Zoom Meet">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 24 24">
+                                                <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z"></path>
+                                            </svg>
+                                            <span class="ms-2">Zoom Meet</span>
+                                        </a>
+                                                                    
+                                                                    <button type="button" id="demo" data-bs-toggle="modal" data-bs-target="#signupPromptModal" class="primary-btn-2 p-0 flex-grow-1 d-flex align-items-center justify-content-center " style="width: 120px; height:45px;" title="Sign up to request a demo">
+                                            
+                                            <span class="" style=" font-size: 12px;">Request a Demo</span>
+                                        </button>
+                                                                </div>
+                                            </div>
+                                        </div>
                                 </div>
                             </div>
                         `;
