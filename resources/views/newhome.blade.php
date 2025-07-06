@@ -205,7 +205,7 @@
         </div>
         <img src="{{asset('homeImage/dots.png')}}" class="dots" alt="">
         <spna class="tutor-span">
-            <h3><span class="text-primary">+200 </span>Tutors</h3>
+            <h3><span class="text-primary">+{{$allTutorsCount}} </span>Tutors</h3>
             <img src="{{asset('homeImage/tutor-banner.png')}}" alt="">
         </spna>
         <img src="{{asset('homeImage/5c59f5b1f89aa3bf34e0e8a6afa3bc296d7128e5.jpg')}}" class="banner-image" alt="">
@@ -765,7 +765,7 @@
                                     title="Only Gmail, Hotmail, or Yahoo emails are allowed (e.g., example@gmail.com)" required>
                             </div>
                             <div class="mb-3 d-flex gap-2">
-                                <select name="country_code" class="form-select w-50" required>
+                                <select name="country_code" class="form-select w-50" required style="background-color: #f5f5f5;">
                                     @foreach ($countries_prefix as $countryCode => $dialCode)
                                     <option value="{{ $dialCode }}"> {{ $dialCode }}</option>
                                     @endforeach

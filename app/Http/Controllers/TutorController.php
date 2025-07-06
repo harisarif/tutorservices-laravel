@@ -57,7 +57,7 @@ class TutorController extends Controller
 
         // Fetch all active tutors
         $allTutors = Tutor::where('status', 'active')->get();
-
+        $allTutorsCount = Tutor::where('status', 'active')->count();
         // Partition tutors based on subject match
         if ($subjectSearch) {
             [$matchedTutors, $otherTutors] = $allTutors->partition(function ($tutor) use ($subjectSearch) {
@@ -115,6 +115,7 @@ class TutorController extends Controller
             'countriesPhone' => $countriesPhone,
             'countries_number_length' => $countries_number_length,
             'countries_prefix' => $countries_prefix,
+            'allTutorsCount'=>$allTutorsCount
         ]);
     }
     public function tutorDetail()
