@@ -1026,27 +1026,36 @@ class TutorController extends Controller
 
         return response()->json(['message' => 'Student assigned to tutor successfully!']);
     }
+    private function safeUnserialize($data)
+    {
+        if (!is_string($data)) return [];
 
+        $unserialized = @unserialize($data);
+        return $unserialized !== false || $data === 'b:0;' ? $unserialized : [];
+    }
     public function show($id)
     {
         $tutor = Tutor::findOrFail($id);
         $qualification = SchoolClass::where('id', $tutor->qualification)->value('name') ?? 'Not specified';
-        $tutor->teaching = unserialize($tutor->teaching);
+
+        $tutor->teaching = $this->safeUnserialize($tutor->teaching);
+        $tutor->curriculum = $this->safeUnserialize($tutor->curriculum);
+
         $storedLanguageCode = $tutor->language;
 
-        $languages = collect(json_decode($storedLanguageCode, true)) // Decode JSON
-            ->pluck('language') // Extract language codes
-            ->toArray(); // Convert to array
+        $languages = collect(json_decode($storedLanguageCode, true))
+            ->pluck('language')
+            ->toArray();
 
-        // Map each language code to its full name from the config file
         $languageNames = array_map(function ($code) {
             return config("languages.languages.$code", 'Unknown');
         }, $languages);
 
-        $tutor->curriculum = unserialize($tutor->curriculum);
         $countries = collect(config('phonecountries.countries'));
+
         return view('view-teacher', compact(['tutor', 'countries', 'qualification', 'languageNames']));
     }
+
 
     public function view($id)
     {
@@ -1060,34 +1069,42 @@ class TutorController extends Controller
     }
 
     public function edit($id)
-    {
-        $schoolClasses = SchoolClass::all();
-        $tutor = Tutor::findOrFail($id);
-        $qualification = SchoolClass::where('id', $tutor->qualification)->value('name') ?? 'Not specified';
-        $tutor->teaching = unserialize($tutor->teaching);
-        $storedLanguageCode = $tutor->language;
+{
+    $schoolClasses = SchoolClass::all();
+    $tutor = Tutor::findOrFail($id);
+    $qualification = SchoolClass::where('id', $tutor->qualification)->value('name') ?? 'Not specified';
 
-        $languages = collect(json_decode($storedLanguageCode, true)) // Decode JSON
-            ->pluck('language') // Extract language codes
-            ->toArray(); // Convert to array
+    // Use safe unserialize
+    $tutor->teaching = $this->safeUnserialize($tutor->teaching);
+    $tutor->curriculum = $this->safeUnserialize($tutor->curriculum);
 
-        // Map each language code to its full name from the config file
-        $languageNames = array_map(function ($code) {
-            return config("languages.languages.$code", 'Unknown');
-        }, $languages);
+    // Language decoding
+    $storedLanguageCode = $tutor->language;
+    $languages = collect(json_decode($storedLanguageCode, true))
+        ->pluck('language')
+        ->toArray();
 
-        //country
+    $languageNames = array_map(function ($code) {
+        return config("languages.languages.$code", 'Unknown');
+    }, $languages);
 
-        $storedCountryCode = $tutor->country; // Get country code
-        $country = config("countries_assoc.countries.$storedCountryCode", 'Unknown'); // Convert to full name
+    // Country full name
+    $storedCountryCode = $tutor->country;
+    $country = config("countries_assoc.countries.$storedCountryCode", 'Unknown');
 
-        $tutor->curriculum = unserialize($tutor->curriculum);
-        $countriesPhone = collect(config('phonecountries.countries'));
-        $countries_number_length = collect(config('countries_number_length.countries'));
-        $countries_prefix = collect(config('countries_prefix.countries'));
-        $countries = collect(config('countries_assoc.countries'));
-        return view('edit-teacher', compact(['tutor', 'country', 'countriesPhone', 'countries', 'countries_number_length', 'countries_prefix', 'languageNames', 'schoolClasses', 'qualification']));
-    }
+    // Country configs
+    $countriesPhone = collect(config('phonecountries.countries'));
+    $countries_number_length = collect(config('countries_number_length.countries'));
+    $countries_prefix = collect(config('countries_prefix.countries'));
+    $countries = collect(config('countries_assoc.countries'));
+
+    return view('edit-teacher', compact([
+        'tutor', 'country', 'countriesPhone', 'countries',
+        'countries_number_length', 'countries_prefix',
+        'languageNames', 'schoolClasses', 'qualification'
+    ]));
+}
+
 
     public function updateProfile(Request $request, $id)
     {
