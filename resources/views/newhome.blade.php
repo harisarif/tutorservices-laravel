@@ -7,6 +7,7 @@
     <title>Edexcel Academy</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -16,10 +17,28 @@
         rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/home.css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/home.css/style2.css') }}">
-    <link rel="stylesheet" href="{{asset('css/figma.css')}}" referrerpolicy="no-referrer" />
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> -->
+    <link rel="stylesheet" href="{{ asset('css/figma.css')}}" />
+    <link rel="stylesheet" href="{{ asset('css/aleritfy.css')}}" />
+    <link rel="stylesheet" href="{{ asset('css/default.min.css')}}" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-
+    <style>
+        .loader {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            background-color: #f5f7f6;
+            z-index: 9999999;
+            top: 0px;
+        }
+    </style>
+    <script>
+        window.addEventListener('load', () => {
+            document.getElementById('lazzyLoader').style.display = 'none';
+        })
+    </script>
 </head>
 <div class="modalBox" id="allModal">
     <div class="boxModal-1 col-4 bg-light rounded py-2 p-0">
@@ -38,6 +57,7 @@
         </div>
     </div>
 </div>
+<div id="messageres"></div>
 @if (session('alert') || session('error'))
 <div class="alert alert-{{ session('error') ? 'danger' : 'success' }} alert-dismissible fade show d-flex align-items-center"
     role="alert"
@@ -69,6 +89,12 @@
         <div class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
+    </div>
+    <div class="loader" id="lazzyLoader">
+        <video autoplay loop muted playsinline>
+            <source src="{{ asset('images/loader.webm') }}" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
     </div>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm p-0">
@@ -465,10 +491,6 @@
                                 class="primary-btn-2  flex-grow-1 p-0  d-flex align-items-center  justify-content-center request-demo-btn" style="width: 120px; height:45px;
     "
                                 title="Request a Demo">
-                                {{-- <svg xmlns="http://www.w3.org/2000/svg"
- width="18" height="18" fill="#fff" viewBox="0 0 24 24">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-2.83.48-5.42-.48-7.07-2.27a9.015 9.015 0 0 1-1.71-9.37c.2-.52.92-.66 1.33-.26l4.07 4.07V7h2v6h-4l4.59 4.59c.39.39.39 1.02 0 1.41-.26.26-.64.36-1 .26z"/>
-        </svg> --}}
                                 <span class="" style="font-size:12px;">Request a Demo</span>
                             </button>
                             @else
@@ -478,9 +500,7 @@
                                 data-bs-target="#signupPromptModal"
                                 class="primary-btn-2 p-0 flex-grow-1 d-flex align-items-center justify-content-center " style="width: 120px; height:45px;"
                                 title="Sign up to request a demo">
-                                {{-- <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 24 24">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-2.83.48-5.42-.48-7.07-2.27a9.015 9.015 0 0 1-1.71-9.37c.2-.52.92-.66 1.33-.26l4.07 4.07V7h2v6h-4l4.59 4.59c.39.39.39 1.02 0 1.41-.26.26-.64.36-1 .26z"/>
-        </svg> --}}
+
                                 <span class="" style=" font-size: 12px;">Request a Demo</span>
                             </button>
                             @endif
@@ -770,7 +790,6 @@
                                     <option value="{{ $dialCode }}"> {{ $dialCode }}</option>
                                     @endforeach
                                 </select>
-                                
 
                                 <input type="text" class="form-control w-50" name="phone" placeholder="e.g +92XXXXXXXXXX" required>
                             </div>
@@ -1296,7 +1315,11 @@
         </div>
     </div>
 
-    @section('js') <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    @section('js')
+    <!-- AlertifyJS JS -->
+    <script src="{{ asset('js/alertify.min.js')}}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Your script comes after this -->
 
     <script src="{{ asset('js/popper.min.js')}}"></script>
@@ -1305,7 +1328,6 @@
     <script src="{{ asset('js/owl.carousel.min.js')}}"></script>
     <!-- Bootstrap & FontAwesome (add these in your layout if not already included) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script>
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -1332,50 +1354,34 @@
             document.body.style.paddingRight = ''; // reset padding if Bootstrap added it
         }
 
-        document.querySelectorAll('.request-demo-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const teacherId = this.getAttribute('data-teacher-id');
+        $('.request-demo-btn').on('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
 
-                fetch('{{ route("request.demo") }}', {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            teacher_id: teacherId
-                        })
-                    })
-                    .then(response => {
-                        if (!response.ok) throw new Error("Network error");
-                        return response.json();
-                    })
-                    .then(data => {
-                        const alertBox = document.getElementById('success');
-                        const messageContainer = document.getElementById('messageres');
+            const teacherId = $(this).data('teacher-id');
 
-                        // Append new message (instead of replacing)
-                        messageContainer.innerHTML += `<div>${data.message}</div>`;
+            $('#lazzyLoader').show();
 
-                        // Show the alert
-                        alertBox.classList.remove('d-none');
-
-                        // Restart progress animation (optional)
-                        const progressLine = alertBox.querySelector('.progress-line');
-                        progressLine.classList.remove('custom-line-test'); // reset animation
-                        void progressLine.offsetWidth; // reflow to restart animation
-                        progressLine.classList.add('custom-line-test');
-
-                        // Auto-hide after 5s
-                        setTimeout(() => {
-                            alertBox.classList.add('d-none');
-                        }, 5000);
-                    })
-                    .catch(error => {
-                        console.error('Request failed:', error);
-                        alert("Something went wrong");
-                    });
+            $.ajax({
+                url: '{{ route("request.demo") }}',
+                method: 'POST',
+                data: {
+                    teacher_id: teacherId,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alertify.success(response.message || 'Demo request sent successfully');
+                    } else {
+                        alertify.error(response.message || 'Something went wrong');
+                    }
+                },
+                error: function() {
+                    alertify.error('Email Not Sent');
+                },
+                complete: function() {
+                    $('#lazzyLoader').hide();
+                }
             });
         });
     </script>
