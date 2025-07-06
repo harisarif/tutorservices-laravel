@@ -655,10 +655,7 @@
                     <span class="primary-badge mb-3">ABOUT EDEXCELEDU</span>
                     <h2 class="section-title">Learn & Grow Your Skills From Anywhere</h2>
                     <h3 class="mb-3"></h3>
-                    <p class="mb-4 about-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                        eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris..</p>
+                    <p class="mb-4 about-content">Education is the foundation of personal and societal growth. It equips individuals with the knowledge, skills, and confidence to explore their full potential and contribute meaningfully to the world. More than just learning facts, true education encourages curiosity, creativity, and critical thinking.</p>
 
                     <div class="row g-3">
                         <div class="col-md-6 mb-4">
