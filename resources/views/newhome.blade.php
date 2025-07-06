@@ -770,6 +770,7 @@
                                     <option value="{{ $dialCode }}"> {{ $dialCode }}</option>
                                     @endforeach
                                 </select>
+                                
 
                                 <input type="text" class="form-control w-50" name="phone" placeholder="e.g +92XXXXXXXXXX" required>
                             </div>
