@@ -910,7 +910,7 @@
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="testimonial-card">
-                        <p class="testimonial-text">"I was able to improve my skills significantly thanks to the amazing tutors here. Highly recommended"</p>
+                        <p class="testimonial-text">"I was able to improve my skills significantly thanks to the amazing tutors here."</p>
                         <div class="d-flex gap-1 flex-column">
                             <div class="testimonial-author">Kathy Sullivan</div>
                             <div class="testimonial-position">CEO at ordian it</div>
@@ -934,7 +934,7 @@
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="testimonial-card">
-                        <p class="testimonial-text">"A seamless learning experience! The scheduling and content delivery are both very well designed"</p>
+                        <p class="testimonial-text">"A seamless learning experience! The scheduling are very well designed"</p>
                         <div class="d-flex gap-1 flex-column">
                             <div class="testimonial-author">Kathy Sullivan</div>
                             <div class="testimonial-position">CEO at ordian it</div>
