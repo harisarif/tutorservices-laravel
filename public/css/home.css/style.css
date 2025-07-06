@@ -11,7 +11,12 @@
     --light-color: #ecf0f1;
     --dark-color: #2c3e50;
 }
-
+.adjust-select select {
+    border: 1px solid #77dd77;
+}
+#searchInput {
+    border: 1px solid #77dd77;
+}
 body {
     font-family: Epilogue, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #333;

@@ -52,8 +52,10 @@
 
         <hr />
         <div class="d-flex justify-content-end gap-2">
+            <a data-bs-toggle="modal" data-bs-target="#signupPromptModal" class="btn bg_theme_green border-0 bg-primary text-white me-0" onclick="document.getElementById('allModal').style.display = 'none'">{{__('messages.student')}}</a>
 
             <a href="{{ route('tutor') }}" class="btn bg_theme_green border-0 bg-primary text-white me-2">{{__('messages.tutor')}}</a>
+
         </div>
     </div>
 </div>
@@ -74,10 +76,14 @@
     <div class="top-bar text-white py-2">
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
-                    <i class="fas fa-phone me-2"></i> +875 784 5682
-                    <i class="fas fa-envelope ms-3 me-2"></i> edexceledu@gmail.com
-                    <i class="fas fa-map-marker-alt ms-3 me-2"></i> 238, Arimantab, Moska - USA
+                <div class="col-md-8 d-flex align-items-center">
+                    <!-- <i class="fas fa-phone me-2"></i> +875 784 5682 -->
+                    <!-- <i class="fas fa-envelope ms-3 me-2"></i> edexceledu@gmail.com -->
+                    <a href="mailto:edexceledu@gmail.com" class="d-flex align-items-center text-decoration-none text-white">
+                        <i class="fas fa-envelope ms-3 me-2"></i> edexceledu@gmail.com
+                    </a>
+
+                    <i class="fas fa-map-marker-alt ms-3 me-2" style="margin-bottom:3px;"></i> Dubai
                 </div>
                 <div class="col-md-4 text-md-end">
 
@@ -103,7 +109,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link text-primary" href="#">Home</a>
+                        <a class="nav-link text-primary" href="{{ route('newhome') }}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About Us</a>
@@ -112,7 +118,7 @@
                         <a class="nav-link" href="#">Courses</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Blog</a>
+                        <a class="nav-link" href="{{route('blogs.index')}}">Blog</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
@@ -213,7 +219,7 @@
                     <h2 class="hero-title">Edexcel Academically With Tailored Tutoring And Professional Guidance</h2>
                     <p class="mb-4">We are experienced in education platform and skilled strategies for the success of
                         our online learning.</p>
-                    <button class="primary-btn">
+                    <button class="primary-btn" data-bs-toggle="modal" data-bs-target="#signupPromptModal">
                         Request a Tutor
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15"
@@ -278,7 +284,7 @@
     </section>
 
     <!-- Tutors Section -->
-    <section class="padding-120 bg-light">
+    <section class="padding-120 bg-white adjust-select">
         <div class="container">
             <span class="primary-badge mb-3">OUR TUTORS</span>
             <h2 class="section-title">Discover Your Tutor</h2>
@@ -296,50 +302,53 @@
 
             <div class="row mb-4 g-3">
                 <div class="col-6 col-md-4 col-lg-2">
-                    <label for="" class="small-label">Please Select A Country</label>
-                    <select class="country form-select" name="country" id="country">
+                    <!-- <label for="" class="small-label">Please Select A Country</label> -->
+                    <select class="country form-select" name="country" id="country" style="font-size: 13px;">
+                        <option>Please Select A Country</option>
                         @foreach($countries as $countryCode => $countryName)
                         <option value="{{ $countryCode }}">{{ $countryName }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-6 col-md-4 col-lg-2">
-                    <label for="" class="small-label">Gender Selection</label>
-                    <select name="gender" id="gender" class="country form-select">
+                    <!-- <label for="" class="small-label">Gender Selection</label> -->
+                    <select name="gender" id="gender" class="country form-select" style="font-size: 13px;">
+                        <option>Gender Selection</option>
                         <option value="Male">{{ __('Male') }}</option>
                         <option value="female">{{ __('Female') }}</option>
                     </select>
                 </div>
                 <div class="col-6 col-md-4 col-lg-2">
-                    <label for="" class="small-label">Which Subject Interests You?</label>
-                    <select name="subjectSearch" id="subjectSearch" class="form-control country">
-
+                    <!-- <label for="" class="small-label">Which Subject Interests You?</label> -->
+                    <select name="subjectSearch" id="subjectSearch" class="form-control country" style="font-size: 13px;">
+                        <option>Which Subject Interests You?</option>
                         @foreach($subjectsTeach as $subjectsCode => $subjects)
                         <option value="{{ $subjectsCode }}">{{ $subjects }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-6 col-md-4 col-lg-2">
-                    <label for="" class="small-label">Price Selection</label>
-                    <select name="prize-Range" id="prize-Range" class="form-select country">
+                    <!-- <label for="" class="small-label">Price Selection</label> -->
+                    <select name="prize-Range" id="prize-Range" class="form-select country" style="font-size: 13px;">
                         <option value="all">{{ __('messages.Price Selection') }}</option>
 
                     </select>
                 </div>
                 <div class="col-6 col-md-4 col-lg-2">
-                    <label for="" class="small-label">Add Varified</label>
-                    <select class="form-select">
-                        <option value="">Select</option>
-                        <option>$0-$50</option>
-                        <option>$50-$100</option>
+                    <!-- <label for="" class="small-label">Add Varified</label> -->
+                    <select class="form-select" style="font-size: 13px;">
+                        <option value="">Add Varified</option>
+                        <option value="all">All</option>
+                        <option value="on">On</option>
+                        <option value="off">Off</option>
                     </select>
                 </div>
                 <div class="col-6 col-md-4 col-lg-2">
-                    <label for="" class="small-label">Select Tutor</label>
-                    <select class="form-select">
-                        <option value="">Select</option>
-                        <option>$0-$50</option>
-                        <option>$50-$100</option>
+                    <!-- <label for="" class="small-label">Select Tutor</label> -->
+                    <select class="form-select" style="font-size: 13px;">
+                        <option value="">Select Tutor</option>
+                        <!-- <option>$0-$50</option>
+                        <option>$50-$100</option> -->
                     </select>
                 </div>
             </div>
@@ -747,7 +756,7 @@
         <div class="dark-bg">
             <div class="container padding-70">
                 <h4 class="pre-heading">Join Our New Session</h4>
-                <h2 class="section-title">Call To Enroll Your Child <br>(+91)958423452</h2>
+                <h2 class="section-title">Call To Enroll Your Child <br></h2>
                 <button class="warning-btn-2">
                     Join With Us
                     <span>
@@ -880,9 +889,7 @@
             <div class="row g-5 justify-content-center">
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="testimonial-card">
-                        <p class="testimonial-text">"Lorem ipsum dolor sit amet, elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Orci nulla pellentesque dignissim enim. Amet consectetur
-                            adipiscing"</p>
+                        <p class="testimonial-text">"This platform has truly exceeded my expectations. The support team is responsive!"</p>
                         <div class="d-flex gap-1 flex-column">
                             <div class="testimonial-author">Kathy Sullivan</div>
                             <div class="testimonial-position">CEO at ordian it</div>
@@ -906,9 +913,7 @@
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="testimonial-card">
-                        <p class="testimonial-text">"Lorem ipsum dolor sit amet, elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Orci nulla pellentesque dignissim enim. Amet consectetur
-                            adipiscing"</p>
+                        <p class="testimonial-text">"I was able to improve my skills significantly thanks to the amazing tutors here. Highly recommended"</p>
                         <div class="d-flex gap-1 flex-column">
                             <div class="testimonial-author">Kathy Sullivan</div>
                             <div class="testimonial-position">CEO at ordian it</div>
@@ -932,9 +937,7 @@
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="testimonial-card">
-                        <p class="testimonial-text">"Lorem ipsum dolor sit amet, elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Orci nulla pellentesque dignissim enim. Amet consectetur
-                            adipiscing"</p>
+                        <p class="testimonial-text">"A seamless learning experience! The scheduling and content delivery are both very well designed"</p>
                         <div class="d-flex gap-1 flex-column">
                             <div class="testimonial-author">Kathy Sullivan</div>
                             <div class="testimonial-position">CEO at ordian it</div>
@@ -1167,10 +1170,9 @@
                     <div class="footer-logo mb-2">
                         <img src="{{asset('homeImage/logo.jpg')}}" alt="">
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
+                    <p>Education is the foundation for personal growth and societal progress. It opens doors to opportunities, builds confidence</p>
                     <div class="contact-info">
-                        <a href="#">
+                        <a href="https://www.facebook.com/EdexcelAcademyOfficial/" target="_blank">
                             <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46"
                                 fill="none">
                                 <rect x="0.5" y="0.0302734" width="45" height="45" rx="22.5" fill="#EEFBF5" />
@@ -1179,7 +1181,7 @@
                                     fill="#42B979" />
                             </svg>
                         </a>
-                        <a href="#">
+                        <a href="https://www.instagram.com/edexcel.official?igsh=bmNvcXpkOTUzN2J1&utm_source=qr" target="_blank">
                             <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46"
                                 fill="none">
                                 <rect x="0.5" y="0.0302734" width="45" height="45" rx="22.5" fill="#EEFBF5" />
@@ -1188,44 +1190,37 @@
                                     fill="#42B979" />
                             </svg>
                         </a>
-                        <a href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46"
-                                fill="none">
-                                <rect x="0.5" y="0.0302734" width="45" height="45" rx="22.5" fill="#EEFBF5" />
-                                <path
-                                    d="M23.5777 13.3877C26.6988 13.3877 29.5543 15.5459 29.5543 18.833C29.5543 21.9209 27.9605 25.374 24.441 25.374C23.5777 25.374 22.5484 24.9424 22.1168 24.1787C21.3863 27.167 21.4195 27.6318 19.7594 29.9229C19.5934 29.9893 19.6266 29.9893 19.527 29.8564C19.4605 29.2256 19.3941 28.6279 19.3941 27.9971C19.3941 25.9717 20.3238 23.0166 20.7887 21.0576C20.523 20.5264 20.4566 19.9287 20.4566 19.3643C20.4566 16.708 23.5777 16.3096 23.5777 18.501C23.5777 19.7959 22.6813 21.0244 22.6813 22.2861C22.6813 23.1162 23.4117 23.7139 24.2418 23.7139C26.5328 23.7139 27.2301 20.4268 27.2301 18.667C27.2301 16.3096 25.5699 15.0146 23.2789 15.0146C20.6559 15.0146 18.6305 16.9072 18.6305 19.5635C18.6305 20.8584 19.4273 21.5225 19.4273 21.8213C19.4273 22.0869 19.2281 22.9834 18.8961 22.9834C18.0992 22.9834 16.8043 21.6553 16.8043 19.3311C16.8043 15.6455 20.1578 13.3877 23.5777 13.3877Z"
-                                    fill="#42B979" />
+                        <a target="_blank" href="https://www.linkedin.com/company/edexcel-academy/">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none">
+                                <rect x="0.5" y="0.5" width="45" height="45" rx="22.5" fill="#EEFBF5" />
+                                <path d="M17.25 18.25H20.25V29.25H17.25V18.25ZM18.75 16.75C19.44 16.75 20 16.19 20 15.5C20 14.81 19.44 14.25 18.75 14.25C18.06 14.25 17.5 14.81 17.5 15.5C17.5 16.19 18.06 16.75 18.75 16.75ZM21.75 18.25H24.5V19.5H24.54C24.94 18.76 25.81 18 27.06 18C29.44 18 30.25 19.44 30.25 21.69V29.25H27.25V22.5C27.25 21.25 26.75 20.5 25.75 20.5C24.75 20.5 24.25 21.25 24.25 22.5V29.25H21.25V18.25H21.75Z" fill="#42B979" />
                             </svg>
+
                         </a>
-                        <a href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46"
-                                fill="none">
-                                <rect x="0.5" y="0.0302734" width="45" height="45" rx="22.5" fill="#EEFBF5" />
-                                <path
-                                    d="M29.9402 18.2021C29.9402 18.3682 29.9402 18.501 29.9402 18.667C29.9402 23.2822 26.4539 28.5615 20.0457 28.5615C18.0535 28.5615 16.2273 27.9971 14.7 27.001C14.9656 27.0342 15.2313 27.0674 15.5301 27.0674C17.157 27.0674 18.6512 26.5029 19.8465 25.5732C18.3191 25.54 17.0242 24.5439 16.5926 23.1494C16.825 23.1826 17.0242 23.2158 17.2566 23.2158C17.5555 23.2158 17.8875 23.1494 18.1531 23.083C16.5594 22.751 15.3641 21.3564 15.3641 19.6631V19.6299C15.8289 19.8955 16.3934 20.0283 16.9578 20.0615C15.9949 19.4307 15.3973 18.3682 15.3973 17.1729C15.3973 16.5088 15.5633 15.9111 15.8621 15.4131C17.5887 17.5049 20.1785 18.8994 23.0672 19.0654C23.0008 18.7998 22.9676 18.5342 22.9676 18.2686C22.9676 16.3428 24.5281 14.7822 26.4539 14.7822C27.45 14.7822 28.3465 15.1807 29.0105 15.8779C29.7742 15.7119 30.5379 15.4131 31.202 15.0146C30.9363 15.8447 30.4051 16.5088 29.6746 16.9404C30.3719 16.874 31.0691 16.6748 31.6668 16.4092C31.202 17.1064 30.6043 17.7041 29.9402 18.2021Z"
-                                    fill="#42B979" />
+                        <a target="_blank" href="https://youtube.com/@edexcelonline01?si=EuQwX0tL3zk4J-2p">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none">
+                                <rect x="0.5" y="0.5" width="45" height="45" rx="22.5" fill="#EEFBF5" />
+                                <path d="M30.1126 18.263C29.8909 17.4627 29.2519 16.8237 28.4516 16.602C27.0624 16.225 23 16.225 23 16.225C23 16.225 18.9376 16.225 17.5484 16.602C16.7481 16.8237 16.1091 17.4627 15.8874 18.263C15.5 19.6534 15.5 23.0001 15.5 23.0001C15.5 23.0001 15.5 26.3467 15.8874 27.7371C16.1091 28.5374 16.7481 29.1764 17.5484 29.3981C18.9376 29.7751 23 29.7751 23 29.7751C23 29.7751 27.0624 29.7751 28.4516 29.3981C29.2519 29.1764 29.8909 28.5374 30.1126 27.7371C30.5 26.3467 30.5 23.0001 30.5 23.0001C30.5 23.0001 30.5 19.6534 30.1126 18.263ZM21.75 26.2501V19.7501L26.25 23.0001L21.75 26.2501Z" fill="#42B979" />
                             </svg>
+
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-white mb-4">Quick Links:</h5>
                     <ul>
-                        <li><a href="#">Home</a></li>
+                        <li><a href="{{ route('newhome') }}">Home</a></li>
                         <li><a href="#">About Us</a></li>
-                        <li><a href="#">Courses</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="{{route('faq.index')}}">Faq</a></li>
+                        <li><a href="{{route('policy.index')}}">Privacy Policy</a></li>
+                        <li><a href="{{route('blogs.index')}}">Blog</a></li>
+                        <li><a href="{{route('terms.condition')}}">Terms & Condition</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-white mb-4">Courses:</h5>
                     <ul>
-                        <li><a href="#">Data Science</a></li>
                         <li><a href="#">Business</a></li>
-                        <li><a href="#">Artificial Intelligence</a></li>
-                        <li><a href="#">Computer Science</a></li>
-                        <li><a href="#">All Courses</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3">
