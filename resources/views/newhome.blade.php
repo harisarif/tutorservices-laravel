@@ -48,6 +48,7 @@
     <button type="button" class="btn-close ms-2" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
+
 <body>
     <!-- Top Bar -->
     <div class="top-bar text-white py-2">
