@@ -19,44 +19,49 @@ class SocialAuthController extends Controller
     }
 
     // Handle callback from provider
-   public function callback($provider)
+  public function callback($provider)
 {
     $socialUser = Socialite::driver($provider)->stateless()->user();
+    $email = $socialUser->getEmail();
 
-    // Check if user exists
-    $user = User::where('email', $socialUser->getEmail())->first();
-      if ($user) {
-        // Email is already present
-        return redirect()->route('newhome')->with('alert', 'Your email is already registered. Please log in using your credentials.');
+    // Email might be null – handle that first
+    if (!$email) {
+        return redirect()->route('login')->with('alert', 'Unable to retrieve your email from provider.');
     }
-    if (!$user) {
-        // Create new user
-        $user = new User();
-        $user->name = $socialUser->getName();
-        $user->email = $socialUser->getEmail();
-        $user->password = Hash::make(strval(mt_rand(10000000, 99999999))); // random 8-digit password
-        $user->role = 'user';
-        $user->save();
 
-        // Create associated student
-        $student = new Student();
-        $student->name = $user->name;
-        $student->email = $user->email;
-        $student->password = $user->password; // use same hashed password
-        $student->user_id = $user->id;
-        $student->session_id = session()->getId();
-        $student->save();
-    } else {
-        // If user exists, redirect with alert
+    // Check if the user already exists
+    $user = User::where('email', $email)->first();
+
+    if ($user) {
+        // ✅ Log in the existing user
         Auth::login($user);
-        return redirect()->route('newhome')->with('alert', 'You are already registered. Logged in successfully.');
+        return redirect()->route('newhome')->with('alert', 'Logged in successfully.');
     }
 
-    // Log the user in
-    Auth::login($user);
+    // ❌ If user not found, create one
+    $user = new User();
+    $user->name = $socialUser->getName() ?? 'Unknown User';
+    $user->email = $email;
+    $user->password = Hash::make(strval(mt_rand(10000000, 99999999))); // random password
+    $user->role = 'user';
+    $user->save();
 
-    return redirect()->route('newhome');
+    // Create associated student
+    $student = new Student();
+    $student->name = $user->name;
+    $student->email = $user->email;
+    $student->password = $user->password;
+    $student->user_id = $user->id;
+    $student->session_id = session()->getId();
+    $student->save();
+
+    // Log in new user
+    Auth::login($user);
+    return redirect()->route('newhome')->with('alert', 'Account created and logged in successfully.');
 }
+
+
+
 
 // Make sure to import the Student model
 

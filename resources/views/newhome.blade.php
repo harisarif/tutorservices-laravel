@@ -38,17 +38,16 @@
         </div>
     </div>
 </div>
-@if (session('alert'))
-<div class="alert alert-danger alert-dismissible  fade show d-flex align-items-center"
+@if (session('alert') || session('error'))
+<div class="alert alert-{{ session('error') ? 'danger' : 'success' }} alert-dismissible fade show d-flex align-items-center"
     role="alert"
     style="position: fixed; top: 20px; font-size:13px; right: 20px; width: 450px; z-index: 1050;">
     <div class="flex-grow-1">
-        {{ session('alert') }}
+        {{ session('alert') ?? session('error') }}
     </div>
     <button type="button" class="btn-close ms-2" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
-
 <body>
     <!-- Top Bar -->
     <div class="top-bar text-white py-2">
@@ -1126,12 +1125,12 @@
                 </div>
                 <div class="col-12 col-lg-7">
                     <div class="mail-section text-center text-lg-end">
-                        <form id="newsletterForm">
+                        <form id="newsletterForm" class="mail">
                             <div class="mb-3">
-                                <label class="d-flex align-items-center mb-2" style="font-size:12px;">Email Address <span class="text-danger ms-1">*</span></label>
+                                <!-- <label class="d-flex align-items-center mb-2" style="font-size:12px;">Email Address <span class="text-danger ms-1">*</span></label> -->
                                 <input type="email" class="form-control" placeholder="Enter your email" name="email" id="newsletterEmail" required pattern="^[\w\.\-]+@(gmail|yahoo|outlook)\.com$">
                             </div>
-                            <button type="submit" class="btn text-white w-100" style="background-color:#42b979">Subscribe</button>
+                            <button type="submit" class="submit-btn" style="background-color:#000">Subscribe</button>
                         </form>
                     </div>
                 </div>
