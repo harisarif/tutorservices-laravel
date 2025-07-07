@@ -162,125 +162,19 @@ class TutorController extends Controller
 
         return redirect()->back();
     }
-    public function fetchData(Request $request)
+     public function fetchData(Request $request)
     {
-        // Initialize the query builder
         $query = Tutor::query();
-
-        // Define the number of tutors per page
         $perPage = 6;
 
+        $this->applyPriceFilter($request, $query);
+        $this->applyGenderFilter($request, $query);
+        $this->applyCountryFilter($request, $query);
+        $this->applySpecializationFilter($request, $query);
+        $this->applySubjectSearch($request, $query);
 
-        if ($request->has('price') && $request->price !== 'all') {
-            $priceValue = trim($request->price);
-
-            // Extract numeric value from stored price (e.g., "$ 100" -> "100")
-            $query->whereRaw("CAST(REGEXP_REPLACE(price, '[^0-9]', '') AS UNSIGNED) IS NOT NULL");
-
-            if (preg_match('/^(\d+)-(\d+)$/', $priceValue, $matches)) {
-                // Case: Price Range (e.g., "200-500")
-                $minPrice = (int) $matches[1];
-                $maxPrice = (int) $matches[2];
-
-                Log::info("Filtering tutors between $minPrice and $maxPrice");
-
-                $query->whereRaw("CAST(REGEXP_REPLACE(price, '[^0-9]', '') AS UNSIGNED) BETWEEN ? AND ?", [$minPrice, $maxPrice]);
-            } elseif (preg_match('/(\d+)\+/', $priceValue, $matches)) {
-                // Case: "5000+" (minimum price)
-                $minPrice = (int) $matches[1];
-
-                Log::info("Filtering tutors with price >= $minPrice");
-
-                $query->whereRaw("CAST(REGEXP_REPLACE(price, '[^0-9]', '') AS UNSIGNED) >= ?", [$minPrice]);
-            } else {
-                // Case: Exact Price (e.g., "100")
-                if (is_numeric($priceValue)) {
-                    $exactPrice = (int) $priceValue;
-
-                    Log::info("Filtering tutors with exact price = $exactPrice");
-
-                    $query->whereRaw("CAST(REGEXP_REPLACE(price, '[^0-9]', '') AS UNSIGNED) = ?", [$exactPrice]);
-                }
-            }
-        }
-
-
-        //gender
-        if ($request->has('gender') && $request->gender !== 'all') {
-            $gender = $request->gender;
-            Log::info("Filtering tutors with gender: $gender");
-            $query->where('gender', $gender);
-        }
-        $teacher = Tutor::all();
-        //country
-        if ($request->has('country') && $request->country !== 'all') {
-            $query->where('country', $request->country);
-        }
-
-        // Filter tutors by search query for subject
-        if ($request->has('specialization') && !empty($request->specialization)) {
-            $specialization = $request->specialization;
-
-            if (is_array($specialization)) {
-                $query->where(function ($q) use ($specialization) {
-                    foreach ($specialization as $spec) {
-                        $q->orWhereJsonContains('specialization', $spec);
-                    }
-                });
-            } else {
-                $query->whereJsonContains('specialization', $specialization);
-            }
-        }
-        $subjectSearch = null;
-
-        // Safely get trimmed input
-        $inputSearch = trim($request->input('subjectsearch'));
-
-        // CASE 1: User provided a new input
-        if ($inputSearch !== '') {
-            $subjectSearch = $inputSearch;
-
-            // Save it to the DB if logged-in user is a student (role: user)
-            if (auth()->check() && auth()->user()->role === 'user') {
-                DB::table('student')
-                    ->where('user_id', auth()->id())
-                    ->update([
-                        'searchQuery' => $subjectSearch,
-                        'updated_at' => now(),
-                    ]);
-            }
-
-            // CASE 2: Input is empty, but user is logged in — load saved search
-        } elseif (auth()->check() && auth()->user()->role === 'user') {
-            $student = DB::table('student')->where('user_id', auth()->id())->first();
-
-            if ($student && $student->searchQuery) {
-                $subjectSearch = strtolower($student->searchQuery); // normalize case
-                Log::info("📌 Loaded previous subject search: " . $subjectSearch);
-
-                $tutors = collect($teacher); // ensure it's a collection
-
-                [$matchedTutors, $otherTutors] = $tutors->partition(function ($tutor) use ($subjectSearch) {
-                    // Adjust logic based on how subject is stored
-                    return str_contains(strtolower($tutor->subject), $subjectSearch);
-                });
-
-                // Merge matched first, then others
-                $tutors = $matchedTutors->concat($otherTutors);
-            }
-        }
-
-
-        // CASE 3: Apply the search filter if we have one
-        if (!empty($subjectSearch)) {
-            $query->where(function ($q) use ($subjectSearch) {
-                $q->whereRaw("LOWER(specialization) LIKE ?", ['%' . strtolower($subjectSearch) . '%']);
-            });
-        }
-        // Paginate the filtered tutors
         $tutors = $query->paginate($perPage);
 
-        // Check if there are no tutors
         if ($tutors->isEmpty()) {
             return response()->json([
                 'message' => 'No tutors found.',
@@ -296,52 +190,31 @@ class TutorController extends Controller
             ]);
         }
 
-        // Calculate age for each tutor and convert to array format
         $tutorsArray = $tutors->map(function ($tutor) {
-
-            $tutor->specialization = json_decode($tutor->specialization, true);
-
-            // If it's an array, convert it into a comma-separated string
-            if (is_array($tutor->specialization)) {
-                $tutor->specialization = implode(', ', array_map('trim', $tutor->specialization));
-            } else {
-                $tutor->specialization = trim($tutor->specialization ?? 'Not Specified');
-            }
+            $tutor->specialization = is_array($decoded = json_decode($tutor->specialization, true))
+                ? implode(', ', array_map('trim', $decoded))
+                : trim($tutor->specialization ?? 'Not Specified');
 
             $tutor->country_name = config("countries_assoc.countries.{$tutor->country}", 'Unknown');
-            // Convert 'teaching' field to a readable string safely
-            // $subjects = @unserialize($tutor->teaching);
-            // if ($subjects === false) {
-            //     $subjects = is_array(json_decode($tutor->teaching, true)) ? json_decode($tutor->teaching, true) : [];
-            // }
-            // $tutor->subjectString = !empty($subjects) ? implode(', ', $subjects) : 'No Subjects Available';
-            // Debug Language Decoding
+
             $languageData = json_decode($tutor->language, true);
-            if (!is_array($languageData)) {
-                \Log::error("Language decoding failed for Tutor ID: {$tutor->id}, Raw Data: " . $tutor->language);
-                $languageData = []; // Fallback to empty array
-            }
-            $tutor->languages = $languageData;
-            // Calculate age and format DOB correctly
+            $tutor->languages = is_array($languageData) ? $languageData : [];
+
             if ($tutor->dob) {
                 $dob = Carbon::parse($tutor->dob);
-                $tutor->dob = $dob->format('d-m-Y'); // Convert DOB to "DD-MM-YYYY"
-                $tutor->age = $dob->age; // Correct way to get age
+                $tutor->dob = $dob->format('d-m-Y');
+                $tutor->age = $dob->age;
             } else {
                 $tutor->dob = 'Unknown';
                 $tutor->age = 'Unknown';
             }
 
-            return $tutor->toArray(); // Convert each tutor to an array
+            return $tutor->toArray();
         })->toArray();
 
-        // Fetch the total count of tutors after applying filters
-        $totalTutorsCount = (clone $query)->count();
-
-        // Manually serialize the paginated data
-        $serializedData = [
-            'tutors' => $tutorsArray, // Tutors as array
-            'totalTutorsCount' => $totalTutorsCount,
+        return response()->json([
+            'tutors' => $tutorsArray,
+            'totalTutorsCount' => (clone $query)->count(),
             'perPage' => $perPage,
             'pagination' => [
                 'total' => $tutors->total(),
@@ -350,10 +223,79 @@ class TutorController extends Controller
                 'currentPage' => $tutors->currentPage(),
                 'lastPage' => $tutors->lastPage(),
             ],
-        ];
+        ]);
+    }
 
-        // Return the serialized data as JSON response
-        return response()->json($serializedData);
+    private function applyPriceFilter(Request $request, $query)
+    {
+        if (!$request->has('price') || $request->price === 'all') return;
+
+        $priceValue = trim($request->price);
+        $query->whereRaw("CAST(REGEXP_REPLACE(price, '[^0-9]', '') AS UNSIGNED) IS NOT NULL");
+
+        if (preg_match('/^(\d+)-(\d+)$/', $priceValue, $matches)) {
+            $query->whereRaw("CAST(REGEXP_REPLACE(price, '[^0-9]', '') AS UNSIGNED) BETWEEN ? AND ?", [(int) $matches[1], (int) $matches[2]]);
+        } elseif (preg_match('/(\d+)\+/', $priceValue, $matches)) {
+            $query->whereRaw("CAST(REGEXP_REPLACE(price, '[^0-9]', '') AS UNSIGNED) >= ?", [(int) $matches[1]]);
+        } elseif (is_numeric($priceValue)) {
+            $query->whereRaw("CAST(REGEXP_REPLACE(price, '[^0-9]', '') AS UNSIGNED) = ?", [(int) $priceValue]);
+        }
+    }
+
+    private function applyGenderFilter(Request $request, $query)
+    {
+        if ($request->has('gender') && $request->gender !== 'all') {
+            $query->where('gender', $request->gender);
+        }
+    }
+
+    private function applyCountryFilter(Request $request, $query)
+    {
+        if ($request->has('country') && $request->country !== 'all') {
+            $query->where('country', $request->country);
+        }
+    }
+
+    private function applySpecializationFilter(Request $request, $query)
+    {
+        if ($request->has('specialization') && !empty($request->specialization)) {
+            $specialization = $request->specialization;
+
+            $query->where(function ($q) use ($specialization) {
+                if (is_array($specialization)) {
+                    foreach ($specialization as $spec) {
+                        $q->orWhereJsonContains('specialization', $spec);
+                    }
+                } else {
+                    $q->whereJsonContains('specialization', $specialization);
+                }
+            });
+        }
+    }
+
+    private function applySubjectSearch(Request $request, $query)
+    {
+        $subjectSearch = trim($request->input('subjectsearch'));
+
+        if ($subjectSearch !== '') {
+            if (auth()->check() && auth()->user()->role === 'user') {
+                DB::table('student')->where('user_id', auth()->id())->update([
+                    'searchQuery' => $subjectSearch,
+                    'updated_at' => now(),
+                ]);
+            }
+        } elseif (auth()->check() && auth()->user()->role === 'user') {
+            $student = DB::table('student')->where('user_id', auth()->id())->first();
+            if ($student && $student->searchQuery) {
+                $subjectSearch = strtolower($student->searchQuery);
+            }
+        }
+
+        if (!empty($subjectSearch)) {
+            $query->where(function ($q) use ($subjectSearch) {
+                $q->whereRaw("LOWER(specialization) LIKE ?", ['%' . strtolower($subjectSearch) . '%']);
+            });
+        }
     }
 
     public function fetchStudentData(Request $request)

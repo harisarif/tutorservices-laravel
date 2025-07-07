@@ -2162,7 +2162,7 @@
             $('#gender').change(function(e) {
                 e.preventDefault();
 
-                var selectedGender = $(this).val();
+                var selectedGender = $(this).val().toLowerCase();
                 console.log("Gender selected:", selectedGender);
 
                 var genderData = {
