@@ -211,40 +211,87 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-section position-relative">
-        <div class="container" style="z-index: 4; position: relative;">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
+   <section class="hero-section position-relative">
+    <div class="container" style="z-index: 4; position: relative;">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                @auth
+                    @if(Auth::user()->role === 'user')
+                        <h4 class="hero-pretitle">WELCOME TO EDEXCEL!</h4>
+                        <h2 class="hero-title">Continue Your Learning Journey With Expert Tutors</h2>
+                        <p class="mb-4">We're glad to have you again. Explore new lessons and grow with our dedicated tutoring support.</p>
+                    @else
+                        {{-- Show guest version to admins or other roles --}}
+                        <h4 class="hero-pretitle">WELCOME EDEXCEL ONLINE COURSES.</h4>
+                        <h2 class="hero-title">Edexcel Academically With Tailored Tutoring And Professional Guidance</h2>
+                        <p class="mb-4">We are experienced in education platform and skilled strategies for the success of our online learning.</p>
+                    @endif
+                @else
+                    {{-- Guest version --}}
                     <h4 class="hero-pretitle">WELCOME EDEXCEL ONLINE COURSES.</h4>
                     <h2 class="hero-title">Edexcel Academically With Tailored Tutoring And Professional Guidance</h2>
-                    <p class="mb-4">We are experienced in education platform and skilled strategies for the success of
-                        our online learning.</p>
-                    <button class="primary-btn" data-bs-toggle="modal" data-bs-target="#signupPromptModal">
-                        Request a Tutor
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15"
-                                fill="none">
-                                <path d="M11.5293 2.2207L16.5293 8.2207L11.5293 14.2207" stroke="white"
-                                    stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M1.5293 8.2207H16.5293" stroke="white" stroke-width="1.5"
-                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </span>
-                    </button>
-                </div>
+                    <p class="mb-4">We are experienced in education platform and skilled strategies for the success of our online learning.</p>
+                @endauth
+                   @auth
+                    @if(Auth::user()->role === 'user')
+                        <button class="primary-btn">
+                    Request a Tutor
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
+                            <path d="M11.5293 2.2207L16.5293 8.2207L11.5293 14.2207" stroke="white"
+                                stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M1.5293 8.2207H16.5293" stroke="white" stroke-width="1.5"
+                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                </button>
+                    @else
+                        {{-- Show guest version to admins or other roles --}}
+                        <button class="primary-btn" data-bs-toggle="modal" data-bs-target="#signupPromptModal">
+                    Request a Tutor
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
+                            <path d="M11.5293 2.2207L16.5293 8.2207L11.5293 14.2207" stroke="white"
+                                stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M1.5293 8.2207H16.5293" stroke="white" stroke-width="1.5"
+                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                </button>
+                    @endif
+                @else
+                  <button class="primary-btn" data-bs-toggle="modal" data-bs-target="#signupPromptModal">
+                    Request a Tutor
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
+                            <path d="M11.5293 2.2207L16.5293 8.2207L11.5293 14.2207" stroke="white"
+                                stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M1.5293 8.2207H16.5293" stroke="white" stroke-width="1.5"
+                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                </button>
+                @endauth
+
+               
             </div>
         </div>
-        <img src="{{asset('homeImage/dots.png')}}" class="dots" alt="">
-        <spna class="tutor-span">
-            <h3><span class="text-primary">+{{$allTutorsCount}} </span>Tutors</h3>
-            <img src="{{asset('homeImage/tutor-banner.png')}}" alt="">
-        </spna>
-        <img src="{{asset('homeImage/5c59f5b1f89aa3bf34e0e8a6afa3bc296d7128e5.jpg')}}" class="banner-image" alt="">
-    </section>
+    </div>
+    <img src="{{ asset('homeImage/dots.png') }}" class="dots" alt="">
+    <spna class="tutor-span">
+        <h3><span class="text-primary">+{{ $allTutorsCount }} </span>Tutors</h3>
+        <img src="{{ asset('homeImage/tutor-banner.png') }}" alt="">
+    </spna>
+    <img src="{{ asset('homeImage/5c59f5b1f89aa3bf34e0e8a6afa3bc296d7128e5.jpg') }}" class="banner-image" alt="">
+</section>
+
+
 
     <!-- Services Section -->
-    <section class="padding-120">
+   @guest <section class="padding-120">
         <div class="container">
             <span class="primary-badge mx-auto mb-3">SERVICES</span>
             <h2 class="text-center section-title">Our Services</h2>
@@ -281,7 +328,45 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> @else
+    @if(Auth::user()->role !== 'user')<section class="padding-120">
+        <div class="container">
+            <span class="primary-badge mx-auto mb-3">SERVICES</span>
+            <h2 class="text-center section-title">Our Services</h2>
+            <div class="row g-3 justify-content-center">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class=" service-card text-center p-4">
+                        <div class="service-icon">
+                            <img src="{{asset('homeImage/teacher.png')}}" width="54" alt="">
+                        </div>
+                        <h3>ONLINE CLASSES</h3>
+                        <p>Duis aute irure dolor reprehenderit in voluptate velit esse cillum dolore fugiat nulla
+                            pariatur Excepteur</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class=" service-card active text-center p-4">
+                        <div class="service-icon active">
+                            <img src="{{asset('homeImage/student.png')}}" width="54" alt="">
+                        </div>
+                        <h3>ONLINE TUTORS</h3>
+                        <p>Duis aute irure dolor reprehenderit in voluptate velit esse cillum dolore fugiat nulla
+                            pariatur. Excepteur</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class=" service-card text-center p-4">
+                        <div class="service-icon">
+                            <img src="{{asset('homeImage/mic.png')}}" width="54" alt="">
+                        </div>
+                        <h3>SUPPORT</h3>
+                        <p>Duis aute irure dolor reprehenderit in voluptate velit esse cillum dolore fugiat nulla
+                            pariatur Excepteur</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> @endif @endguest
 
     <!-- Tutors Section -->
     <section class="padding-120 bg-white adjust-select">
@@ -313,7 +398,7 @@
                 <div class="col-6 col-md-4 col-lg-2">
                     <!-- <label for="" class="small-label">Gender Selection</label> -->
                     <select name="gender" id="gender" class="country form-select" style="font-size: 13px;">
-                        <option>Gender Selection</option>
+                        <option>Show By Gender</option>
                         <option value="Male">{{ __('Male') }}</option>
                         <option value="female">{{ __('Female') }}</option>
                     </select>
@@ -522,130 +607,11 @@
             <div id="paginationContainer">
                 {{ $tutors->links('custom-pagination') }}
             </div>
-            {{-- <div class="col-12 col-md-6 col-lg-4">
-                    <div class="tutor-card">
-                        <div class="image-section">
-                            <img src="{{asset('homeImage/Link.png')}}" alt="">
-            <span class="course-badge">Aerospace Engineering</span>
-        </div>
-        <div class="d-flex justify-content-between align-items-center mb-3 align-items-center">
-            <h3 class="display-6">Haris Arif</h3>
-            <div class="d-flex justify-content-end gap-1 align-items-center">
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                </div>
-                <div class="price">$50.00</div>
-            </div>
-        </div>
-        <p class="content">1+ Years Of Air Conditioning And Refrigeration Service Teaching Experience:
-            Your Air
-            Conditioning And Refrigeration Service Success, Guaranteed. - Hello, My Name Is Haris. I
-            Have 1+ Years Of Experience As A Air Conditioning And
-            Refrigeration Service Teacher & Tutor.</p>
-        <div class="d-flex justify-content-between mt-3 info-bar">
-            <span class="text-muted">
-                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="15" viewBox="0 0 11 15"
-                    fill="none">
-                    <path
-                        d="M7.875 7.26953V9.01953H2.625V7.26953H7.875ZM10.3086 3.14062C10.4362 3.26823 10.5 3.42318 10.5 3.60547V3.76953H7V0.269531H7.16406C7.34635 0.269531 7.5013 0.333333 7.62891 0.460938L10.3086 3.14062ZM6.125 3.98828C6.125 4.17057 6.1888 4.32552 6.31641 4.45312C6.44401 4.58073 6.59896 4.64453 6.78125 4.64453H10.5V13.6133C10.5 13.7956 10.4362 13.9505 10.3086 14.0781C10.181 14.2057 10.026 14.2695 9.84375 14.2695H0.65625C0.473958 14.2695 0.31901 14.2057 0.191406 14.0781C0.0638021 13.9505 0 13.7956 0 13.6133V0.925781C0 0.74349 0.0638021 0.588542 0.191406 0.460938C0.31901 0.333333 0.473958 0.269531 0.65625 0.269531H6.125V3.98828ZM1.75 2.23828V2.67578C1.75 2.82161 1.82292 2.89453 1.96875 2.89453H4.15625C4.30208 2.89453 4.375 2.82161 4.375 2.67578V2.23828C4.375 2.09245 4.30208 2.01953 4.15625 2.01953H1.96875C1.82292 2.01953 1.75 2.09245 1.75 2.23828ZM1.75 3.98828V4.42578C1.75 4.57161 1.82292 4.64453 1.96875 4.64453H4.15625C4.30208 4.64453 4.375 4.57161 4.375 4.42578V3.98828C4.375 3.84245 4.30208 3.76953 4.15625 3.76953H1.96875C1.82292 3.76953 1.75 3.84245 1.75 3.98828ZM8.75 12.3008V11.8633C8.75 11.7174 8.67708 11.6445 8.53125 11.6445H6.34375C6.19792 11.6445 6.125 11.7174 6.125 11.8633V12.3008C6.125 12.4466 6.19792 12.5195 6.34375 12.5195H8.53125C8.67708 12.5195 8.75 12.4466 8.75 12.3008ZM8.75 6.83203C8.75 6.70443 8.70443 6.60417 8.61328 6.53125C8.54036 6.4401 8.4401 6.39453 8.3125 6.39453H2.1875C2.0599 6.39453 1.95052 6.4401 1.85938 6.53125C1.78646 6.60417 1.75 6.70443 1.75 6.83203V9.45703C1.75 9.58464 1.78646 9.69401 1.85938 9.78516C1.95052 9.85807 2.0599 9.89453 2.1875 9.89453H8.3125C8.4401 9.89453 8.54036 9.85807 8.61328 9.78516C8.70443 9.69401 8.75 9.58464 8.75 9.45703V6.83203Z"
-                        fill="black" />
-                </svg>
-                <span>Albanian(Cl)</span>
-            </span>
-            <span class="text-muted">
-                <span>Male</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="15" viewBox="0 0 13 15"
-                    fill="none">
-                    <path
-                        d="M8.58594 6.25781C7.91146 6.93229 7.09115 7.26953 6.125 7.26953C5.15885 7.26953 4.32943 6.93229 3.63672 6.25781C2.96224 5.5651 2.625 4.73568 2.625 3.76953C2.625 2.80339 2.96224 1.98307 3.63672 1.30859C4.32943 0.615885 5.15885 0.269531 6.125 0.269531C7.09115 0.269531 7.91146 0.615885 8.58594 1.30859C9.27865 1.98307 9.625 2.80339 9.625 3.76953C9.625 4.73568 9.27865 5.5651 8.58594 6.25781ZM8.58594 8.14453C9.58854 8.14453 10.4453 8.50911 11.1562 9.23828C11.8854 9.94922 12.25 10.806 12.25 11.8086V12.957C12.25 13.3216 12.1224 13.6315 11.8672 13.8867C11.612 14.1419 11.3021 14.2695 10.9375 14.2695H1.3125C0.947917 14.2695 0.638021 14.1419 0.382812 13.8867C0.127604 13.6315 0 13.3216 0 12.957V11.8086C0 10.806 0.355469 9.94922 1.06641 9.23828C1.79557 8.50911 2.66146 8.14453 3.66406 8.14453H4.12891C4.76693 8.4362 5.43229 8.58203 6.125 8.58203C6.81771 8.58203 7.48307 8.4362 8.12109 8.14453H8.58594Z"
-                        fill="black" />
-                </svg>
-            </span>
-            <span class="text-muted">
-                <span>13-05-1985</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"
-                    fill="none">
-                    <path
-                        d="M2.70703 2.48438C4.03776 1.15365 5.64193 0.488281 7.51953 0.488281C9.39714 0.488281 10.9922 1.15365 12.3047 2.48438C13.6354 3.79688 14.3008 5.39193 14.3008 7.26953C14.3008 9.14714 13.6354 10.7513 12.3047 12.082C10.9922 13.3945 9.39714 14.0508 7.51953 14.0508C5.64193 14.0508 4.03776 13.3945 2.70703 12.082C1.39453 10.7513 0.738281 9.14714 0.738281 7.26953C0.738281 5.39193 1.39453 3.79688 2.70703 2.48438ZM9.07812 10.0586C9.26042 10.1862 9.41536 10.168 9.54297 10.0039L10.3086 8.9375C10.4362 8.75521 10.418 8.60026 10.2539 8.47266L8.50391 7.21484V3.44141C8.50391 3.22266 8.39453 3.11328 8.17578 3.11328H6.86328C6.64453 3.11328 6.53516 3.22266 6.53516 3.44141V8.03516C6.53516 8.14453 6.58073 8.23568 6.67188 8.30859L9.07812 10.0586Z"
-                        fill="black" />
-                </svg>
-            </span>
-        </div>
-        <div class="d-flex justify-content-between gap-3 mt-3">
-            <button class="primary-btn-2 flex-grow-1">Send Message</button>
-            <button class="primary-btn-2 flex-grow-1">Enroll</button>
-        </div>
-        </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4">
-            <div class="tutor-card">
-                <div class="image-section">
-                    <img src="{{asset('homeImage/Link.png')}}" alt="">
-                    <span class="course-badge">Aerospace Engineering</span>
-                </div>
-                <div class="d-flex justify-content-between align-items-center mb-3 align-items-center">
-                    <h3 class="display-6">Haris Arif</h3>
-                    <div class="d-flex justify-content-end gap-1 align-items-center">
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="price">$50.00</div>
-                    </div>
-                </div>
-                <p class="content">1+ Years Of Air Conditioning And Refrigeration Service Teaching Experience:
-                    Your Air
-                    Conditioning And Refrigeration Service Success, Guaranteed. - Hello, My Name Is Haris. I
-                    Have 1+ Years Of Experience As A Air Conditioning And
-                    Refrigeration Service Teacher & Tutor.</p>
-                <div class="d-flex justify-content-between mt-3 info-bar">
-                    <span class="text-muted">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="15" viewBox="0 0 11 15"
-                            fill="none">
-                            <path
-                                d="M7.875 7.26953V9.01953H2.625V7.26953H7.875ZM10.3086 3.14062C10.4362 3.26823 10.5 3.42318 10.5 3.60547V3.76953H7V0.269531H7.16406C7.34635 0.269531 7.5013 0.333333 7.62891 0.460938L10.3086 3.14062ZM6.125 3.98828C6.125 4.17057 6.1888 4.32552 6.31641 4.45312C6.44401 4.58073 6.59896 4.64453 6.78125 4.64453H10.5V13.6133C10.5 13.7956 10.4362 13.9505 10.3086 14.0781C10.181 14.2057 10.026 14.2695 9.84375 14.2695H0.65625C0.473958 14.2695 0.31901 14.2057 0.191406 14.0781C0.0638021 13.9505 0 13.7956 0 13.6133V0.925781C0 0.74349 0.0638021 0.588542 0.191406 0.460938C0.31901 0.333333 0.473958 0.269531 0.65625 0.269531H6.125V3.98828ZM1.75 2.23828V2.67578C1.75 2.82161 1.82292 2.89453 1.96875 2.89453H4.15625C4.30208 2.89453 4.375 2.82161 4.375 2.67578V2.23828C4.375 2.09245 4.30208 2.01953 4.15625 2.01953H1.96875C1.82292 2.01953 1.75 2.09245 1.75 2.23828ZM1.75 3.98828V4.42578C1.75 4.57161 1.82292 4.64453 1.96875 4.64453H4.15625C4.30208 4.64453 4.375 4.57161 4.375 4.42578V3.98828C4.375 3.84245 4.30208 3.76953 4.15625 3.76953H1.96875C1.82292 3.76953 1.75 3.84245 1.75 3.98828ZM8.75 12.3008V11.8633C8.75 11.7174 8.67708 11.6445 8.53125 11.6445H6.34375C6.19792 11.6445 6.125 11.7174 6.125 11.8633V12.3008C6.125 12.4466 6.19792 12.5195 6.34375 12.5195H8.53125C8.67708 12.5195 8.75 12.4466 8.75 12.3008ZM8.75 6.83203C8.75 6.70443 8.70443 6.60417 8.61328 6.53125C8.54036 6.4401 8.4401 6.39453 8.3125 6.39453H2.1875C2.0599 6.39453 1.95052 6.4401 1.85938 6.53125C1.78646 6.60417 1.75 6.70443 1.75 6.83203V9.45703C1.75 9.58464 1.78646 9.69401 1.85938 9.78516C1.95052 9.85807 2.0599 9.89453 2.1875 9.89453H8.3125C8.4401 9.89453 8.54036 9.85807 8.61328 9.78516C8.70443 9.69401 8.75 9.58464 8.75 9.45703V6.83203Z"
-                                fill="black" />
-                        </svg>
-                        <span>Albanian(Cl)</span>
-                    </span>
-                    <span class="text-muted">
-                        <span>Male</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="15" viewBox="0 0 13 15"
-                            fill="none">
-                            <path
-                                d="M8.58594 6.25781C7.91146 6.93229 7.09115 7.26953 6.125 7.26953C5.15885 7.26953 4.32943 6.93229 3.63672 6.25781C2.96224 5.5651 2.625 4.73568 2.625 3.76953C2.625 2.80339 2.96224 1.98307 3.63672 1.30859C4.32943 0.615885 5.15885 0.269531 6.125 0.269531C7.09115 0.269531 7.91146 0.615885 8.58594 1.30859C9.27865 1.98307 9.625 2.80339 9.625 3.76953C9.625 4.73568 9.27865 5.5651 8.58594 6.25781ZM8.58594 8.14453C9.58854 8.14453 10.4453 8.50911 11.1562 9.23828C11.8854 9.94922 12.25 10.806 12.25 11.8086V12.957C12.25 13.3216 12.1224 13.6315 11.8672 13.8867C11.612 14.1419 11.3021 14.2695 10.9375 14.2695H1.3125C0.947917 14.2695 0.638021 14.1419 0.382812 13.8867C0.127604 13.6315 0 13.3216 0 12.957V11.8086C0 10.806 0.355469 9.94922 1.06641 9.23828C1.79557 8.50911 2.66146 8.14453 3.66406 8.14453H4.12891C4.76693 8.4362 5.43229 8.58203 6.125 8.58203C6.81771 8.58203 7.48307 8.4362 8.12109 8.14453H8.58594Z"
-                                fill="black" />
-                        </svg>
-                    </span>
-                    <span class="text-muted">
-                        <span>13-05-1985</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"
-                            fill="none">
-                            <path
-                                d="M2.70703 2.48438C4.03776 1.15365 5.64193 0.488281 7.51953 0.488281C9.39714 0.488281 10.9922 1.15365 12.3047 2.48438C13.6354 3.79688 14.3008 5.39193 14.3008 7.26953C14.3008 9.14714 13.6354 10.7513 12.3047 12.082C10.9922 13.3945 9.39714 14.0508 7.51953 14.0508C5.64193 14.0508 4.03776 13.3945 2.70703 12.082C1.39453 10.7513 0.738281 9.14714 0.738281 7.26953C0.738281 5.39193 1.39453 3.79688 2.70703 2.48438ZM9.07812 10.0586C9.26042 10.1862 9.41536 10.168 9.54297 10.0039L10.3086 8.9375C10.4362 8.75521 10.418 8.60026 10.2539 8.47266L8.50391 7.21484V3.44141C8.50391 3.22266 8.39453 3.11328 8.17578 3.11328H6.86328C6.64453 3.11328 6.53516 3.22266 6.53516 3.44141V8.03516C6.53516 8.14453 6.58073 8.23568 6.67188 8.30859L9.07812 10.0586Z"
-                                fill="black" />
-                        </svg>
-                    </span>
-                </div>
-                <div class="d-flex justify-content-between gap-3 mt-3">
-                    <button class="primary-btn-2 flex-grow-1">Send Message</button>
-                    <button class="primary-btn-2 flex-grow-1">Enroll</button>
-                </div>
-            </div>
-        </div>
-        </div>
-        </div> --}}
+           
     </section>
 
-    <!-- About Section -->
-    <section class="padding-120 about">
+    <!-- About Section -->    
+   @guest <section class="padding-120 about">
         <div class="container">
             <div class="row align-items-center g-3">
                 <div class="col-lg-6 text-center text-lg-start">
@@ -674,8 +640,39 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> @else
+    @if(Auth::user()->role !== 'user')
+     <section class="padding-120 about">
+        <div class="container">
+            <div class="row align-items-center g-3">
+                <div class="col-lg-6 text-center text-lg-start">
+                    <img src="{{asset('homeImage/about-section.png')}}" alt="About Edexcel" class="img-fluid rounded">
+                </div>
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <span class="primary-badge mb-3">ABOUT EDEXCELEDU</span>
+                    <h2 class="section-title">Learn & Grow Your Skills From Anywhere</h2>
+                    <h3 class="mb-3"></h3>
+                    <p class="mb-4 about-content">Education is the foundation of personal and societal growth. It equips individuals with the knowledge, skills, and confidence to explore their full potential and contribute meaningfully to the world. More than just learning facts, true education encourages curiosity, creativity, and critical thinking.</p>
 
+                    <div class="row g-3">
+                        <div class="col-md-6 mb-4">
+                            <h4 class="about-heading">FLEXIBLE CLASSNAMEES</h4>
+                            <p class="about-content">Suspendisse ultrice gravida dictum fusce placerat ultricies integer
+                                quis auctor elit sed
+                                vulputate mi sit.</p>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <h4 class="about-heading">FLEXIBLE CLASSNAMEES</h4>
+                            <p class="about-content">Suspendisse ultrice gravida dictum fusce placerat ultricies integer
+                                quis auctor elit sed
+                                vulputate mi sit.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> @endif
+@endguest
     <!-- Courses Section -->
     <section class="padding-120 bg-light">
         <div class="container">
@@ -749,7 +746,7 @@
     </section>
 
     <!-- Call to Action -->
-    <section class="call-to-action">
+   @guest <section class="call-to-action">
         <div class="dark-bg">
             <div class="container padding-70">
                 <h4 class="pre-heading">Join Our New Session</h4>
@@ -768,6 +765,26 @@
             </div>
         </div>
     </section>
+     @else
+    @if(Auth::user()->role !== 'user')<section class="call-to-action">
+        <div class="dark-bg">
+            <div class="container padding-70">
+                <h4 class="pre-heading">Join Our New Session</h4>
+                <h2 class="section-title">Call To Enroll Your Child <br></h2>
+                <button class="warning-btn-2">
+                    Join With Us
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
+                            <path d="M11.5293 2.2207L16.5293 8.2207L11.5293 14.2207" stroke="white" stroke-width="1.5"
+                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M1.5293 8.2207H16.5293" stroke="white" stroke-width="1.5" stroke-miterlimit="10"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </section> @endif @endguest
 
     <!-- Inquiry Form -->
     <section class="padding-120 padding-bottom-150">
@@ -826,7 +843,8 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="stats-section">
+   @guest
+     <section class="stats-section">
         <div class="container">
             <div class="stat-counter row g-3">
                 <div class="col-12 col-md-6 col-lg-3">
@@ -875,10 +893,60 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> @else
+    @if(Auth::user()->role !== 'user')<section class="stats-section">
+        <div class="container">
+            <div class="stat-counter row g-3">
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="d-flex gap-2 align-items-center">
+                        <div class="stat-icon">
+                            <img src="{{asset('homeImage/teacher-2.png')}}" alt="">
+                        </div>
+                        <div class="d-flex flex-column gap-1">
+                            <h4 class="stat-count">+500</h4>
+                            <span class="stat-heading">Teacher</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="d-flex gap-2 align-items-center">
+                        <div class="stat-icon">
+                            <img src="{{asset('homeImage/language.png')}}" alt="">
+                        </div>
+                        <div class="d-flex flex-column gap-1">
+                            <h4 class="stat-count">+500</h4>
+                            <span class="stat-heading">Languages</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="d-flex gap-2 align-items-center">
+                        <div class="stat-icon">
+                            <img src="{{asset('homeImage/students-2.png')}}" alt="">
+                        </div>
+                        <div class="d-flex flex-column gap-1">
+                            <h4 class="stat-count">+1000</h4>
+                            <span class="stat-heading">Students</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="d-flex gap-2 align-items-center">
+                        <div class="stat-icon">
+                            <img src="{{asset('homeImage/subjects.png')}}" alt="">
+                        </div>
+                        <div class="d-flex flex-column gap-1">
+                            <h4 class="stat-count">+1500</h4>
+                            <span class="stat-heading">Subjects</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>@endif @endguest
 
     <!-- Testimonials -->
-    <section class="padding-120 padding-top-180 bg-light">
+   @guest <section class="padding-120 padding-top-180 bg-light">
         <div class="container">
             <span class="primary-badge mb-4 mx-auto">TESTIMONIALS</span>
             <h2 class="text-center section-title">Creating A Community Of <br>Life Long Learners.</h2>
@@ -958,10 +1026,91 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>   @else
+    @if(Auth::user()->role !== 'user') <section class="padding-120 padding-top-180 bg-light">
+        <div class="container">
+            <span class="primary-badge mb-4 mx-auto">TESTIMONIALS</span>
+            <h2 class="text-center section-title">Creating A Community Of <br>Life Long Learners.</h2>
+
+            <div class="row g-5 justify-content-center">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"This platform has truly exceeded my expectations. The support team is responsive!"</p>
+                        <div class="d-flex gap-1 flex-column">
+                            <div class="testimonial-author">Kathy Sullivan</div>
+                            <div class="testimonial-position">CEO at ordian it</div>
+                        </div>
+                        <span class="quttes">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                width="70" height="47" viewBox="0 0 70 47" fill="none">
+                                <rect width="70" height="46" transform="translate(0 0.0292969)"
+                                    fill="url(#pattern0_427_218)" />
+                                <defs>
+                                    <pattern id="pattern0_427_218" patternContentUnits="objectBoundingBox" width="1"
+                                        height="1">
+                                        <use xlink:href="#image0_427_218" transform="scale(0.0142857 0.0217391)" />
+                                    </pattern>
+                                    <image id="image0_427_218" width="70" height="46" preserveAspectRatio="none"
+                                        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAAuCAYAAACViW+zAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAUUSURBVHgB7ZrPb+NEFMefxx7Hjps0bUKSbrcl7Ub8OCFRiZU4rYQEQmIl9tAbSJz6d+TPQPwLvay0SKBKSEjcWIK4gBB02Wq3JT/dzTZNk9hjG4+z2Q1pftkziXPYz83JSPP8nffePM88AeZAPv9ppE4iKgZDwSLGRBBk2zZExxLcJ4ToGNO0bYyj9fLxYQ0WQgGl3v5V61625FVNVYghYYIMmf4jIRH3R9kgdqrHT58IwIUCim3+tKbhWMx0TLX/8rMgtJzHpdK3VzAHNjY+i5KIHXcQxAdffipEbEnAAJ0YVEgZ1kPNXX1XDAswzKyJh7hmKlACjsIUUDb/e9LumnEnYikiiOAXQSZKQGEOcDZX3XQkS6NPGAVzPGJbZlmtN4ETm5v3kh3pYRoAIRSBwDi2pft+o97kRtpPuAxD84skmXrlyw/rUCjYwExvoeDFQgWGmC2nbdcqlaOWD2FcF839ts0yOfUQYsvVxsn9BnAil/s80XTMDaaFQk5Dj5WqUCya/d9mFOYAp3ZPd3wlsCEcp1vj5yE9MrfupQWBvAEBoTuQ0LwqUw8Z/m8GYdhEoV4itsjZqMlZYBXFIpZe++qD6riFmiKMu/fv/pxnEaW+Vnk86KI8oHnOUkkWAkOq5ePvJtZPE3eltY1fbrKED/UU+IevKAB3FCZR3ARbPvl+alE5NmFRV41oQgyCW1DlHT69sI5uQ0C88iBZO5tlLBpnAEv8egZ8cVsHziRv/ptm8eCI3NVnDeuRZWFqN5NHAvJfMr7AsHC5c//rNnAk4W7LEdlJQ0DoYlX+PjqddTwaZQDLqlADeNYpfSRkBBaFQusnP+OHhDnArAY4EuKcV3r5jmWxKI3kU192CcMGsOQWSoeIZ2qXGIO/aZplHR/fdmM7SHHHXlzSr2WhS655zI0bJbM4JucMCLMvpnZbt1hXZhK00jQI6H5CLfbOR0mNRBlqlsnQ7zawhAv91P0kgFcivUywidxbq7IICZgjghtoEnLiSiK/dvUsfgFQmupB8fi7WywbwTREURBESVBW1mPJlfX34PL8D+8I5GWOYc0tfqBe6e58OwB7E72TdSPwTyedze97qcQTJpP5WFusAT1xsrmtzUljFJivB4+mk6YHcJ4wBMshGODiHmHs7Y3zmgPMfL4SECmOEp4w7lF1KAZQHumxkXMnctXQbGqbZAVB7o6y6DAaRJHUkXMj8YrhO40NqgdKQEKBJQQ5kgohgujdDywd+2KYXkxxCwR56YTJZJ6HbhPq38YtE101Gqq3UBC2g5+uzwvNbM6t0p0VN8cJoRsxjKXKoS/W0nnLsvBamDEgeuIGS0aHREK3CSHTsWDJQBddbreVgW2wo5jroTUPzne2QrcJRS5bXVg2it+YAgnXk9EZtrgfXvOgKxqh2oXg5MfOMiZg24pyaygKgrddiwLhfg/ESuMEN8MMJ0+YyqNVPeyYvs6hZYvGOYQECtuISTVLWAtGUwsaNCKMXDP5hvDQulTaC+oDfgW9TUWDRnj9LAuE9r5N6z5o/vmDTm8SYYHQfrz/fSvRfhZiLiakqHd6DYEzUE6mzxYXUsRrUrx25HD1/P22kuiuzvP2j3Y1VderT2ZuQSsVbSG75cg2XoE5Qa9q5Ui7UvrrqE6fR/bg5dybg0sU3eZ+7uoK0gGlEbRNJPXmJxsSlteBI1QQpDnPampFn7mddfxlmH+Kd+9aXFpZCwW09+ABN28e1+3wH5+NLVJDMgdDAAAAAElFTkSuQmCC" />
+                                </defs>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"I was able to improve my skills significantly thanks to the amazing tutors here."</p>
+                        <div class="d-flex gap-1 flex-column">
+                            <div class="testimonial-author">Kathy Sullivan</div>
+                            <div class="testimonial-position">CEO at ordian it</div>
+                        </div>
+                        <span class="quttes">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                width="70" height="47" viewBox="0 0 70 47" fill="none">
+                                <rect width="70" height="46" transform="translate(0 0.0292969)"
+                                    fill="url(#pattern0_427_218)" />
+                                <defs>
+                                    <pattern id="pattern0_427_218" patternContentUnits="objectBoundingBox" width="1"
+                                        height="1">
+                                        <use xlink:href="#image0_427_218" transform="scale(0.0142857 0.0217391)" />
+                                    </pattern>
+                                    <image id="image0_427_218" width="70" height="46" preserveAspectRatio="none"
+                                        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAAuCAYAAACViW+zAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAUUSURBVHgB7ZrPb+NEFMefxx7Hjps0bUKSbrcl7Ub8OCFRiZU4rYQEQmIl9tAbSJz6d+TPQPwLvay0SKBKSEjcWIK4gBB02Wq3JT/dzTZNk9hjG4+z2Q1pftkziXPYz83JSPP8nffePM88AeZAPv9ppE4iKgZDwSLGRBBk2zZExxLcJ4ToGNO0bYyj9fLxYQ0WQgGl3v5V61625FVNVYghYYIMmf4jIRH3R9kgdqrHT58IwIUCim3+tKbhWMx0TLX/8rMgtJzHpdK3VzAHNjY+i5KIHXcQxAdffipEbEnAAJ0YVEgZ1kPNXX1XDAswzKyJh7hmKlACjsIUUDb/e9LumnEnYikiiOAXQSZKQGEOcDZX3XQkS6NPGAVzPGJbZlmtN4ETm5v3kh3pYRoAIRSBwDi2pft+o97kRtpPuAxD84skmXrlyw/rUCjYwExvoeDFQgWGmC2nbdcqlaOWD2FcF839ts0yOfUQYsvVxsn9BnAil/s80XTMDaaFQk5Dj5WqUCya/d9mFOYAp3ZPd3wlsCEcp1vj5yE9MrfupQWBvAEBoTuQ0LwqUw8Z/m8GYdhEoV4itsjZqMlZYBXFIpZe++qD6riFmiKMu/fv/pxnEaW+Vnk86KI8oHnOUkkWAkOq5ePvJtZPE3eltY1fbrKED/UU+IevKAB3FCZR3ARbPvl+alE5NmFRV41oQgyCW1DlHT69sI5uQ0C88iBZO5tlLBpnAEv8egZ8cVsHziRv/ptm8eCI3NVnDeuRZWFqN5NHAvJfMr7AsHC5c//rNnAk4W7LEdlJQ0DoYlX+PjqddTwaZQDLqlADeNYpfSRkBBaFQusnP+OHhDnArAY4EuKcV3r5jmWxKI3kU192CcMGsOQWSoeIZ2qXGIO/aZplHR/fdmM7SHHHXlzSr2WhS655zI0bJbM4JucMCLMvpnZbt1hXZhK00jQI6H5CLfbOR0mNRBlqlsnQ7zawhAv91P0kgFcivUywidxbq7IICZgjghtoEnLiSiK/dvUsfgFQmupB8fi7WywbwTREURBESVBW1mPJlfX34PL8D+8I5GWOYc0tfqBe6e58OwB7E72TdSPwTyedze97qcQTJpP5WFusAT1xsrmtzUljFJivB4+mk6YHcJ4wBMshGODiHmHs7Y3zmgPMfL4SECmOEp4w7lF1KAZQHumxkXMnctXQbGqbZAVB7o6y6DAaRJHUkXMj8YrhO40NqgdKQEKBJQQ5kgohgujdDywd+2KYXkxxCwR56YTJZJ6HbhPq38YtE101Gqq3UBC2g5+uzwvNbM6t0p0VN8cJoRsxjKXKoS/W0nnLsvBamDEgeuIGS0aHREK3CSHTsWDJQBddbreVgW2wo5jroTUPzne2QrcJRS5bXVg2it+YAgnXk9EZtrgfXvOgKxqh2oXg5MfOMiZg24pyaygKgrddiwLhfg/ESuMEN8MMJ0+YyqNVPeyYvs6hZYvGOYQECtuISTVLWAtGUwsaNCKMXDP5hvDQulTaC+oDfgW9TUWDRnj9LAuE9r5N6z5o/vmDTm8SYYHQfrz/fSvRfhZiLiakqHd6DYEzUE6mzxYXUsRrUrx25HD1/P22kuiuzvP2j3Y1VderT2ZuQSsVbSG75cg2XoE5Qa9q5Ui7UvrrqE6fR/bg5dybg0sU3eZ+7uoK0gGlEbRNJPXmJxsSlteBI1QQpDnPampFn7mddfxlmH+Kd+9aXFpZCwW09+ABN28e1+3wH5+NLVJDMgdDAAAAAElFTkSuQmCC" />
+                                </defs>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"A seamless learning experience! The scheduling are very well designed"</p>
+                        <div class="d-flex gap-1 flex-column">
+                            <div class="testimonial-author">Kathy Sullivan</div>
+                            <div class="testimonial-position">CEO at ordian it</div>
+                        </div>
+                        <span class="quttes">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                width="70" height="47" viewBox="0 0 70 47" fill="none">
+                                <rect width="70" height="46" transform="translate(0 0.0292969)"
+                                    fill="url(#pattern0_427_218)" />
+                                <defs>
+                                    <pattern id="pattern0_427_218" patternContentUnits="objectBoundingBox" width="1"
+                                        height="1">
+                                        <use xlink:href="#image0_427_218" transform="scale(0.0142857 0.0217391)" />
+                                    </pattern>
+                                    <image id="image0_427_218" width="70" height="46" preserveAspectRatio="none"
+                                        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAAuCAYAAACViW+zAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAUUSURBVHgB7ZrPb+NEFMefxx7Hjps0bUKSbrcl7Ub8OCFRiZU4rYQEQmIl9tAbSJz6d+TPQPwLvay0SKBKSEjcWIK4gBB02Wq3JT/dzTZNk9hjG4+z2Q1pftkziXPYz83JSPP8nffePM88AeZAPv9ppE4iKgZDwSLGRBBk2zZExxLcJ4ToGNO0bYyj9fLxYQ0WQgGl3v5V61625FVNVYghYYIMmf4jIRH3R9kgdqrHT58IwIUCim3+tKbhWMx0TLX/8rMgtJzHpdK3VzAHNjY+i5KIHXcQxAdffipEbEnAAJ0YVEgZ1kPNXX1XDAswzKyJh7hmKlACjsIUUDb/e9LumnEnYikiiOAXQSZKQGEOcDZX3XQkS6NPGAVzPGJbZlmtN4ETm5v3kh3pYRoAIRSBwDi2pft+o97kRtpPuAxD84skmXrlyw/rUCjYwExvoeDFQgWGmC2nbdcqlaOWD2FcF839ts0yOfUQYsvVxsn9BnAil/s80XTMDaaFQk5Dj5WqUCya/d9mFOYAp3ZPd3wlsCEcp1vj5yE9MrfupQWBvAEBoTuQ0LwqUw8Z/m8GYdhEoV4itsjZqMlZYBXFIpZe++qD6riFmiKMu/fv/pxnEaW+Vnk86KI8oHnOUkkWAkOq5ePvJtZPE3eltY1fbrKED/UU+IevKAB3FCZR3ARbPvl+alE5NmFRV41oQgyCW1DlHT69sI5uQ0C88iBZO5tlLBpnAEv8egZ8cVsHziRv/ptm8eCI3NVnDeuRZWFqN5NHAvJfMr7AsHC5c//rNnAk4W7LEdlJQ0DoYlX+PjqddTwaZQDLqlADeNYpfSRkBBaFQusnP+OHhDnArAY4EuKcV3r5jmWxKI3kU192CcMGsOQWSoeIZ2qXGIO/aZplHR/fdmM7SHHHXlzSr2WhS655zI0bJbM4JucMCLMvpnZbt1hXZhK00jQI6H5CLfbOR0mNRBlqlsnQ7zawhAv91P0kgFcivUywidxbq7IICZgjghtoEnLiSiK/dvUsfgFQmupB8fi7WywbwTREURBESVBW1mPJlfX34PL8D+8I5GWOYc0tfqBe6e58OwB7E72TdSPwTyedze97qcQTJpP5WFusAT1xsrmtzUljFJivB4+mk6YHcJ4wBMshGODiHmHs7Y3zmgPMfL4SECmOEp4w7lF1KAZQHumxkXMnctXQbGqbZAVB7o6y6DAaRJHUkXMj8YrhO40NqgdKQEKBJQQ5kgohgujdDywd+2KYXkxxCwR56YTJZJ6HbhPq38YtE101Gqq3UBC2g5+uzwvNbM6t0p0VN8cJoRsxjKXKoS/W0nnLsvBamDEgeuIGS0aHREK3CSHTsWDJQBddbreVgW2wo5jroTUPzne2QrcJRS5bXVg2it+YAgnXk9EZtrgfXvOgKxqh2oXg5MfOMiZg24pyaygKgrddiwLhfg/ESuMEN8MMJ0+YyqNVPeyYvs6hZYvGOYQECtuISTVLWAtGUwsaNCKMXDP5hvDQulTaC+oDfgW9TUWDRnj9LAuE9r5N6z5o/vmDTm8SYYHQfrz/fSvRfhZiLiakqHd6DYEzUE6mzxYXUsRrUrx25HD1/P22kuiuzvP2j3Y1VderT2ZuQSsVbSG75cg2XoE5Qa9q5Ui7UvrrqE6fR/bg5dybg0sU3eZ+7uoK0gGlEbRNJPXmJxsSlteBI1QQpDnPampFn7mddfxlmH+Kd+9aXFpZCwW09+ABN28e1+3wH5+NLVJDMgdDAAAAAElFTkSuQmCC" />
+                                </defs>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> @endif @endguest
 
     <!-- Become Tutor -->
-    <section class="padding-120">
+  @guest  <section class="padding-120">
         <div class="container text-center">
             <span class="primary-badge mb-4 mx-auto">BECOM A TUTOR</span>
             <h2 class="text-center section-title">Guide And Inspire Learners</h2>
@@ -995,7 +1144,42 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> @else
+    @if(Auth::user()->role !== 'user')<section class="padding-120">
+        <div class="container text-center">
+            <span class="primary-badge mb-4 mx-auto">BECOM A TUTOR</span>
+            <h2 class="text-center section-title">Guide And Inspire Learners</h2>
+            <div class="become-tutor-div">
+                <div class="row g-3">
+                    <div class="col-12 col-lg-7">
+                        <div class="tutor-content">
+                            <h4>Guide and Inspire Learners</h4>
+                            <p>Earn while you teach—share your expertise with students on Edexcel. Sign up to start
+                                tutoring online.</p>
+                            <button class="warning-btn-2">
+                                Register yourself as a professional teacher
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15"
+                                        fill="none">
+                                        <path d="M11.5293 2.2207L16.5293 8.2207L11.5293 14.2207" stroke="white"
+                                            stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M1.5293 8.2207H16.5293" stroke="white" stroke-width="1.5"
+                                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-5">
+                        <div class="tutor-image text-center">
+                            <img src="{{asset('homeImage/become-tutor-teacher.png')}}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> @endif @endguest
 
     <!-- FAQ -->
     <section class="padding-120 bg-light">
@@ -1527,7 +1711,7 @@
                 };
                 console.log("AJAX Data Sent:", locationData);
 
-                $('#overlay').show(); // Show loading overlay
+                $('#lazzyLoader').show(); // Show loading overlay
 
                 $.ajax({
                     type: 'POST',
@@ -1537,7 +1721,7 @@
                     success: function(response) {
                         console.log("AJAX Success: ", response);
                         $('#tutorsContainer').empty();
-                        $('#overlay').hide(); // Hide loading overlay
+                         $('#lazzyLoader').hide(); // Hide loading overlay
 
                         if (response && response.tutors && response.tutors.length > 0) {
                             response.tutors.forEach(function(tutor) {
@@ -1674,7 +1858,7 @@
                     },
                     error: function(xhr, status, error) {
                         console.log('AJAX Error:', xhr.responseText);
-                        $('#overlay').hide();
+                         $('#lazzyLoader').hide();
                     }
                 });
             });
@@ -1702,7 +1886,7 @@
 
                 console.log("AJAX:", locationData);
 
-                $('#overlay').show(); // Show loading overlay
+                $('#lazzyLoader').show(); // Show loading overlay
 
                 $.ajax({
                     type: 'POST',
@@ -1713,7 +1897,7 @@
                     success: function(response) {
                         console.log("AJAX Success: ", response);
                         $('#tutorsContainer').empty();
-                        $('#overlay').hide(); // Hide loading overlay
+                        $('#lazzyLoader').hide(); // Hide loading overlay
 
                         if (response && response.tutors && response.tutors.length > 0) {
                             response.tutors.forEach(function(tutor) {
@@ -1844,7 +2028,7 @@
                     },
                     error: function(xhr, status, error) {
                         console.log('AJAX Error:', xhr.responseText);
-                        $('#overlay').hide();
+                        $('#lazzyLoader').hide();
                     }
                 });
             });
@@ -1858,7 +2042,7 @@
                     country: selectedCountry !== "all" ? selectedCountry : "all"
                 };
 
-                $('#overlay').show(); // Show loading overlay
+                $('#lazzyLoader').show();// Show loading overlay
 
                 $.ajax({
                     type: 'POST',
@@ -1868,7 +2052,7 @@
                     success: function(response) {
                         console.log("AJAX Success:", response);
                         $('#tutorsContainer').empty();
-                        $('#overlay').hide(); // Hide loading overlay
+                         $('#lazzyLoader').hide(); // Hide loading overlay
 
                         if (response && response.tutors && response.tutors.length > 0) {
                             response.tutors.forEach(function(tutor) {
@@ -1970,7 +2154,7 @@
                     },
                     error: function(xhr) {
                         console.error('AJAX Error:', xhr.responseText);
-                        $('#overlay').hide();
+                        $('#lazzyLoader').hide();
                     }
                 });
             });
@@ -1985,7 +2169,7 @@
                     gender: selectedGender !== "all" ? selectedGender : "all"
                 };
 
-                $('#overlay').show(); // Show loading overlay
+                $('#lazzyLoader').show();// Show loading overlay
 
                 $.ajax({
                     type: 'POST',
@@ -1995,7 +2179,7 @@
                     success: function(response) {
                         console.log("AJAX Success:", response);
                         $('#tutorsContainer').empty();
-                        $('#overlay').hide(); // Hide loading overlay
+                        $('#lazzyLoader').hide(); // Hide loading overlay
 
                         if (response && response.tutors && response.tutors.length > 0) {
                             response.tutors.forEach(function(tutor) {
@@ -2095,7 +2279,7 @@
                     },
                     error: function(xhr) {
                         console.error('AJAX Error:', xhr.responseText);
-                        $('#overlay').hide();
+                        $('#lazzyLoader').hide();
                     }
                 });
             });
@@ -2107,7 +2291,7 @@
                     subjectsearch: searchQuery
                 };
 
-                $('#overlay').show();
+                $('#lazzyLoader').show();
 
                 $.ajax({
                     type: 'POST',
@@ -2117,7 +2301,7 @@
                     success: function(response) {
                         console.log("AJAX Success: ", response);
                         $('#tutorsContainer').empty();
-                        $('#overlay').hide();
+                        $('#lazzyLoader').hide();
 
                         if (response && response.tutors && response.tutors.length > 0) {
                             response.tutors.forEach(function(tutor) {
@@ -2246,7 +2430,7 @@
                     },
                     error: function(xhr, status, error) {
                         console.error('AJAX error:', status, error);
-                        $('#overlay').hide();
+                       $('#lazzyLoader').hide();
                         $('#tutorsContainer').html(
                             '<p class="text-danger">An error occurred while fetching tutors. Please try again later.</p>'
                         );
