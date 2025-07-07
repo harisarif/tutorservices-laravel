@@ -179,6 +179,14 @@ class StudentController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
+   // ✅ Check if user already exists by email
+    $existingUser = User::where('email', $request->input('email'))->first();
+
+   if ($existingUser) {
+    return redirect()->route('newhome')->with('alert', 'User already exists.');
+}
+
+
         $student = new Student();
         $student->name = $request->input('name');
         $student->email = $request->input('email');

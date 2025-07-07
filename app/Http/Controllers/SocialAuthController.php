@@ -33,9 +33,8 @@ class SocialAuthController extends Controller
     $user = User::where('email', $email)->first();
 
     if ($user) {
-        // ✅ Log in the existing user
-        Auth::login($user);
-        return redirect()->route('newhome')->with('alert', 'Logged in successfully.');
+        
+        return redirect()->route('newhome')->with('alert', 'User already exists.');
     }
 
     // ❌ If user not found, create one

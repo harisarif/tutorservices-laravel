@@ -40,7 +40,7 @@
         })
     </script>
 </head>
-<div class="modalBox" id="allModal">
+@guest<div class="modalBox" id="allModal">
     <div class="boxModal-1 col-4 bg-light rounded py-2 p-0">
         <h5 class="col-12 d-flex justify-content-between align-items-center px-2 border-bottom">
             {{__('messages.academy_name')}}
@@ -58,7 +58,26 @@
 
         </div>
     </div>
-</div>
+</div> @else 
+    @if(Auth::user()->role !== 'user')<div class="modalBox" id="allModal">
+    <div class="boxModal-1 col-4 bg-light rounded py-2 p-0">
+        <h5 class="col-12 d-flex justify-content-between align-items-center px-2 border-bottom">
+            {{__('messages.academy_name')}}
+            <span class="fs-2 pointer foucs bg-primary text-white text-center rounded mb-1"
+                onclick="document.getElementById('allModal').style.display = 'none'" style="cursor:pointer;height:35px;width:35px;"> &times;</span>
+        </h5>
+
+        <p class="px-2">{{__('messages.welcome_message')}}</p>
+
+        <hr />
+        <div class="d-flex justify-content-end gap-2">
+            <a data-bs-toggle="modal" data-bs-target="#signupPromptModal" class="btn bg_theme_green border-0 bg-primary text-white me-0" onclick="document.getElementById('allModal').style.display = 'none'">{{__('messages.student')}}</a>
+
+            <a href="{{ route('tutor') }}" class="btn bg_theme_green border-0 bg-primary text-white me-2">{{__('messages.tutor')}}</a>
+
+        </div>
+    </div>
+</div> @endif @endguest
 <div id="messageres"></div>
 @if (session('alert') || session('error'))
 <div class="alert alert-{{ session('error') ? 'danger' : 'success' }} alert-dismissible fade show d-flex align-items-center"
@@ -174,7 +193,7 @@
                             </span>
                         </button> </a>
                 </form>
-                @elseif(Auth::user()->role === 'admin')
+                @else
                 <a href="{{ route('basicsignup') }}">
                     <button class="primary-btn">
                         Register
@@ -201,7 +220,7 @@
                             </svg>
                         </span>
                     </button>
-                </a> @endif
+                </a> @endif   @else
                 {{-- Logout form --}}
 
                 @endauth
@@ -217,7 +236,8 @@
             <div class="col-lg-6">
                 @auth
                     @if(Auth::user()->role === 'user')
-                        <h4 class="hero-pretitle">WELCOME TO EDEXCEL!</h4>
+                        <h4 class="hero-pretitle">WELCOME TO EDEXCEL!  {{ ucfirst(Auth::user()->name ?? 'No first name') }}
+</h4>
                         <h2 class="hero-title">Continue Your Learning Journey With Expert Tutors</h2>
                         <p class="mb-4">We're glad to have you again. Explore new lessons and grow with our dedicated tutoring support.</p>
                     @else
@@ -234,7 +254,7 @@
                 @endauth
                    @auth
                     @if(Auth::user()->role === 'user')
-                        <button class="primary-btn">
+                        <button class="primary-btn" style="display:none;">
                     Request a Tutor
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
