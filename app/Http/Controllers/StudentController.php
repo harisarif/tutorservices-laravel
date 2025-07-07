@@ -183,8 +183,10 @@ class StudentController extends Controller
     $existingUser = User::where('email', $request->input('email'))->first();
 
    if ($existingUser) {
-    return redirect()->route('newhome')->with('alert', 'User already exists.');
+    Auth::login($existingUser);
+    return redirect()->route('newhome')->with('alert', 'Logged in successfully.');
 }
+
 
 
         $student = new Student();

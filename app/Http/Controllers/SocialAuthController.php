@@ -33,7 +33,7 @@ class SocialAuthController extends Controller
     $user = User::where('email', $email)->first();
 
     if ($user) {
-        
+        Auth::login($user);
         return redirect()->route('newhome')->with('alert', 'User already exists.');
     }
 
