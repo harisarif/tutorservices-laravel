@@ -341,7 +341,7 @@
                         <div class="service-icon">
                             <img src="{{asset('homeImage/mic.png')}}" width="54" alt="">
                         </div>
-                        <h3>SUPPORT</h3>
+                        <h3>Linguistic Learning</h3>
                         <p>Duis aute irure dolor reprehenderit in voluptate velit esse cillum dolore fugiat nulla
                             pariatur Excepteur</p>
                     </div>
@@ -409,7 +409,7 @@
                 <div class="col-6 col-md-4 col-lg-2">
                     <!-- <label for="" class="small-label">Please Select A Country</label> -->
                     <select class="country form-select" name="country" id="country" style="font-size: 13px;">
-                        <option>Please Select A Country</option>
+                        <option value="all">Please Select A Country</option>
                         @foreach($countries as $countryCode => $countryName)
                         <option value="{{ $countryCode }}">{{ $countryName }}</option>
                         @endforeach
@@ -418,7 +418,7 @@
                 <div class="col-6 col-md-4 col-lg-2">
                     <!-- <label for="" class="small-label">Gender Selection</label> -->
                     <select name="gender" id="gender" class="country form-select" style="font-size: 13px;">
-                        <option>Show By Gender</option>
+                        <option value="all">Show By Gender</option>
                         <option value="Male">{{ __('Male') }}</option>
                         <option value="female">{{ __('Female') }}</option>
                     </select>
@@ -2469,9 +2469,16 @@
                     },
                     dataType: 'json',
                     success: function(response) {
-                        $('#gender').val('Male').trigger('change');
-                        $('#country').val('AL').trigger('change');
-                        $('#price').val('0-50').trigger('change');
+                        // ✅ Reset filters to first/default option
+    $('#gender')[0].selectedIndex = 0;
+    $('#country')[0].selectedIndex = 0;
+    $('#subjectSearch')[0].selectedIndex = 0;
+    $('#prize-Range')[0].selectedIndex = 0;
+
+    $('#gender').trigger('change');
+    $('#country').trigger('change');
+    $('#subjectSearch').trigger('change');
+    $('#prize-Range').trigger('change');
                         // Clear input fields
                         $('#tutorsContainer').empty(); // Clear tutor list
                         console.log("Filters reset successfully:", response);
