@@ -379,7 +379,7 @@
                         <div class="service-icon">
                             <img src="{{asset('homeImage/mic.png')}}" width="54" alt="">
                         </div>
-                        <h3>SUPPORT</h3>
+                        <h3>Linguistic Learning</h3>
                         <p>Duis aute irure dolor reprehenderit in voluptate velit esse cillum dolore fugiat nulla
                             pariatur Excepteur</p>
                     </div>
