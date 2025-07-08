@@ -58,8 +58,8 @@
 
         </div>
     </div>
-</div> @else 
-    @if(Auth::user()->role !== 'user')<div class="modalBox" id="allModal">
+</div> @else
+@if(Auth::user()->role !== 'user')<div class="modalBox" id="allModal">
     <div class="boxModal-1 col-4 bg-light rounded py-2 p-0">
         <h5 class="col-12 d-flex justify-content-between align-items-center px-2 border-bottom">
             {{__('messages.academy_name')}}
@@ -220,7 +220,7 @@
                             </svg>
                         </span>
                     </button>
-                </a> @endif   @else
+                </a> @endif @else
                 {{-- Logout form --}}
 
                 @endauth
@@ -230,88 +230,88 @@
     </nav>
 
     <!-- Hero Section -->
-   <section class="hero-section position-relative">
-    <div class="container" style="z-index: 4; position: relative;">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                @auth
+    <section class="hero-section position-relative">
+        <div class="container" style="z-index: 4; position: relative;">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    @auth
                     @if(Auth::user()->role === 'user')
-                        <h4 class="hero-pretitle">WELCOME TO EDEXCEL!  {{ ucfirst(Auth::user()->name ?? 'No first name') }}
-</h4>
-                        <h2 class="hero-title">Continue Your Learning Journey With Expert Tutors</h2>
-                        <p class="mb-4">We're glad to have you again. Explore new lessons and grow with our dedicated tutoring support.</p>
+                    <h4 class="hero-pretitle">WELCOME TO EDEXCEL! {{ ucfirst(Auth::user()->name ?? 'No first name') }}
+                    </h4>
+                    <h2 class="hero-title">Continue Your Learning Journey With Expert Tutors</h2>
+                    <p class="mb-4">We're glad to have you again. Explore new lessons and grow with our dedicated tutoring support.</p>
                     @else
-                        {{-- Show guest version to admins or other roles --}}
-                        <h4 class="hero-pretitle">WELCOME EDEXCEL ONLINE COURSES.</h4>
-                        <h2 class="hero-title">Edexcel Academically With Tailored Tutoring And Professional Guidance</h2>
-                        <p class="mb-4">We are experienced in education platform and skilled strategies for the success of our online learning.</p>
+                    {{-- Show guest version to admins or other roles --}}
+                    <h4 class="hero-pretitle">WELCOME EDEXCEL ONLINE COURSES.</h4>
+                    <h2 class="hero-title">Edexcel Academically With Tailored Tutoring And Professional Guidance</h2>
+                    <p class="mb-4">We are experienced in education platform and skilled strategies for the success of our online learning.</p>
                     @endif
-                @else
+                    @else
                     {{-- Guest version --}}
                     <h4 class="hero-pretitle">WELCOME EDEXCEL ONLINE COURSES.</h4>
                     <h2 class="hero-title">Edexcel Academically With Tailored Tutoring And Professional Guidance</h2>
                     <p class="mb-4">We are experienced in education platform and skilled strategies for the success of our online learning.</p>
-                @endauth
-                   @auth
+                    @endauth
+                    @auth
                     @if(Auth::user()->role === 'user')
-                        <button class="primary-btn" style="display:none;">
-                    Request a Tutor
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
-                            <path d="M11.5293 2.2207L16.5293 8.2207L11.5293 14.2207" stroke="white"
-                                stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M1.5293 8.2207H16.5293" stroke="white" stroke-width="1.5"
-                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </span>
-                </button>
+                    <button class="primary-btn" style="display:none;">
+                        Request a Tutor
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
+                                <path d="M11.5293 2.2207L16.5293 8.2207L11.5293 14.2207" stroke="white"
+                                    stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M1.5293 8.2207H16.5293" stroke="white" stroke-width="1.5"
+                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                    </button>
                     @else
-                        {{-- Show guest version to admins or other roles --}}
-                        <button class="primary-btn" data-bs-toggle="modal" data-bs-target="#signupPromptModal">
-                    Request a Tutor
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
-                            <path d="M11.5293 2.2207L16.5293 8.2207L11.5293 14.2207" stroke="white"
-                                stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M1.5293 8.2207H16.5293" stroke="white" stroke-width="1.5"
-                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </span>
-                </button>
+                    {{-- Show guest version to admins or other roles --}}
+                    <button class="primary-btn" data-bs-toggle="modal" data-bs-target="#signupPromptModal">
+                        Request a Tutor
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
+                                <path d="M11.5293 2.2207L16.5293 8.2207L11.5293 14.2207" stroke="white"
+                                    stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M1.5293 8.2207H16.5293" stroke="white" stroke-width="1.5"
+                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                    </button>
                     @endif
-                @else
-                  <button class="primary-btn" data-bs-toggle="modal" data-bs-target="#signupPromptModal">
-                    Request a Tutor
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
-                            <path d="M11.5293 2.2207L16.5293 8.2207L11.5293 14.2207" stroke="white"
-                                stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M1.5293 8.2207H16.5293" stroke="white" stroke-width="1.5"
-                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </span>
-                </button>
-                @endauth
+                    @else
+                    <button class="primary-btn" data-bs-toggle="modal" data-bs-target="#signupPromptModal">
+                        Request a Tutor
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
+                                <path d="M11.5293 2.2207L16.5293 8.2207L11.5293 14.2207" stroke="white"
+                                    stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M1.5293 8.2207H16.5293" stroke="white" stroke-width="1.5"
+                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                    </button>
+                    @endauth
 
-               
+
+                </div>
             </div>
         </div>
-    </div>
-    <img src="{{ asset('homeImage/dots.png') }}" class="dots" alt="">
-    <spna class="tutor-span">
-        <h3><span class="text-primary">+{{ $allTutorsCount }} </span>Tutors</h3>
-        <img src="{{ asset('homeImage/tutor-banner.png') }}" alt="">
-    </spna>
-    <img src="{{ asset('homeImage/5c59f5b1f89aa3bf34e0e8a6afa3bc296d7128e5.jpg') }}" class="banner-image" alt="">
-</section>
+        <img src="{{ asset('homeImage/dots.png') }}" class="dots" alt="">
+        <spna class="tutor-span">
+            <h3><span class="text-primary">+{{ $allTutorsCount }} </span>Tutors</h3>
+            <img src="{{ asset('homeImage/tutor-banner.png') }}" alt="">
+        </spna>
+        <img src="{{ asset('homeImage/5c59f5b1f89aa3bf34e0e8a6afa3bc296d7128e5.jpg') }}" class="banner-image" alt="">
+    </section>
 
 
 
     <!-- Services Section -->
-   @guest <section class="padding-120">
+    @guest <section class="padding-120">
         <div class="container">
             <span class="primary-badge mx-auto mb-3">SERVICES</span>
             <h2 class="text-center section-title">Our Services</h2>
@@ -503,7 +503,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-between align-items-center mb-3 align-items-center">
-                            <h3 class="display-6">{{ $item->f_name }} {{$item->l_name}}</h3>
+                            <h3 class="display-6">${tutor.f_name} ${tutor.l_name.charAt(0)}.</h3>
                             <div class="d-flex justify-content-end gap-1 align-items-center">
                                 <div class="rating">
                                     <i class="fa fa-star"></i>
@@ -627,11 +627,11 @@
             <div id="paginationContainer">
                 {{ $tutors->links('custom-pagination') }}
             </div>
-           
+
     </section>
 
-    <!-- About Section -->    
-   @guest <section class="padding-120 about">
+    <!-- About Section -->
+    @guest <section class="padding-120 about">
         <div class="container">
             <div class="row align-items-center g-3">
                 <div class="col-lg-6 text-center text-lg-start">
@@ -662,7 +662,7 @@
         </div>
     </section> @else
     @if(Auth::user()->role !== 'user')
-     <section class="padding-120 about">
+    <section class="padding-120 about">
         <div class="container">
             <div class="row align-items-center g-3">
                 <div class="col-lg-6 text-center text-lg-start">
@@ -692,7 +692,7 @@
             </div>
         </div>
     </section> @endif
-@endguest
+    @endguest
     <!-- Courses Section -->
     <section class="padding-120 bg-light">
         <div class="container">
@@ -766,7 +766,7 @@
     </section>
 
     <!-- Call to Action -->
-   @guest <section class="call-to-action">
+    @guest <section class="call-to-action">
         <div class="dark-bg">
             <div class="container padding-70">
                 <h4 class="pre-heading">Join Our New Session</h4>
@@ -785,7 +785,7 @@
             </div>
         </div>
     </section>
-     @else
+    @else
     @if(Auth::user()->role !== 'user')<section class="call-to-action">
         <div class="dark-bg">
             <div class="container padding-70">
@@ -863,8 +863,8 @@
     </section>
 
     <!-- Stats Section -->
-   @guest
-     <section class="stats-section">
+    @guest
+    <section class="stats-section">
         <div class="container">
             <div class="stat-counter row g-3">
                 <div class="col-12 col-md-6 col-lg-3">
@@ -966,7 +966,7 @@
     </section>@endif @endguest
 
     <!-- Testimonials -->
-   @guest <section class="padding-120 padding-top-180 bg-light">
+    @guest <section class="padding-120 padding-top-180 bg-light">
         <div class="container">
             <span class="primary-badge mb-4 mx-auto">TESTIMONIALS</span>
             <h2 class="text-center section-title">Creating A Community Of <br>Life Long Learners.</h2>
@@ -1046,7 +1046,7 @@
                 </div>
             </div>
         </div>
-    </section>   @else
+    </section> @else
     @if(Auth::user()->role !== 'user') <section class="padding-120 padding-top-180 bg-light">
         <div class="container">
             <span class="primary-badge mb-4 mx-auto">TESTIMONIALS</span>
@@ -1130,7 +1130,7 @@
     </section> @endif @endguest
 
     <!-- Become Tutor -->
-  @guest  <section class="padding-120">
+    @guest <section class="padding-120">
         <div class="container text-center">
             <span class="primary-badge mb-4 mx-auto">BECOM A TUTOR</span>
             <h2 class="text-center section-title">Guide And Inspire Learners</h2>
@@ -1741,7 +1741,7 @@
                     success: function(response) {
                         console.log("AJAX Success: ", response);
                         $('#tutorsContainer').empty();
-                         $('#lazzyLoader').hide(); // Hide loading overlay
+                        $('#lazzyLoader').hide(); // Hide loading overlay
 
                         if (response && response.tutors && response.tutors.length > 0) {
                             response.tutors.forEach(function(tutor) {
@@ -1810,7 +1810,10 @@
                                             </div>` : ''}
 
                                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h3 class="display-6">${tutor.f_name ?? ''} ${tutor.l_name ?? ''}</h3>
+                                                <h3 class="display-6">
+  ${tutor.f_name ?? ''} ${(tutor.l_name ?? '').charAt(0)}.
+</h3>
+
                                                 <div class="d-flex justify-content-end gap-1 align-items-center">
                                                     <div class="rating">${'★'.repeat(5)}</div>
                                                     <div class="price">$${tutor.price ?? 'N/A'}</div>
@@ -1878,7 +1881,7 @@
                     },
                     error: function(xhr, status, error) {
                         console.log('AJAX Error:', xhr.responseText);
-                         $('#lazzyLoader').hide();
+                        $('#lazzyLoader').hide();
                     }
                 });
             });
@@ -1984,7 +1987,7 @@
                                     </div>` : ''}
 
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h3 class="display-6">${tutor.f_name} ${tutor.l_name}</h3>
+                                        <h3 class="display-6"> ${tutor.f_name ?? ''} ${(tutor.l_name ?? '').charAt(0)}.</h3>
                                         <div class="d-flex justify-content-end gap-1 align-items-center">
                                             <div class="rating">${'★'.repeat(5)}</div>
                                             <div class="price">${tutor.price ?? 'N/A'}</div>
@@ -2062,7 +2065,7 @@
                     country: selectedCountry !== "all" ? selectedCountry : "all"
                 };
 
-                $('#lazzyLoader').show();// Show loading overlay
+                $('#lazzyLoader').show(); // Show loading overlay
 
                 $.ajax({
                     type: 'POST',
@@ -2072,7 +2075,7 @@
                     success: function(response) {
                         console.log("AJAX Success:", response);
                         $('#tutorsContainer').empty();
-                         $('#lazzyLoader').hide(); // Hide loading overlay
+                        $('#lazzyLoader').hide(); // Hide loading overlay
 
                         if (response && response.tutors && response.tutors.length > 0) {
                             response.tutors.forEach(function(tutor) {
@@ -2111,7 +2114,7 @@
                                     </div>` : ''}
 
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h3 class="display-6">${tutor.f_name} ${tutor.l_name}</h3>
+                                        <h3 class="display-6"> ${tutor.f_name ?? ''} ${(tutor.l_name ?? '').charAt(0)}.</h3>
                                         <div class="d-flex justify-content-end gap-1 align-items-center">
                                             <div class="rating">${'★'.repeat(5)}</div>
                                             <div class="price">${tutor.price ?? 'N/A'}</div>
@@ -2189,7 +2192,7 @@
                     gender: selectedGender !== "all" ? selectedGender : "all"
                 };
 
-                $('#lazzyLoader').show();// Show loading overlay
+                $('#lazzyLoader').show(); // Show loading overlay
 
                 $.ajax({
                     type: 'POST',
@@ -2238,7 +2241,7 @@
                                     </div>` : ''}
 
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h3 class="display-6">${tutor.f_name} ${tutor.l_name}</h3>
+                                        <h3 class="display-6"> ${tutor.f_name ?? ''} ${(tutor.l_name ?? '').charAt(0)}.</h3>
                                         <div class="d-flex justify-content-end gap-1 align-items-center">
                                             <div class="rating">${'★'.repeat(5)}</div>
                                             <div class="price">${tutor.price ?? 'N/A'}</div>
@@ -2385,7 +2388,7 @@
                                     </div>` : ''}
 
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h3 class="display-6">${tutor.f_name} ${tutor.l_name}</h3>
+                                        <h3 class="display-6"> ${tutor.f_name ?? ''} ${(tutor.l_name ?? '').charAt(0)}.</h3>
                                         <div class="d-flex justify-content-end gap-1 align-items-center">
                                             <div class="rating">${'★'.repeat(5)}</div>
                                             <div class="price">${tutor.price ?? 'N/A'}</div>
@@ -2450,7 +2453,7 @@
                     },
                     error: function(xhr, status, error) {
                         console.error('AJAX error:', status, error);
-                       $('#lazzyLoader').hide();
+                        $('#lazzyLoader').hide();
                         $('#tutorsContainer').html(
                             '<p class="text-danger">An error occurred while fetching tutors. Please try again later.</p>'
                         );
@@ -2532,7 +2535,7 @@
                                     </div>` : ''}
 
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h3 class="display-6">${tutor.f_name} ${tutor.l_name}</h3>
+                                        <h3 class="display-6"> ${tutor.f_name ?? ''} ${(tutor.l_name ?? '').charAt(0)}.</h3>
                                         <div class="d-flex justify-content-end gap-1 align-items-center">
                                             <div class="rating">${'★'.repeat(5)}</div>
                                             <div class="price">${tutor.price ?? 'N/A'}</div>
