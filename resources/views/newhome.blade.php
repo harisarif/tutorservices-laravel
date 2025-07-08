@@ -503,7 +503,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-between align-items-center mb-3 align-items-center">
-                            <h3 class="display-6">${tutor.f_name} ${tutor.l_name.charAt(0)}.</h3>
+                            <h3 class="display-6">{{ $item->f_name }} {{ substr($item->l_name, 0, 1) }}.</h3>
                             <div class="d-flex justify-content-end gap-1 align-items-center">
                                 <div class="rating">
                                     <i class="fa fa-star"></i>
