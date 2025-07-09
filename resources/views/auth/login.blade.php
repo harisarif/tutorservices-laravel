@@ -19,7 +19,8 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Platform', 'Platform-fallback', 'Platform-fallback-android', 'Noto Sans',
+        'NotoSans-fallback', 'NotoSans-fallback-android', sans-serif;
             display: flex;
             height: 100vh;
         }
@@ -46,14 +47,12 @@
             font-size: 30px;
             font-weight: 700;
             margin-bottom: 10px;
-            font-family:Epilogue;
         }
 
         .left-panel p {
             color: #6c6c6c;
             margin-bottom: 20px;
             font-size: 18px;
-            font-family: Poppins;
         }
 
         .form-group {
@@ -157,11 +156,11 @@
         }
 
         .card img {
-            width: 64%;
+            width: 85%;
             border-radius: 12px;
             position: absolute;
-            bottom: 0;
-            right: 16px;
+            bottom: 10px;
+            right: 12px;
         }
 
         .icon-badge {
@@ -379,13 +378,13 @@
       </div> -->
         </div>
         <div class="right-panel">
-            <div class="close-btn">×</div>
+            <!-- <div class="close-btn">×</div> -->
             <div class="card">
                 <div class="icon-badge">
                     <img src="{{ asset('images/Group11.png') }}" />
                 </div>
-                <h3>Online Expert Training</h3>
-                <img src="{{ asset('images/user.png') }}" alt="Woman with tablet" />
+                <h3>Empowering Learners. Shaping Futures.</h3>
+                <img src="{{ asset('images/login-page.png') }}" alt="Woman with tablet" />
             </div>
         </div>
     </div>

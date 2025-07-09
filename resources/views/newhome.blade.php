@@ -22,6 +22,10 @@
     <link rel="stylesheet" href="{{ asset('css/default.min.css')}}" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <style>
+        body {
+            font-family: 'Platform', 'Platform-fallback', 'Platform-fallback-android', 'Noto Sans',
+        'NotoSans-fallback', 'NotoSans-fallback-android', sans-serif;
+        }
         .loader {
             width: 100%;
             height: 100vh;
@@ -238,19 +242,19 @@
                     @if(Auth::user()->role === 'user')
                     <h4 class="hero-pretitle">WELCOME TO EDEXCEL! {{ ucfirst(Auth::user()->name ?? 'No first name') }}
                     </h4>
-                    <h2 class="hero-title">Continue Your Learning Journey With Expert Tutors</h2>
-                    <p class="mb-4">We're glad to have you again. Explore new lessons and grow with our dedicated tutoring support.</p>
+                    <h2 class="hero-title">Continue Your Learning <br> Journey With Expert Tutors</h2>
+                    <p class="mb-4">We're glad to have you again. Explore new lessons and grow with our <br> dedicated tutoring support.</p>
                     @else
                     {{-- Show guest version to admins or other roles --}}
                     <h4 class="hero-pretitle">WELCOME EDEXCEL ONLINE COURSES.</h4>
-                    <h2 class="hero-title">Edexcel Academically With Tailored Tutoring And Professional Guidance</h2>
-                    <p class="mb-4">We are experienced in education platform and skilled strategies for the success of our online learning.</p>
+                    <h2 class="hero-title">Edexcel Academically <br> With Tailored Tutoring And Professional Guidance</h2>
+                    <p class="mb-4">We are experienced in education platform and skilled strategies for the success of our <br> online learning.</p>
                     @endif
                     @else
                     {{-- Guest version --}}
                     <h4 class="hero-pretitle">WELCOME EDEXCEL ONLINE COURSES.</h4>
-                    <h2 class="hero-title">Edexcel Academically With Tailored Tutoring And Professional Guidance</h2>
-                    <p class="mb-4">We are experienced in education platform and skilled strategies for the success of our online learning.</p>
+                    <h2 class="hero-title">Edexcel Academically <br> With Tailored Tutoring And Professional Guidance</h2>
+                    <p class="mb-4">We are experienced in education platform and skilled strategies for the success of our <br> online learning.</p>
                     @endauth
                     @auth
                     @if(Auth::user()->role === 'user')
@@ -1502,8 +1506,8 @@
                             <div class="icon-badge">
                                 <img src="{{ asset('images/Group11.png') }}" />
                             </div>
-                            <h3>Online Expert Training</h3>
-                            <img src="{{ asset('images/user.png') }}" alt="Woman with tablet" />
+                            <h3>Learn Anytime, Anywhere With the Best</h3>
+                            <img src="{{ asset('images/login-page.png') }}" alt="Woman with tablet" />
                         </div>
                     </div>
                 </div>
