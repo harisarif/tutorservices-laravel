@@ -24,8 +24,9 @@
     <style>
         body {
             font-family: 'Platform', 'Platform-fallback', 'Platform-fallback-android', 'Noto Sans',
-        'NotoSans-fallback', 'NotoSans-fallback-android', sans-serif;
+                'NotoSans-fallback', 'NotoSans-fallback-android', sans-serif;
         }
+
         .loader {
             width: 100%;
             height: 100vh;
@@ -1488,7 +1489,11 @@
                                     <strong class="text-danger">{{ $message }}</strong>
                                 </span>
                                 @enderror
-                                <div class="divider">Sign Up with Others</div>
+                                <div class="divider-container">
+                                    <div class="divider-line"></div>
+                                    <span class="divider-text">Signup with Others</span>
+                                    <div class="divider-line"></div>
+                                </div>
 
                             </form>
                             <a class="social-btn" href="{{ route('social.redirect','google') }}">
@@ -2474,15 +2479,15 @@
                     dataType: 'json',
                     success: function(response) {
                         // ✅ Reset filters to first/default option
-    $('#gender')[0].selectedIndex = 0;
-    $('#country')[0].selectedIndex = 0;
-    $('#subjectSearch')[0].selectedIndex = 0;
-    $('#prize-Range')[0].selectedIndex = 0;
+                        $('#gender')[0].selectedIndex = 0;
+                        $('#country')[0].selectedIndex = 0;
+                        $('#subjectSearch')[0].selectedIndex = 0;
+                        $('#prize-Range')[0].selectedIndex = 0;
 
-    $('#gender').trigger('change');
-    $('#country').trigger('change');
-    $('#subjectSearch').trigger('change');
-    $('#prize-Range').trigger('change');
+                        $('#gender').trigger('change');
+                        $('#country').trigger('change');
+                        $('#subjectSearch').trigger('change');
+                        $('#prize-Range').trigger('change');
                         // Clear input fields
                         $('#tutorsContainer').empty(); // Clear tutor list
                         console.log("Filters reset successfully:", response);

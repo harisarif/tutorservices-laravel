@@ -20,7 +20,7 @@
 
         body {
             font-family: 'Platform', 'Platform-fallback', 'Platform-fallback-android', 'Noto Sans',
-        'NotoSans-fallback', 'NotoSans-fallback-android', sans-serif;
+                'NotoSans-fallback', 'NotoSans-fallback-android', sans-serif;
             display: flex;
             height: 100vh;
         }
@@ -112,7 +112,7 @@
             background-color: #fff;
             font-weight: 400;
             cursor: pointer;
-            color:#000;
+            color: #000;
         }
 
         .social-btn img {
@@ -193,6 +193,25 @@
             color: #28b463;
         }
 
+        .divider-container {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background-color: #ccc;
+        }
+
+        .divider-text {
+            padding: 0 10px;
+            white-space: nowrap;
+            color: #999;
+            font-weight: 500;
+        }
 
 
         @media(max-width: 1850px) {
@@ -330,12 +349,12 @@
                 @csrf
                 <div class="form-group">
                     <img src="{{ asset('images/formkit_email.png') }}" alt="email icon" />
-                    <input type="email" placeholder="Email Address" name="email"  required autocomplete="off" />
-                    
+                    <input type="email" placeholder="Email Address" name="email" required autocomplete="off" />
+
                 </div>
                 <div class="form-group">
                     <img src="{{ asset('images/Frame.png') }}" alt="password icon" />
-                    <input type="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password"/>
+                    <input type="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" />
                     @error('password')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -344,10 +363,10 @@
                 </div>
                 <button class="login-button" type="submit">Login</button>
                 @error('email')
-                    <span class="invalid-feedback" role="alert" style="color:red;">
-                        <strong class="text-danger">{{ $message }}</strong>
-                    </span>
-                    @enderror
+                <span class="invalid-feedback" role="alert" style="color:red;">
+                    <strong class="text-danger">{{ $message }}</strong>
+                </span>
+                @enderror
                 <div class="row mb-3" style="display:flex;justify-content:space-between">
                     <div>
                         <input class="form-check-input mt-2" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} style="box-shadow: none;">
@@ -367,7 +386,12 @@
 
                 </div>
             </form>
-            <div class="divider">Login with Others</div>
+            <div class="divider-container">
+                <div class="divider-line"></div>
+                <span class="divider-text">Login with Others</span>
+                <div class="divider-line"></div>
+            </div>
+
             <a class="social-btn" href="{{ route('social.redirect','google') }}">
                 <img src="https://img.icons8.com/color/48/000000/google-logo.png" />
                 Login with <strong style="margin-left: 5px;">google</strong>
