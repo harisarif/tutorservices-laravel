@@ -57,8 +57,10 @@
 
         <hr />
         <div class="d-flex justify-content-end gap-2">
-            <a data-bs-toggle="modal" data-bs-target="#signupPromptModal" class="btn bg_theme_green border-0 bg-primary text-white me-0" onclick="document.getElementById('allModal').style.display = 'none'">{{__('messages.student')}}</a>
-
+            <a href="javascript:void(0)" class="btn bg_theme_green border-0 bg-primary text-white me-0"
+            onclick="document.getElementById('allModal').style.display = 'none'; document.getElementById('tutorSect').scrollIntoView({ behavior: 'smooth' });">
+            {{__('messages.student')}}
+            </a>
             <a href="{{ route('tutor') }}" class="btn bg_theme_green border-0 bg-primary text-white me-2">{{__('messages.tutor')}}</a>
 
         </div>
@@ -313,88 +315,7 @@
         <img src="{{ asset('homeImage/5c59f5b1f89aa3bf34e0e8a6afa3bc296d7128e5.jpg') }}" class="banner-image" alt="">
     </section>
 
-
-
-    <!-- Services Section -->
-    @guest <section class="padding-120">
-        <div class="container">
-            <span class="primary-badge mx-auto mb-3">SERVICES</span>
-            <h2 class="text-center section-title">Our Services</h2>
-            <div class="row g-3 justify-content-center">
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class=" service-card text-center p-4">
-                        <div class="service-icon">
-                            <img src="{{asset('homeImage/teacher.png')}}" width="54" alt="">
-                        </div>
-                        <h3>ONLINE CLASSES</h3>
-                        <p>Duis aute irure dolor reprehenderit in voluptate velit esse cillum dolore fugiat nulla
-                            pariatur Excepteur</p>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class=" service-card active text-center p-4">
-                        <div class="service-icon active">
-                            <img src="{{asset('homeImage/student.png')}}" width="54" alt="">
-                        </div>
-                        <h3>ONLINE TUTORS</h3>
-                        <p>Duis aute irure dolor reprehenderit in voluptate velit esse cillum dolore fugiat nulla
-                            pariatur. Excepteur</p>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class=" service-card text-center p-4">
-                        <div class="service-icon">
-                            <img src="{{asset('homeImage/mic.png')}}" width="54" alt="">
-                        </div>
-                        <h3>Linguistic Learning</h3>
-                        <p>Duis aute irure dolor reprehenderit in voluptate velit esse cillum dolore fugiat nulla
-                            pariatur Excepteur</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> @else
-    @if(Auth::user()->role !== 'user')<section class="padding-120">
-        <div class="container">
-            <span class="primary-badge mx-auto mb-3">SERVICES</span>
-            <h2 class="text-center section-title">Our Services</h2>
-            <div class="row g-3 justify-content-center">
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class=" service-card text-center p-4">
-                        <div class="service-icon">
-                            <img src="{{asset('homeImage/teacher.png')}}" width="54" alt="">
-                        </div>
-                        <h3>ONLINE CLASSES</h3>
-                        <p>Duis aute irure dolor reprehenderit in voluptate velit esse cillum dolore fugiat nulla
-                            pariatur Excepteur</p>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class=" service-card active text-center p-4">
-                        <div class="service-icon active">
-                            <img src="{{asset('homeImage/student.png')}}" width="54" alt="">
-                        </div>
-                        <h3>ONLINE TUTORS</h3>
-                        <p>Duis aute irure dolor reprehenderit in voluptate velit esse cillum dolore fugiat nulla
-                            pariatur. Excepteur</p>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class=" service-card text-center p-4">
-                        <div class="service-icon">
-                            <img src="{{asset('homeImage/mic.png')}}" width="54" alt="">
-                        </div>
-                        <h3>Linguistic Learning</h3>
-                        <p>Duis aute irure dolor reprehenderit in voluptate velit esse cillum dolore fugiat nulla
-                            pariatur Excepteur</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> @endif @endguest
-
-    <!-- Tutors Section -->
-    <section class="padding-120 bg-white adjust-select">
+    <section class="padding-120 bg-white adjust-select" id="tutorSect">
         <div class="container">
             <span class="primary-badge mb-3">OUR TUTORS</span>
             <h2 class="section-title">Discover Your Tutor</h2>
@@ -431,19 +352,36 @@
                 <div class="col-6 col-md-4 col-lg-2">
                     <!-- <label for="" class="small-label">Which Subject Interests You?</label> -->
                     <select name="subjectSearch" id="subjectSearch" class="form-control country" style="font-size: 13px;">
-                        <option>Which Subject Interests You?</option>
+                        <option value="all">Which Subject Interests You?</option>
                         @foreach($subjectsTeach as $subjectsCode => $subjects)
                         <option value="{{ $subjectsCode }}">{{ $subjects }}</option>
                         @endforeach
                     </select>
                 </div>
-                <div class="col-6 col-md-4 col-lg-2">
-                    <!-- <label for="" class="small-label">Price Selection</label> -->
-                    <select name="prize-Range" id="prize-Range" class="form-select country" style="font-size: 13px;">
-                        <option value="all">{{ __('messages.Price Selection') }}</option>
+                <!-- <div class="col-6 col-md-4 col-lg-2"> -->
+                <!-- <label for="" class="small-label">Price Selection</label> -->
+                <!-- <select name="prize-Range" id="prize-Range" class="form-select country" style="font-size: 13px;">
+                                <option value="all">{{ __('messages.Price Selection') }}</option>
 
-                    </select>
+                            </select> -->
+                <!-- <input type="range" id="price-range" name="price-range" min="0" max="100" step="10"> -->
+                <!-- </div> -->
+                <!-- <div class="col-6 col-md-4 col-lg-2" style="border:1px solid #77dd77;border-radius: 5px;height: 43px;">
+                    <label for="" class="small-label">Price Selection</label> 
+                    <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                </div> -->
+                <div class="dropdownposition-relative col-6 col-md-4 col-lg-2">
+                    <button class="btn dropdown-toggle w-100" type="button" id="priceToggleBtn" style="border: 1px solid #77dd77;font-size:13px;height:42px;">
+                        Select Price
+                    </button>
+                    <div class="dropdown-menu p-3 position-absolute" id="priceDropdown" style="width: 200px; display: none;">
+                        <label for="priceRange" class="form-label" style="font-size: 12px;">
+                            Max Price: $<span id="priceValue">50</span>
+                        </label>
+                        <input type="range" class="form-range" min="50" max="300" step="" id="priceRange">
+                    </div>
                 </div>
+
                 <div class="col-6 col-md-4 col-lg-2">
                     <!-- <label for="" class="small-label">Add Varified</label> -->
                     <select class="form-select" style="font-size: 13px;">
@@ -453,12 +391,9 @@
                         <option value="off">Off</option>
                     </select>
                 </div>
-                <div class="col-6 col-md-4 col-lg-2">
-                    <!-- <label for="" class="small-label">Select Tutor</label> -->
+                <div class="col-6 col-md-4 col-lg-2 d-none">
                     <select class="form-select" style="font-size: 13px;">
                         <option value="">Select Tutor</option>
-                        <!-- <option>$0-$50</option>
-                        <option>$50-$100</option> -->
                     </select>
                 </div>
             </div>
@@ -468,7 +403,7 @@
                 @if($item->status != 'inactive')
 
                 {{-- @if ($tutors->count() > 0)
-    <div class="row tutorsContainer p-0 m-0"> --}}
+                         <div class="row tutorsContainer p-0 m-0"> --}}
                 {{-- @foreach ($tutors as $item) --}}
                 <div class="col-12 col-md-6 col-lg-4 d-flex m-0 " style="padding:1px;">
                     <div class="tutor-card d-flex flex-column w-100 ">
@@ -583,7 +518,7 @@
                             <a href="{{ route('zoom.send.meeting.email', ['student_id' => Auth::user()->id, 'teacher_id' => $item->teacher_id]) }}"
                                 class="primary-btn-2 flex-grow-1 d-flex align-items-center justify-content-center px-3 py-2"
                                 style="text-decoration: none; 
-"
+                "
                                 title="Zoom Meet">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 24 24">
                                     <path d="M17 10.5V7c0-1.1-.9-2-2-2H4C2.9 5 2 5.9 2 7v10c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-3.5l4 4v-11l-4 4z" />
@@ -608,7 +543,7 @@
                                 id="demo"
                                 data-teacher-id="{{ $item->teacher_id }}"
                                 class="primary-btn-2  flex-grow-1 p-0  d-flex align-items-center  justify-content-center request-demo-btn" style="width: 120px; height:45px;
-    "
+            "
                                 title="Request a Demo">
                                 <span class="" style="font-size:12px;">Request a Demo</span>
                             </button>
@@ -634,6 +569,87 @@
             </div>
 
     </section>
+
+    <!-- Services Section -->
+    @guest <section class="padding-120">
+        <div class="container">
+            <span class="primary-badge mx-auto mb-3">SERVICES</span>
+            <h2 class="text-center section-title">Our Services</h2>
+            <div class="row g-3 justify-content-center">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class=" service-card text-center p-4">
+                        <div class="service-icon">
+                            <img src="{{asset('homeImage/teacher.png')}}" width="54" alt="">
+                        </div>
+                        <h3>ONLINE CLASSES</h3>
+                        <p>Duis aute irure dolor reprehenderit in voluptate velit esse cillum dolore fugiat nulla
+                            pariatur Excepteur</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class=" service-card active text-center p-4">
+                        <div class="service-icon active">
+                            <img src="{{asset('homeImage/student.png')}}" width="54" alt="">
+                        </div>
+                        <h3>ONLINE TUTORS</h3>
+                        <p>Duis aute irure dolor reprehenderit in voluptate velit esse cillum dolore fugiat nulla
+                            pariatur. Excepteur</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class=" service-card text-center p-4">
+                        <div class="service-icon">
+                            <img src="{{asset('homeImage/mic.png')}}" width="54" alt="">
+                        </div>
+                        <h3>Linguistic Learning</h3>
+                        <p>Duis aute irure dolor reprehenderit in voluptate velit esse cillum dolore fugiat nulla
+                            pariatur Excepteur</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> @else
+    @if(Auth::user()->role !== 'user')<section class="padding-120">
+        <div class="container">
+            <span class="primary-badge mx-auto mb-3">SERVICES</span>
+            <h2 class="text-center section-title">Our Services</h2>
+            <div class="row g-3 justify-content-center">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class=" service-card text-center p-4">
+                        <div class="service-icon">
+                            <img src="{{asset('homeImage/teacher.png')}}" width="54" alt="">
+                        </div>
+                        <h3>ONLINE CLASSES</h3>
+                        <p>Duis aute irure dolor reprehenderit in voluptate velit esse cillum dolore fugiat nulla
+                            pariatur Excepteur</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class=" service-card active text-center p-4">
+                        <div class="service-icon active">
+                            <img src="{{asset('homeImage/student.png')}}" width="54" alt="">
+                        </div>
+                        <h3>ONLINE TUTORS</h3>
+                        <p>Duis aute irure dolor reprehenderit in voluptate velit esse cillum dolore fugiat nulla
+                            pariatur. Excepteur</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class=" service-card text-center p-4">
+                        <div class="service-icon">
+                            <img src="{{asset('homeImage/mic.png')}}" width="54" alt="">
+                        </div>
+                        <h3>Linguistic Learning</h3>
+                        <p>Duis aute irure dolor reprehenderit in voluptate velit esse cillum dolore fugiat nulla
+                            pariatur Excepteur</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> @endif @endguest
+
+    <!-- Tutors Section -->
+
 
     <!-- About Section -->
     @guest <section class="padding-120 about">
@@ -1534,6 +1550,37 @@
     <!-- Bootstrap & FontAwesome (add these in your layout if not already included) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        const priceBtn = document.getElementById('priceToggleBtn');
+        const priceDropdown = document.getElementById('priceDropdown');
+        const priceValue = document.getElementById('priceValue');
+        const priceRange = document.getElementById('priceRange');
+
+        // Toggle visibility
+        priceBtn.addEventListener('click', function() {
+            priceDropdown.style.display = priceDropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Update displayed price
+        priceRange.addEventListener('input', function() {
+            priceValue.textContent = this.value;
+        });
+
+        // Optional: hide when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!priceBtn.contains(e.target) && !priceDropdown.contains(e.target)) {
+                priceDropdown.style.display = 'none';
+            }
+        });
+        $('#gender').on('mousedown', function() {
+            $(this).find('option[value="all"]').remove(); // Remove the "Show By Gender" when dropdown is opened
+        });
+        $('#country').on('mousedown', function() {
+            $(this).find('option[value="all"]').remove(); // Remove the "Show By Gender" when dropdown is opened
+        });
+        $('#subjectSearch').on('mousedown', function() {
+            $(this).find('option[value="all"]').remove(); // Remove the "Show By Gender" when dropdown is opened
+        });
+
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const MODAL_BOX = document.getElementById('allModal');
@@ -1729,7 +1776,7 @@
                 }
             });
 
-            $('#prize-Range').change(function(e) {
+            $('#priceRange').on('input', function (e) {
                 e.preventDefault();
 
                 var selectedPrice = $(this).val();
@@ -1820,12 +1867,12 @@
 
                                             <div class="d-flex justify-content-between align-items-center mb-3">
                                                 <h3 class="display-6">
-  ${tutor.f_name ?? ''} ${(tutor.l_name ?? '').charAt(0)}.
-</h3>
+                                                ${tutor.f_name ?? ''} ${(tutor.l_name ?? '').charAt(0)}.
+                                                </h3>
 
                                                 <div class="d-flex justify-content-end gap-1 align-items-center">
                                                     <div class="rating">${'★'.repeat(5)}</div>
-                                                    <div class="price">$${tutor.price ?? 'N/A'}</div>
+                                                    <div class="price">${tutor.price ?? 'N/A'}</div>
                                                 </div>
                                             </div>
 
