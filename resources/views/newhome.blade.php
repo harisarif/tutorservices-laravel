@@ -1481,6 +1481,7 @@
                             <!-- Form -->
                             <form action="{{ route('student-create') }}" method="POST" class="pages" enctype="multipart/form-data" autocomplete="off">
                                 @csrf
+                                <input type="text" name="website" style="display:none">
                                 <div class="modal-form-group">
                                     <img src="{{ asset('images/Frame-user.png') }}" alt="email icon" />
                                     <input type="text" placeholder="Full Name" name="name" required autocomplete="off" autofocus />
@@ -1488,7 +1489,7 @@
                                 </div>
                                 <div class="modal-form-group">
                                     <img src="{{ asset('images/formkit_email.png') }}" alt="email icon" />
-                                    <input type="email" placeholder="Email Address" name="email" value="{{ old('email') }}" required autocomplete="off" autofocus class="@error('email') is-invalid @enderror" />
+                                    <input type="email" pattern="^[a-zA-Z0-9._%+-]+@(?:gmail\.com|outlook\.com|hotmail\.com|yahoo\.com)$" placeholder="Email Address" name="email" value="{{ old('email') }}" required autocomplete="off" autofocus class="@error('email') is-invalid @enderror" />
 
                                 </div>
                                 <div class="modal-form-group">

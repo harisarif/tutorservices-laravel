@@ -26,7 +26,8 @@ use App\Notifications\TutorRequestNotification;
 
 class StudentController extends Controller
 {
-    public function LoginPage() {
+    public function LoginPage()
+    {
         return view('login-2');
     }
     public function index()
@@ -156,12 +157,25 @@ class StudentController extends Controller
         return view('student-list', compact('data'));
     }
     public function create(Request $request)
-    { 
+    {
 
         $rules = [
-            'email' => 'required|string|email|max:255|unique:student,email',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                'regex:/^[a-zA-Z\s\-\'\.]{2,}$/u' // only letters, spaces, hyphens, apostrophes, dots
+            ],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                'unique:student,email',
+                'regex:/^[a-zA-Z0-9._%+-]+@(gmail\.com|outlook\.com|hotmail\.com|yahoo\.com)$/'
+            ],
             'password' => 'required|min:8',
-            'phone' => 'nullable|string|max:20', // checks c_password too
+            'phone' => 'nullable|string|max:20',
             'availability_status' => 'nullable|string|max:255',
             'country' => 'nullable|string|max:100',
             'city' => 'nullable|string|max:100',
@@ -170,7 +184,16 @@ class StudentController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ];
 
+        if ($request->filled('website')) {
+            abort(403, 'Bot detected.');
+        }
+        if (preg_match('/[\p{Cyrillic}]/u', $request->input('name'))) {
+            return redirect()->back()->withErrors(['name' => 'Invalid characters in name.'])->withInput();
+        }
 
+        if (str_contains($request->input('name'), 'Поздравялем') || str_contains($request->input('name'), '🏆')) {
+            return redirect()->back()->withErrors(['name' => 'Suspicious name detected.'])->withInput();
+        }
         $validator = Validator::make($request->all(), $rules);
 
         // Check if validation fails
@@ -179,13 +202,13 @@ class StudentController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-   // ✅ Check if user already exists by email
-    $existingUser = User::where('email', $request->input('email'))->first();
+        // ✅ Check if user already exists by email
+        $existingUser = User::where('email', $request->input('email'))->first();
 
-   if ($existingUser) {
-    Auth::login($existingUser);
-    return redirect()->route('newhome')->with('alert', 'User already exists.');
-}
+        if ($existingUser) {
+            Auth::login($existingUser);
+            return redirect()->route('newhome')->with('alert', 'User already exists.');
+        }
 
 
 
@@ -203,17 +226,17 @@ class StudentController extends Controller
         $student->session_id = session()->getId();
         $student->save();
 
-    //      $tutor = Tutor::findOrFail($id);
+        //      $tutor = Tutor::findOrFail($id);
 
-    //     $toTutor = $tutor->email;
-    //     $subjectTutor = "Welcome to Edexcel Your Learning Journey Starts Now!";
-    //     $messageTutor ="Dear " . $tutor->name . ",\r\n\r\n" .
-    // "We are thrilled to welcome you to Edexcel! 🎉 As a valued tutor, your role is essential in shaping our students’ learning journey.\r\n\r\n" .
-    // "To get started, please log in to your account, complete your profile, and explore the available teaching tools and resources.\r\n" .
-    // "If you have any questions or require support, feel free to reach out to us at info@edexceledu.com — we're always here to help.\r\n\r\n" .
-    // "We look forward to working with you and empowering students together.\r\n\r\n" .
-    // "Best regards,\r\n" .
-    // "The Edexcel Team";
+        //     $toTutor = $tutor->email;
+        //     $subjectTutor = "Welcome to Edexcel Your Learning Journey Starts Now!";
+        //     $messageTutor ="Dear " . $tutor->name . ",\r\n\r\n" .
+        // "We are thrilled to welcome you to Edexcel! 🎉 As a valued tutor, your role is essential in shaping our students’ learning journey.\r\n\r\n" .
+        // "To get started, please log in to your account, complete your profile, and explore the available teaching tools and resources.\r\n" .
+        // "If you have any questions or require support, feel free to reach out to us at info@edexceledu.com — we're always here to help.\r\n\r\n" .
+        // "We look forward to working with you and empowering students together.\r\n\r\n" .
+        // "Best regards,\r\n" .
+        // "The Edexcel Team";
 
         // $this->sendEmail($toTutor, $subjectTutor, $messageTutor);
 
@@ -413,24 +436,24 @@ class StudentController extends Controller
         $request->validate([
             'teacher_id' => 'required|integer|exists:tutors,teacher_id',
         ]);
-    
+
         // Get the tutor using teacher_id (not primary key)
         $tutor = \App\Models\Tutor::where('teacher_id', $request->teacher_id)->first();
-    
+
         if (!$tutor) {
             return response()->json(['error' => 'Tutor not found.'], 404);
         }
-    
+
         $user = Auth::user();
-    
+
         // Social Icons
         $facebookImg = "<img src='https://edexceledu.com/icons/facebook.jpeg' alt='Facebook' width='20' height='20' style='vertical-align:middle'>";
         $instagramImg = "<img src='https://edexceledu.com/icons/instagram.jpeg' alt='Instagram' width='20' height='20' style='vertical-align:middle'>";
         $linkedinImg  = "<img src='https://edexceledu.com/icons/linkedin.jpeg' alt='LinkedIn' width='20' height='20' style='vertical-align:middle'>";
         $youtubeImg   = "<img src='https://edexceledu.com/icons/youtube.jpeg' alt='YouTube' width='20' height='20' style='vertical-align:middle'>";
-    
+
         $subjectTutor = "New Tutoring Request from {$user->name}";
-    
+
         // Reusable HTML message body
         $message = function ($recipientName, $recipientType) use ($user, $tutor, $facebookImg, $instagramImg, $linkedinImg, $youtubeImg) {
             $otherPerson = $recipientType === 'tutor' ? $user : $tutor;
@@ -472,17 +495,17 @@ class StudentController extends Controller
                 </div>
             ";
         };
-    
+
         // Send to Tutor
         $this->sendEmail($tutor->email, $subjectTutor, $message($tutor->f_name, 'tutor'));
-    
+
         // Send to User (confirmation)
         $subjectUser = "Your Tutoring Request to {$tutor->name} was sent";
         $this->sendEmail($user->email, $subjectUser, $message($user->name, 'user'));
-    
+
         return response()->json(['success' => true, 'message' => 'Demo request sent to both tutor and student.']);
     }
-    
+
     public function sendTutorRequest(Request $request, $id)
     {
         $student = auth()->user();
