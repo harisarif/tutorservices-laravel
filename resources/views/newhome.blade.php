@@ -1536,7 +1536,7 @@
         </div>
     </div>
     @if(Auth::check() && Auth::user()->role === 'user')
-    <div class="modal fade" id="signupPromptModalNew" tabindex="-1" aria-labelledby="signupPromptLabel" aria-hidden="true">
+    <div class="modal fade" id="signupPromptModalNew" tabindex="-1" aria-labelledby="signupPromptLabel" aria-hidden="true" >
         <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 1000px !important;">
             <div class="modal-content" style="border-radius: 16px; overflow: hidden; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
 
@@ -1622,8 +1622,11 @@
     <!-- Bootstrap & FontAwesome (add these in your layout if not already included) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        const modal = new bootstrap.Modal(document.getElementById('signupPromptModalNew'));
-        modal.show();
+        document.addEventListener('DOMContentLoaded', () => {
+            const modalEl = document.getElementById('signupPromptModalNew');
+            const bootstrapModal = new bootstrap.Modal(modalEl);
+            bootstrapModal.show();
+        });
         const priceBtn = document.getElementById('priceToggleBtn');
         const priceDropdown = document.getElementById('priceDropdown');
         const priceValue = document.getElementById('priceValue');
@@ -1658,10 +1661,12 @@
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const MODAL_BOX = document.getElementById('allModal');
-                MODAL_BOX.style.display = 'flex';
-                MODAL_BOX.children[0].classList.add('dropModal')
-            }, 1000)
-        })
+                if (MODAL_BOX) {
+                    MODAL_BOX.style.display = 'flex';
+                    MODAL_BOX.children[0].classList.add('dropModal');
+                }
+            }, 1000);
+        });
 
         function closeModal() {
             const modal = document.getElementById('signupPromptModal');
@@ -1729,30 +1734,30 @@
 
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const submitBtn = document.getElementById("submitBtn");
-            const form = document.querySelector("form");
+        // document.addEventListener("DOMContentLoaded", function() {
+        //     const submitBtn = document.getElementById("submitBtn");
+        //     const form = document.querySelector("form");
 
-            const requiredFields = [
-                document.getElementById("inquiryname"),
-                document.getElementById("inquiryemail"),
-                document.getElementById("phone"),
-                document.getElementById("inquirydesp"), // Remove this if optional
-            ];
+        //     const requiredFields = [
+        //         document.getElementById("inquiryname"),
+        //         document.getElementById("inquiryemail"),
+        //         document.getElementById("phone"),
+        //         document.getElementById("inquirydesp"), // Remove this if optional
+        //     ];
 
-            function validateFields() {
-                const allFilled = requiredFields.every(field => field.value.trim() !== '');
-                submitBtn.disabled = !allFilled;
-            }
+        //     function validateFields() {
+        //         const allFilled = requiredFields.every(field => field.value.trim() !== '');
+        //         submitBtn.disabled = !allFilled;
+        //     }
 
-            requiredFields.forEach(field => {
-                field.addEventListener("input", validateFields);
-            });
+        //     requiredFields.forEach(field => {
+        //         field.addEventListener("input", validateFields);
+        //     });
 
-            validateFields(); // Initial check
+        //     validateFields();
 
-            form.addEventListener("submit", function(e) {});
-        });
+        //     form.addEventListener("submit", function(e) {});
+        // });
         document.querySelectorAll('.trigger-modal').forEach(function(element) {
             element.addEventListener('mouseenter', function() {
                 var modal = new bootstrap.Modal(document.getElementById('videoModal'));
@@ -1827,21 +1832,21 @@
         });
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const priceRanges = ["0-50", "50-100", "100-200", "500-1000"];
-            const select = document.getElementById("prize-Range");
+        // document.addEventListener("DOMContentLoaded", () => {
+        //     const priceRanges = ["0-50", "50-100", "100-200", "500-1000"];
+        //     const select = document.getElementById("prize-Range");
 
-            if (select) {
-                priceRanges.forEach(range => {
-                    const option = document.createElement("option");
-                    option.value = range;
-                    option.textContent = `$${range.replace("-", " - $")}`;
-                    select.appendChild(option);
-                });
-            } else {
-                console.error("Element with ID 'prize-Range' not found.");
-            }
-        });
+        //     if (select) {
+        //         priceRanges.forEach(range => {
+        //             const option = document.createElement("option");
+        //             option.value = range;
+        //             option.textContent = `$${range.replace("-", " - $")}`;
+        //             select.appendChild(option);
+        //         });
+        //     } else {
+        //         console.error("Element with ID 'prize-Range' not found.");
+        //     }
+        // });
 
         $(document).ready(function() {
             $.ajaxSetup({
@@ -2769,11 +2774,11 @@
         }
 
         // Close the dropdown if clicked outside
-        document.addEventListener('click', function(event) {
-            if (!event.target.closest('.custom-select')) {
-                document.querySelector('.custom-options').classList.remove('open');
-            }
-        });
+        // document.addEventListener('click', function(event) {
+        //     if (!event.target.closest('.custom-select')) {
+        //         document.querySelector('.custom-options').classList.remove('open');
+        //     }
+        // });
 
         function toggleDropdownWeb() {
             document.querySelector('.custom-options-web').classList.toggle('open');
@@ -2800,7 +2805,7 @@
             window.location.href = url;
         }
         $(document).ready(function() {
-            $('#countrySelect').select2();
+            // $('#countrySelect').select2();
 
             const defaultCountry = 'US';
             const countriesPrefix = @json($countries_prefix);
