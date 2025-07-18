@@ -541,7 +541,7 @@
                             {{-- //request a demo code --}}
                             @if(Auth::check() && Auth::user()->role === 'user')
                             <button type="button"
-                                id="demo"
+                                id="demo1"
                                 data-teacher-id="{{ $item->teacher_id }}"
                                 class="primary-btn-2  flex-grow-1 p-0  d-flex align-items-center  justify-content-center request-demo-btn" style="width: 120px; height:45px;
             "
@@ -550,7 +550,7 @@
                             </button>
                             @else
                             <button type="button"
-                                id="demo"
+                                id="demo1"
                                 data-bs-toggle="modal"
                                 data-bs-target="#signupPromptModal"
                                 class="primary-btn-2 p-0 flex-grow-1 d-flex align-items-center justify-content-center " style="width: 120px; height:45px;"
