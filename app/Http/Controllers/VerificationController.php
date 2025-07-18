@@ -250,9 +250,9 @@ class VerificationController extends Controller
                 
 
             // Recipients
-            $mail->setFrom('info@edexceledu.com', 'Edexcel'); // Use direct values here
+            $mail->setFrom($name, 'Edexcel'); // Use direct values here
             $mail->addAddress($to);
-            $mail->addReplyTo('info@edexceledu.com', 'Support');
+            $mail->addReplyTo( $name, 'Support');
             // Content
             $mail->isHTML(true); // Set email format to plain text
             $mail->Subject = $subject;
