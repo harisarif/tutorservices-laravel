@@ -863,8 +863,8 @@ class StudentController extends Controller
 
     function sendEmail($to, $subject, $body)
     {
-        $pass = env('email_pass');
-        $name = env('email_name');
+        $name = env('MAIL_USERNAME');
+        $pass = env('MAIL_PASSWORD');
         $mail = new PHPMailer(true);
 
         try {

@@ -58,8 +58,8 @@
         <hr />
         <div class="d-flex justify-content-end gap-2">
             <a href="javascript:void(0)" class="btn bg_theme_green border-0 bg-primary text-white me-0"
-            onclick="document.getElementById('allModal').style.display = 'none'; document.getElementById('tutorSect').scrollIntoView({ behavior: 'smooth' });">
-            {{__('messages.student')}}
+                onclick="document.getElementById('allModal').style.display = 'none'; document.getElementById('tutorSect').scrollIntoView({ behavior: 'smooth' });">
+                {{__('messages.student')}}
             </a>
             <a href="{{ route('tutor') }}" class="btn bg_theme_green border-0 bg-primary text-white me-2">{{__('messages.tutor')}}</a>
 
@@ -354,7 +354,7 @@
                     <select name="subjectSearch" id="subjectSearch" class="form-control country" style="font-size: 13px;">
                         <option value="all">Which Subject Interests You?</option>
                         @foreach($subjectsTeach as $subjectsCode => $subjects)
-                        <option value="{{ $subjectsCode }}">{{ $subjects }}</option>
+                        <option value="{{ $subjects }}">{{ $subjects }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -1535,6 +1535,78 @@
             </div>
         </div>
     </div>
+    @if(Auth::check() && Auth::user()->role === 'user')
+    <div class="modal fade" id="signupPromptModalNew" tabindex="-1" aria-labelledby="signupPromptLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 1000px !important;">
+            <div class="modal-content" style="border-radius: 16px; overflow: hidden; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
+
+                <div class="modal-body p-0 d-flex">
+
+                    <div class="left-panel col-6">
+                        <!-- <span class="fs-2 pointer foucs mb-1 position-absolute top-0" style="right:0px" onclick="document.getElementById('signupPromptModal').style.display = 'none'"> &times;</span> -->
+                        <h2 class="mb-0">Create Your Account</h4>
+
+                            <p class="my-2">How to i get started</p>
+
+                            <!-- Form -->
+                            <form action="{{ route('student-create') }}" method="POST" class="pages" enctype="multipart/form-data" autocomplete="off">
+                                @csrf
+                                <div class="modal-form-group">
+                                    <img src="{{ asset('images/Frame-user.png') }}" alt="email icon" />
+                                    <input type="text" placeholder="Full Name" name="name" required autocomplete="off" autofocus />
+
+                                </div>
+                                <div class="modal-form-group">
+                                    <img src="{{ asset('images/formkit_email.png') }}" alt="email icon" />
+                                    <input type="email" placeholder="Email Address" name="email" value="{{ old('email') }}" required autocomplete="off" autofocus class="@error('email') is-invalid @enderror" />
+
+                                </div>
+                                <div class="modal-form-group">
+                                    <img src="{{ asset('images/Frame.png') }}" alt="password icon" />
+                                    <input type="password" placeholder="Password" class=" @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" />
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <button class="login-button" type="submit">Sign Up</button>
+                                @error('email')
+                                <span class="invalid-feedback" role="alert" style="color:red;">
+                                    <strong class="text-danger">{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                <div class="divider-container">
+                                    <div class="divider-line"></div>
+                                    <span class="divider-text">Signup with Others</span>
+                                    <div class="divider-line"></div>
+                                </div>
+
+                            </form>
+                            <a class="social-btn" href="{{ route('social.redirect','google') }}">
+                                <img src="https://img.icons8.com/color/48/000000/google-logo.png" />
+                                Sign Up with <strong style="margin-left: 5px;">google</strong>
+                            </a>
+
+                            <p class="mt-3 text-center" style="font-size: 12px; color: #999;">
+                                Already have an account? <a href="{{ route('login') }}" style="color: #42b979;">Login here</a>
+                            </p>
+                    </div>
+                    <div class="right-panel col-6">
+                        <div class="close-btn" data-bs-dismiss="modal" aria-label="Close">×</div>
+                        <div class="card-image">
+                            <div class="icon-badge">
+                                <img src="{{ asset('images/Group11.png') }}" />
+                            </div>
+                            <h3>Learn Anytime, Anywhere With the Best</h3>
+                            <img src="{{ asset('images/login-page.png') }}" alt="Woman with tablet" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
 
     @section('js')
     <!-- AlertifyJS JS -->
@@ -1550,6 +1622,8 @@
     <!-- Bootstrap & FontAwesome (add these in your layout if not already included) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        const modal = new bootstrap.Modal(document.getElementById('signupPromptModalNew'));
+        modal.show();
         const priceBtn = document.getElementById('priceToggleBtn');
         const priceDropdown = document.getElementById('priceDropdown');
         const priceValue = document.getElementById('priceValue');
@@ -1776,7 +1850,7 @@
                 }
             });
 
-            $('#priceRange').on('input', function (e) {
+            $('#priceRange').on('input', function(e) {
                 e.preventDefault();
 
                 var selectedPrice = $(this).val();
@@ -2529,8 +2603,15 @@
                         $('#gender')[0].selectedIndex = 0;
                         $('#country')[0].selectedIndex = 0;
                         $('#subjectSearch')[0].selectedIndex = 0;
-                        $('#prize-Range')[0].selectedIndex = 0;
-
+                        if ($('#subjectSearch').length) {
+                            $('#subjectSearch').val('Physics');
+                            $('#subjectSearch').trigger('change'); // This will re-fetch data with "Male"
+                        }
+                        $('#priceRange')[0].selectedIndex = 0;
+                        if ($('#priceRange').length) {
+                            $('#priceRange').val(100); // Or your default value
+                            $('#priceValue').text(100); // Force UI update if needed
+                        }
                         $('#gender').trigger('change');
                         $('#country').trigger('change');
                         $('#subjectSearch').trigger('change');
