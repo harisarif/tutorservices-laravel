@@ -45,7 +45,8 @@
         })
     </script>
 </head>
-@guest<div class="modalBox" id="allModal">
+@guest
+<div class="modalBox" id="allModal">
     <div class="boxModal-1 col-4 bg-light rounded py-2 p-0">
         <h5 class="col-12 d-flex justify-content-between align-items-center px-2 border-bottom">
             {{__('messages.academy_name')}}
@@ -1646,6 +1647,13 @@
     <!-- Bootstrap & FontAwesome (add these in your layout if not already included) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        window.addEventListener('load', () => {
+    setTimeout(() => {
+        const MODAL_BOX = document.getElementById('allModal');
+        MODAL_BOX.style.display = 'flex';
+        MODAL_BOX.children[0].classList.add('dropModal')
+    }, 1000)
+})
         function nextStep() {
             document.getElementById('step1').style.display = 'none';
             document.getElementById('step2').style.display = 'block';
@@ -1659,6 +1667,11 @@
         document.getElementById('stepForm').addEventListener('submit', function(e) {
             e.preventDefault();
             alert("Payment submitted! (simulate PayPal)");
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const modalEl = document.getElementById('signupPromptModalNew');
+            const bootstrapModal = new bootstrap.Modal(modalEl);
+            bootstrapModal.show();
         });
         document.addEventListener('DOMContentLoaded', () => {
             const modalEl = document.getElementById('signupPromptModalNew');
@@ -1694,16 +1707,6 @@
         });
         $('#subjectSearch').on('mousedown', function() {
             $(this).find('option[value="all"]').remove(); // Remove the "Show By Gender" when dropdown is opened
-        });
-
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const MODAL_BOX = document.getElementById('allModal');
-                if (MODAL_BOX) {
-                    MODAL_BOX.style.display = 'flex';
-                    MODAL_BOX.children[0].classList.add('dropModal');
-                }
-            }, 1000);
         });
 
         function closeModal() {
