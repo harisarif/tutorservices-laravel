@@ -1536,7 +1536,7 @@
         </div>
     </div>
     @if(Auth::check() && Auth::user()->role === 'user')
-    <div class="modal fade" id="signupPromptModalNew" tabindex="-1" aria-labelledby="signupPromptLabel" aria-hidden="true" >
+    <div class="modal fade" id="signupPromptModalNew" tabindex="-1" aria-labelledby="signupPromptLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 1000px !important;">
             <div class="modal-content" style="border-radius: 16px; overflow: hidden; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
 
@@ -1544,56 +1544,80 @@
 
                     <div class="left-panel col-6">
                         <!-- <span class="fs-2 pointer foucs mb-1 position-absolute top-0" style="right:0px" onclick="document.getElementById('signupPromptModal').style.display = 'none'"> &times;</span> -->
-                        <h2 class="mb-0">Create Your Account</h4>
+                        <h2 class="mb-0">Fill the fields</h4>
 
-                            <p class="my-2">How to i get started</p>
+                            <!-- <p class="my-2">How to i get started</p> -->
 
                             <!-- Form -->
-                            <form action="{{ route('student-create') }}" method="POST" class="pages" enctype="multipart/form-data" autocomplete="off">
-                                @csrf
-                                <div class="modal-form-group">
-                                    <img src="{{ asset('images/Frame-user.png') }}" alt="email icon" />
-                                    <input type="text" placeholder="Full Name" name="name" required autocomplete="off" autofocus />
+                            <form id="stepForm" style="height: 100%;">
+                                <!-- Step 1 -->
+                                <div id="step1">
+                                    <div class="mb-3">
+                                        <label class="form-label">Tutor Name</label>
+                                        <input type="text" class="form-control" placeholder="Enter tutor name" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Date & Time</label>
+                                        <input type="datetime-local" class="form-control" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Duration</label>
+                                        <select class="form-select" required>
+                                            <option value="">Select duration</option>
+                                            <option value="30">30 Minutes</option>
+                                            <option value="60">1 Hour</option>
+                                            <option value="90">1.5 Hours</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Message</label>
+                                        <textarea class="form-control" rows="3" placeholder="Your message..."></textarea>
+                                    </div>
+                                    <button type="button" class="btn btn-primary w-100" onclick="nextStep()">Next</button>
+                                </div>
 
-                                </div>
-                                <div class="modal-form-group">
-                                    <img src="{{ asset('images/formkit_email.png') }}" alt="email icon" />
-                                    <input type="email" placeholder="Email Address" name="email" value="{{ old('email') }}" required autocomplete="off" autofocus class="@error('email') is-invalid @enderror" />
+                                <!-- Step 2 -->
+                                <!-- Step 2 -->
+                                <div id="step2" style="display: none;">
+                                    <h5 class="my-1" style="font-size: 12px;">Payment Details</h5>
 
-                                </div>
-                                <div class="modal-form-group">
-                                    <img src="{{ asset('images/Frame.png') }}" alt="password icon" />
-                                    <input type="password" placeholder="Password" class=" @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" />
-                                    @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                                <button class="login-button" type="submit">Sign Up</button>
-                                @error('email')
-                                <span class="invalid-feedback" role="alert" style="color:red;">
-                                    <strong class="text-danger">{{ $message }}</strong>
-                                </span>
-                                @enderror
-                                <div class="divider-container">
-                                    <div class="divider-line"></div>
-                                    <span class="divider-text">Signup with Others</span>
-                                    <div class="divider-line"></div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Name on Card / PayPal</label>
+                                        <input type="text" class="form-control" placeholder="Full name" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" placeholder="email@example.com" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Amount (USD)</label>
+                                        <input type="number" class="form-control" value="50" readonly>
+                                    </div>
+
+                                    <!-- Placeholder for PayPal button -->
+                                    <div id="paypal-button-container" class="mb-3 text-center">
+                                        <button type="submit" class="btn btn-success w-100">Pay with PayPal</button>
+                                    </div>
+
+                                    <!-- Back Button -->
+                                    <button type="button" class="btn btn-secondary w-100 mt-2" onclick="prevStep()">Back</button>
                                 </div>
 
                             </form>
-                            <a class="social-btn" href="{{ route('social.redirect','google') }}">
+
+                            <!-- <a class="social-btn" href="{{ route('social.redirect','google') }}">
                                 <img src="https://img.icons8.com/color/48/000000/google-logo.png" />
                                 Sign Up with <strong style="margin-left: 5px;">google</strong>
-                            </a>
+                            </a> -->
 
-                            <p class="mt-3 text-center" style="font-size: 12px; color: #999;">
+                            <!-- <p class="mt-3 text-center" style="font-size: 12px; color: #999;">
                                 Already have an account? <a href="{{ route('login') }}" style="color: #42b979;">Login here</a>
-                            </p>
+                            </p> -->
                     </div>
                     <div class="right-panel col-6">
-                        <div class="close-btn" data-bs-dismiss="modal" aria-label="Close">×</div>
+                        <!-- <div class="close-btn" data-bs-dismiss="modal" aria-label="Close">×</div> -->
                         <div class="card-image">
                             <div class="icon-badge">
                                 <img src="{{ asset('images/Group11.png') }}" />
@@ -1622,6 +1646,20 @@
     <!-- Bootstrap & FontAwesome (add these in your layout if not already included) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        function nextStep() {
+            document.getElementById('step1').style.display = 'none';
+            document.getElementById('step2').style.display = 'block';
+        }
+
+        function prevStep() {
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('step1').style.display = 'block';
+        }
+
+        document.getElementById('stepForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert("Payment submitted! (simulate PayPal)");
+        });
         document.addEventListener('DOMContentLoaded', () => {
             const modalEl = document.getElementById('signupPromptModalNew');
             const bootstrapModal = new bootstrap.Modal(modalEl);
