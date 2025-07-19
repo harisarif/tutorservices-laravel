@@ -542,7 +542,7 @@
                             @if(Auth::check() && Auth::user()->role === 'user')
                             <button type="button"
                                 id="demo1"
-                                data-teacher-id="{{ $item->teacher_id }}"
+                                data-teacher-id="{{ $item->teacher_id }}" data-teacher-name="{{ $item->name ?? '' }}"
                                 class="primary-btn-2  flex-grow-1 p-0  d-flex align-items-center  justify-content-center request-demo-btn" style="width: 120px; height:45px;
             "
                                 title="Request a Demo">
@@ -552,7 +552,8 @@
                             <button type="button"
                                 id="demo1"
                                 data-bs-toggle="modal"
-                                data-bs-target="#signupPromptModal"
+                                data-bs-target="#signupPromptModal"  data-teacher-id="{{ $item->teacher_id }}"
+    data-teacher-name="{{ $item->f_name }}"
                                 class="primary-btn-2 p-0 flex-grow-1 d-flex align-items-center justify-content-center " style="width: 120px; height:45px;"
                                 title="Sign up to request a demo">
 
@@ -1481,7 +1482,7 @@
                             <!-- Form -->
                             <form action="{{ route('student-create') }}" method="POST" class="pages" enctype="multipart/form-data" autocomplete="off">
                                 @csrf
-                                <input type="text" name="website" style="display:none">
+                                <input type="text" name="website" style="display:none">  <input type="hidden" name="teacher_id" id="modalTeacherId" />
                                 <div class="modal-form-group">
                                     <img src="{{ asset('images/Frame-user.png') }}" alt="email icon" />
                                     <input type="text" placeholder="Full Name" name="name" required autocomplete="off" autofocus />
@@ -1514,10 +1515,11 @@
                                 </div>
 
                             </form>
-                            <a class="social-btn" href="{{ route('social.redirect','google') }}">
-                                <img src="https://img.icons8.com/color/48/000000/google-logo.png" />
-                                Sign Up with <strong style="margin-left: 5px;">google</strong>
-                            </a>
+                            <a class="social-btn" id="googleSignupBtn" href="#">
+    <img src="https://img.icons8.com/color/48/000000/google-logo.png" />
+    Sign Up with <strong style="margin-left: 5px;">Google</strong>
+</a>
+
 
                             <p class="mt-3 text-center" style="font-size: 12px; color: #999;">
                                 Already have an account? <a href="{{ route('login') }}" style="color: #42b979;">Login here</a>
@@ -1555,9 +1557,10 @@
                                 <!-- Step 1 -->
                                 <div id="step1">
                                     <div class="mb-3">
-                                        <label class="form-label">Tutor Name</label>
-                                        <input type="text" class="form-control" placeholder="Enter tutor name" required>
-                                    </div>
+    <label class="form-label">Tutor Name</label>
+    <input type="text" class="form-control"   value="{{ session('selected_teacher_name') }}" placeholder="Enter tutor name" value="" required>
+</div>
+
                                     <div class="mb-3">
                                         <label class="form-label">Date & Time</label>
                                         <input type="datetime-local" class="form-control" required>
@@ -1757,9 +1760,60 @@
                 }
             });
         });
-    </script>
+    </script> <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const requestDemoButtons = document.querySelectorAll(".request-demo-btn, [data-bs-target='#signupPromptModal']");
+        const teacherIdInput = document.getElementById("modalTeacherId");
+        const teacherNameInput = document.getElementById("modalTeacherName");
+        const googleBtn = document.getElementById("googleSignupBtn");
+
+        requestDemoButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const teacherId = this.getAttribute("data-teacher-id");
+                const teacherName = this.getAttribute("data-teacher-name");
+
+                if (teacherIdInput) teacherIdInput.value = teacherId;
+                if (teacherNameInput) teacherNameInput.value = teacherName;
+
+                // Optional: update the modal heading or greeting
+                const modalHeading = document.querySelector("#signupPromptModal h2");
+                if (modalHeading && teacherName) {
+                    modalHeading.innerHTML = `Create Your Account for ${teacherName}`;
+                }
+
+                // Update Google OAuth link
+                if (googleBtn) {
+                    googleBtn.href = `/auth/redirect/google?teacher_id=${teacherId}&teacher_name=${encodeURIComponent(teacherName)}`;
+                }
+            });
+        });
+    });
+</script>
 
     <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // When any "Request a Demo" button is clicked
+        const demoButtons = document.querySelectorAll('.request-demo-btn');
+
+        demoButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const teacherId = this.getAttribute('data-teacher-id');
+                const teacherName = this.getAttribute('data-teacher-name');
+
+                // Set values inside modal
+                document.getElementById('modalTeacherId').value = teacherId;
+                const displayTeacherName = document.getElementById("modalTutorName");
+if (displayTeacherName && teacherName) {
+    displayTeacherName.textContent = teacherName;
+}
+//                 // If you want to show name somewhere dynamically, you can do:
+//                 document.getElementById('modalTutorName').innerText = teacherName;
+            });
+        });
+    });
+</script>
+
+    <script>  
         document.addEventListener('DOMContentLoaded', function() {
             const demoBtn = document.getElementById('demo');
 

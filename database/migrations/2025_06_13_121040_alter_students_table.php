@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('session_id')->nullable()->change();
             $table->string('country')->nullable()->change();
             $table->string('city')->nullable()->change();
-            $table->string('subject')->nullable()->change();
+             $table->renameColumn('subject', 'tutor_name')->default('')->change();
             $table->string('gender')->nullable()->change();
            $table->renameColumn('grade', 'searchQuery')->default('')->change();
-           
+           $table->unsignedBigInteger('tutor_id')->nullable();
            });
     }
 

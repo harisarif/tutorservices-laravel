@@ -158,7 +158,7 @@ class StudentController extends Controller
     }
     public function create(Request $request)
     {
-
+  
         $rules = [
             'name' => [
                 'required',
@@ -252,7 +252,7 @@ class StudentController extends Controller
 
         $this->sendEmail($toStudent, $subjectStudent, $messageStudent);
 
-        $toAdmin = 'info@edexceledu.com';
+        $toAdmin = 'test@edexceledu.com';
         $subjectAdmin = "Edexcel Notification";
         $messageAdmin = "Subject: New Student Enrollment Notification
 
@@ -286,7 +286,7 @@ class StudentController extends Controller
         }
 
         // Redirect to the "hire us" page
-        return redirect()->route('newhome')->with(compact('user'));
+        return redirect()->route('new')->with(compact('user'));
 
         // Optionally, you can redirect the user or return a response
         // return redirect()->route('newhome')->with('success', 'Student created successfully.');
@@ -438,7 +438,7 @@ class StudentController extends Controller
         ]);
 
         // Get the tutor using teacher_id (not primary key)
-        $tutor = \App\Models\Tutor::where('teacher_id', $request->teacher_id)->first();
+        $tutor = Tutor::where('teacher_id', $request->teacher_id)->first();
 
         if (!$tutor) {
             return response()->json(['error' => 'Tutor not found.'], 404);
