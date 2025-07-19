@@ -159,30 +159,30 @@ class StudentController extends Controller
     public function create(Request $request)
     {
   
-        $rules = [
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-                'regex:/^[a-zA-Z\s\-\'\.]{2,}$/u' // only letters, spaces, hyphens, apostrophes, dots
-            ],
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                'unique:student,email',
-                'regex:/^[a-zA-Z0-9._%+-]+@(gmail\.com|outlook\.com|hotmail\.com|yahoo\.com)$/'
-            ],
-            'password' => 'required|min:8',
-            'phone' => 'nullable|string|max:20',
-            'availability_status' => 'nullable|string|max:255',
-            'country' => 'nullable|string|max:100',
-            'city' => 'nullable|string|max:100',
-            'subject' => 'nullable|array',
-            'subject.*' => 'nullable|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        ];
+        // $rules = [
+        //     'name' => [
+        //         'required',
+        //         'string',
+        //         'max:255',
+        //         'regex:/^[a-zA-Z\s\-\'\.]{2,}$/u' // only letters, spaces, hyphens, apostrophes, dots
+        //     ],
+        //     'email' => [
+        //         'required',
+        //         'string',
+        //         'email',
+        //         'max:255',
+        //         'unique:student,email',
+        //         'regex:/^[a-zA-Z0-9._%+-]+@(gmail\.com|outlook\.com|hotmail\.com|yahoo\.com)$/'
+        //     ],
+        //     'password' => 'required|min:8',
+        //     'phone' => 'nullable|string|max:20',
+        //     'availability_status' => 'nullable|string|max:255',
+        //     'country' => 'nullable|string|max:100',
+        //     'city' => 'nullable|string|max:100',
+        //     'subject' => 'nullable|array',
+        //     'subject.*' => 'nullable|string|max:255',
+        //     'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        // ];
 
         if ($request->filled('website')) {
             abort(403, 'Bot detected.');
@@ -194,14 +194,14 @@ class StudentController extends Controller
         if (str_contains($request->input('name'), 'Поздравялем') || str_contains($request->input('name'), '🏆')) {
             return redirect()->back()->withErrors(['name' => 'Suspicious name detected.'])->withInput();
         }
-        $validator = Validator::make($request->all(), $rules);
+        // $validator = Validator::make($request->all(), $rules);
 
         // Check if validation fails
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
+        // if ($validator->fails()) {
+        //     return redirect()->back()
+        //         ->withErrors($validator)
+        //         ->withInput();
+        // }
         // ✅ Check if user already exists by email
         $existingUser = User::where('email', $request->input('email'))->first();
 
@@ -211,7 +211,7 @@ class StudentController extends Controller
         }
 
 
-
+        
         $student = new Student();
         $student->name = $request->input('name');
         $student->email = $request->input('email');
@@ -224,8 +224,9 @@ class StudentController extends Controller
         $student->password = Hash::make($request->input('password'));
         $student->user_id = $user->id;
         $student->session_id = session()->getId();
+        $student->tutor_name = 'null';
         $student->save();
-
+// dd('asdsa');
         //      $tutor = Tutor::findOrFail($id);
 
         //     $toTutor = $tutor->email;

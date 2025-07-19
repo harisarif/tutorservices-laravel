@@ -107,7 +107,7 @@
                     <!-- <i class="fas fa-phone me-2"></i> +875 784 5682 -->
                     <!-- <i class="fas fa-envelope ms-3 me-2"></i> edexceledu@gmail.com -->
                     <a href="mailto:edexceledu@gmail.com" class="d-flex align-items-center text-decoration-none text-white">
-                        <i class="fas fa-envelope ms-3 me-2"></i> edexceledu@gmail.com
+                        <i class="fas fa-envelope ms-3 me-2"></i> info@edexceledu.com
                     </a>
 
                     <i class="fas fa-map-marker-alt ms-3 me-2" style="margin-bottom:3px;"></i> Dubai
@@ -478,7 +478,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="d-flex justify-content-between mt-3 info-bar">
+                        <div class="d-flex justify-content-between mt-3 info-bar d-none">
                             <span class="text-muted">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="15" viewBox="0 0 11 15"
                                     fill="none">
@@ -1557,9 +1557,9 @@
                                 <!-- Step 1 -->
                                 <div id="step1">
                                     <div class="mb-3">
-    <label class="form-label">Tutor Name</label>
-    <input type="text" class="form-control"   value="{{ session('selected_teacher_name') }}" placeholder="Enter tutor name" value="" required>
-</div>
+                                        <label class="form-label">Tutor Name</label>
+                                        <input readonly type="text" class="form-control"   value="{{ session('selected_teacher_name') }}" placeholder="Enter tutor name" value="" required>
+                                    </div>
 
                                     <div class="mb-3">
                                         <label class="form-label">Date & Time</label>
@@ -1578,7 +1578,7 @@
                                         <label class="form-label">Message</label>
                                         <textarea class="form-control" rows="3" placeholder="Your message..."></textarea>
                                     </div>
-                                    <button type="button" class="btn btn-primary w-100" onclick="nextStep()">Next</button>
+                                    <button type="button" class="btn primary-btn pe-0 w-100" onclick="nextStep()">Next</button>
                                 </div>
 
                                 <!-- Step 2 -->
@@ -1627,7 +1627,7 @@
                             <div class="icon-badge">
                                 <img src="{{ asset('images/Group11.png') }}" />
                             </div>
-                            <h3>Learn Anytime, Anywhere With the Best</h3>
+                            <h3 class="text-dark">Learn Anytime, Anywhere With the Best</h3>
                             <img src="{{ asset('images/login-page.png') }}" alt="Woman with tablet" />
                         </div>
                     </div>
@@ -2061,7 +2061,7 @@ if (displayTeacherName && teacherName) {
                                                                         <span class="me-2"><i class="fa-solid fa-globe" style="font-size: 13px; margin-top: 5px;color: #1cc88a !important;"></i></span>
                                                                         <p class="mb-0 subjects-name" style="color:black; transform: scaleY(1);text-transform:capitalize">${displayText}</p>
                                                                     </div>
-                                            <div class="d-flex justify-content-between mt-3 info-bar">
+                                            <div class="d-flex justify-content-between mt-3 info-bar d-none">
                                                 <span class="text-muted">${languages}</span>
                                                 <span class="text-muted">${tutor.gender ?? 'Not specified'}</span>
                                                 <span class="text-muted">${tutor.dob ?? 'DOB not provided'}</span>
@@ -2230,7 +2230,7 @@ if (displayTeacherName && teacherName) {
                                         - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
                                     </p>
 
-                                    <div class="d-flex justify-content-between mt-3 info-bar">
+                                    <div class="d-flex justify-content-between mt-3 info-bar d-none">
                                         <span class="text-muted">${languages}</span>
                                         <span class="text-muted">${tutor.gender ?? 'N/A'}</span>
                                         <span class="text-muted">${tutor.dob ?? 'N/A'}</span>
@@ -2357,7 +2357,7 @@ if (displayTeacherName && teacherName) {
                                         - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
                                     </p>
 
-                                    <div class="d-flex justify-content-between mt-3 info-bar">
+                                    <div class="d-flex justify-content-between mt-3 info-bar d-none">
                                         <span class="text-muted">${languages}</span>
                                         <span class="text-muted">${tutor.gender ?? 'N/A'}</span>
                                         <span class="text-muted">${tutor.dob ?? 'N/A'}</span>
@@ -2484,7 +2484,7 @@ if (displayTeacherName && teacherName) {
                                         - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
                                     </p>
 
-                                    <div class="d-flex justify-content-between mt-3 info-bar">
+                                    <div class="d-flex justify-content-between mt-3 info-bar d-none">
                                         <span class="text-muted">${languages}</span>
                                         <span class="text-muted">${tutor.gender ?? 'N/A'}</span>
                                         <span class="text-muted">${tutor.dob ?? 'N/A'}</span>
@@ -2631,7 +2631,7 @@ if (displayTeacherName && teacherName) {
                                         - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
                                     </p>
 
-                                    <div class="d-flex justify-content-between mt-3 info-bar">
+                                    <div class="d-flex justify-content-between mt-3 info-bar d-none">
                                         <span class="text-muted">${languages}</span>
                                         <span class="text-muted">${tutor.gender ?? 'N/A'}</span>
                                         <span class="text-muted">${tutor.dob ?? 'N/A'}</span>
@@ -2792,7 +2792,7 @@ if (displayTeacherName && teacherName) {
                                         - Hello, my name is ${tutor.f_name}. I have ${tutor.experience}+ years of experience as a ${specialization} Teacher & Tutor. 🇬🇧
                                     </p>
 
-                                    <div class="d-flex justify-content-between mt-3 info-bar">
+                                    <div class="d-flex justify-content-between mt-3 info-bar d-none">
                                         <span class="text-muted">${languages}</span>
                                         <span class="text-muted">${tutor.gender ?? 'N/A'}</span>
                                         <span class="text-muted">${tutor.dob ?? 'N/A'}</span>
